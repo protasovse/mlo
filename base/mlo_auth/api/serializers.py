@@ -13,16 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
         view_name='users-api:user-detail',
         lookup_field='pk',
     )
-    url = HyperlinkedIdentityField(
+    '''url = HyperlinkedIdentityField(
         view_name='users:user-detail',
         lookup_field='pk',
-    )
+    )'''
 
     class Meta:
         model = USER_MODEL
         fields = (
             'api_url',
-            'url',
+            # 'url',
             'id',
             'first_name',
             'last_name',

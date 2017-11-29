@@ -4,46 +4,46 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
-from base.mlo_auth.managers import UserManager, CLIENT, LAWYER, EDITOR
+from base.mlo_auth.managers import UserManager, CLIENT, LAWYER
 
 ROLES_CHOICES = (
     (CLIENT, _('Клиент')),
     (LAWYER, _('Юрист')),
-    (EDITOR, _('Редактор'))
+    # (EDITOR, _('Редактор')),
 )
 
 
-class Roles(models.Model):
-    """
-    Роли пользователей на сайте.
-    Изначально это «Юрист» или «Клиент»
-    Roles.objects.create(pk = 1, key="client", value="Клиент",
-        description="«Клиент» — это пользователь, который получает услуги", have_profile=False)
-    Roles.objects.create(pk = 2, key="lawyer", value="Юрист",
-        description="«Юрист» — это пользователь, который предоставляет услуги Клиентам", have_profile=True)
-    Roles.objects.create(pk = 3, key="editor", value="Редактор",
-        description="«Редактор» — это пользователь, который имеет право редактировать вопросы, ответы, данные пользователей", have_profile=False)
-    Юристы будут иметь профайл, Клиетны не будут иметь
-    """
-    key = models.CharField(_('Ключ на латинице'),
-                           max_length=16,
-                           unique=True)
-
-    value = models.CharField(_('Название роли'),
-                             max_length=16)
-
-    description = models.TextField(_('Описание роли'),
-                                   blank=True)
-
-    have_profile = models.BooleanField(_('Имеет ли расширенный профайл'),
-                                       default=False)
-
-    class Meta:
-        verbose_name = _('Тип учётной записи')
-        verbose_name_plural = _('Типы учётных записей')
-
-    def __str__(self):
-        return self.value
+# class Roles(models.Model):
+#     """
+#     Роли пользователей на сайте.
+#     Изначально это «Юрист» или «Клиент»
+#     Roles.objects.create(pk = 1, key="client", value="Клиент",
+#         description="«Клиент» — это пользователь, который получает услуги", have_profile=False)
+#     Roles.objects.create(pk = 2, key="lawyer", value="Юрист",
+#         description="«Юрист» — это пользователь, который предоставляет услуги Клиентам", have_profile=True)
+#     Roles.objects.create(pk = 3, key="editor", value="Редактор",
+#         description="«Редактор» — это пользователь, который имеет право редактировать вопросы, ответы, данные пользователей", have_profile=False)
+#     Юристы будут иметь профайл, Клиетны не будут иметь
+#     """
+#     key = models.CharField(_('Ключ на латинице'),
+#                            max_length=16,
+#                            unique=True)
+#
+#     value = models.CharField(_('Название роли'),
+#                              max_length=16)
+#
+#     description = models.TextField(_('Описание роли'),
+#                                    blank=True)
+#
+#     have_profile = models.BooleanField(_('Имеет ли расширенный профайл'),
+#                                        default=False)
+#
+#     class Meta:
+#         verbose_name = _('Тип учётной записи')
+#         verbose_name_plural = _('Типы учётных записей')
+#
+#     def __str__(self):
+#         return self.value
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -71,16 +71,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('Дата регистрации'),
                                        default=timezone.now)
 
-    """
     role = models.PositiveSmallIntegerField(_('Тип учётной записи'),
                                             choices=ROLES_CHOICES, default=1, db_index=True,
                                             help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
                                                         'или «Клиент», если хотите получать их.'))
-    """
 
-    role = models.ManyToManyField(Roles, verbose_name=_('Тип учётной записи'), default=1, db_index=True,
-                                  help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
-                                              'или «Клиент», если хотите получать их.'))
+    # role = models.ManyToManyField(Roles, verbose_name=_('Тип учётной записи'), default=1, db_index=True,
+    #                               help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
+    #                                           'или «Клиент», если хотите получать их.'))
 
     objects = UserManager()
 

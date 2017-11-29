@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 CLIENT = 1
 LAWYER = 2
-EDITOR = 3
+# EDITOR = 3
 
 
 class UserManager(BaseUserManager):
