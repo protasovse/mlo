@@ -21,7 +21,7 @@ class Entry(models.Model):
     будут наследовать свойства этой модели
     """
 
-    content = models.TextField(_('Содержание'))
+    content = models.TextField(_('Содержание'),)
 
     author = models.ForeignKey(
         AUTH_USER_MODEL,
@@ -111,7 +111,7 @@ class Answer(Entry):
         verbose_name_plural = _('Ответы')
 
     def children(self):
-        return Answer.answers.answers_relate_to_question(self.entry_id).filter(parent=self)
+        return Answer.answers.related_to_question(self.entry_id).filter(parent=self)
 
     @property
     def is_parent(self):
