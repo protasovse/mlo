@@ -27,15 +27,18 @@ from rest_framework.permissions import (
 
 from ..models import Question, Answer
 from .pagination import QuestionLimitOffsetPagination, QuestionPageNumberPagination
-from .permissions import IsOwnerOrStaffOrReadOnly
+from .permissions import (
+    IsOwnerOrStaffOrReadOnly,
+    IsLawyerReadOnly
+)
 from .serializers import (
     QuestionCreateUpdateSerializer,
     QuestionDetailSerializer,
     QuestionListSerializer,
     AnswerDetailSerializer,
     AnswerListSerializer,
-    AnswerCreateUpdateSerializer,
-)
+    AnswerUpdateSerializer,
+    answer_create_serializer)
 
 
 class QuestionCreateAPIView(CreateAPIView):
@@ -95,16 +98,30 @@ class QuestionListAPIView(ListAPIView):
 
 
 class AnswerDetailAPIView(RetrieveAPIView):
-    queryset = Answer.objects.all()
+    queryset = Answer.published.all()
     serializer_class = AnswerDetailSerializer
 
 
 class AnswerListAPIView(ListAPIView):
-    queryset = Answer.objects.all()
+    queryset = Answer.published.all()
     serializer_class = AnswerListSerializer
 
 
 class AnswerUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Answer.objects.all()
-    serializer_class = AnswerCreateUpdateSerializer
+    queryset = Answer.published.all()
+    serializer_class = AnswerUpdateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrStaffOrReadOnly]
+
+
+class AnswerCreateAPIView(CreateAPIView):
+    queryset = Answer.published.all()
+    # permission_classes = [IsAuthenticatedOrReadOnly, IsLawyerReadOnly]
+
+    def get_serializer_class(self):
+        question_id = self.request.GET.get("question_id")
+        parent_id = self.request.GET.get("parent_id", None)
+        return answer_create_serializer(
+                question_id=question_id,
+                parent_id=parent_id,
+                user=self.request.user
+        )

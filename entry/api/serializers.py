@@ -7,6 +7,7 @@ from rest_framework.serializers import (
 )
 
 from base.mlo_auth.api.serializers import UserSerializer
+from base.mlo_auth.managers import LAWYER
 from ..models import Question, Answer
 
 
@@ -18,7 +19,6 @@ class QuestionCreateUpdateSerializer(ModelSerializer):
             'title',
             'content',
             'pub_date',
-            'status',
             'rubrics',
         ]
 
@@ -58,7 +58,6 @@ class QuestionDetailSerializer(ModelSerializer):
             'content',
             'html_content',
             'pub_date',
-            'status',
             'reply_count',
             'replies',
         ]
@@ -99,7 +98,6 @@ class QuestionListSerializer(ModelSerializer):
             'content',
             'rubrics',
             'pub_date',
-            'status',
             'delete_url',
             'reply_count',
         ]
@@ -108,7 +106,7 @@ class QuestionListSerializer(ModelSerializer):
         return UserSerializer(obj.author, context=self.context).data
 
 
-class AnswerCreateUpdateSerializer(ModelSerializer):
+class AnswerUpdateSerializer(ModelSerializer):
     class Meta:
         model = Answer
         fields = [
@@ -116,6 +114,42 @@ class AnswerCreateUpdateSerializer(ModelSerializer):
             'content',
             'pub_date',
         ]
+
+
+def answer_create_serializer(question_id=None, parent_id=None, user=None):
+    class AnswerCreateSerializer(ModelSerializer):
+        class Meta:
+            model = Answer
+            fields = [
+                'id',
+                'content',
+                'pub_date',
+            ]
+
+        def __init__(self, *args, **kwargs):
+            self.question_id = question_id
+
+            try:
+                parent_qs = Answer.answers.get(pk=parent_id)
+                self.parent_obj = parent_qs
+            except Answer.DoesNotExist:
+                self.parent_obj = None
+
+            super(AnswerCreateSerializer, self).__init__(*args, **kwargs)
+
+        def create(self, validated_data):
+            content = validated_data.get('content')
+            entry_id = self.question_id
+            parent_obj = self.parent_obj
+            comment = Answer.objects.create(
+                content=content,
+                entry_id=entry_id,
+                parent=parent_obj,
+                author=user,
+            )
+            return comment
+
+    return AnswerCreateSerializer
 
 
 class AnswerDetailSerializer(ModelSerializer):

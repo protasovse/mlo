@@ -9,6 +9,7 @@ from .views import (
     AnswerDetailAPIView,
     AnswerListAPIView,
     AnswerUpdateAPIView,
+    AnswerCreateAPIView,
 )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
     url(r'^questions/(?P<pk>\d+)/delete/$', QuestionDeleteAPIView.as_view(), name='question-delete'),
 
     url(r'^answers/$', AnswerListAPIView.as_view(), name='answer-list'),
+    url(r'^answers/create/$', AnswerCreateAPIView.as_view(), name='answer-create'),
     url(r'^answers/(?P<pk>\d+)/$', AnswerDetailAPIView.as_view(), name='answer-detail'),
     url(r'^answers/(?P<pk>\d+)/edit/$', AnswerUpdateAPIView.as_view(), name='answer-update'),
 ]
