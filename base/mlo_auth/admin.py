@@ -12,7 +12,7 @@ class MloUserAdmin(UserAdmin):
 
     add_form = UserCreationForm
 
-    list_display = ('get_full_name', 'email')
+    list_display = ('get_full_name', 'email', 'is_staff',)
 
     list_filter = ('is_active', 'role')
 

@@ -1,4 +1,7 @@
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
+
+from rest_framework.exceptions import ValidationError
 from rest_framework.relations import HyperlinkedRelatedField
 from rest_framework.serializers import (
     ModelSerializer,
@@ -9,6 +12,8 @@ from rest_framework.serializers import (
 from base.mlo_auth.api.serializers import UserSerializer
 from base.mlo_auth.managers import LAWYER
 from ..models import Question, Answer
+
+CONTENT_MIN_LEN = 15
 
 
 class QuestionCreateUpdateSerializer(ModelSerializer):
@@ -70,7 +75,7 @@ class QuestionDetailSerializer(ModelSerializer):
         return obj.html_content
 
     def get_replies(self, obj):
-        a_qs = Answer.answers.answers_by_question(obj.id)
+        a_qs = Answer.answers.by_question(obj.id)
         answers = AnswerDetailSerializer(a_qs, context=self.context, many=True).data
         return answers
 
@@ -116,7 +121,7 @@ class AnswerUpdateSerializer(ModelSerializer):
         ]
 
 
-def answer_create_serializer(question_id=None, parent_id=None, user=None):
+def answer_create_serializer(question_id=None, answer_id=None, author=None):
     class AnswerCreateSerializer(ModelSerializer):
         class Meta:
             model = Answer
@@ -127,26 +132,63 @@ def answer_create_serializer(question_id=None, parent_id=None, user=None):
             ]
 
         def __init__(self, *args, **kwargs):
+
             self.question_id = question_id
+            self.author = author
 
             try:
-                parent_qs = Answer.answers.get(pk=parent_id)
-                self.parent_obj = parent_qs
+                answer_parent_qs = Answer.answers.get(pk=answer_id)
+                # Если задан answer_id для вопроса не 1-го уровня
+                if not answer_parent_qs.is_parent:
+                    answer_parent_qs = Answer.answers.get(pk=answer_parent_qs.parent.pk)
+                self.parent_obj = answer_parent_qs
+                # Если задан parent_obj, то номер вопроса берём из его entry_id и игнорируем question_id,
+                # т.е. если ответ не 1-го уровня, то question_id можем и не задавать
+                self.question_id = answer_parent_qs.entry_id
             except Answer.DoesNotExist:
                 self.parent_obj = None
 
             super(AnswerCreateSerializer, self).__init__(*args, **kwargs)
 
+        def validate(self, data):
+
+            question_id = self.question_id
+
+            if question_id is None:
+                raise ValidationError(_('Установите номер вопроса (question_id) или номер ответа (answer_id), '
+                                        'на которых на который нужно добавить комментарий.'))
+
+            try:
+                question = Question.published.get(pk=question_id)
+            except Question.DoesNotExist:
+                raise ValidationError(_('Вопрос с question_id = %s не существует или удалён.' % (question_id,)))
+
+            # Для ответа 1-го уровня. Только юрист может его добавить и только один ответ.
+            if self.parent_obj is None:
+
+                if hasattr(self.author, 'role') is False or self.author.role != LAWYER:
+                    raise ValidationError(_('Только юрист может отвечать на вопрос.'))
+
+                if Answer.answers.by_question(question_id=question_id).filter(author=author).count() > 0:
+                    raise ValidationError(_('Вы уже отвечали на этот вопрос.'))
+            else:
+                # Ответ 2-го уровня (комментарий на ответ) может добавить или автор вопроса, или любой юрист
+                if question.author != self.author and \
+                   (hasattr(self.author, 'role') is False or self.author.role != LAWYER):
+                    raise ValidationError(_('Только юрист или автор вопроса может добавить комментарий к ответу.'))
+
+            if len(data['content']) < CONTENT_MIN_LEN:
+                raise ValidationError(_('Текст записи слишком короткий.'))
+
+            return data
+
         def create(self, validated_data):
             content = validated_data.get('content')
-            entry_id = self.question_id
+            question_id = self.question_id
             parent_obj = self.parent_obj
-            comment = Answer.objects.create(
-                content=content,
-                entry_id=entry_id,
-                parent=parent_obj,
-                author=user,
-            )
+
+            comment = Answer.answers.create(question_id, content, author, parent_obj)
+
             return comment
 
     return AnswerCreateSerializer

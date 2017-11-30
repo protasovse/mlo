@@ -5,7 +5,7 @@ from base.mlo_auth.managers import LAWYER
 
 
 class IsOwnerOrStaffOrReadOnly(BasePermission):
-    message = _('Для редактирования вы должны быть администратором или автором вопроса.')
+    message = _('Для редактирования вы должны быть администратором или автором записи.')
 
     def has_object_permission(self, request, view, obj):
         return request.user.is_staff or obj.author == request.user

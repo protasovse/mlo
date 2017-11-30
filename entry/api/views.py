@@ -53,6 +53,7 @@ class QuestionCreateAPIView(CreateAPIView):
 class QuestionDetailAPIView(RetrieveAPIView):
     queryset = Question.published.all()
     serializer_class = QuestionDetailSerializer
+    permission_classes = [AllowAny]
 
 
 class QuestionUpdateAPIView(RetrieveUpdateAPIView):
@@ -69,6 +70,7 @@ class QuestionDeleteAPIView(DestroyAPIView):
 
 class QuestionListAPIView(ListAPIView):
     serializer_class = QuestionListSerializer
+    permission_classes = [AllowAny]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = [
         'title',
@@ -100,11 +102,13 @@ class QuestionListAPIView(ListAPIView):
 class AnswerDetailAPIView(RetrieveAPIView):
     queryset = Answer.published.all()
     serializer_class = AnswerDetailSerializer
+    permission_classes = [AllowAny]
 
 
 class AnswerListAPIView(ListAPIView):
     queryset = Answer.published.all()
     serializer_class = AnswerListSerializer
+    permission_classes = [AllowAny]
 
 
 class AnswerUpdateAPIView(RetrieveUpdateAPIView):
@@ -115,13 +119,13 @@ class AnswerUpdateAPIView(RetrieveUpdateAPIView):
 
 class AnswerCreateAPIView(CreateAPIView):
     queryset = Answer.published.all()
-    # permission_classes = [IsAuthenticatedOrReadOnly, IsLawyerReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         question_id = self.request.GET.get("question_id")
-        parent_id = self.request.GET.get("parent_id", None)
+        answer_id = self.request.GET.get("answer_id", None)
         return answer_create_serializer(
                 question_id=question_id,
-                parent_id=parent_id,
-                user=self.request.user
+                answer_id=answer_id,
+                author=self.request.user
         )
