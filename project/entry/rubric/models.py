@@ -17,7 +17,7 @@ class Rubric(MPTTModel):
     slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'),
                             help_text=_('Можно не вводить. Автоматически генерируется из названия рубрики.'))
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
-                            verbose_name=_('Родительская рубрика'))
+                            verbose_name=_('Родительская рубрика'),on_delete=models.CASCADE)
 
     class MPTTMeta:
         pass

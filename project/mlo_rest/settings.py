@@ -11,18 +11,28 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root = environ.Path(__file__) - 3
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env(root('.env'))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+BASE_DIR = root()
+PROJECT_DIR = environ.Path()
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'at-=+7w#c6er-uwhvzwzdfr+*9sz)c*54#%x1-4t9qu8+3b8-o'
+STATIC_ROOT = environ.Path('static').__str__()
+STATICFILES_DIRS = [
+   environ.Path('media/vue/bundles').__str__()
+]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = [
+    '127.0.0.1'
+]
+
+
+
 
 if DEBUG:
     LOGGING = {
@@ -41,7 +51,6 @@ if DEBUG:
         },
     }
 
-ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -56,9 +65,16 @@ INSTALLED_APPS = [
     'base.mlo_auth',
     'entry',
     'entry.rubric',
+    'django_mptt_admin',
+    'rest_framework'
 ]
 
-SITE_ID = 1
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
+vars().update(EMAIL_CONFIG)
+
+
+SITE_ID = env('SITE_ID')
 AUTH_USER_MODEL = 'mlo_auth.user'
 
 MIDDLEWARE = [
@@ -91,26 +107,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mlo_rest.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mlo_rest',
-        'USER': 'mlo',
-        'PASSWORD': '2323',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    },
-}
+DATABASES = {'default': env.db()}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -150,12 +147,6 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
-# **********************************************************************
-# REST_FRAME_WORK settings
-# **********************************************************************
-INSTALLED_APPS += [
-    'rest_framework',
-]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -164,9 +155,3 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-# **********************************************************************
-# django_mptt_admin
-# **********************************************************************
-INSTALLED_APPS += [
-    'django_mptt_admin',
-]

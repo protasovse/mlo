@@ -12,6 +12,9 @@ from .views import (
     AnswerCreateAPIView,
 )
 
+
+app_name = 'entry_api'
+
 urlpatterns = [
     url(r'^questions/$', QuestionListAPIView.as_view(), name='question-list'),
     url(r'^questions/create/$', QuestionCreateAPIView.as_view(), name='question-create'),

@@ -26,7 +26,8 @@ class Entry(models.Model):
     author = models.ForeignKey(
         AUTH_USER_MODEL,
         default=-1,
-        related_name="%(class)s_set"
+        related_name="%(class)s_set",
+        on_delete=models.CASCADE,
     )
 
     pub_date = models.DateTimeField(
@@ -102,7 +103,7 @@ class Answer(Entry):
     # К какой записи (вопросу) относится, так же равна question.pk
     entry_id = models.PositiveIntegerField(db_index=True)
     # Если является ответом на ответ, то содержит внешний ключ на этот ответ
-    parent = models.ForeignKey("self", null=True, blank=True)
+    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
     answers = AnswersManager()
 
@@ -131,7 +132,6 @@ class Answer(Entry):
 
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):
-    print(instance.is_parent)
     if instance.is_parent:
         question = instance.on_question
         question.reply_count = \
