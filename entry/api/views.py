@@ -109,6 +109,16 @@ class AnswerListAPIView(ListAPIView):
     queryset = Answer.published.all()
     serializer_class = AnswerListSerializer
     permission_classes = [AllowAny]
+    pagination_class = PageNumberPagination
+    filter_backends = [SearchFilter]
+    search_fields = [
+        'id',
+        'content',
+        'author__first_name',
+        'author__last_name',
+        'author__patronymic',
+        'author__email'
+    ]
 
 
 class AnswerUpdateAPIView(RetrieveUpdateAPIView):

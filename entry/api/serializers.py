@@ -151,12 +151,12 @@ def answer_create_serializer(question_id=None, answer_id=None, author=None):
             super(AnswerCreateSerializer, self).__init__(*args, **kwargs)
 
         def validate(self, data):
-
             question_id = self.question_id
 
             if question_id is None:
-                raise ValidationError(_('Установите номер вопроса (question_id) или номер ответа (answer_id), '
-                                        'на которых на который нужно добавить комментарий.'))
+                raise ValidationError(_('Установите номер вопроса (question_id) для ответа на него,'
+                                        ' или номер ответа (answer_id), на которых на который нужно добавить'
+                                        ' комментарий.'))
 
             try:
                 question = Question.published.get(pk=question_id)
