@@ -107,4 +107,4 @@ venv.bak/
 
 /.idea/
 
-staticfiles/
+/project/staticfiles/
