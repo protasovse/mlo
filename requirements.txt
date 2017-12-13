@@ -1,0 +1,23 @@
+cffi==1.11.2
+Django==2.0
+pytz==2017.3
+six==1.11.0
+django-environ==0.4.4
+
+# mptt — организация древовидных структур
+django-mptt
+django-mptt-admin
+
+djangorestframework==3.7.3
+
+# Python markdown parser library
+misaka==2.1.0
+
+# Postgres driver for Django
+psycopg2==2.7.3.2
+
+# Mysql
+mysqlclient==1.3.12
+PyMySQL==0.7.11
+
+django-js-asset==0.1.1
