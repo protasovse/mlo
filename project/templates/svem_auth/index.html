@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}<div id="container"><router-view></router-view></div>{% endblock %}
+
+{% block block_js %}
+<script src='{% static "authorization.js" %}'></script>
+{% endblock %}

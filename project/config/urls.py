@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.urls import path
 from django.contrib import admin
 
 urlpatterns = [
@@ -15,4 +16,6 @@ urlpatterns = [
 
     url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
     url(r'^', include('apps.rubric.urls', namespace='rubrics')),
+
+    path('auth/', include('apps.svem_auth.urls'))
 ]

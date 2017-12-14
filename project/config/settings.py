@@ -10,9 +10,10 @@ PROJECT_DIR = environ.Path()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-STATIC_ROOT = environ.Path('staticfiles').__str__()
+
+STATIC_ROOT = environ.Path('project/static').__str__()
 STATICFILES_DIRS = [
-    environ.Path('media/vue/bundles').__str__(),
+   environ.Path('project/media/vue/bundles').__str__()
 ]
 
 ALLOWED_HOSTS = [
@@ -48,12 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'apps.mlo_auth',
-    'apps.entry',
-    'apps.rubric',
     'django_mptt_admin',
     'rest_framework',
     'easy_select2',
+    'apps.mlo_auth',
+    'apps.entry',
+    'apps.rubric',
+    'apps.svem_auth',
 ]
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')
@@ -79,7 +81,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [environ.Path('project/templates').__str__()],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +93,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -131,8 +135,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 
 REST_FRAMEWORK = {
