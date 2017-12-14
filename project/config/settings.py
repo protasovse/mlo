@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'apps.entry',
     'apps.rubric',
     'django_mptt_admin',
-    'rest_framework'
+    'rest_framework',
+    'easy_select2',
 ]
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')

@@ -16,8 +16,10 @@ misaka==2.1.0
 # Postgres driver for Django
 psycopg2==2.7.3.2
 
-# Mysql
+# Mysql driver
 mysqlclient==1.3.12
-PyMySQL==0.7.11
 
 django-js-asset==0.1.1
+
+# Select2
+django-easy-select2==1.3.4
