@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.utils.translation import ugettext_lazy as _
 from django_mptt_admin.admin import DjangoMpttAdmin
+from easy_select2 import Select2
 from mptt.forms import TreeNodeChoiceField
 
 from apps.rubric.models import Rubric
@@ -15,15 +16,17 @@ class RubricAdminForm(forms.ModelForm):
     parent = TreeNodeChoiceField(
         label=_('Родительская рубрика'),
         empty_label=_('Нет родительской рубрики'),
-        level_indicator='……', required=False,
-        queryset=Rubric.objects.all())
+        level_indicator='• • ', required=False,
+        queryset=Rubric.objects.all(),
+        widget=Select2({'width': '100ex'}),
+    )
 
-    def __init__(self, *args, **kwargs):
-        super(RubricAdminForm, self).__init__(*args, **kwargs)
-        self.fields['parent'].widget = RelatedFieldWidgetWrapper(
-            self.fields['parent'].widget,
-            Rubric.parent.field.remote_field,
-            self.admin_site)
+    # def __init__(self, *args, **kwargs):
+    #     super(RubricAdminForm, self).__init__(*args, **kwargs)
+    #     self.fields['parent'].widget = RelatedFieldWidgetWrapper(
+    #         self.fields['parent'].widget,
+    #         Rubric.parent.field.remote_field,
+    #         self.admin_site)
 
     def clean_parent(self):
         """
@@ -36,6 +39,8 @@ class RubricAdminForm(forms.ModelForm):
                 code='self_parenting')
         return data
 
+    # Meta = select2_modelform_meta(Rubric)
+
     class Meta:
         model = Rubric
         fields = forms.ALL_FIELDS
@@ -43,11 +48,12 @@ class RubricAdminForm(forms.ModelForm):
 
 @admin.register(Rubric)
 class RubricAdmin(DjangoMpttAdmin):
+    form = RubricAdminForm
     fields = ('name', 'description', 'slug', 'parent')
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)
-    raw_id_fields = ('parent',)
+    # raw_id_fields = ('parent',)
     list_filter = ('tree_id',)
     # inlines = (RubricsInLine, )
-    use_context_menu=True
+    use_context_menu = True
     item_label_field_name = 'title_for_admin'

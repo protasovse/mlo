@@ -47,7 +47,7 @@ class Rubric(MPTTModel):
         super(Rubric, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "%d. %s" % (self.pk, self.name)
+        return "%s (%d)" % (self.name, self.pk,)
 
 
 class Classified(models.Model):

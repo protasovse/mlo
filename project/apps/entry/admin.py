@@ -1,11 +1,10 @@
-from easy_select2 import select2_modelform
-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from easy_select2 import select2_modelform
 
 from apps.entry.models import Question, Answer
 
-QuestionForm = select2_modelform(Question, attrs={'width': '600px'})
+QuestionForm = select2_modelform(Question, attrs={'width': '100ex'})
 
 
 @admin.register(Question)
