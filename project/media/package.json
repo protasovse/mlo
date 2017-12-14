@@ -1,0 +1,15 @@
+{
+  "name": "mlo",
+  "version": "1.0.0",
+  "description": "Frondend for Django project Мойюрист.онлайн",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "protasovse",
+  "license": "ISC"
+}
