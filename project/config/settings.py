@@ -13,7 +13,6 @@ DEBUG = env('DEBUG')
 STATIC_ROOT = environ.Path('staticfiles').__str__()
 STATICFILES_DIRS = [
     environ.Path('media/vue/bundles').__str__(),
-    environ.Path('media/node_modules').__str__(),
 ]
 
 ALLOWED_HOSTS = [

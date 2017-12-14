@@ -107,3 +107,4 @@ venv.bak/
 
 /project/.idea/
 /project/staticfiles/
+/project/media/node_modules/
