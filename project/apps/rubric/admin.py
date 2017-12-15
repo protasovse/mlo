@@ -46,6 +46,39 @@ class RubricAdminForm(forms.ModelForm):
         fields = forms.ALL_FIELDS
 
 
+class TreeIdFilter(admin.SimpleListFilter):
+    """
+    Фильтр в правой колонке
+    """
+    title = _('Рубрики')
+    parameter_name = 'parent_id'
+
+    def lookups(self, request, model_admin):
+        if self.value() is None:
+            rubrics = Rubric.objects.filter(parent=None)
+        else:
+            rq = Rubric.objects.get(pk=self.value())
+            rubrics = rq.get_children()
+            if rubrics.count() == 0:
+                rubrics = rq.get_siblings(include_self=True)
+
+        l = ()
+        for r in rubrics:
+            l = l+((
+                       r.pk,
+                       "%s (%d)" % (r.name, r.get_descendants().count())
+                   ),)
+
+        return l
+
+    def queryset(self, request, queryset):
+        # print(self.value())
+        if self.value() is None:
+            return Rubric.objects.all()
+        rq = Rubric.objects.get(pk=self.value())
+        return Rubric.objects.get(pk=self.value()).get_descendants(include_self=True)
+
+
 @admin.register(Rubric)
 class RubricAdmin(DjangoMpttAdmin):
     form = RubricAdminForm
@@ -53,7 +86,7 @@ class RubricAdmin(DjangoMpttAdmin):
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)
     # raw_id_fields = ('parent',)
-    list_filter = ('tree_id',)
+    list_filter = (TreeIdFilter,)
     # inlines = (RubricsInLine, )
     use_context_menu = True
     item_label_field_name = 'title_for_admin'
