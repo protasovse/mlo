@@ -82,7 +82,13 @@ class TreeIdFilter(admin.SimpleListFilter):
 @admin.register(Rubric)
 class RubricAdmin(DjangoMpttAdmin):
     form = RubricAdminForm
-    fields = ('name', 'description', 'slug', 'parent')
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'parent',)}),
+        (_('Описание'), {
+            'fields': ('description', 'slug'),
+            'classes': ('collapse', 'collapse-closed')
+        }))
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)
     # raw_id_fields = ('parent',)

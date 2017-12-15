@@ -4,6 +4,17 @@ from easy_select2 import select2_modelform
 
 from apps.entry.models import Question, Answer
 
+
+class AnswersInLine(admin.StackedInline):
+    model = Answer
+    fk_name = 'on_question'
+    extra = 0
+    raw_id_fields = ('author',)
+    fields = (('author', 'status'), 'content', 'parent')
+    show_change_link = True
+    classes = ('collapse', 'collapse-closed')
+
+
 QuestionForm = select2_modelform(Question, attrs={'width': '100ex'})
 
 
@@ -24,6 +35,6 @@ class QuestionAdmin(admin.ModelAdmin):
     # raw_id_fields = ('author',)
     search_fields = ['title', 'content']
     list_filter = ('pub_date', 'status')
-    # inlines = (FilesInLine, AnswersInLine, CommentsInLine)
+    inlines = (AnswersInLine, )
 
 admin.site.register(Answer)

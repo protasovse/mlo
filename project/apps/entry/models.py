@@ -100,7 +100,7 @@ class Question(Entry, Titled, Classified):
 
 class Answer(Entry):
     # К какой записи (вопросу) относится, так же равна question.pk
-    entry_id = models.PositiveIntegerField(db_index=True)
+    on_question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     # Если является ответом на ответ, то содержит внешний ключ на этот ответ
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
@@ -111,7 +111,7 @@ class Answer(Entry):
         verbose_name_plural = _('Ответы')
 
     def children(self):
-        return Answer.answers.related_to_question(self.entry_id).filter(parent=self)
+        return Answer.answers.related_to_question(self.on_question_id).filter(parent=self)
 
     @property
     def is_parent(self):
@@ -122,19 +122,16 @@ class Answer(Entry):
             return False
         return True
 
-    @property
-    def on_question(self):
-        """
-        Возвращаем вопрос на который ответ
-        """
-        return Question.objects.get(pk=self.entry_id)
-
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):
+    """
+    Сигнал для подсчёта количества ответов на вопрос
+    и «ответов» на ответ
+    """
     if instance.is_parent:
         question = instance.on_question
         question.reply_count = \
-            sender.objects.filter(parent=None, entry_id=question.pk).count()
+            sender.objects.filter(parent=None, on_question=question.pk).count()
         question.save(update_fields=('reply_count',))
     else:
         parent = instance.parent

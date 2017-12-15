@@ -20,7 +20,7 @@ class Rubric(MPTTModel):
                             verbose_name=_('Родительская рубрика'), on_delete=models.CASCADE)
 
     class MPTTMeta:
-        order_insertion_by = ('name',)
+        order_insertion_by = ('-id',)
 
     class Meta:
         ordering = ('name',)
@@ -43,6 +43,8 @@ class Rubric(MPTTModel):
 
     def save(self, *args, **kwargs):
         self._set_slug()
+        # Первую букву в верхний регистр
+        self.name = self.name[0].upper() + self.name[1:]
         super(Rubric, self).save(*args, **kwargs)
 
     def __str__(self):

@@ -1,9 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from apps.mlo_auth.managers import LAWYER
-from config.settings import AUTH_USER_MODEL
-
 DELETED = 0
 DRAFT = 1
 PUBLISHED = 2
@@ -40,7 +37,7 @@ class AnswersManager(models.Manager):
         :param question_id: номер вопроса
         :return: queryset
         """
-        qs = super(AnswersManager, self).filter(entry_id=question_id)
+        qs = super(AnswersManager, self).filter(on_question_id=question_id)
         return qs
 
     def by_question(self, question_id):
@@ -64,7 +61,7 @@ class AnswersManager(models.Manager):
 
         if isinstance(author, get_user_model()):
             instance = self.model()
-            instance.entry_id = question_id
+            instance.on_question_id = question_id
             instance.author = author
             instance.content = content
             instance.parent = parent
