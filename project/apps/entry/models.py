@@ -56,7 +56,7 @@ class Entry(models.Model):
     )
 
     reply_count = models.IntegerField(
-        _('Количество ответов'), db_index=True,
+        _('Ответов'), db_index=True,
         default=0, editable=False)
 
     objects = models.Manager()
@@ -66,7 +66,7 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '№%d. %s' % (self.id, self.content[:64])
+        return '№%d. %s (%d отв.)' % (self.id, self.content[:64], self.reply_count)
 
     def __int__(self):
         return self.pk
@@ -153,7 +153,8 @@ class Answer(Entry):
     on_question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
-        related_name='answers'
+        related_name='answers',
+        verbose_name=_('На вопрос')
     )
     # Если является ответом на ответ, то содержит внешний ключ на этот ответ
     # parent — либо None, если ответ юриста первый, либо равен answer_id первого ответа.
@@ -162,7 +163,7 @@ class Answer(Entry):
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        verbose_name=_('К ответу')
+        verbose_name=_('К ответу'),
     )
 
     answers = AnswersManager()
@@ -182,6 +183,11 @@ class Answer(Entry):
         if self.parent is not None:
             return False
         return True
+
+    def save(self, *args, **kwargs):
+        if not hasattr(self, 'on_question'):
+            self.on_question = self.parent.on_question
+        return super(Answer, self).save()
 
 
 class Offer(models.Model):
