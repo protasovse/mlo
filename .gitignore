@@ -109,3 +109,5 @@ venv.bak/
 
 /project/staticfiles/
 /project/media/node_modules/
+/project/storage/
+

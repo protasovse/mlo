@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 
@@ -17,5 +19,6 @@ urlpatterns = [
     url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
     url(r'^', include('apps.rubric.urls', namespace='rubrics')),
 
-    path('auth/', include('apps.svem_auth.urls'))
-]
+    path('auth/', include('apps.svem_auth.urls')),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

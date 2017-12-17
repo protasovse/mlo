@@ -20,6 +20,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
+MEDIA_ROOT = environ.Path('storage').__str__()
+MEDIA_URL = '/storage/'
 
 if DEBUG:
     LOGGING = {

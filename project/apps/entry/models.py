@@ -37,6 +37,7 @@ class Entry(models.Model):
         default=-1,
         related_name="%(class)s_set",
         on_delete=models.CASCADE,
+        verbose_name=_('Автор')
     )
 
     pub_date = models.DateTimeField(
@@ -65,7 +66,7 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '№%d. %s: (%s)' % (self.id, self.content[:40], self.get_status_display())
+        return '№%d. %s' % (self.id, self.content[:64])
 
     def __int__(self):
         return self.pk
@@ -86,7 +87,7 @@ class Files(models.Model):
     Модель файлов, прикрепленных к записи.
     """
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='entries/files/%Y/%m/%d', verbose_name=_('Файл'))
+    file = models.FileField(upload_to='entries/%Y/%m/%d', verbose_name=_('Файл'))
 
     def get_basename(self):
         if self.file.name:
@@ -149,10 +150,20 @@ class Answer(Entry):
     «под» 1-м ответом юриста на вопрос.
     """
     # К какой записи (вопросу) относится, так же равна question.pk
-    on_question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
+    on_question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        related_name='answers'
+    )
     # Если является ответом на ответ, то содержит внешний ключ на этот ответ
     # parent — либо None, если ответ юриста первый, либо равен answer_id первого ответа.
-    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
+    parent = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        verbose_name=_('К ответу')
+    )
 
     answers = AnswersManager()
 
