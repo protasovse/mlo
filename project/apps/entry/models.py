@@ -71,6 +71,38 @@ class Entry(models.Model):
         abstract = True
 
 
+class Files(models.Model):
+    """
+    Модель файлов, прикрепленных к записи.
+    """
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(upload_to='entries/files/%Y/%m/%d', verbose_name=_('Файл'))
+
+    def get_basename(self):
+        if self.file.name:
+            import os
+            return os.path.basename(self.file.name)
+
+    class Meta:
+        verbose_name = _('Файл')
+        verbose_name_plural = _('Файлы')
+
+    def __str__(self):
+        return str(self.get_basename())
+
+
+class Likes(models.Model):
+    """
+    Лайки
+    """
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('entry', 'user')
+
+
 class Titled(models.Model):
     """
     Эту модель будут наследовать все совокупности записей,
@@ -84,7 +116,8 @@ class Titled(models.Model):
 
 class Question(Entry, Titled, Classified):
     """
-    Вопросы
+    Вопросы. Вопрос может задать и Клиент и Юрист. Для Клиента — это юридическая консультация.
+    Для юриста — это обсуждение какой-либо сложной профессиональной ситуации.
     """
     class Meta:
         ordering = ("-id",)
@@ -99,9 +132,16 @@ class Question(Entry, Titled, Classified):
 
 
 class Answer(Entry):
+    """
+    Ответы на вопросы. Ответ относится к определенному вопросу.
+    Так же ответ может относиться к вопросу и другому ответу на этот вопрос, т.е. юрист может добавить только
+    один ответ, который относится только к вопросу. Далее диалог между клиентом и юристом будет происходить
+    «под» 1-м ответом юриста на вопрос.
+    """
     # К какой записи (вопросу) относится, так же равна question.pk
     on_question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     # Если является ответом на ответ, то содержит внешний ключ на этот ответ
+    # parent — либо None, если ответ юриста первый, либо равен answer_id первого ответа.
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
     answers = AnswersManager()
@@ -121,6 +161,13 @@ class Answer(Entry):
         if self.parent is not None:
             return False
         return True
+
+
+class Offer(models.Model):
+    """
+    Предложение платных услуг юристом
+    """
+    pass
 
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):
