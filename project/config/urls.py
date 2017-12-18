@@ -17,8 +17,10 @@ urlpatterns = [
     # url(r'^api/v0/', include(api.v0.urls, namespace='api')),
 
     url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
+
     url(r'^', include('apps.rubric.urls', namespace='rubrics')),
 
     path('auth/', include('apps.svem_auth.urls')),
+    path('api/', include('config.api_urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

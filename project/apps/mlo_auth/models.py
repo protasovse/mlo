@@ -3,7 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-
+from django.contrib.auth import get_user_model
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
 
 ROLES_CHOICES = (
@@ -104,5 +104,29 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
+    def activate(self):
+        if self.is_active:
+            return
+        self.is_active = 1
+        self.save()
+
     def __str__(self):
         return self.get_full_name
+
+
+class Backend(object):
+    def authenticate(self, email="", password="", **kwargs):
+        try:
+            user = get_user_model().objects.get(email__iexact=email)
+            if user.check_password(password):
+                return user
+            else:
+                return None
+        except get_user_model().DoesNotExist:
+            return None
+
+    def get_user(self, user_id):
+        try:
+            return get_user_model().objects.get(pk=user_id)
+        except get_user_model().DoesNotExist:
+            return None

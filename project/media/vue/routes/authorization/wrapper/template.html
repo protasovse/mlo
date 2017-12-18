@@ -1,0 +1,18 @@
+<div id="auth">
+    <router-view name="title"></router-view>
+
+    <div class="form">
+        <div class="for_message">
+            <div class="loading" v-if="loading">
+                <img src="/static/auth/loader.gif" width="50px">
+            </div>
+            <div class="error" v-if="error">
+                <div>{{error_txt}}</div>
+            </div>
+            <div class="success" v-if="success">
+                <div>{{success_txt}}</div>
+            </div>
+        </div>
+    <router-view></router-view>
+    </div>
+</div>
