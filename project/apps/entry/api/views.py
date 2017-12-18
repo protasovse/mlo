@@ -106,7 +106,7 @@ class AnswerDetailAPIView(RetrieveAPIView):
 
 
 class AnswerListAPIView(ListAPIView):
-    queryset = Answer.published.all()
+    queryset = Answer.answers.all()
     serializer_class = AnswerListSerializer
     permission_classes = [AllowAny]
     pagination_class = PageNumberPagination

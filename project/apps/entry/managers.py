@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+# from apps.entry.models import Likes
+
 DELETED = 0
 DRAFT = 1
 PUBLISHED = 2
@@ -15,7 +17,29 @@ def entries_published(queryset):
 
 class EntryPublishedManager(models.Manager):
     def get_queryset(self):
+        """
+        Только опубликованные записи
+        """
         return entries_published(super(EntryPublishedManager, self).get_queryset())
+
+    def like(self, entry_id, user_id):
+        """
+        Установить/удалить лайк для записи с pk=entry_id, пользователем user_id
+        :return: True если установили лайк, False если удалили
+        """
+        obj = self.model.objects.filter(pk=entry_id)
+        if obj.count():
+            obj = obj[0]
+        else:
+            return None
+        like, created = obj.likes.get_or_create(entry_id=entry_id, user_id=user_id)
+        if created:
+            i_like_it = True
+        else:
+            like.delete()
+            i_like_it = False
+
+        return i_like_it
 
 
 thread_data = None
@@ -53,7 +77,7 @@ class AnswersManager(models.Manager):
         """
         Создаём ответ пользоваетеля на вопрос.
         :param question_id: вопрос, на который создаём ответ
-        :param content: текс ответа
+        :param content: текст ответа
         :param author: автор ответа
         :param parent: если ответ не 1-го уровня, то задаёт родительский ответ
         :return: созданный ответ

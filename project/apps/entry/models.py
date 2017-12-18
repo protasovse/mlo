@@ -194,23 +194,23 @@ class Offer(models.Model):
     """
     Предложение платных услуг юристом
     """
-    answer = models.ForeignKey(Answer,
-                               on_delete=models.CASCADE)
+    answer = models.OneToOneField(Answer,
+                                  on_delete=models.CASCADE)
 
-    cost = models.PositiveIntegerField(verbose_name=_('Стоимость услуг'))
+    cost = models.PositiveIntegerField(verbose_name=_('Стоимость услуг (₽)'))
 
     pub_date = models.DateTimeField(default=timezone.now)
 
     # Оплачена ли услуга автором вопроса, на который дан ответ с предложениями
     status = models.IntegerField(
-        _('Статус предложения'), db_index=True,
+        _('Статус счёта'), db_index=True,
         choices=OFFER_STATUS_CHOICES, default=OFFER_NEW)
 
     paid_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        verbose_name = "Предложение услуг"
-        verbose_name_plural = "Предложения услуг"
+        verbose_name = "Счёт на оказание платных услуг"
+        verbose_name_plural = "Счёта"
 
     def __str__(self):
         return "%d. стоимость: %d₽. (ответ %d, вопрос %d)" % \

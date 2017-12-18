@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from easy_select2 import select2_modelform, select2_modelform_meta, apply_select2
 
-from apps.entry.models import Question, Answer, Files
-
+from apps.entry.models import Question, Answer, Files, Offer
 
 QuestionForm = select2_modelform(Question, attrs={'width': '100ex'},)
 
@@ -45,11 +44,21 @@ class AnswersForAnswerInLine(admin.StackedInline):
 
 
 class FilesInLine(admin.StackedInline):
-    # Файлы, прикрепленные к вопросу
+    # Файлы
     model = Files
     fk_name = 'entry'
     extra = 0
     classes = ('collapse', 'collapse-closed')
+
+
+class OfferInLine(admin.StackedInline):
+    # Предложения платных услуг
+    model = Offer
+    fk_name = 'answer'
+    readonly_fields = ['status']
+    fields = [('cost', 'status')]
+    extra = 1
+    # classes = ('collapse', 'collapse-closed')
 
 
 @admin.register(Question)
@@ -80,7 +89,7 @@ class AnswerAdmin(admin.ModelAdmin):
     readonly_fields = ('on_question',)
     fields = ('content', ('author', 'status'), 'on_question')
     radio_fields = {'status': admin.VERTICAL}
-    inlines = (AnswersForAnswerInLine, FilesInLine,)
+    inlines = (OfferInLine, AnswersForAnswerInLine, FilesInLine,)
 
     def get_queryset(self, request):
         """

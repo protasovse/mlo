@@ -145,8 +145,3 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
-
-FIXTURE_DIRS = (
-   'apps/rubric/fixtures/initial.json',
-   'apps/entry/fixtures/initial.json',
-)
