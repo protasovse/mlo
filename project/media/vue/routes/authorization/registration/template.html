@@ -1,0 +1,23 @@
+<div class="auth_login">
+        <div class="form-field">
+            <label class="user" for="login-username"></label>
+            <input id='login-username' type="email" name="email" v-model="email" placeholder="email" >
+        </div>
+        <div class="form-field">
+            <label class="lock" for="login-password"></label>
+            <input id='login-password' type="password" v-model="password" placeholder="Пароль" @keyup.13="save">
+        </div>
+        <div class="form-field">
+            <label class="lock" for="login-re-password"></label>
+            <input id='login-re-password' type="password" v-model="re_password" placeholder="Повторите пароль" @keyup.13="save">
+        </div>
+
+         <div class="form-field">
+            <button type="submit" class="auth_button"
+                    @click="save" :disabled=success :class="{disabled: success}">Зарегистрироваться</button>
+         </div>
+     <footer class="info">
+         <span><router-link :to="{name: 'login'}">Войти</router-link></span>
+        <span> <router-link :to="{name: 'forgot'}">Забыли пароль?</router-link></span>
+     </footer>
+</div>

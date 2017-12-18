@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.entry',
     'apps.rubric',
     'apps.svem_auth',
+    'apps.svem_system'
 ]
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')
@@ -67,6 +68,7 @@ vars().update(EMAIL_CONFIG)
 
 SITE_ID = env('SITE_ID')
 AUTH_USER_MODEL = 'mlo_auth.user'
+AUTHENTICATION_BACKENDS = ['apps.mlo_auth.models.Backend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,3 +147,11 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
+
+FIXTURE_DIRS = (
+   'apps/rubric/fixtures/initial.json',
+   'apps/entry/fixtures/initial.json',
+)
+
+APPEND_SLASH = True
+SITE_PROTOCOL = 'https'

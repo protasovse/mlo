@@ -1,0 +1,37 @@
+<div class="auth_login">
+        <div class="form-field">
+            <label class="user" for="login-username"></label>
+            <input id='login-username' type="email" name="email" v-model="email" placeholder="Email">
+        </div>
+        <div class="form-field">
+            <label class="lock" for="login-password"></label>
+            <input id='login-password' type="password" v-model="password" placeholder="Пароль" @keyup.13="save">
+        </div>
+
+         <div class="form-field">
+             <button type="submit" class="auth_button" @click="save">Войти</button>
+         </div>
+
+        <div class="social_buttons">
+            Войти через социальные сети<br/>
+            <span>
+                <a :href=vk_url >
+                    <img src="/static/auth/icon-vk-50.jpg" >
+                </a>
+            </span>
+            <span>
+                <a :href=fb_url>
+                    <img src="/static/auth/icon-fb-50.png">
+                </a>
+            </span>
+        </div>
+        <div class="form-field" v-if="unactive"  >
+            Не пришло письмо с подтверждением?<br/>
+            <a @click="send_activation" href="javascript:void(0)">Выслать активационное письмо еще раз</a>
+        </div>
+     <footer class="info">
+         <span><router-link :to="{name: 'registration'}">Зарегистрироваться</router-link></span>
+         <span><router-link :to="{name: 'forgot'}">Забыли пароль?</router-link></span>
+     </footer>
+
+</div>

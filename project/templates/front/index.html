@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    {% if is_login %}
+        Ты авторизован
+    {% else %}
+        Ты не авторизован
+    {% endif %}
+<br/>
+<a href="{% url 'login' %}">Вход</a><br/>
+<a href="{% url 'logout' %}">Выход</a><br/>
+{% endblock %}

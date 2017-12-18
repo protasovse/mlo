@@ -1,0 +1,15 @@
+<div class="auth_forgot">
+        <div class="form-field">
+            <label class="user" for="login-username"></label>
+            <input id='login-username' type="email" name="email" v-model="email" placeholder="email">
+        </div>
+          <div class="form-field">
+             <button type="submit" class="auth_button"
+                @click="save" :disabled=success :class="{disabled: success}">Восстановить</button>
+         </div>
+
+     <footer class="info">
+        <span> <router-link :to="{name: 'login'}">Войти</router-link></span>
+         <span><router-link :to="{name: 'registration'}">Регистрация</router-link></span>
+     </footer>
+</div>
