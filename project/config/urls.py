@@ -18,7 +18,7 @@ urlpatterns = [
 
     url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
 
-    url(r'^', include('apps.rubric.urls', namespace='rubrics')),
+    # url(r'^', include('apps.rubric.urls', namespace='rubrics')),
 
     path('auth/', include('apps.svem_auth.urls')),
     path('api/', include('config.api_urls'))

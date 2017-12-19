@@ -10,10 +10,9 @@ PROJECT_DIR = environ.Path()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-
-STATIC_ROOT = environ.Path('project/static').__str__()
+STATIC_ROOT = environ.Path('static').__str__()
 STATICFILES_DIRS = [
-   environ.Path('project/media/vue/bundles').__str__()
+   environ.Path('media/vue/bundles').__str__()
 ]
 
 ALLOWED_HOSTS = [
@@ -56,12 +55,14 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'easy_select2',
     'image_cropping',
+    # 'vk_cities',
     'apps.mlo_auth',
     'apps.entry',
     'apps.rubric',
     'apps.account',
     'apps.svem_auth',
-    'apps.svem_system'
+    'apps.svem_system',
+    'apps.sxgeo',
 ]
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')
@@ -88,7 +89,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [environ.Path('project/templates').__str__()],
+        'DIRS': [environ.Path('templates').__str__()],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,10 +157,7 @@ THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
-FIXTURE_DIRS = (
-   'apps/rubric/fixtures/initial.json',
-   'apps/entry/fixtures/initial.json',
-)
-
 APPEND_SLASH = True
 SITE_PROTOCOL = 'https'
+
+# VK_CITIES_COUNTRIES = ['RU']

@@ -12,7 +12,7 @@ from apps.svem_auth.models.users import UserHash
 class AppUser(ApiView):
     def post(self, request):
         """
-        регистрация новго юзера
+        регистрация нового юзера
         :param request:
         :return:
         """
