@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'easy_thumbnails',
     'easy_select2',
+    'django_select2',
     'image_cropping',
     # 'vk_cities',
     'apps.mlo_auth',

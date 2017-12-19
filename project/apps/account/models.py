@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from image_cropping import ImageCropField, ImageRatioField
 
+from apps.sxgeo.models import Cities
 from config.settings import AUTH_USER_MODEL
 
 SEX_MALE = 'М'
@@ -11,36 +12,6 @@ SEX = (
     (SEX_MALE, _('Мужской')),
     (SEX_FEMALE, _('Женский')),
 )
-
-
-class Info(models.Model):
-    """
-    Общая информация
-    """
-
-    user = models.OneToOneField(
-        AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name=_('Пользователь')
-    )
-
-    birth_date = models.DateField(blank=True, null=True,
-                                  verbose_name=_('Дата рождения'))
-
-    sex = models.CharField(choices=SEX, max_length=1, null=True, blank=True, verbose_name=_('Пол'))
-
-    orig = ImageCropField(blank=True, verbose_name=_('Оригинал'),
-                          upload_to='account/photo/%Y/%m/')
-    photo = ImageRatioField('orig', '600x720', verbose_name=_('Фото профиля'))
-    pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
-
-    class Meta:
-        verbose_name = _('Информация')
-        verbose_name_plural = _('Информация')
-
-    def __str__(self):
-        return self.user.get_full_name
 
 
 class AccountBase(models.Model):
@@ -57,6 +28,31 @@ class AccountBase(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Info(AccountBase):
+    """
+    Общая информация
+    """
+
+    birth_date = models.DateField(blank=True, null=True,
+                                  verbose_name=_('Дата рождения'))
+
+    sex = models.CharField(choices=SEX, max_length=1, null=True, blank=True, verbose_name=_('Пол'))
+
+    orig = ImageCropField(blank=True, verbose_name=_('Оригинал'),
+                          upload_to='account/photo/%Y/%m/')
+    photo = ImageRatioField('orig', '600x720', verbose_name=_('Фото профиля'))
+    pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
+
+    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Информация')
+        verbose_name_plural = _('Информация')
+
+    def __str__(self):
+        return self.user.get_full_name
 
 
 class Case(AccountBase):

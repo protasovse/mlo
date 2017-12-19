@@ -1,6 +1,6 @@
 import misaka
 from django.db import models
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, pre_delete
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -180,7 +180,7 @@ class Answer(Entry):
         """
         Если True, то является первым ответом пользователя на вопрос
         """
-        if self.parent is not None:
+        if self.parent_id is not None:
             return False
         return True
 
@@ -234,4 +234,4 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
         parent.save(update_fields=('reply_count',))
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
-post_delete.connect(post_save_answer_receiver, sender=Answer)
+pre_delete.connect(post_save_answer_receiver, sender=Answer)

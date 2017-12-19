@@ -21,6 +21,8 @@ urlpatterns = [
     # url(r'^', include('apps.rubric.urls', namespace='rubrics')),
 
     path('auth/', include('apps.svem_auth.urls')),
-    path('api/', include('config.api_urls'))
+    path('api/', include('config.api_urls')),
+
+    url(r'^select2/', include('django_select2.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

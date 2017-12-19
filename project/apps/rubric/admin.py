@@ -39,8 +39,6 @@ class RubricAdminForm(forms.ModelForm):
                 code='self_parenting')
         return data
 
-    # Meta = select2_modelform_meta(Rubric)
-
     class Meta:
         model = Rubric
         fields = forms.ALL_FIELDS
@@ -80,7 +78,7 @@ class TreeIdFilter(admin.SimpleListFilter):
 
 
 @admin.register(Rubric)
-class RubricAdmin(DjangoMpttAdmin):
+class RubricAdmin(DjangoMpttAdmin, admin.ModelAdmin):
     form = RubricAdminForm
     fieldsets = (
         (None, {
@@ -91,8 +89,6 @@ class RubricAdmin(DjangoMpttAdmin):
         }))
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)
-    # raw_id_fields = ('parent',)
     list_filter = (TreeIdFilter,)
-    # inlines = (RubricsInLine, )
     use_context_menu = True
     item_label_field_name = 'title_for_admin'

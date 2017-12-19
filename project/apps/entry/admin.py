@@ -1,20 +1,7 @@
-from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from easy_select2 import select2_modelform, select2_modelform_meta, apply_select2
 
 from apps.entry.models import Question, Answer, Files, Offer
-
-QuestionForm = select2_modelform(Question, attrs={'width': '100ex'},)
-
-
-class AnswerForm(forms.ModelForm):
-    class Meta:
-        model = Answer
-        fields = ['author', 'content']
-        widgets = {
-            'author': apply_select2(forms.Select),
-        }
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -22,9 +9,9 @@ class AnswersForQuestionInLine(admin.StackedInline):
     Ответы первого уровня к вопросу
     """
     model = Answer
-    form = AnswerForm
     fk_name = 'on_question'
     fields = ('author', 'content',)
+    autocomplete_fields = ['author']
     extra = 0
     show_change_link = True
     classes = ('collapse', 'collapse-closed')
@@ -35,9 +22,9 @@ class AnswersForQuestionInLine(admin.StackedInline):
 
 class AnswersForAnswerInLine(admin.StackedInline):
     model = Answer
-    form = AnswerForm
     fk_name = 'parent'
     fields = ['author', 'content']
+    autocomplete_fields = ['author']
     extra = 0
     show_change_link = True
     classes = ('collapse', 'collapse-closed')
@@ -66,7 +53,6 @@ class QuestionAdmin(admin.ModelAdmin):
     """
     Админка для модели Question.
     """
-    form = QuestionForm
     fieldsets = (
         (_('Content'), {
             'fields': ('title', 'content',)}),
@@ -74,20 +60,21 @@ class QuestionAdmin(admin.ModelAdmin):
             'fields': ('status', 'author', 'rubrics'),
             # 'classes': ('collapse', 'collapse-closed')
         }))
+    autocomplete_fields = ['rubrics', 'author']
     radio_fields = {'status': admin.HORIZONTAL}
     list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count')
-    search_fields = ['title', 'content']
+    search_fields = ['title', 'content', 'author__last_name', 'author__email']
     list_filter = ('pub_date', 'status')
     inlines = (AnswersForQuestionInLine, FilesInLine,)
 
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    form = AnswerForm
     list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
-    search_fields = ['content', ]
+    search_fields = ['content', 'author__last_name', 'author__email']
     readonly_fields = ('on_question',)
     fields = ('content', ('author', 'status'), 'on_question')
+    autocomplete_fields = ['author']
     radio_fields = {'status': admin.VERTICAL}
     inlines = (OfferInLine, AnswersForAnswerInLine, FilesInLine,)
 
