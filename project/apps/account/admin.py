@@ -23,16 +23,19 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
 @admin.register(Case)
 class CaseAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
+    autocomplete_fields = ['user']
 
 
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
+    autocomplete_fields = ['user']
 
 
 @admin.register(Experience)
 class ExperienceAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
+    autocomplete_fields = ['user']
 
 
 admin.site.register(Info, InfoAdmin)
