@@ -12,8 +12,11 @@ DEBUG = env('DEBUG')
 
 STATIC_ROOT = environ.Path('staticfiles').__str__()
 STATICFILES_DIRS = [
-   environ.Path('media/vue/bundles').__str__()
+    environ.Path('media/vue/bundles').__str__(),
+    environ.Path('static').__str__(),
 ]
+
+STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = [
     '127.0.0.1'
@@ -139,12 +142,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-STATIC_URL = '/static/'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
