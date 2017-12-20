@@ -8,6 +8,7 @@ from apps.sxgeo.models import Cities
 @admin.register(Cities)
 class CitiesAdmin(admin.ModelAdmin):
     search_fields = ['name_ru']
+    list_display = ['full_name_ru']
 
 
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
@@ -16,7 +17,7 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
         (None, {'fields': ('user', 'city', 'birth_date', 'sex', )}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
-    search_fields = ['user__last_name', 'city__name_ru']
+    search_fields = ['user__last_name']
     autocomplete_fields = ['user', 'city']
 
 

@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, connection
+from django.utils.translation import ugettext_lazy as _
 
 
 class Country(models.Model):
@@ -28,7 +29,24 @@ class Cities(models.Model):
     lon = models.DecimalField(max_digits=10, decimal_places=5)
     okato = models.CharField(max_length=20)
 
+    @property
+    def full_name_ru(self):
+        cursor = connection.cursor()
+        sql = """
+                SELECT c.name_ru, r.name_ru, co.name_ru FROM sxgeo_cities c
+                LEFT JOIN sxgeo_regions r ON c.region_id = r.id
+                LEFT JOIN sxgeo_country co ON r.country = co.iso
+                WHERE c.id = %d
+               """ % (self.id,)
+        cursor.execute(sql)
+        c = cursor.fetchone()
+        return "%s (%s, %s)" % (c[0], c[2], c[1])
+
     def __str__(self):
-        return self.name_ru
+        return self.full_name_ru
+
+    class Meta:
+        verbose_name = _('Город')
+        verbose_name_plural = _('Города')
 
 
