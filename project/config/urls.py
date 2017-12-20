@@ -3,9 +3,14 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
+from apps.mlo_auth.admin import LoginView
+
 
 urlpatterns = [
+
+    path('admin/login/', LoginView.as_view(),name='login'),
     url(r'^admin/', admin.site.urls),
+
 
     url(r'^вопросы/', include('apps.entry.urls_questions', namespace='questions')),
 

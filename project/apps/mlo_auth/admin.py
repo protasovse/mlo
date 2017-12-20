@@ -1,13 +1,16 @@
 from django.contrib import admin
-
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
-from django.forms import modelform_factory
 from django.utils.translation import ugettext_lazy as _
-
+from django import forms
 from apps.account.models import Case, Education, Experience
 from apps.mlo_auth.models import User
+from django.contrib.auth.forms import AuthenticationForm as AdminAuthenticationForm
+from django.contrib.auth.views import LoginView as AdminLoginView
+
+UserModel = get_user_model()
 
 
 class CaseInLine(admin.StackedInline):
@@ -54,6 +57,40 @@ class MloUserAdmin(UserAdmin):
     filter_horizontal = ()
 
     inlines = (CaseInLine, EducationInLine, ExperienceInLine)
+
+
+class AuthenticationForm(AdminAuthenticationForm):
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        if username is not None and password:
+            self.user_cache = authenticate(email=username, password=password)
+            if self.user_cache is None:
+                # An authentication backend may reject inactive users. Check
+                # if the user exists and is inactive, and raise the 'inactive'
+                # error if so.
+                try:
+                    self.user_cache = UserModel._default_manager.get_by_natural_key(username)
+                except UserModel.DoesNotExist:
+                    pass
+                else:
+                    self.confirm_login_allowed(self.user_cache)
+                raise forms.ValidationError(
+                    self.error_messages['invalid_login'],
+                    code='invalid_login',
+                    params={'username': self.username_field.verbose_name},
+                )
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
+
+
+class LoginView(AdminLoginView):
+    template_name = 'admin/login.html'
+
+    def get_form_class(self):
+        return AuthenticationForm
 
 
 admin.site.register(User, MloUserAdmin)
