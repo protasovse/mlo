@@ -10,7 +10,7 @@ PROJECT_DIR = environ.Path()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-STATIC_ROOT = environ.Path('static').__str__()
+STATIC_ROOT = environ.Path('staticfiles').__str__()
 STATICFILES_DIRS = [
    environ.Path('media/vue/bundles').__str__()
 ]
