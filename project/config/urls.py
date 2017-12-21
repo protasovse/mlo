@@ -11,7 +11,7 @@ urlpatterns = [
     path('admin/login/', LoginView.as_view(),name='login'),
     url(r'^admin/', admin.site.urls),
 
-
+    #
     url(r'^вопросы/', include('apps.entry.urls_questions', namespace='questions')),
 
     url(r'^api/v0/entries/', include('apps.entry.api.urls', namespace='entries-api')),
