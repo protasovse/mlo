@@ -1,0 +1,14 @@
+h5, h6 {
+  font-weight: $font-weight-normal;
+}
+
+.subtitle {
+  font: {
+    size: ($font-size-base * 0.857);
+    weight: $font-weight-semibold;
+  }
+  text: {
+    transform: uppercase;
+  }
+  letter-spacing: 0.75pt;
+}
