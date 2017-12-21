@@ -30,6 +30,7 @@ class AppUser(ApiView):
                 pass
 
             user = get_user_model().objects.create_user(_email, _password)
+
             emails.send_activation_email(user)
             return True
         except IntegrityError:
@@ -84,7 +85,9 @@ class ActivateAccount(ApiView):
                 raise ApiPublicException(
                     'Не удалось активировать аккаунт. Ссылка на смену пароля просрочена или некоректна'
                 )
-            hash.user.activate()
+            user = hash.user
+            user.activate(False)
+            user.set_lawyer()
             hash.delete()
         except UserHash.DoesNotExist:
             raise ApiPublicException('Не удалось активировать аккаунт. Ссылка на смену пароля просрочена или некоректна')

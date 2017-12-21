@@ -105,11 +105,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
-    def activate(self):
+    def activate(self, do_save=True):
         if self.is_active:
             return
         self.is_active = 1
-        self.save()
+        if do_save:
+            self.save()
+
+    def set_lawyer(self, do_save=True):
+        if self.role == LAWYER:
+            return
+        self.role = LAWYER
+        if do_save:
+            self.save()
 
     def __str__(self):
         return self.get_full_name
