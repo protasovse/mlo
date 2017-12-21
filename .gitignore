@@ -110,3 +110,4 @@ venv.bak/
 /project/staticfiles/
 /project/media/node_modules/
 /project/storage/
+/project/apps/front/template/front/mainpage.html
