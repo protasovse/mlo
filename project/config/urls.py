@@ -13,9 +13,6 @@ urlpatterns = [
     url(r'^api/v0/users/', include('apps.mlo_auth.api.urls', namespace="users-api")),
     url(r'^api/v0/auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # Api
-    # url(r'^api/v0/', include(api.v0.urls, namespace='api')),
-
     url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
 
     # url(r'^', include('apps.rubric.urls', namespace='rubrics')),
@@ -25,4 +22,5 @@ urlpatterns = [
 
     url(r'^select2/', include('django_select2.urls')),
 
+    url(r'^', include('apps.front.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

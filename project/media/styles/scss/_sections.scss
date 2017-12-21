@@ -1,0 +1,38 @@
+section {
+  // @extend .container;
+  div:first-child {
+    position: relative;
+    // @extend .row;
+    div:first-child {
+      //
+    }
+  }
+
+  // section.header
+  &.header {
+    min-height: 720px;
+    position: relative;
+    color: white;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      left: -200px;
+      right: -200px;
+      min-height: 100%;
+      background: {
+        image: url(#{$img_dir}/bgr/main-header.jpg);
+        position: center top;
+        clip: border-box;
+        size: cover;
+        repeat: no-repeat;
+      }
+    }
+    //div:first-child {
+      @extend .d-flex;
+      @extend .justify-content-center;
+      @extend .align-items-center;
+    //}
+  }
+
+} // section

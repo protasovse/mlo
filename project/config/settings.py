@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'apps.svem_auth',
     'apps.svem_system',
     'apps.sxgeo',
+    'apps.front',
 ]
 
 EMAIL_BACKEND = env('EMAIL_BACKEND')

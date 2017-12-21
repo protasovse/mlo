@@ -1,1 +1,4 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
+$img_dir: '/static/img';
+@import "layout";
+@import "sections";
