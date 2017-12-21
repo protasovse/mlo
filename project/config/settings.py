@@ -1,5 +1,6 @@
 import os
 import environ
+from easy_thumbnails.conf import Settings as thumbnail_settings
 
 root = environ.Path(__file__) - 3
 env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
@@ -151,7 +152,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
+
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
@@ -159,4 +160,11 @@ THUMBNAIL_PROCESSORS = (
 APPEND_SLASH = True
 SITE_PROTOCOL = 'https'
 
-# VK_CITIES_COUNTRIES = ['RU']
+
+VK_CLIENT_ID = 6302697
+VK_CLIENT_SECRET = 'iu1QGd2VbzQMKSi5AxaP'
+VK_REDIRECT_URL = 'https://мойюрист.онлайн/auth/vk'
+
+FB_CLIENT_ID = 150974185544797
+FB_CLIENT_SECRET = '6e13e4e659064e7fbbc65c30c8ce0c5c'
+FB_REDIRECT_URL = 'https://мойюрист.онлайн/auth/fb'
