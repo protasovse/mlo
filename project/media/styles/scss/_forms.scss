@@ -28,7 +28,8 @@ form {
 
 .form-check-label {
   font-size: $font-size-base;
-  font-weight: $font-weight-normal;
+  // font-weight: $font-weight-normal;
+  // color: $gray-700;
 }
 
 .form-check-input {
@@ -39,22 +40,53 @@ form {
     visibility: hidden;
   }
 
-  /* checkbox aspect */
-  //
-  &[type="checkbox"] + label:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -2px;
-    width: 16px;
-    height: 16px;
-    z-index: 0;
-    border: 1px solid $gray-500;
-    border-radius: 2px;
-    margin-top: 2px;
-    transition: .2s;
-  }
-  &[type="checkbox"]:checked + label:before {
+  // рамка чекбокса
+  &[type="checkbox"] {
+    + label:before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: -2px;
+      width: 16px;
+      height: 16px;
+      z-index: 0;
+      border: 1px solid $gray-500;
+      border-radius: 2px;
+      margin-top: 2px;
+      transition: .2s;
+    }
+    &:checked + label:before {
       border-color: $gray-200;
     }
+    &:disabled {
+      + label {
+        color: $gray-500;
+      }
+      + label:before {
+        border-color: $gray-100;
+      }
+    }
   }
+
+  // галочка чекбокса
+  &[type="checkbox"]:checked {
+    + label:after {
+      content: '\e900';
+      font-family: icomoon;
+      position: absolute;
+      color: $gray-800;
+      top: 3px;
+      left: -1px;
+      width: 16px;
+      height: 16px;
+      z-index: 0;
+    }
+    &:disabled + label:after {
+      color: $gray-500; //
+    }
+  }
+}
+
+/*&[type="checkbox"]:disabled + label:before { //
+  border-color: $gray-100;
+}*/
