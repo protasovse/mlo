@@ -35,6 +35,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-bubble:before {
+  content: "\e928";
+}
 .icon-checker:before {
   content: "\e900";
   color: #545454;

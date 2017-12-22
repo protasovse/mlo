@@ -1784,40 +1784,37 @@ form {
 .form-check-label {
   font-size: 0.875rem; }
 
-.form-check-input[type="checkbox"]:not(:checked), .form-check-input[type="checkbox"]:checked {
+.form-check-input[type="checkbox"]:not(:checked), .form-check-input[type="checkbox"]:checked, .form-check-input[type="radio"]:not(:checked), .form-check-input[type="radio"]:checked {
   position: absolute;
   left: -9999px;
   visibility: hidden; }
-.form-check-input[type="checkbox"] + label:before {
+.form-check-input[type="checkbox"] + label, .form-check-input[type="radio"] + label {
+  padding-left: 3px; }
+.form-check-input[type="checkbox"] + label:before, .form-check-input[type="radio"] + label:before {
   content: '';
+  font-family: icomoon;
+  line-height: 14px;
+  font-size: 16px;
   position: absolute;
-  top: 2px;
-  left: -2px;
+  top: 3px;
+  left: 0px;
   width: 16px;
   height: 16px;
   z-index: 0;
   border: 1px solid #bababa;
   border-radius: 2px;
-  margin-top: 2px;
   transition: .2s; }
-.form-check-input[type="checkbox"]:checked + label:before {
-  border-color: #e6e6e6; }
-.form-check-input[type="checkbox"]:disabled + label {
+.form-check-input[type="checkbox"]:checked + label:before, .form-check-input[type="radio"]:checked + label:before {
+  border-color: #e6e6e6;
+  content: '\e900'; }
+.form-check-input[type="checkbox"]:disabled + label, .form-check-input[type="radio"]:disabled + label {
   color: #bababa; }
-.form-check-input[type="checkbox"]:disabled + label:before {
+.form-check-input[type="checkbox"]:disabled + label:before, .form-check-input[type="radio"]:disabled + label:before {
   border-color: #f5f5f5; }
-.form-check-input[type="checkbox"]:checked + label:after {
-  content: '\e900';
-  font-family: icomoon;
-  position: absolute;
-  color: #545454;
-  top: 3px;
-  left: -1px;
-  width: 16px;
-  height: 16px;
-  z-index: 0; }
-.form-check-input[type="checkbox"]:checked:disabled + label:after {
-  color: #bababa; }
+.form-check-input[type="radio"] + label:before {
+  border-radius: 50%; }
+.form-check-input[type="radio"]:checked + label:before {
+  content: '\e928'; }
 
 /*&[type="checkbox"]:disabled + label:before { //
   border-color: $gray-100;

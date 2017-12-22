@@ -34,29 +34,37 @@ form {
 
 .form-check-input {
   &[type="checkbox"]:not(:checked),
-  &[type="checkbox"]:checked {
+  &[type="checkbox"]:checked,
+  &[type="radio"]:not(:checked),
+  &[type="radio"]:checked {
     position: absolute;
     left: -9999px;
     visibility: hidden;
   }
 
   // рамка чекбокса
-  &[type="checkbox"] {
+  &[type="checkbox"], &[type="radio"] {
+    + label {
+      padding-left: 3px;
+    }
     + label:before {
       content: '';
+      font-family: icomoon;
+      line-height: 14px;
+      font-size: 16px;
       position: absolute;
-      top: 2px;
-      left: -2px;
+      top: 3px;
+      left: 0px;
       width: 16px;
       height: 16px;
       z-index: 0;
       border: 1px solid $gray-500;
       border-radius: 2px;
-      margin-top: 2px;
       transition: .2s;
     }
     &:checked + label:before {
       border-color: $gray-200;
+      content: '\e900';
     }
     &:disabled {
       + label {
@@ -67,24 +75,16 @@ form {
       }
     }
   }
-
-  // галочка чекбокса
-  &[type="checkbox"]:checked {
-    + label:after {
-      content: '\e900';
-      font-family: icomoon;
-      position: absolute;
-      color: $gray-800;
-      top: 3px;
-      left: -1px;
-      width: 16px;
-      height: 16px;
-      z-index: 0;
+  // поправка для radio
+  &[type="radio"] {
+    + label:before {
+      border-radius: 50%;
     }
-    &:disabled + label:after {
-      color: $gray-500; //
+    &:checked + label:before {
+      content: '\e928';
     }
   }
+
 }
 
 /*&[type="checkbox"]:disabled + label:before { //
