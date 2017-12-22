@@ -1,5 +1,29 @@
 h5, h6 {
-  font-weight: $font-weight-normal;
+  font-weight: $font-weight-semibold;
+}
+
+h1 {
+  line-height: 1.2037037em;
+}
+
+h2 {
+  line-height: 1.25em;
+}
+
+h3 {
+  line-height: 1.3461539em;
+}
+
+h4 {
+  line-height: 1.5em;
+}
+
+h5 {
+  line-height: 1.3888889em;
+}
+
+h6 {
+  line-height: 1.375em;
 }
 
 .subtitle {

@@ -1,0 +1,60 @@
+$form-font-size: $font-size-base * 1.142857142857143;
+
+form {
+  font-size: $form-font-size;
+  font-weight: $font-weight-semibold;
+  color: $gray-600;
+}
+
+.form-control {
+  font-size: $form-font-size;
+  &.is-valid, &.is-invalid {
+    border: {
+      width: 2px;
+    }
+  }
+}
+
+.form-group {
+  font-size: $form-font-size;
+  .invalid-feedback, .valid-feedback {
+    @extend small;
+  }
+}
+
+.col-form-legend {
+  font-size: $form-font-size;
+}
+
+.form-check-label {
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+}
+
+.form-check-input {
+  &[type="checkbox"]:not(:checked),
+  &[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+
+  /* checkbox aspect */
+  //
+  &[type="checkbox"] + label:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 16px;
+    height: 16px;
+    z-index: 0;
+    border: 1px solid $gray-500;
+    border-radius: 2px;
+    margin-top: 2px;
+    transition: .2s;
+  }
+  &[type="checkbox"]:checked + label:before {
+      border-color: $gray-200;
+    }
+  }

@@ -8,12 +8,13 @@
 @import "../../node_modules/bootstrap/scss/print";
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "../../node_modules/bootstrap/scss/type";
-@import "type";
+  @import "type";
 @import "../../node_modules/bootstrap/scss/images";
 @import "../../node_modules/bootstrap/scss/code";
 @import "../../node_modules/bootstrap/scss/grid";
 @import "../../node_modules/bootstrap/scss/tables";
 @import "../../node_modules/bootstrap/scss/forms";
+  @import "forms";
 @import "../../node_modules/bootstrap/scss/buttons";
 @import "../../node_modules/bootstrap/scss/transitions";
 @import "../../node_modules/bootstrap/scss/dropdown";
@@ -37,7 +38,10 @@
 @import "../../node_modules/bootstrap/scss/popover";
 @import "../../node_modules/bootstrap/scss/carousel";
 @import "../../node_modules/bootstrap/scss/utilities";
+  @import "utilities/text";
 
 $img_dir: '/static/img';
 @import "layout";
 @import "sections";
+
+// @import "form_elements/checkbox";

@@ -4,15 +4,142 @@
 {% block body %}
     <section class="header">
         <div>
-            <h1>{{ h1 }}</h1>
-            <h2>{{ h1 }}</h2>
-            <h3>{{ h1 }}</h3>
-            <h4>{{ h1 }}</h4>
-            <h5>{{ h1 }}</h5>
-            <h6>{{ h1 }}</h6>
-            <p class="lead">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя способами:</p>
+            <h1>{{ h1 }}<br>{{ h1 }}</h1>
+            <h2>{{ h1 }}<br>{{ h1 }}</h2>
+            <h3>{{ h1 }}<br>{{ h1 }}</h3>
+            <h4>{{ h1 }}<br>{{ h1 }}</h4>
+            <h5>{{ h1 }}</h5><h5 class="font-weight-normal">{{ h1 }}</h5>
+            <h6>{{ h1 }}</h6><h6 class="font-weight-normal">{{ h1 }}</h6>
+            <p class="lead">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя
+                способами:</p>
             <p>Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя способами:</p>
-            <p class="subtitle">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя способами</p>
+            <p class="subtitle">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно
+                тремя способами</p>
         </div>
+    </section>
+
+    <section class="col-5" style="margin-top:60px; margin-bottom: 60px">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" disabled placeholder="Недоступно">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Подсказка">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" value="Фокус и ввод">
+                <small class="text-muted">Введите Ваше имя и телефон.</small>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control is-invalid" value="Ошибка">
+                <span class="invalid-feedback">We'll never share your email with anyone else.</span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control is-valid" value="Верно">
+                <span class="valid-feedback">We'll never share your email with anyone else.</span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" value="Заполнено">
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input">
+                    Check me out
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+    <section class="col-8" style="margin-top: 60px; margin-bottom: 1000px">
+        <form>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-legend col-sm-2">Radios</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                       value="option1" checked>
+                                Option one is this and that&mdash;be sure to include why it's great
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                       value="option2">
+                                Option two can be something else and selecting it will deselect option one
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3"
+                                       value="option3" disabled>
+                                Option three is disabled
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="col-sm-2">Checkbox</div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <div class="form-check-label">
+                            <input id="c1" class="form-check-input" type="checkbox">
+                            <label for="c1">Check me out (look)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <hr>
+        <br>
+        <form>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm"
+                           placeholder="col-form-label-sm">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control form-control-lg" id="colFormLabelLg"
+                           placeholder="col-form-label-lg">
+                </div>
+            </div>
+        </form>
+
     </section>
 {% endblock %}
