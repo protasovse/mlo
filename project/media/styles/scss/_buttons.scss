@@ -1,0 +1,32 @@
+.btn {
+  cursor: pointer;
+  border: {
+    width: 2px;
+  }
+}
+
+.btn-sm {
+  border-width: 1px;
+}
+
+.btn-onbar {
+  border-color: #d5e1fe;
+  background: transparent;
+  color: $white;
+  &:hover {
+    border-color: $dark-blue;
+    background-color: $dark-blue;
+  }
+  &.sq {
+    width: 39px;
+    height: 39px;
+    font-size: 1rem;
+  }
+  &.active {
+    color: $red;
+    &:not(:hover) {
+      border-color: white;
+      background-color: white;
+    }
+  }
+}

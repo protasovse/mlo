@@ -1,13 +1,11 @@
-$form-font-size: $font-size-base * 1.142857142857143;
-
 form {
-  font-size: $form-font-size;
+  font-size: $font-size-base;
   font-weight: $font-weight-semibold;
   color: $gray-600;
 }
 
 .form-control {
-  font-size: $form-font-size;
+  font-size: $font-size-base;
   &.is-valid, &.is-invalid {
     border: {
       width: 2px;
@@ -16,14 +14,14 @@ form {
 }
 
 .form-group {
-  font-size: $form-font-size;
+  font-size: $font-size-base;
   .invalid-feedback, .valid-feedback {
     @extend small;
   }
 }
 
 .col-form-legend {
-  font-size: $form-font-size;
+  font-size: $font-size-base;
 }
 
 .form-check-label {
@@ -37,9 +35,7 @@ form {
   &[type="checkbox"]:checked,
   &[type="radio"]:not(:checked),
   &[type="radio"]:checked {
-    position: absolute;
-    left: -9999px;
-    visibility: hidden;
+    display: none;
   }
 
   // рамка чекбокса
