@@ -2219,6 +2219,43 @@ input[type="button"].btn-block {
       border-color: white;
       background-color: white; }
 
+.btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl {
+  color: white;
+  width: 70px;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 1.5rem; }
+
+.btn-vk {
+  background-color: #2d69bd; }
+  .btn-vk:hover {
+    background-color: #4983d4; }
+
+.btn-od {
+  background-color: #ff9934; }
+  .btn-od:hover {
+    background-color: #ffb367; }
+
+.btn-ml {
+  background-color: #0078c2; }
+  .btn-ml:hover {
+    background-color: #0098f5; }
+
+.btn-fb {
+  background-color: #527ebf; }
+  .btn-fb:hover {
+    background-color: #779acd; }
+
+.btn-tw {
+  background-color: #00aee8; }
+  .btn-tw:hover {
+    background-color: #1cc6ff; }
+
+.btn-gl {
+  background-color: #e34c3b; }
+  .btn-gl:hover {
+    background-color: #e97568; }
+
 .fade {
   opacity: 0;
   transition: opacity 0.15s linear; }
