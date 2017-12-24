@@ -25,6 +25,7 @@ h2 {
     line-height: 1.3461539em;
   }
   &.logo {
+    @extend .mb-5;
     @include media-breakpoint-down(sm) {
       text-align: center;
     }

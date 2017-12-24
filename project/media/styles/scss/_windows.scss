@@ -42,4 +42,11 @@
     bottom: 0; left: 0;
     @extend .pl-4, .pl-md-5, .pb-5, .m-0;
   }
+  .req {
+    @extend .normal;
+    margin-bottom: line(0.5);
+    a {
+      color: $gray-800;
+    }
+  }
 }

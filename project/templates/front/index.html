@@ -202,11 +202,45 @@
     <section class="blue">
 
         <div class="win-round">
-            <!-- "Sign Up" -->
-            <h2 class="logo mb-5">Регистрация</h2>
+
+            <h2 class="logo">Вход</h2>
 
             <div class="row">
+                <form method="post" class="l-col">
 
+                   <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Электронный ящик" name="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Пароль" name="password">
+                    </div>
+                    <p class="req"><a href="#">Восстановить пароль</a></p>
+                    <button type="submit" class="btn btn-outline-primary col-12">Войти</button>
+
+                </form>
+
+                <div class="hr"></div>
+
+                <div class="soc r-col">
+                    <h4 class="mb-3">войти через соцсети:</h4>
+                    <button type="submit" class="btn-vk"><span class="icon-vk"></span></button>
+                    <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+                    <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
+                    <button type="submit" class="btn-fb"><span class="icon-fb"></span></button>
+                    <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
+                    <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
+                </div>
+
+                <p class="reg">Ещё не зарегистрированны? <a href="#sgnup">Регистрация</a></p>
+            </div>
+
+        </div>
+    </section>
+    <br>
+    <section class="blue">
+        <div class="win-round">
+            <h2 class="logo">Регистрация</h2>
+            <div class="row">
                 <form method="post" class="l-col">
 
                     <!--fieldset class="form-group mb-3">
@@ -255,7 +289,6 @@
                 </div>
 
                 <p class="reg">Уже зарегистрированны? <a href="#login">Войдите</a></p>
-
             </div>
 
         </div>
