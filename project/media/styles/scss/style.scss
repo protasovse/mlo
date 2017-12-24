@@ -43,6 +43,7 @@
   @import "utilities/text";
 
 $img_dir: '/static/img';
+@import "mixins/text";
 @import "layout";
 @import "sections";
 

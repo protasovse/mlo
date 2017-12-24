@@ -8,6 +8,15 @@ h1 {
 
 h2 {
   line-height: 1.25em;
+  &.logo {
+    &:before {
+      font-family: icomoon;
+      content: '\e92b';
+      padding-right: 1.25rem;
+      font-size: 3.125rem;
+      vertical-align: bottom;
+    }
+  }
 }
 
 h3 {
@@ -31,8 +40,10 @@ h6 {
     size: ($font-size-base * .75);
     weight: $font-weight-semibold;
   }
-  text: {
-    transform: uppercase;
-  }
+  text-transform: uppercase;
   letter-spacing: 0.75pt;
+}
+
+.normal {
+  font-size: $font-size-base * .875;
 }

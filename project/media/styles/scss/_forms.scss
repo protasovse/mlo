@@ -1,6 +1,8 @@
 form {
-  font-size: $font-size-base;
-  font-weight: $font-weight-semibold;
+  label {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+  }
   color: $gray-600;
 }
 
@@ -45,25 +47,37 @@ form {
     }
     + label:before {
       content: '';
-      font-family: icomoon;
-      line-height: 14px;
-      font-size: 16px;
       position: absolute;
-      top: 3px;
+      top: 2px;
       left: 0px;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       z-index: 0;
       border: 1px solid $gray-500;
       border-radius: 2px;
-      transition: .2s;
     }
-    &:checked + label:before {
+    + label:after {
+      content: '';
+      font-family: icomoon;
+      text-align: center;
+      line-height: 16px;
+      font-size: 16px;
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 1px;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      z-index: 1;
+      transition: .3s;
+    }
+    &:checked + label:after {
       border-color: $gray-200;
       content: '\e900';
     }
     &:disabled {
-      + label {
+      + label, + label:after {
         color: $gray-500;
       }
       + label:before {
@@ -73,11 +87,13 @@ form {
   }
   // поправка для radio
   &[type="radio"] {
-    + label:before {
+    + label:before, + label:after {
       border-radius: 50%;
     }
-    &:checked + label:before {
-      content: '\e928';
+    &:checked + label:after {
+      content: '';
+      border: 3px solid white;
+      background-color: $gray-600;
     }
   }
 

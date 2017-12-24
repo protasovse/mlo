@@ -111,3 +111,4 @@ venv.bak/
 /project/media/node_modules/
 /project/storage/
 /project/apps/front/template/front/mainpage.html
+/project/media/styles/scss/.sass-cache/
