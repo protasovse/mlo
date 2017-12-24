@@ -4,6 +4,10 @@
   background-color: white;
   border-radius: line(1);
   max-width: 770px;
+  h4 {
+    @extend .mb-3;
+    color: $gray-600;
+  }
   @include media-breakpoint-down(sm) {
     border-radius:0;
   }
