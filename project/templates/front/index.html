@@ -60,7 +60,7 @@
         </form>
     </section>
 
-    <section class="col-8" style="margin-top: 60px; margin-bottom: 1000px">
+    <section class="col-8" style="margin-top: 60px; margin-bottom: 60px">
         <form>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-4 col-form-label">Электронный ящик</label>
@@ -113,39 +113,18 @@
             </fieldset>
             <fieldset class="form-group">
                 <div class="row">
-                    <legend class="col-form-legend col-sm-4">Радио</legend>
+
                     <div class="col-sm-8">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios10"
-                                       checked value="option1">
-                                <label for="gridRadios10">Option one is this and that&mdash;be sure to include why it's
-                                    great</label>
-                            </label>
+                        <div class="form-check form-check-inline form-check-label mr-5">
+                            <input class="form-check-input" type="radio" name="role0" id="radio10" value="client">
+                            <label for="radio10">Клиент</label>
                         </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios20"
-                                       value="option2">
-                                <label for="gridRadios20">Option two can be something else and selecting it will
-                                    deselect option one</label>
-                            </label>
-                        </div>
-                        <div class="form-check disabled">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios30"
-                                       value="option3" disabled>
-                                <label for="gridRadios30">Option three is disabled</label>
-                            </label>
-                        </div>
-                        <div class="form-check disabled">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios40"
-                                       value="option4" checked disabled>
-                                <label for="gridRadios40">Option three is disabled and checked</label>
-                            </label>
+                        <div class="form-check form-check-inline form-check-label">
+                            <input class="form-check-input" type="radio" name="role0" id="radio20" value="lawyer">
+                            <label for="radio20">Юрист</label>
                         </div>
                     </div>
+
                 </div>
             </fieldset>
             <div class="form-group row">
@@ -217,14 +196,71 @@
                 </div>
             </div>
         </form>
-        <h2 class="my-5">Кнопки социальных сетей</h2>
 
-        <button type="submit" class="btn btn-lg btn-vk"><span class="icon-vk"></span></button>
-        <button type="submit" class="btn btn-lg btn-od"><span class="icon-od"></span></button>
-        <button type="submit" class="btn btn-lg btn-ml"><span class="icon-ml"></span></button>
-        <button type="submit" class="btn btn-lg btn-fb"><span class="icon-fb"></span></button>
-        <button type="submit" class="btn btn-lg btn-tw"><span class="icon-tw"></span></button>
-        <button type="submit" class="btn btn-lg btn-gl"><span class="icon-gl"></span></button>
+    </section>
 
+    <section class="blue">
+
+        <div class="border col-8 p-5 mx-auto" style="background-color: white; border-radius:20px;">
+            <!-- "Sign Up" -->
+            <h2 class="logo mb-5">Регистрация</h2>
+
+            <div class="row">
+
+                <form method="post" class="col-6">
+
+                    <fieldset class="form-group mb-3">
+                        <div class="form-check form-check-inline form-check-label mr-5">
+                            <input class="form-check-input" type="radio" name="role" id="radio1" value="client">
+                            <label for="radio1">Клиент</label>
+                        </div>
+                        <div class="form-check form-check-inline form-check-label">
+                            <input class="form-check-input" type="radio" name="role" id="radio2" checked
+                                   value="lawyer">
+                            <label for="radio2">Юрист</label>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Имя" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Фамилия" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Отчество" name="patronymic">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Электронный ящик" name="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Пароль" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary col-12">Зарегистрироваться</button>
+
+                    <p class="normal text-muted mt-4 mb-0">Уже зарегистрированны? <a href="/вход"
+                                                                                rel="modal:open">Войдите</a></p>
+
+                </form>
+
+                <!--div class="col-12 py-4">
+                    <div style="height: 1px; background-color: #ddd; width: 100%;"></div></div-->
+
+                <div class="col-1 p-0" style="text-align: center;">
+                    <div style="width: 1px; background-color: #ddd; height: 100%; margin-left: 50%"></div></div>
+
+                <div class="soc col">
+                    <h4 class="mb-3">через соцсети:</h4>
+                    <button type="submit" class="btn btn-lg btn-vk mr-1 mb-2"><span class="icon-vk"></span></button>
+                    <button type="submit" class="btn btn-lg btn-od mr-1 mb-2"><span class="icon-od"></span></button>
+                    <button type="submit" class="btn btn-lg btn-ml mr-1 mb-2"><span class="icon-ml"></span></button>
+                    <br/>
+                    <button type="submit" class="btn btn-lg btn-fb mr-1 mb-2"><span class="icon-fb"></span></button>
+                    <button type="submit" class="btn btn-lg btn-tw mr-1 mb-2"><span class="icon-tw"></span></button>
+                    <button type="submit" class="btn btn-lg btn-gl mr-1 mb-2"><span class="icon-gl"></span></button>
+                </div>
+
+            </div>
+
+        </div>
     </section>
 {% endblock %}
