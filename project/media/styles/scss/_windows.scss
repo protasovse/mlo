@@ -5,25 +5,25 @@
   border-radius: line(1);
   max-width: 770px;
   h4 {
-    @extend .mb-3;
+    margin-bottom: line(1);//
     color: $gray-600;
   }
   @include media-breakpoint-down(sm) {
-    border-radius:0;
+    border-radius: 0;
   }
   .l-col {
-    @extend .col-12, .col-md-6;
+    @extend .col-12, .col-md-6, .order-1;
     margin-bottom: line(3);
     @include media-breakpoint-down(sm) {
       margin-bottom: line(1);
     }
   }
   .r-col {
-    @extend .col;
+    @extend .col, .order-3;
     margin-bottom: line(3);
   }
   .hr {
-    @extend .col-12, .col-md-1;
+    @extend .col-12, .col-md-1, .order-2;
     &:before {
       content: '';
       display: block;
@@ -43,7 +43,8 @@
   .reg {
     @extend .normal, .text-muted;
     position: absolute;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     @extend .pl-4, .pl-md-5, .pb-5, .m-0;
   }
   .req {
@@ -53,4 +54,24 @@
       color: $gray-800;
     }
   }
+
+  &.rec {
+    h4 {
+      margin-left: 16px;
+      @include media-breakpoint-down(sm) {
+        margin-left: 0;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      .l-col {
+        order: 3;
+        margin-bottom: line(3);
+      }
+      .r-col {
+        order: 1;
+        margin-bottom: line(.5);
+      }
+    }
+  }
+
 }

@@ -25,9 +25,10 @@ h2 {
     line-height: 1.3461539em;
   }
   &.logo {
-    @extend .mb-5;
+    margin-bottom: line(2);
     @include media-breakpoint-down(sm) {
       text-align: center;
+      margin-bottom: line(1);
     }
     &:before {
       font-family: icomoon;
