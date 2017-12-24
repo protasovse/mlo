@@ -946,9 +946,9 @@ module.exports = "<div class=\"auth_login\">\n        <div class=\"form-field\">
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     VK_AUTHORIZE_URL: 'https://oauth.vk.com/authorize',
-    VK_CLIENT_ID: 6278759,
+    VK_CLIENT_ID: 6302697,
     VK_DISPLAY: 'page',
-    VK_REDIRECT_URL: 'https://geodiscover.org/auth/vk',
+    VK_REDIRECT_URL: 'https://xn--h1abiilhh6g.xn--80asehdb/auth/vk',
     VK_RESPONCE_TYPE: 'code',
     VK_SCOPE: 4195331,
     VK_API_VERSION: 5.69
@@ -961,8 +961,8 @@ module.exports = "<div class=\"auth_login\">\n        <div class=\"form-field\">
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     FB_AUTHORIZE_URL: 'https://www.facebook.com/v2.11/dialog/oauth',
-    FB_CLIENT_ID: 150974185544797,
-    FB_REDIRECT_URL: 'https://geodiscover.org/auth/fb',
+    FB_CLIENT_ID: 1422542761187900,
+    FB_REDIRECT_URL: 'https://мойюрист.онлайн/auth/fb',
     FB_SCOPE: 'email'
 });
 
