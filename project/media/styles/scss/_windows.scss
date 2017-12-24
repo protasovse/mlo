@@ -9,9 +9,14 @@
   }
   .l-col {
     @extend .col-12, .col-md-6;
+    margin-bottom: line(3);
+    @include media-breakpoint-down(sm) {
+      margin-bottom: line(1);
+    }
   }
   .r-col {
     @extend .col;
+    margin-bottom: line(3);
   }
   .hr {
     @extend .col-12, .col-md-1;
@@ -30,5 +35,11 @@
         margin: line(2) 0;
       }
     }
+  }
+  .reg {
+    @extend .normal, .text-muted;
+    position: absolute;
+    bottom: 0; left: 0;
+    @extend .pl-4, .pl-md-5, .pb-5, .m-0;
   }
 }

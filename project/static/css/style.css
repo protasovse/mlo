@@ -503,7 +503,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.75pt; }
 
-.normal {
+.normal, .win-round .reg {
   font-size: 0.875rem; }
 
 .img-fluid {
@@ -5388,7 +5388,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 .mh-100 {
   max-height: 100% !important; }
 
-.m-0 {
+.m-0, .win-round .reg {
   margin: 0 !important; }
 
 .mt-0,
@@ -5594,7 +5594,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 .py-4 {
   padding-bottom: 1.5rem !important; }
 
-.pl-4,
+.pl-4, .win-round .reg,
 .px-4,
 .win-round {
   padding-left: 1.5rem !important; }
@@ -5611,7 +5611,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 .px-5 {
   padding-right: 3rem !important; }
 
-.pb-5,
+.pb-5, .win-round .reg,
 .py-5,
 .win-round {
   padding-bottom: 3rem !important; }
@@ -6114,7 +6114,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   .py-md-5 {
     padding-bottom: 3rem !important; }
 
-  .pl-md-5,
+  .pl-md-5, .win-round .reg,
   .px-md-5,
   .win-round {
     padding-left: 3rem !important; }
@@ -6759,7 +6759,7 @@ a.text-light:focus, a.text-light:hover {
 a.text-dark:focus, a.text-dark:hover {
   color: #3b3b3b !important; }
 
-.text-muted {
+.text-muted, .win-round .reg {
   color: #878787 !important; }
 
 .text-hide {
@@ -6816,6 +6816,13 @@ section {
   @media (max-width: 767px) {
     .win-round {
       border-radius: 0; } }
+  .win-round .l-col {
+    margin-bottom: 3.75rem; }
+    @media (max-width: 767px) {
+      .win-round .l-col {
+        margin-bottom: 1.25rem; } }
+  .win-round .r-col {
+    margin-bottom: 3.75rem; }
   .win-round .hr:before {
     content: '';
     display: block;
@@ -6830,5 +6837,9 @@ section {
         width: 100%;
         height: 1px;
         margin: 2.5rem 0; } }
+  .win-round .reg {
+    position: absolute;
+    bottom: 0;
+    left: 0; }
 
 /*# sourceMappingURL=style.css.map */
