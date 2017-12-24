@@ -201,13 +201,13 @@
 
     <section class="blue">
 
-        <div class="border col-8 p-5 mx-auto" style="background-color: white; border-radius:20px;">
+        <div class="win-round">
             <!-- "Sign Up" -->
             <h2 class="logo mb-5">Регистрация</h2>
 
             <div class="row">
 
-                <form method="post" class="col-6">
+                <form method="post" class="l-col">
 
                     <fieldset class="form-group mb-3">
                         <div class="form-check form-check-inline form-check-label mr-5">
@@ -221,7 +221,10 @@
                         </div>
                     </fieldset>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Имя" name="first_name">
+                        <input type="text" class="form-control is-invalid" placeholder="Имя"
+                               value="Валерий" name="first_name">
+                        <span class="invalid-feedback">Ваше имя уже встречается у другого клиента. Придумайте себе
+                        другое имя.</span>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Фамилия" name="first_name">
@@ -242,21 +245,16 @@
 
                 </form>
 
-                <!--div class="col-12 py-4">
-                    <div style="height: 1px; background-color: #ddd; width: 100%;"></div></div-->
+                <div class="hr"></div>
 
-                <div class="col-1 p-0" style="text-align: center;">
-                    <div style="width: 1px; background-color: #ddd; height: 100%; margin-left: 50%"></div></div>
-
-                <div class="soc col">
-                    <h4 class="mb-3">через соцсети:</h4>
-                    <button type="submit" class="btn btn-lg btn-vk mr-1 mb-2"><span class="icon-vk"></span></button>
-                    <button type="submit" class="btn btn-lg btn-od mr-1 mb-2"><span class="icon-od"></span></button>
-                    <button type="submit" class="btn btn-lg btn-ml mr-1 mb-2"><span class="icon-ml"></span></button>
-                    <br/>
-                    <button type="submit" class="btn btn-lg btn-fb mr-1 mb-2"><span class="icon-fb"></span></button>
-                    <button type="submit" class="btn btn-lg btn-tw mr-1 mb-2"><span class="icon-tw"></span></button>
-                    <button type="submit" class="btn btn-lg btn-gl mr-1 mb-2"><span class="icon-gl"></span></button>
+                <div class="soc r-col">
+                    <h4 class="mb-3">войти через соцсети:</h4>
+                    <button type="submit" class="btn-vk"><span class="icon-vk"></span></button>
+                    <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+                    <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
+                    <button type="submit" class="btn-fb"><span class="icon-fb"></span></button>
+                    <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
+                    <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
                 </div>
 
             </div>

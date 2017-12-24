@@ -33,6 +33,7 @@
 
 
 %btn-soc {
+  @extend .btn, .btn-lg, .mr-1, .mb-2;
   color: white;
   width: 70px;
   padding-left: 0;

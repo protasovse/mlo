@@ -2,8 +2,7 @@ section {
   padding-top: line(5);
   padding-bottom: line(5);
   position: relative;
-  @extend .d-flex;
-  @extend .align-items-center;
+  @extend .d-flex, .align-items-center, .row;
   &:before {
     content: '';
     position: absolute;
@@ -33,11 +32,9 @@ section {
   }
 
   &.blue {
-    height: 100vh;
+    min-height: 100vh;
     &:before {
-      background: {
-        color: $blue;
-      }
+      background-color: $blue;
     }
   }
 }

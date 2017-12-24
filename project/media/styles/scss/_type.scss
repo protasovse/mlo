@@ -2,37 +2,57 @@ h5, h6 {
   font-weight: $font-weight-semibold;
 }
 
-h1 {
-  line-height: 1.2037037em;
-}
-
-h2 {
-  line-height: 1.25em;
-  &.logo {
-    &:before {
-      font-family: icomoon;
-      content: '\e92b';
-      padding-right: 1.25rem;
-      font-size: 3.125rem;
-      vertical-align: bottom;
-    }
-  }
-}
-
-h3 {
-  line-height: 1.3461539em;
-}
-
-h4 {
-  line-height: 1.5em;
+h6 {
+  line-height: 1.375em;
 }
 
 h5 {
   line-height: 1.3888889em;
 }
 
-h6 {
-  line-height: 1.375em;
+h4 {
+  line-height: 1.5em;
+}
+
+h3 {
+  line-height: 1.3461539em;
+}
+
+h2 {
+  line-height: 1.25em;
+  @include media-breakpoint-down(sm) {
+    font-size: $h3-font-size;
+    line-height: 1.3461539em;
+  }
+  &.logo {
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
+    &:before {
+      font-family: icomoon;
+      content: '\e92b';
+      font-size: 3.125rem;
+      @include media-breakpoint-up(sm) {
+        padding-right: 1.25rem;
+        vertical-align: bottom;
+      }
+      @include media-breakpoint-down(sm) {
+        padding-bottom: 20px;
+        padding-right: 0;
+        height:  3.125rem;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}
+
+h1 {
+  line-height: 1.2037037em;
+  @include media-breakpoint-down(sm) {
+    font-size: $h2-font-size;
+    line-height: 1.25em;
+  }
 }
 
 .subtitle {
