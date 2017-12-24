@@ -1,13 +1,230 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block body %}
+    <section class="header">
+        <div>
+            <h1>{{ h1 }}<br>{{ h1 }}</h1>
+            <h1 class="small">{{ h1 }}<br>{{ h1 }}</h1>
+            <h2>{{ h1 }}<br>{{ h1 }}</h2>
+            <h3>{{ h1 }}<br>{{ h1 }}</h3>
+            <h4>{{ h1 }}<br>{{ h1 }}</h4>
+            <h5>{{ h1 }}</h5><h5 class="font-weight-normal">{{ h1 }}</h5>
+            <h6>{{ h1 }}</h6><h6 class="font-weight-normal">{{ h1 }}</h6>
+            <p class="lead">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя
+                способами:</p>
+            <p>p: Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя
+                способами:</p>
+            <p class="small">p.sm: Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно
+                тремя способами:</p>
+            <p class="subtitle">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно
+                тремя способами</p>
+        </div>
+    </section>
 
-    {% if is_login %}
-        Ты авторизован
-    {% else %}
-        Ты не авторизован
-    {% endif %}
-<br/>
-<a href="{% url 'login' %}">Вход</a><br/>
-<a href="{% url 'logout' %}">Выход</a><br/>
+    <section class="col-5" style="margin-top:60px; margin-bottom: 60px">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" disabled placeholder="Недоступно">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Подсказка">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" value="Фокус и ввод">
+                <small class="text-muted">Введите Ваше имя и телефон.</small>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control is-invalid" value="Ошибка">
+                <span class="invalid-feedback">We'll never share your email with anyone else.</span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control is-valid" value="Верно">
+                <span class="valid-feedback">We'll never share your email with anyone else.</span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" value="Заполнено">
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input">
+                    Check me out
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+    <section class="col-8" style="margin-top: 60px; margin-bottom: 1000px">
+        <form>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-4 col-form-label">Электронный ящик</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-4 col-form-label">Пароль</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-legend col-sm-4">Переключатели</legend>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="gridRadios1" id="gridRadios1"
+                                       checked value="option1">
+                                <label for="gridRadios1">Option one is this and that&mdash;be sure to include why it's
+                                    great</label>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="gridRadios2" id="gridRadios2"
+                                       value="option2">
+                                <label for="gridRadios2">Option two can be something else and selecting it will deselect
+                                    option one</label>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="gridRadios3" id="gridRadios3"
+                                       value="option3" disabled>
+                                <label for="gridRadios3">Option three is disabled</label>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="gridRadios3" id="gridRadios4"
+                                       value="option4" checked disabled>
+                                <label for="gridRadios4">Option three is disabled and checked</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-legend col-sm-4">Радио</legend>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios10"
+                                       checked value="option1">
+                                <label for="gridRadios10">Option one is this and that&mdash;be sure to include why it's
+                                    great</label>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios20"
+                                       value="option2">
+                                <label for="gridRadios20">Option two can be something else and selecting it will
+                                    deselect option one</label>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios30"
+                                       value="option3" disabled>
+                                <label for="gridRadios30">Option three is disabled</label>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios40"
+                                       value="option4" checked disabled>
+                                <label for="gridRadios40">Option three is disabled and checked</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-outline-primary px-4">
+                        <span class="icon-folder mr-2"></span>Обзор
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-outline-primary col-5">Зарегистрироваться</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-outline-primary btn-sm px-3">
+                        Вход<span class="icon-person ml-2"></span></button>
+                </div>
+            </div>
+            <div class="form-group row p-5" style="background-color: #2e67fb">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-sm btn-onbar sq"><span class="icon-lightning"></span></button>
+                    <button type="submit" class="btn btn-sm btn-onbar sq active"><span class="icon-lightning"></span>
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-onbar px-3">
+                        Задать вопрос<span class="ml-2 icon-message_bubble"></span></button>
+                    <button type="submit" class="btn btn-sm btn-onbar sq"><span class="icon-menu"></span></button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-outline-primary">Зарегистрироваться</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary btn-lg col-8">Задать вопрос юристу</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <hr>
+        <br>
+        <form>
+            <div class="form-group row">
+                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm"
+                           placeholder="col-form-label-sm">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control form-control-lg" id="colFormLabelLg"
+                           placeholder="col-form-label-lg">
+                </div>
+            </div>
+        </form>
+        <h2 class="my-5">Кнопки социальных сетей</h2>
+
+        <button type="submit" class="btn btn-lg btn-vk"><span class="icon-vk"></span></button>
+        <button type="submit" class="btn btn-lg btn-od"><span class="icon-od"></span></button>
+        <button type="submit" class="btn btn-lg btn-ml"><span class="icon-ml"></span></button>
+        <button type="submit" class="btn btn-lg btn-fb"><span class="icon-fb"></span></button>
+        <button type="submit" class="btn btn-lg btn-tw"><span class="icon-tw"></span></button>
+        <button type="submit" class="btn btn-lg btn-gl"><span class="icon-gl"></span></button>
+
+    </section>
 {% endblock %}
