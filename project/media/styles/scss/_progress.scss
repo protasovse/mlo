@@ -1,0 +1,31 @@
+
+.file-loader {
+  @extend .small, .mb-3;
+  position: relative;
+  height: line(1.5);
+
+  &:before {
+    content: attr(data-filename);
+    white-space: nowrap;
+  }
+
+  &:after {
+    font-family: icomoon;
+    content: '\e91b';
+    font-size: 1rem;
+    color: $gray-500;
+    position: absolute;
+    right: 0; top: 0;
+    cursor: pointer;
+  }
+
+  .bar {
+    @extend .progress, .mt-1;
+    margin-right: 30px;
+    height: 4px;
+    & :first-child {
+      content: '';
+      @extend .progress-bar, .bg-secondary;
+    }
+  }
+}
