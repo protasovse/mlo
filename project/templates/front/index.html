@@ -4,21 +4,13 @@
 {% block body %}
     <section class="header">
         <div>
-            <h1>{{ h1 }}<br>{{ h1 }}</h1>
-            <h1 class="small">{{ h1 }}<br>{{ h1 }}</h1>
-            <h2>{{ h1 }}<br>{{ h1 }}</h2>
-            <h3>{{ h1 }}<br>{{ h1 }}</h3>
-            <h4>{{ h1 }}<br>{{ h1 }}</h4>
-            <h5>{{ h1 }}</h5><h5 class="font-weight-normal">{{ h1 }}</h5>
-            <h6>{{ h1 }}</h6><h6 class="font-weight-normal">{{ h1 }}</h6>
-            <p class="lead">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя
-                способами:</p>
-            <p>p: Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно тремя
-                способами:</p>
-            <p class="small">p.sm: Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно
-                тремя способами:</p>
-            <p class="subtitle">Консультация юриста онлайн. Получить профессиональную юридическую консультацию можно
-                тремя способами</p>
+            <h1 class="text-center mb-3">{{ h1 }}</h1>
+            <p class="lead text-center mb-4"><b>Получите профессиональную юридическую консультацию удобным для Вас
+                способом:</b><br>
+                В режиме вопрос-ответ, в чате, либо по телефону.</p>
+            <p class="text-center">
+                <button type="submit" class="btn btn-lg btn-primary px-5">Задать вопрос юристу</button>
+            </p>
         </div>
     </section>
 
@@ -346,12 +338,13 @@
                 </div>
 
                 <div class="form-group row mt-4">
-                    <label for="ask_name" class="col-form-label">Тема права</label>
+                    <label for="ask_name" class="col-form-label">Рубрика</label>
                     <div class="col-sm-8">
                         <textarea type="email" class="form-control" id="ask_content"
-                              placeholder="" rows="1"></textarea>
+                                  placeholder="" rows="1"></textarea>
                         <small>Выбирите одну или несколько тем, что Ваш вопрос увидел компетентные юрист.
-                        Начните вводить тему.</small>
+                            Начните вводить тему.
+                        </small>
                     </div>
                 </div>
 
@@ -394,6 +387,21 @@
 
     </section>
     <br>
+    <section class="blue">
+        <div class="d-flex">
+            <div class="lawyer-card">
+                <div class="titl">
+                    <h6><a href="#">Швырёва Надежда Валерьевна</a></h6>
+                    <div class="rating">9,37</div>
+                </div>
+                <div class="cont">
+                    <h6 class="subtitle">Юрист-онлайн</h6>
+                    <p class="normal">Практики: корпоративное и коммерческое право РФ, международное частное право,
+                        иностранные инвестиции, M&A, антимонопольное право, законодательство о рынке ценных бумаг.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 {% endblock %}

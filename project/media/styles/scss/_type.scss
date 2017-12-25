@@ -64,8 +64,10 @@ h1 {
   }
   text-transform: uppercase;
   letter-spacing: 0.75pt;
+  color: $gray-500;
 }
 
 .normal {
   font-size: $font-size-base * .875;
+  line-height: line(1);
 }

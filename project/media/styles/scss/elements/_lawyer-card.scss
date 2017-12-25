@@ -1,0 +1,59 @@
+.lawyer-card {
+  width: 320px;
+  height: 440px;
+  .cont {
+    width: 320px;
+    height: 440px;
+    position: absolute;
+    padding: 220px 30px 20px 30px;
+    z-index: 2;
+  }
+  .titl {
+    width: 320px;
+    height: 440px;
+    position: absolute;
+    padding: 70px 30px 240px 160px;
+    z-index: 2;
+    // рейтинг
+    .rating {
+      @extend .subtitle;
+      &:before {
+        font-family: "icomoon";
+        content: "\e905";
+        font-weight: $font-weight-normal;
+        font-size: 14px;
+        color: $red;
+        margin-right: 7px;
+        position: relative;
+        top: 2px;
+      }
+    }
+
+  }
+
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 70px;
+    left: 30px;
+    z-index: 0;
+    background-image: url(https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg);
+    background-size: 100% 100%;
+    width: 110px;
+    height: 130px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-image: url("/static/img/lyr/lawyer-card.svg");
+    width: 320px;
+    height: 440px;
+  }
+}
