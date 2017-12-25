@@ -32,6 +32,22 @@ form {
   // color: $gray-700;
 }
 
+.col-form-label {
+  text-align: right;
+  @include media-breakpoint-down(xs) {
+    text-align: left;
+  }
+  @extend .col, .mr-3, .pr-4;
+  &.required {
+    &:after {
+      position: absolute;
+      right: 0;
+      content: '*';
+      color: $red;
+    }
+  }
+}
+
 .form-check-input {
   &[type="checkbox"]:not(:checked),
   &[type="checkbox"]:checked,

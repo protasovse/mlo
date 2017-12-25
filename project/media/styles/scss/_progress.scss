@@ -1,28 +1,36 @@
 
 .file-loader {
-  @extend .small, .mb-3;
+  @extend .normal, .mb-2, .mt-2;
   position: relative;
   height: line(1.5);
+  overflow: hidden;
 
   &:before {
     content: attr(data-filename);
     white-space: nowrap;
+    position: absolute;
+    z-index: 0;
   }
 
   &:after {
     font-family: icomoon;
     content: '\e91b';
-    font-size: 1rem;
     color: $gray-500;
     position: absolute;
     right: 0; top: 0;
     cursor: pointer;
+    z-index: 1;
+    width: line(5);
+    text-align: right;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
   }
 
   .bar {
     @extend .progress, .mt-1;
-    margin-right: 30px;
+    margin-right: line(1.5);
     height: 4px;
+    position: relative;
+    top: line(1);
     & :first-child {
       content: '';
       @extend .progress-bar, .bg-secondary;

@@ -6,6 +6,7 @@
 }
 
 .btn-sm {
+  @extend .px-4;
   border-width: 1px;
 }
 
