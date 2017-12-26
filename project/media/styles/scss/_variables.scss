@@ -82,7 +82,8 @@ $theme-colors: map-merge((
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
-  "dark":       $dark
+  "dark":       $dark,
+  "white":      $white,
 ), $theme-colors);
 // stylelint-enable
 
@@ -176,7 +177,7 @@ $container-max-widths: (
   sm: 100%,
   md: 720px,
   lg: 960px,
-  xl: 1140px
+  xl: 1170px
 ) !default;
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");

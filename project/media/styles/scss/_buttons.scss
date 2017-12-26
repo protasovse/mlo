@@ -90,4 +90,13 @@
   }
 }
 
+.btn-white {
+  color: $blue;
+  &:hover {
+    background-color: $dark-blue; //
+    color: white;
+    border-color: $dark-blue;
+  }
+}
+
 
