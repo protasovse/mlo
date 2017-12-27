@@ -2,11 +2,12 @@ section {
   padding-top: line(5);
   padding-bottom: line(5);
   position: relative;
-  @extend .d-flex, .align-items-center, .row;
+  @extend .d-flex, .row;
   &:before {
     content: '';
     position: absolute;
     z-index: 0;
+    top: 0;
     left: -200px;
     right: -200px;
     min-height: 100%;
@@ -17,6 +18,7 @@ section {
 
   // section.header
   &.header {
+    @extend .align-items-center;
     min-height: 720px;
     color: white;
     &:before {
@@ -32,10 +34,43 @@ section {
   }
 
   &.blue {
-    min-height: 100vh;
     color: white;
     &:before {
       background-color: $blue;
+    }
+  }
+
+  &.lawyer-section {
+    @extend .container;
+    padding-bottom: 0;
+    height: line(34);
+    @include media-breakpoint-down(xs) {
+      padding-bottom: line(3);
+      height: line(41);
+    }
+    header {
+      @extend .row;
+      width: 100%;
+      height: line(2);
+      z-index: 5;
+      & > h3 {
+        @extend .col;
+      }
+      & > div {
+        @extend .col, .text-sm-right;
+        @include media-breakpoint-down(xs) {
+          position: absolute;
+          bottom: line(5);
+          left: 0;
+        }
+      }
+    }
+    main {
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      overflow: scroll;
+      @extend .d-flex, .justify-content-start, .flex-nowrap;
     }
   }
 }

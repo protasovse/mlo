@@ -32,7 +32,6 @@
   }
 }
 
-
 %btn-soc {
   @extend .btn, .mr-1, .mb-2;
   color: white;
@@ -91,7 +90,7 @@
 }
 
 .btn-white {
-  color: $blue;
+  color: $blue; //
   &:hover {
     background-color: $dark-blue; //
     color: white;
