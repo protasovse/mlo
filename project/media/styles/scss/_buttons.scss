@@ -11,7 +11,8 @@
 }
 
 .btn-onbar {
-  border-color: #d5e1fe;
+  @extend .btn-sm;
+  border-color: rgba(255, 255, 255, .5);
   background: transparent;
   color: $white;
   &:hover {
@@ -22,6 +23,7 @@
     width: 39px;
     height: 39px;
     font-size: 1rem;
+    padding: 0!important;
   }
   &.active {
     color: $red;

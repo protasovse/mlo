@@ -1,0 +1,30 @@
+
+.mlo-navbar {
+
+  @extend .navbar, .fixed-top;
+  color: white;
+  padding-bottom: line(1);
+  padding-top: line(1);
+  background-color: transparent!important;
+
+  .navbar-brand {
+    img {
+      padding: 0;
+      width: 153px;
+      height: 47px;
+    }
+  }
+
+  &.fixed {
+    @extend .bg-primary;
+    padding-bottom: line(.3);
+    padding-top: line(.3);
+
+    .navbar-brand img {
+      width: 115px;
+      height: 34px;
+    }
+
+  }
+
+}

@@ -2,8 +2,26 @@
 {% load static %}
 
 {% block body %}
-    <section class="header">
-        <div>
+
+    <nav class="mlo-navbar" :class="navbar_isfixed?'fixed':''">
+        <a class="navbar-brand" href="/">
+            <img src="{% static "/img/nav/logo.svg" %}">
+        </a>
+        <div class="d-none d-md-block text-center">
+            <span class="large font-weight-semibold">8 (927) 080-66-66</span>
+            <br>
+            <span class="normal">горячая линия в Москве</span>
+        </div>
+        <div class="ml-auto-">
+            <button type="submit" class="btn btn-sm btn-onbar" @click="navbar_isfixed=!navbar_isfixed">Спросить юриста
+            </button>
+            <button type="submit" class="btn btn-sm btn-onbar sq _active"><span class="icon-lightning"></span></button>
+            <button type="submit" class="btn btn-onbar sq"><span class="icon-menu"></span></button>
+        </div>
+    </nav>
+
+    <section class="header-section">
+        <main>
             <h1 class="text-center mb-3">{{ h1 }}</h1>
             <p class="lead text-center mb-4"><b>Получите профессиональную юридическую консультацию удобным для Вас
                 способом:</b><br>
@@ -11,7 +29,354 @@
             <p class="text-center">
                 <button type="submit" class="btn btn-lg btn-primary px-5">Задать вопрос юристу</button>
             </p>
+        </main>
+    </section>
+
+    <section class="gray" >
+        <div class="container">
+            <h2>За 10 лет 236 820 посетителей получили консультации</h2>
+            <p class="lead mb-5">23 467 отзывов и благодарностей оставили наши клиенты.</p>
+
+            <div class="card-columns">
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                            на Украину, их я и так знаю.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Андрей к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Москва, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
+                                <br>
+                                Ноябрьск, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Отличный и развернутый ответ.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Стерлитамак, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                            на Украину, их я и так знаю.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Андрей к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Москва, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                            на Украину, их я и так знаю.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Андрей к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Москва, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
+                                <br>
+                                Ноябрьск, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Отличный и развернутый ответ.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Стерлитамак, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                            на Украину, их я и так знаю.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Андрей к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Москва, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
+                                <br>
+                                Ноябрьск, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card">
+                    <blockquote class="blockquote mb-0 card-body">
+                        <p>Отличный и развернутый ответ.</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                                Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
+                                <br>
+                                Стерлитамак, 23 Ноября 2017 20:53
+                            </small>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+
+            <footer class="row">
+                <div class="col mx-auto text-center">
+                    <button href="#" class="btn btn-primary">Все отзывы <i class="icon-forum ml-2"></i>
+                    </button>
+                </div>
+            </footer>
+
+
         </div>
+    </section>
+
+    <section class="blue lawyer-section">
+
+        <div class="container">
+            <div class="row">
+                <div class="title">
+                    <h3>Юристы и адвокаты</h3>
+                    <button type="button" class="btn btn-sm btn-white">Все эксперты <i class="icon-people ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="cards-inner">
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Швырёва Надежда Валерьевна</a></h6>
+                        <p class="rating">9,37</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Юрист-онлайн</h6>
+                        <p>Практики: корпоративное и коммерческое право РФ, международное частное право,
+                            иностранные
+                            инвестиции, M&A, антимонопольное право, законодательство о рынке ценных бумаг.</p>
+                    </div>
+                </div>
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/e_grayscale/v1459783709/user_id_3.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Авсюков Кирилл Сергеевич</a></h6>
+                        <p class="rating">9,99</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Супер-адвокат</h6>
+                        <p>Партнер юридической фирмы Bright & Hues. До присоединения к фирме в 2016 году Евгений
+                            работал
+                            в
+                            московских офисах международных консалтинговых и юридических фирм.</p>
+                    </div>
+                </div>
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/v1476854720/2hHNHtY5gJ8_n3p2jm.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Саломатова Татьяна Вячеславовна</a></h6>
+                        <p class="rating">9,99</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Супер-адвокат</h6>
+                        <p>Консультирование крупной российской фармацевтической компании в отношении
+                            корпоративных и
+                            коммерческих вопросов, связанных с общим центром обслуживания (shared services
+                            center)</p>
+                    </div>
+                </div>
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Швырёва Надежда Валерьевна</a></h6>
+                        <p class="rating">9,37</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Юрист-онлайн</h6>
+                        <p>Практики: корпоративное и коммерческое право РФ, международное частное право,
+                            иностранные
+                            инвестиции, M&A, антимонопольное право, законодательство о рынке ценных бумаг.</p>
+                    </div>
+                </div>
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/e_grayscale/v1459783709/user_id_3.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Авсюков Кирилл Сергеевич</a></h6>
+                        <p class="rating">9,99</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Супер-адвокат</h6>
+                        <p>Партнер юридической фирмы Bright & Hues. До присоединения к фирме в 2016 году Евгений
+                            работал
+                            в
+                            московских офисах международных консалтинговых и юридических фирм.</p>
+                    </div>
+                </div>
+                <div class="lawyer-card">
+                    <div class="lanyard"></div>
+                    <img src="https://res.cloudinary.com/svem/image/upload/v1476854720/2hHNHtY5gJ8_n3p2jm.jpg">
+                    <div class="lawyer-card-title">
+                        <h6><a href="#">Саломатова Татьяна Вячеславовна</a></h6>
+                        <p class="rating">9,99</p>
+                    </div>
+                    <div class="lawyer-card-body">
+                        <h6>Супер-адвокат</h6>
+                        <p>Консультирование крупной российской фармацевтической компании в отношении
+                            корпоративных и
+                            коммерческих вопросов, связанных с общим центром обслуживания (shared services
+                            center)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="questions-section">
+
+        <div class="container">
+
+            <header>
+                <h3>Последние консультации юристов</h3>
+            </header>
+
+            <hr>
+
+            <article>
+                <div class="date">19 октября в 20:42</div>
+                <h6><a href="#">Уйти на пенсию со службы по контракту с льготным стажем</a></h6>
+
+                <div class="number">№ 477818 <span>Ростов-на-Дону</span></div>
+                <div class="content">
+                    <p>Здравствуйте. В данный момент я военнослужащий по контракту, и хотелось бы поскорее на
+                        пенсию.</p>
+                    <p>У меня два года срочной службы, после этого 10 лет в органах ФСИН с льготным стажем год за
+                        полтора, следовательно 15 лет льготного стажа, и плюс три года контрактной службы.</p>
+                    <p>Могу ли я сейчас уйти на пенсию, так как у меня получается 20 лет с льготным стажем?
+                        Или же нужно еще 5 лет? И если могу уйти на пенсию, как мне лучше уволиться без последствий,
+                        до окончания контракта?</p>
+                </div>
+
+                <div class="col-md-3"></div>
+                <div class="answer">
+                    <div class="answer-header">
+                        <div class="usr">
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s5600.jpg"></a>
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s8195.jpg"></a>
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s9.jpg"></a>
+                        </div>
+                        <!--div>
+                            <a href="#">Бодылев Аркадий Олегович</a><br>
+                            <span class="text-muted">Волгоград</span>
+                        </div-->
+                        <div>
+                            <a href="#">3 ответа</a>
+                        </div>
+                    </div>
+                    <p>Вы можете обратиться в суд с исковым заявлением и обжаловать решение,
+                        которое приняла комиссия МСЭ. Всех вам благ. Успешного решения вашего вопроса.</p>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div class="date">19 октября в 20:42</div>
+                <h6><a href="#">Уйти на пенсию со службы по контракту с льготным стажем</a></h6>
+
+                <div class="number">№ 477818 <span>Ростов-на-Дону</span></div>
+                <div class="content">
+                    <p>Здравствуйте. В данный момент я военнослужащий по контракту, и хотелось бы поскорее на
+                        пенсию.</p>
+                    <p>У меня два года срочной службы, после этого 10 лет в органах ФСИН с льготным стажем год за
+                        полтора, следовательно 15 лет льготного стажа, и плюс три года контрактной службы.</p>
+                    <p>Могу ли я сейчас уйти на пенсию, так как у меня получается 20 лет с льготным стажем?
+                        Или же нужно еще 5 лет? И если могу уйти на пенсию, как мне лучше уволиться без последствий,
+                        до окончания контракта?</p>
+                </div>
+
+                <div class="col-md-3"></div>
+                <div class="answer">
+                    <div class="answer-header">
+                        <div class="usr">
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s5600.jpg"></a>
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s8195.jpg"></a>
+                            <a href="#"><img src="http://svem.ru/files/ephoto/s9.jpg"></a>
+                        </div>
+                        <!--div>
+                            <a href="#">Бодылев Аркадий Олегович</a><br>
+                            <span class="text-muted">Волгоград</span>
+                        </div-->
+                        <div>
+                            <a href="#">3 ответа</a>
+                        </div>
+                    </div>
+                    <p>Вы можете обратиться в суд с исковым заявлением и обжаловать решение,
+                        которое приняла комиссия МСЭ. Всех вам благ. Успешного решения вашего вопроса.</p>
+                </div>
+            </article>
+
+            <hr>
+
+            <footer class="row">
+                <div class="col-9 ml-auto mt-2">
+                    <button href="#" class="btn btn-primary">Ещё консультации… <i class="icon-check-circle ml-2"></i>
+                    </button>
+                </div>
+            </footer>
+
+        </div>
+
     </section>
 
     <section class="col-5" style="margin-top:60px; margin-bottom: 60px">
@@ -387,95 +752,16 @@
 
     </section>
     <br>
-    <section class="blue lawyer-section" style="margin-bottom: 500px;">
-        <header>
-            <h3>Юристы и адвокаты</h3>
-            <div>
-                <button type="button" class="btn btn-sm btn-white">Все эксперты</button>
-            </div>
-        </header>
-        <main>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Швырёва Надежда Валерьевна</a></h6>
-                    <p class="rating">9,37</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Юрист-онлайн</h6>
-                    <p>Практики: корпоративное и коммерческое право РФ, международное частное право, иностранные
-                        инвестиции, M&A, антимонопольное право, законодательство о рынке ценных бумаг.</p>
-                </div>
-            </div>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/e_grayscale/v1459783709/user_id_3.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Авсюков Кирилл Сергеевич</a></h6>
-                    <p class="rating">9,99</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Супер-адвокат</h6>
-                    <p>Партнер юридической фирмы Bright & Hues. До присоединения к фирме в 2016 году Евгений работал
-                        в
-                        московских офисах международных консалтинговых и юридических фирм.</p>
-                </div>
-            </div>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/v1476854720/2hHNHtY5gJ8_n3p2jm.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Саломатова Татьяна Вячеславовна</a></h6>
-                    <p class="rating">9,99</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Супер-адвокат</h6>
-                    <p>Консультирование крупной российской фармацевтической компании в отношении корпоративных и
-                        коммерческих вопросов, связанных с общим центром обслуживания (shared services center)</p>
-                </div>
-            </div>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Швырёва Надежда Валерьевна</a></h6>
-                    <p class="rating">9,37</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Юрист-онлайн</h6>
-                    <p>Практики: корпоративное и коммерческое право РФ, международное частное право, иностранные
-                        инвестиции, M&A, антимонопольное право, законодательство о рынке ценных бумаг.</p>
-                </div>
-            </div>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/e_grayscale/v1459783709/user_id_3.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Авсюков Кирилл Сергеевич</a></h6>
-                    <p class="rating">9,99</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Супер-адвокат</h6>
-                    <p>Партнер юридической фирмы Bright & Hues. До присоединения к фирме в 2016 году Евгений работал
-                        в
-                        московских офисах международных консалтинговых и юридических фирм.</p>
-                </div>
-            </div>
-            <div class="lawyer-card">
-                <div class="lanyard"></div>
-                <img src="https://res.cloudinary.com/svem/image/upload/v1476854720/2hHNHtY5gJ8_n3p2jm.jpg">
-                <div class="lawyer-card-title">
-                    <h6><a href="#">Саломатова Татьяна Вячеславовна</a></h6>
-                    <p class="rating">9,99</p>
-                </div>
-                <div class="lawyer-card-body">
-                    <h6>Супер-адвокат</h6>
-                    <p>Консультирование крупной российской фармацевтической компании в отношении корпоративных и
-                        коммерческих вопросов, связанных с общим центром обслуживания (shared services center)</p>
-                </div>
-            </div>
-        </main>
-    </section>
 
+{% endblock %}
+
+{% block block_js %}
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                navbar_isfixed: true,
+            }
+        })
+    </script>
 {% endblock %}
