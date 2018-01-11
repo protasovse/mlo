@@ -7073,6 +7073,7 @@ section {
     margin-top: 1.25rem; }
 
 .win-round {
+  position: relative;
   background-color: white;
   border-radius: 1.25rem;
   max-width: 770px;

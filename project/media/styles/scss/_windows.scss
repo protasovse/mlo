@@ -1,6 +1,7 @@
 
 .win-round {
   @extend .px-4, .px-md-5, .py-5, .mx-auto;
+  position: relative;
   background-color: white;
   border-radius: line(1);
   max-width: 770px;
