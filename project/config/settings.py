@@ -7,14 +7,16 @@ env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
 environ.Env.read_env(root('.env'))
 
 BASE_DIR = root()
-PROJECT_DIR = environ.Path()
+
+PROJECT_DIR = BASE_DIR + '/project'
+
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 STATIC_ROOT = environ.Path('staticfiles').__str__()
 STATICFILES_DIRS = [
-    environ.Path('media/vue/bundles').__str__(),
-    environ.Path('static').__str__(),
+    PROJECT_DIR + '/media/vue/bundles',
+    PROJECT_DIR + '/static'
 ]
 
 STATIC_URL = '/static/'
@@ -95,7 +97,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [environ.Path('templates').__str__()],
+        'DIRS': [PROJECT_DIR + '/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

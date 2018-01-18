@@ -45,12 +45,15 @@ export default {
     mounted() {
         this.$http.get('/api/user/flash').then(
             (r) => {if (r.data.success) {this.set_form_success(r.data.data)}},
-            (r) => {this.set_form_error(r.data.error)}
+            (r) => {
+                this.mark_error_fields(r);
+                this.set_form_error(r.data.error)
+            }
         )
     },
     methods: {
         default_error() {return 'Не удалось авторизироваться. Не верный пароль' },
-        get_requires_fields() {return [this.email, this.password]},
+        get_requires_fields() {return ['email', 'password']},
         save() {
             try {
                 this.form_validate([this.requires_fields]);
@@ -69,6 +72,12 @@ export default {
             this.get('/api/user/resend', {email: this.email},
                 () => {this.set_form_success('Письмо отправлено повторно. Проверьте, пожалуйста, почту.')},
             );
+        },
+        vk() {
+            window.location.href = this.vk_url;
+        },
+        fb() {
+            window.location.href = this.fb_url;
         }
     }
 }

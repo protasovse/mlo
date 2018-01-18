@@ -25,6 +25,7 @@ class AppUser(ApiView):
 
             try:
                 get_user_model().objects.get(email=_email)
+
                 raise ApiPublicException('Данный email уже зарегистрирован в системе')
             except get_user_model().DoesNotExist:
                 pass
@@ -41,12 +42,13 @@ class AppUser(ApiView):
         _password = request.GET.get('password')
         user = authenticate(email=_email, password=_password)
         if user is None:
-            raise ApiPublicException('Не удалось авторизоваться')
+            raise ApiPublicException('Не удалось авторизоваться', field={'field': 'password', 'txt': 'Неверный пароль'})
         if not user.is_active:
             raise ApiPublicException(
                 'Аккаунт не активирован. Вам на почту должно было придти письмо с сылкой активации акканта.'
                 'Пожалуйста, проверьте почту.',
-                code='unactive', request_status=403
+                code='unactive', request_status=403,
+                field={'field': 'password', 'txt': 'неверный пароль'}
         )
         login(request, user)
         return True
@@ -105,12 +107,13 @@ class ReSend(ApiView):
 class FlashMessageCheck(ApiView):
     def get(self, request):
         mess = messages.get_messages(request)
+
         if len(mess) == 0:
             return False
         for message in mess:
             # почему-то нет интерфейса получения первого элмента
             if message.level == messages.ERROR:
-                raise ApiPublicException(message.message)
+                raise ApiPublicException(message.message, field={'field': message.extra_tags, 'txt': message.message})
             return message.message
 
 

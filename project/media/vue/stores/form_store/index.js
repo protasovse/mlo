@@ -5,7 +5,8 @@ export default {
         is_success: false,
         error_txt: '',
         success_txt: '',
-        loading: false
+        loading: false,
+        fields: {}
     },
     mutations: {
         set_error(state, error) {
@@ -30,6 +31,13 @@ export default {
             state.is_error = false;
             state.is_success = false;
             state.loading = false;
+            state.fields = {}
+        },
+        error_field(state, error) {
+            Vue.set(state.fields, error.field, error.txt)
+        },
+        clear_error_field(state) {
+            state.fields = {}
         }
     }
 }
