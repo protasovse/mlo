@@ -1,7 +1,13 @@
 
 .mlo-navbar {
 
-  @extend .navbar, .fixed-top;
+  @extend .navbar;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-fixed;
+
   color: white;
   padding-bottom: line(1);
   padding-top: line(1);

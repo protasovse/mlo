@@ -1,3 +1,5 @@
+// sections and footers of layout
+
 section {
   padding-top: line(4);
   padding-bottom: line(4);
@@ -146,7 +148,40 @@ section {
       margin-top: line(1);
     }
   }
-
 }
 
-// section
+footer {
+    &.main-footer {
+      @extend  .container-fluid, .normal;
+      border-top: 1px solid $gray-200;
+      padding: line(1) line(1.5);
+      color: $gray-500;
+      background-color: $gray-100;
+      a {
+        color: $gray-500;
+      }
+    & > div {
+      @extend .row, .align-items-center;
+      .ttl {
+        @extend .col-12, .col-md-4, .text-center, .text-md-right, .order-md-3;
+        a {
+          color: $gray-800;
+        }
+      }
+      .mdd {
+        @extend .col-12, .col-md-4, .text-center, .text-md-center, .order-md-2, .my-4, .my-md-0;
+        font-size: 1.5rem;
+        a {
+          @extend .mx-4;
+          text-decoration: none;
+          &:hover{
+            color: $gray-800;
+          }
+        }
+      }
+      .cpr {
+        @extend .col-12, .col-md-4, .text-center, .text-md-left, .order-md-1;
+      }
+    }
+  }
+}
