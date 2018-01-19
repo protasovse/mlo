@@ -32,7 +32,9 @@ class SocialNetworkLogin(View):
             return http.HttpResponseRedirect('/')
         except Exception as e:
             logger.error(format(e))
-            messages.add_message(request, messages.ERROR, 'Не удалось авторизироваться через {0}'.format(self.provider))
+            messages.add_message(
+                request, messages.ERROR, 'Не удалось авторизироваться через {0}'.format(self.provider), 'social'
+            )
             return http.HttpResponseRedirect('/auth/login')
 
 
@@ -47,7 +49,7 @@ class VK(SocialNetworkLogin):
             'code': request.GET.get('code')
         }).json()
         if 'error' in res.keys():
-            raise BackendPublicException(res['error'])
+            raise BackendPublicException(res['error'], field={'field': 'social'})
         return res['email']
 
 
@@ -75,5 +77,5 @@ class FB(SocialNetworkLogin):
             params={'fields': 'email,first_name,last_name'}
         ).json()
         if 'error' in res.keys():
-            raise BackendPublicException(res['error']['message'])
+            raise BackendPublicException(res['error']['message'], field={'field': 'social'})
         return res['email']

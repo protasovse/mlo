@@ -44,18 +44,18 @@ class ApiView(View):
                     'success': True,
                 }
                 if type(result) == bool:
-                    print(result)
                     response = {'success': result}
                 elif result is not None:
                     response['data'] = result
                 request_status = 200
         except ApiPublicException as e:
-            response = {
-                'success': False,
-                'error': str(e),
-                'code': e.code
-            }
-            request_status = e.request_status
+                response = {
+                    'success': False,
+                    'error': str(e),
+                    'code': e.code,
+                    'fields': e.fields
+                }
+                request_status = e.request_status
         except ValidationError as e:
             response = {
                 'success': False,

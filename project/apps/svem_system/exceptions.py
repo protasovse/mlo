@@ -4,7 +4,11 @@ class ControlledException(Exception):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args)
+        self.fields = []
         self.code = kwargs.get('code', 'error')
+        field = kwargs.get('field', False)
+        if field:
+            self.fields.append(field)
         self.request_status = int(kwargs.get('request_status', 500))
 
 

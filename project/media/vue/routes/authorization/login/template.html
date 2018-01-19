@@ -1,37 +1,57 @@
-<div class="auth_login">
-        <div class="form-field">
-            <label class="user" for="login-username"></label>
-            <input id='login-username' type="email" name="email" v-model="email" placeholder="Email">
+<div class="row">
+    <div class="l-col">
+        <div class="form-group">
+            <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
+                   placeholder="Электронный ящик" name="email" v-model="email">
+            <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
         </div>
-        <div class="form-field">
-            <label class="lock" for="login-password"></label>
-            <input id='login-password' type="password" v-model="password" placeholder="Пароль" @keyup.13="save">
+        <div class="form-group">
+            <input type="password" class="form-control" :class="{'is-invalid': error_fields.password }"
+                   placeholder="Пароль" v-model="password" name="password" @keyup.13="save">
+            <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
         </div>
 
-         <div class="form-field">
-             <button type="submit" class="auth_button" @click="save">Войти</button>
-         </div>
+        <p class="req">
+            <router-link :to="{name: 'forgot'}">Восстановить пароль</router-link>
+        </p>
 
-        <div class="social_buttons">
-            Войти через социальные сети<br/>
-            <span>
-                <a :href=vk_url >
-                    <img src="/static/auth/icon-vk-50.jpg" >
-                </a>
-            </span>
-            <span>
-                <a :href=fb_url>
-                    <img src="/static/auth/icon-fb-50.png">
-                </a>
-            </span>
+
+        <button type="submit" class="btn btn-outline-primary col-12" @click="save" :disabled=loading>
+            <span v-if="loading">Загрузка...</span><span v-else>Войти</span>
+        </button>
+
+
+
+
+        <div class="msg" v-if="unactive"><!-- .l-col .msg -->
+            <p class="err">
+                Не пришло письмо с подтверждением?<br/>
+                <a @click="send_activation" href="javascript:void(0)">Выслать активационное письмо еще раз</a>
+            </p>
         </div>
-        <div class="form-field" v-if="unactive"  >
-            Не пришло письмо с подтверждением?<br/>
-            <a @click="send_activation" href="javascript:void(0)">Выслать активационное письмо еще раз</a>
+
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="r-col">
+        <h4>войти через соцсети:</h4>
+        <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
+        <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+        <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
+        <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
+        <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
+        <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
+
+
+        <div class="msg"  v-if="error_fields.social" ><!-- .r-col .msg -->
+            <p class="err" v-if="error_fields.social">{{ error_fields.social }}</p>
         </div>
-     <footer class="info">
-         <span><router-link :to="{name: 'registration'}">Зарегистрироваться</router-link></span>
-         <span><router-link :to="{name: 'forgot'}">Забыли пароль?</router-link></span>
-     </footer>
+    </div>
+
+    <p class="reg">Ещё не зарегистрированны?
+        <router-link :to="{name: 'registration'}">Регистрация</router-link>
+    </p>
 
 </div>

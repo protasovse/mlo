@@ -17,14 +17,26 @@ export default {
         },
         loading() {
             return this.$store.state.loading;
-        }
+        },
+        error_fields() {
+            return this.$store.state.fields;
+        },
     },
     beforeMount() {
          this.$store.commit('init_state')
     },
     methods: {
+        set_field_error(field, txt) {
+            this.$store.commit('error_field', {
+                'field': field,
+                'txt': txt
+            });
+        },
         start_loading() {
             this.$store.commit('start_loading')
+        },
+        clear_error_field() {
+            this.$store.commit('clear_error_field')
         },
         stop_loading() {
             this.$store.commit('stop_loading')
@@ -38,10 +50,19 @@ export default {
             if (this.get_requires_fields === undefined) {
                 return;
             }
-            if (!this.get_requires_fields().every(function (x) {return x !== ''})) {
+            let has_error = false;
+            let req_fields = this.get_requires_fields();
+            req_fields.forEach((field) => {
+                if (this[field] === '') {
+                    this.set_field_error(field,'обязательное поле');
+                    has_error = true;
+                }
+            });
+            if (has_error) {
                 throw new Error('Введите данные');
             }
         },
+
         form_validate(fns) {
             fns.forEach((fn) => {fn()})
         },
@@ -72,8 +93,14 @@ export default {
         default_error() {
             return 'Что-то пошло не так';
         },
+        mark_error_fields(r) {
+            r.data.fields.forEach((x) => {
+                this.set_field_error(x['field'], x['txt']);
+            });
+        },
         process_error(r, fn=undefined) {
             this.stop_loading();
+            this.mark_error_fields(r);
             if (fn === undefined) {
                 if (r.data.error !== undefined) {
                     throw new Error(r.data.error)
@@ -81,12 +108,13 @@ export default {
                     throw new Error(this.default_error())
                 }
             } else {
-                console.log(r);
                 fn(r)
             }
         },
+
         get(url, params, fn, fn_error=undefined) {
             this.start_loading();
+            this.clear_error_field();
             this.$http.get(url, {params: params}, {emulateJSON:true}).then(
                  (r) => {this.process_success(r, fn)},
                  (r) => {this.process_error(r, fn_error)}
@@ -94,6 +122,7 @@ export default {
         },
         post(url, params, fn, fn_error=undefined) {
             this.start_loading();
+            this.clear_error_field();
             this.$http.post(url, params, {emulateJSON:true}).then(
                 r => this.process_success(r, fn),
                 r => this.process_error(r, fn_error)
