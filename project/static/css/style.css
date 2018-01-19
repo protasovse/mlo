@@ -512,7 +512,7 @@ h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .file-loader, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .lawyer-card .lawyer-card-body p {
+.normal, .file-loader, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .lawyer-card .lawyer-card-body p {
   font-size: 0.875rem;
   line-height: 1.25rem; }
 
@@ -5645,7 +5645,7 @@ a.bg-white:focus, a.bg-white:hover {
 .m-3 {
   margin: 1rem !important; }
 
-.mt-3, .win-round .err,
+.mt-3, .win-round .err, .win-round .suc,
 .my-3 {
   margin-top: 1rem !important; }
 
@@ -6948,10 +6948,10 @@ a.text-primary:focus, a.text-primary:hover {
 a.text-secondary:focus, a.text-secondary:hover {
   color: #a1a1a1 !important; }
 
-.text-success {
+.text-success, .win-round .suc {
   color: #16c246 !important; }
 
-a.text-success:focus, a.text-success:hover {
+a.text-success:focus, .win-round a.suc:focus, a.text-success:hover, .win-round a.suc:hover {
   color: #119435 !important; }
 
 .text-info {
