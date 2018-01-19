@@ -3455,10 +3455,21 @@ tbody.collapse.show {
   padding-bottom: 1.25rem;
   padding-top: 1.25rem;
   background-color: transparent !important; }
-  .mlo-navbar .navbar-brand img {
-    padding: 0;
-    width: 153px;
-    height: 47px; }
+  .mlo-navbar .navbar-brand {
+    position: relative;
+    z-index: 1; }
+    .mlo-navbar .navbar-brand img {
+      padding: 0;
+      width: 153px;
+      height: 47px; }
+  .mlo-navbar .title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0; }
+  .mlo-navbar .actions {
+    position: relative;
+    z-index: 1; }
   .mlo-navbar.fixed {
     padding-bottom: 0.375rem;
     padding-top: 0.375rem; }
@@ -4829,7 +4840,7 @@ a.bg-white:focus, a.bg-white:hover {
   clear: both;
   content: ""; }
 
-.d-none {
+.d-none, .mlo-navbar .title {
   display: none !important; }
 
 .d-inline {
@@ -4893,7 +4904,7 @@ a.bg-white:focus, a.bg-white:hover {
   .d-md-inline-block {
     display: inline-block !important; }
 
-  .d-md-block {
+  .d-md-block, .mlo-navbar .title {
     display: block !important; }
 
   .d-md-table {
@@ -6873,7 +6884,7 @@ section.lawyer-section .title,
 .text-right {
   text-align: right !important; }
 
-.text-center, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr {
+.text-center, .mlo-navbar .title, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr {
   text-align: center !important; }
 
 @media (min-width: 576px) {

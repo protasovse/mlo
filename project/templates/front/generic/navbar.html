@@ -1,0 +1,18 @@
+{% load static %}
+
+<nav class="mlo-navbar" :class="navbar_isfixed?'fixed':''">
+    <a class="navbar-brand" href="/">
+        <img src="{% static "/img/nav/logo.svg" %}">
+    </a>
+    <div class="title">
+        <span class="large font-weight-semibold">8 (927) 080-66-66</span>
+        <br>
+        <span class="normal">горячая линия в Москве</span>
+    </div>
+    <div class="actions">
+        <button type="submit" class="btn btn-sm btn-onbar" @click="navbar_isfixed=!navbar_isfixed">
+            Спросить юриста</button>
+        <button type="submit" class="btn btn-sm btn-onbar sq _active"><span class="icon-lightning"></span></button>
+        <button type="submit" class="btn btn-onbar sq"><span class="icon-menu"></span></button>
+    </div>
+</nav>

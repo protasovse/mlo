@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    {% block navbar %}
+        {% include 'front/generic/navbar.html' %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+        {% include 'front/generic/footer.html' %}
+    {% endblock %}
+
+{% endblock %}
+
+
+{% block block_js %}
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                navbar_isfixed: true,
+            }
+        })
+    </script>
+{% endblock %}
