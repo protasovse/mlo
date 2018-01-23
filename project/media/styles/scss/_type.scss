@@ -24,7 +24,7 @@ h3 {
 
 h2 {
   line-height: 1.25em;
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     font-size: $h3-font-size;
     line-height: 1.3461539em;
   }
@@ -55,7 +55,7 @@ h2 {
 
 h1 {
   line-height: 1.2037037em;
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     font-size: $h2-font-size;
     line-height: 1.25em;
   }
