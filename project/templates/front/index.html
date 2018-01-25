@@ -1,24 +1,7 @@
-{% extends 'layout.html' %}
+{% extends 'front/base.html' %}
 {% load static %}
 
-{% block body %}
-
-    <nav class="mlo-navbar" :class="navbar_isfixed?'fixed':''">
-        <a class="navbar-brand" href="/">
-            <img src="{% static "/img/nav/logo.svg" %}">
-        </a>
-        <div class="d-none d-md-block text-center">
-            <span class="large font-weight-semibold">8 (927) 080-66-66</span>
-            <br>
-            <span class="normal">горячая линия в Москве</span>
-        </div>
-        <div class="ml-auto-">
-            <button type="submit" class="btn btn-sm btn-onbar" @click="navbar_isfixed=!navbar_isfixed">Спросить юриста
-            </button>
-            <button type="submit" class="btn btn-sm btn-onbar sq _active"><span class="icon-lightning"></span></button>
-            <button type="submit" class="btn btn-onbar sq"><span class="icon-menu"></span></button>
-        </div>
-    </nav>
+{% block content %}
 
     <section class="header-section">
         <main>
@@ -379,23 +362,6 @@
 
     </section>
 
-    <footer class="main-footer">
-        <div>
-            <div class="ttl">
-                <a href="#">Пользовательсткое соглашение</a><br>
-                <a href="#">Карта сайта</a>
-            </div>
-            <div class="mdd">
-                <a href="https://vk.com/moiyurist.online"><span class="icon-vk"></span></a>
-                <a href="https://fb.com/moiyurist.online"><span class="icon-fb"></span></a>
-                <a href="https://twitter.com/moiyurist.online"><span class="icon-tw"></span></a>
-            </div>
-            <div class="cpr">© Мойюрист.онлайн — Развёрнутая юридическая помощь, 2005–2015.
-                <nobr>Дизайн — <a href="http://mortis.ru" rel="nofollow">mortis.ru</a></nobr>
-            </div>
-        </div>
-    </footer>
-
     <section class="col-5" style="margin-top:60px; margin-bottom: 60px">
         <form>
             <div class="form-group">
@@ -577,7 +543,7 @@
 
         <div class="win-round">
 
-            <h2 class="logo">Вход</h2>
+            <h2 class="logo">Активация / Вход</h2>
 
             <div class="row">
                 <form method="post" class="l-col">
@@ -591,12 +557,10 @@
                     <p class="req"><a href="#">Восстановить пароль</a></p>
 
                     <button id="login_button" type="submit" class="btn btn-outline-primary col-12"
-                            data-loading-text="Загрузка…" disabled>Загрузка...
-                    </button>
+                            data-loading-text="Загрузка…">Вход</button>
 
                     <div class="msg"><!-- .l-col .msg -->
-                        <p class="err">Введенное вами имя пользователя не принадлежит аккаунту.
-                            Проверьте свое имя пользователя и повторите попытку.</p>
+                        <p class="suc">Ваша учётная запись активированна, авторизуйтесь, пожалуйста.</p>
                     </div>
 
                 </form>
@@ -611,9 +575,9 @@
                     <button type="submit" class="btn-fb"><span class="icon-fb"></span></button>
                     <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
                     <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
-                    <div class="msg"><!-- .r-col .msg -->
+                    <!--div class="msg"><!-- .r-col .msg - ->
                         <p class="err">Авторизация через соцсети не удалась.</p>
-                    </div>
+                    </div-->
                 </div>
                 <p class="reg">Ещё не зарегистрированны? <a href="#sgnup">Регистрация</a></p>
             </div>
@@ -780,15 +744,4 @@
     </section>
     <br>
 
-{% endblock %}
-
-{% block block_js %}
-    <script>
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                navbar_isfixed: true,
-            }
-        })
-    </script>
 {% endblock %}

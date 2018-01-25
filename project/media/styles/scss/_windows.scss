@@ -61,6 +61,10 @@
     @extend .normal, .text-danger, .mt-3;
   }
 
+  .suc {
+    @extend .normal, .text-success, .mt-3;
+  }
+
   &.rec {
     h4 {
       margin-left: 16px;

@@ -14,11 +14,26 @@
   background-color: transparent!important;
 
   .navbar-brand {
+    position: relative;
+    z-index: 1;
     img {
       padding: 0;
       width: 153px;
       height: 47px;
     }
+  }
+
+  .title {
+    @extend .d-none, .d-md-block, .text-center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+  }
+
+  .actions {
+    position: relative;
+    z-index: 1;
   }
 
   &.fixed {

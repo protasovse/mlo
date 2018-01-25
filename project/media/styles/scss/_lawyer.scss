@@ -1,0 +1,39 @@
+.lawyer-page {
+  margin-bottom: line(10);
+  padding-top: line(6);
+  padding-bottom: 0;
+
+  &>div.container {
+    // z-index: 0;
+  }
+
+  .l-col {
+    @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto;
+    margin-bottom: -20px;
+    .photo {
+      //-webkit-clip-path: url(#photoSvgPath);
+      clip-path: url(#photoSvgPath);
+      width: 300px;
+      height: 360px;
+      position: relative;
+      image {
+      width: 300px;
+      height: 360px;
+      }
+    }
+  }
+
+  .r-col {
+    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7;
+    h1 {
+      margin-bottom: 30px;
+    }
+    .lead {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+    button {
+      @extend .btn, .btn-sm, .btn-white;
+    }
+  }
+}
