@@ -64,7 +64,7 @@ class ForgotPassword(ApiView):
         try:
             user = get_user_model().objects.get(email=request.POST.get('email'))
         except get_user_model().DoesNotExist:
-            raise ApiPublicException('Указанный email не найден')
+            raise ApiPublicException('Указанный email не найден', field={'field': 'email', 'txt': 'Email не найден'})
         emails.senf_forgot_email(user)
 
 
@@ -76,7 +76,9 @@ class ResetPassword(ApiView):
             hash.user.save()
             hash.delete()
         except UserHash.DoesNotExist:
-            raise ApiPublicException('Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна')
+            raise ApiPublicException(
+                'Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна',
+            )
 
 
 class ActivateAccount(ApiView):

@@ -21,7 +21,13 @@
         </button>
 
 
+        <div class="msg" v-if="success"><!-- .l-col .msg -->
+            <p class="suc">{{ success_txt }}</p>
+        </div>
 
+        <div class="msg" v-if="error"><!-- .l-col .msg -->
+            <p class="err">{{ error_txt }}</p>
+        </div>
 
         <div class="msg" v-if="unactive"><!-- .l-col .msg -->
             <p class="err">
@@ -45,7 +51,7 @@
         <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
 
 
-        <div class="msg"  v-if="error_fields.social" ><!-- .r-col .msg -->
+        <div class="msg" v-if="error_fields.social"><!-- .r-col .msg -->
             <p class="err" v-if="error_fields.social">{{ error_fields.social }}</p>
         </div>
     </div>

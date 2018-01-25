@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         default_error() {return 'Не удалось зарегистрироваться'},
-        get_requires_fields() {return [this.email, this.password, this.re_password]},
+        get_requires_fields() {return ['email', 'password', 're_password']},
         save() {
             try {
                 this.form_validate([this.requires_fields, this.password_vaidate]);

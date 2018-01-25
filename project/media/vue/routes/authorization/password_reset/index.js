@@ -15,7 +15,7 @@ export default {
     },
     methods: {
         default_error() {return 'Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна'},
-        get_requires_fields() {return [this.password, this.re_password]},
+        get_requires_fields() {return ['password', 're_password']},
         save() {
             try {
                 this.form_validate([this.requires_fields, this.password_vaidate]);

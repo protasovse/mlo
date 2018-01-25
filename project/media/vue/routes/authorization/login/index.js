@@ -10,6 +10,7 @@ export default {
     mixins: [logged_disallow, form_mixin],
     name: 'auth_login',
     template,
+    props: ['token'],
     data() {
         return {
             email: '',
@@ -43,13 +44,26 @@ export default {
         }
     },
     mounted() {
+
         this.$http.get('/api/user/flash').then(
             (r) => {if (r.data.success) {this.set_form_success(r.data.data)}},
             (r) => {
                 this.mark_error_fields(r);
                 this.set_form_error(r.data.error)
             }
-        )
+        );
+        if (this.token) {
+            try {
+                this.post('/api/user/activate', {'token': this.token}, () => {
+                    this.set_form_success(
+                        "Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации"
+                    )
+                });
+            } catch (err) {
+                this.set_form_error(err.message)
+            }
+        }
+
     },
     methods: {
         default_error() {return 'Не удалось авторизироваться. Не верный пароль' },
