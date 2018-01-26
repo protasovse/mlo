@@ -1,5 +1,7 @@
 // vars
 $medals-size: line(3);
+$photo-width: 300px;
+$photo-height: 360px;
 
 .lawyer-page {
 
@@ -19,8 +21,19 @@ $medals-size: line(3);
     .photo {
       clip-path: url("#photoSvgPath");
       -webkit-clip-path: url("#photoSvgPath");
-      width: 300px;
-      height: 360px;
+      width: $photo-width;
+      height: $photo-height;
+    }
+    .l-col {
+      @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto, .order-2, .order-sm-1, .text-center, .text-sm-left;
+      margin-bottom: -20px;
+      @include media-breakpoint-down(sm) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    .r-col {
+      @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left, .mb-5;
     }
   }
 
@@ -33,13 +46,17 @@ $medals-size: line(3);
       @extend .row, .mt-5;
     }
     dt {
-      @extend .col-12, .col-md-5;
+      @extend .col-12, .col-sm-5;
       color: $gray-600;
     }
     dd {
-      @extend .col-12, .col-md-7;
+      @extend .col-12, .col-sm-7;
       line-height: line(1.5);
       margin-bottom: 0;
+    }
+    .medals {
+      @extend .d-flex, .justify-content-around;
+      width: $photo-width;
     }
     .medal {
       position: relative;
@@ -80,7 +97,7 @@ $medals-size: line(3);
       }
     }
     nav {
-      @extend .col-10, .mx-auto, .row;
+      @extend .col-12, .col-xl-10, .mx-auto, .row;
       margin-top: line(2);
       a {
         @extend .col;
@@ -109,6 +126,11 @@ $medals-size: line(3);
           font-size: 1.25em;
           vertical-align: bottom;
         }
+        @include media-breakpoint-down(sm) {
+          span {
+            display: none;
+          }
+        }
         &:hover, &.active {
           z-index: 1;
           text-decoration: none;
@@ -120,18 +142,11 @@ $medals-size: line(3);
         }
       }
     }
-  }
-
-  .l-col {
-    @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto, .order-2, .order-sm-1, .text-center, .text-sm-left;
-    margin-bottom: -20px;
-    @include media-breakpoint-down(sm) {
-      padding-left: 0;
-      padding-right: 0;
+    .l-col {
+      @extend .col-12, .col-md-5, .col-xl-4, .ml-xl-auto, .mb-4;
     }
-  }
-
-  .r-col {
-    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left, .mb-5;
+    .r-col {
+      @extend .col-12, .col-lg-7, .col-xl-6, .mr-xl-auto;
+    }
   }
 }
