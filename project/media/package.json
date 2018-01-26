@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "file:node_modules/babel-loader",
     "bootstrap": "^4.0.0-beta.2",
     "build-url": "^1.0.10",
     "css-loader": "^0.28.7",

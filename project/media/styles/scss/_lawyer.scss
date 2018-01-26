@@ -1,29 +1,47 @@
 // vars
 $medals-size: line(3);
 
-
 .lawyer-page {
 
   & section.header {
     padding-top: line(6);
     padding-bottom: 0;
+    h1 {
+      margin-bottom: 30px;
+    }
+    .lead {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+    button {
+      @extend .btn, .btn-sm, .btn-white;
+    }
+    .photo {
+      clip-path: url("#photoSvgPath");
+      -webkit-clip-path: url("#photoSvgPath");
+      width: 300px;
+      height: 360px;
+    }
   }
 
   & section.about {
     padding-top: line(3);
+    .lead {
+      font-size: 18px;
+    }
     dl {
       @extend .row, .mt-5;
     }
     dt {
-      @extend .col-5;
+      @extend .col-12, .col-md-5;
       color: $gray-600;
     }
     dd {
-      @extend .col-7;
+      @extend .col-12, .col-md-7;
       line-height: line(1.5);
       margin-bottom: 0;
     }
-    .rate {
+    .medal {
       position: relative;
       width: $medals-size*2;
       height: $medals-size*2;
@@ -33,12 +51,19 @@ $medals-size: line(3);
       text-align: center;
       &:before {
         position: absolute;
+        left: $medals-size/2;
+        top: 0;
         z-index: 0;
         font-family: icomoon;
         content: attr(data-back);
         font-size: $medals-size;
         line-height: $medals-size;
         color: $red;
+      }
+      &.blue {
+        &:before {
+          color: $blue;
+        }
       }
       &:after {
         content: attr(data-value);
@@ -104,25 +129,9 @@ $medals-size: line(3);
       padding-left: 0;
       padding-right: 0;
     }
-    .photo {
-      clip-path: url("#photoSvgPath");
-      -webkit-clip-path: url("#photoSvgPath");
-      width: 300px;
-      height: 360px;
-    }
   }
 
   .r-col {
-    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left;
-    h1 {
-      margin-bottom: 30px;
-    }
-    .lead {
-      font-size: 18px;
-      margin-bottom: 40px;
-    }
-    button {
-      @extend .btn, .btn-sm, .btn-white;
-    }
+    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left, .mb-5;
   }
 }

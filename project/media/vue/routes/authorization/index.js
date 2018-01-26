@@ -16,7 +16,7 @@ export default [
                 path:'login',
                 components: {
                     default: login,
-                    title: { template: '<div class="logo">Вход</div>' }
+                    title: { template: 'Вход' }
                 },
                 name: 'login',
             },
