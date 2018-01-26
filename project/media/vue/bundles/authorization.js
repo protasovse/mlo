@@ -69,135 +69,166 @@
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    created() {},
-    computed: {
-        error() {
-            return this.$store.state.is_error;
-        },
-        success() {
-            return this.$store.state.is_success;
-        },
-        error_txt() {
-            return this.$store.state.error_txt;
-        },
-        success_txt() {
-            return this.$store.state.success_txt;
-        },
-        loading() {
-            return this.$store.state.loading;
-        },
-        error_fields() {
-            return this.$store.state.fields;
-        }
+  created() {},
+
+  computed: {
+    error() {
+      return this.$store.state.is_error;
     },
-    beforeMount() {
-        this.$store.commit('init_state');
+
+    success() {
+      return this.$store.state.is_success;
     },
-    methods: {
-        set_field_error(field, txt) {
-            this.$store.commit('error_field', {
-                'field': field,
-                'txt': txt
-            });
-        },
-        start_loading() {
-            this.$store.commit('start_loading');
-        },
-        clear_error_field() {
-            this.$store.commit('clear_error_field');
-        },
-        stop_loading() {
-            this.$store.commit('stop_loading');
-        },
-        password_vaidate() {
-            if (this.password !== this.re_password) {
-                throw new Error('Пароли не совпадают');
-            }
-        },
-        requires_fields() {
-            if (this.get_requires_fields === undefined) {
-                return;
-            }
-            let has_error = false;
-            let req_fields = this.get_requires_fields();
-            req_fields.forEach(field => {
-                if (this[field] === '') {
-                    this.set_field_error(field, 'обязательное поле');
-                    has_error = true;
-                }
-            });
-            if (has_error) {
-                throw new Error('Введите данные');
-            }
-        },
 
-        form_validate(fns) {
-            fns.forEach(fn => {
-                fn();
-            });
-        },
-        set_form_error(txt) {
-            this.$store.commit('set_error', {
-                txt: txt
-            });
-            this.stop_loading();
-        },
-        set_form_success(txt) {
-            this.$store.commit('set_success', {
-                txt: txt
-            });
-            this.stop_loading();
-        },
-        process_success(r, succes_fn) {
-            this.stop_loading();
-            if (r.data.success === false) {
-                if (r.data.error !== undefined) {
-                    throw new Error(r.data.error);
-                } else {
-                    throw new Error(this.default_error());
-                }
-            } else {
-                succes_fn(r.data);
-            }
-        },
-        default_error() {
-            return 'Что-то пошло не так';
-        },
-        mark_error_fields(r) {
-            r.data.fields.forEach(x => {
-                this.set_field_error(x['field'], x['txt']);
-            });
-        },
-        process_error(r, fn = undefined) {
-            this.stop_loading();
-            this.mark_error_fields(r);
-            if (fn === undefined) {
-                if (r.data.error !== undefined) {
-                    throw new Error(r.data.error);
-                } else {
-                    throw new Error(this.default_error());
-                }
-            } else {
-                fn(r);
-            }
-        },
+    error_txt() {
+      return this.$store.state.error_txt;
+    },
 
-        get(url, params, fn, fn_error = undefined) {
-            this.start_loading();
-            this.clear_error_field();
-            this.$http.get(url, { params: params }, { emulateJSON: true }).then(r => {
-                this.process_success(r, fn);
-            }, r => {
-                this.process_error(r, fn_error);
-            }).catch(e => this.set_form_error(e.message));
-        },
-        post(url, params, fn, fn_error = undefined) {
-            this.start_loading();
-            this.clear_error_field();
-            this.$http.post(url, params, { emulateJSON: true }).then(r => this.process_success(r, fn), r => this.process_error(r, fn_error)).catch(e => this.set_form_error(e.message));
-        }
+    success_txt() {
+      return this.$store.state.success_txt;
+    },
 
+    loading() {
+      return this.$store.state.loading;
+    },
+
+    error_fields() {
+      return this.$store.state.fields;
     }
+
+  },
+
+  beforeMount() {
+    this.$store.commit('init_state');
+  },
+
+  methods: {
+    set_field_error(field, txt) {
+      this.$store.commit('error_field', {
+        'field': field,
+        'txt': txt
+      });
+    },
+
+    start_loading() {
+      this.$store.commit('start_loading');
+    },
+
+    clear_error_field() {
+      this.$store.commit('clear_error_field');
+    },
+
+    stop_loading() {
+      this.$store.commit('stop_loading');
+    },
+
+    password_vaidate() {
+      if (this.password !== this.re_password) {
+        throw new Error('Пароли не совпадают');
+      }
+    },
+
+    requires_fields() {
+      if (this.get_requires_fields === undefined) {
+        return;
+      }
+
+      let has_error = false;
+      let req_fields = this.get_requires_fields();
+      req_fields.forEach(field => {
+        if (this[field] === '') {
+          this.set_field_error(field, 'обязательное поле');
+          has_error = true;
+        }
+      });
+
+      if (has_error) {
+        throw new Error('Введите данные');
+      }
+    },
+
+    form_validate(fns) {
+      fns.forEach(fn => {
+        fn();
+      });
+    },
+
+    set_form_error(txt) {
+      this.$store.commit('set_error', {
+        txt: txt
+      });
+      this.stop_loading();
+    },
+
+    set_form_success(txt) {
+      this.$store.commit('set_success', {
+        txt: txt
+      });
+      this.stop_loading();
+    },
+
+    process_success(r, succes_fn) {
+      this.stop_loading();
+
+      if (r.data.success === false) {
+        if (r.data.error !== undefined) {
+          throw new Error(r.data.error);
+        } else {
+          throw new Error(this.default_error());
+        }
+      } else {
+        succes_fn(r.data);
+      }
+    },
+
+    default_error() {
+      return 'Что-то пошло не так';
+    },
+
+    mark_error_fields(r) {
+      r.data.fields.forEach(x => {
+        this.set_field_error(x['field'], x['txt']);
+      });
+    },
+
+    process_error(r, fn = undefined) {
+      this.stop_loading();
+      this.mark_error_fields(r);
+
+      if (fn === undefined) {
+        if (r.data.error !== undefined) {
+          throw new Error(r.data.error);
+        } else {
+          throw new Error(this.default_error());
+        }
+      } else {
+        fn(r);
+      }
+    },
+
+    get(url, params, fn, fn_error = undefined) {
+      this.start_loading();
+      this.clear_error_field();
+      this.$http.get(url, {
+        params: params
+      }, {
+        emulateJSON: true
+      }).then(r => {
+        this.process_success(r, fn);
+      }, r => {
+        this.process_error(r, fn_error);
+      }).catch(e => this.set_form_error(e.message));
+    },
+
+    post(url, params, fn, fn_error = undefined) {
+      this.start_loading();
+      this.clear_error_field();
+      this.$http.post(url, params, {
+        emulateJSON: true
+      }).then(r => this.process_success(r, fn), r => this.process_error(r, fn_error)).catch(e => this.set_form_error(e.message));
+    }
+
+  }
 });
 
 /***/ }),
@@ -206,13 +237,13 @@
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    beforeCreate: function () {
-        this.$http.get('/api/user/check').then(r => {
-            if (r.data.success === true) {
-                window.location.href = '/';
-            }
-        });
-    }
+  beforeCreate: function () {
+    this.$http.get('/api/user/check').then(r => {
+      if (r.data.success === true) {
+        window.location.href = '/';
+      }
+    });
+  }
 });
 
 /***/ }),
@@ -225,7 +256,8 @@
  * @link https://github.com/steverydz/build-url#readme
  * @license MIT
  */
-;(function () {
+;
+(function () {
   'use strict';
 
   var root = this;
@@ -260,6 +292,7 @@
             queryString.push(key + '=' + options.queryParams[key]);
           }
         }
+
         builtUrl += '?' + queryString.join('&');
       }
 
@@ -280,6 +313,7 @@
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = buildUrl;
     }
+
     exports.buildUrl = buildUrl;
   } else {
     root.buildUrl = buildUrl;
@@ -296,12 +330,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__stores_form_store_index_js__ = __webpack_require__(24);
 
 
-
 var app = new Vue({
-    name: 'instance_auth',
-    'el': '#app',
-    store: new Vuex.Store(__WEBPACK_IMPORTED_MODULE_1__stores_form_store_index_js__["a" /* default */]),
-    router: new VueRouter({ mode: 'history', routes: __WEBPACK_IMPORTED_MODULE_0__routes_authorization_index_js__["a" /* default */] })
+  name: 'instance_auth',
+  'el': '#app',
+  store: new Vuex.Store(__WEBPACK_IMPORTED_MODULE_1__stores_form_store_index_js__["a" /* default */]),
+  router: new VueRouter({
+    mode: 'history',
+    routes: __WEBPACK_IMPORTED_MODULE_0__routes_authorization_index_js__["a" /* default */]
+  })
 });
 
 /***/ }),
@@ -321,54 +357,65 @@ var app = new Vue({
 
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = ([{
-    path: '/auth/',
-    component: __WEBPACK_IMPORTED_MODULE_5__wrapper_index_js__["a" /* default */],
-    name: 'auth',
-    children: [{
-        path: 'login',
-        components: {
-            default: __WEBPACK_IMPORTED_MODULE_1__login_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Вход</div>' }
-        },
-        name: 'login'
-    }, {
-        path: 'registration',
-        components: {
-            default: __WEBPACK_IMPORTED_MODULE_2__registration_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Регистрация</div>' }
-        },
-        name: 'registration'
-    }, {
-        path: 'forgot',
-        components: {
-            default: __WEBPACK_IMPORTED_MODULE_0__forgot_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Восстановить пароль</div>' }
-        },
-        name: 'forgot'
-    }, {
-        path: 'reset/:token',
-        name: 'reset',
-        components: {
-            default: __WEBPACK_IMPORTED_MODULE_3__password_reset_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Изменение пароля</div>' }
-
-        },
-        props: { default: true }
-    }, {
-        path: 'activate/:token',
-        name: 'activate',
-        components: {
-            default: __WEBPACK_IMPORTED_MODULE_1__login_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Вход</div>' }
-
-        },
-        props: { default: true }
-    }, {
-        path: '*',
-        redirect: 'login'
-    }]
+  path: '/auth/',
+  component: __WEBPACK_IMPORTED_MODULE_5__wrapper_index_js__["a" /* default */],
+  name: 'auth',
+  children: [{
+    path: 'login',
+    components: {
+      default: __WEBPACK_IMPORTED_MODULE_1__login_index_js__["a" /* default */],
+      title: {
+        template: '<span>Вход</span>'
+      }
+    },
+    name: 'login'
+  }, {
+    path: 'registration',
+    components: {
+      default: __WEBPACK_IMPORTED_MODULE_2__registration_index_js__["a" /* default */],
+      title: {
+        template: '<span>Регистрация</span>'
+      }
+    },
+    name: 'registration'
+  }, {
+    path: 'forgot',
+    components: {
+      default: __WEBPACK_IMPORTED_MODULE_0__forgot_index_js__["a" /* default */],
+      title: {
+        template: '<span>Восстановить пароль</span>'
+      }
+    },
+    name: 'forgot'
+  }, {
+    path: 'reset/:token',
+    name: 'reset',
+    components: {
+      default: __WEBPACK_IMPORTED_MODULE_3__password_reset_index_js__["a" /* default */],
+      title: {
+        template: '<span>Изменение пароля</span>'
+      }
+    },
+    props: {
+      default: true
+    }
+  }, {
+    path: 'activate/:token',
+    name: 'activate',
+    components: {
+      default: __WEBPACK_IMPORTED_MODULE_1__login_index_js__["a" /* default */],
+      title: {
+        template: '<span>Вход</span>'
+      }
+    },
+    props: {
+      default: true
+    }
+  }, {
+    path: '*',
+    redirect: 'login'
+  }]
 }]);
 
 /***/ }),
@@ -383,41 +430,47 @@ var app = new Vue({
 
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
-    name: 'auth_forgot',
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    data() {
-        return {
-            email: ''
-        };
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
+  name: 'auth_forgot',
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+
+  data() {
+    return {
+      email: ''
+    };
+  },
+
+  methods: {
+    default_error() {
+      return 'Ошибка восстановления доступа';
     },
-    methods: {
-        default_error() {
-            return 'Ошибка восстановления доступа';
-        },
-        get_requires_fields() {
-            return ['email'];
-        },
-        save() {
-            try {
-                this.form_validate([this.requires_fields]);
-                this.post('/api/user/forgot', { email: this.email }, () => {
-                    this.set_form_success("Ссылка для восстановления пароля была отправлена на почту");
-                });
-            } catch (err) {
-                this.set_form_error(err.message);
-            }
-        }
+
+    get_requires_fields() {
+      return ['email'];
+    },
+
+    save() {
+      try {
+        this.form_validate([this.requires_fields]);
+        this.post('/api/user/forgot', {
+          email: this.email
+        }, () => {
+          this.set_form_success("Ссылка для восстановления пароля была отправлена на почту");
+        });
+      } catch (err) {
+        this.set_form_error(err.message);
+      }
     }
+
+  }
 });
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n\n                <div  class=\"l-col\" method=\"post\">\n\n                    <div class=\"form-group\">\n                        <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                                placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n                        <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n\n                    </div>\n                    <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary col-12\" :disabled=success>\n                        <span v-if=\"loading\">Загрузка...</span>\n                        <span v-else-if=\"success\">Письмо отправлено</span>\n                        <span v-else>Отправить письмо</span>\n                    </button>\n\n                </div>\n\n                <div class=\"r-col\">\n                    <h4>Введите адрес электронной почты и мы вышлем инструкцию для восстановления пароля.</h4>\n                    <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n                        <p class=\"suc\">{{success_txt}}</p>\n                    </div>\n\n                </div>\n\n                <p class=\"reg\"><router-link :to=\"{name: 'login'}\">Вход</router-link> или <router-link :to=\"{name: 'registration'}\">Регистрация</router-link></p>\n\n\n\n\n            </div>\n\n\n";
+module.exports = "<div class=\"row\">\n\n    <div class=\"l-col\" method=\"post\">\n\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n\n        </div>\n        <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary col-12\" :disabled=success>\n            <span v-if=\"loading\">Загрузка...</span>\n            <span v-else-if=\"success\">Письмо отправлено</span>\n            <span v-else>Отправить письмо</span>\n        </button>\n\n    </div>\n\n    <div class=\"r-col\">\n        <h4>Введите адрес электронной почты и мы вышлем инструкцию для восстановления пароля.</h4>\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{ success_txt }}</p>\n        </div>\n\n    </div>\n\n    <p class=\"reg\">\n        <router-link :to=\"{name: 'login'}\">Вход</router-link>\n        или\n        <router-link :to=\"{name: 'registration'}\">Регистрация</router-link>\n    </p>\n\n</div>\n\n\n";
 
 /***/ }),
 /* 7 */
@@ -435,103 +488,121 @@ module.exports = "<div class=\"row\">\n\n                <div  class=\"l-col\" m
 
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
-    name: 'auth_login',
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    props: ['token'],
-    data() {
-        return {
-            email: '',
-            password: '',
-            unactive: false
-        };
-    },
-    computed: {
-        vk_url: function () {
-            var buildUrl = __webpack_require__(2);
-            return buildUrl(__WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_AUTHORIZE_URL, {
-                queryParams: {
-                    client_id: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_CLIENT_ID,
-                    display: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_DISPLAY,
-                    redirect_uri: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_REDIRECT_URL,
-                    scope: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_SCOPE,
-                    response_type: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_RESPONCE_TYPE,
-                    v: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_API_VERSION
-                }
-            });
-        },
-        fb_url: function () {
-            var buildUrl = __webpack_require__(2);
-            return buildUrl(__WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_AUTHORIZE_URL, {
-                queryParams: {
-                    client_id: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_CLIENT_ID,
-                    redirect_uri: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_REDIRECT_URL,
-                    scope: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_SCOPE
-                }
-            });
-        }
-    },
-    mounted() {
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
+  name: 'auth_login',
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+  props: ['token'],
 
-        this.$http.get('/api/user/flash').then(r => {
-            if (r.data.success) {
-                this.set_form_success(r.data.data);
-            }
-        }, r => {
-            this.mark_error_fields(r);
-            this.set_form_error(r.data.error);
-        });
-        if (this.token) {
-            try {
-                this.post('/api/user/activate', { 'token': this.token }, () => {
-                    this.set_form_success("Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации");
-                });
-            } catch (err) {
-                this.set_form_error(err.message);
-            }
+  data() {
+    return {
+      email: '',
+      password: '',
+      unactive: false
+    };
+  },
+
+  computed: {
+    vk_url: function () {
+      var buildUrl = __webpack_require__(2);
+
+      return buildUrl(__WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_AUTHORIZE_URL, {
+        queryParams: {
+          client_id: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_CLIENT_ID,
+          display: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_DISPLAY,
+          redirect_uri: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_REDIRECT_URL,
+          scope: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_SCOPE,
+          response_type: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_RESPONCE_TYPE,
+          v: __WEBPACK_IMPORTED_MODULE_3__config_vk__["a" /* default */].VK_API_VERSION
         }
+      });
     },
-    methods: {
-        default_error() {
-            return 'Не удалось авторизироваться. Не верный пароль';
-        },
-        get_requires_fields() {
-            return ['email', 'password'];
-        },
-        save() {
-            try {
-                this.form_validate([this.requires_fields]);
-                this.get('/api/user', { email: this.email, password: this.password }, r => {
-                    window.location.href = '/';
-                }, r => {
-                    this.unactive = r.data.code === 'unactive';
-                    this.process_error(r);
-                });
-            } catch (err) {
-                this.set_form_error(err.message);
-            }
-        },
-        send_activation() {
-            this.get('/api/user/resend', { email: this.email }, () => {
-                this.set_form_success('Письмо отправлено повторно. Проверьте, пожалуйста, почту.');
-            });
-        },
-        vk() {
-            window.location.href = this.vk_url;
-        },
-        fb() {
-            window.location.href = this.fb_url;
+    fb_url: function () {
+      var buildUrl = __webpack_require__(2);
+
+      return buildUrl(__WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_AUTHORIZE_URL, {
+        queryParams: {
+          client_id: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_CLIENT_ID,
+          redirect_uri: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_REDIRECT_URL,
+          scope: __WEBPACK_IMPORTED_MODULE_4__config_fb__["a" /* default */].FB_SCOPE
         }
+      });
     }
+  },
+
+  mounted() {
+    this.$http.get('/api/user/flash').then(r => {
+      if (r.data.success) {
+        this.set_form_success(r.data.data);
+      }
+    }, r => {
+      this.mark_error_fields(r);
+      this.set_form_error(r.data.error);
+    });
+
+    if (this.token) {
+      try {
+        this.post('/api/user/activate', {
+          'token': this.token
+        }, () => {
+          this.set_form_success("Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации");
+        });
+      } catch (err) {
+        this.set_form_error(err.message);
+      }
+    }
+  },
+
+  methods: {
+    default_error() {
+      return 'Не удалось авторизироваться. Не верный пароль';
+    },
+
+    get_requires_fields() {
+      return ['email', 'password'];
+    },
+
+    save() {
+      try {
+        this.form_validate([this.requires_fields]);
+        this.get('/api/user', {
+          email: this.email,
+          password: this.password
+        }, r => {
+          window.location.href = '/';
+        }, r => {
+          this.unactive = r.data.code === 'unactive';
+          this.process_error(r);
+        });
+      } catch (err) {
+        this.set_form_error(err.message);
+      }
+    },
+
+    send_activation() {
+      this.get('/api/user/resend', {
+        email: this.email
+      }, () => {
+        this.set_form_success('Письмо отправлено повторно. Проверьте, пожалуйста, почту.');
+      });
+    },
+
+    vk() {
+      window.location.href = this.vk_url;
+    },
+
+    fb() {
+      window.location.href = this.fb_url;
+    }
+
+  }
 });
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n        </div>\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                   placeholder=\"Пароль\" v-model=\"password\" name=\"password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n        </div>\n\n        <p class=\"req\">\n            <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n        </p>\n\n\n        <button type=\"submit\" class=\"btn btn-outline-primary col-12\" @click=\"save\" :disabled=loading>\n            <span v-if=\"loading\">Загрузка...</span><span v-else>Войти</span>\n        </button>\n\n\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{success_txt}}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n            <p class=\"err\">{{error_txt}}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"unactive\"><!-- .l-col .msg -->\n            <p class=\"err\">\n                Не пришло письмо с подтверждением?<br/>\n                <a @click=\"send_activation\" href=\"javascript:void(0)\">Выслать активационное письмо еще раз</a>\n            </p>\n        </div>\n\n\n    </div>\n\n    <div class=\"hr\"></div>\n\n    <div class=\"r-col\">\n        <h4>войти через соцсети:</h4>\n        <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n        <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button>\n\n\n        <div class=\"msg\"  v-if=\"error_fields.social\" ><!-- .r-col .msg -->\n            <p class=\"err\" v-if=\"error_fields.social\">{{ error_fields.social }}</p>\n        </div>\n    </div>\n\n    <p class=\"reg\">Ещё не зарегистрированны?\n        <router-link :to=\"{name: 'registration'}\">Регистрация</router-link>\n    </p>\n\n</div>";
+module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n        </div>\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                   placeholder=\"Пароль\" v-model=\"password\" name=\"password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n        </div>\n\n        <p class=\"req\">\n            <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n        </p>\n\n\n        <button type=\"submit\" class=\"btn btn-outline-primary col-12\" @click=\"save\" :disabled=loading>\n            <span v-if=\"loading\">Загрузка...</span><span v-else>Войти</span>\n        </button>\n\n\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{ success_txt }}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n            <p class=\"err\">{{ error_txt }}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"unactive\"><!-- .l-col .msg -->\n            <p class=\"err\">\n                Не пришло письмо с подтверждением?<br/>\n                <a @click=\"send_activation\" href=\"javascript:void(0)\">Выслать активационное письмо еще раз</a>\n            </p>\n        </div>\n\n\n    </div>\n\n    <div class=\"hr\"></div>\n\n    <div class=\"r-col\">\n        <h4>войти через соцсети:</h4>\n        <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n        <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button>\n\n\n        <div class=\"msg\" v-if=\"error_fields.social\"><!-- .r-col .msg -->\n            <p class=\"err\" v-if=\"error_fields.social\">{{ error_fields.social }}</p>\n        </div>\n    </div>\n\n    <p class=\"reg\">Ещё не зарегистрированны?\n        <router-link :to=\"{name: 'registration'}\">Регистрация</router-link>\n    </p>\n</div>";
 
 /***/ }),
 /* 9 */
@@ -539,13 +610,13 @@ module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div c
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    VK_AUTHORIZE_URL: 'https://oauth.vk.com/authorize',
-    VK_CLIENT_ID: 6302697,
-    VK_DISPLAY: 'page',
-    VK_REDIRECT_URL: 'https://xn--h1abiilhh6g.xn--80asehdb/auth/vk',
-    VK_RESPONCE_TYPE: 'code',
-    VK_SCOPE: 4195331,
-    VK_API_VERSION: 5.69
+  VK_AUTHORIZE_URL: 'https://oauth.vk.com/authorize',
+  VK_CLIENT_ID: 6302697,
+  VK_DISPLAY: 'page',
+  VK_REDIRECT_URL: 'https://xn--h1abiilhh6g.xn--80asehdb/auth/vk',
+  VK_RESPONCE_TYPE: 'code',
+  VK_SCOPE: 4195331,
+  VK_API_VERSION: 5.69
 });
 
 /***/ }),
@@ -554,10 +625,10 @@ module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div c
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    FB_AUTHORIZE_URL: 'https://www.facebook.com/v2.11/dialog/oauth',
-    FB_CLIENT_ID: 1422542761187900,
-    FB_REDIRECT_URL: 'https://мойюрист.онлайн/auth/fb',
-    FB_SCOPE: 'email'
+  FB_AUTHORIZE_URL: 'https://www.facebook.com/v2.11/dialog/oauth',
+  FB_CLIENT_ID: 1422542761187900,
+  FB_REDIRECT_URL: 'https://мойюрист.онлайн/auth/fb',
+  FB_SCOPE: 'email'
 });
 
 /***/ }),
@@ -572,43 +643,50 @@ module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div c
 
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
-    name: 'auth_reg',
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    data() {
-        return {
-            email: '',
-            password: '',
-            re_password: ''
-        };
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
+  name: 'auth_reg',
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+
+  data() {
+    return {
+      email: '',
+      password: '',
+      re_password: ''
+    };
+  },
+
+  methods: {
+    default_error() {
+      return 'Не удалось зарегистрироваться';
     },
-    methods: {
-        default_error() {
-            return 'Не удалось зарегистрироваться';
-        },
-        get_requires_fields() {
-            return [this.email, this.password, this.re_password];
-        },
-        save() {
-            try {
-                this.form_validate([this.requires_fields, this.password_vaidate]);
-                this.post('/api/user', { email: this.email, password: this.password }, () => {
-                    this.set_form_success('Вы успешно зарегистрированы, но не активированы. ' + 'Вам на почту было отправлено активационное письмо.  ' + 'Пожауйста перейтиде по ссылке, указанной в пиьсме и активируйте свой аккаунт.');
-                });
-            } catch (err) {
-                this.set_form_error(err.message);
-            }
-        }
+
+    get_requires_fields() {
+      return ['email', 'password', 're_password'];
+    },
+
+    save() {
+      try {
+        this.form_validate([this.requires_fields, this.password_vaidate]);
+        this.post('/api/user', {
+          email: this.email,
+          password: this.password
+        }, () => {
+          this.set_form_success('Вы успешно зарегистрированы, но не активированы. ' + 'Вам на почту было отправлено активационное письмо.  ' + 'Пожауйста перейтиде по ссылке, указанной в пиьсме и активируйте свой аккаунт.');
+        });
+      } catch (err) {
+        this.set_form_error(err.message);
+      }
     }
+
+  }
 });
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"auth_login\">\n        <div class=\"form-field\">\n            <label class=\"user\" for=\"login-username\"></label>\n            <input id='login-username' type=\"email\" name=\"email\" v-model=\"email\" placeholder=\"email\" >\n        </div>\n        <div class=\"form-field\">\n            <label class=\"lock\" for=\"login-password\"></label>\n            <input id='login-password' type=\"password\" v-model=\"password\" placeholder=\"Пароль\" @keyup.13=\"save\">\n        </div>\n        <div class=\"form-field\">\n            <label class=\"lock\" for=\"login-re-password\"></label>\n            <input id='login-re-password' type=\"password\" v-model=\"re_password\" placeholder=\"Повторите пароль\" @keyup.13=\"save\">\n        </div>\n\n         <div class=\"form-field\">\n            <button type=\"submit\" class=\"auth_button\"\n                    @click=\"save\" :disabled=success :class=\"{disabled: success}\">Зарегистрироваться</button>\n         </div>\n     <footer class=\"info\">\n         <span><router-link :to=\"{name: 'login'}\">Войти</router-link></span>\n        <span> <router-link :to=\"{name: 'forgot'}\">Забыли пароль?</router-link></span>\n     </footer>\n</div>";
+module.exports = "\n<div class=\"row\">\n                <div method=\"post\" class=\"l-col\">\n\n\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control is-invalid\" placeholder=\"Имя\"\n                               value=\"Валерий\" name=\"first_name\">\n                        <span class=\"invalid-feedback\">Ваше имя уже встречается у другого клиента. Придумайте себе\n                        другое имя.</span>\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"Фамилия\" name=\"first_name\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"Отчество\" name=\"patronymic\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"email\" class=\"form-control\" placeholder=\"Электронный ящик\" name=\"email\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" name=\"password\">\n                    </div>\n                    <button type=\"submit\" class=\"btn btn-outline-primary col-12\">Зарегистрироваться</button>\n\n                </div>\n\n                <div class=\"hr\"></div>\n\n                <div class=\"r-col\">\n                    <h4>войти через соцсети:</h4>\n                   <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n                    <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button>\n                </div>\n\n                <p class=\"reg\">Уже зарегистрированны? <a href=\"#login\">Войдите</a></p>\n            </div>\n\n\n\n\n\n<div class=\"auth_login\">\n        <div class=\"form-field\">\n            <label class=\"user\" for=\"login-username\"></label>\n            <input id='login-username' type=\"email\" name=\"email\" v-model=\"email\" placeholder=\"email\" >\n        </div>\n        <div class=\"form-field\">\n            <label class=\"lock\" for=\"login-password\"></label>\n            <input id='login-password' type=\"password\" v-model=\"password\" placeholder=\"Пароль\" @keyup.13=\"save\">\n        </div>\n        <div class=\"form-field\">\n            <label class=\"lock\" for=\"login-re-password\"></label>\n            <input id='login-re-password' type=\"password\" v-model=\"re_password\" placeholder=\"Повторите пароль\" @keyup.13=\"save\">\n        </div>\n\n         <div class=\"form-field\">\n            <button type=\"submit\" class=\"auth_button\"\n                    @click=\"save\" :disabled=success :class=\"{disabled: success}\">Зарегистрироваться</button>\n         </div>\n     <footer class=\"info\">\n         <span><router-link :to=\"{name: 'login'}\">Войти</router-link></span>\n        <span> <router-link :to=\"{name: 'forgot'}\">Забыли пароль?</router-link></span>\n     </footer>\n</div>";
 
 /***/ }),
 /* 13 */
@@ -622,36 +700,43 @@ module.exports = "<div class=\"auth_login\">\n        <div class=\"form-field\">
 
 
 
-
 /* harmony default export */ __webpack_exports__["a"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
-    name: 'password_reset',
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    props: ['token'],
-    data() {
-        return {
-            password: '',
-            re_password: ''
-        };
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
+  name: 'password_reset',
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+  props: ['token'],
+
+  data() {
+    return {
+      password: '',
+      re_password: ''
+    };
+  },
+
+  methods: {
+    default_error() {
+      return 'Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна';
     },
-    methods: {
-        default_error() {
-            return 'Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна';
-        },
-        get_requires_fields() {
-            return [this.password, this.re_password];
-        },
-        save() {
-            try {
-                this.form_validate([this.requires_fields, this.password_vaidate]);
-                this.post('/api/user/reset', { password: this.password, 'token': this.token }, () => {
-                    this.set_form_success("Доступы к аккаунту обновлены. Теперь мы можете войти используя новый пароль");
-                });
-            } catch (err) {
-                this.set_form_error(err.message);
-            }
-        }
+
+    get_requires_fields() {
+      return ['password', 're_password'];
+    },
+
+    save() {
+      try {
+        this.form_validate([this.requires_fields, this.password_vaidate]);
+        this.post('/api/user/reset', {
+          password: this.password,
+          'token': this.token
+        }, () => {
+          this.set_form_success("Доступы к аккаунту обновлены. Теперь мы можете войти используя новый пароль");
+        });
+      } catch (err) {
+        this.set_form_error(err.message);
+      }
     }
+
+  }
 });
 
 /***/ }),
@@ -672,26 +757,30 @@ module.exports = "<div class=\"auth_forgot\">\n\n         <div class=\"form-fiel
 
 
 
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
-    name: 'auth_activate',
-    props: ['token'],
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    mounted() {
-        try {
-            this.post('/api/user/activate', { 'token': this.token }, () => {
-                this.set_form_success("Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации");
-            });
-        } catch (err) {
-            this.set_form_error(err.message);
-        }
-    },
-    methods: {
-        default_error() {
-            return 'Ошибка восстановления доступа';
-        }
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
+  name: 'auth_activate',
+  props: ['token'],
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+
+  mounted() {
+    try {
+      this.post('/api/user/activate', {
+        'token': this.token
+      }, () => {
+        this.set_form_success("Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации");
+      });
+    } catch (err) {
+      this.set_form_error(err.message);
     }
+  },
+
+  methods: {
+    default_error() {
+      return 'Ошибка восстановления доступа';
+    }
+
+  }
 });
 
 /***/ }),
@@ -711,16 +800,15 @@ module.exports = "<div>\n    <footer class=\"info\" v-if=\"success\">\n         
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__style_less__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_form__ = __webpack_require__(0);
 
-
-//import './../../../../styles/fonts.less';
+ //import './../../../../styles/fonts.less';
 //import './../../../../styles/app.less';
 //import './../../../../styles/form.less';
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    name: 'auth_wrapper',
-    template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
-    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]]
+  name: 'auth_wrapper',
+  template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]]
 });
 
 /***/ }),
@@ -784,73 +872,76 @@ exports.push([module.i, "body {\n  background-color: #2e67fb;\n}\nbody .main-for
 */
 // css base code, injected by the css-loader
 module.exports = function (useSourceMap) {
-	var list = [];
+  var list = []; // return the list of modules as css string
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
 
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
+      if (item[2]) {
+        return "@media " + item[2] + "{" + content + "}";
+      } else {
+        return content;
+      }
+    }).join("");
+  }; // import a list of modules into the list
+
+
+  list.i = function (modules, mediaQuery) {
+    if (typeof modules === "string") modules = [[null, modules, ""]];
+    var alreadyImportedModules = {};
+
+    for (var i = 0; i < this.length; i++) {
+      var id = this[i][0];
+      if (typeof id === "number") alreadyImportedModules[id] = true;
+    }
+
+    for (i = 0; i < modules.length; i++) {
+      var item = modules[i]; // skip already imported module
+      // this implementation is not 100% perfect for weird media query combinations
+      //  when a module is imported multiple times with different media queries.
+      //  I hope this will never occur (Hey this way we have smaller bundles)
+
+      if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+        if (mediaQuery && !item[2]) {
+          item[2] = mediaQuery;
+        } else if (mediaQuery) {
+          item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+        }
+
+        list.push(item);
+      }
+    }
+  };
+
+  return list;
 };
 
 function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
+  var content = item[1] || '';
+  var cssMapping = item[3];
 
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
+  if (!cssMapping) {
+    return content;
+  }
 
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
 
-	return [content].join('\n');
-}
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
 
-// Adapted from convert-source-map (MIT)
+
 function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+  return '/*# ' + data + ' */';
 }
 
 /***/ }),
@@ -1229,7 +1320,6 @@ function updateLink (link, options, obj) {
 /* 23 */
 /***/ (function(module, exports) {
 
-
 /**
  * When source maps are enabled, `style-loader` uses a link element with a data-uri to
  * embed the css on the page. This breaks all relative urls because now they are relative to a
@@ -1242,80 +1332,77 @@ function updateLink (link, options, obj) {
  * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
  *
  */
-
 module.exports = function (css) {
-	// get current location
-	var location = typeof window !== "undefined" && window.location;
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
 
-	if (!location) {
-		throw new Error("fixUrls requires window.location");
-	}
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  } // blank or null?
 
-	// blank or null?
-	if (!css || typeof css !== "string") {
-		return css;
-	}
 
-	var baseUrl = location.protocol + "//" + location.host;
-	var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+  if (!css || typeof css !== "string") {
+    return css;
+  }
 
-	// convert each url(...)
-	/*
- This regular expression is just a way to recursively match brackets within
- a string.
- 	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-    (  = Start a capturing group
-      (?:  = Start a non-capturing group
-          [^)(]  = Match anything that isn't a parentheses
-          |  = OR
-          \(  = Match a start parentheses
-              (?:  = Start another non-capturing groups
-                  [^)(]+  = Match anything that isn't a parentheses
-                  |  = OR
-                  \(  = Match a start parentheses
-                      [^)(]*  = Match anything that isn't a parentheses
-                  \)  = Match a end parentheses
-              )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-  \)  = Match a close parens
- 	 /gi  = Get all matches, not the first.  Be case insensitive.
-  */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function (fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl.trim().replace(/^"(.*)"$/, function (o, $1) {
-			return $1;
-		}).replace(/^'(.*)'$/, function (o, $1) {
-			return $1;
-		});
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/"); // convert each url(...)
 
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
-			return fullMatch;
-		}
+  /*
+  This regular expression is just a way to recursively match brackets within
+  a string.
+  	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+     (  = Start a capturing group
+       (?:  = Start a non-capturing group
+           [^)(]  = Match anything that isn't a parentheses
+           |  = OR
+           \(  = Match a start parentheses
+               (?:  = Start another non-capturing groups
+                   [^)(]+  = Match anything that isn't a parentheses
+                   |  = OR
+                   \(  = Match a start parentheses
+                       [^)(]*  = Match anything that isn't a parentheses
+                   \)  = Match a end parentheses
+               )  = End Group
+               *\) = Match anything and then a close parens
+           )  = Close non-capturing group
+           *  = Match anything
+        )  = Close capturing group
+   \)  = Match a close parens
+  	 /gi  = Get all matches, not the first.  Be case insensitive.
+   */
 
-		// convert the url to a full url
-		var newUrl;
+  var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function (fullMatch, origUrl) {
+    // strip quotes (if they exist)
+    var unquotedOrigUrl = origUrl.trim().replace(/^"(.*)"$/, function (o, $1) {
+      return $1;
+    }).replace(/^'(.*)'$/, function (o, $1) {
+      return $1;
+    }); // already a full url? no change
 
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-			//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
+    if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
+      return fullMatch;
+    } // convert the url to a full url
 
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
 
-	// send back the fixed css
-	return fixedCss;
+    var newUrl;
+
+    if (unquotedOrigUrl.indexOf("//") === 0) {
+      //TODO: should we add protocol?
+      newUrl = unquotedOrigUrl;
+    } else if (unquotedOrigUrl.indexOf("/") === 0) {
+      // path should be relative to the base url
+      newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+    } else {
+      // path should be relative to current directory
+      newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+    } // send back the fixed url(...)
+
+
+    return "url(" + JSON.stringify(newUrl) + ")";
+  }); // send back the fixed css
+
+  return fixedCss;
 };
 
 /***/ }),
@@ -1324,47 +1411,54 @@ module.exports = function (css) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    namespaced: true,
-    state: {
-        is_error: false,
-        is_success: false,
-        error_txt: '',
-        success_txt: '',
-        loading: false,
-        fields: {}
+  namespaced: true,
+  state: {
+    is_error: false,
+    is_success: false,
+    error_txt: '',
+    success_txt: '',
+    loading: false,
+    fields: {}
+  },
+  mutations: {
+    set_error(state, error) {
+      state.is_error = true;
+      state.is_success = false;
+      state.error_txt = error.txt;
     },
-    mutations: {
-        set_error(state, error) {
-            state.is_error = true;
-            state.is_success = false;
-            state.error_txt = error.txt;
-        },
-        start_loading(state) {
-            state.loading = true;
-            state.is_error = false;
-            state.is_success = false;
-        },
-        stop_loading(state) {
-            state.loading = false;
-        },
-        set_success(state, success) {
-            state.is_error = false;
-            state.is_success = true;
-            state.success_txt = success.txt;
-        },
-        init_state(state) {
-            state.is_error = false;
-            state.is_success = false;
-            state.loading = false;
-            state.fields = {};
-        },
-        error_field(state, error) {
-            Vue.set(state.fields, error.field, error.txt);
-        },
-        clear_error_field(state) {
-            state.fields = {};
-        }
+
+    start_loading(state) {
+      state.loading = true;
+      state.is_error = false;
+      state.is_success = false;
+    },
+
+    stop_loading(state) {
+      state.loading = false;
+    },
+
+    set_success(state, success) {
+      state.is_error = false;
+      state.is_success = true;
+      state.success_txt = success.txt;
+    },
+
+    init_state(state) {
+      state.is_error = false;
+      state.is_success = false;
+      state.loading = false;
+      state.fields = {};
+    },
+
+    error_field(state, error) {
+      Vue.set(state.fields, error.field, error.txt);
+    },
+
+    clear_error_field(state) {
+      state.fields = {};
     }
+
+  }
 });
 
 /***/ })

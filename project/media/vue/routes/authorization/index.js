@@ -16,7 +16,7 @@ export default [
                 path:'login',
                 components: {
                     default: login,
-                    title: { template: 'Вход' }
+                    title: { template: '<span>Вход</span>' }
                 },
                 name: 'login',
             },
@@ -24,7 +24,7 @@ export default [
                 path:'registration',
                 components: {
                     default: registration,
-                    title: { template: 'Регистрация' }
+                    title: { template: '<span>Регистрация</span>' }
                 },
                 name: 'registration'
             },
@@ -32,7 +32,7 @@ export default [
                 path:'forgot',
                 components: {
                     default: forgot,
-                    title: { template: 'Восстановить пароль' }
+                    title: { template: '<span>Восстановить пароль</span>' }
                 },
                 name: 'forgot'
             },
@@ -41,7 +41,7 @@ export default [
                 name: 'reset',
                 components: {
                     default: password_reset,
-                    title: { template: 'Изменение пароля' }
+                    title: { template: '<span>Изменение пароля</span>' }
 
                 },
                 props: {default:true},
@@ -51,7 +51,7 @@ export default [
                 name: 'activate',
                 components: {
                     default: login,
-                    title: { template: 'Вход' }
+                    title: { template: '<span>Вход</span>' }
 
                 },
                 props: {default:true},
