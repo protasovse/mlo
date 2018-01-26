@@ -11,6 +11,10 @@
   color: white;
   padding-bottom: line(1);
   padding-top: line(1);
+  @include media-breakpoint-down(sm) {
+    padding-left: line(.5);
+    padding-right: line(.5); //
+  }
   background-color: transparent!important;
 
   .navbar-brand {

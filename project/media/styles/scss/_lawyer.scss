@@ -1,30 +1,119 @@
-.lawyer-page {
-  margin-bottom: line(10);
-  padding-top: line(6);
-  padding-bottom: 0;
+// vars
+$medals-size: line(3);
 
-  &>div.container {
-    // z-index: 0;
+
+.lawyer-page {
+
+  & section.header {
+    padding-top: line(6);
+    padding-bottom: 0;
   }
 
-  .l-col {
-    @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto;
-    margin-bottom: -20px;
-    .photo {
-      //-webkit-clip-path: url(#photoSvgPath);
-      clip-path: url(#photoSvgPath);
-      width: 300px;
-      height: 360px;
+  & section.about {
+    padding-top: line(3);
+    dl {
+      @extend .row, .mt-5;
+    }
+    dt {
+      @extend .col-5;
+      color: $gray-600;
+    }
+    dd {
+      @extend .col-7;
+      line-height: line(1.5);
+      margin-bottom: 0;
+    }
+    .rate {
       position: relative;
-      image {
-      width: 300px;
-      height: 360px;
+      width: $medals-size*2;
+      height: $medals-size*2;
+      line-height: $medals-size*3;
+      @extend .subtitle;
+      vertical-align: bottom;
+      text-align: center;
+      &:before {
+        position: absolute;
+        z-index: 0;
+        font-family: icomoon;
+        content: attr(data-back);
+        font-size: $medals-size;
+        line-height: $medals-size;
+        color: $red;
+      }
+      &:after {
+        content: attr(data-value);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        line-height: $medals-size;
+        color: $white;
+        font-size: $medals-size/3.33;
+        text-align: center;
+      }
+    }
+    nav {
+      @extend .col-10, .mx-auto, .row;
+      margin-top: line(2);
+      a {
+        @extend .col;
+        z-index: 0;
+        text-align: center;
+        color: $gray-600;
+        font-weight: $font-weight-semibold;
+        border: 1px $gray-200 solid;
+        font-size: $font-size-lg;
+        border-right: none;
+        height: line(4);
+        line-height: line(4);
+        margin-left: -1px;
+        &:first-of-type {
+          border-bottom-left-radius: $border-radius;
+          border-top-left-radius: $border-radius;
+        }
+        &:last-of-type {
+          border-bottom-right-radius: $border-radius;
+          border-top-right-radius: $border-radius;
+          border-right: 1px $gray-200 solid;
+        }
+        i {
+          @extend .mr-2;
+          color: $gray-200;
+          font-size: 1.25em;
+          vertical-align: bottom;
+        }
+        &:hover, &.active {
+          z-index: 1;
+          text-decoration: none;
+          background-color: $gray-100;
+          border: 1px $gray-500 solid;
+          i {
+            color: $blue;
+          }
+        }
       }
     }
   }
 
+  .l-col {
+    @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto, .order-2, .order-sm-1, .text-center, .text-sm-left;
+    margin-bottom: -20px;
+    @include media-breakpoint-down(sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .photo {
+      clip-path: url("#photoSvgPath");
+      -webkit-clip-path: url("#photoSvgPath");
+      width: 300px;
+      height: 360px;
+    }
+  }
+
   .r-col {
-    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7;
+    @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left;
     h1 {
       margin-bottom: 30px;
     }

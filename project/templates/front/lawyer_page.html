@@ -1,37 +1,72 @@
 {% extends 'front/base.html' %}
 
 {% block content %}
-    <section class="blue lawyer-page">
+    <div class="lawyer-page">
+        <section class="blue header">
 
-        <div class="container">
-            <div class="row">
-                <div class="l-col">
-                    <svg height="0" width="0">
-                        <defs>
-                            <clipPath id="photoSvgPath">
-                                <path style="position:absolute;top:0;left:0;"
-                                      d="M0.014,0.001 L0.014,57.857 L0.014,224.998 C0.014,224.998 0.014,228.330
-                                      0.014,231.427 C0.014,296.516 85.276,347.997 150.003,359.997 C214.729,347.997
-                                      299.992,296.516 299.992,231.427 C299.992,228.330 299.992,224.998 299.992,224.998
-                                      L299.992,0.000 L279.993,0.000 L259.995,0.000 L86.674,0.000 L0.014,0.001 Z"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <svg class="photo">
-                        <image width="300" height="380" xmlns:xlink="http://www.w3.org/1999/xlink"
-                               xlink:href="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
-                        </image>
-                    </svg>
-
-                </div>
-                <div class="r-col">
-                    <h1>Авсюков Кирилл Владимирович</h1>
-                    <div class="lead">Профессиональный юрист в Волгограде<br>
-                        <small>Волгоград</small>
+            <div class="container">
+                <div class="row">
+                    <div class="l-col order-2 border">
+                        <img class="photo"
+                             src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
+                        <svg height="0" width="0">
+                            <defs>
+                                <clipPath id="photoSvgPath">
+                                    <path d="M0,0V231.43C0,296.52,85.27,348,150,360c64.73-12,150-63.48,150-128.57V0Z"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                     </div>
-                    <button type="button">Задать вопрос <i class="icon-message_bubble ml-2"></i></button>
+                    <div class="r-col order-1 mb-5">
+                        <h1>Авсюков Кирилл Владимирович</h1>
+                        <div class="lead">Профессиональный юрист в Волгограде<br>
+                            <small>Волгоград</small>
+                        </div>
+                        <button type="button">Задать вопрос <i class="icon-message_bubble ml-2"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <section class="about">
+            <div class="container">
+                <div class="row border">
+                    <div class="col-4 ml-md-auto border">
+                        <div class="d-flex justify-content-around" style="width: 300px;">
+                            <div class="rate" data-back="&#xe925;" data-value="3/5">рейтинг</div>
+                            <div class="rate" data-back="&#xe91e;" data-value="12">опыт, лет</div>
+                        </div>
+                    </div>
+                    <div class="col-6 mr-md-auto border">
+                        <p class="lead">Адвокат № 61/2343. Председатель Ростовской областной коллегии адвокатов
+                            «ПАРИТЕТ»</p>
+                        <dl>
+                            <dt>Телефон</dt>
+                            <dd>+7 (940) 776-45-45<br>
+                                +7 (975) 457-11-22
+                            </dd>
+
+                            <dt>Эл. почта</dt>
+                            <dd>nadinrnd@mail.ru</dd>
+
+                            <dt>Зарегистрирован</dt>
+                            <dd>21.09.2005</dd>
+
+                            <dt>Последний визит</dt>
+                            <dd>22 Окт 2017 в 15:24</dd>
+
+                            <dt>Skype</dt>
+                            <dd>nadinrnd</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <nav>
+                        <a href="#"><i class="icon-paper-text"></i> Биография</a>
+                        <a href="#"><i class="icon-people"></i> Отзывы</a>
+                        <a href="#"><i class="icon-message_bubble"></i> Ответы</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock %}
