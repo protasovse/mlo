@@ -7199,7 +7199,7 @@ footer.main-footer {
   position: relative;
   background-color: white;
   border-radius: 1.25rem;
-  max-width: 770px;
+  width: 770px;
   z-index: 10;
   color: #212121; }
   .win-round h4 {

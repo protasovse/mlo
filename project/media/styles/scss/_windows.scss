@@ -4,11 +4,11 @@
   position: relative;
   background-color: white;
   border-radius: line(1);
-  max-width: 770px;
+  width: 770px;
   z-index: 10;
   color: $gray-900;
   h4 {
-    margin-bottom: line(1);//
+    margin-bottom: line(1);
     color: $gray-600;
   }
   @include media-breakpoint-down(sm) {
@@ -60,7 +60,6 @@
   .err {
     @extend .normal, .text-danger, .mt-3;
   }
-
   .suc {
     @extend .normal, .text-success, .mt-3;
   }
@@ -83,5 +82,4 @@
       }
     }
   }
-
 }
