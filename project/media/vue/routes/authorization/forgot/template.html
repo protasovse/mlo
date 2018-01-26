@@ -1,15 +1,35 @@
-<div class="auth_forgot">
-        <div class="form-field">
-            <label class="user" for="login-username"></label>
-            <input id='login-username' type="email" name="email" v-model="email" placeholder="email">
-        </div>
-          <div class="form-field">
-             <button type="submit" class="auth_button"
-                @click="save" :disabled=success :class="{disabled: success}">Восстановить</button>
-         </div>
+<div class="row">
 
-     <footer class="info">
-        <span> <router-link :to="{name: 'login'}">Войти</router-link></span>
-         <span><router-link :to="{name: 'registration'}">Регистрация</router-link></span>
-     </footer>
+    <div class="l-col" method="post">
+
+        <div class="form-group">
+            <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
+                   placeholder="Электронный ящик" name="email" v-model="email">
+            <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+
+        </div>
+        <button type="submit" @click="save" class="btn btn-outline-primary col-12" :disabled=success>
+            <span v-if="loading">Загрузка...</span>
+            <span v-else-if="success">Письмо отправлено</span>
+            <span v-else>Отправить письмо</span>
+        </button>
+
+    </div>
+
+    <div class="r-col">
+        <h4>Введите адрес электронной почты и мы вышлем инструкцию для восстановления пароля.</h4>
+        <div class="msg" v-if="success"><!-- .l-col .msg -->
+            <p class="suc">{{ success_txt }}</p>
+        </div>
+
+    </div>
+
+    <p class="reg">
+        <router-link :to="{name: 'login'}">Вход</router-link>
+        или
+        <router-link :to="{name: 'registration'}">Регистрация</router-link>
+    </p>
+
 </div>
+
+

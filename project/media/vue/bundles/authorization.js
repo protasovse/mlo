@@ -344,7 +344,7 @@ var app = new Vue({
         path: 'forgot',
         components: {
             default: __WEBPACK_IMPORTED_MODULE_0__forgot_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Восстановление пароля</div>' }
+            title: { template: '<div class="logo">Восстановить пароль</div>' }
         },
         name: 'forgot'
     }, {
@@ -360,8 +360,8 @@ var app = new Vue({
         path: 'activate/:token',
         name: 'activate',
         components: {
-            default: __WEBPACK_IMPORTED_MODULE_4__activate_email_index_js__["a" /* default */],
-            title: { template: '<div class="logo">Активация учетной записи</div>' }
+            default: __WEBPACK_IMPORTED_MODULE_1__login_index_js__["a" /* default */],
+            title: { template: '<div class="logo">Вход</div>' }
 
         },
         props: { default: true }
@@ -398,7 +398,7 @@ var app = new Vue({
             return 'Ошибка восстановления доступа';
         },
         get_requires_fields() {
-            return [this.email];
+            return ['email'];
         },
         save() {
             try {
@@ -417,7 +417,7 @@ var app = new Vue({
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"auth_forgot\">\n        <div class=\"form-field\">\n            <label class=\"user\" for=\"login-username\"></label>\n            <input id='login-username' type=\"email\" name=\"email\" v-model=\"email\" placeholder=\"email\">\n        </div>\n          <div class=\"form-field\">\n             <button type=\"submit\" class=\"auth_button\"\n                @click=\"save\" :disabled=success :class=\"{disabled: success}\">Восстановить</button>\n         </div>\n\n     <footer class=\"info\">\n        <span> <router-link :to=\"{name: 'login'}\">Войти</router-link></span>\n         <span><router-link :to=\"{name: 'registration'}\">Регистрация</router-link></span>\n     </footer>\n</div>";
+module.exports = "<div class=\"row\">\n\n                <div  class=\"l-col\" method=\"post\">\n\n                    <div class=\"form-group\">\n                        <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                                placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n                        <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n\n                    </div>\n                    <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary col-12\" :disabled=success>\n                        <span v-if=\"loading\">Загрузка...</span>\n                        <span v-else-if=\"success\">Письмо отправлено</span>\n                        <span v-else>Отправить письмо</span>\n                    </button>\n\n                </div>\n\n                <div class=\"r-col\">\n                    <h4>Введите адрес электронной почты и мы вышлем инструкцию для восстановления пароля.</h4>\n                    <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n                        <p class=\"suc\">{{success_txt}}</p>\n                    </div>\n\n                </div>\n\n                <p class=\"reg\"><router-link :to=\"{name: 'login'}\">Вход</router-link> или <router-link :to=\"{name: 'registration'}\">Регистрация</router-link></p>\n\n\n\n\n            </div>\n\n\n";
 
 /***/ }),
 /* 7 */
@@ -440,6 +440,7 @@ module.exports = "<div class=\"auth_forgot\">\n        <div class=\"form-field\"
     mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
     name: 'auth_login',
     template: __WEBPACK_IMPORTED_MODULE_0__template_html___default.a,
+    props: ['token'],
     data() {
         return {
             email: '',
@@ -473,6 +474,7 @@ module.exports = "<div class=\"auth_forgot\">\n        <div class=\"form-field\"
         }
     },
     mounted() {
+
         this.$http.get('/api/user/flash').then(r => {
             if (r.data.success) {
                 this.set_form_success(r.data.data);
@@ -481,6 +483,15 @@ module.exports = "<div class=\"auth_forgot\">\n        <div class=\"form-field\"
             this.mark_error_fields(r);
             this.set_form_error(r.data.error);
         });
+        if (this.token) {
+            try {
+                this.post('/api/user/activate', { 'token': this.token }, () => {
+                    this.set_form_success("Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации");
+                });
+            } catch (err) {
+                this.set_form_error(err.message);
+            }
+        }
     },
     methods: {
         default_error() {
@@ -520,7 +531,7 @@ module.exports = "<div class=\"auth_forgot\">\n        <div class=\"form-field\"
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n        </div>\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                   placeholder=\"Пароль\" v-model=\"password\" name=\"password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n        </div>\n\n        <p class=\"req\">\n            <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n        </p>\n\n\n        <button type=\"submit\" class=\"btn btn-outline-primary col-12\" @click=\"save\" :disabled=loading>\n            <span v-if=\"loading\">Загрузка...</span><span v-else>Войти</span>\n        </button>\n\n\n\n\n        <div class=\"msg\" v-if=\"unactive\"><!-- .l-col .msg -->\n            <p class=\"err\">\n                Не пришло письмо с подтверждением?<br/>\n                <a @click=\"send_activation\" href=\"javascript:void(0)\">Выслать активационное письмо еще раз</a>\n            </p>\n        </div>\n\n\n    </div>\n\n    <div class=\"hr\"></div>\n\n    <div class=\"r-col\">\n        <h4>войти через соцсети:</h4>\n        <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n        <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button>\n\n\n        <div class=\"msg\"  v-if=\"error_fields.social\" ><!-- .r-col .msg -->\n            <p class=\"err\" v-if=\"error_fields.social\">{{ error_fields.social }}</p>\n        </div>\n    </div>\n\n    <p class=\"reg\">Ещё не зарегистрированны?\n        <router-link :to=\"{name: 'registration'}\">Регистрация</router-link>\n    </p>\n\n</div>";
+module.exports = "<div class=\"row\">\n    <div class=\"l-col\">\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n        </div>\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                   placeholder=\"Пароль\" v-model=\"password\" name=\"password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n        </div>\n\n        <p class=\"req\">\n            <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n        </p>\n\n\n        <button type=\"submit\" class=\"btn btn-outline-primary col-12\" @click=\"save\" :disabled=loading>\n            <span v-if=\"loading\">Загрузка...</span><span v-else>Войти</span>\n        </button>\n\n\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{success_txt}}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n            <p class=\"err\">{{error_txt}}</p>\n        </div>\n\n        <div class=\"msg\" v-if=\"unactive\"><!-- .l-col .msg -->\n            <p class=\"err\">\n                Не пришло письмо с подтверждением?<br/>\n                <a @click=\"send_activation\" href=\"javascript:void(0)\">Выслать активационное письмо еще раз</a>\n            </p>\n        </div>\n\n\n    </div>\n\n    <div class=\"hr\"></div>\n\n    <div class=\"r-col\">\n        <h4>войти через соцсети:</h4>\n        <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n        <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button>\n\n\n        <div class=\"msg\"  v-if=\"error_fields.social\" ><!-- .r-col .msg -->\n            <p class=\"err\" v-if=\"error_fields.social\">{{ error_fields.social }}</p>\n        </div>\n    </div>\n\n    <p class=\"reg\">Ещё не зарегистрированны?\n        <router-link :to=\"{name: 'registration'}\">Регистрация</router-link>\n    </p>\n\n</div>";
 
 /***/ }),
 /* 9 */
@@ -662,7 +673,7 @@ module.exports = "<div class=\"auth_forgot\">\n\n         <div class=\"form-fiel
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* unused harmony default export */ var _unused_webpack_default_export = ({
     mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_logged_disallow__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_form__["a" /* default */]],
     name: 'auth_activate',
     props: ['token'],

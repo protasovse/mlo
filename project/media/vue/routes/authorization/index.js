@@ -32,7 +32,7 @@ export default [
                 path:'forgot',
                 components: {
                     default: forgot,
-                    title: { template: '<div class="logo">Восстановление пароля</div>' }
+                    title: { template: '<div class="logo">Восстановить пароль</div>' }
                 },
                 name: 'forgot'
             },
@@ -50,8 +50,8 @@ export default [
                 path:'activate/:token',
                 name: 'activate',
                 components: {
-                    default: activate_email,
-                    title: { template: '<div class="logo">Активация учетной записи</div>' }
+                    default: login,
+                    title: { template: '<div class="logo">Вход</div>' }
 
                 },
                 props: {default:true},

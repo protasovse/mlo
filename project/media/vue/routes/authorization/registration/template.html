@@ -1,3 +1,49 @@
+
+<div class="row">
+                <div method="post" class="l-col">
+
+
+                    <div class="form-group">
+                        <input type="text" class="form-control is-invalid" placeholder="Имя"
+                               value="Валерий" name="first_name">
+                        <span class="invalid-feedback">Ваше имя уже встречается у другого клиента. Придумайте себе
+                        другое имя.</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Фамилия" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Отчество" name="patronymic">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Электронный ящик" name="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Пароль" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary col-12">Зарегистрироваться</button>
+
+                </div>
+
+                <div class="hr"></div>
+
+                <div class="r-col">
+                    <h4>войти через соцсети:</h4>
+                   <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
+                    <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+        <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
+        <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
+        <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
+        <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
+                </div>
+
+                <p class="reg">Уже зарегистрированны? <a href="#login">Войдите</a></p>
+            </div>
+
+
+
+
+
 <div class="auth_login">
         <div class="form-field">
             <label class="user" for="login-username"></label>

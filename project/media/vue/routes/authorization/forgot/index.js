@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         default_error() {return 'Ошибка восстановления доступа'},
-        get_requires_fields() {return [this.email]},
+        get_requires_fields() {return ['email']},
         save() {
             try {
                 this.form_validate([this.requires_fields]);
