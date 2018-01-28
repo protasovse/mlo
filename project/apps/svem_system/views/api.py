@@ -49,13 +49,14 @@ class ApiView(View):
                     response['data'] = result
                 request_status = 200
         except ApiPublicException as e:
-                response = {
-                    'success': False,
-                    'error': str(e),
-                    'code': e.code,
-                    'fields': e.fields
-                }
-                request_status = e.request_status
+
+            response = {
+                'success': False,
+                'error': str(e),
+                'code': e.code,
+                'fields': e.fields
+            }
+            request_status = e.request_status
         except ValidationError as e:
             response = {
                 'success': False,
@@ -67,7 +68,8 @@ class ApiView(View):
         except Exception as e:
             response = {
                 'success': False,
-                'error': 'системная ошибка'
+                'error': 'системная ошибка',
+                'fields': [],
             }
             if self.is_debug_mode(request):
                 response['exception'] = type(e).__name__

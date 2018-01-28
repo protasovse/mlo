@@ -1,69 +1,67 @@
-
 <div class="row">
-                <div method="post" class="l-col">
+    <div class="l-col">
 
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Имя" v-model="first_name"
+                   name="first_name" :class="{'is-invalid': error_fields.first_name }">
+            <span class="invalid-feedback" v-if="error_fields.first_name">{{ error_fields.first_name }}</span>
 
-                    <div class="form-group">
-                        <input type="text" class="form-control is-invalid" placeholder="Имя"
-                               value="Валерий" name="first_name">
-                        <span class="invalid-feedback">Ваше имя уже встречается у другого клиента. Придумайте себе
-                        другое имя.</span>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Фамилия" name="first_name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Отчество" name="patronymic">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Электронный ящик" name="email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Пароль" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-outline-primary col-12">Зарегистрироваться</button>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Фамилия" v-model="last_name"
+                   name="last_name" :class="{'is-invalid': error_fields.last_name }">
+            <span class="invalid-feedback" v-if="error_fields.last_name">{{ error_fields.last_name }}</span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Отчество" v-model="patronymic"
+                   name="patronymic" :class="{'is-invalid': error_fields.patronymic }">
+            <span class="invalid-feedback" v-if="error_fields.patronymic">{{ error_fields.patronymic }}</span>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Электронный ящик" v-model="email"
+                   name="email" :class="{'is-invalid': error_fields.email }">
+            <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Пароль" v-model="password"
+                   name="password" @keyup.13="save" :class="{'is-invalid': error_fields.password }">
+            <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
+        </div>
 
-                </div>
+        <button type="submit" @click="save" class="btn btn-outline-primary col-12" :disabled='loading||success'>
+            <span v-if="loading">Загрузка...</span>
+            <span v-else-if="success">Успешно</span>
+            <span v-else>Зарегистрироваться</span>
+        </button>
 
-                <div class="hr"></div>
+         <div class="msg" v-if="success"><!-- .l-col .msg -->
+            <p class="suc">{{ success_txt }}</p>
+        </div>
 
-                <div class="r-col">
-                    <h4>войти через соцсети:</h4>
-                   <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
-                    <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+        <div class="msg" v-if="error"><!-- .l-col .msg -->
+            <p class="err">{{ error_txt }}</p>
+        </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="r-col">
+        <h4>войти через соцсети:</h4>
+        <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
+        <button type="submit" class="btn-od"><span class="icon-od"></span></button>
         <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
         <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
         <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
         <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
-                </div>
+    </div>
 
-                <p class="reg">Уже зарегистрированны? <a href="#login">Войдите</a></p>
-            </div>
-
-
-
-
-
-<div class="auth_login">
-        <div class="form-field">
-            <label class="user" for="login-username"></label>
-            <input id='login-username' type="email" name="email" v-model="email" placeholder="email" >
-        </div>
-        <div class="form-field">
-            <label class="lock" for="login-password"></label>
-            <input id='login-password' type="password" v-model="password" placeholder="Пароль" @keyup.13="save">
-        </div>
-        <div class="form-field">
-            <label class="lock" for="login-re-password"></label>
-            <input id='login-re-password' type="password" v-model="re_password" placeholder="Повторите пароль" @keyup.13="save">
-        </div>
-
-         <div class="form-field">
-            <button type="submit" class="auth_button"
-                    @click="save" :disabled=success :class="{disabled: success}">Зарегистрироваться</button>
-         </div>
-     <footer class="info">
-         <span><router-link :to="{name: 'login'}">Войти</router-link></span>
-        <span> <router-link :to="{name: 'forgot'}">Забыли пароль?</router-link></span>
-     </footer>
+    <p class="reg">Уже зарегистрированны?
+        <router-link :to="{name: 'login'}">Войдите</router-link>
+    </p>
 </div>
+
+
+
+
+

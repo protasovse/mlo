@@ -41,7 +41,7 @@ export default [
                 name: 'reset',
                 components: {
                     default: password_reset,
-                    title: { template: '<span>Изменение пароля</span>' }
+                    title: { template: '<span>Создать новый пароль</span>' }
 
                 },
                 props: {default:true},
