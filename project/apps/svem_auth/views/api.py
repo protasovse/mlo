@@ -2,6 +2,7 @@ from datetime import date
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
 from django.core.validators import EmailValidator
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from apps.svem_auth.models import emails
 from apps.svem_system.views.api import ApiView
@@ -19,23 +20,30 @@ class AppUser(ApiView):
         try:
             _email = request.POST.get('email')
             _password = request.POST.get('password')
-
-            validate_email = EmailValidator('ошибка: "{}" невалидный адрес электронной почты '.format(_email))
+            validate_email = EmailValidator(
+                '"{}" невалидный адрес электронной почты '.format(_email),
+                'email'
+            )
             validate_email(_email)
-
             try:
                 get_user_model().objects.get(email=_email)
-
-                raise ApiPublicException('Данный email уже зарегистрирован в системе')
+                raise ApiPublicException(
+                    'Данный email уже зарегистрирован в системе',
+                    field={'field': 'email', 'txt': 'Данный email уже зарегистрирован в системе'}
+                )
             except get_user_model().DoesNotExist:
                 pass
-
-            user = get_user_model().objects.create_user(_email, _password)
-
+            user = get_user_model().objects.create_user(
+                _email, _password,
+                first_name=request.POST.get('email'),
+                last_name=request.POST.get('last_name'),
+                patronymic=request.POST.get('patronymic')
+            )
             emails.send_activation_email(user)
             return True
-        except IntegrityError:
-            raise ApiException('Данный email уже зарегистрирован в системе')
+        except ValidationError as err:
+            raise ApiPublicException('Введите валидные данные', field={'field': err.code, 'txt': err.message})
+        
 
     def get(self, request):
         _email = request.GET.get('email')

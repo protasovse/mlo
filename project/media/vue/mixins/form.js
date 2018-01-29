@@ -43,6 +43,7 @@ export default {
         },
         password_vaidate() {
             if (this.password !== this.re_password) {
+                this.set_field_error('re_password','Пароли не совпадают');
                 throw new Error('Пароли не совпадают')
             }
         },

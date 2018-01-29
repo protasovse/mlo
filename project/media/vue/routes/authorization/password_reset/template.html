@@ -1,21 +1,45 @@
-<div class="auth_forgot">
+<div class="row">
 
-         <div class="form-field">
-            <label class="lock" for="login-password"></label>
-            <input id='login-password' type="password" v-model="password" placeholder="Пароль" @keyup.13="save">
+    <div class="l-col" method="post">
+
+        <div class="form-group">
+            <input type="password" class="form-control" :class="{'is-invalid': error_fields.password }"
+                   placeholder="Пароль" name="password" v-model="password" @keyup.13="save">
+            <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
         </div>
-        <div class="form-field">
-            <label class="lock" for="login-re-password"></label>
-            <input id='login-re-password' type="password" v-model="re_password" placeholder="Повторите пароль" @keyup.13="save">
+
+
+        <div class="form-group">
+            <input type="password" class="form-control" :class="{'is-invalid': error_fields.re_password }"
+                   placeholder="Повторите пароль" name="re_password" v-model="re_password" @keyup.13="save">
+            <span class="invalid-feedback" v-if="error_fields.re_password">{{ error_fields.re_password }}</span>
         </div>
 
-          <div class="form-field">
-             <button type="submit" class="auth_button"
-                    @click="save" :disabled=success :class="{disabled: success}">Сменить пароль</button>
-         </div>
+        <button type="submit" @click="save" class="btn btn-outline-primary col-12" :disabled=success>
+            <span v-if="loading">Загрузка...</span>
+            <span v-else-if="success">Пароль изменен</span>
+            <span v-else>Сменить пароль</span>
+        </button>
 
-     <footer class="info">
-        <span> <router-link :to="{name: 'login'}">Войти</router-link></span>
-         <span><router-link :to="{name: 'registration'}">Регистрация</router-link></span>
-     </footer>
+    </div>
+
+    <div class="r-col">
+        <h4>Пожалуйста введите новый пароль.</h4>
+        <div class="msg" v-if="success"><!-- .l-col .msg -->
+            <p class="suc">{{ success_txt }}</p>
+        </div>
+        <div class="msg" v-if="error"><!-- .l-col .msg -->
+            <p class="err">{{ error_txt }}</p>
+        </div>
+
+    </div>
+
+     <p class="reg">
+        <router-link :to="{name: 'login'}">Вход</router-link>
+        или
+        <router-link :to="{name: 'registration'}">Регистрация</router-link>
+    </p>
+
 </div>
+
+

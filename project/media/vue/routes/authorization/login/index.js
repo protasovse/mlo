@@ -1,13 +1,11 @@
 import template from './template.html';
 import logged_disallow from '../../../mixins/logged_disallow';
 import form_mixin from '../../../mixins/form';
-import VK_CONFIG from '../../../config/vk';
-import FB_CONFIG from '../../../config/fb';
-
+import social_mixin from '../../../mixins/social';
 
 
 export default {
-    mixins: [logged_disallow, form_mixin],
+    mixins: [logged_disallow, form_mixin, social_mixin],
     name: 'auth_login',
     template,
     props: ['token'],
@@ -18,33 +16,7 @@ export default {
             unactive: false,
         }
     },
-    computed: {
-        vk_url: function () {
-            var buildUrl = require('build-url');
-            return buildUrl(VK_CONFIG.VK_AUTHORIZE_URL, {
-                queryParams: {
-                    client_id: VK_CONFIG.VK_CLIENT_ID,
-                    display: VK_CONFIG.VK_DISPLAY,
-                    redirect_uri: VK_CONFIG.VK_REDIRECT_URL,
-                    scope: VK_CONFIG.VK_SCOPE,
-                    response_type: VK_CONFIG.VK_RESPONCE_TYPE,
-                    v: VK_CONFIG.VK_API_VERSION
-                }
-            });
-        },
-        fb_url: function () {
-            var buildUrl = require('build-url');
-            return buildUrl(FB_CONFIG.FB_AUTHORIZE_URL, {
-                queryParams: {
-                    client_id: FB_CONFIG.FB_CLIENT_ID,
-                    redirect_uri: FB_CONFIG.FB_REDIRECT_URL,
-                    scope: FB_CONFIG.FB_SCOPE,
-                }
-            });
-        }
-    },
     mounted() {
-
         this.$http.get('/api/user/flash').then(
             (r) => {if (r.data.success) {this.set_form_success(r.data.data)}},
             (r) => {
@@ -63,7 +35,6 @@ export default {
                 this.set_form_error(err.message)
             }
         }
-
     },
     methods: {
         default_error() {return 'Не удалось авторизироваться. Не верный пароль' },
@@ -86,12 +57,6 @@ export default {
             this.get('/api/user/resend', {email: this.email},
                 () => {this.set_form_success('Письмо отправлено повторно. Проверьте, пожалуйста, почту.')},
             );
-        },
-        vk() {
-            window.location.href = this.vk_url;
-        },
-        fb() {
-            window.location.href = this.fb_url;
         }
     }
 }
