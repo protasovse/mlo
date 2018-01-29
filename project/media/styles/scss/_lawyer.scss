@@ -5,6 +5,19 @@ $photo-height: 360px;
 
 .lawyer-page {
 
+  dl {
+    @extend .row;
+  }
+  dt {
+    @extend .col-12, .col-sm-5;
+    color: $gray-600;
+  }
+  dd {
+    @extend .col-12, .col-sm-7;
+    line-height: line(1.5);
+    margin-bottom: 0;
+  }
+
   & section.header {
     padding-top: line(6);
     padding-bottom: 0;
@@ -41,18 +54,6 @@ $photo-height: 360px;
     padding-top: line(3);
     .lead {
       font-size: 18px;
-    }
-    dl {
-      @extend .row, .mt-5;
-    }
-    dt {
-      @extend .col-12, .col-sm-5;
-      color: $gray-600;
-    }
-    dd {
-      @extend .col-12, .col-sm-7;
-      line-height: line(1.5);
-      margin-bottom: 0;
     }
     .medals {
       @extend .d-flex, .justify-content-around;
@@ -147,6 +148,50 @@ $photo-height: 360px;
     }
     .r-col {
       @extend .col-12, .col-lg-7, .col-xl-6, .mr-xl-auto;
+    }
+  }
+
+  & article {
+    .title {
+      @extend .col-3, .ml-auto, .text-right;
+    }
+    .gutter {
+      @extend .col-1;
+    }
+    .content {
+      @extend .col-6, .mr-auto;
+      h5 {
+        @extend .mb-3;
+        small {
+          @extend .text-muted;
+          display: block;
+        }
+      }
+    }
+    .check {
+      @extend .normal;
+      display: block;
+      position: relative;
+      height: 2.5rem;
+      padding-top: 1.2rem;
+      padding-left: 2.9rem;
+      &:before {
+        content: '\e903';
+        font-family: icomoon;
+        font-size: 2rem;
+        color: $green;
+        position: absolute;
+        top: .55rem;
+        left: 0;
+      }
+      &:after {
+        content: attr(data-label);
+        color: $gray-500;
+        position: absolute;
+        font-size: 1rem;
+        top: 0;
+        left: 2.9rem;
+      }
     }
   }
 }
