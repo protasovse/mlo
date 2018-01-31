@@ -7,7 +7,7 @@ from datetime import date
 
 class UserHash(models.Model):
     key = models.CharField("Key", max_length=40, primary_key=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created = models.DateTimeField("created", auto_now_add=True)
     live_until = models.DateTimeField("created", auto_now_add=True)
 

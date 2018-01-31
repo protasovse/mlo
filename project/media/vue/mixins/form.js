@@ -55,7 +55,7 @@ export default {
             let req_fields = this.get_requires_fields();
             req_fields.forEach((field) => {
                 if (this[field] === '') {
-                    this.set_field_error(field,'обязательное поле');
+                    this.set_field_error(field, 'Поле обязательное для заполнения');
                     has_error = true;
                 }
             });

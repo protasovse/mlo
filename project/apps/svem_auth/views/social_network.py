@@ -17,16 +17,22 @@ logger = logging.getLogger(__name__)
 class SocialNetworkLogin(View):
     provider = ''
 
-    def get_email(self, request):
+    def get_info(self, request):
         pass
 
     def get(self, request):
         try:
-            email = self.get_email(request)
+            info = self.get_info(request)
+            email = info.pop('email')
             try:
                 user = get_user_model().objects.get(email=email)
             except get_user_model().DoesNotExist:
-                user = get_user_model().objects.create_user(email, binascii.hexlify(os.urandom(6)).decode())
+                user = get_user_model().objects.create_user(
+                    email,
+                    binascii.hexlify(os.urandom(6)).decode(),  # пароль
+                    **info,  # extra_field
+                )
+                # user.set_lawyer()
             user.activate()
             login(request, user)
             return http.HttpResponseRedirect('/')
@@ -41,22 +47,37 @@ class SocialNetworkLogin(View):
 class VK(SocialNetworkLogin):
     provider = 'VK'
 
-    def get_email(self, request):
+    def get_info(self, request):
+        info = {}
+
         res = requests.get('https://oauth.vk.com/access_token', params={
             'client_id': settings.VK_CLIENT_ID,
             'client_secret': settings.VK_CLIENT_SECRET,
             'redirect_uri': settings.VK_REDIRECT_URL,
             'code': request.GET.get('code')
         }).json()
+
+        # info.update({'user_id': res['user_id']})
+        info.update({'email': res['email']})
+
+        inf = requests.get('https://api.vk.com/method/users.get.json', params={
+            'user_ids': res['user_id'],
+            'access_token': res['access_token']
+        }).json()
+        inf = inf['response'][0]
+
+        info.update({'first_name': inf['first_name']})
+        info.update({'last_name': inf['last_name']})
+
         if 'error' in res.keys():
             raise BackendPublicException(res['error'], field={'field': 'social'})
-        return res['email']
+        return info
 
 
 class FB(SocialNetworkLogin):
     provider = 'Facebook'
 
-    def get_email(self, request):
+    def get_info(self, request):
         if request.GET.get('error_code'):
             raise BackendPublicException(request.GET.get('error_message'))
 

@@ -24,7 +24,7 @@ export default [
                 path:'registration',
                 components: {
                     default: registration,
-                    title: { template: '<span>Регистрация</span>' }
+                    title: { template: '<span>Регистрация юриста</span>' }
                 },
                 name: 'registration'
             },

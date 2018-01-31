@@ -108,7 +108,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def activate(self, do_save=True):
         if self.is_active:
             return
-        self.is_active = 1
+        self.is_active = True
         if do_save:
             self.save()
 

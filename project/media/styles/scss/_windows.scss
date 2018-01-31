@@ -4,6 +4,7 @@
   position: relative;
   background-color: white;
   border-radius: line(1);
+  box-shadow: 0 0 line(1.75) 0 rgba(0,0,0,.3);
   width: 770px;
   z-index: 10;
   color: $gray-900;
@@ -24,6 +25,7 @@
   .r-col {
     @extend .col, .order-3;
     margin-bottom: line(3);
+    font-weight: $font-weight-light;
   }
   .hr {
     @extend .col-12, .col-md-1, .order-2;

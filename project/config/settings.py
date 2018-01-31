@@ -22,13 +22,15 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'мойюрист.онлайн',
+    'xn--h1abiilhh6g.xn--80asehdb',
 ]
 
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
 
-if DEBUG:
+if 0 and DEBUG:
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -160,13 +162,13 @@ THUMBNAIL_PROCESSORS = (
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 APPEND_SLASH = True
-SITE_PROTOCOL = 'https'
+SITE_PROTOCOL = 'http'
 
 
-VK_CLIENT_ID = 6302697
-VK_CLIENT_SECRET = 'iu1QGd2VbzQMKSi5AxaP'
-VK_REDIRECT_URL = 'https://мойюрист.онлайн/auth/vk'
+VK_CLIENT_ID = 3344860
+VK_CLIENT_SECRET = 'idSIuk1OKdxZRxQrDrTC'
+VK_REDIRECT_URL = 'http://xn--h1abiilhh6g.xn--80asehdb:8000/auth/vk'
 
 FB_CLIENT_ID = 1422542761187900
 FB_CLIENT_SECRET = 'ddd3cae70cb3abb564c704731d79bdb7'
-FB_REDIRECT_URL = 'https://мойюрист.онлайн/auth/fb'
+FB_REDIRECT_URL = 'http://127.0.0.1:8000/auth/fb'

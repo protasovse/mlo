@@ -8,7 +8,7 @@ from apps.mlo_auth.admin import LoginView
 
 urlpatterns = [
 
-    path('admin/login/', LoginView.as_view(),name='login'),
+    path('admin/login/', LoginView.as_view(), name='login'),
     url(r'^admin/', admin.site.urls),
 
     url(r'^вопросы/', include('apps.entry.urls_questions', namespace='questions')),

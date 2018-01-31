@@ -4,60 +4,81 @@ from django.contrib import messages
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
+
+from apps.mlo_auth.managers import LAWYER
 from apps.svem_auth.models import emails
 from apps.svem_system.views.api import ApiView
 from apps.svem_system.exceptions import ApiException, ApiPublicException
 from apps.svem_auth.models.users import UserHash
 
+MSG_EMAIL_NOT_VALID = '«{}» — неверный адрес электронной почты'
+MSG_EMAIL_USED_FIELD = 'Этот электронный ящик уже используется'
+MSG_EMAIL_USED_MSG = 'Введённый электронный ящик уже используется другим пользователем.'
+MSG_EMAIL_NOT_FOUND_FIELD = 'Электронный ящик не найден'
+MSG_EMAIL_NOT_FOUND_MSG = 'Введенный вами электронный ящик не зарегистрирован. ' \
+                          'Проверьте правильность ввода или пройдите регистрацию.'
+MSG_PASSWORD_INCORRECT_MSG = 'К сожалению, вы ввели неверный пароль. Проверьте свой пароль еще раз.'
+MSG_PASSWORD_INCORRECT_FIELD = 'Неверный пароль'
+MSG_DATA_NOT_VALID = 'Введите правильные данные'
+MSG_NO_CORRECT = 'Не удалось активировать учётную запись. Ссылка на смену пароля просрочена или неверна.'
+MSG_ACCOUNT_NOT_ACTIVE = 'Учётная запись не активна. ' \
+                         'Вам на почту ранее было отправлено письмо с ссылкой для активации акканта.'
+
 
 class AppUser(ApiView):
+
     def post(self, request):
         """
         регистрация нового юзера
-        :param request:
-        :return:
         """
         try:
             _email = request.POST.get('email')
             _password = request.POST.get('password')
             validate_email = EmailValidator(
-                '"{}" невалидный адрес электронной почты '.format(_email),
+                MSG_EMAIL_NOT_VALID.format(_email),
                 'email'
             )
             validate_email(_email)
             try:
                 get_user_model().objects.get(email=_email)
                 raise ApiPublicException(
-                    'Данный email уже зарегистрирован в системе',
-                    field={'field': 'email', 'txt': 'Данный email уже зарегистрирован в системе'}
+                    MSG_EMAIL_USED_MSG,
+                    field={'field': 'email', 'txt': MSG_EMAIL_USED_FIELD}
                 )
             except get_user_model().DoesNotExist:
                 pass
             user = get_user_model().objects.create_user(
                 _email, _password,
-                first_name=request.POST.get('email'),
+                first_name=request.POST.get('first_name'),
                 last_name=request.POST.get('last_name'),
                 patronymic=request.POST.get('patronymic')
             )
+            user.set_lawyer()
             emails.send_activation_email(user)
             return True
         except ValidationError as err:
-            raise ApiPublicException('Введите валидные данные', field={'field': err.code, 'txt': err.message})
-        
+            raise ApiPublicException(
+                MSG_DATA_NOT_VALID,
+                field={'field': err.code, 'txt': err.message}
+            )
 
     def get(self, request):
         _email = request.GET.get('email')
         _password = request.GET.get('password')
+        # Check email
+        try:
+            get_user_model().objects.get(email=_email)
+        except get_user_model().DoesNotExist:
+            raise ApiPublicException(MSG_EMAIL_NOT_FOUND_MSG,
+                                     field={'field': 'email', 'txt': MSG_EMAIL_NOT_FOUND_FIELD})
+        # Check password
         user = authenticate(email=_email, password=_password)
         if user is None:
-            raise ApiPublicException('Не удалось авторизоваться', field={'field': 'password', 'txt': 'Неверный пароль'})
+            raise ApiPublicException(MSG_PASSWORD_INCORRECT_MSG,
+                                     field={'field': 'password', 'txt': MSG_PASSWORD_INCORRECT_FIELD})
+        # Account not active
         if not user.is_active:
-            raise ApiPublicException(
-                'Аккаунт не активирован. Вам на почту должно было придти письмо с сылкой активации акканта.'
-                'Пожалуйста, проверьте почту.',
-                code='unactive', request_status=403,
-                field={'field': 'password', 'txt': 'неверный пароль'}
-        )
+            raise ApiPublicException(MSG_ACCOUNT_NOT_ACTIVE, code='unactive', request_status=403)
         login(request, user)
         return True
 
@@ -72,7 +93,8 @@ class ForgotPassword(ApiView):
         try:
             user = get_user_model().objects.get(email=request.POST.get('email'))
         except get_user_model().DoesNotExist:
-            raise ApiPublicException('Указанный email не найден', field={'field': 'email', 'txt': 'Email не найден'})
+            raise ApiPublicException(MSG_EMAIL_NOT_FOUND_MSG,
+                                     field={'field': 'email', 'txt': MSG_EMAIL_NOT_FOUND_FIELD})
         emails.senf_forgot_email(user)
 
 
@@ -84,9 +106,7 @@ class ResetPassword(ApiView):
             hash.user.save()
             hash.delete()
         except UserHash.DoesNotExist:
-            raise ApiPublicException(
-                'Не удалось сменить пароль. Ссылка на смену пароля просрочена или некоректна',
-            )
+            raise ApiPublicException(MSG_NO_CORRECT)
 
 
 class ActivateAccount(ApiView):
@@ -94,15 +114,12 @@ class ActivateAccount(ApiView):
         try:
             hash = UserHash.objects.get(key=request.POST.get('token'), live_until__gte=date.today().isoformat())
             if hash.user.is_active:
-                raise ApiPublicException(
-                    'Не удалось активировать аккаунт. Ссылка на смену пароля просрочена или некоректна'
-                )
+                raise ApiPublicException(MSG_NO_CORRECT)
             user = hash.user
-            user.activate(False)
-            user.set_lawyer()
+            user.activate(True)
             hash.delete()
         except UserHash.DoesNotExist:
-            raise ApiPublicException('Не удалось активировать аккаунт. Ссылка на смену пароля просрочена или некоректна')
+            raise ApiPublicException(MSG_NO_CORRECT)
 
 
 class ReSend(ApiView):

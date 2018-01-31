@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="l-col">
+    <div class="l-col col-12">
         <div class="form-group">
             <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
                    placeholder="Электронный ящик" name="email" v-model="email">
@@ -44,14 +44,14 @@
     <div class="r-col">
         <h4>войти через соцсети:</h4>
         <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
-        <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+        <!--button type="submit" class="btn-od"><span class="icon-od"></span></button>
         <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
         <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
         <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
-        <button type="submit" class="btn-gl"><span class="icon-gl"></span></button>
+        <button type="submit" class="btn-gl"><span class="icon-gl"></span></button-->
 
 
-        <div class="msg" v-if="error_fields.social"><!-- .r-col .msg -->
+        <div class="msg" v-if="error_fields.social">
             <p class="err" v-if="error_fields.social">{{ error_fields.social }}</p>
         </div>
     </div>
