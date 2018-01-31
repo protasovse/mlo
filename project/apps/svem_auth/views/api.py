@@ -95,7 +95,7 @@ class ForgotPassword(ApiView):
         except get_user_model().DoesNotExist:
             raise ApiPublicException(MSG_EMAIL_NOT_FOUND_MSG,
                                      field={'field': 'email', 'txt': MSG_EMAIL_NOT_FOUND_FIELD})
-        emails.senf_forgot_email(user)
+        emails.send_forgot_email(user)
 
 
 class ResetPassword(ApiView):

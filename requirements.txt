@@ -32,3 +32,6 @@ requests==2.18.4
 # Геолокация, города
 # git+git://github.com/pyvim/django-vk-cities.git
 git+git://github.com/idlesign/pysyge.git
+
+# DB mailer
+git+git://github.com/protasovse/django-db-mailer.git

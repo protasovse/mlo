@@ -47,6 +47,10 @@ if 0 and DEBUG:
         },
     }
 
+if DEBUG:
+    EMAIL_BACKEND = env('EMAIL_BACKEND')
+    EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
+    vars().update(EMAIL_CONFIG)
 
 # Application definition
 
@@ -73,12 +77,8 @@ INSTALLED_APPS = [
     'apps.svem_system',
     'apps.sxgeo',
     'apps.front',
+    'dbmail',
 ]
-
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
-vars().update(EMAIL_CONFIG)
-
 
 SITE_ID = env('SITE_ID')
 AUTH_USER_MODEL = 'mlo_auth.user'
