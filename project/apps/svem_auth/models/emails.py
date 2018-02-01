@@ -3,9 +3,6 @@ from dbmail import send_db_mail
 from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_auth.models.users import UserHash
 from django.contrib.sites.models import Site
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
-from django.conf import settings
 from datetime import date
 
 from config.settings import SITE_PROTOCOL
@@ -22,15 +19,16 @@ def send_activation_email(user):
 
     ctx = {
         'hash': token.key,
-        'user': user,
+        'username': user.get_name,
         'site': Site.objects.get_current(),
-        'protocol': settings.SITE_PROTOCOL
+        'protocol': SITE_PROTOCOL
     }
 
-    message = render_to_string('emails/auth/activation.html', ctx)
-    msg = EmailMessage('Подвердите аккаунт', message, to=[user.email])
-    msg.content_subtype = 'html'
-    msg.send()
+    send_db_mail(
+        'sign-up',
+        user.email,
+        ctx,
+    )
 
 
 def send_forgot_email(user):
@@ -43,7 +41,7 @@ def send_forgot_email(user):
 
     ctx = {
         'hash': user_hash,
-        'username': user.get_full_name,
+        'username': user.get_name,
         'site': Site.objects.get_current(),
         'protocol': SITE_PROTOCOL,
     }

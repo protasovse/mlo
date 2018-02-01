@@ -102,8 +102,22 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         return full_name.strip()
 
+    @property
     def get_short_name(self):
         return self.first_name
+
+    # Имя Отчество
+    @property
+    def get_name(self):
+
+        if self.first_name and self.patronymic:
+            full_name = '%s %s' % (self.first_name, self.patronymic)
+        elif self.first_name:
+            full_name = self.first_name
+        else:
+            full_name = self.email
+
+        return full_name.strip()
 
     def activate(self, do_save=True):
         if self.is_active:

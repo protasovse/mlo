@@ -3,7 +3,7 @@ import environ
 from easy_thumbnails.conf import Settings as thumbnail_settings
 
 root = environ.Path(__file__) - 3
-env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
+env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
 environ.Env.read_env(root('.env'))
 
 BASE_DIR = root()
@@ -47,10 +47,9 @@ if 0 and DEBUG:
         },
     }
 
-if DEBUG:
-    EMAIL_BACKEND = env('EMAIL_BACKEND')
-    EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
-    vars().update(EMAIL_CONFIG)
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
+vars().update(EMAIL_CONFIG)
 
 # Application definition
 
@@ -112,8 +111,6 @@ TEMPLATES = [
     },
 ]
 
-
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {'default': env.db()}
@@ -156,14 +153,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-
 THUMBNAIL_PROCESSORS = (
-    'image_cropping.thumbnail_processors.crop_corners',
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
+                           'image_cropping.thumbnail_processors.crop_corners',
+                       ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 APPEND_SLASH = True
 SITE_PROTOCOL = 'http'
-
 
 VK_CLIENT_ID = 3344860
 VK_CLIENT_SECRET = 'idSIuk1OKdxZRxQrDrTC'
