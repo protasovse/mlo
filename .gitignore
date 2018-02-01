@@ -112,3 +112,4 @@ venv.bak/
 /project/storage/
 /project/apps/front/template/front/mainpage.html
 /project/media/styles/scss/.sass-cache/
+/project/media/vue/bundles/
