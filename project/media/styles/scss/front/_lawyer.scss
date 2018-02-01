@@ -52,6 +52,7 @@ $photo-height: 360px;
 
   & section.about {
     padding-top: line(3);
+    padding-bottom: line(3);
     .lead {
       font-size: 18px;
     }
@@ -152,14 +153,22 @@ $photo-height: 360px;
   }
 
   & article {
+    border-top: 1px solid $gray-200;
+    padding-top: line(2);
     .title {
-      @extend .col-3, .ml-auto, .text-right;
+      @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right;
+      h3 {
+        margin-bottom: line(2);
+      }
     }
     .gutter {
       @extend .col-1;
+      @include media-breakpoint-down(md){
+        display: none;
+      }
     }
     .content {
-      @extend .col-6, .mr-auto;
+      @extend .col-12, .col-lg-6, .mr-auto;
       h5 {
         @extend .mb-3;
         small {
