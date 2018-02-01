@@ -13,7 +13,7 @@ export default {
             email: '',
             password: '',
             first_name: '',
-            second_name: '',
+            last_name: '',
             patronymic: ''
         }
     },
