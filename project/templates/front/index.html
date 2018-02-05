@@ -8,7 +8,8 @@
             <h1 class="text-center mb-3">{{ h1 }}</h1>
             <p class="lead text-center mb-4"><b>Получите профессиональную юридическую консультацию удобным для Вас
                 способом:</b><br>
-                В режиме вопрос-ответ, в чате, либо по телефону. <a href="/auth/login">Вход</a>, <a href="/auth/logout">Выход</a></p>
+                В режиме вопрос-ответ, в чате, либо по телефону. <a href="/auth/login">Вход</a>, <a href="/auth/logout">Выход</a>
+            </p>
             <p class="lead text-center mb-4">{{ request.user.email }}</p>
             <p class="text-center">
                 <button type="submit" class="btn btn-lg btn-primary px-5">Задать вопрос юристу</button>
@@ -16,7 +17,55 @@
         </main>
     </section>
 
-    <section class="gray">
+    <section class="gray review-section">
+        <div class="container">
+            <div class="row">
+                <div class="title">
+                    <h2>За 10 лет 236&nbsp;820 посетителей получили консультации</h2>
+                </div>
+                <div class="gutter"></div>
+                <div class="reviews">
+                    <div class="review">
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                        <div class="review-item">
+                            <h6>Ольга Логинова</h6>
+                            <p>{% lorem 17 w random %}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc">
+                    <p class="lead">23&nbsp;467 отзывов и благодарностей оставили наши клиенты.</p>
+                    <button type="button">Посмотреть все отзывы<span class="icon-forum ml-2"></span></button>
+                </div>
+                <div class="gutter"></div>
+            </div>
+        </div>
+    </section>
+
+    {% comment %}<section class="gray">
         <div class="container">
             <h2>За 10 лет 236 820 посетителей получили консультации</h2>
             <p class="lead mb-5">23 467 отзывов и благодарностей оставили наши клиенты.</p>
@@ -24,7 +73,7 @@
             <div class="card-columns">
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                        <p>1Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
                             на Украину, их я и так знаю.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
@@ -37,7 +86,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <p>2Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
@@ -49,7 +98,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Отличный и развернутый ответ.</p>
+                        <p>3Отличный и развернутый ответ.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
@@ -61,7 +110,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                        <p>4Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
                             на Украину, их я и так знаю.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
@@ -74,7 +123,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                        <p>5Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
                             на Украину, их я и так знаю.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
@@ -87,7 +136,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <p>6Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
@@ -99,7 +148,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Отличный и развернутый ответ.</p>
+                        <p>7Отличный и развернутый ответ.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
@@ -111,7 +160,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
+                        <p>8Мне требуется решение моей ситуации с данными обстоятельствами, а не свод общих правил въезда
                             на Украину, их я и так знаю.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
@@ -124,7 +173,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
+                        <p>9Олег Юрьевич! Большое спасибо, Вы мне очень помогли.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Светлана Валериевна к <cite title="Source Title"><a href="#">вопросу №434656</a></cite>
@@ -136,7 +185,7 @@
                 </div>
                 <div class="card">
                     <blockquote class="blockquote mb-0 card-body">
-                        <p>Отличный и развернутый ответ.</p>
+                        <p>10Отличный и развернутый ответ.</p>
                         <footer class="blockquote-footer">
                             <small class="text-muted">
                                 Анна к <cite title="Source Title"><a href="#">вопросу №324656</a></cite>
@@ -157,7 +206,7 @@
 
 
         </div>
-    </section>
+    </section>{% endcomment %}
 
     <section class="blue lawyer-section">
 
@@ -558,7 +607,8 @@
                     <p class="req"><a href="#">Восстановить пароль</a></p>
 
                     <button id="login_button" type="submit" class="btn btn-outline-primary col-12"
-                            data-loading-text="Загрузка…">Вход</button>
+                            data-loading-text="Загрузка…">Вход
+                    </button>
 
                     <div class="msg"><!-- .l-col .msg -->
                         <p class="suc">Ваша учётная запись активированна, авторизуйтесь, пожалуйста.</p>

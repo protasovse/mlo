@@ -49,11 +49,80 @@ section {
     & > .container {
       position: relative;
     }
-    h1,h2,h3,h4 {
+    h1, h2, h3, h4 {
       color: $light-blue;
+    }
+    h2, .lead {
+      margin-bottom: line(2);
     }
     &:before {
       background-color: $gray-100;
+    }
+    button {
+      @extend .btn, .btn-primary;
+    }
+  }
+
+  &.review-section {
+    padding-bottom: 0;
+    height: line(31);
+    @include media-breakpoint-down(sm){
+      padding-bottom: line(4);
+      height: auto;
+    }
+    .title, .desc {
+      @extend .col-12, .col-md-5;
+    }
+    .gutter {
+      @extend .col-12, .col-md-7;
+    }
+    .reviews {
+      @extend .col-12, .col-md-7, .ml-auto;
+      position: absolute;
+      right: 0;
+      @include media-breakpoint-down(sm){
+        position: static;
+        padding-bottom: line(1);
+      }
+    }
+    .review {
+      background-color: white;
+      position: relative;
+      max-height: line(27);
+      overflow-y: hidden;
+      box-shadow: 0 -2.1rem 0 -1.5rem #fcfcfc, 0 -4.2rem 0 -3rem #fafafa;
+      @include media-breakpoint-down(sm){
+        min-width: 600px;
+      }
+      .review-item {
+        border-bottom: solid 4px $gray-100;
+        p {
+          margin-bottom: 0;
+        }
+        padding: line(1) line(1) line(1) line(5);
+        @include media-breakpoint-down(md){
+          padding-left: line(3);
+        }
+        position: relative;
+        &:before {
+          content: '\e901';
+          font-family: icomoon;
+          color: $blue;
+          position: absolute;
+          left: line(1.5);
+          @include media-breakpoint-down(md){
+            left: line(1);
+          }
+        }
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: line(6);
+        box-shadow:inset 0px -9rem 5rem -4rem $gray-100;
+      }
     }
   }
 
@@ -152,15 +221,15 @@ section {
 }
 
 footer {
-    &.main-footer {
-      @extend  .container-fluid, .normal;
-      border-top: 1px solid $gray-200;
-      padding: line(1) line(1.5);
+  &.main-footer {
+    @extend .container-fluid, .normal;
+    border-top: 1px solid $gray-200;
+    padding: line(1) line(1.5);
+    color: $gray-500;
+    background-color: $gray-100;
+    a {
       color: $gray-500;
-      background-color: $gray-100;
-      a {
-        color: $gray-500;
-      }
+    }
     & > div {
       @extend .row, .align-items-center;
       .ttl {
@@ -175,7 +244,7 @@ footer {
         a {
           @extend .mx-4;
           text-decoration: none;
-          &:hover{
+          &:hover {
             color: $gray-800;
           }
         }
