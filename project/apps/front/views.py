@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth import get_user_model
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
 
@@ -16,6 +17,9 @@ class LawyerPage(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LawyerPage, self).get_context_data(**kwargs)
-        context['h1'] = "Юрист"
-        return context
 
+        lawyer = get_object_or_404(get_user_model(), pk=kwargs['id'])
+
+        context['lawyer'] = lawyer
+
+        return context

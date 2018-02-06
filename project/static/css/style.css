@@ -7180,7 +7180,7 @@ section {
     left: 0;
     right: 0; }
   section.header-section {
-    min-height: 620px;
+    height: 100vh;
     color: white; }
     section.header-section:before {
       background-image: url(/static/img/bgr/main-header.jpg);

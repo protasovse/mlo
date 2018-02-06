@@ -71,6 +71,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('Дата регистрации'),
                                        default=timezone.now)
 
+    last_login = models.DateTimeField(_('Последний визит'),
+                                      default=timezone.now)
+
     role = models.PositiveSmallIntegerField(_('Тип учётной записи'),
                                             choices=ROLES_CHOICES, default=1, db_index=True,
                                             help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
@@ -93,8 +96,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def get_full_name(self):
 
-        if self.first_name and self.last_name:
-            full_name = '%s %s' % (self.first_name, self.last_name)
+        if self.first_name and self.last_name and self.patronymic:
+            full_name = '%s %s %s' % (self.last_name, self.first_name, self.patronymic)
         elif self.first_name:
             full_name = self.first_name
         else:

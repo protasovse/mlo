@@ -21,7 +21,7 @@ section {
   // section.header
   &.header-section {
     @extend .align-items-center, .justify-content-center;
-    min-height: 620px;
+    height: 100vh;
     color: white;
     &:before {
       background: {
@@ -71,12 +71,6 @@ section {
     }
     .content {
       @extend .col-12, .col-xl-10, .mx-auto;
-    }
-    @include media-breakpoint-down(md) {
-      & {
-        //max-width: none;
-        //margin: 0;
-      }
     }
     .advantages {
       @extend .row, .no-gutters, .normal;
