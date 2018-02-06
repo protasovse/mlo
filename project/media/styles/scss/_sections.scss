@@ -63,10 +63,69 @@ section {
     }
   }
 
+  &.advantage-section {
+    @extend .container;
+    padding-bottom: line(2);
+    h3 {
+      margin-bottom: line(3);
+    }
+    .content {
+      @extend .col-12, .col-xl-10, .mx-auto;
+    }
+    @include media-breakpoint-down(md) {
+      & {
+        //max-width: none;
+        //margin: 0;
+      }
+    }
+    .advantages {
+      @extend .row, .no-gutters, .normal;
+      .advantage-item {
+        margin-bottom: line(2);
+        padding-right: line(2);
+        color: $gray-600;
+        h5 {
+          font-weight: $font-weight-normal;
+          color: $gray-900;
+        }
+        @extend .col-12, .col-sm-6, .col-lg-4;
+        padding-left: line(4.5);
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-repeat: no-repeat;
+          width: line(3);
+          height: 100%;
+        }
+        &.i1:before {
+          background-image: url("/static/img/advantage/advantage-1.svg");
+        }
+        &.i2:before {
+          background-image: url("/static/img/advantage/advantage-2.svg");
+        }
+        &.i3:before {
+          background-image: url("/static/img/advantage/advantage-3.svg");
+        }
+        &.i4:before {
+          background-image: url("/static/img/advantage/advantage-4.svg");
+        }
+        &.i5:before {
+          background-image: url("/static/img/advantage/advantage-5.svg");
+        }
+        &.i6:before {
+          background-image: url("/static/img/advantage/advantage-6.svg");
+        }
+      }
+    }
+  }
+
   &.review-section {
     padding-bottom: 0;
     height: line(31);
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       padding-bottom: line(4);
       height: auto;
     }
@@ -75,12 +134,14 @@ section {
     }
     .gutter {
       @extend .col-12, .col-md-7;
+      z-index: 0;
     }
     .reviews {
       @extend .col-12, .col-md-7, .ml-auto;
       position: absolute;
+      z-index: 2;
       right: 0;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         position: static;
         padding-bottom: line(1);
       }
@@ -91,7 +152,7 @@ section {
       max-height: line(27);
       overflow-y: hidden;
       box-shadow: 0 -2.1rem 0 -1.5rem #fcfcfc, 0 -4.2rem 0 -3rem #fafafa;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         min-width: 600px;
       }
       .review-item {
@@ -100,17 +161,18 @@ section {
           margin-bottom: 0;
         }
         padding: line(1) line(1) line(1) line(5);
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
           padding-left: line(3);
         }
         position: relative;
+        cursor: pointer;
         &:before {
           content: '\e901';
           font-family: icomoon;
           color: $blue;
           position: absolute;
           left: line(1.5);
-          @include media-breakpoint-down(md){
+          @include media-breakpoint-down(md) {
             left: line(1);
           }
         }
@@ -121,7 +183,7 @@ section {
         bottom: 0;
         width: 100%;
         height: line(6);
-        box-shadow:inset 0px -9rem 5rem -4rem $gray-100;
+        box-shadow: inset 0px -9rem 5rem -4rem $gray-100;
       }
     }
   }
