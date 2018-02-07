@@ -30,6 +30,10 @@ class Cities(models.Model):
     okato = models.CharField(max_length=20)
 
     @property
+    def name(self):
+        return self.name_ru
+
+    @property
     def full_name_ru(self):
         cursor = connection.cursor()
         sql = """

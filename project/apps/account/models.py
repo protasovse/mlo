@@ -22,7 +22,7 @@ class AccountBase(models.Model):
     )
     last_update = models.DateTimeField(
         auto_now=True,
-        verbose_name=_('Дата обновления')
+        verbose_name=_('Дата обновления данных')
     )
 
     class Meta:
@@ -46,12 +46,44 @@ class Info(AccountBase):
 
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
 
+    status = models.CharField(max_length=140, null=True, blank=True, verbose_name=_('Статус'))
+
+    about = models.TextField(null=True, blank=True, verbose_name=_('О себе'))
+
+    signature = models.CharField(max_length=128, blank=True, null=True, verbose_name=_('Подпись под ответами'))
+
     class Meta:
         verbose_name = _('Информация')
         verbose_name_plural = _('Информация')
 
     def __str__(self):
         return self.user.get_full_name
+
+
+class Contact(AccountBase):
+    C_EMAIL = 'E'
+    C_PHONE = 'P'
+    C_ADDRESS = 'A'
+    C_SITE = 'S'
+
+    CONTACT_TYPES = ((C_EMAIL, _('Электронный ящик')),
+                     (C_PHONE, _('Телефон')),
+                     (C_ADDRESS, _('Адрес')),
+                     (C_SITE, _('Сайт')))
+
+    type = models.CharField(
+        _('Тип'), db_index=True, max_length=1,
+        choices=CONTACT_TYPES, default=C_EMAIL)
+
+    value = models.CharField(
+        _('Значение'), max_length=128)
+
+    class Meta:
+        verbose_name = _('Контакт')
+        verbose_name_plural = _('Контакты')
+
+    def __str__(self):
+        return self.value
 
 
 class Case(AccountBase):

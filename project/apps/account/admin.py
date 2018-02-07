@@ -1,7 +1,7 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin
 
-from apps.account.models import Info, Case, Education, Experience
+from apps.account.models import Info, Case, Education, Experience, Contact
 from apps.sxgeo.models import Cities
 
 
@@ -15,10 +15,18 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
     fieldsets = (
         (None, {'fields': ('user', 'city', 'birth_date', 'sex', )}),
+        ('Текст', {'fields': ('status', 'signature', 'about', )}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
     search_fields = ['user__last_name']
     autocomplete_fields = ['user', 'city']
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    raw_id_fields = ('user', )
+    autocomplete_fields = ['user']
+    search_fields = ['user__last_name']
 
 
 @admin.register(Case)

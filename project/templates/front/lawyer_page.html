@@ -19,8 +19,8 @@
                     </div>
                     <div class="r-col">
                         <h1>{{ lawyer.get_full_name }}</h1>
-                        <div class="lead">Профессиональный юрист в Волгограде<br>
-                            <small>Волгоград</small>
+                        <div class="lead">{{ lawyer_info.status }}<br>
+                            <small>{{ lawyer_info.city.name }}</small>
                         </div>
                         <button type="button">Задать вопрос <i class="icon-message_bubble ml-2"></i></button>
                     </div>
@@ -37,8 +37,7 @@
                         </div>
                     </div>
                     <div class="r-col">
-                        <p class="lead">Адвокат № 61/2343. Председатель Ростовской областной коллегии адвокатов
-                            «ПАРИТЕТ»</p>
+                        <p class="lead">{{ lawyer_info.about }}</p>
                         <dl>
                             <dt>Зарегистрирован</dt>
                             <dd>{{ lawyer.date_joined }}</dd>
@@ -46,16 +45,10 @@
                             <dt>Последний визит</dt>
                             <dd>{{ lawyer.last_login }}</dd>
 
-                            <dt>Телефон</dt>
-                            <dd>+7 (940) 776-45-45<br>
-                                +7 (975) 457-11-22
-                            </dd>
-
-                            <dt>Эл. почта</dt>
-                            <dd>nadinrnd-sokolova@mail.ru</dd>
-
-                            <dt>Skype</dt>
-                            <dd>nadinrnd</dd>
+                            {% for cnt in lawyer_contact %}
+                                <dt>{{ cnt.get_type_display }}</dt>
+                                <dd>{{ cnt.value|urlize }}</dd>
+                            {% endfor %}
                         </dl>
                     </div>
                 </div>

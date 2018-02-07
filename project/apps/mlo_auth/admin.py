@@ -5,12 +5,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 from django import forms
-from apps.account.models import Case, Education, Experience
+from apps.account.models import Case, Education, Experience, Contact
 from apps.mlo_auth.models import User
 from django.contrib.auth.forms import AuthenticationForm as AdminAuthenticationForm
 from django.contrib.auth.views import LoginView as AdminLoginView
 
 UserModel = get_user_model()
+
+
+class ContactInLine(admin.StackedInline):
+    model = Contact
+    extra = 0
+    classes = ('collapse', 'collapse-closed')
 
 
 class CaseInLine(admin.StackedInline):
@@ -56,7 +62,7 @@ class MloUserAdmin(UserAdmin):
     ordering = ('id',)
     filter_horizontal = ()
 
-    inlines = (CaseInLine, EducationInLine, ExperienceInLine)
+    inlines = (ContactInLine, CaseInLine, EducationInLine, ExperienceInLine)
 
 
 class AuthenticationForm(AdminAuthenticationForm):
