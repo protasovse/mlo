@@ -512,7 +512,7 @@ h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .lawyer-card .lawyer-card-body p, .lawyer-page article .check {
+.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .lawyer-card .lawyer-card-body p, .lawyer-page article .check {
   font-size: 0.875rem;
   line-height: 1.25rem; }
 
@@ -2346,7 +2346,7 @@ fieldset[disabled] a.btn-gl {
   line-height: 1.5;
   border-radius: 0.3rem; }
 
-.btn-sm, .btn-onbar, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .lawyer-page section.header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .lawyer-page section.header button {
   padding: 0.5rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -2368,26 +2368,8 @@ input[type="button"].btn-block {
   cursor: pointer;
   border-width: 2px; }
 
-.btn-sm, .btn-onbar, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .lawyer-page section.header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .lawyer-page section.header button {
   border-width: 1px; }
-
-.btn-onbar {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: transparent;
-  color: #fff; }
-  .btn-onbar:hover {
-    border-color: #285de0;
-    background-color: #285de0; }
-  .btn-onbar.sq {
-    width: 39px;
-    height: 39px;
-    font-size: 1rem;
-    padding: 0 !important; }
-  .btn-onbar.active {
-    color: #fc6947; }
-    .btn-onbar.active:not(:hover) {
-      border-color: white;
-      background-color: white; }
 
 .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl {
   color: white;
@@ -2809,7 +2791,7 @@ tbody.collapse.show {
   .btn + .dropdown-toggle-split::after, .btn-vk + .dropdown-toggle-split::after, .btn-od + .dropdown-toggle-split::after, .btn-ml + .dropdown-toggle-split::after, .btn-fb + .dropdown-toggle-split::after, .btn-tw + .dropdown-toggle-split::after, .btn-gl + .dropdown-toggle-split::after, section.gray button + .dropdown-toggle-split::after, .lawyer-page section.header button + .dropdown-toggle-split::after {
     margin-left: 0; }
 
-.btn-sm + .dropdown-toggle-split, .btn-onbar + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem; }
 
@@ -3573,17 +3555,17 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
       color: #fff; }
 
 .mlo-navbar {
+  height: 6.25rem;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   z-index: 1030;
   color: white;
-  padding-bottom: 1.25rem;
-  padding-top: 1.25rem;
   background-color: transparent !important; }
   @media (max-width: 767px) {
     .mlo-navbar {
+      height: 5rem;
       padding-left: 0.625rem;
       padding-right: 0.625rem; } }
   .mlo-navbar .navbar-brand {
@@ -3596,17 +3578,37 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   .mlo-navbar .title, .mlo-navbar .lawyer-page section.header .r-col, .lawyer-page section.header .mlo-navbar .r-col {
     position: absolute;
     left: 0;
-    right: 0;
-    z-index: 0; }
+    right: 0; }
   .mlo-navbar .actions {
-    position: relative;
-    z-index: 1; }
-  .mlo-navbar.fixed {
-    padding-bottom: 0.375rem;
-    padding-top: 0.375rem; }
-    .mlo-navbar.fixed .navbar-brand img {
-      width: 115px;
-      height: 34px; }
+    position: relative; }
+    .mlo-navbar .actions a {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 0.25rem;
+      text-align: center;
+      color: #fff; }
+      .mlo-navbar .actions a:hover {
+        background-color: rgba(0, 0, 0, 0.2); }
+      .mlo-navbar .actions a.sq {
+        width: 2.5rem;
+        padding: 0 !important; }
+      .mlo-navbar .actions a.active {
+        color: #fc6947; }
+        .mlo-navbar .actions a.active:not(:hover) {
+          border-color: white;
+          background-color: white; }
+
+.navbar-fixed .mlo-navbar {
+  position: fixed;
+  height: 3.75rem;
+  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3); }
+  .navbar-fixed .mlo-navbar .navbar-brand img {
+    width: 115px;
+    height: 34px; }
 
 .card {
   position: relative;
@@ -4833,10 +4835,10 @@ button.close {
 .align-text-top {
   vertical-align: text-top !important; }
 
-.bg-primary, .mlo-navbar.fixed {
+.bg-primary, .navbar-fixed .mlo-navbar {
   background-color: #2e67fb !important; }
 
-a.bg-primary:focus, a.mlo-navbar.fixed:focus, a.bg-primary:hover, a.mlo-navbar.fixed:hover {
+a.bg-primary:focus, .navbar-fixed a.mlo-navbar:focus, a.bg-primary:hover, .navbar-fixed a.mlo-navbar:hover {
   background-color: #0546f1 !important; }
 
 .bg-secondary, .file-loader .bar :first-child {
@@ -5204,7 +5206,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div {
+.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -5911,6 +5913,7 @@ footer.main-footer > div .mdd a {
 
 .pr-3,
 .px-3,
+.mlo-navbar .actions a,
 section.lawyer-section .cards .cards-inner {
   padding-right: 1rem !important; }
 
@@ -5920,6 +5923,7 @@ section.lawyer-section .cards .cards-inner {
 
 .pl-3,
 .px-3,
+.mlo-navbar .actions a,
 section.lawyer-section .cards .cards-inner {
   padding-left: 1rem !important; }
 
@@ -5933,7 +5937,6 @@ section.lawyer-section .cards .cards-inner {
 .pr-4, .col-form-label,
 .px-4,
 .btn-sm,
-.btn-onbar,
 .btn-group-sm > .btn,
 .btn-group-sm > .btn-vk,
 .btn-group-sm > .btn-od,
@@ -5953,7 +5956,6 @@ section.gray .btn-group-sm > button,
 .pl-4, .win-round .reg,
 .px-4,
 .btn-sm,
-.btn-onbar,
 .btn-group-sm > .btn,
 .btn-group-sm > .btn-vk,
 .btn-group-sm > .btn-od,
@@ -7163,14 +7165,15 @@ a.text-white:focus, a.text-white:hover {
 .font-weight-semibold {
   font-weight: 600 !important; }
 
-.container-overflow-wrap {
-  overflow: hidden;
-  min-height: 100vh; }
+#app {
+  height: 100vh;
+  overflow-y: scroll; }
 
 section {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  position: relative; }
+  position: relative;
+  z-index: 0; }
   section:before {
     content: '';
     position: absolute;
@@ -7181,6 +7184,7 @@ section {
     right: 0; }
   section.header-section {
     height: 100vh;
+    min-height: 720px;
     color: white; }
     section.header-section:before {
       background-image: url(/static/img/bgr/main-header.jpg);
@@ -7248,7 +7252,7 @@ section {
       z-index: 0; }
     section.review-section .reviews {
       position: absolute;
-      z-index: 2;
+      z-index: 1;
       right: 0; }
       @media (max-width: 767px) {
         section.review-section .reviews {
@@ -7407,6 +7411,49 @@ footer.main-footer {
     .win-round.rec .r-col {
       order: 1;
       margin-bottom: 0.625rem; } }
+
+#app, .slide-menu, .mlo-navbar {
+  transition: all .2s; }
+
+.shaded:before, #app.open-slide-menu .mlo-navbar:before {
+  content: '';
+  position: fixed;
+  z-index: 1040;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(33, 33, 33, 0.6); }
+
+.slide-menu {
+  width: 430px;
+  background-color: #f5f5f5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -430px;
+  z-index: 1050;
+  overflow-y: scroll; }
+
+.slide-menu-toggle:before {
+  content: '\e907';
+  font-family: icomoon; }
+
+#app.open-slide-menu {
+  overflow-y: hidden;
+  margin-right: 430px;
+  margin-left: -430px; }
+  #app.open-slide-menu .mlo-navbar {
+    right: 430px;
+    left: -430px; }
+    #app.open-slide-menu .mlo-navbar .slide-menu-toggle {
+      position: relative;
+      z-index: 1041; }
+      #app.open-slide-menu .mlo-navbar .slide-menu-toggle:before {
+        content: '\e906'; }
+  #app.open-slide-menu .slide-menu {
+    right: 0; }
 
 .lawyer-card {
   width: 320px;

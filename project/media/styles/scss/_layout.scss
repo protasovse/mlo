@@ -1,7 +1,4 @@
-.container-overflow-wrap {
-  overflow: hidden;
-  min-height: 100vh;
-}
-div#app {
-
+#app {
+  height: 100vh;
+  overflow-y: scroll;
 }

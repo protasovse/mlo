@@ -4,6 +4,7 @@ section {
   padding-top: line(4);
   padding-bottom: line(4);
   position: relative;
+  z-index: 0;
   // overflow: hidden;
   @extend .d-flex; //, .row;
   // Подложка (картинка или фон)
@@ -22,6 +23,7 @@ section {
   &.header-section {
     @extend .align-items-center, .justify-content-center;
     height: 100vh;
+    min-height: 720px;
     color: white;
     &:before {
       background: {
@@ -133,7 +135,7 @@ section {
     .reviews {
       @extend .col-12, .col-md-7, .ml-auto;
       position: absolute;
-      z-index: 2;
+      z-index: 1;
       right: 0;
       @include media-breakpoint-down(sm) {
         position: static;

@@ -6,6 +6,10 @@
         {% include 'front/generic/navbar.html' %}
     {% endblock %}
 
+    {% block slidemenu %}
+        {% include 'front/generic/slidemenu.html' %}
+    {% endblock %}
+
     {% block content %}{% endblock %}
 
     {% block footer %}
@@ -23,5 +27,12 @@
                 navbar_isfixed: true,
             }
         })
+
+        $('.slide-menu-toggle').click(function () {
+            $('#app').toggleClass("open-slide-menu");
+        });
+        $('.fix-navbar').click(function () {
+            $('#app').toggleClass("navbar-fixed");
+        });
     </script>
 {% endblock %}

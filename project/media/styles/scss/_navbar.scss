@@ -1,21 +1,18 @@
-
 .mlo-navbar {
-
-  @extend .navbar;
+  @extend .navbar, .align-items-center;
+  height: line(5);
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   z-index: $zindex-fixed;
-
   color: white;
-  padding-bottom: line(1);
-  padding-top: line(1);
   @include media-breakpoint-down(sm) {
+    height: line(4);
     padding-left: line(.5);
-    padding-right: line(.5); //
+    padding-right: line(.5);
   }
-  background-color: transparent!important;
+  background-color: transparent !important;
 
   .navbar-brand {
     position: relative;
@@ -32,24 +29,48 @@
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 0;
   }
 
   .actions {
     position: relative;
-    z-index: 1;
-  }
 
-  &.fixed {
-    @extend .bg-primary;
-    padding-bottom: line(.3);
-    padding-top: line(.3);
-
-    .navbar-brand img {
-      width: 115px;
-      height: 34px;
+    a {
+      display: inline-block;
+      @extend .px-3, .normal;
+      text-decoration: none;
+      font-weight: $font-weight-semibold;
+      height: line(2);
+      line-height: line(2);
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: $border-radius;
+      text-align: center;
+      color: $white;
+      &:hover {
+        background-color: rgba(0, 0, 0, .2);
+      }
+      &.sq {
+        width: line(2);
+        padding: 0 !important;
+      }
+      &.active {
+        color: $red;
+        &:not(:hover) {
+          border-color: white;
+          background-color: white;
+        }
+      }
     }
-
   }
+}
 
+.navbar-fixed .mlo-navbar {
+  @extend .bg-primary;
+  position: fixed;
+  height: line(3);
+  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
+
+  .navbar-brand img {
+    width: 115px;
+    height: 34px;
+  }
 }

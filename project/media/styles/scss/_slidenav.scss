@@ -1,0 +1,61 @@
+$slide-menu-width: 430px;
+
+#app, .slide-menu, .mlo-navbar {
+  transition: all .2s;
+}
+
+// Затенение
+.shaded {
+  &:before {
+    content: '';
+    position: fixed;
+    z-index: $zindex-modal-backdrop;
+    display: block;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(33, 33, 33, .6);
+  }
+}
+
+// Контейнер слайд-меню
+.slide-menu {
+  width: $slide-menu-width;
+  background-color: $gray-100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -$slide-menu-width;
+  z-index: $zindex-modal;
+  overflow-y: scroll;
+}
+
+// Гамбургер
+.slide-menu-toggle {
+  &:before {
+    content: '\e907';
+    font-family: icomoon;
+  }
+}
+
+#app.open-slide-menu {
+  overflow-y: hidden;
+  margin-right: $slide-menu-width;
+  margin-left: -$slide-menu-width;
+  .mlo-navbar {
+    @extend .shaded;
+    .slide-menu-toggle {
+      position: relative;
+      z-index: $zindex-modal-backdrop+1;
+      &:before {
+        content: '\e906';
+      }
+    }
+    right: $slide-menu-width;
+    left: -$slide-menu-width;
+  }
+  .slide-menu {
+    right: 0;
+  }
+}
