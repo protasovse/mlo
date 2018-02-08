@@ -26,7 +26,12 @@
             data: {
                 navbar_isfixed: true,
             }
-        })
+        });
+
+        $('#app').on('scroll', function () {
+            $('#app').addClass("navbar-fixed");
+            // alert($('body').offset().top);
+        });
 
         $('.slide-menu-toggle').click(function () {
             $('#app').toggleClass("open-slide-menu");

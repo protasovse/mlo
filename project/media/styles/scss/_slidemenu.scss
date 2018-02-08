@@ -1,4 +1,5 @@
 $slide-menu-width: 430px;
+$slide-menu-width-mob: 260px;
 
 #app, .slide-menu, .mlo-navbar {
   transition: all .2s;
@@ -37,11 +38,20 @@ $slide-menu-width: 430px;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    margin-top: line(2);
     li {
       margin-bottom: line(.9);
       a {
         text-decoration: none;
       }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    width: $slide-menu-width-mob;
+    right: -$slide-menu-width-mob;
+    padding: line(1);
+    ul {
+      margin-top: line(1);
     }
   }
   .text {
@@ -62,6 +72,10 @@ $slide-menu-width: 430px;
   overflow-y: hidden;
   margin-right: $slide-menu-width;
   margin-left: -$slide-menu-width;
+  @include media-breakpoint-down(sm) {
+    margin-right: $slide-menu-width-mob;
+    margin-left: -$slide-menu-width-mob;
+  }
   .mlo-navbar {
     @extend .shaded;
     .slide-menu-toggle {
@@ -73,6 +87,10 @@ $slide-menu-width: 430px;
     }
     right: $slide-menu-width;
     left: -$slide-menu-width;
+    @include media-breakpoint-down(sm) {
+      right: $slide-menu-width-mob;
+      left: -$slide-menu-width-mob;
+    }
   }
   .slide-menu {
     right: 0;
