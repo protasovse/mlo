@@ -512,13 +512,16 @@ h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .lawyer-card .lawyer-card-body p, .lawyer-page article .check {
+.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .lawyer-page article .check {
   font-size: 0.875rem;
   line-height: 1.25rem; }
 
 .large {
   font-size: 1.125rem;
   line-height: 1.3888889em; }
+
+a.gray {
+  color: #545454; }
 
 .img-fluid {
   max-width: 100%;
@@ -3582,11 +3585,11 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   .mlo-navbar .actions {
     position: relative; }
     .mlo-navbar .actions a {
-      display: inline-block;
+      display: block;
       text-decoration: none;
       font-weight: 600;
       height: 2.5rem;
-      line-height: 2.5rem;
+      line-height: 38px;
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 0.25rem;
       text-align: center;
@@ -4994,7 +4997,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .lawyer-page section.about .medals {
+.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .lawyer-page section.about .medals {
   display: flex !important; }
 
 .d-inline-flex {
@@ -5167,7 +5170,7 @@ a.bg-white:focus, a.bg-white:hover {
 .flex-row {
   flex-direction: row !important; }
 
-.flex-column {
+.flex-column, .slide-menu {
   flex-direction: column !important; }
 
 .flex-row-reverse {
@@ -5194,7 +5197,7 @@ a.bg-white:focus, a.bg-white:hover {
 .justify-content-center, section.header-section {
   justify-content: center !important; }
 
-.justify-content-between, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col {
+.justify-content-between, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, .slide-menu {
   justify-content: space-between !important; }
 
 .justify-content-around, .lawyer-page section.about .medals {
@@ -5763,7 +5766,7 @@ a.bg-white:focus, a.bg-white:hover {
 .my-1 {
   margin-bottom: 0.25rem !important; }
 
-.ml-1,
+.ml-1, .mlo-navbar .actions a,
 .mx-1 {
   margin-left: 0.25rem !important; }
 
@@ -7434,7 +7437,20 @@ footer.main-footer {
   bottom: 0;
   right: -430px;
   z-index: 1050;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  padding: 1.25rem 1.25rem 3.75rem 2.5rem; }
+  .slide-menu ul {
+    font-size: 1.25rem;
+    font-weight: 300;
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+    .slide-menu ul li {
+      margin-bottom: 1.125rem; }
+      .slide-menu ul li a {
+        text-decoration: none; }
+  .slide-menu .text {
+    color: #bababa; }
 
 .slide-menu-toggle:before {
   content: '\e907';

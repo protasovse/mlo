@@ -32,15 +32,16 @@
   }
 
   .actions {
+    @extend .d-flex;
     position: relative;
 
     a {
-      display: inline-block;
-      @extend .px-3, .normal;
+      display: block;
+      @extend .ml-1, .px-3, .normal;
       text-decoration: none;
       font-weight: $font-weight-semibold;
       height: line(2);
-      line-height: line(2);
+      line-height: 38px;
       border: 1px solid rgba(255, 255, 255, .5);
       border-radius: $border-radius;
       text-align: center;
