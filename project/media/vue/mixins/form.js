@@ -47,6 +47,13 @@ export default {
                 throw new Error('Пароли не совпадают')
             }
         },
+        password_strength_validate()
+        {
+            if (this.password.length < 6) {
+                this.set_field_error('password', 'Пароль слишком короткий');
+                throw new Error('Длина пароля не должна быть короче 6 символов')
+            }
+        },
         requires_fields() {
             if (this.get_requires_fields === undefined) {
                 return;
@@ -65,6 +72,7 @@ export default {
         },
 
         form_validate(fns) {
+            this.clear_error_field();
             fns.forEach((fn) => {fn()})
         },
         set_form_error(txt) {
