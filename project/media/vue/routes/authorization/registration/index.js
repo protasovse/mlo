@@ -22,7 +22,7 @@ export default {
         get_requires_fields() {return ['email', 'password', 'first_name', 'last_name', 'patronymic']},
         save() {
             try {
-                this.form_validate([this.requires_fields]);
+                this.form_validate([this.requires_fields, this.password_strength_validate]);
                 this.post('/api/user', {
                     email: this.email,
                     password: this.password,

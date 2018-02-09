@@ -18,7 +18,7 @@ export default {
         get_requires_fields() {return ['password', 're_password']},
         save() {
             try {
-                this.form_validate([this.requires_fields, this.password_vaidate]);
+                this.form_validate([this.requires_fields, this.password_vaidate, this.password_strength_validate]);
                 this.post('/api/user/reset', {password: this.password, 'token': this.token}, () => {
                     this.set_form_success("Доступы к аккаунту обновлены. Теперь вы можете войти используя новый пароль")
                 });
