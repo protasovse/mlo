@@ -55,9 +55,6 @@
   .req {
     @extend .normal;
     margin-bottom: line(0.5);
-    a {
-      color: $gray-800;
-    }
   }
   .err {
     @extend .normal, .text-danger, .mt-3;

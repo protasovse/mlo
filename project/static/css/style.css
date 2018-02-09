@@ -7402,8 +7402,6 @@ footer.main-footer {
     left: 0; }
   .win-round .req {
     margin-bottom: 0.625rem; }
-    .win-round .req a {
-      color: #545454; }
   .win-round.rec h4 {
     margin-left: 16px; }
     @media (max-width: 767px) {
