@@ -23,7 +23,7 @@ MSG_DATA_NOT_VALID = 'Введите правильные данные'
 MSG_NO_CORRECT = 'Не удалось активировать учётную запись. Ссылка на смену пароля просрочена или неверна.'
 MSG_ACCOUNT_NOT_ACTIVE = 'Учётная запись не активна. ' \
                          'Вам на почту ранее было отправлено письмо с ссылкой для активации акканта.'
-
+MSG_USER_IS_ACTIVE = 'Активация аккаунта не требуется. Аккаунт уже активирован'
 
 class AppUser(ApiView):
 
@@ -112,9 +112,13 @@ class ResetPassword(ApiView):
 class ActivateAccount(ApiView):
     def post(self, request):
         try:
-            hash = UserHash.objects.get(key=request.POST.get('token'), live_until__gte=date.today().isoformat())
+            hash = UserHash.objects.get(key=request.POST.get('token'))
+            # hash exists, but user is active already
             if hash.user.is_active:
-                raise ApiPublicException(MSG_NO_CORRECT)
+                raise ApiPublicException(MSG_USER_IS_ACTIVE)
+            # if hash exists, but too late
+            if hash.live_until.date() < date.today():
+                raise ApiPublicException(MSG_ACCOUNT_NOT_ACTIVE, code='unactive', request_status=403)
             user = hash.user
             user.activate(True)
             hash.delete()
@@ -128,7 +132,11 @@ class ReSend(ApiView):
             user = get_user_model().objects.get(email=request.GET.get('email'))
             emails.send_activation_email(user)
         except get_user_model().DoesNotExist:
-            raise ApiPublicException('Не удалось отправить активационное письмо')
+            hash = UserHash.objects.get(key=request.GET.get('token'))
+            user = hash.user
+            emails.send_activation_email(user)
+
+
 
 
 class FlashMessageCheck(ApiView):

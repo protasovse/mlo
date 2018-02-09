@@ -26,11 +26,16 @@ export default {
         );
         if (this.token) {
             try {
-                this.post('/api/user/activate', {'token': this.token}, () => {
-                    this.set_form_success(
-                        "Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации"
-                    )
-                });
+                this.post('/api/user/activate', {'token': this.token},
+                    () => {
+                        this.set_form_success(
+                            "Аккаунт успешно активирован. Вы можете войти на сайт, используя данные, указанные при регистрации"
+                        )
+                    },
+                    (r) => {
+                        this.unactive = (r.data.code === 'unactive');
+                        this.process_error(r);
+                    });
             } catch (err) {
                 this.set_form_error(err.message)
             }
@@ -54,8 +59,9 @@ export default {
             }
         },
         send_activation() {
-            this.get('/api/user/resend', {email: this.email},
+            this.get('/api/user/resend', {email: this.email, token: this.token},
                 () => {this.set_form_success('Письмо отправлено повторно. Проверьте, пожалуйста, почту.')},
+                () => {this.set_form_error('Нe удалось отрпавить активационное письмо')},
             );
         }
     }
