@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
-                   placeholder="Электронный ящик" name="email" v-model="email">
+                   placeholder="Электронный ящик" name="email" v-model="email" @change="save_field_value('email', email)">
             <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
 
         </div>

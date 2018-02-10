@@ -2,7 +2,6 @@ import forgot from './forgot/index.js'
 import login from './login/index.js'
 import registration from './registration/index.js'
 import password_reset from './password_reset/index.js'
-import activate_email from './activate_email/index.js'
 import wrapper from './wrapper/index.js'
 
 

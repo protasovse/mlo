@@ -10,7 +10,7 @@ export default {
     template,
     data() {
         return {
-            email: '',
+            email: this.get_saved_field('email'),
             password: '',
             first_name: '',
             last_name: '',
