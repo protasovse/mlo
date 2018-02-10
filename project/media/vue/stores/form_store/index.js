@@ -6,7 +6,9 @@ export default {
         error_txt: '',
         success_txt: '',
         loading: false,
-        fields: {}
+        fields: {},
+        // сохраненные значения
+        values: {}
     },
     mutations: {
         set_error(state, error) {
@@ -35,6 +37,9 @@ export default {
         },
         error_field(state, error) {
             Vue.set(state.fields, error.field, error.txt)
+        },
+        save_field(state, value) {
+            Vue.set(state.values, value.key, value.val)
         },
         clear_error_field(state) {
             state.fields = {}

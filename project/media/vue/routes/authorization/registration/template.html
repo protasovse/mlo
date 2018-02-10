@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <input type="email" class="form-control" placeholder="Электронный ящик" v-model="email"
-                   name="email" :class="{'is-invalid': error_fields.email }">
+                   name="email" :class="{'is-invalid': error_fields.email }" @change="save_field_value('email', email)">
             <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
         </div>
         <div class="form-group">

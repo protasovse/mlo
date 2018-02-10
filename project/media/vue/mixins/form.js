@@ -21,11 +21,18 @@ export default {
         error_fields() {
             return this.$store.state.fields;
         },
+
     },
     beforeMount() {
          this.$store.commit('init_state')
     },
     methods: {
+        save_field_value(field, value) {
+            this.$store.commit('save_field', {
+                'key': field,
+                'val': value
+            });
+        },
         set_field_error(field, txt) {
             this.$store.commit('error_field', {
                 'field': field,
@@ -136,7 +143,11 @@ export default {
                 r => this.process_success(r, fn),
                 r => this.process_error(r, fn_error)
             ).catch(e => this.set_form_error(e.message))
-        }
-
+        },
+        get_saved_field(field)
+        {
+            let f_arr = this.$store.state.values;
+            return f_arr[field]
+        },
     }
 }
