@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
 from apps.account.models import Info, Contact
+from apps.svem_system.views.api import ApiView
 
 
 class Mainpage(TemplateView):
@@ -29,3 +30,15 @@ class LawyerPage(TemplateView):
         context['lawyer_contact'] = lawyer_contact
 
         return context
+
+
+class AskQuestion(TemplateView):
+
+    template_name = 'front/ask_question.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AskQuestion, self).get_context_data(**kwargs)
+        return context
+
+    def post(self, request):
+        pass
