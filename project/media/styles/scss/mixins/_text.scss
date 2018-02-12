@@ -1,0 +1,3 @@
+@function line($count) {
+  @return $line-height-base * $count * 1rem;
+}

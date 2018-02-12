@@ -1,0 +1,77 @@
+.mlo-navbar {
+  @extend .navbar, .align-items-center;
+  height: line(5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-fixed;
+  color: white;
+  @include media-breakpoint-down(sm) {
+    height: line(4);
+    padding-left: line(.5);
+    padding-right: line(.5);
+  }
+  background-color: transparent !important;
+
+  .navbar-brand {
+    position: relative;
+    z-index: 1;
+    img {
+      padding: 0;
+      width: 153px;
+      height: 47px;
+    }
+  }
+
+  .title {
+    @extend .d-none, .d-md-block, .text-center;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .actions {
+    @extend .d-flex;
+    position: relative;
+
+    a {
+      display: block;
+      @extend .ml-1, .px-3, .normal;
+      text-decoration: none;
+      font-weight: $font-weight-semibold;
+      height: line(2);
+      line-height: 38px;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: $border-radius;
+      text-align: center;
+      color: $white;
+      &:hover {
+        background-color: rgba(0, 0, 0, .2);
+      }
+      &.sq {
+        width: line(2);
+        padding: 0 !important;
+      }
+      &.active {
+        color: $red;
+        &:not(:hover) {
+          border-color: white;
+          background-color: white;
+        }
+      }
+    }
+  }
+}
+
+.navbar-fixed .mlo-navbar {
+  @extend .bg-primary;
+  position: fixed;
+  height: line(3);
+  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
+
+  .navbar-brand img {
+    width: 115px;
+    height: 34px;
+  }
+}

@@ -1,0 +1,315 @@
+// sections and footers of layout
+
+section {
+  padding-top: line(4);
+  padding-bottom: line(4);
+  position: relative;
+  z-index: 0;
+  // overflow: hidden;
+  @extend .d-flex; //, .row;
+  // Подложка (картинка или фон)
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // min-height: 100%;
+  }
+
+  // section.header
+  &.header-section {
+    @extend .align-items-center, .justify-content-center;
+    height: 100vh;
+    min-height: 720px;
+    color: white;
+    &:before {
+      background: {
+        image: url(#{$img_dir}/bgr/main-header.jpg);
+        position: center top;
+        clip: border-box;
+        size: cover;
+        repeat: no-repeat;
+      }
+    }
+    main {
+      position: relative;
+    }
+  }
+
+  &.blue {
+    color: white;
+    &:before {
+      background-color: $blue;
+    }
+  }
+
+  &.gray {
+    color: $gray-600;
+    & > .container {
+      position: relative;
+    }
+    h1, h2, h3, h4 {
+      color: $light-blue;
+    }
+    h2, .lead {
+      margin-bottom: line(2);
+    }
+    &:before {
+      background-color: $gray-100;
+    }
+    button {
+      @extend .btn, .btn-primary;
+    }
+  }
+
+  &.advantage-section {
+    @extend .container;
+    padding-bottom: line(2);
+    h3 {
+      margin-bottom: line(3);
+    }
+    .content {
+      @extend .col-12, .col-xl-10, .mx-auto;
+    }
+    .advantages {
+      @extend .row, .no-gutters, .normal;
+      .advantage-item {
+        margin-bottom: line(2);
+        padding-right: line(2);
+        color: $gray-600;
+        h5 {
+          font-weight: $font-weight-normal;
+          color: $gray-900;
+        }
+        @extend .col-12, .col-sm-6, .col-lg-4;
+        padding-left: line(4.5);
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-repeat: no-repeat;
+          width: line(3);
+          height: 100%;
+        }
+        &.i1:before {
+          background-image: url("/static/img/advantage/advantage-1.svg");
+        }
+        &.i2:before {
+          background-image: url("/static/img/advantage/advantage-2.svg");
+        }
+        &.i3:before {
+          background-image: url("/static/img/advantage/advantage-3.svg");
+        }
+        &.i4:before {
+          background-image: url("/static/img/advantage/advantage-4.svg");
+        }
+        &.i5:before {
+          background-image: url("/static/img/advantage/advantage-5.svg");
+        }
+        &.i6:before {
+          background-image: url("/static/img/advantage/advantage-6.svg");
+        }
+      }
+    }
+  }
+
+  &.review-section {
+    padding-bottom: 0;
+    height: line(31);
+    @include media-breakpoint-down(sm) {
+      padding-bottom: line(4);
+      height: auto;
+    }
+    .title, .desc {
+      @extend .col-12, .col-md-5;
+    }
+    .gutter {
+      @extend .col-12, .col-md-7;
+      z-index: 0;
+    }
+    .reviews {
+      @extend .col-12, .col-md-7, .ml-auto;
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      @include media-breakpoint-down(sm) {
+        position: static;
+        padding-bottom: line(1);
+      }
+    }
+    .review {
+      background-color: white;
+      position: relative;
+      max-height: line(27);
+      overflow-y: hidden;
+      box-shadow: 0 -2.1rem 0 -1.5rem #fcfcfc, 0 -4.2rem 0 -3rem #fafafa;
+      @include media-breakpoint-down(sm) {
+        min-width: 600px;
+      }
+      .review-item {
+        border-bottom: solid 4px $gray-100;
+        p {
+          margin-bottom: 0;
+        }
+        padding: line(1) line(1) line(1) line(5);
+        @include media-breakpoint-down(md) {
+          padding-left: line(3);
+        }
+        position: relative;
+        cursor: pointer;
+        &:before {
+          content: '\e901';
+          font-family: icomoon;
+          color: $blue;
+          position: absolute;
+          left: line(1.5);
+          @include media-breakpoint-down(md) {
+            left: line(1);
+          }
+        }
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: line(6);
+        box-shadow: inset 0px -9rem 5rem -4rem $gray-100;
+      }
+    }
+  }
+
+  &.lawyer-section {
+    // @extend .container;
+    padding-bottom: 0;
+    height: line(34);
+    @include media-breakpoint-down(xs) {
+      padding-bottom: line(3);
+      height: line(41);
+    }
+    .cards {
+      .cards-inner {
+        @extend .d-flex, .justify-content-start, .flex-nowrap, .px-3;
+      }
+      position: absolute;
+      overflow: scroll;
+      z-index: 0;
+      top: 0;
+      width: 100%;
+    }
+    .title {
+      @extend .col-sm-10, .mx-auto, .d-flex, .justify-content-between;
+      position: static;
+      height: line(2);
+      z-index: 1;
+      & > h3 {
+      }
+      & > button {
+        @include media-breakpoint-down(xs) {
+          position: absolute;
+          bottom: line(5);
+          // left: 0;
+        }
+      }
+    }
+  }
+
+  // section.questions
+  &.questions-section {
+    header {
+      @extend .row;
+      h3 {
+        @extend .col-md-11, .ml-auto;
+      }
+    }
+    article {
+      @extend .row;
+      .date {
+        @extend .col-12, .col-md-3, .subtitle, .text-md-right, .mb-2;
+        line-height: 25px;
+      }
+      h6 {
+        @extend .col-12, .col-md-9, .col-lg-7;
+        margin: 0;
+      }
+      .number {
+        @extend .col-12, .col-md-3, .text-md-right, .normal, .mb-3;
+        color: $gray-500;
+        span {
+          white-space: nowrap;
+        }
+      }
+      .content {
+        @extend .col-12, .col-md-9, .col-lg-7;
+        font-size: $font-size-lg;
+      }
+      .answer {
+        @extend .col-12, .col-md-9, .col-lg-7;
+        .answer-header {
+          @extend .normal, .d-flex, .align-items-center, .mb-3;
+          .usr {
+            @extend .mr-3;
+            padding-right: 10px;
+            a {
+              display: inline-block;
+              margin-right: -10px;
+              img {
+                width: line(2);
+                height: line(2);
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+        p {
+          color: $gray-600;
+        }
+      }
+    }
+    hr {
+      margin-bottom: line(1.5);
+      margin-top: line(1);
+    }
+  }
+}
+
+footer {
+  &.main-footer {
+    @extend .container-fluid, .normal;
+    border-top: 1px solid $gray-200;
+    padding: line(1) line(1.5);
+    color: $gray-500;
+    background-color: $gray-100;
+    a {
+      color: $gray-500;
+    }
+    & > div {
+      @extend .row, .align-items-center;
+      .ttl {
+        @extend .col-12, .col-md-4, .text-center, .text-md-right, .order-md-3;
+        a {
+          color: $gray-800;
+        }
+      }
+      .mdd {
+        @extend .col-12, .col-md-4, .text-center, .text-md-center, .order-md-2, .my-4, .my-md-0;
+        font-size: 1.5rem;
+        a {
+          @extend .mx-4;
+          text-decoration: none;
+          &:hover {
+            color: $gray-800;
+          }
+        }
+      }
+      .cpr {
+        @extend .col-12, .col-md-4, .text-center, .text-md-left, .order-md-1;
+      }
+    }
+  }
+}
