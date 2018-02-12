@@ -192,7 +192,7 @@ class Answer(Entry):
 
 class Offer(models.Model):
     """
-    Предложение платных услуг юристом
+    Предложение платных услуг юристом. Прикрепляется в ответе. В этом же ответе описывается суть предложения.
     """
     answer = models.OneToOneField(Answer,
                                   on_delete=models.CASCADE)
@@ -215,6 +215,61 @@ class Offer(models.Model):
     def __str__(self):
         return "%d. стоимость: %d₽. (ответ %d, вопрос %d)" % \
                (self.pk, self.cost, self.answer.id, self.answer.on_question.id)
+
+
+class ConsultState(models.Model):
+    """
+    Наименование состояний платной консультации
+    """
+    key = models.CharField(_('Название на латинице'), max_length=24)
+    state = models.CharField(_('Название состояния'), max_length=24)
+
+    class Meta:
+        verbose_name = _('Состояние платной консультации')
+        verbose_name_plural = _('Состояния платных консультаций')
+
+    def __str__(self):
+        return "%s (%s)" % (self.key, self.state)
+
+
+class Consult(Question):
+
+    expert = models.ManyToManyField(
+        AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        verbose_name=_('Эксперт'),
+    )
+
+    state = models.ManyToManyField(
+        ConsultState,
+        through='ConsultStateLog'
+    )
+
+
+class ConsultStateLog(models.Model):
+    """
+    Таблица для связи многие-ко-многим, хранящая дату перевода в это состояние
+    """
+    consult = models.ForeignKey(Consult, on_delete=models.CASCADE)
+
+    consult_state = models.ForeignKey(
+        ConsultState,
+        on_delete=models.CASCADE,
+        verbose_name=_('Состояние')
+    )
+
+    date = models.DateTimeField(
+        auto_now_add=True,
+        editable=False
+    )
+
+    class Meta:
+        verbose_name = _('Состояние')
+        verbose_name_plural = _('Состояния')
+
+    def __str__(self):
+        return '%s (%s)' % (self.consult_state, self.date)
 
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):

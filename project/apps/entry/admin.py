@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.models import Question, Answer, Files, Offer
+from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -68,6 +68,35 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = (AnswersForQuestionInLine, FilesInLine,)
 
 
+class ConsultStateLogAdmin(admin.StackedInline):
+    # Состояния платной консультации
+    model = ConsultStateLog
+    fields = ['consult_state',]
+    fk_name = 'consult'
+    extra = 0
+    classes = ('collapse', 'collapse-closed')
+
+
+@admin.register(Consult)
+class ConsultAdmin(admin.ModelAdmin):
+    """
+    Админка для модели Consult.
+    """
+    fieldsets = (
+        (_('Content'), {
+            'fields': ('title', 'content', 'expert',)}),
+        (_('Клиссификация'), {
+            'fields': ('status', 'author', 'rubrics'),
+            # 'classes': ('collapse', 'collapse-closed')
+        }))
+    autocomplete_fields = ['rubrics', 'author', 'expert']
+    radio_fields = {'status': admin.HORIZONTAL}
+    list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count')
+    search_fields = ['title', 'content', 'author__last_name', 'author__email']
+    list_filter = ('pub_date', 'status')
+    inlines = (ConsultStateLogAdmin, AnswersForQuestionInLine, FilesInLine,)
+
+
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
@@ -84,3 +113,8 @@ class AnswerAdmin(admin.ModelAdmin):
         """
         qs = super().get_queryset(request)
         return qs.filter(parent=None)
+
+
+@admin.register(ConsultState)
+class ConsultState(admin.ModelAdmin):
+    pass
