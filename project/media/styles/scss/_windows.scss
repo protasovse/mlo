@@ -12,6 +12,9 @@
     margin-bottom: line(1);
     color: $gray-600;
   }
+  h3 {
+    @extend .mt-5, .mb-4;
+  }
   @include media-breakpoint-down(sm) {
     border-radius: 0;
   }

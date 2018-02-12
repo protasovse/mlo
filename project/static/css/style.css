@@ -5821,7 +5821,7 @@ footer.main-footer > div .mdd {
 footer.main-footer > div .mdd a {
   margin-right: 1.5rem !important; }
 
-.mb-4, .lawyer-page section.about .l-col,
+.mb-4, .win-round h3, .lawyer-page section.about .l-col,
 .my-4,
 footer.main-footer > div .mdd {
   margin-bottom: 1.5rem !important; }
@@ -5834,7 +5834,7 @@ footer.main-footer > div .mdd a {
 .m-5 {
   margin: 3rem !important; }
 
-.mt-5,
+.mt-5, .win-round h3,
 .my-5 {
   margin-top: 3rem !important; }
 

@@ -29,8 +29,7 @@
                 <div class="form-group row mt-4">
                     <label for="ask_name" class="col-form-label">Рубрика</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="ask_content"
-                               placeholder="" rows="1"></input>
+                        <input type="text" class="form-control" id="ask_content"/>
                         <small>Выбирите одну или несколько тем, чтобы Ваш вопрос увидел компетентные юрист.
                             Начните вводить тему.
                         </small>
@@ -53,23 +52,7 @@
                     </div>
                 </div>
 
-                <h3 class="mt-5 mb-4">Личные данные</h3>
-
-                <div class="form-group row">
-                    <label for="ask_name" class="col-form-label required">Ваше имя</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="ask_email" class="col-form-label required">Электронный ящик</label>
-                    <div class="col-sm-8">
-                        <input type="email" class="form-control" id="ask_email" required placeholder="Электронный ящик">
-                    </div>
-                </div>
-
-                <h3 class="mt-5 mb-4">Тип консультации</h3>
+                <h3>Тип консультации</h3>
 
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action -active">
@@ -93,6 +76,30 @@
                             </div>
                         </div>
                     </a>
+                </div>
+
+                <h3>Личные данные</h3>
+
+                <div class="form-group row">
+                    <label for="ask_name" class="col-form-label required">Ваше имя</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ask_email" class="col-form-label required">Электронный ящик</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="ask_email" placeholder="Электронный ящик">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ask_phone" class="col-form-label required">Телефон</label>
+                    <div class="col-sm-8">
+                        <input type="tel" class="form-control" id="ask_phone" placeholder="Номер телефона">
+                        <small>Для уточнения данных.</small>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4" style="float: right;">
