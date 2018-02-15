@@ -130,6 +130,13 @@ class Question(Entry, Titled, Classified):
     Вопросы. Вопрос может задать и Клиент и Юрист. Для Клиента — это юридическая консультация.
     Для юриста — это обсуждение какой-либо сложной профессиональной ситуации.
     """
+
+    # Вопрос платный если есть запись в таблице Consult, и вопрос оплачен
+    is_pay = models.BooleanField(
+        _('Платный вопрос'),
+        default=False,
+    )
+
     class Meta:
         ordering = ("-id",)
         verbose_name = _("Вопрос")
@@ -223,7 +230,7 @@ class ConsultState(models.Model):
     1. Новая (new) — вопрос задан и ещё не оплачен. (Статус по умолчанию для нового вопроса консультации)
     2. Оплачена (paid) — вопрос оплачен.
     2. В работе (inwork) — распределён эксперту и находится в работе.
-    3. Решён (resolved) — эксперт ответил на вопрос. Далее, если клиент задаёт дополнительный вопрос,
+    3. Ответ эксперта (answered) — эксперт ответил на вопрос. Далее, если клиент задаёт дополнительный вопрос,
        то вопрос переходит в статус «В работе», иначе клиент может либо закрыть вопрос, нажав на кнопку «Закрыть»,
        либо вопрос закрывается автоматически через 3 дня.
     4. Закрыт (closed) — вопрос закрыт. Расчёт произведён.
@@ -246,19 +253,21 @@ class Consult(models.Model):
     """
     question = models.ForeignKey(
         Question,
-        on_delete=models.CASCADE
+        on_delete=models.NOT_PROVIDED,
+        related_name='consult'
     )
 
-    expert = models.ManyToManyField(
+    experts = models.ForeignKey(
         AUTH_USER_MODEL,
         null=True,
         blank=True,
+        on_delete=models.NOT_PROVIDED,
         verbose_name=_('Эксперт'),
     )
 
     state = models.ForeignKey(
         ConsultState,
-        on_delete=models.CASCADE,
+        on_delete=models.NOT_PROVIDED,
         default=1,
         verbose_name=_('Текущее состояние'),
     )
@@ -268,6 +277,49 @@ class Consult(models.Model):
     class Meta:
         verbose_name = _('Платная консультация')
         verbose_name_plural = _('Платные консультации')
+
+    # Оплачена, если состояние не равно 'new'
+    @property
+    def is_paid(self):
+        return self.state.key != 'new'
+
+    # Переводим заявку в статус «Оплачено»
+    def to_paid(self):
+        if self.state.key == 'new':
+            self.state = ConsultState.objects.get(key='paid')
+            self.save()
+            self.question.is_pay = True
+            self.question.save()
+            return True
+        return False
+
+    # Переводим заявку в статус «В работе», если есть user_id, то назначаем эксперта
+    def to_in_work(self, user_id=None):
+        if self.state.key != 'new':
+            if user_id is not None:
+                self.experts.add(user_id)
+            self.state = ConsultState.objects.get(key='inwork')
+            self.save()
+            return True
+        return False
+
+    # Переводим заявку в статус «Ответ юриста»
+    def to_answered(self):
+        if self.state.key == 'answered':
+            return True
+        if self.state.key == 'inwork':
+            self.state = ConsultState.objects.get(key='answered')
+            self.save()
+            return True
+        return False
+
+    # Переводим заявку в статус «Ответ юриста»
+    def to_closed(self):
+        if self.state.key == 'answered':
+            self.state = ConsultState.objects.get(key='closed')
+            self.save()
+            return True
+        return False
 
     def __str__(self):
         return self.question.__str__()
@@ -300,11 +352,12 @@ class ConsultStateLog(models.Model):
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):
     """
-    Сигнал для подсчёта количества ответов на вопрос
-    и «ответов» на ответ
+    Добавление или удаление ответа
     """
+    question = instance.on_question
+
+    # Подсчёт количества ответов на вопрос и «ответов» на ответ
     if instance.is_parent:
-        question = instance.on_question
         question.reply_count = \
             sender.objects.filter(parent=None, on_question=question.pk).count()
         question.save(update_fields=('reply_count',))

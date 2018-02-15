@@ -57,7 +57,7 @@ class QuestionAdmin(admin.ModelAdmin):
         (_('Content'), {
             'fields': ('title', 'content',)}),
         (_('Клиссификация'), {
-            'fields': ('status', 'author', 'rubrics'),
+            'fields': ('status', 'author', 'rubrics', 'is_pay'),
             # 'classes': ('collapse', 'collapse-closed')
         }))
     autocomplete_fields = ['rubrics', 'author']
@@ -75,9 +75,9 @@ class ConsultAdmin(admin.ModelAdmin):
     """
     fieldsets = (
         (_('Content'), {
-            'fields': ('question', 'cost', 'expert', 'state')}),
+            'fields': ('question', 'cost', 'experts', 'state')}),
         )
-    autocomplete_fields = ['expert']
+    autocomplete_fields = ['experts']
     raw_id_fields = ['question']
     list_filter = ['state']
     # inlines = (AnswersForQuestionInLine, FilesInLine,)
