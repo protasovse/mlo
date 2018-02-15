@@ -219,7 +219,14 @@ class Offer(models.Model):
 
 class ConsultState(models.Model):
     """
-    Наименование состояний платной консультации
+    Наименование состояний платной консультации:
+    1. Новая (new) — вопрос задан и ещё не оплачен. (Статус по умолчанию для нового вопроса консультации)
+    2. Оплачена (paid) — вопрос оплачен.
+    2. В работе (inwork) — распределён эксперту и находится в работе.
+    3. Решён (resolved) — эксперт ответил на вопрос. Далее, если клиент задаёт дополнительный вопрос,
+       то вопрос переходит в статус «В работе», иначе клиент может либо закрыть вопрос, нажав на кнопку «Закрыть»,
+       либо вопрос закрывается автоматически через 3 дня.
+    4. Закрыт (closed) — вопрос закрыт. Расчёт произведён.
     """
     key = models.CharField(_('Название на латинице'), max_length=24)
     state = models.CharField(_('Название состояния'), max_length=24)
@@ -232,7 +239,15 @@ class ConsultState(models.Model):
         return "%s (%s)" % (self.key, self.state)
 
 
-class Consult(Question):
+class Consult(models.Model):
+    """
+    Платные консультации.
+    Экспертов может быть несколько.
+    """
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE
+    )
 
     expert = models.ManyToManyField(
         AUTH_USER_MODEL,
@@ -241,15 +256,26 @@ class Consult(Question):
         verbose_name=_('Эксперт'),
     )
 
-    state = models.ManyToManyField(
+    state = models.ForeignKey(
         ConsultState,
-        through='ConsultStateLog'
+        on_delete=models.CASCADE,
+        default=1,
+        verbose_name=_('Текущее состояние'),
     )
+
+    cost = models.PositiveIntegerField(_('Цена консультации'))
+
+    class Meta:
+        verbose_name = _('Платная консультация')
+        verbose_name_plural = _('Платные консультации')
+
+    def __str__(self):
+        return self.question.__str__()
 
 
 class ConsultStateLog(models.Model):
     """
-    Таблица для связи многие-ко-многим, хранящая дату перевода в это состояние
+    Журнал состояний консультации
     """
     consult = models.ForeignKey(Consult, on_delete=models.CASCADE)
 
