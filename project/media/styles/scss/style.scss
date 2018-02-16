@@ -17,7 +17,7 @@
 @import "../../node_modules/bootstrap/scss/forms";
   @import "forms";
 @import "../../node_modules/bootstrap/scss/buttons";
-  @import "buttons";
+  @import "form_elements/buttons";
 @import "../../node_modules/bootstrap/scss/transitions";
 @import "../../node_modules/bootstrap/scss/dropdown";
 @import "../../node_modules/bootstrap/scss/button-group";
@@ -51,6 +51,7 @@ $img_dir: '/static/img';
 @import "windows";
 @import "slidemenu";
 @import "elements/lawyer-card";
+@import "elements/question";
   @import "front/lawyer";
 
 

@@ -115,6 +115,18 @@ form {
 
 }
 
-/*&[type="checkbox"]:disabled + label:before { //
-  border-color: $gray-100;
-}*/
+.file-input {
+  input {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+    display: block;
+  }
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}

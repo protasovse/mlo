@@ -1,0 +1,65 @@
+.question-page {
+
+  header {
+    height: line(8);
+    background: {
+      image: url("#{$img_dir}/bgr/main-header.jpg");
+      position: center;
+      size: 100% auto;
+    }
+  }
+
+  main {
+    @extend .col-9;
+    padding-right: line(2.25);
+  }
+
+  aside {
+    @extend .col-3;
+    padding-left: line(2.25);
+  }
+
+}
+
+.question {
+
+  %l-col {
+    @extend .col-3, .text-right;
+  }
+
+  %r-col {
+    @extend .col-9;
+  }
+
+  h1 {
+    @extend .col, h2;
+    margin-bottom: line(2);
+  }
+
+  .info {
+    @extend .row, .d-flex, .align-items-center, .mb-3;
+  }
+
+  .published {
+    @extend %l-col, .subtitle;
+  }
+
+  .author {
+    @extend %r-col;
+    h6 {
+      margin: 0;
+    }
+  }
+
+  .number {
+    @extend %l-col, .normal;
+    color: $gray-500;
+  }
+
+  .content {
+    @extend %r-col;
+    font-weight: $font-weight-light;
+    font-size: $h5-font-size;
+  }
+
+}

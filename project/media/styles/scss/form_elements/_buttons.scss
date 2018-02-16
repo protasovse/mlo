@@ -1,5 +1,8 @@
 .btn {
   cursor: pointer;
+  &:disabled {
+    cursor: auto;
+  }
   border: {
     width: 2px;
   }

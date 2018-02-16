@@ -23,7 +23,7 @@ class Rubric(MPTTModel):
         order_insertion_by = ('-id',)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('level', 'name',)
         verbose_name = _('Рубрика')
         verbose_name_plural = _('Рубрики')
 

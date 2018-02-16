@@ -63,11 +63,12 @@
 
   p,
   h2,
+  .question h1,
   h3 {
     orphans: 3;
     widows: 3; }
 
-  h2,
+  h2, .question h1,
   h3 {
     page-break-after: avoid; }
 
@@ -122,7 +123,7 @@ hr {
   height: 0;
   overflow: visible; }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, .question h1, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
@@ -357,7 +358,7 @@ template {
 [hidden] {
   display: none !important; }
 
-h1, h2, h3, h4, h5, h6,
+h1, h2, .question h1, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
@@ -368,7 +369,7 @@ h1, h2, h3, h4, h5, h6,
 h1, .h1 {
   font-size: 3.375rem; }
 
-h2, .h2 {
+h2, .question h1, .h2 {
   font-size: 2.5rem; }
 
 h3, .h3 {
@@ -470,28 +471,28 @@ h3 {
       font-size: 1.25rem;
       line-height: 1.5em; } }
 
-h2 {
+h2, .question h1 {
   line-height: 1.25em; }
   @media (max-width: 991px) {
-    h2 {
+    h2, .question h1 {
       font-size: 1.625rem;
       line-height: 1.3461539em; } }
-  h2.logo {
+  h2.logo, .question h1.logo {
     margin-bottom: 2.5rem; }
     @media (max-width: 767px) {
-      h2.logo {
+      h2.logo, .question h1.logo {
         text-align: center;
         margin-bottom: 1.25rem; } }
-    h2.logo:before {
+    h2.logo:before, .question h1.logo:before {
       font-family: icomoon;
       content: '\e92b';
       font-size: 3.125rem; }
       @media (min-width: 576px) {
-        h2.logo:before {
+        h2.logo:before, .question h1.logo:before {
           padding-right: 1.25rem;
           vertical-align: bottom; } }
       @media (max-width: 767px) {
-        h2.logo:before {
+        h2.logo:before, .question h1.logo:before {
           padding-bottom: 20px;
           padding-right: 0;
           height: 3.125rem;
@@ -505,14 +506,14 @@ h1 {
       font-size: 2.5rem;
       line-height: 1.25em; } }
 
-.subtitle, section.questions-section article .date, .lawyer-card .lawyer-card-title p, .lawyer-card .lawyer-card-body h6, .lawyer-page section.about .medal {
+.subtitle, section.questions-section article .date, .lawyer-card .lawyer-card-title p, .lawyer-card .lawyer-card-body h6, .question .published, .lawyer-page section.about .medal {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .lawyer-page article .check {
+.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question .number, .lawyer-page article .check {
   font-size: 0.875rem;
   line-height: 1.25rem; }
 
@@ -618,7 +619,7 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
-.row, section.advantage-section .advantages, section.questions-section header, section.questions-section article, footer.main-footer > div, .lawyer-page dl, .lawyer-page section.about nav {
+.row, section.advantage-section .advantages, section.questions-section header, section.questions-section article, footer.main-footer > div, .question .info, .lawyer-page dl, .lawyer-page section.about nav {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -627,13 +628,13 @@ pre {
 .no-gutters, section.advantage-section .advantages {
   margin-right: 0;
   margin-left: 0; }
-  .no-gutters > .col, section.advantage-section .advantages > .col, .no-gutters > .col-form-label, section.advantage-section .advantages > .col-form-label, .win-round .no-gutters > .r-col, section.advantage-section .win-round .advantages > .r-col, .win-round section.advantage-section .advantages > .r-col, .lawyer-page section.about nav .no-gutters > a, section.advantage-section .lawyer-page section.about nav .advantages > a, .lawyer-page section.about nav section.advantage-section .advantages > a,
+  .no-gutters > .col, section.advantage-section .advantages > .col, .no-gutters > .col-form-label, section.advantage-section .advantages > .col-form-label, .win-round .no-gutters > .r-col, section.advantage-section .win-round .advantages > .r-col, .win-round section.advantage-section .advantages > .r-col, .question .no-gutters > h1, section.advantage-section .question .advantages > h1, .question section.advantage-section .advantages > h1, .lawyer-page section.about nav .no-gutters > a, section.advantage-section .lawyer-page section.about nav .advantages > a, .lawyer-page section.about nav section.advantage-section .advantages > a,
   .no-gutters > [class*="col-"],
   section.advantage-section .advantages > [class*="col-"] {
     padding-right: 0;
     padding-left: 0; }
 
-.col-1, .lawyer-page article .gutter, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content, .col, .col-form-label, .win-round .r-col, .lawyer-page section.about nav a,
+.col-1, .lawyer-page article .gutter, .col-2, .col-3, .question-page aside, .question .published, .question .number, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .question-page main, .question .author, .question .content, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content, .col, .col-form-label, .win-round .r-col, .question h1, .lawyer-page section.about nav a,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, section.review-section .lawyer-page section.header .r-col, .lawyer-page section.header section.review-section .r-col, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, section.questions-section header h3, .col-md-12, .col-md,
 .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
@@ -645,7 +646,7 @@ pre {
   padding-right: 15px;
   padding-left: 15px; }
 
-.col, .col-form-label, .win-round .r-col, .lawyer-page section.about nav a {
+.col, .col-form-label, .win-round .r-col, .question h1, .lawyer-page section.about nav a {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%; }
@@ -663,7 +664,7 @@ pre {
   flex: 0 0 16.6666666667%;
   max-width: 16.6666666667%; }
 
-.col-3 {
+.col-3, .question-page aside, .question .published, .question .number {
   flex: 0 0 25%;
   max-width: 25%; }
 
@@ -687,7 +688,7 @@ pre {
   flex: 0 0 66.6666666667%;
   max-width: 66.6666666667%; }
 
-.col-9 {
+.col-9, .question-page main, .question .author, .question .content {
   flex: 0 0 75%;
   max-width: 75%; }
 
@@ -1683,7 +1684,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   flex-wrap: wrap;
   margin-right: -5px;
   margin-left: -5px; }
-  .form-row > .col, .form-row > .col-form-label, .win-round .form-row > .r-col, .lawyer-page section.about nav .form-row > a,
+  .form-row > .col, .form-row > .col-form-label, .win-round .form-row > .r-col, .question .form-row > h1, .lawyer-page section.about nav .form-row > a,
   .form-row > [class*="col-"] {
     padding-right: 5px;
     padding-left: 5px; }
@@ -1941,9 +1942,20 @@ form {
   border: 3px solid white;
   background-color: #878787; }
 
-/*&[type="checkbox"]:disabled + label:before { //
-  border-color: $gray-100;
-}*/
+.file-input {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer; }
+  .file-input input {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+    display: block; }
+
 .btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .lawyer-page section.header button {
   display: inline-block;
   font-weight: 600;
@@ -2370,6 +2382,8 @@ input[type="button"].btn-block {
 .btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .lawyer-page section.header button {
   cursor: pointer;
   border-width: 2px; }
+  .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .lawyer-page section.header button:disabled {
+    cursor: auto; }
 
 .btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .lawyer-page section.header button {
   border-width: 1px; }
@@ -4997,7 +5011,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .lawyer-page section.about .medals {
+.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .question .info, .lawyer-page section.about .medals {
   display: flex !important; }
 
 .d-inline-flex {
@@ -5209,7 +5223,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div {
+.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div, .question .info {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -5800,7 +5814,7 @@ a.bg-white:focus, a.bg-white:hover {
 .mx-3 {
   margin-right: 1rem !important; }
 
-.mb-3, section.questions-section article .number, section.questions-section article .answer .answer-header, .lawyer-page article .content h5,
+.mb-3, section.questions-section article .number, section.questions-section article .answer .answer-header, .question .info, .lawyer-page article .content h5,
 .my-3 {
   margin-bottom: 1rem !important; }
 
@@ -7029,7 +7043,7 @@ section.lawyer-section .lawyer-page section.header .r-col,
 .text-left {
   text-align: left !important; }
 
-.text-right {
+.text-right, .question .published, .question .number {
   text-align: right !important; }
 
 .text-center, .mlo-navbar .title, .mlo-navbar .lawyer-page section.header .r-col, .lawyer-page section.header .mlo-navbar .r-col, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .lawyer-page section.header .l-col {
@@ -7207,9 +7221,9 @@ section {
     color: #878787; }
     section.gray > .container, section.gray > section.advantage-section {
       position: relative; }
-    section.gray h1, section.gray h2, section.gray h3, section.gray h4 {
+    section.gray h1, section.gray h2, section.gray .question h1, .question section.gray h1, section.gray h3, section.gray h4 {
       color: #4c7efd; }
-    section.gray h2, section.gray .lead {
+    section.gray h2, section.gray .question h1, .question section.gray h1, section.gray .lead {
       margin-bottom: 2.5rem; }
     section.gray:before {
       background-color: #f5f5f5; }
@@ -7541,6 +7555,26 @@ footer.main-footer {
     background-image: url("/static/img/lyr/lawyer-card.svg");
     width: 320px;
     height: 440px; }
+
+.question-page header {
+  height: 10rem;
+  background-image: url("/static/img/bgr/main-header.jpg");
+  background-position: center;
+  background-size: 100% auto; }
+.question-page main {
+  padding-right: 2.8125rem; }
+.question-page aside {
+  padding-left: 2.8125rem; }
+
+.question h1 {
+  margin-bottom: 2.5rem; }
+.question .author h6 {
+  margin: 0; }
+.question .number {
+  color: #bababa; }
+.question .content {
+  font-weight: 300;
+  font-size: 1.125rem; }
 
 .lawyer-page dt {
   color: #878787; }

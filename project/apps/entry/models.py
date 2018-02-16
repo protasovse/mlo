@@ -9,6 +9,8 @@ from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED
 from apps.rubric.models import Classified
 from config.settings import AUTH_USER_MODEL
 
+CONSULT_COST = 800
+
 STATUS_CHOICES = ((DELETED, _('Удалённый')),
                   (DRAFT, _('Черновик')),
                   (PUBLISHED, _('Опубликован')))

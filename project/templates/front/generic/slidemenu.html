@@ -19,10 +19,15 @@
     </div>
 
     <footer>
-        <p><a href="/auth/login/" class="btn btn-outline-primary btn-sm">Личный кабинет
-            <i class="icon-person ml-2"></i></a></p>
-        <p class="text">или <a class="gray" href="/auth/registration/">Зарегистрируйтесь</a> на
-            сайте юридической помощи «Мойюрист.онлайн»</p>
+        {% if user.is_authenticated %}
+            <p><a href="/auth/logout/" class="btn btn-outline-primary btn-sm">Выйти
+                <i class="icon-nav-arrow-right ml-1"></i></a></p>
+        {% else %}
+            <p><a href="/auth/login/" class="btn btn-outline-primary btn-sm">Личный кабинет
+                <i class="icon-person ml-2"></i></a></p>
+            <p class="text">или <a class="gray" href="/auth/registration/">Зарегистрируйтесь</a> на
+                сайте юридической помощи «Мойюрист.онлайн»</p>
+        {% endif %}
     </footer>
 
 </div>

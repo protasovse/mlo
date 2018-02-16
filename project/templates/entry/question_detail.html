@@ -1,0 +1,113 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% load markdown %}
+
+{% block content %}
+
+    <div class="question-page">
+
+        <header>
+        </header>
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+
+                <main>
+
+                    <article id="question-{{ question.pk }}" class="question" itemscope
+                             itemtype="http://schema.org/Question">
+
+                        <div class="row">
+                            <h1 itemprop="name">{{ question.title }}</h1>
+                        </div>
+
+                        <div class="info">
+
+                            <time class="published" datetime="{{ question.pub_date|date:"c" }}"
+                                  itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
+
+                            <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                                <h6 itemprop="name">{{ question.author.get_full_name }}</h6>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="number">
+                                № {{ question.pk }}<br>
+                                <span>{{ question.author.info_set.first.city.name }}</span>
+                            </div>
+
+                            <div class="content" itemprop="text">
+                                {{ question.content|markdown|safe }}
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </main>
+
+                <aside>
+                    kjkjhk
+                </aside>
+
+            </div>
+
+        </div>
+    </div>
+    {% comment %}
+
+    <footer class="question-footer">
+        {# Файлы #}
+        {#% include 'questions/snippets/files.html' with files=question.files.all %#}
+        {% with rubrics=question.rubrics.all %}
+            {% if rubrics|length %}
+                <nav class="question-rubrics"><span>Рубрики:</span>{% for rubric in rubrics %}
+                    <a href="{{ rubric.get_absolute_url }}"
+                       class="question-rubrics_link"
+                       title="Показать все вопросы в рубрике: {{ rubric }}"
+                       rel="tag category">{{ rubric }}</a>
+                {% endfor %}</nav>{% endif %}
+        {% endwith %}
+    </footer>
+
+    <hr>
+
+    <footer class="actions">
+        <ul class="action-list">
+            <li class="action-item">
+                <a href="#" class="action-link" data-handler="show_answer_form"
+                   data-href="{% url 'action' %}" data-on_question="{{ question.pk }}">Ответить</a>
+            </li>
+            <li class="action-item">
+                {#% include 'questions/snippets/comment_action.html' with count=question.comment_count id=question.pk %#}
+            </li>
+            <li class="action-item">
+                <a href="#" class="action-link">Отметить вопрос как…</a>
+            </li>
+        </ul>
+        <div class="additional-content">
+            <div id="answer-form"></div>
+            <div id="comments-{{ question.pk }}"></div>
+        </div>
+    </footer>
+
+    {# Ответы #}
+
+        <section class="section section_answers">
+            <header class="section-header">
+                <h3>Ответы <span class="section-header__counter" id="answers_counter"
+                                 itemprop="answerCount">{{ question.answer_count }}</span></h3>
+            </header>
+            <div id="answers">
+                <ul class="answer-list">
+                    {% if answers|length %}{% for answer in answers %}
+                        {#% include 'questions/snippets/answer.html' with answer=answer %#}
+                    {% endfor %}{% endif %}
+                </ul>
+            </div>
+        </section>
+{% endcomment %}
+{% endblock %}
