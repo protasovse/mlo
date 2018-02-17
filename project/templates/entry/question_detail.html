@@ -7,6 +7,22 @@
     <div class="question-page">
 
         <header>
+            <div class="container">
+                <div class="row">
+                    <div class="l-col">
+                        <h2 class="l">Консультируйся с юристом онлайн</h2>
+                        <h2 class="s">Бесплатный звонок юристу: <a class="tel" href="tel:84955682478">8 495 568-24-78</a></h2>
+                        <p class="phone">или по телефону: <a class="tel" href="tel:84955682478">8 495 568-24-78</a></p>
+                        <p class="l">Бесплатные или платные юридические консультации, лучших юристов.</p>
+                    </div>
+                    <div class="r-col">
+                        <form action="{% url 'ask_question' %}">
+                            <textarea id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
+                            <button type="submit">Задать вопрос юристу</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <div class="container" style="margin-top: 60px;">

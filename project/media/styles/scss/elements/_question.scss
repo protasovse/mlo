@@ -1,12 +1,68 @@
 .question-page {
 
   header {
-    height: line(8);
+    padding-top: line(5);
+    padding-bottom: line(2);
+    // height: line(8);
     background: {
-      image: url("#{$img_dir}/bgr/main-header.jpg");
+      image: url("#{$img_dir}/bgr/bg-1.jpg");
       position: center;
-      size: 100% auto;
+      size: cover;
     }
+    .l-col {
+      @extend .col-12, .col-lg-5, .ml-auto, .d-flex, .flex-column, .justify-content-center;
+      color: $white;
+      h2 {
+        @extend .pb-lg-4;
+      }
+      p {
+        @extend .lead, .pb-lg-4;
+      }
+      .tel {
+        color: rgb(255, 255, 204);
+        white-space: nowrap;
+        font-weight: $font-weight-semibold;
+      }
+      .phone {
+        @include media-breakpoint-up(md){
+          display: none;
+        }
+      }
+    }
+
+    .r-col {
+      @extend .col-12, .col-lg-5, .mr-auto;
+      form {
+        padding: line(2);
+        background-color: $white;
+        border-radius: line(1);
+        & > * {
+          @extend .mb-1;
+          display: inline-block;
+          width: 100%;
+          @include media-breakpoint-down(md) {
+            width: auto;
+          }
+        }
+        button {
+          @extend .btn, .btn-primary, .btn-lg;
+        }
+        textarea {
+          @extend .border, .p-2, .d-none, .d-lg-block;
+          border-radius: $border-radius-lg;
+          height: line(8.5);
+        }
+        @include media-breakpoint-down(md) {
+          background: none;
+          padding: 0;
+        }
+      }
+    }
+
+    @include media-breakpoint-down(md) {
+      text-align: center;
+    }
+
   }
 
   main {
@@ -57,9 +113,8 @@
   }
 
   .content {
-    @extend %r-col;
+    @extend %r-col, .lead;
     font-weight: $font-weight-light;
-    font-size: $h5-font-size;
   }
 
 }

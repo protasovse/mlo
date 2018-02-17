@@ -1,20 +1,20 @@
-h5, h6 {
+h5, h6, .h5, .h6 {
   font-weight: $font-weight-semibold;
 }
 
-h6 {
+h6, .h6 {
   line-height: 1.375em;
 }
 
-h5 {
+h5, .h5 {
   line-height: 1.3888889em;
 }
 
-h4 {
+h4, .h4 {
   line-height: 1.5em;
 }
 
-h3 {
+h3, .h3 {
   line-height: 1.3461539em;
   @include media-breakpoint-down(sm) {
     font-size: $h4-font-size;
@@ -22,7 +22,7 @@ h3 {
   }
 }
 
-h2 {
+h2, .h2 {
   line-height: 1.25em;
   @include media-breakpoint-down(md) {
     font-size: $h3-font-size;
@@ -45,7 +45,7 @@ h2 {
       @include media-breakpoint-down(sm) {
         padding-bottom: 20px;
         padding-right: 0;
-        height:  3.125rem;
+        height: 3.125rem;
         display: block;
         text-align: center;
       }
@@ -53,7 +53,7 @@ h2 {
   }
 }
 
-h1 {
+h1, .h1 {
   line-height: 1.2037037em;
   @include media-breakpoint-down(md) {
     font-size: $h2-font-size;
@@ -81,6 +81,16 @@ h1 {
   line-height: 1.3888889em;
 }
 
+.lead {
+  font-size: $lead-font-size;
+  line-height: 1.5em;
+}
+
 a.gray {
   color: $gray-800;
+}
+
+.tel {
+  text-decoration: none!important;
+  border-bottom: dashed 1px $white;
 }
