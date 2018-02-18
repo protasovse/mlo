@@ -14,7 +14,6 @@ SEX = (
 
 
 class AccountBase(models.Model):
-
     user = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -27,6 +26,89 @@ class AccountBase(models.Model):
 
     class Meta:
         abstract = True
+
+
+class RatingTypes(models.Model):
+    """
+    Типы баллов рейтинга.
+    """
+    key = models.CharField(
+        _('Ключ'),
+        max_length=128,
+    )
+
+    description = models.TextField(
+        _('Описание'),
+    )
+
+    value = models.IntegerField(
+        _('Балл'),
+    )
+
+    class Meta:
+        verbose_name = _('Рейтинг: тип')
+        verbose_name_plural = _('Рейтинг: типы')
+
+    def __str__(self):
+        return '%s (%d)' % (self.description, self.value)
+
+
+class Rating(models.Model):
+    """
+    Баллы рейтинга пользователей
+    """
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name=_('Пользователь')
+    )
+
+    date = models.DateTimeField(
+        auto_now=True,
+        db_index=True,
+        verbose_name=_('Дата'),
+    )
+
+    value = models.IntegerField(
+        _('Балл'),
+        editable=False,
+    )
+
+    type = models.ForeignKey(RatingTypes, on_delete=models.NOT_PROVIDED)
+
+    class Meta:
+        verbose_name = _('Рейтинг: балл')
+        verbose_name_plural = _('Рейтинг: баллы')
+
+    def save(self, *args, **kwargs):
+        self.value = self.type.value
+        return super(Rating, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '%s: %d — %s (%s)' % (self.user, self.value, self.type.key, self.date)
+
+
+class RatingResult(models.Model):
+    """
+    Рейтинг — суммы баллов
+    """
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name=_('Пользователь')
+    )
+
+    value = models.IntegerField(
+        _('Балл'),
+        db_index=True,
+    )
+
+    class Meta:
+        verbose_name = _('Рейтинг: результаты')
+        verbose_name_plural = _('Рейтинг: результаты')
+
+    def __str__(self):
+        return '%d: %s' % (self.value, self.user)
 
 
 class Info(AccountBase):
@@ -115,7 +197,7 @@ class Case(AccountBase):
         verbose_name_plural = _('Кейсы')
 
     def __str__(self):
-        return 'Кейс: «%s»' % (self.title, )
+        return 'Кейс: «%s»' % (self.title,)
 
 
 class Education(AccountBase):

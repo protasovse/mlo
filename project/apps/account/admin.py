@@ -1,7 +1,7 @@
 from django.contrib import admin
 from image_cropping import ImageCroppingMixin
 
-from apps.account.models import Info, Case, Education, Experience, Contact
+from apps.account.models import Info, Case, Education, Experience, Contact, RatingTypes, Rating, RatingResult
 from apps.sxgeo.models import Cities
 
 
@@ -45,6 +45,21 @@ class EducationAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
     autocomplete_fields = ['user']
+
+
+@admin.register(RatingTypes)
+class RatingTypesAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(RatingResult)
+class RatingResultAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Info, InfoAdmin)
