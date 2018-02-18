@@ -24,7 +24,7 @@
         font-weight: $font-weight-semibold;
       }
       .phone {
-        @include media-breakpoint-up(md){
+        @include media-breakpoint-up(md) {
           display: none;
         }
       }
@@ -61,6 +61,15 @@
 
     @include media-breakpoint-down(md) {
       text-align: center;
+      .l {
+        display: none;
+      }
+    }
+
+    @include media-breakpoint-up(sm) {
+      .s {
+        display: none;
+      }
     }
 
   }
@@ -102,19 +111,70 @@
 
   .author {
     @extend %r-col;
-    h6 {
+    h5 {
       margin: 0;
     }
   }
 
   .number {
     @extend %l-col, .normal;
+    margin-top: line(.25);
     color: $gray-500;
   }
 
   .content {
-    @extend %r-col, .lead;
-    font-weight: $font-weight-light;
+    @extend %r-col;
+    .text {
+      @extend .lead;
+      font-weight: $font-weight-light;
+    }
   }
+
+  .rubrics {
+    @extend .normal;
+    .rubric-item {
+      &:before {
+        @extend .mr-2;
+        content: '\e908';
+        font-family: icomoon;
+        color: $gray-200;
+      }
+      &:after {
+        @extend .mr-3;
+        content: ',';
+      }
+      &:last-of-type {
+        &:after {
+          content: none;
+        }
+      }
+      a {
+        color: $gray-800;
+      }
+    }
+  }
+
+  .brick {
+    margin: line(1) 0 0;
+    padding: line(.75) line(.5) line(.75) line(1.5);
+    background-color: $gray-100;
+    border-radius: line(.5);
+    font-size: $font-size-base;
+    font-weight: normal;
+
+    .file-item {
+      @extend .mb-1;
+      &:before {
+        @extend .mr-2;
+        content: '\e911';
+        font-family: icomoon;
+        color: $gray-500;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  // блок файлов
 
 }

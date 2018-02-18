@@ -4,3 +4,6 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+body, #app {
+  min-width: 320px;
+}

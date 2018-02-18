@@ -384,7 +384,7 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1rem; }
 
-.lead, .question-page header .l-col p, .question .content {
+.lead, .question-page header .l-col p, .question .content .text {
   font-size: 1.25rem;
   font-weight: 100; }
 
@@ -513,7 +513,7 @@ h1, .h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question .number, .lawyer-page article .check {
+.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question .number, .question .rubrics, .lawyer-page article .check, .lawyer-list .lawyer-list-item {
   font-size: 0.875rem;
   line-height: 1.25rem; }
 
@@ -521,7 +521,7 @@ h1, .h1 {
   font-size: 1.125rem;
   line-height: 1.3888889em; }
 
-.lead, .question-page header .l-col p, .question .content {
+.lead, .question-page header .l-col p, .question .content .text {
   font-size: 1.25rem;
   line-height: 1.5em; }
 
@@ -5103,7 +5103,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .question-page header .l-col, .question .info, .lawyer-page section.about .medals {
+.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .question-page header .l-col, .question .info, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header {
   display: flex !important; }
 
 .d-inline-flex {
@@ -5315,7 +5315,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div, .question .info {
+.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div, .question .info, .lawyer-list .lawyer-list-item-header {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -5868,7 +5868,7 @@ a.bg-white:focus, a.bg-white:hover {
 .mx-1 {
   margin-right: 0.25rem !important; }
 
-.mb-1, .question-page header .r-col form > *,
+.mb-1, .question-page header .r-col form > *, .question .brick .file-item,
 .my-1 {
   margin-bottom: 0.25rem !important; }
 
@@ -5879,11 +5879,11 @@ a.bg-white:focus, a.bg-white:hover {
 .m-2 {
   margin: 0.5rem !important; }
 
-.mt-2, .file-loader,
+.mt-2, .file-loader, .lawyer-list .lawyer-list-item-about,
 .my-2 {
   margin-top: 0.5rem !important; }
 
-.mr-2, .lawyer-page section.about nav a i,
+.mr-2, .question .rubrics .rubric-item:before, .question .brick .file-item:before, .lawyer-page section.about nav a i,
 .mx-2 {
   margin-right: 0.5rem !important; }
 
@@ -5902,7 +5902,7 @@ a.bg-white:focus, a.bg-white:hover {
 .my-3 {
   margin-top: 1rem !important; }
 
-.mr-3, .col-form-label, section.questions-section article .answer .answer-header .usr,
+.mr-3, .col-form-label, section.questions-section article .answer .answer-header .usr, .question .rubrics .rubric-item:after,
 .mx-3 {
   margin-right: 1rem !important; }
 
@@ -7282,6 +7282,9 @@ a.text-white:focus, a.text-white:hover {
   overflow-y: scroll;
   overflow-x: hidden; }
 
+body, #app {
+  min-width: 320px; }
+
 section {
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -7317,7 +7320,7 @@ section {
       position: relative; }
     section.gray h1, section.gray h2, section.gray .question h1, .question section.gray h1, section.gray h3, section.gray h4 {
       color: #4c7efd; }
-    section.gray h2, section.gray .question h1, .question section.gray h1, section.gray .lead, section.gray .question-page header .l-col p, .question-page header .l-col section.gray p, section.gray .question .content, .question section.gray .content {
+    section.gray h2, section.gray .question h1, .question section.gray h1, section.gray .lead, section.gray .question-page header .l-col p, .question-page header .l-col section.gray p, section.gray .question .content .text, .question .content section.gray .text {
       margin-bottom: 2.5rem; }
     section.gray:before {
       background-color: #f5f5f5; }
@@ -7684,7 +7687,12 @@ footer.main-footer {
         padding: 0; } }
   @media (max-width: 991px) {
     .question-page header {
-      text-align: center; } }
+      text-align: center; }
+      .question-page header .l {
+        display: none; } }
+  @media (min-width: 576px) {
+    .question-page header .s {
+      display: none; } }
 .question-page main {
   padding-right: 2.8125rem; }
 .question-page aside {
@@ -7692,12 +7700,36 @@ footer.main-footer {
 
 .question h1 {
   margin-bottom: 2.5rem; }
-.question .author h6 {
+.question .author h5 {
   margin: 0; }
 .question .number {
+  margin-top: 0.3125rem;
   color: #bababa; }
-.question .content {
+.question .content .text {
   font-weight: 300; }
+.question .rubrics .rubric-item:before {
+  content: '\e908';
+  font-family: icomoon;
+  color: #e6e6e6; }
+.question .rubrics .rubric-item:after {
+  content: ','; }
+.question .rubrics .rubric-item:last-of-type:after {
+  content: none; }
+.question .rubrics .rubric-item a {
+  color: #545454; }
+.question .brick {
+  margin: 1.25rem 0 0;
+  padding: 0.9375rem 0.625rem 0.9375rem 1.875rem;
+  background-color: #f5f5f5;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  font-weight: normal; }
+  .question .brick .file-item:before {
+    content: '\e911';
+    font-family: icomoon;
+    color: #bababa; }
+  .question .brick .file-item:last-of-type {
+    margin-bottom: 0; }
 
 .lawyer-page dt {
   color: #878787; }
@@ -7709,7 +7741,7 @@ footer.main-footer {
   padding-bottom: 0; }
   .lawyer-page section.header h1 {
     margin-bottom: 30px; }
-  .lawyer-page section.header .lead, .lawyer-page section.header .question-page header .l-col p, .question-page header .l-col .lawyer-page section.header p, .lawyer-page section.header .question .content, .question .lawyer-page section.header .content {
+  .lawyer-page section.header .lead, .lawyer-page section.header .question-page header .l-col p, .question-page header .l-col .lawyer-page section.header p, .lawyer-page section.header .question .content .text, .question .content .lawyer-page section.header .text {
     font-size: 18px;
     margin-bottom: 40px; }
   .lawyer-page section.header .photo {
@@ -7726,7 +7758,7 @@ footer.main-footer {
 .lawyer-page section.about {
   padding-top: 3.75rem;
   padding-bottom: 3.75rem; }
-  .lawyer-page section.about .lead, .lawyer-page section.about .question-page header .l-col p, .question-page header .l-col .lawyer-page section.about p, .lawyer-page section.about .question .content, .question .lawyer-page section.about .content {
+  .lawyer-page section.about .lead, .lawyer-page section.about .question-page header .l-col p, .question-page header .l-col .lawyer-page section.about p, .lawyer-page section.about .question .content .text, .question .content .lawyer-page section.about .text {
     font-size: 18px; }
   .lawyer-page section.about .medals {
     width: 300px; }
@@ -7826,5 +7858,15 @@ footer.main-footer {
       font-size: 1rem;
       top: 0;
       left: 2.9rem; }
+
+.lawyer-list h4 {
+  margin-bottom: 1.875rem; }
+.lawyer-list .lawyer-list-item-header img {
+  margin-right: 0.625rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%; }
+.lawyer-list .lawyer-list-item-about {
+  color: #bababa; }
 
 /*# sourceMappingURL=style.css.map */

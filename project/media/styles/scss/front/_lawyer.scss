@@ -204,3 +204,30 @@ $photo-height: 360px;
     }
   }
 }
+
+.lawyer-list {
+
+  h4 {
+    margin-bottom: line(1.5);
+  }
+
+  .lawyer-list-item {
+    @extend .normal;
+
+  }
+
+  .lawyer-list-item-header {
+    @extend .d-flex, .align-items-center;
+    img {
+      margin-right: line(.5);
+      width: line(2);
+      height: line(2);
+      border-radius: 50%;
+    }
+  }
+
+  .lawyer-list-item-about {
+    @extend .mt-2;
+    color: $gray-500;
+  }
+}

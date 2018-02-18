@@ -10,13 +10,14 @@
             <div class="container">
                 <div class="row">
                     <div class="l-col">
-                        <h2 class="l">Консультируйся с юристом онлайн</h2>
-                        <h2 class="s">Бесплатный звонок юристу: <a class="tel" href="tel:84955682478">8 495 568-24-78</a></h2>
-                        <p class="phone">или по телефону: <a class="tel" href="tel:84955682478">8 495 568-24-78</a></p>
+                        <h2><span class="l">Консультируйся с юристом онлайн</span>
+                            <span class="s">Бесплатный звонок юристу</span></h2>
+                        <p class="phone"><span class="l">или по телефону: </span><a class="tel" href="tel:84955682478">8
+                            495 568-24-78</a></p>
                         <p class="l">Бесплатные или платные юридические консультации, лучших юристов.</p>
                     </div>
                     <div class="r-col">
-                        <form action="{% url 'ask_question' %}">
+                        <form class="l" action="{% url 'ask_question' %}">
                             <textarea id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
                             <button type="submit">Задать вопрос юристу</button>
                         </form>
@@ -43,7 +44,7 @@
                                   itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
 
                             <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                <h6 itemprop="name">{{ question.author.get_full_name }}</h6>
+                                <h5 itemprop="name">{{ question.author.get_full_name }}</h5>
                             </div>
 
                         </div>
@@ -55,9 +56,31 @@
                                 <span>{{ question.author.info_set.first.city.name }}</span>
                             </div>
 
-                            <div class="content" itemprop="text">
-                                {{ question.content|markdown|safe }}
+                            <div class="content">
+
+                                <div class="text" itemprop="text">{{ question.content|markdown|safe }}</div>
+
+                                {% if question.files.count %}
+                                <div class="files brick">
+                                    {% for file in question.files.all %}
+                                        <div class="file-item"><a href="#">{{ file.get_basename }}</a></div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+
+                                <hr class="my-4">
+
+                                {% include 'front/generic/yandex-share.html' %}
+
+                                {% if question.rubrics.count %}
+                                    <br>
+                                    <p class="rubrics">{% for rubric in question.rubrics.all %}
+                                        <span class="rubric-item"><a href="#">{{ rubric }}</a></span>
+                                    {% endfor %}</p>
+                                {% endif %}
+
                             </div>
+
 
                         </div>
 
@@ -66,7 +89,28 @@
                 </main>
 
                 <aside>
-                    kjkjhk
+                    <div class="lawyer-list">
+                        <h4>Лучшие эксперты</h4>
+                        <div class="lawyer-list-item">
+                            <div class="lawyer-list-item-header">
+                                <img src="http://svem.ru/files/ephoto/n8195.jpg" />
+                                <a href="#">Мещерякова Ольга Васильевна</a>
+                            </div>
+                            <p class="lawyer-list-item-about">Юридические услуги по РФ: наследственные, семейные,
+                                жилищные…</p>
+                        </div>
+                        <div class="lawyer-list-item">
+                            <div class="lawyer-list-item-header">
+                                <img src="http://svem.ru/files/ephoto/n1.jpg" />
+                                <a href="#">Протасов Сергей</a>
+                            </div>
+                            <p class="lawyer-list-item-about">Руководитель Мойюрист.онлайн…</p>
+                        </div>
+
+                    </div>
+                    {% if question.consult.count %}
+                        Платная
+                    {% endif %}
                 </aside>
 
             </div>
