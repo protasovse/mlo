@@ -46,8 +46,8 @@ class RatingTypes(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Рейтинг: тип')
-        verbose_name_plural = _('Рейтинг: типы')
+        verbose_name = _('Рейтинг: тип баллов')
+        verbose_name_plural = _('Рейтинг: типы баллов')
 
     def __str__(self):
         return '%s (%d)' % (self.description, self.value)
@@ -104,8 +104,8 @@ class RatingResult(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Рейтинг: результаты')
-        verbose_name_plural = _('Рейтинг: результаты')
+        verbose_name = _('Рейтинг: сумма балов')
+        verbose_name_plural = _('Рейтинг: сумма балов')
 
     def __str__(self):
         return '%d: %s' % (self.value, self.user)
