@@ -206,14 +206,14 @@ $photo-height: 360px;
 }
 
 .lawyer-list {
+  @extend .mb-4;
 
   h4 {
     margin-bottom: line(1.5);
   }
 
   .lawyer-list-item {
-    @extend .normal;
-
+    @extend .normal, .mb-4;
   }
 
   .lawyer-list-item-header {
@@ -229,5 +229,31 @@ $photo-height: 360px;
   .lawyer-list-item-about {
     @extend .mt-2;
     color: $gray-500;
+  }
+
+  .consult-state {
+    @extend .mb-3;
+    color: $green;
+    font-weight: $font-weight-normal;
+    &:before {
+      @extend .mr-2;
+      content: '\e912';
+      font-family: icomoon;
+    }
+    &.inwork {
+      &:before {
+        content: '\e91a';
+      }
+    }
+  }
+
+  .consult-lawyer {
+    @extend .d-flex;
+    a.pht {
+      @include photo-mask(75px, 90px, "fff", "fff");
+    }
+    h6 {
+      @extend .ml-3;
+    }
   }
 }

@@ -19,7 +19,8 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
     search_fields = ['user__last_name']
-    autocomplete_fields = ['user', 'city']
+    autocomplete_fields = ['city']
+    raw_id_fields = ['user']
 
 
 @admin.register(Contact)
@@ -59,7 +60,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 @admin.register(RatingResult)
 class RatingResultAdmin(admin.ModelAdmin):
-    pass
+    autocomplete_fields = ['user']
 
 
 admin.site.register(Info, InfoAdmin)

@@ -17,6 +17,7 @@ class AccountBase(models.Model):
     user = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        related_name="%(class)s",
         verbose_name=_('Пользователь')
     )
     last_update = models.DateTimeField(
@@ -111,10 +112,16 @@ class RatingResult(models.Model):
         return '%d: %s' % (self.value, self.user)
 
 
-class Info(AccountBase):
+class Info(models.Model):
     """
     Общая информация
     """
+    user = models.OneToOneField(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="%(class)s",
+        verbose_name=_('Пользователь')
+    )
 
     birth_date = models.DateField(blank=True, null=True,
                                   verbose_name=_('Дата рождения'))

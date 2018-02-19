@@ -1,0 +1,11 @@
+{% load cropping %}
+<div class="lawyer-list">
+    <h5 class="consult-state {{ item.state.key }}">{{ item.state }}</h5>
+    <p class="subtitle">Цена консультации</p>
+    <p class="cost rub">{{ item.cost }}</p>
+    <p class="subtitle">Консультацию ведёт эксперт</p>
+    <div class="consult-lawyer">
+        <a class="pht" href="{% url 'lawyer_page' item.question.author.pk  %}"><img src="{% cropped_thumbnail item.question.author.info 'photo' %}" /></a>
+        <h6><a href="{% url 'lawyer_page' item.question.author.pk  %}">{{ item.question.author }}</a></h6>
+    </div>
+</div>

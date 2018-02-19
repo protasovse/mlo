@@ -245,7 +245,7 @@ class ConsultState(models.Model):
         verbose_name_plural = _('Состояния платных консультаций')
 
     def __str__(self):
-        return "%s (%s)" % (self.key, self.state)
+        return self.state
 
 
 class Consult(models.Model):

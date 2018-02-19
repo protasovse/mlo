@@ -61,11 +61,11 @@
                                 <div class="text" itemprop="text">{{ question.content|markdown|safe }}</div>
 
                                 {% if question.files.count %}
-                                <div class="files brick">
-                                    {% for file in question.files.all %}
-                                        <div class="file-item"><a href="#">{{ file.get_basename }}</a></div>
-                                    {% endfor %}
-                                </div>
+                                    <div class="files brick">
+                                        {% for file in question.files.all %}
+                                            <div class="file-item"><a href="#">{{ file.get_basename }}</a></div>
+                                        {% endfor %}
+                                    </div>
                                 {% endif %}
 
                                 <hr class="my-4">
@@ -89,28 +89,15 @@
                 </main>
 
                 <aside>
-                    <div class="lawyer-list">
-                        <h4>Лучшие эксперты</h4>
-                        <div class="lawyer-list-item">
-                            <div class="lawyer-list-item-header">
-                                <img src="http://svem.ru/files/ephoto/n8195.jpg" />
-                                <a href="#">Мещерякова Ольга Васильевна</a>
-                            </div>
-                            <p class="lawyer-list-item-about">Юридические услуги по РФ: наследственные, семейные,
-                                жилищные…</p>
-                        </div>
-                        <div class="lawyer-list-item">
-                            <div class="lawyer-list-item-header">
-                                <img src="http://svem.ru/files/ephoto/n1.jpg" />
-                                <a href="#">Протасов Сергей</a>
-                            </div>
-                            <p class="lawyer-list-item-about">Руководитель Мойюрист.онлайн…</p>
-                        </div>
 
-                    </div>
                     {% if question.consult.count %}
-                        Платная
+                        {% include 'entry/generic/consult_block.html' with item=question.consult.first  %}
                     {% endif %}
+
+                    {% if rating.count %}
+                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
+                    {% endif %}
+
                 </aside>
 
             </div>

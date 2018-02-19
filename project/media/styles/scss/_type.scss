@@ -94,3 +94,15 @@ a.gray {
   text-decoration: none!important;
   border-bottom: dashed 1px $white;
 }
+
+.cost {
+  color: $gray-900;
+  font-size: $font-size-lg;
+}
+
+.rub {
+  &:after {
+    @extend .ml-2;
+    content: '₽';
+  }
+}
