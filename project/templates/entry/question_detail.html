@@ -28,10 +28,11 @@
         </header>
 
         {# Содержание страницы вопроса #}
-        <div class="container" style="margin-top: 60px;">
+        <div class="question-page-content">
+
             <div class="row">
 
-                {# Основная часть #}
+                {# Основная часть — вопрос #}
                 <main>
 
                     {# Вопрос #}
@@ -43,28 +44,25 @@
                             <h1 itemprop="name">{{ question.title }}</h1>
                         </div>
 
-                        {# Инфо #}
-                        <div class="row">
-                            <time class="l-col subtitle" datetime="{{ question.pub_date|date:"c" }}"
-                                  itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
-
-                            <div class="r-col author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                <h5 itemprop="name">{{ question.author.get_full_name }}</h5>
-                            </div>
-                        </div>
-
-                        {# Техт #}
+                        {# Инфо, текст #}
                         <div class="row">
 
-                            <div class="l-col number">
-                                № {{ question.pk }}<br>
-                                <span>{{ question.author.info_set.first.city.name }}</span>
+                            <div class="l-col">
+                                <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
+                                      itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time><br>
+                                <span>№ {{ question.pk }}</span><br>
+                                <span>{{ question.author.info.city.name }}</span>
                             </div>
 
                             <div class="r-col content">
 
+                                {# Имя #}
+                                <h5 class="my-3 my-sm-0" itemprop="name">{{ question.author.get_full_name }}</h5>
+
+                                {# Текст #}
                                 <div class="text-lead" itemprop="text">{{ question.content|markdown|safe }}</div>
 
+                                {# Файлы #}
                                 {% if question.files.count %}
                                     <div class="files brick">
                                         {% for file in question.files.all %}
@@ -86,30 +84,47 @@
 
                             </div>
 
-
-                        </div>
-
-                        {# Ответы #}
-                        <div class="answer-list">
-
-                            <h3 class="ml-auto">Ответы <span class="answer__counter" id="answers_counter"
-                                                             itemprop="answerCount">{{ question.reply_count }}</span>
-                            </h3>
-                            {% for answer in answers %}
-                                {% include 'entry/generic/answer_item.html' with item=answer %}
-                            {% endfor %}
                         </div>
 
                     </article>
 
                 </main>
 
-                {# Боковая колонка  #}
+                {# Боковая колонка 1  #}
                 <aside>
 
-                    {% if question.consult.count %}
+                    {% if question.is_pay %}
                         {% include 'entry/generic/consult_block.html' with item=question.consult.first %}
                     {% endif %}
+
+                </aside>
+
+            </div>
+
+            <div class="row gradient">
+
+                {# Основная часть — ответы #}
+                <main>
+                    {# Ответы #}
+                    {% if question.reply_count > 0 %}
+
+                        <div class="row">
+                            <h3 class="answer-list-head">Ответы экспертов
+                                {% if question.reply_count %}<span class="answer__counter" id="answers_counter"
+                                                                   itemprop="answerCount">{{ question.reply_count }}</span>{% endif %}
+                            </h3>
+                        </div>
+
+                        {% for answer in answers %}
+                            {% include 'entry/generic/answer_item.html' with item=answer %}
+                        {% endfor %}
+
+                    {% endif %}
+
+                </main>
+
+                {# Боковая колонка 2  #}
+                <aside>
 
                     {% if rating.count %}
                         {% include 'entry/generic/lawyer_rate.html' with items=rating %}

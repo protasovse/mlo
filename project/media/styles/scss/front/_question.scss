@@ -1,100 +1,128 @@
-.question-page {
-
-  header.page {
-    padding-top: line(5);
-    padding-bottom: line(2);
-    // height: line(8);
-    background: {
-      image: url("#{$img_dir}/bgr/bg-1.jpg");
-      position: center;
-      size: cover;
+header.page {
+  padding-top: line(5);
+  padding-bottom: line(2);
+  // height: line(8);
+  background: {
+    image: url("#{$img_dir}/bgr/bg-1.jpg");
+    position: center;
+    size: cover;
+  }
+  .l-col {
+    @extend .col-12, .col-lg-5, .ml-auto, .d-flex, .flex-column, .justify-content-center;
+    color: $white;
+    h2 {
+      @extend .pb-lg-4;
     }
-    .l-col {
-      @extend .col-12, .col-lg-5, .ml-auto, .d-flex, .flex-column, .justify-content-center;
-      color: $white;
-      h2 {
-        @extend .pb-lg-4;
-      }
-      p {
-        @extend .lead, .pb-lg-4;
-      }
-      .tel {
-        color: rgb(255, 255, 204);
-        white-space: nowrap;
-        font-weight: $font-weight-semibold;
-      }
-      .phone {
-        @include media-breakpoint-up(md) {
-          display: none;
-        }
+    p {
+      @extend .lead, .pb-lg-4;
+    }
+    .tel {
+      color: rgb(255, 255, 204);
+      white-space: nowrap;
+      font-weight: $font-weight-semibold;
+    }
+    .phone {
+      @include media-breakpoint-up(md) {
+        display: none;
       }
     }
+  }
 
-    .r-col {
-      @extend .col-12, .col-lg-5, .mr-auto;
-      form {
-        padding: line(2);
-        background-color: $white;
-        border-radius: line(1);
-        & > * {
-          @extend .mb-1;
-          display: inline-block;
-          width: 100%;
-          @include media-breakpoint-down(md) {
-            width: auto;
-          }
-        }
-        button {
-          @extend .btn, .btn-primary, .btn-lg;
-        }
-        textarea {
-          @extend .border, .p-2, .d-none, .d-lg-block;
-          border-radius: $border-radius-lg;
-          height: line(8.5);
-        }
+  .r-col {
+    @extend .col-12, .col-lg-5, .mr-auto;
+    form {
+      padding: line(2);
+      background-color: $white;
+      border-radius: line(1);
+      & > * {
+        @extend .mb-1;
+        display: inline-block;
+        width: 100%;
         @include media-breakpoint-down(md) {
-          background: none;
-          padding: 0;
+          width: auto;
         }
       }
-    }
-
-    @include media-breakpoint-down(md) {
-      text-align: center;
-      .l {
-        display: none;
+      button {
+        @extend .btn, .btn-primary, .btn-lg;
+      }
+      textarea {
+        @extend .border, .p-2, .d-none, .d-lg-block;
+        border-radius: $border-radius-lg;
+        height: line(8.5);
+      }
+      @include media-breakpoint-down(md) {
+        background: none;
+        padding: 0;
       }
     }
+  }
 
-    @include media-breakpoint-up(sm) {
-      .s {
-        display: none;
-      }
+  @include media-breakpoint-down(md) {
+    text-align: center;
+    .l {
+      display: none;
     }
-
   }
 
-  main {
-    @extend .col-9, .mb-5;
-    padding-right: line(2.25);
+  @include media-breakpoint-up(sm) {
+    .s {
+      display: none;
+    }
   }
 
-  aside {
-    @extend .col-3;
-    padding-left: line(2.25);
-  }
+}
 
+.question-page-content {
+  @extend .container;
+  margin-top: line(3);
+
+  @include media-breakpoint-down(lg) {
+    max-width: none;
+  }
+  .gradient {
+    position: relative;
+    padding-top: line(3);
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      height: line(10);
+      top: 0;
+      left: 0;
+      right: 0;
+      margin-left: -1000px;
+      margin-right: -1000px;
+      background: linear-gradient(180deg, $gray-100, $white);
+    }
+  }
+}
+
+main {
+  @extend .col-12, .col-md-9, .mb-5;
+  padding-right: line(2.25);
+  @include media-breakpoint-down(lg) {
+    padding-right: line(1);
+  }
+}
+
+aside {
+  @extend .col-12, .col-md-3;
+  padding-left: line(2.25);
+  @include media-breakpoint-down(lg) {
+    padding-left: line(1);
+  }
 }
 
 .entry {
 
   .l-col {
-    @extend .col-3, .ml-auto, .text-right, .normal;
+    @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
     color: $gray-500;
+    line-height: line(1);
   }
 
   .r-col {
-    @extend .col-9;
+    @extend .col-12, .col-lg-9;
   }
 
   h1 {
@@ -158,60 +186,72 @@
     }
   }
 
-  .answer {
+  &.answer-push {
+    padding-left: line(4);
+    @include media-breakpoint-down(md) {
+      padding-left: 0;
+    }
+  }
 
-    &.answer-push {
+  .answer-header {
+    @extend .mb-2;
+    display: flex;
+    flex-direction: row;
+    @include media-breakpoint-down(md) {
+      flex-wrap: nowrap;
+      .l-col {
+        flex: auto;
+      }
       .r-col {
-        @extend .col-8;
-      }
-    }
-
-    .answer-header {
-      h5 {
-        margin-bottom: 0;
-      }
-    }
-
-    .answer-header-photo {
-      display: inline-block;
-      width: line(4);
-      height: line(4);
-      border-radius: 50%;
-      overflow: hidden;
-      img {
-        width: 100%;
-      }
-    }
-
-    .answer-header-stat {
-      @extend .small, .text-muted;
-      .item {
-        @extend .mr-3, .d-inline-flex, .align-items-center;
-        cursor: pointer;
-        i {
-          @extend .mr-2, .normal;
-          color: $gray-200;
-        }
-        &:hover {
-          i {
-            color: $light-blue;
-          }
-        }
-      }
-    }
-
-    .header-photo-small {
-      .answer-header-photo {
-        width: line(2);
-        height: line(2);
-      }
-      .answer-header-stat {
-        display: none;
+        flex: 1 0.11 auto;
       }
     }
   }
 
+  .answer-header-photo {
+    display: inline-block;
+    width: line(4);
+    height: line(4);
+    @include media-breakpoint-down(md) {
+      width: line(2);
+      height: line(2);
+    }
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+
+  .answer-header-medal {
+    @extend .small, .text-muted;
+    .item {
+      @extend .mr-4, .d-inline-flex, .align-items-center;
+      cursor: pointer;
+      i {
+        @extend .mr-2, .normal;
+        color: $gray-200;
+      }
+      &:hover {
+        i {
+          color: $light-blue;
+        }
+      }
+    }
+  }
+
+  .header-photo-small {
+    .answer-header-photo {
+      width: line(2);
+      height: line(2);
+    }
+    .answer-header-stat {
+      display: none;
+    }
+  }
+
   .answer-footer-like {
+    @extend .d-flex, .align-items-center, .justify-content-end;
     .answer-footer-like-sign {
       @extend .normal, .mr-2;
       color: $gray-500;
@@ -237,6 +277,17 @@
       }
     }
   }
+}
 
-  // блок файлов
+.answer-list-head {
+  @extend .col-12, .ml-auto;
+  margin-bottom: line(1);
+  .answer__counter {
+    &:before {
+      content: '(';
+    }
+    &:after {
+      content: ')';
+    }
+  }
 }
