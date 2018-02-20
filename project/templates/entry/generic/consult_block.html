@@ -5,7 +5,7 @@
     <p class="cost rub">{{ item.cost }}</p>
     <p class="subtitle">Консультацию ведёт эксперт</p>
     <div class="consult-lawyer">
-        <a class="pht" href="{% url 'lawyer_page' item.question.author.pk  %}"><img src="{% cropped_thumbnail item.question.author.info 'photo' %}" /></a>
-        <h6><a href="{% url 'lawyer_page' item.question.author.pk  %}">{{ item.question.author }}</a></h6>
+        <a class="pht" href="{% url 'lawyer_page' item.expert.pk  %}"><img src="{% cropped_thumbnail item.expert.info 'photo' %}" /></a>
+        <h6><a href="{% url 'lawyer_page' item.expert.pk  %}">{{ item.expert }}</a></h6>
     </div>
 </div>

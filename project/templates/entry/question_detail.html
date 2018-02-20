@@ -6,6 +6,7 @@
 
     <div class="question-page">
 
+        {# Хедер страницы вопроса #}
         <header class="page">
             <div class="container">
                 <div class="row">
@@ -26,11 +27,14 @@
             </div>
         </header>
 
+        {# Содержание страницы вопроса #}
         <div class="container" style="margin-top: 60px;">
             <div class="row">
 
+                {# Основная часть #}
                 <main>
 
+                    {# Вопрос #}
                     <article id="question-{{ question.pk }}" class="entry question" itemscope
                              itemtype="http://schema.org/Question">
 
@@ -100,6 +104,7 @@
 
                 </main>
 
+                {# Боковая колонка  #}
                 <aside>
 
                     {% if question.consult.count %}

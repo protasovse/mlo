@@ -75,7 +75,7 @@
   }
 
   main {
-    @extend .col-9;
+    @extend .col-9, .mb-5;
     padding-right: line(2.25);
   }
 
@@ -89,7 +89,7 @@
 .entry {
 
   .l-col {
-    @extend .col-3, .text-right, .normal;
+    @extend .col-3, .ml-auto, .text-right, .normal;
     color: $gray-500;
   }
 
@@ -160,6 +160,18 @@
 
   .answer {
 
+    &.answer-push {
+      .r-col {
+        @extend .col-8;
+      }
+    }
+
+    .answer-header {
+      h5 {
+        margin-bottom: 0;
+      }
+    }
+
     .answer-header-photo {
       display: inline-block;
       width: line(4);
@@ -173,31 +185,54 @@
 
     .answer-header-stat {
       @extend .small, .text-muted;
-      span {
+      .item {
         @extend .mr-3, .d-inline-flex, .align-items-center;
+        cursor: pointer;
         i {
           @extend .mr-2, .normal;
           color: $gray-200;
         }
+        &:hover {
+          i {
+            color: $light-blue;
+          }
+        }
+      }
+    }
+
+    .header-photo-small {
+      .answer-header-photo {
+        width: line(2);
+        height: line(2);
+      }
+      .answer-header-stat {
+        display: none;
       }
     }
   }
 
   .answer-footer-like {
-    @extend .border, .d-inline-flex, .justify-content-center;
-    border-radius: line(2);
-    padding: line(.5) line(1);
-    color: $gray-500;
-    span {
-      padding: 0 line(.5);
+    .answer-footer-like-sign {
+      @extend .normal, .mr-2;
+      color: $gray-500;
     }
-    i {
-      font-size: line(1);
-      cursor: pointer;
-      &.icon-dislike:hover, &.icon-dislike.active {
+    .answer-footer-like-block {
+      @extend .border, .d-inline-flex, .justify-content-center;
+      border-radius: line(2);
+      padding: line(.5) line(1);
+      color: $gray-500;
+      span {
+        padding: 0 line(.5);
+        font-weight: $font-weight-semibold;
+      }
+      i {
+        font-size: line(1);
+        cursor: pointer;
+      }
+      .icon-dislike:hover, .icon-dislike.active, .dislike {
         color: $red;
       }
-      &.icon-like:hover, &.icon-dislike.active {
+      .icon-like:hover, .icon-dislike.active, .like {
         color: $green;
       }
     }

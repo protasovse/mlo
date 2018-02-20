@@ -75,9 +75,9 @@ class ConsultAdmin(admin.ModelAdmin):
     """
     fieldsets = (
         (_('Content'), {
-            'fields': ('question', 'cost', 'experts', 'state')}),
+            'fields': ('question', 'cost', 'expert', 'state')}),
         )
-    autocomplete_fields = ['experts']
+    autocomplete_fields = ['expert']
     raw_id_fields = ['question']
     list_filter = ['state']
     # inlines = (AnswersForQuestionInLine, FilesInLine,)

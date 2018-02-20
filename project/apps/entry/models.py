@@ -265,7 +265,7 @@ class Consult(models.Model):
         related_name='consult'
     )
 
-    experts = models.ForeignKey(
+    expert = models.ForeignKey(
         AUTH_USER_MODEL,
         null=True,
         blank=True,
@@ -305,7 +305,7 @@ class Consult(models.Model):
     def to_in_work(self, user_id=None):
         if self.state.key != 'new':
             if user_id is not None:
-                self.experts.add(user_id)
+                self.expert.add(user_id)
             self.state = ConsultState.objects.get(key='inwork')
             self.save()
             return True
