@@ -6,7 +6,7 @@
 
     <div class="question-page">
 
-        <header>
+        <header class="page">
             <div class="container">
                 <div class="row">
                     <div class="l-col">
@@ -31,34 +31,35 @@
 
                 <main>
 
-                    <article id="question-{{ question.pk }}" class="question" itemscope
+                    <article id="question-{{ question.pk }}" class="entry question" itemscope
                              itemtype="http://schema.org/Question">
 
+                        {# Заголовок #}
                         <div class="row">
                             <h1 itemprop="name">{{ question.title }}</h1>
                         </div>
 
-                        <div class="info">
-
-                            <time class="published" datetime="{{ question.pub_date|date:"c" }}"
+                        {# Инфо #}
+                        <div class="row">
+                            <time class="l-col subtitle" datetime="{{ question.pub_date|date:"c" }}"
                                   itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
 
-                            <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                            <div class="r-col author" itemprop="author" itemscope itemtype="http://schema.org/Person">
                                 <h5 itemprop="name">{{ question.author.get_full_name }}</h5>
                             </div>
-
                         </div>
 
+                        {# Техт #}
                         <div class="row">
 
-                            <div class="number">
+                            <div class="l-col number">
                                 № {{ question.pk }}<br>
                                 <span>{{ question.author.info_set.first.city.name }}</span>
                             </div>
 
-                            <div class="content">
+                            <div class="r-col content">
 
-                                <div class="text" itemprop="text">{{ question.content|markdown|safe }}</div>
+                                <div class="text-lead" itemprop="text">{{ question.content|markdown|safe }}</div>
 
                                 {% if question.files.count %}
                                     <div class="files brick">
@@ -84,6 +85,17 @@
 
                         </div>
 
+                        {# Ответы #}
+                        <div class="answer-list">
+
+                            <h3 class="ml-auto">Ответы <span class="answer__counter" id="answers_counter"
+                                                             itemprop="answerCount">{{ question.reply_count }}</span>
+                            </h3>
+                            {% for answer in answers %}
+                                {% include 'entry/generic/answer_item.html' with item=answer %}
+                            {% endfor %}
+                        </div>
+
                     </article>
 
                 </main>
@@ -91,7 +103,7 @@
                 <aside>
 
                     {% if question.consult.count %}
-                        {% include 'entry/generic/consult_block.html' with item=question.consult.first  %}
+                        {% include 'entry/generic/consult_block.html' with item=question.consult.first %}
                     {% endif %}
 
                     {% if rating.count %}

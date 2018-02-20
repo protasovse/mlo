@@ -2,6 +2,7 @@ from django.contrib import admin
 from image_cropping import ImageCroppingMixin
 
 from apps.account.models import Info, Case, Education, Experience, Contact, RatingTypes, Rating, RatingResult
+from apps.entry.models import Likes
 from apps.sxgeo.models import Cities
 
 
@@ -61,6 +62,11 @@ class RatingAdmin(admin.ModelAdmin):
 @admin.register(RatingResult)
 class RatingResultAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user']
+
+
+@admin.register(Likes)
+class RatingAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Info, InfoAdmin)

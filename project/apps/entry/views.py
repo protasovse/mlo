@@ -5,7 +5,7 @@ from django.db import connection
 from django.views.generic import DetailView
 
 from apps.account.models import RatingResult
-from apps.entry.models import Question
+from apps.entry.models import Question, Answer
 
 
 class QuestionDetail(DetailView):
@@ -28,5 +28,7 @@ class QuestionDetail(DetailView):
         print(context['rating'])
         """
         context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
-        print(context['rating'])
+
+        context['answers'] = Answer.answers.related_to_question(context['object']).filter(parent_id=None)
+
         return context

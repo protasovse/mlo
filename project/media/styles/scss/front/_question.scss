@@ -1,6 +1,6 @@
 .question-page {
 
-  header {
+  header.page {
     padding-top: line(5);
     padding-bottom: line(2);
     // height: line(8);
@@ -86,13 +86,14 @@
 
 }
 
-.question {
+.entry {
 
-  %l-col {
-    @extend .col-3, .text-right;
+  .l-col {
+    @extend .col-3, .text-right, .normal;
+    color: $gray-500;
   }
 
-  %r-col {
+  .r-col {
     @extend .col-9;
   }
 
@@ -101,30 +102,11 @@
     margin-bottom: line(2);
   }
 
-  .info {
-    @extend .row, .d-flex, .align-items-center, .mb-3;
-  }
-
-  .published {
-    @extend %l-col, .subtitle;
-  }
-
-  .author {
-    @extend %r-col;
-    h5 {
-      margin: 0;
-    }
-  }
-
-  .number {
-    @extend %l-col, .normal;
-    margin-top: line(.25);
-    color: $gray-500;
-  }
-
   .content {
-    @extend %r-col;
     .text {
+      font-size: $font-size-lg;
+    }
+    .text-lead {
       @extend .lead;
       font-weight: $font-weight-light;
     }
@@ -175,6 +157,51 @@
       }
     }
   }
-  // блок файлов
 
+  .answer {
+
+    .answer-header-photo {
+      display: inline-block;
+      width: line(4);
+      height: line(4);
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+
+    .answer-header-stat {
+      @extend .small, .text-muted;
+      span {
+        @extend .mr-3, .d-inline-flex, .align-items-center;
+        i {
+          @extend .mr-2, .normal;
+          color: $gray-200;
+        }
+      }
+    }
+  }
+
+  .answer-footer-like {
+    @extend .border, .d-inline-flex, .justify-content-center;
+    border-radius: line(2);
+    padding: line(.5) line(1);
+    color: $gray-500;
+    span {
+      padding: 0 line(.5);
+    }
+    i {
+      font-size: line(1);
+      cursor: pointer;
+      &.icon-dislike:hover, &.icon-dislike.active {
+        color: $red;
+      }
+      &.icon-like:hover, &.icon-dislike.active {
+        color: $green;
+      }
+    }
+  }
+
+  // блок файлов
 }

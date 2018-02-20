@@ -64,12 +64,12 @@
 
   p,
   h2,
-  .question h1,
+  .entry h1,
   h3 {
     orphans: 3;
     widows: 3; }
 
-  h2, .question h1,
+  h2, .entry h1,
   h3 {
     page-break-after: avoid; }
 
@@ -111,7 +111,7 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   color: #545454;
   text-align: left;
   background-color: #fff; }
@@ -124,7 +124,7 @@ hr {
   height: 0;
   overflow: visible; }
 
-h1, h2, .question h1, h3, h4, h5, h6 {
+h1, h2, .entry h1, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
@@ -359,7 +359,7 @@ template {
 [hidden] {
   display: none !important; }
 
-h1, h2, .question h1, h3, h4, h5, h6,
+h1, h2, .entry h1, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
@@ -370,7 +370,7 @@ h1, h2, .question h1, h3, h4, h5, h6,
 h1, .h1 {
   font-size: 3.375rem; }
 
-h2, .question h1, .h2 {
+h2, .entry h1, .h2 {
   font-size: 2.5rem; }
 
 h3, .h3 {
@@ -385,7 +385,7 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1rem; }
 
-.lead, .question-page header .l-col p, .question .content .text {
+.lead, .question-page header.page .l-col p, .entry .content .text-lead {
   font-size: 1.25rem;
   font-weight: 100; }
 
@@ -416,7 +416,8 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 small, .form-group .invalid-feedback, .form-group .valid-feedback,
-.small {
+.small,
+.entry .answer .answer-header-stat {
   font-size: 80%;
   font-weight: 400; }
 
@@ -472,28 +473,28 @@ h3, .h3 {
       font-size: 1.25rem;
       line-height: 1.5em; } }
 
-h2, .question h1, .h2 {
+h2, .entry h1, .h2 {
   line-height: 1.25em; }
   @media (max-width: 991px) {
-    h2, .question h1, .h2 {
+    h2, .entry h1, .h2 {
       font-size: 1.625rem;
       line-height: 1.3461539em; } }
-  h2.logo, .question h1.logo, .h2.logo {
-    margin-bottom: 2.5rem; }
+  h2.logo, .entry h1.logo, .h2.logo {
+    margin-bottom: 2.7777777778rem; }
     @media (max-width: 767px) {
-      h2.logo, .question h1.logo, .h2.logo {
+      h2.logo, .entry h1.logo, .h2.logo {
         text-align: center;
-        margin-bottom: 1.25rem; } }
-    h2.logo:before, .question h1.logo:before, .h2.logo:before {
+        margin-bottom: 1.3888888889rem; } }
+    h2.logo:before, .entry h1.logo:before, .h2.logo:before {
       font-family: icomoon;
       content: '\e92b';
       font-size: 3.125rem; }
       @media (min-width: 576px) {
-        h2.logo:before, .question h1.logo:before, .h2.logo:before {
+        h2.logo:before, .entry h1.logo:before, .h2.logo:before {
           padding-right: 1.25rem;
           vertical-align: bottom; } }
       @media (max-width: 767px) {
-        h2.logo:before, .question h1.logo:before, .h2.logo:before {
+        h2.logo:before, .entry h1.logo:before, .h2.logo:before {
           padding-bottom: 20px;
           padding-right: 0;
           height: 3.125rem;
@@ -507,22 +508,22 @@ h1, .h1 {
       font-size: 2.5rem;
       line-height: 1.25em; } }
 
-.subtitle, section.questions-section article .date, .lawyer-card .lawyer-card-title p, .lawyer-card .lawyer-card-body h6, .question .published, .lawyer-page section.about .medal {
+.subtitle, section.questions-section article .date, .lawyer-card .lawyer-card-title p, .lawyer-card .lawyer-card-body h6, .lawyer-page section.about .medal {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question .number, .question .rubrics, .lawyer-page article .check, .lawyer-list .lawyer-list-item {
+.normal, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, section.questions-section article .number, section.questions-section article .answer .answer-header, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .entry .l-col, .entry .rubrics, .entry .answer .answer-header-stat span i, .lawyer-page article .check, .lawyer-list .lawyer-list-item {
   font-size: 0.875rem;
-  line-height: 1.25rem; }
+  line-height: 1.3888888889rem; }
 
 .large {
   font-size: 1.125rem;
   line-height: 1.3888889em; }
 
-.lead, .question-page header .l-col p, .question .content .text {
+.lead, .question-page header.page .l-col p, .entry .content .text-lead {
   font-size: 1.25rem;
   line-height: 1.5em; }
 
@@ -635,7 +636,7 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
-.row, section.advantage-section .advantages, section.questions-section header, section.questions-section article, footer.main-footer > div, .question .info, .lawyer-page dl, .lawyer-page section.about nav {
+.row, section.advantage-section .advantages, section.questions-section header, section.questions-section article, footer.main-footer > div, .lawyer-page dl, .lawyer-page section.about nav {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -644,13 +645,13 @@ pre {
 .no-gutters, section.advantage-section .advantages {
   margin-right: 0;
   margin-left: 0; }
-  .no-gutters > .col, section.advantage-section .advantages > .col, .no-gutters > .col-form-label, section.advantage-section .advantages > .col-form-label, .win-round .no-gutters > .r-col, section.advantage-section .win-round .advantages > .r-col, .win-round section.advantage-section .advantages > .r-col, .question .no-gutters > h1, section.advantage-section .question .advantages > h1, .question section.advantage-section .advantages > h1, .lawyer-page section.about nav .no-gutters > a, section.advantage-section .lawyer-page section.about nav .advantages > a, .lawyer-page section.about nav section.advantage-section .advantages > a,
+  .no-gutters > .col, section.advantage-section .advantages > .col, .no-gutters > .col-form-label, section.advantage-section .advantages > .col-form-label, .win-round .no-gutters > .r-col, section.advantage-section .win-round .advantages > .r-col, .win-round section.advantage-section .advantages > .r-col, .entry .no-gutters > h1, section.advantage-section .entry .advantages > h1, .entry section.advantage-section .advantages > h1, .lawyer-page section.about nav .no-gutters > a, section.advantage-section .lawyer-page section.about nav .advantages > a, .lawyer-page section.about nav section.advantage-section .advantages > a,
   .no-gutters > [class*="col-"],
   section.advantage-section .advantages > [class*="col-"] {
     padding-right: 0;
     padding-left: 0; }
 
-.col-1, .lawyer-page article .gutter, .col-2, .col-3, .question-page aside, .question .published, .question .number, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .question-page main, .question .author, .question .content, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page header .l-col, .question-page header .r-col, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content, .col, .col-form-label, .win-round .r-col, .question h1, .lawyer-page section.about nav a,
+.col-1, .lawyer-page article .gutter, .col-2, .col-3, .question-page aside, .entry .l-col, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .question-page main, .entry .r-col, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page header.page .l-col, .question-page header.page .r-col, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content, .col, .col-form-label, .win-round .r-col, .entry h1, .lawyer-page section.about nav a,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, section.review-section .lawyer-page section.header .r-col, .lawyer-page section.header section.review-section .r-col, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, section.questions-section header h3, .col-md-12, .col-md,
 .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
@@ -662,7 +663,7 @@ pre {
   padding-right: 15px;
   padding-left: 15px; }
 
-.col, .col-form-label, .win-round .r-col, .question h1, .lawyer-page section.about nav a {
+.col, .col-form-label, .win-round .r-col, .entry h1, .lawyer-page section.about nav a {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%; }
@@ -680,7 +681,7 @@ pre {
   flex: 0 0 16.6666666667%;
   max-width: 16.6666666667%; }
 
-.col-3, .question-page aside, .question .published, .question .number {
+.col-3, .question-page aside, .entry .l-col {
   flex: 0 0 25%;
   max-width: 25%; }
 
@@ -704,7 +705,7 @@ pre {
   flex: 0 0 66.6666666667%;
   max-width: 66.6666666667%; }
 
-.col-9, .question-page main, .question .author, .question .content {
+.col-9, .question-page main, .entry .r-col {
   flex: 0 0 75%;
   max-width: 75%; }
 
@@ -716,7 +717,7 @@ pre {
   flex: 0 0 91.6666666667%;
   max-width: 91.6666666667%; }
 
-.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page header .l-col, .question-page header .r-col, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content {
+.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, section.questions-section article .date, section.questions-section article h6, section.questions-section article .number, section.questions-section article .content, section.questions-section article .answer, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page header.page .l-col, .question-page header.page .r-col, .lawyer-page dt, .lawyer-page dd, .lawyer-page section.header .l-col, .lawyer-page section.header .r-col, .lawyer-page section.about nav, .lawyer-page section.about .l-col, .lawyer-page section.about .r-col, .lawyer-page article .title, .lawyer-page article .content {
   flex: 0 0 100%;
   max-width: 100%; }
 
@@ -1085,7 +1086,7 @@ pre {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%; }
 
-  .col-lg-5, .question-page header .l-col, .question-page header .r-col, .lawyer-page section.header .l-col {
+  .col-lg-5, .question-page header.page .l-col, .question-page header.page .r-col, .lawyer-page section.header .l-col {
     flex: 0 0 41.6666666667%;
     max-width: 41.6666666667%; }
 
@@ -1544,7 +1545,7 @@ pre {
   width: 100%;
   padding: 0.625rem 0.875rem;
   font-size: 1rem;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   color: #545454;
   background-color: #fff;
   background-image: none;
@@ -1569,7 +1570,7 @@ pre {
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.5rem + 2px); }
+  height: calc(2.6388888889rem + 2px); }
 select.form-control:focus::-ms-value {
   color: #545454;
   background-color: #fff; }
@@ -1582,7 +1583,7 @@ select.form-control:focus::-ms-value {
   padding-top: calc(0.625rem + 1px);
   padding-bottom: calc(0.625rem + 1px);
   margin-bottom: 0;
-  line-height: 1.25; }
+  line-height: 1.3888888889; }
 
 .col-form-label-lg {
   padding-top: calc(0.90625rem + 1px);
@@ -1606,7 +1607,7 @@ select.form-control:focus::-ms-value {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   margin-bottom: 0;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   background-color: transparent;
   border: solid transparent;
   border-width: 1px 0; }
@@ -1620,7 +1621,7 @@ select.form-control:focus::-ms-value {
   .input-group-sm > .input-group-btn > .form-control-plaintext.btn-tw,
   .input-group-sm > .input-group-btn > .form-control-plaintext.btn-gl,
   section.gray .input-group-sm > .input-group-btn > button.form-control-plaintext,
-  .question-page header .r-col form .input-group-sm > .input-group-btn > button.form-control-plaintext,
+  .question-page header.page .r-col form .input-group-sm > .input-group-btn > button.form-control-plaintext,
   .lawyer-page section.header .input-group-sm > .input-group-btn > button.form-control-plaintext, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
   .input-group-lg > .form-control-plaintext.input-group-addon,
   .input-group-lg > .input-group-btn > .form-control-plaintext.btn,
@@ -1631,7 +1632,7 @@ select.form-control:focus::-ms-value {
   .input-group-lg > .input-group-btn > .form-control-plaintext.btn-tw,
   .input-group-lg > .input-group-btn > .form-control-plaintext.btn-gl,
   section.gray .input-group-lg > .input-group-btn > button.form-control-plaintext,
-  .question-page header .r-col form .input-group-lg > .input-group-btn > button.form-control-plaintext,
+  .question-page header.page .r-col form .input-group-lg > .input-group-btn > button.form-control-plaintext,
   .lawyer-page section.header .input-group-lg > .input-group-btn > button.form-control-plaintext {
     padding-right: 0;
     padding-left: 0; }
@@ -1646,7 +1647,7 @@ select.form-control:focus::-ms-value {
 .input-group-sm > .input-group-btn > .btn-tw,
 .input-group-sm > .input-group-btn > .btn-gl,
 section.gray .input-group-sm > .input-group-btn > button,
-.question-page header .r-col form .input-group-sm > .input-group-btn > button,
+.question-page header.page .r-col form .input-group-sm > .input-group-btn > button,
 .lawyer-page section.header .input-group-sm > .input-group-btn > button {
   padding: 0.5rem 0.5rem;
   font-size: 0.875rem;
@@ -1674,7 +1675,7 @@ select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.for
 .input-group-lg > .input-group-btn > .btn-tw,
 .input-group-lg > .input-group-btn > .btn-gl,
 section.gray .input-group-lg > .input-group-btn > button,
-.question-page header .r-col form .input-group-lg > .input-group-btn > button,
+.question-page header.page .r-col form .input-group-lg > .input-group-btn > button,
 .lawyer-page section.header .input-group-lg > .input-group-btn > button {
   padding: 0.90625rem 1rem;
   font-size: 1.125rem;
@@ -1704,7 +1705,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   flex-wrap: wrap;
   margin-right: -5px;
   margin-left: -5px; }
-  .form-row > .col, .form-row > .col-form-label, .win-round .form-row > .r-col, .question .form-row > h1, .lawyer-page section.about nav .form-row > a,
+  .form-row > .col, .form-row > .col-form-label, .win-round .form-row > .r-col, .entry .form-row > h1, .lawyer-page section.about nav .form-row > a,
   .form-row > [class*="col-"] {
     padding-right: 5px;
     padding-left: 5px; }
@@ -1976,7 +1977,7 @@ form {
     cursor: pointer;
     display: block; }
 
-.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page header .r-col form button, .lawyer-page section.header button {
+.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page header.page .r-col form button, .lawyer-page section.header button {
   display: inline-block;
   font-weight: 600;
   text-align: center;
@@ -1986,17 +1987,17 @@ form {
   border: 1px solid transparent;
   padding: 0.625rem 0.875rem;
   font-size: 1rem;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   border-radius: 0.25rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
-  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page header .r-col form button:focus, .lawyer-page section.header button:focus, .btn:hover, .btn-vk:hover, .btn-od:hover, .btn-ml:hover, .btn-fb:hover, .btn-tw:hover, .btn-gl:hover, section.gray button:hover, .question-page header .r-col form button:hover, .lawyer-page section.header button:hover {
+  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page header.page .r-col form button:focus, .lawyer-page section.header button:focus, .btn:hover, .btn-vk:hover, .btn-od:hover, .btn-ml:hover, .btn-fb:hover, .btn-tw:hover, .btn-gl:hover, section.gray button:hover, .question-page header.page .r-col form button:hover, .lawyer-page section.header button:hover {
     text-decoration: none; }
-  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page header .r-col form button:focus, .lawyer-page section.header button:focus, .btn.focus, .focus.btn-vk, .focus.btn-od, .focus.btn-ml, .focus.btn-fb, .focus.btn-tw, .focus.btn-gl, section.gray button.focus, .question-page header .r-col form button.focus, .lawyer-page section.header button.focus {
+  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page header.page .r-col form button:focus, .lawyer-page section.header button:focus, .btn.focus, .focus.btn-vk, .focus.btn-od, .focus.btn-ml, .focus.btn-fb, .focus.btn-tw, .focus.btn-gl, section.gray button.focus, .question-page header.page .r-col form button.focus, .lawyer-page section.header button.focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(46, 103, 251, 0.25); }
-  .btn.disabled, .disabled.btn-vk, .disabled.btn-od, .disabled.btn-ml, .disabled.btn-fb, .disabled.btn-tw, .disabled.btn-gl, section.gray button.disabled, .question-page header .r-col form button.disabled, .lawyer-page section.header button.disabled, .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page header .r-col form button:disabled, .lawyer-page section.header button:disabled {
+  .btn.disabled, .disabled.btn-vk, .disabled.btn-od, .disabled.btn-ml, .disabled.btn-fb, .disabled.btn-tw, .disabled.btn-gl, section.gray button.disabled, .question-page header.page .r-col form button.disabled, .lawyer-page section.header button.disabled, .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page header.page .r-col form button:disabled, .lawyer-page section.header button:disabled {
     opacity: .65; }
-  .btn:not([disabled]):not(.disabled):active, .btn-vk:not([disabled]):not(.disabled):active, .btn-od:not([disabled]):not(.disabled):active, .btn-ml:not([disabled]):not(.disabled):active, .btn-fb:not([disabled]):not(.disabled):active, .btn-tw:not([disabled]):not(.disabled):active, .btn-gl:not([disabled]):not(.disabled):active, section.gray button:not([disabled]):not(.disabled):active, .question-page header .r-col form button:not([disabled]):not(.disabled):active, .lawyer-page section.header button:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active, .btn-vk:not([disabled]):not(.disabled).active, .btn-od:not([disabled]):not(.disabled).active, .btn-ml:not([disabled]):not(.disabled).active, .btn-fb:not([disabled]):not(.disabled).active, .btn-tw:not([disabled]):not(.disabled).active, .btn-gl:not([disabled]):not(.disabled).active, section.gray button:not([disabled]):not(.disabled).active, .question-page header .r-col form button:not([disabled]):not(.disabled).active, .lawyer-page section.header button:not([disabled]):not(.disabled).active {
+  .btn:not([disabled]):not(.disabled):active, .btn-vk:not([disabled]):not(.disabled):active, .btn-od:not([disabled]):not(.disabled):active, .btn-ml:not([disabled]):not(.disabled):active, .btn-fb:not([disabled]):not(.disabled):active, .btn-tw:not([disabled]):not(.disabled):active, .btn-gl:not([disabled]):not(.disabled):active, section.gray button:not([disabled]):not(.disabled):active, .question-page header.page .r-col form button:not([disabled]):not(.disabled):active, .lawyer-page section.header button:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active, .btn-vk:not([disabled]):not(.disabled).active, .btn-od:not([disabled]):not(.disabled).active, .btn-ml:not([disabled]):not(.disabled).active, .btn-fb:not([disabled]):not(.disabled).active, .btn-tw:not([disabled]):not(.disabled).active, .btn-gl:not([disabled]):not(.disabled).active, section.gray button:not([disabled]):not(.disabled).active, .question-page header.page .r-col form button:not([disabled]):not(.disabled).active, .lawyer-page section.header button:not([disabled]):not(.disabled).active {
     background-image: none; }
 
 a.btn.disabled, a.disabled.btn-vk, a.disabled.btn-od, a.disabled.btn-ml, a.disabled.btn-fb, a.disabled.btn-tw, a.disabled.btn-gl,
@@ -2009,20 +2010,20 @@ fieldset[disabled] a.btn-tw,
 fieldset[disabled] a.btn-gl {
   pointer-events: none; }
 
-.btn-primary, section.gray button, .question-page header .r-col form button {
+.btn-primary, section.gray button, .question-page header.page .r-col form button {
   color: #fff;
   background-color: #2e67fb;
   border-color: #2e67fb; }
-  .btn-primary:hover, section.gray button:hover, .question-page header .r-col form button:hover {
+  .btn-primary:hover, section.gray button:hover, .question-page header.page .r-col form button:hover {
     color: #fff;
     background-color: #084cfa;
     border-color: #0546f1; }
-  .btn-primary:focus, section.gray button:focus, .question-page header .r-col form button:focus, .btn-primary.focus, section.gray button.focus, .question-page header .r-col form button.focus {
+  .btn-primary:focus, section.gray button:focus, .question-page header.page .r-col form button:focus, .btn-primary.focus, section.gray button.focus, .question-page header.page .r-col form button.focus {
     box-shadow: 0 0 0 0.2rem rgba(46, 103, 251, 0.5); }
-  .btn-primary.disabled, section.gray button.disabled, .question-page header .r-col form button.disabled, .btn-primary:disabled, section.gray button:disabled, .question-page header .r-col form button:disabled {
+  .btn-primary.disabled, section.gray button.disabled, .question-page header.page .r-col form button.disabled, .btn-primary:disabled, section.gray button:disabled, .question-page header.page .r-col form button:disabled {
     background-color: #2e67fb;
     border-color: #2e67fb; }
-  .btn-primary:not([disabled]):not(.disabled):active, section.gray button:not([disabled]):not(.disabled):active, .question-page header .r-col form button:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, section.gray button:not([disabled]):not(.disabled).active, .question-page header .r-col form button:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle, section.gray .show > button.dropdown-toggle, .question-page header .r-col form .show > button.dropdown-toggle {
+  .btn-primary:not([disabled]):not(.disabled):active, section.gray button:not([disabled]):not(.disabled):active, .question-page header.page .r-col form button:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, section.gray button:not([disabled]):not(.disabled).active, .question-page header.page .r-col form button:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle, section.gray .show > button.dropdown-toggle, .question-page header.page .r-col form .show > button.dropdown-toggle {
     color: #fff;
     background-color: #0546f1;
     border-color: #0443e5;
@@ -2375,13 +2376,13 @@ fieldset[disabled] a.btn-gl {
   .btn-link:disabled, .btn-link.disabled {
     color: #878787; }
 
-.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .btn-vk, .btn-group-lg > .btn-od, .btn-group-lg > .btn-ml, .btn-group-lg > .btn-fb, .btn-group-lg > .btn-tw, .btn-group-lg > .btn-gl, section.gray .btn-group-lg > button, .lawyer-page section.header .btn-group-lg > button, .question-page header .r-col form button {
+.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .btn-vk, .btn-group-lg > .btn-od, .btn-group-lg > .btn-ml, .btn-group-lg > .btn-fb, .btn-group-lg > .btn-tw, .btn-group-lg > .btn-gl, section.gray .btn-group-lg > button, .lawyer-page section.header .btn-group-lg > button, .question-page header.page .r-col form button {
   padding: 0.90625rem 1rem;
   font-size: 1.125rem;
   line-height: 1.5;
   border-radius: 0.3rem; }
 
-.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page header .r-col form .btn-group-sm > button, .lawyer-page section.header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page header.page .r-col form .btn-group-sm > button, .lawyer-page section.header button {
   padding: 0.5rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -2399,13 +2400,13 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
 
-.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page header .r-col form button, .lawyer-page section.header button {
+.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page header.page .r-col form button, .lawyer-page section.header button {
   cursor: pointer;
   border-width: 2px; }
-  .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page header .r-col form button:disabled, .lawyer-page section.header button:disabled {
+  .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page header.page .r-col form button:disabled, .lawyer-page section.header button:disabled {
     cursor: auto; }
 
-.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page header .r-col form .btn-group-sm > button, .lawyer-page section.header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page header.page .r-col form .btn-group-sm > button, .lawyer-page section.header button {
   border-width: 1px; }
 
 .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl {
@@ -2574,7 +2575,7 @@ tbody.collapse.show {
   position: relative;
   display: inline-flex;
   vertical-align: middle; }
-  .btn-group > .btn, .btn-group > .btn-vk, .btn-group > .btn-od, .btn-group > .btn-ml, .btn-group > .btn-fb, .btn-group > .btn-tw, .btn-group > .btn-gl, section.gray .btn-group > button, .question-page header .r-col form .btn-group > button, .lawyer-page section.header .btn-group > button,
+  .btn-group > .btn, .btn-group > .btn-vk, .btn-group > .btn-od, .btn-group > .btn-ml, .btn-group > .btn-fb, .btn-group > .btn-tw, .btn-group > .btn-gl, section.gray .btn-group > button, .question-page header.page .r-col form .btn-group > button, .lawyer-page section.header .btn-group > button,
   .btn-group-vertical > .btn,
   .btn-group-vertical > .btn-vk,
   .btn-group-vertical > .btn-od,
@@ -2583,11 +2584,11 @@ tbody.collapse.show {
   .btn-group-vertical > .btn-tw,
   .btn-group-vertical > .btn-gl,
   section.gray .btn-group-vertical > button,
-  .question-page header .r-col form .btn-group-vertical > button,
+  .question-page header.page .r-col form .btn-group-vertical > button,
   .lawyer-page section.header .btn-group-vertical > button {
     position: relative;
     flex: 0 1 auto; }
-    .btn-group > .btn:hover, .btn-group > .btn-vk:hover, .btn-group > .btn-od:hover, .btn-group > .btn-ml:hover, .btn-group > .btn-fb:hover, .btn-group > .btn-tw:hover, .btn-group > .btn-gl:hover, section.gray .btn-group > button:hover, .question-page header .r-col form .btn-group > button:hover, .lawyer-page section.header .btn-group > button:hover,
+    .btn-group > .btn:hover, .btn-group > .btn-vk:hover, .btn-group > .btn-od:hover, .btn-group > .btn-ml:hover, .btn-group > .btn-fb:hover, .btn-group > .btn-tw:hover, .btn-group > .btn-gl:hover, section.gray .btn-group > button:hover, .question-page header.page .r-col form .btn-group > button:hover, .lawyer-page section.header .btn-group > button:hover,
     .btn-group-vertical > .btn:hover,
     .btn-group-vertical > .btn-vk:hover,
     .btn-group-vertical > .btn-od:hover,
@@ -2596,10 +2597,10 @@ tbody.collapse.show {
     .btn-group-vertical > .btn-tw:hover,
     .btn-group-vertical > .btn-gl:hover,
     section.gray .btn-group-vertical > button:hover,
-    .question-page header .r-col form .btn-group-vertical > button:hover,
+    .question-page header.page .r-col form .btn-group-vertical > button:hover,
     .lawyer-page section.header .btn-group-vertical > button:hover {
       z-index: 2; }
-    .btn-group > .btn:focus, .btn-group > .btn-vk:focus, .btn-group > .btn-od:focus, .btn-group > .btn-ml:focus, .btn-group > .btn-fb:focus, .btn-group > .btn-tw:focus, .btn-group > .btn-gl:focus, section.gray .btn-group > button:focus, .question-page header .r-col form .btn-group > button:focus, .lawyer-page section.header .btn-group > button:focus, .btn-group > .btn:active, .btn-group > .btn-vk:active, .btn-group > .btn-od:active, .btn-group > .btn-ml:active, .btn-group > .btn-fb:active, .btn-group > .btn-tw:active, .btn-group > .btn-gl:active, section.gray .btn-group > button:active, .question-page header .r-col form .btn-group > button:active, .lawyer-page section.header .btn-group > button:active, .btn-group > .btn.active, .btn-group > .active.btn-vk, .btn-group > .active.btn-od, .btn-group > .active.btn-ml, .btn-group > .active.btn-fb, .btn-group > .active.btn-tw, .btn-group > .active.btn-gl, section.gray .btn-group > button.active, .question-page header .r-col form .btn-group > button.active, .lawyer-page section.header .btn-group > button.active,
+    .btn-group > .btn:focus, .btn-group > .btn-vk:focus, .btn-group > .btn-od:focus, .btn-group > .btn-ml:focus, .btn-group > .btn-fb:focus, .btn-group > .btn-tw:focus, .btn-group > .btn-gl:focus, section.gray .btn-group > button:focus, .question-page header.page .r-col form .btn-group > button:focus, .lawyer-page section.header .btn-group > button:focus, .btn-group > .btn:active, .btn-group > .btn-vk:active, .btn-group > .btn-od:active, .btn-group > .btn-ml:active, .btn-group > .btn-fb:active, .btn-group > .btn-tw:active, .btn-group > .btn-gl:active, section.gray .btn-group > button:active, .question-page header.page .r-col form .btn-group > button:active, .lawyer-page section.header .btn-group > button:active, .btn-group > .btn.active, .btn-group > .active.btn-vk, .btn-group > .active.btn-od, .btn-group > .active.btn-ml, .btn-group > .active.btn-fb, .btn-group > .active.btn-tw, .btn-group > .active.btn-gl, section.gray .btn-group > button.active, .question-page header.page .r-col form .btn-group > button.active, .lawyer-page section.header .btn-group > button.active,
     .btn-group-vertical > .btn:focus,
     .btn-group-vertical > .btn-vk:focus,
     .btn-group-vertical > .btn-od:focus,
@@ -2608,7 +2609,7 @@ tbody.collapse.show {
     .btn-group-vertical > .btn-tw:focus,
     .btn-group-vertical > .btn-gl:focus,
     section.gray .btn-group-vertical > button:focus,
-    .question-page header .r-col form .btn-group-vertical > button:focus,
+    .question-page header.page .r-col form .btn-group-vertical > button:focus,
     .lawyer-page section.header .btn-group-vertical > button:focus,
     .btn-group-vertical > .btn:active,
     .btn-group-vertical > .btn-vk:active,
@@ -2618,7 +2619,7 @@ tbody.collapse.show {
     .btn-group-vertical > .btn-tw:active,
     .btn-group-vertical > .btn-gl:active,
     section.gray .btn-group-vertical > button:active,
-    .question-page header .r-col form .btn-group-vertical > button:active,
+    .question-page header.page .r-col form .btn-group-vertical > button:active,
     .lawyer-page section.header .btn-group-vertical > button:active,
     .btn-group-vertical > .btn.active,
     .btn-group-vertical > .active.btn-vk,
@@ -2628,10 +2629,10 @@ tbody.collapse.show {
     .btn-group-vertical > .active.btn-tw,
     .btn-group-vertical > .active.btn-gl,
     section.gray .btn-group-vertical > button.active,
-    .question-page header .r-col form .btn-group-vertical > button.active,
+    .question-page header.page .r-col form .btn-group-vertical > button.active,
     .lawyer-page section.header .btn-group-vertical > button.active {
       z-index: 2; }
-  .btn-group .btn + .btn, .btn-group .btn-vk + .btn, .btn-group .btn-od + .btn, .btn-group .btn-ml + .btn, .btn-group .btn-fb + .btn, .btn-group .btn-tw + .btn, .btn-group .btn-gl + .btn, .btn-group section.gray button + .btn, section.gray .btn-group button + .btn, .btn-group .question-page header .r-col form button + .btn, .question-page header .r-col form .btn-group button + .btn, .btn-group .lawyer-page section.header button + .btn, .lawyer-page section.header .btn-group button + .btn, .btn-group .btn + .btn-vk, .btn-group .btn-vk + .btn-vk, .btn-group .btn-od + .btn-vk, .btn-group .btn-ml + .btn-vk, .btn-group .btn-fb + .btn-vk, .btn-group .btn-tw + .btn-vk, .btn-group .btn-gl + .btn-vk, .btn-group section.gray button + .btn-vk, section.gray .btn-group button + .btn-vk, .btn-group .question-page header .r-col form button + .btn-vk, .question-page header .r-col form .btn-group button + .btn-vk, .btn-group .lawyer-page section.header button + .btn-vk, .lawyer-page section.header .btn-group button + .btn-vk, .btn-group .btn + .btn-od, .btn-group .btn-vk + .btn-od, .btn-group .btn-od + .btn-od, .btn-group .btn-ml + .btn-od, .btn-group .btn-fb + .btn-od, .btn-group .btn-tw + .btn-od, .btn-group .btn-gl + .btn-od, .btn-group section.gray button + .btn-od, section.gray .btn-group button + .btn-od, .btn-group .question-page header .r-col form button + .btn-od, .question-page header .r-col form .btn-group button + .btn-od, .btn-group .lawyer-page section.header button + .btn-od, .lawyer-page section.header .btn-group button + .btn-od, .btn-group .btn + .btn-ml, .btn-group .btn-vk + .btn-ml, .btn-group .btn-od + .btn-ml, .btn-group .btn-ml + .btn-ml, .btn-group .btn-fb + .btn-ml, .btn-group .btn-tw + .btn-ml, .btn-group .btn-gl + .btn-ml, .btn-group section.gray button + .btn-ml, section.gray .btn-group button + .btn-ml, .btn-group .question-page header .r-col form button + .btn-ml, .question-page header .r-col form .btn-group button + .btn-ml, .btn-group .lawyer-page section.header button + .btn-ml, .lawyer-page section.header .btn-group button + .btn-ml, .btn-group .btn + .btn-fb, .btn-group .btn-vk + .btn-fb, .btn-group .btn-od + .btn-fb, .btn-group .btn-ml + .btn-fb, .btn-group .btn-fb + .btn-fb, .btn-group .btn-tw + .btn-fb, .btn-group .btn-gl + .btn-fb, .btn-group section.gray button + .btn-fb, section.gray .btn-group button + .btn-fb, .btn-group .question-page header .r-col form button + .btn-fb, .question-page header .r-col form .btn-group button + .btn-fb, .btn-group .lawyer-page section.header button + .btn-fb, .lawyer-page section.header .btn-group button + .btn-fb, .btn-group .btn + .btn-tw, .btn-group .btn-vk + .btn-tw, .btn-group .btn-od + .btn-tw, .btn-group .btn-ml + .btn-tw, .btn-group .btn-fb + .btn-tw, .btn-group .btn-tw + .btn-tw, .btn-group .btn-gl + .btn-tw, .btn-group section.gray button + .btn-tw, section.gray .btn-group button + .btn-tw, .btn-group .question-page header .r-col form button + .btn-tw, .question-page header .r-col form .btn-group button + .btn-tw, .btn-group .lawyer-page section.header button + .btn-tw, .lawyer-page section.header .btn-group button + .btn-tw, .btn-group .btn + .btn-gl, .btn-group .btn-vk + .btn-gl, .btn-group .btn-od + .btn-gl, .btn-group .btn-ml + .btn-gl, .btn-group .btn-fb + .btn-gl, .btn-group .btn-tw + .btn-gl, .btn-group .btn-gl + .btn-gl, .btn-group section.gray button + .btn-gl, section.gray .btn-group button + .btn-gl, .btn-group .question-page header .r-col form button + .btn-gl, .question-page header .r-col form .btn-group button + .btn-gl, .btn-group .lawyer-page section.header button + .btn-gl, .lawyer-page section.header .btn-group button + .btn-gl, .btn-group section.gray .btn + button, section.gray .btn-group .btn + button, .btn-group section.gray .btn-vk + button, section.gray .btn-group .btn-vk + button, .btn-group section.gray .btn-od + button, section.gray .btn-group .btn-od + button, .btn-group section.gray .btn-ml + button, section.gray .btn-group .btn-ml + button, .btn-group section.gray .btn-fb + button, section.gray .btn-group .btn-fb + button, .btn-group section.gray .btn-tw + button, section.gray .btn-group .btn-tw + button, .btn-group section.gray .btn-gl + button, section.gray .btn-group .btn-gl + button, .btn-group section.gray button + button, section.gray .btn-group button + button, .btn-group .question-page header .r-col form section.gray button + button, section.gray .btn-group .question-page header .r-col form button + button, .question-page header .r-col form .btn-group section.gray button + button, section.gray .question-page header .r-col form .btn-group button + button, .btn-group .lawyer-page section.header section.gray button + button, section.gray .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group section.gray button + button, section.gray .lawyer-page section.header .btn-group button + button, .btn-group .question-page header .r-col form .btn + button, .question-page header .r-col form .btn-group .btn + button, .btn-group .question-page header .r-col form .btn-vk + button, .question-page header .r-col form .btn-group .btn-vk + button, .btn-group .question-page header .r-col form .btn-od + button, .question-page header .r-col form .btn-group .btn-od + button, .btn-group .question-page header .r-col form .btn-ml + button, .question-page header .r-col form .btn-group .btn-ml + button, .btn-group .question-page header .r-col form .btn-fb + button, .question-page header .r-col form .btn-group .btn-fb + button, .btn-group .question-page header .r-col form .btn-tw + button, .question-page header .r-col form .btn-group .btn-tw + button, .btn-group .question-page header .r-col form .btn-gl + button, .question-page header .r-col form .btn-group .btn-gl + button, .btn-group section.gray .question-page header .r-col form button + button, .question-page header .r-col form .btn-group section.gray button + button, section.gray .btn-group .question-page header .r-col form button + button, .question-page header .r-col form section.gray .btn-group button + button, .btn-group .question-page header .r-col form button + button, .question-page header .r-col form .btn-group button + button, .btn-group .lawyer-page section.header .question-page header .r-col form button + button, .question-page header .r-col form .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group .question-page header .r-col form button + button, .question-page header .r-col form .lawyer-page section.header .btn-group button + button, .btn-group .lawyer-page section.header .btn + button, .lawyer-page section.header .btn-group .btn + button, .btn-group .lawyer-page section.header .btn-vk + button, .lawyer-page section.header .btn-group .btn-vk + button, .btn-group .lawyer-page section.header .btn-od + button, .lawyer-page section.header .btn-group .btn-od + button, .btn-group .lawyer-page section.header .btn-ml + button, .lawyer-page section.header .btn-group .btn-ml + button, .btn-group .lawyer-page section.header .btn-fb + button, .lawyer-page section.header .btn-group .btn-fb + button, .btn-group .lawyer-page section.header .btn-tw + button, .lawyer-page section.header .btn-group .btn-tw + button, .btn-group .lawyer-page section.header .btn-gl + button, .lawyer-page section.header .btn-group .btn-gl + button, .btn-group section.gray .lawyer-page section.header button + button, .lawyer-page section.header .btn-group section.gray button + button, section.gray .btn-group .lawyer-page section.header button + button, .lawyer-page section.header section.gray .btn-group button + button, .btn-group .question-page header .r-col form .lawyer-page section.header button + button, .lawyer-page section.header .btn-group .question-page header .r-col form button + button, .question-page header .r-col form .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .question-page header .r-col form .btn-group button + button, .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group button + button,
+  .btn-group .btn + .btn, .btn-group .btn-vk + .btn, .btn-group .btn-od + .btn, .btn-group .btn-ml + .btn, .btn-group .btn-fb + .btn, .btn-group .btn-tw + .btn, .btn-group .btn-gl + .btn, .btn-group section.gray button + .btn, section.gray .btn-group button + .btn, .btn-group .question-page header.page .r-col form button + .btn, .question-page header.page .r-col form .btn-group button + .btn, .btn-group .lawyer-page section.header button + .btn, .lawyer-page section.header .btn-group button + .btn, .btn-group .btn + .btn-vk, .btn-group .btn-vk + .btn-vk, .btn-group .btn-od + .btn-vk, .btn-group .btn-ml + .btn-vk, .btn-group .btn-fb + .btn-vk, .btn-group .btn-tw + .btn-vk, .btn-group .btn-gl + .btn-vk, .btn-group section.gray button + .btn-vk, section.gray .btn-group button + .btn-vk, .btn-group .question-page header.page .r-col form button + .btn-vk, .question-page header.page .r-col form .btn-group button + .btn-vk, .btn-group .lawyer-page section.header button + .btn-vk, .lawyer-page section.header .btn-group button + .btn-vk, .btn-group .btn + .btn-od, .btn-group .btn-vk + .btn-od, .btn-group .btn-od + .btn-od, .btn-group .btn-ml + .btn-od, .btn-group .btn-fb + .btn-od, .btn-group .btn-tw + .btn-od, .btn-group .btn-gl + .btn-od, .btn-group section.gray button + .btn-od, section.gray .btn-group button + .btn-od, .btn-group .question-page header.page .r-col form button + .btn-od, .question-page header.page .r-col form .btn-group button + .btn-od, .btn-group .lawyer-page section.header button + .btn-od, .lawyer-page section.header .btn-group button + .btn-od, .btn-group .btn + .btn-ml, .btn-group .btn-vk + .btn-ml, .btn-group .btn-od + .btn-ml, .btn-group .btn-ml + .btn-ml, .btn-group .btn-fb + .btn-ml, .btn-group .btn-tw + .btn-ml, .btn-group .btn-gl + .btn-ml, .btn-group section.gray button + .btn-ml, section.gray .btn-group button + .btn-ml, .btn-group .question-page header.page .r-col form button + .btn-ml, .question-page header.page .r-col form .btn-group button + .btn-ml, .btn-group .lawyer-page section.header button + .btn-ml, .lawyer-page section.header .btn-group button + .btn-ml, .btn-group .btn + .btn-fb, .btn-group .btn-vk + .btn-fb, .btn-group .btn-od + .btn-fb, .btn-group .btn-ml + .btn-fb, .btn-group .btn-fb + .btn-fb, .btn-group .btn-tw + .btn-fb, .btn-group .btn-gl + .btn-fb, .btn-group section.gray button + .btn-fb, section.gray .btn-group button + .btn-fb, .btn-group .question-page header.page .r-col form button + .btn-fb, .question-page header.page .r-col form .btn-group button + .btn-fb, .btn-group .lawyer-page section.header button + .btn-fb, .lawyer-page section.header .btn-group button + .btn-fb, .btn-group .btn + .btn-tw, .btn-group .btn-vk + .btn-tw, .btn-group .btn-od + .btn-tw, .btn-group .btn-ml + .btn-tw, .btn-group .btn-fb + .btn-tw, .btn-group .btn-tw + .btn-tw, .btn-group .btn-gl + .btn-tw, .btn-group section.gray button + .btn-tw, section.gray .btn-group button + .btn-tw, .btn-group .question-page header.page .r-col form button + .btn-tw, .question-page header.page .r-col form .btn-group button + .btn-tw, .btn-group .lawyer-page section.header button + .btn-tw, .lawyer-page section.header .btn-group button + .btn-tw, .btn-group .btn + .btn-gl, .btn-group .btn-vk + .btn-gl, .btn-group .btn-od + .btn-gl, .btn-group .btn-ml + .btn-gl, .btn-group .btn-fb + .btn-gl, .btn-group .btn-tw + .btn-gl, .btn-group .btn-gl + .btn-gl, .btn-group section.gray button + .btn-gl, section.gray .btn-group button + .btn-gl, .btn-group .question-page header.page .r-col form button + .btn-gl, .question-page header.page .r-col form .btn-group button + .btn-gl, .btn-group .lawyer-page section.header button + .btn-gl, .lawyer-page section.header .btn-group button + .btn-gl, .btn-group section.gray .btn + button, section.gray .btn-group .btn + button, .btn-group section.gray .btn-vk + button, section.gray .btn-group .btn-vk + button, .btn-group section.gray .btn-od + button, section.gray .btn-group .btn-od + button, .btn-group section.gray .btn-ml + button, section.gray .btn-group .btn-ml + button, .btn-group section.gray .btn-fb + button, section.gray .btn-group .btn-fb + button, .btn-group section.gray .btn-tw + button, section.gray .btn-group .btn-tw + button, .btn-group section.gray .btn-gl + button, section.gray .btn-group .btn-gl + button, .btn-group section.gray button + button, section.gray .btn-group button + button, .btn-group .question-page header.page .r-col form section.gray button + button, section.gray .btn-group .question-page header.page .r-col form button + button, .question-page header.page .r-col form .btn-group section.gray button + button, section.gray .question-page header.page .r-col form .btn-group button + button, .btn-group .lawyer-page section.header section.gray button + button, section.gray .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group section.gray button + button, section.gray .lawyer-page section.header .btn-group button + button, .btn-group .question-page header.page .r-col form .btn + button, .question-page header.page .r-col form .btn-group .btn + button, .btn-group .question-page header.page .r-col form .btn-vk + button, .question-page header.page .r-col form .btn-group .btn-vk + button, .btn-group .question-page header.page .r-col form .btn-od + button, .question-page header.page .r-col form .btn-group .btn-od + button, .btn-group .question-page header.page .r-col form .btn-ml + button, .question-page header.page .r-col form .btn-group .btn-ml + button, .btn-group .question-page header.page .r-col form .btn-fb + button, .question-page header.page .r-col form .btn-group .btn-fb + button, .btn-group .question-page header.page .r-col form .btn-tw + button, .question-page header.page .r-col form .btn-group .btn-tw + button, .btn-group .question-page header.page .r-col form .btn-gl + button, .question-page header.page .r-col form .btn-group .btn-gl + button, .btn-group section.gray .question-page header.page .r-col form button + button, .question-page header.page .r-col form .btn-group section.gray button + button, section.gray .btn-group .question-page header.page .r-col form button + button, .question-page header.page .r-col form section.gray .btn-group button + button, .btn-group .question-page header.page .r-col form button + button, .question-page header.page .r-col form .btn-group button + button, .btn-group .lawyer-page section.header .question-page header.page .r-col form button + button, .question-page header.page .r-col form .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group .question-page header.page .r-col form button + button, .question-page header.page .r-col form .lawyer-page section.header .btn-group button + button, .btn-group .lawyer-page section.header .btn + button, .lawyer-page section.header .btn-group .btn + button, .btn-group .lawyer-page section.header .btn-vk + button, .lawyer-page section.header .btn-group .btn-vk + button, .btn-group .lawyer-page section.header .btn-od + button, .lawyer-page section.header .btn-group .btn-od + button, .btn-group .lawyer-page section.header .btn-ml + button, .lawyer-page section.header .btn-group .btn-ml + button, .btn-group .lawyer-page section.header .btn-fb + button, .lawyer-page section.header .btn-group .btn-fb + button, .btn-group .lawyer-page section.header .btn-tw + button, .lawyer-page section.header .btn-group .btn-tw + button, .btn-group .lawyer-page section.header .btn-gl + button, .lawyer-page section.header .btn-group .btn-gl + button, .btn-group section.gray .lawyer-page section.header button + button, .lawyer-page section.header .btn-group section.gray button + button, section.gray .btn-group .lawyer-page section.header button + button, .lawyer-page section.header section.gray .btn-group button + button, .btn-group .question-page header.page .r-col form .lawyer-page section.header button + button, .lawyer-page section.header .btn-group .question-page header.page .r-col form button + button, .question-page header.page .r-col form .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .question-page header.page .r-col form .btn-group button + button, .btn-group .lawyer-page section.header button + button, .lawyer-page section.header .btn-group button + button,
   .btn-group .btn + .btn-group,
   .btn-group .btn-vk + .btn-group,
   .btn-group .btn-od + .btn-group,
@@ -2641,8 +2642,8 @@ tbody.collapse.show {
   .btn-group .btn-gl + .btn-group,
   .btn-group section.gray button + .btn-group,
   section.gray .btn-group button + .btn-group,
-  .btn-group .question-page header .r-col form button + .btn-group,
-  .question-page header .r-col form .btn-group button + .btn-group,
+  .btn-group .question-page header.page .r-col form button + .btn-group,
+  .question-page header.page .r-col form .btn-group button + .btn-group,
   .btn-group .lawyer-page section.header button + .btn-group,
   .lawyer-page section.header .btn-group button + .btn-group,
   .btn-group .btn-group + .btn,
@@ -2654,8 +2655,8 @@ tbody.collapse.show {
   .btn-group .btn-group + .btn-gl,
   .btn-group section.gray .btn-group + button,
   section.gray .btn-group .btn-group + button,
-  .btn-group .question-page header .r-col form .btn-group + button,
-  .question-page header .r-col form .btn-group .btn-group + button,
+  .btn-group .question-page header.page .r-col form .btn-group + button,
+  .question-page header.page .r-col form .btn-group .btn-group + button,
   .btn-group .lawyer-page section.header .btn-group + button,
   .lawyer-page section.header .btn-group .btn-group + button,
   .btn-group .btn-group + .btn-group,
@@ -2668,8 +2669,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn,
   .btn-group-vertical section.gray button + .btn,
   section.gray .btn-group-vertical button + .btn,
-  .btn-group-vertical .question-page header .r-col form button + .btn,
-  .question-page header .r-col form .btn-group-vertical button + .btn,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn,
   .btn-group-vertical .lawyer-page section.header button + .btn,
   .lawyer-page section.header .btn-group-vertical button + .btn,
   .btn-group-vertical .btn + .btn-vk,
@@ -2681,8 +2682,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-vk,
   .btn-group-vertical section.gray button + .btn-vk,
   section.gray .btn-group-vertical button + .btn-vk,
-  .btn-group-vertical .question-page header .r-col form button + .btn-vk,
-  .question-page header .r-col form .btn-group-vertical button + .btn-vk,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-vk,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-vk,
   .btn-group-vertical .lawyer-page section.header button + .btn-vk,
   .lawyer-page section.header .btn-group-vertical button + .btn-vk,
   .btn-group-vertical .btn + .btn-od,
@@ -2694,8 +2695,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-od,
   .btn-group-vertical section.gray button + .btn-od,
   section.gray .btn-group-vertical button + .btn-od,
-  .btn-group-vertical .question-page header .r-col form button + .btn-od,
-  .question-page header .r-col form .btn-group-vertical button + .btn-od,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-od,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-od,
   .btn-group-vertical .lawyer-page section.header button + .btn-od,
   .lawyer-page section.header .btn-group-vertical button + .btn-od,
   .btn-group-vertical .btn + .btn-ml,
@@ -2707,8 +2708,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-ml,
   .btn-group-vertical section.gray button + .btn-ml,
   section.gray .btn-group-vertical button + .btn-ml,
-  .btn-group-vertical .question-page header .r-col form button + .btn-ml,
-  .question-page header .r-col form .btn-group-vertical button + .btn-ml,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-ml,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-ml,
   .btn-group-vertical .lawyer-page section.header button + .btn-ml,
   .lawyer-page section.header .btn-group-vertical button + .btn-ml,
   .btn-group-vertical .btn + .btn-fb,
@@ -2720,8 +2721,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-fb,
   .btn-group-vertical section.gray button + .btn-fb,
   section.gray .btn-group-vertical button + .btn-fb,
-  .btn-group-vertical .question-page header .r-col form button + .btn-fb,
-  .question-page header .r-col form .btn-group-vertical button + .btn-fb,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-fb,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-fb,
   .btn-group-vertical .lawyer-page section.header button + .btn-fb,
   .lawyer-page section.header .btn-group-vertical button + .btn-fb,
   .btn-group-vertical .btn + .btn-tw,
@@ -2733,8 +2734,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-tw,
   .btn-group-vertical section.gray button + .btn-tw,
   section.gray .btn-group-vertical button + .btn-tw,
-  .btn-group-vertical .question-page header .r-col form button + .btn-tw,
-  .question-page header .r-col form .btn-group-vertical button + .btn-tw,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-tw,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-tw,
   .btn-group-vertical .lawyer-page section.header button + .btn-tw,
   .lawyer-page section.header .btn-group-vertical button + .btn-tw,
   .btn-group-vertical .btn + .btn-gl,
@@ -2746,8 +2747,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-gl,
   .btn-group-vertical section.gray button + .btn-gl,
   section.gray .btn-group-vertical button + .btn-gl,
-  .btn-group-vertical .question-page header .r-col form button + .btn-gl,
-  .question-page header .r-col form .btn-group-vertical button + .btn-gl,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-gl,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-gl,
   .btn-group-vertical .lawyer-page section.header button + .btn-gl,
   .lawyer-page section.header .btn-group-vertical button + .btn-gl,
   .btn-group-vertical section.gray .btn + button,
@@ -2766,38 +2767,38 @@ tbody.collapse.show {
   section.gray .btn-group-vertical .btn-gl + button,
   .btn-group-vertical section.gray button + button,
   section.gray .btn-group-vertical button + button,
-  .btn-group-vertical .question-page header .r-col form section.gray button + button,
-  section.gray .btn-group-vertical .question-page header .r-col form button + button,
-  .question-page header .r-col form .btn-group-vertical section.gray button + button,
-  section.gray .question-page header .r-col form .btn-group-vertical button + button,
+  .btn-group-vertical .question-page header.page .r-col form section.gray button + button,
+  section.gray .btn-group-vertical .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .btn-group-vertical section.gray button + button,
+  section.gray .question-page header.page .r-col form .btn-group-vertical button + button,
   .btn-group-vertical .lawyer-page section.header section.gray button + button,
   section.gray .btn-group-vertical .lawyer-page section.header button + button,
   .lawyer-page section.header .btn-group-vertical section.gray button + button,
   section.gray .lawyer-page section.header .btn-group-vertical button + button,
-  .btn-group-vertical .question-page header .r-col form .btn + button,
-  .question-page header .r-col form .btn-group-vertical .btn + button,
-  .btn-group-vertical .question-page header .r-col form .btn-vk + button,
-  .question-page header .r-col form .btn-group-vertical .btn-vk + button,
-  .btn-group-vertical .question-page header .r-col form .btn-od + button,
-  .question-page header .r-col form .btn-group-vertical .btn-od + button,
-  .btn-group-vertical .question-page header .r-col form .btn-ml + button,
-  .question-page header .r-col form .btn-group-vertical .btn-ml + button,
-  .btn-group-vertical .question-page header .r-col form .btn-fb + button,
-  .question-page header .r-col form .btn-group-vertical .btn-fb + button,
-  .btn-group-vertical .question-page header .r-col form .btn-tw + button,
-  .question-page header .r-col form .btn-group-vertical .btn-tw + button,
-  .btn-group-vertical .question-page header .r-col form .btn-gl + button,
-  .question-page header .r-col form .btn-group-vertical .btn-gl + button,
-  .btn-group-vertical section.gray .question-page header .r-col form button + button,
-  .question-page header .r-col form .btn-group-vertical section.gray button + button,
-  section.gray .btn-group-vertical .question-page header .r-col form button + button,
-  .question-page header .r-col form section.gray .btn-group-vertical button + button,
-  .btn-group-vertical .question-page header .r-col form button + button,
-  .question-page header .r-col form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page section.header .question-page header .r-col form button + button,
-  .question-page header .r-col form .btn-group-vertical .lawyer-page section.header button + button,
-  .lawyer-page section.header .btn-group-vertical .question-page header .r-col form button + button,
-  .question-page header .r-col form .lawyer-page section.header .btn-group-vertical button + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-vk + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-vk + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-od + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-od + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-ml + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-ml + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-fb + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-fb + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-tw + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-tw + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-gl + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-gl + button,
+  .btn-group-vertical section.gray .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .btn-group-vertical section.gray button + button,
+  section.gray .btn-group-vertical .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form section.gray .btn-group-vertical button + button,
+  .btn-group-vertical .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .btn-group-vertical button + button,
+  .btn-group-vertical .lawyer-page section.header .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .btn-group-vertical .lawyer-page section.header button + button,
+  .lawyer-page section.header .btn-group-vertical .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .lawyer-page section.header .btn-group-vertical button + button,
   .btn-group-vertical .lawyer-page section.header .btn + button,
   .lawyer-page section.header .btn-group-vertical .btn + button,
   .btn-group-vertical .lawyer-page section.header .btn-vk + button,
@@ -2816,10 +2817,10 @@ tbody.collapse.show {
   .lawyer-page section.header .btn-group-vertical section.gray button + button,
   section.gray .btn-group-vertical .lawyer-page section.header button + button,
   .lawyer-page section.header section.gray .btn-group-vertical button + button,
-  .btn-group-vertical .question-page header .r-col form .lawyer-page section.header button + button,
-  .lawyer-page section.header .btn-group-vertical .question-page header .r-col form button + button,
-  .question-page header .r-col form .btn-group-vertical .lawyer-page section.header button + button,
-  .lawyer-page section.header .question-page header .r-col form .btn-group-vertical button + button,
+  .btn-group-vertical .question-page header.page .r-col form .lawyer-page section.header button + button,
+  .lawyer-page section.header .btn-group-vertical .question-page header.page .r-col form button + button,
+  .question-page header.page .r-col form .btn-group-vertical .lawyer-page section.header button + button,
+  .lawyer-page section.header .question-page header.page .r-col form .btn-group-vertical button + button,
   .btn-group-vertical .lawyer-page section.header button + button,
   .lawyer-page section.header .btn-group-vertical button + button,
   .btn-group-vertical .btn + .btn-group,
@@ -2831,8 +2832,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-gl + .btn-group,
   .btn-group-vertical section.gray button + .btn-group,
   section.gray .btn-group-vertical button + .btn-group,
-  .btn-group-vertical .question-page header .r-col form button + .btn-group,
-  .question-page header .r-col form .btn-group-vertical button + .btn-group,
+  .btn-group-vertical .question-page header.page .r-col form button + .btn-group,
+  .question-page header.page .r-col form .btn-group-vertical button + .btn-group,
   .btn-group-vertical .lawyer-page section.header button + .btn-group,
   .lawyer-page section.header .btn-group-vertical button + .btn-group,
   .btn-group-vertical .btn-group + .btn,
@@ -2844,8 +2845,8 @@ tbody.collapse.show {
   .btn-group-vertical .btn-group + .btn-gl,
   .btn-group-vertical section.gray .btn-group + button,
   section.gray .btn-group-vertical .btn-group + button,
-  .btn-group-vertical .question-page header .r-col form .btn-group + button,
-  .question-page header .r-col form .btn-group-vertical .btn-group + button,
+  .btn-group-vertical .question-page header.page .r-col form .btn-group + button,
+  .question-page header.page .r-col form .btn-group-vertical .btn-group + button,
   .btn-group-vertical .lawyer-page section.header .btn-group + button,
   .lawyer-page section.header .btn-group-vertical .btn-group + button,
   .btn-group-vertical .btn-group + .btn-group {
@@ -2858,16 +2859,16 @@ tbody.collapse.show {
   .btn-toolbar .input-group {
     width: auto; }
 
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:not(:first-child):not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), .question-page header .r-col form .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), .lawyer-page section.header .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:not(:first-child):not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), .question-page header.page .r-col form .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle), .lawyer-page section.header .btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
   border-radius: 0; }
 
-.btn-group > .btn:first-child, .btn-group > .btn-vk:first-child, .btn-group > .btn-od:first-child, .btn-group > .btn-ml:first-child, .btn-group > .btn-fb:first-child, .btn-group > .btn-tw:first-child, .btn-group > .btn-gl:first-child, section.gray .btn-group > button:first-child, .question-page header .r-col form .btn-group > button:first-child, .lawyer-page section.header .btn-group > button:first-child {
+.btn-group > .btn:first-child, .btn-group > .btn-vk:first-child, .btn-group > .btn-od:first-child, .btn-group > .btn-ml:first-child, .btn-group > .btn-fb:first-child, .btn-group > .btn-tw:first-child, .btn-group > .btn-gl:first-child, section.gray .btn-group > button:first-child, .question-page header.page .r-col form .btn-group > button:first-child, .lawyer-page section.header .btn-group > button:first-child {
   margin-left: 0; }
-  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:first-child:not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), .question-page header .r-col form .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), .lawyer-page section.header .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle) {
+  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:first-child:not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), .question-page header.page .r-col form .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle), .lawyer-page section.header .btn-group > button:first-child:not(:last-child):not(.dropdown-toggle) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
 
-.btn-group > .btn:last-child:not(:first-child), .btn-group > .btn-vk:last-child:not(:first-child), .btn-group > .btn-od:last-child:not(:first-child), .btn-group > .btn-ml:last-child:not(:first-child), .btn-group > .btn-fb:last-child:not(:first-child), .btn-group > .btn-tw:last-child:not(:first-child), .btn-group > .btn-gl:last-child:not(:first-child), section.gray .btn-group > button:last-child:not(:first-child), .question-page header .r-col form .btn-group > button:last-child:not(:first-child), .lawyer-page section.header .btn-group > button:last-child:not(:first-child),
+.btn-group > .btn:last-child:not(:first-child), .btn-group > .btn-vk:last-child:not(:first-child), .btn-group > .btn-od:last-child:not(:first-child), .btn-group > .btn-ml:last-child:not(:first-child), .btn-group > .btn-fb:last-child:not(:first-child), .btn-group > .btn-tw:last-child:not(:first-child), .btn-group > .btn-gl:last-child:not(:first-child), section.gray .btn-group > button:last-child:not(:first-child), .question-page header.page .r-col form .btn-group > button:last-child:not(:first-child), .lawyer-page section.header .btn-group > button:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
@@ -2875,29 +2876,29 @@ tbody.collapse.show {
 .btn-group > .btn-group {
   float: left; }
 
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-vk, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-od, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-ml, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-fb, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-tw, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-gl, section.gray .btn-group > .btn-group:not(:first-child):not(:last-child) > button, .question-page header .r-col form .btn-group > .btn-group:not(:first-child):not(:last-child) > button, .lawyer-page section.header .btn-group > .btn-group:not(:first-child):not(:last-child) > button {
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-vk, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-od, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-ml, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-fb, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-tw, .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn-gl, section.gray .btn-group > .btn-group:not(:first-child):not(:last-child) > button, .question-page header.page .r-col form .btn-group > .btn-group:not(:first-child):not(:last-child) > button, .lawyer-page section.header .btn-group > .btn-group:not(:first-child):not(:last-child) > button {
   border-radius: 0; }
 
-.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-vk:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-od:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-ml:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-fb:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-tw:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-gl:last-child, section.gray .btn-group > .btn-group:first-child:not(:last-child) > button:last-child, .question-page header .r-col form .btn-group > .btn-group:first-child:not(:last-child) > button:last-child, .lawyer-page section.header .btn-group > .btn-group:first-child:not(:last-child) > button:last-child,
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-vk:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-od:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-ml:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-fb:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-tw:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .btn-gl:last-child, section.gray .btn-group > .btn-group:first-child:not(:last-child) > button:last-child, .question-page header.page .r-col form .btn-group > .btn-group:first-child:not(:last-child) > button:last-child, .lawyer-page section.header .btn-group > .btn-group:first-child:not(:last-child) > button:last-child,
 .btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0; }
 
-.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-vk:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-od:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-ml:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-fb:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-tw:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-gl:first-child, section.gray .btn-group > .btn-group:last-child:not(:first-child) > button:first-child, .question-page header .r-col form .btn-group > .btn-group:last-child:not(:first-child) > button:first-child, .lawyer-page section.header .btn-group > .btn-group:last-child:not(:first-child) > button:first-child {
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-vk:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-od:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-ml:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-fb:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-tw:first-child, .btn-group > .btn-group:last-child:not(:first-child) > .btn-gl:first-child, section.gray .btn-group > .btn-group:last-child:not(:first-child) > button:first-child, .question-page header.page .r-col form .btn-group > .btn-group:last-child:not(:first-child) > button:first-child, .lawyer-page section.header .btn-group > .btn-group:last-child:not(:first-child) > button:first-child {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
 
-.btn + .dropdown-toggle-split, .btn-vk + .dropdown-toggle-split, .btn-od + .dropdown-toggle-split, .btn-ml + .dropdown-toggle-split, .btn-fb + .dropdown-toggle-split, .btn-tw + .dropdown-toggle-split, .btn-gl + .dropdown-toggle-split, section.gray button + .dropdown-toggle-split, .question-page header .r-col form button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
+.btn + .dropdown-toggle-split, .btn-vk + .dropdown-toggle-split, .btn-od + .dropdown-toggle-split, .btn-ml + .dropdown-toggle-split, .btn-fb + .dropdown-toggle-split, .btn-tw + .dropdown-toggle-split, .btn-gl + .dropdown-toggle-split, section.gray button + .dropdown-toggle-split, .question-page header.page .r-col form button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
   padding-right: 0.65625rem;
   padding-left: 0.65625rem; }
-  .btn + .dropdown-toggle-split::after, .btn-vk + .dropdown-toggle-split::after, .btn-od + .dropdown-toggle-split::after, .btn-ml + .dropdown-toggle-split::after, .btn-fb + .dropdown-toggle-split::after, .btn-tw + .dropdown-toggle-split::after, .btn-gl + .dropdown-toggle-split::after, section.gray button + .dropdown-toggle-split::after, .question-page header .r-col form button + .dropdown-toggle-split::after, .lawyer-page section.header button + .dropdown-toggle-split::after {
+  .btn + .dropdown-toggle-split::after, .btn-vk + .dropdown-toggle-split::after, .btn-od + .dropdown-toggle-split::after, .btn-ml + .dropdown-toggle-split::after, .btn-fb + .dropdown-toggle-split::after, .btn-tw + .dropdown-toggle-split::after, .btn-gl + .dropdown-toggle-split::after, section.gray button + .dropdown-toggle-split::after, .question-page header.page .r-col form button + .dropdown-toggle-split::after, .lawyer-page section.header button + .dropdown-toggle-split::after {
     margin-left: 0; }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .question-page header .r-col form .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .question-page header.page .r-col form .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page section.header button + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem; }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .btn-vk + .dropdown-toggle-split, .btn-group-lg > .btn-od + .dropdown-toggle-split, .btn-group-lg > .btn-ml + .dropdown-toggle-split, .btn-group-lg > .btn-fb + .dropdown-toggle-split, .btn-group-lg > .btn-tw + .dropdown-toggle-split, .btn-group-lg > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-lg > button + .dropdown-toggle-split, .question-page header .r-col form .btn-group-lg > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-lg > button + .dropdown-toggle-split, .question-page header .r-col form button + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .btn-vk + .dropdown-toggle-split, .btn-group-lg > .btn-od + .dropdown-toggle-split, .btn-group-lg > .btn-ml + .dropdown-toggle-split, .btn-group-lg > .btn-fb + .dropdown-toggle-split, .btn-group-lg > .btn-tw + .dropdown-toggle-split, .btn-group-lg > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-lg > button + .dropdown-toggle-split, .question-page header.page .r-col form .btn-group-lg > button + .dropdown-toggle-split, .lawyer-page section.header .btn-group-lg > button + .dropdown-toggle-split, .question-page header.page .r-col form button + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem; }
 
@@ -2905,10 +2906,10 @@ tbody.collapse.show {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  .btn-group-vertical .btn, .btn-group-vertical .btn-vk, .btn-group-vertical .btn-od, .btn-group-vertical .btn-ml, .btn-group-vertical .btn-fb, .btn-group-vertical .btn-tw, .btn-group-vertical .btn-gl, .btn-group-vertical section.gray button, section.gray .btn-group-vertical button, .btn-group-vertical .question-page header .r-col form button, .question-page header .r-col form .btn-group-vertical button, .btn-group-vertical .lawyer-page section.header button, .lawyer-page section.header .btn-group-vertical button,
+  .btn-group-vertical .btn, .btn-group-vertical .btn-vk, .btn-group-vertical .btn-od, .btn-group-vertical .btn-ml, .btn-group-vertical .btn-fb, .btn-group-vertical .btn-tw, .btn-group-vertical .btn-gl, .btn-group-vertical section.gray button, section.gray .btn-group-vertical button, .btn-group-vertical .question-page header.page .r-col form button, .question-page header.page .r-col form .btn-group-vertical button, .btn-group-vertical .lawyer-page section.header button, .lawyer-page section.header .btn-group-vertical button,
   .btn-group-vertical .btn-group {
     width: 100%; }
-  .btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn-vk + .btn, .btn-group-vertical > .btn-od + .btn, .btn-group-vertical > .btn-ml + .btn, .btn-group-vertical > .btn-fb + .btn, .btn-group-vertical > .btn-tw + .btn, .btn-group-vertical > .btn-gl + .btn, section.gray .btn-group-vertical > button + .btn, .question-page header .r-col form .btn-group-vertical > button + .btn, .lawyer-page section.header .btn-group-vertical > button + .btn, .btn-group-vertical > .btn + .btn-vk, .btn-group-vertical > .btn-vk + .btn-vk, .btn-group-vertical > .btn-od + .btn-vk, .btn-group-vertical > .btn-ml + .btn-vk, .btn-group-vertical > .btn-fb + .btn-vk, .btn-group-vertical > .btn-tw + .btn-vk, .btn-group-vertical > .btn-gl + .btn-vk, section.gray .btn-group-vertical > button + .btn-vk, .question-page header .r-col form .btn-group-vertical > button + .btn-vk, .lawyer-page section.header .btn-group-vertical > button + .btn-vk, .btn-group-vertical > .btn + .btn-od, .btn-group-vertical > .btn-vk + .btn-od, .btn-group-vertical > .btn-od + .btn-od, .btn-group-vertical > .btn-ml + .btn-od, .btn-group-vertical > .btn-fb + .btn-od, .btn-group-vertical > .btn-tw + .btn-od, .btn-group-vertical > .btn-gl + .btn-od, section.gray .btn-group-vertical > button + .btn-od, .question-page header .r-col form .btn-group-vertical > button + .btn-od, .lawyer-page section.header .btn-group-vertical > button + .btn-od, .btn-group-vertical > .btn + .btn-ml, .btn-group-vertical > .btn-vk + .btn-ml, .btn-group-vertical > .btn-od + .btn-ml, .btn-group-vertical > .btn-ml + .btn-ml, .btn-group-vertical > .btn-fb + .btn-ml, .btn-group-vertical > .btn-tw + .btn-ml, .btn-group-vertical > .btn-gl + .btn-ml, section.gray .btn-group-vertical > button + .btn-ml, .question-page header .r-col form .btn-group-vertical > button + .btn-ml, .lawyer-page section.header .btn-group-vertical > button + .btn-ml, .btn-group-vertical > .btn + .btn-fb, .btn-group-vertical > .btn-vk + .btn-fb, .btn-group-vertical > .btn-od + .btn-fb, .btn-group-vertical > .btn-ml + .btn-fb, .btn-group-vertical > .btn-fb + .btn-fb, .btn-group-vertical > .btn-tw + .btn-fb, .btn-group-vertical > .btn-gl + .btn-fb, section.gray .btn-group-vertical > button + .btn-fb, .question-page header .r-col form .btn-group-vertical > button + .btn-fb, .lawyer-page section.header .btn-group-vertical > button + .btn-fb, .btn-group-vertical > .btn + .btn-tw, .btn-group-vertical > .btn-vk + .btn-tw, .btn-group-vertical > .btn-od + .btn-tw, .btn-group-vertical > .btn-ml + .btn-tw, .btn-group-vertical > .btn-fb + .btn-tw, .btn-group-vertical > .btn-tw + .btn-tw, .btn-group-vertical > .btn-gl + .btn-tw, section.gray .btn-group-vertical > button + .btn-tw, .question-page header .r-col form .btn-group-vertical > button + .btn-tw, .lawyer-page section.header .btn-group-vertical > button + .btn-tw, .btn-group-vertical > .btn + .btn-gl, .btn-group-vertical > .btn-vk + .btn-gl, .btn-group-vertical > .btn-od + .btn-gl, .btn-group-vertical > .btn-ml + .btn-gl, .btn-group-vertical > .btn-fb + .btn-gl, .btn-group-vertical > .btn-tw + .btn-gl, .btn-group-vertical > .btn-gl + .btn-gl, section.gray .btn-group-vertical > button + .btn-gl, .question-page header .r-col form .btn-group-vertical > button + .btn-gl, .lawyer-page section.header .btn-group-vertical > button + .btn-gl, section.gray .btn-group-vertical > .btn + button, section.gray .btn-group-vertical > .btn-vk + button, section.gray .btn-group-vertical > .btn-od + button, section.gray .btn-group-vertical > .btn-ml + button, section.gray .btn-group-vertical > .btn-fb + button, section.gray .btn-group-vertical > .btn-tw + button, section.gray .btn-group-vertical > .btn-gl + button, section.gray .btn-group-vertical > button + button, .question-page header .r-col form section.gray .btn-group-vertical > button + button, section.gray .question-page header .r-col form .btn-group-vertical > button + button, .lawyer-page section.header section.gray .btn-group-vertical > button + button, section.gray .lawyer-page section.header .btn-group-vertical > button + button, .question-page header .r-col form .btn-group-vertical > .btn + button, .question-page header .r-col form .btn-group-vertical > .btn-vk + button, .question-page header .r-col form .btn-group-vertical > .btn-od + button, .question-page header .r-col form .btn-group-vertical > .btn-ml + button, .question-page header .r-col form .btn-group-vertical > .btn-fb + button, .question-page header .r-col form .btn-group-vertical > .btn-tw + button, .question-page header .r-col form .btn-group-vertical > .btn-gl + button, section.gray .question-page header .r-col form .btn-group-vertical > button + button, .question-page header .r-col form section.gray .btn-group-vertical > button + button, .question-page header .r-col form .btn-group-vertical > button + button, .lawyer-page section.header .question-page header .r-col form .btn-group-vertical > button + button, .question-page header .r-col form .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header .btn-group-vertical > .btn + button, .lawyer-page section.header .btn-group-vertical > .btn-vk + button, .lawyer-page section.header .btn-group-vertical > .btn-od + button, .lawyer-page section.header .btn-group-vertical > .btn-ml + button, .lawyer-page section.header .btn-group-vertical > .btn-fb + button, .lawyer-page section.header .btn-group-vertical > .btn-tw + button, .lawyer-page section.header .btn-group-vertical > .btn-gl + button, section.gray .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header section.gray .btn-group-vertical > button + button, .question-page header .r-col form .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header .question-page header .r-col form .btn-group-vertical > button + button, .lawyer-page section.header .btn-group-vertical > button + button,
+  .btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn-vk + .btn, .btn-group-vertical > .btn-od + .btn, .btn-group-vertical > .btn-ml + .btn, .btn-group-vertical > .btn-fb + .btn, .btn-group-vertical > .btn-tw + .btn, .btn-group-vertical > .btn-gl + .btn, section.gray .btn-group-vertical > button + .btn, .question-page header.page .r-col form .btn-group-vertical > button + .btn, .lawyer-page section.header .btn-group-vertical > button + .btn, .btn-group-vertical > .btn + .btn-vk, .btn-group-vertical > .btn-vk + .btn-vk, .btn-group-vertical > .btn-od + .btn-vk, .btn-group-vertical > .btn-ml + .btn-vk, .btn-group-vertical > .btn-fb + .btn-vk, .btn-group-vertical > .btn-tw + .btn-vk, .btn-group-vertical > .btn-gl + .btn-vk, section.gray .btn-group-vertical > button + .btn-vk, .question-page header.page .r-col form .btn-group-vertical > button + .btn-vk, .lawyer-page section.header .btn-group-vertical > button + .btn-vk, .btn-group-vertical > .btn + .btn-od, .btn-group-vertical > .btn-vk + .btn-od, .btn-group-vertical > .btn-od + .btn-od, .btn-group-vertical > .btn-ml + .btn-od, .btn-group-vertical > .btn-fb + .btn-od, .btn-group-vertical > .btn-tw + .btn-od, .btn-group-vertical > .btn-gl + .btn-od, section.gray .btn-group-vertical > button + .btn-od, .question-page header.page .r-col form .btn-group-vertical > button + .btn-od, .lawyer-page section.header .btn-group-vertical > button + .btn-od, .btn-group-vertical > .btn + .btn-ml, .btn-group-vertical > .btn-vk + .btn-ml, .btn-group-vertical > .btn-od + .btn-ml, .btn-group-vertical > .btn-ml + .btn-ml, .btn-group-vertical > .btn-fb + .btn-ml, .btn-group-vertical > .btn-tw + .btn-ml, .btn-group-vertical > .btn-gl + .btn-ml, section.gray .btn-group-vertical > button + .btn-ml, .question-page header.page .r-col form .btn-group-vertical > button + .btn-ml, .lawyer-page section.header .btn-group-vertical > button + .btn-ml, .btn-group-vertical > .btn + .btn-fb, .btn-group-vertical > .btn-vk + .btn-fb, .btn-group-vertical > .btn-od + .btn-fb, .btn-group-vertical > .btn-ml + .btn-fb, .btn-group-vertical > .btn-fb + .btn-fb, .btn-group-vertical > .btn-tw + .btn-fb, .btn-group-vertical > .btn-gl + .btn-fb, section.gray .btn-group-vertical > button + .btn-fb, .question-page header.page .r-col form .btn-group-vertical > button + .btn-fb, .lawyer-page section.header .btn-group-vertical > button + .btn-fb, .btn-group-vertical > .btn + .btn-tw, .btn-group-vertical > .btn-vk + .btn-tw, .btn-group-vertical > .btn-od + .btn-tw, .btn-group-vertical > .btn-ml + .btn-tw, .btn-group-vertical > .btn-fb + .btn-tw, .btn-group-vertical > .btn-tw + .btn-tw, .btn-group-vertical > .btn-gl + .btn-tw, section.gray .btn-group-vertical > button + .btn-tw, .question-page header.page .r-col form .btn-group-vertical > button + .btn-tw, .lawyer-page section.header .btn-group-vertical > button + .btn-tw, .btn-group-vertical > .btn + .btn-gl, .btn-group-vertical > .btn-vk + .btn-gl, .btn-group-vertical > .btn-od + .btn-gl, .btn-group-vertical > .btn-ml + .btn-gl, .btn-group-vertical > .btn-fb + .btn-gl, .btn-group-vertical > .btn-tw + .btn-gl, .btn-group-vertical > .btn-gl + .btn-gl, section.gray .btn-group-vertical > button + .btn-gl, .question-page header.page .r-col form .btn-group-vertical > button + .btn-gl, .lawyer-page section.header .btn-group-vertical > button + .btn-gl, section.gray .btn-group-vertical > .btn + button, section.gray .btn-group-vertical > .btn-vk + button, section.gray .btn-group-vertical > .btn-od + button, section.gray .btn-group-vertical > .btn-ml + button, section.gray .btn-group-vertical > .btn-fb + button, section.gray .btn-group-vertical > .btn-tw + button, section.gray .btn-group-vertical > .btn-gl + button, section.gray .btn-group-vertical > button + button, .question-page header.page .r-col form section.gray .btn-group-vertical > button + button, section.gray .question-page header.page .r-col form .btn-group-vertical > button + button, .lawyer-page section.header section.gray .btn-group-vertical > button + button, section.gray .lawyer-page section.header .btn-group-vertical > button + button, .question-page header.page .r-col form .btn-group-vertical > .btn + button, .question-page header.page .r-col form .btn-group-vertical > .btn-vk + button, .question-page header.page .r-col form .btn-group-vertical > .btn-od + button, .question-page header.page .r-col form .btn-group-vertical > .btn-ml + button, .question-page header.page .r-col form .btn-group-vertical > .btn-fb + button, .question-page header.page .r-col form .btn-group-vertical > .btn-tw + button, .question-page header.page .r-col form .btn-group-vertical > .btn-gl + button, section.gray .question-page header.page .r-col form .btn-group-vertical > button + button, .question-page header.page .r-col form section.gray .btn-group-vertical > button + button, .question-page header.page .r-col form .btn-group-vertical > button + button, .lawyer-page section.header .question-page header.page .r-col form .btn-group-vertical > button + button, .question-page header.page .r-col form .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header .btn-group-vertical > .btn + button, .lawyer-page section.header .btn-group-vertical > .btn-vk + button, .lawyer-page section.header .btn-group-vertical > .btn-od + button, .lawyer-page section.header .btn-group-vertical > .btn-ml + button, .lawyer-page section.header .btn-group-vertical > .btn-fb + button, .lawyer-page section.header .btn-group-vertical > .btn-tw + button, .lawyer-page section.header .btn-group-vertical > .btn-gl + button, section.gray .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header section.gray .btn-group-vertical > button + button, .question-page header.page .r-col form .lawyer-page section.header .btn-group-vertical > button + button, .lawyer-page section.header .question-page header.page .r-col form .btn-group-vertical > button + button, .lawyer-page section.header .btn-group-vertical > button + button,
   .btn-group-vertical > .btn + .btn-group,
   .btn-group-vertical > .btn-vk + .btn-group,
   .btn-group-vertical > .btn-od + .btn-group,
@@ -2917,7 +2918,7 @@ tbody.collapse.show {
   .btn-group-vertical > .btn-tw + .btn-group,
   .btn-group-vertical > .btn-gl + .btn-group,
   section.gray .btn-group-vertical > button + .btn-group,
-  .question-page header .r-col form .btn-group-vertical > button + .btn-group,
+  .question-page header.page .r-col form .btn-group-vertical > button + .btn-group,
   .lawyer-page section.header .btn-group-vertical > button + .btn-group,
   .btn-group-vertical > .btn-group + .btn,
   .btn-group-vertical > .btn-group + .btn-vk,
@@ -2927,30 +2928,30 @@ tbody.collapse.show {
   .btn-group-vertical > .btn-group + .btn-tw,
   .btn-group-vertical > .btn-group + .btn-gl,
   section.gray .btn-group-vertical > .btn-group + button,
-  .question-page header .r-col form .btn-group-vertical > .btn-group + button,
+  .question-page header.page .r-col form .btn-group-vertical > .btn-group + button,
   .lawyer-page section.header .btn-group-vertical > .btn-group + button,
   .btn-group-vertical > .btn-group + .btn-group {
     margin-top: -1px;
     margin-left: 0; }
-  .btn-group-vertical > .btn:not(:first-child):not(:last-child), .btn-group-vertical > .btn-vk:not(:first-child):not(:last-child), .btn-group-vertical > .btn-od:not(:first-child):not(:last-child), .btn-group-vertical > .btn-ml:not(:first-child):not(:last-child), .btn-group-vertical > .btn-fb:not(:first-child):not(:last-child), .btn-group-vertical > .btn-tw:not(:first-child):not(:last-child), .btn-group-vertical > .btn-gl:not(:first-child):not(:last-child), section.gray .btn-group-vertical > button:not(:first-child):not(:last-child), .question-page header .r-col form .btn-group-vertical > button:not(:first-child):not(:last-child), .lawyer-page section.header .btn-group-vertical > button:not(:first-child):not(:last-child) {
+  .btn-group-vertical > .btn:not(:first-child):not(:last-child), .btn-group-vertical > .btn-vk:not(:first-child):not(:last-child), .btn-group-vertical > .btn-od:not(:first-child):not(:last-child), .btn-group-vertical > .btn-ml:not(:first-child):not(:last-child), .btn-group-vertical > .btn-fb:not(:first-child):not(:last-child), .btn-group-vertical > .btn-tw:not(:first-child):not(:last-child), .btn-group-vertical > .btn-gl:not(:first-child):not(:last-child), section.gray .btn-group-vertical > button:not(:first-child):not(:last-child), .question-page header.page .r-col form .btn-group-vertical > button:not(:first-child):not(:last-child), .lawyer-page section.header .btn-group-vertical > button:not(:first-child):not(:last-child) {
     border-radius: 0; }
-  .btn-group-vertical > .btn:first-child:not(:last-child), .btn-group-vertical > .btn-vk:first-child:not(:last-child), .btn-group-vertical > .btn-od:first-child:not(:last-child), .btn-group-vertical > .btn-ml:first-child:not(:last-child), .btn-group-vertical > .btn-fb:first-child:not(:last-child), .btn-group-vertical > .btn-tw:first-child:not(:last-child), .btn-group-vertical > .btn-gl:first-child:not(:last-child), section.gray .btn-group-vertical > button:first-child:not(:last-child), .question-page header .r-col form .btn-group-vertical > button:first-child:not(:last-child), .lawyer-page section.header .btn-group-vertical > button:first-child:not(:last-child) {
+  .btn-group-vertical > .btn:first-child:not(:last-child), .btn-group-vertical > .btn-vk:first-child:not(:last-child), .btn-group-vertical > .btn-od:first-child:not(:last-child), .btn-group-vertical > .btn-ml:first-child:not(:last-child), .btn-group-vertical > .btn-fb:first-child:not(:last-child), .btn-group-vertical > .btn-tw:first-child:not(:last-child), .btn-group-vertical > .btn-gl:first-child:not(:last-child), section.gray .btn-group-vertical > button:first-child:not(:last-child), .question-page header.page .r-col form .btn-group-vertical > button:first-child:not(:last-child), .lawyer-page section.header .btn-group-vertical > button:first-child:not(:last-child) {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
-  .btn-group-vertical > .btn:last-child:not(:first-child), .btn-group-vertical > .btn-vk:last-child:not(:first-child), .btn-group-vertical > .btn-od:last-child:not(:first-child), .btn-group-vertical > .btn-ml:last-child:not(:first-child), .btn-group-vertical > .btn-fb:last-child:not(:first-child), .btn-group-vertical > .btn-tw:last-child:not(:first-child), .btn-group-vertical > .btn-gl:last-child:not(:first-child), section.gray .btn-group-vertical > button:last-child:not(:first-child), .question-page header .r-col form .btn-group-vertical > button:last-child:not(:first-child), .lawyer-page section.header .btn-group-vertical > button:last-child:not(:first-child) {
+  .btn-group-vertical > .btn:last-child:not(:first-child), .btn-group-vertical > .btn-vk:last-child:not(:first-child), .btn-group-vertical > .btn-od:last-child:not(:first-child), .btn-group-vertical > .btn-ml:last-child:not(:first-child), .btn-group-vertical > .btn-fb:last-child:not(:first-child), .btn-group-vertical > .btn-tw:last-child:not(:first-child), .btn-group-vertical > .btn-gl:last-child:not(:first-child), section.gray .btn-group-vertical > button:last-child:not(:first-child), .question-page header.page .r-col form .btn-group-vertical > button:last-child:not(:first-child), .lawyer-page section.header .btn-group-vertical > button:last-child:not(:first-child) {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
-  .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-vk, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-od, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-ml, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-fb, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-tw, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-gl, section.gray .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, .question-page header .r-col form .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, .lawyer-page section.header .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button {
+  .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-vk, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-od, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-ml, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-fb, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-tw, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn-gl, section.gray .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, .question-page header.page .r-col form .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button, .lawyer-page section.header .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > button {
     border-radius: 0; }
-  .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-vk:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-od:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-ml:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-fb:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-tw:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-gl:last-child, section.gray .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child, .question-page header .r-col form .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child, .lawyer-page section.header .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child,
+  .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-vk:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-od:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-ml:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-fb:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-tw:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn-gl:last-child, section.gray .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child, .question-page header.page .r-col form .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child, .lawyer-page section.header .btn-group-vertical > .btn-group:first-child:not(:last-child) > button:last-child,
   .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
-  .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-vk:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-od:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-ml:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-fb:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-tw:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-gl:first-child, section.gray .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child, .question-page header .r-col form .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child, .lawyer-page section.header .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child {
+  .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-vk:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-od:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-ml:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-fb:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-tw:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn-gl:first-child, section.gray .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child, .question-page header.page .r-col form .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child, .lawyer-page section.header .btn-group-vertical > .btn-group:last-child:not(:first-child) > button:first-child {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 
-[data-toggle="buttons"] > .btn input[type="radio"], [data-toggle="buttons"] > .btn-vk input[type="radio"], [data-toggle="buttons"] > .btn-od input[type="radio"], [data-toggle="buttons"] > .btn-ml input[type="radio"], [data-toggle="buttons"] > .btn-fb input[type="radio"], [data-toggle="buttons"] > .btn-tw input[type="radio"], [data-toggle="buttons"] > .btn-gl input[type="radio"], section.gray [data-toggle="buttons"] > button input[type="radio"], .question-page header .r-col form [data-toggle="buttons"] > button input[type="radio"], .lawyer-page section.header [data-toggle="buttons"] > button input[type="radio"],
+[data-toggle="buttons"] > .btn input[type="radio"], [data-toggle="buttons"] > .btn-vk input[type="radio"], [data-toggle="buttons"] > .btn-od input[type="radio"], [data-toggle="buttons"] > .btn-ml input[type="radio"], [data-toggle="buttons"] > .btn-fb input[type="radio"], [data-toggle="buttons"] > .btn-tw input[type="radio"], [data-toggle="buttons"] > .btn-gl input[type="radio"], section.gray [data-toggle="buttons"] > button input[type="radio"], .question-page header.page .r-col form [data-toggle="buttons"] > button input[type="radio"], .lawyer-page section.header [data-toggle="buttons"] > button input[type="radio"],
 [data-toggle="buttons"] > .btn input[type="checkbox"],
 [data-toggle="buttons"] > .btn-vk input[type="checkbox"],
 [data-toggle="buttons"] > .btn-od input[type="checkbox"],
@@ -2959,7 +2960,7 @@ tbody.collapse.show {
 [data-toggle="buttons"] > .btn-tw input[type="checkbox"],
 [data-toggle="buttons"] > .btn-gl input[type="checkbox"],
 section.gray [data-toggle="buttons"] > button input[type="checkbox"],
-.question-page header .r-col form [data-toggle="buttons"] > button input[type="checkbox"],
+.question-page header.page .r-col form [data-toggle="buttons"] > button input[type="checkbox"],
 .lawyer-page section.header [data-toggle="buttons"] > button input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn input[type="radio"],
 [data-toggle="buttons"] > .btn-group > .btn-vk input[type="radio"],
@@ -2969,7 +2970,7 @@ section.gray [data-toggle="buttons"] > button input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn-tw input[type="radio"],
 [data-toggle="buttons"] > .btn-group > .btn-gl input[type="radio"],
 section.gray [data-toggle="buttons"] > .btn-group > button input[type="radio"],
-.question-page header .r-col form [data-toggle="buttons"] > .btn-group > button input[type="radio"],
+.question-page header.page .r-col form [data-toggle="buttons"] > .btn-group > button input[type="radio"],
 .lawyer-page section.header [data-toggle="buttons"] > .btn-group > button input[type="radio"],
 [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn-vk input[type="checkbox"],
@@ -2979,7 +2980,7 @@ section.gray [data-toggle="buttons"] > .btn-group > button input[type="radio"],
 [data-toggle="buttons"] > .btn-group > .btn-tw input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn-gl input[type="checkbox"],
 section.gray [data-toggle="buttons"] > .btn-group > button input[type="checkbox"],
-.question-page header .r-col form [data-toggle="buttons"] > .btn-group > button input[type="checkbox"],
+.question-page header.page .r-col form [data-toggle="buttons"] > .btn-group > button input[type="checkbox"],
 .lawyer-page section.header [data-toggle="buttons"] > .btn-group > button input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
@@ -3018,7 +3019,7 @@ section.gray [data-toggle="buttons"] > .btn-group > button input[type="checkbox"
   margin-bottom: 0;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   color: #545454;
   text-align: center;
   background-color: #e6e6e6;
@@ -3034,7 +3035,7 @@ section.gray [data-toggle="buttons"] > .btn-group > button input[type="checkbox"
   .input-group-sm > .input-group-btn > .input-group-addon.btn-tw,
   .input-group-sm > .input-group-btn > .input-group-addon.btn-gl,
   section.gray .input-group-sm > .input-group-btn > button.input-group-addon,
-  .question-page header .r-col form .input-group-sm > .input-group-btn > button.input-group-addon,
+  .question-page header.page .r-col form .input-group-sm > .input-group-btn > button.input-group-addon,
   .lawyer-page section.header .input-group-sm > .input-group-btn > button.input-group-addon {
     padding: 0.5rem 0.5rem;
     font-size: 0.875rem;
@@ -3049,7 +3050,7 @@ section.gray [data-toggle="buttons"] > .btn-group > button input[type="checkbox"
   .input-group-lg > .input-group-btn > .input-group-addon.btn-tw,
   .input-group-lg > .input-group-btn > .input-group-addon.btn-gl,
   section.gray .input-group-lg > .input-group-btn > button.input-group-addon,
-  .question-page header .r-col form .input-group-lg > .input-group-btn > button.input-group-addon,
+  .question-page header.page .r-col form .input-group-lg > .input-group-btn > button.input-group-addon,
   .lawyer-page section.header .input-group-lg > .input-group-btn > button.input-group-addon {
     padding: 0.90625rem 1rem;
     font-size: 1.125rem;
@@ -3068,7 +3069,7 @@ section.gray [data-toggle="buttons"] > .btn-group > button input[type="checkbox"
 .input-group-btn:not(:last-child) > .btn-tw,
 .input-group-btn:not(:last-child) > .btn-gl,
 section.gray .input-group-btn:not(:last-child) > button,
-.question-page header .r-col form .input-group-btn:not(:last-child) > button,
+.question-page header.page .r-col form .input-group-btn:not(:last-child) > button,
 .lawyer-page section.header .input-group-btn:not(:last-child) > button,
 .input-group-btn:not(:last-child) > .btn-group > .btn,
 .input-group-btn:not(:last-child) > .btn-group > .btn-vk,
@@ -3078,7 +3079,7 @@ section.gray .input-group-btn:not(:last-child) > button,
 .input-group-btn:not(:last-child) > .btn-group > .btn-tw,
 .input-group-btn:not(:last-child) > .btn-group > .btn-gl,
 section.gray .input-group-btn:not(:last-child) > .btn-group > button,
-.question-page header .r-col form .input-group-btn:not(:last-child) > .btn-group > button,
+.question-page header.page .r-col form .input-group-btn:not(:last-child) > .btn-group > button,
 .lawyer-page section.header .input-group-btn:not(:last-child) > .btn-group > button,
 .input-group-btn:not(:last-child) > .dropdown-toggle,
 .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
@@ -3089,7 +3090,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group > button,
 .input-group-btn:not(:first-child) > .btn-tw:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:not(:first-child) > .btn-gl:not(:last-child):not(.dropdown-toggle),
 section.gray .input-group-btn:not(:first-child) > button:not(:last-child):not(.dropdown-toggle),
-.question-page header .r-col form .input-group-btn:not(:first-child) > button:not(:last-child):not(.dropdown-toggle),
+.question-page header.page .r-col form .input-group-btn:not(:first-child) > button:not(:last-child):not(.dropdown-toggle),
 .lawyer-page section.header .input-group-btn:not(:first-child) > button:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn,
 .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn-vk,
@@ -3099,7 +3100,7 @@ section.gray .input-group-btn:not(:first-child) > button:not(:last-child):not(.d
 .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn-tw,
 .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn-gl,
 section.gray .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > button,
-.question-page header .r-col form .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > button,
+.question-page header.page .r-col form .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > button,
 .lawyer-page section.header .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0; }
@@ -3117,7 +3118,7 @@ section.gray .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > 
 .input-group-btn:not(:first-child) > .btn-tw,
 .input-group-btn:not(:first-child) > .btn-gl,
 section.gray .input-group-btn:not(:first-child) > button,
-.question-page header .r-col form .input-group-btn:not(:first-child) > button,
+.question-page header.page .r-col form .input-group-btn:not(:first-child) > button,
 .lawyer-page section.header .input-group-btn:not(:first-child) > button,
 .input-group-btn:not(:first-child) > .btn-group > .btn,
 .input-group-btn:not(:first-child) > .btn-group > .btn-vk,
@@ -3127,7 +3128,7 @@ section.gray .input-group-btn:not(:first-child) > button,
 .input-group-btn:not(:first-child) > .btn-group > .btn-tw,
 .input-group-btn:not(:first-child) > .btn-group > .btn-gl,
 section.gray .input-group-btn:not(:first-child) > .btn-group > button,
-.question-page header .r-col form .input-group-btn:not(:first-child) > .btn-group > button,
+.question-page header.page .r-col form .input-group-btn:not(:first-child) > .btn-group > button,
 .lawyer-page section.header .input-group-btn:not(:first-child) > .btn-group > button,
 .input-group-btn:not(:first-child) > .dropdown-toggle,
 .input-group-btn:not(:last-child) > .btn:not(:first-child),
@@ -3138,7 +3139,7 @@ section.gray .input-group-btn:not(:first-child) > .btn-group > button,
 .input-group-btn:not(:last-child) > .btn-tw:not(:first-child),
 .input-group-btn:not(:last-child) > .btn-gl:not(:first-child),
 section.gray .input-group-btn:not(:last-child) > button:not(:first-child),
-.question-page header .r-col form .input-group-btn:not(:last-child) > button:not(:first-child),
+.question-page header.page .r-col form .input-group-btn:not(:last-child) > button:not(:first-child),
 .lawyer-page section.header .input-group-btn:not(:last-child) > button:not(:first-child),
 .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn,
 .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn-vk,
@@ -3148,7 +3149,7 @@ section.gray .input-group-btn:not(:last-child) > button:not(:first-child),
 .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn-tw,
 .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn-gl,
 section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button,
-.question-page header .r-col form .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button,
+.question-page header.page .r-col form .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button,
 .lawyer-page section.header .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
@@ -3161,25 +3162,25 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   align-items: stretch;
   font-size: 0;
   white-space: nowrap; }
-  .input-group-btn > .btn, .input-group-btn > .btn-vk, .input-group-btn > .btn-od, .input-group-btn > .btn-ml, .input-group-btn > .btn-fb, .input-group-btn > .btn-tw, .input-group-btn > .btn-gl, section.gray .input-group-btn > button, .question-page header .r-col form .input-group-btn > button, .lawyer-page section.header .input-group-btn > button {
+  .input-group-btn > .btn, .input-group-btn > .btn-vk, .input-group-btn > .btn-od, .input-group-btn > .btn-ml, .input-group-btn > .btn-fb, .input-group-btn > .btn-tw, .input-group-btn > .btn-gl, section.gray .input-group-btn > button, .question-page header.page .r-col form .input-group-btn > button, .lawyer-page section.header .input-group-btn > button {
     position: relative; }
-    .input-group-btn > .btn + .btn, .input-group-btn > .btn-vk + .btn, .input-group-btn > .btn-od + .btn, .input-group-btn > .btn-ml + .btn, .input-group-btn > .btn-fb + .btn, .input-group-btn > .btn-tw + .btn, .input-group-btn > .btn-gl + .btn, section.gray .input-group-btn > button + .btn, .question-page header .r-col form .input-group-btn > button + .btn, .lawyer-page section.header .input-group-btn > button + .btn, .input-group-btn > .btn + .btn-vk, .input-group-btn > .btn-vk + .btn-vk, .input-group-btn > .btn-od + .btn-vk, .input-group-btn > .btn-ml + .btn-vk, .input-group-btn > .btn-fb + .btn-vk, .input-group-btn > .btn-tw + .btn-vk, .input-group-btn > .btn-gl + .btn-vk, section.gray .input-group-btn > button + .btn-vk, .question-page header .r-col form .input-group-btn > button + .btn-vk, .lawyer-page section.header .input-group-btn > button + .btn-vk, .input-group-btn > .btn + .btn-od, .input-group-btn > .btn-vk + .btn-od, .input-group-btn > .btn-od + .btn-od, .input-group-btn > .btn-ml + .btn-od, .input-group-btn > .btn-fb + .btn-od, .input-group-btn > .btn-tw + .btn-od, .input-group-btn > .btn-gl + .btn-od, section.gray .input-group-btn > button + .btn-od, .question-page header .r-col form .input-group-btn > button + .btn-od, .lawyer-page section.header .input-group-btn > button + .btn-od, .input-group-btn > .btn + .btn-ml, .input-group-btn > .btn-vk + .btn-ml, .input-group-btn > .btn-od + .btn-ml, .input-group-btn > .btn-ml + .btn-ml, .input-group-btn > .btn-fb + .btn-ml, .input-group-btn > .btn-tw + .btn-ml, .input-group-btn > .btn-gl + .btn-ml, section.gray .input-group-btn > button + .btn-ml, .question-page header .r-col form .input-group-btn > button + .btn-ml, .lawyer-page section.header .input-group-btn > button + .btn-ml, .input-group-btn > .btn + .btn-fb, .input-group-btn > .btn-vk + .btn-fb, .input-group-btn > .btn-od + .btn-fb, .input-group-btn > .btn-ml + .btn-fb, .input-group-btn > .btn-fb + .btn-fb, .input-group-btn > .btn-tw + .btn-fb, .input-group-btn > .btn-gl + .btn-fb, section.gray .input-group-btn > button + .btn-fb, .question-page header .r-col form .input-group-btn > button + .btn-fb, .lawyer-page section.header .input-group-btn > button + .btn-fb, .input-group-btn > .btn + .btn-tw, .input-group-btn > .btn-vk + .btn-tw, .input-group-btn > .btn-od + .btn-tw, .input-group-btn > .btn-ml + .btn-tw, .input-group-btn > .btn-fb + .btn-tw, .input-group-btn > .btn-tw + .btn-tw, .input-group-btn > .btn-gl + .btn-tw, section.gray .input-group-btn > button + .btn-tw, .question-page header .r-col form .input-group-btn > button + .btn-tw, .lawyer-page section.header .input-group-btn > button + .btn-tw, .input-group-btn > .btn + .btn-gl, .input-group-btn > .btn-vk + .btn-gl, .input-group-btn > .btn-od + .btn-gl, .input-group-btn > .btn-ml + .btn-gl, .input-group-btn > .btn-fb + .btn-gl, .input-group-btn > .btn-tw + .btn-gl, .input-group-btn > .btn-gl + .btn-gl, section.gray .input-group-btn > button + .btn-gl, .question-page header .r-col form .input-group-btn > button + .btn-gl, .lawyer-page section.header .input-group-btn > button + .btn-gl, section.gray .input-group-btn > .btn + button, section.gray .input-group-btn > .btn-vk + button, section.gray .input-group-btn > .btn-od + button, section.gray .input-group-btn > .btn-ml + button, section.gray .input-group-btn > .btn-fb + button, section.gray .input-group-btn > .btn-tw + button, section.gray .input-group-btn > .btn-gl + button, section.gray .input-group-btn > button + button, .question-page header .r-col form section.gray .input-group-btn > button + button, section.gray .question-page header .r-col form .input-group-btn > button + button, .lawyer-page section.header section.gray .input-group-btn > button + button, section.gray .lawyer-page section.header .input-group-btn > button + button, .question-page header .r-col form .input-group-btn > .btn + button, .question-page header .r-col form .input-group-btn > .btn-vk + button, .question-page header .r-col form .input-group-btn > .btn-od + button, .question-page header .r-col form .input-group-btn > .btn-ml + button, .question-page header .r-col form .input-group-btn > .btn-fb + button, .question-page header .r-col form .input-group-btn > .btn-tw + button, .question-page header .r-col form .input-group-btn > .btn-gl + button, section.gray .question-page header .r-col form .input-group-btn > button + button, .question-page header .r-col form section.gray .input-group-btn > button + button, .question-page header .r-col form .input-group-btn > button + button, .lawyer-page section.header .question-page header .r-col form .input-group-btn > button + button, .question-page header .r-col form .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header .input-group-btn > .btn + button, .lawyer-page section.header .input-group-btn > .btn-vk + button, .lawyer-page section.header .input-group-btn > .btn-od + button, .lawyer-page section.header .input-group-btn > .btn-ml + button, .lawyer-page section.header .input-group-btn > .btn-fb + button, .lawyer-page section.header .input-group-btn > .btn-tw + button, .lawyer-page section.header .input-group-btn > .btn-gl + button, section.gray .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header section.gray .input-group-btn > button + button, .question-page header .r-col form .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header .question-page header .r-col form .input-group-btn > button + button, .lawyer-page section.header .input-group-btn > button + button {
+    .input-group-btn > .btn + .btn, .input-group-btn > .btn-vk + .btn, .input-group-btn > .btn-od + .btn, .input-group-btn > .btn-ml + .btn, .input-group-btn > .btn-fb + .btn, .input-group-btn > .btn-tw + .btn, .input-group-btn > .btn-gl + .btn, section.gray .input-group-btn > button + .btn, .question-page header.page .r-col form .input-group-btn > button + .btn, .lawyer-page section.header .input-group-btn > button + .btn, .input-group-btn > .btn + .btn-vk, .input-group-btn > .btn-vk + .btn-vk, .input-group-btn > .btn-od + .btn-vk, .input-group-btn > .btn-ml + .btn-vk, .input-group-btn > .btn-fb + .btn-vk, .input-group-btn > .btn-tw + .btn-vk, .input-group-btn > .btn-gl + .btn-vk, section.gray .input-group-btn > button + .btn-vk, .question-page header.page .r-col form .input-group-btn > button + .btn-vk, .lawyer-page section.header .input-group-btn > button + .btn-vk, .input-group-btn > .btn + .btn-od, .input-group-btn > .btn-vk + .btn-od, .input-group-btn > .btn-od + .btn-od, .input-group-btn > .btn-ml + .btn-od, .input-group-btn > .btn-fb + .btn-od, .input-group-btn > .btn-tw + .btn-od, .input-group-btn > .btn-gl + .btn-od, section.gray .input-group-btn > button + .btn-od, .question-page header.page .r-col form .input-group-btn > button + .btn-od, .lawyer-page section.header .input-group-btn > button + .btn-od, .input-group-btn > .btn + .btn-ml, .input-group-btn > .btn-vk + .btn-ml, .input-group-btn > .btn-od + .btn-ml, .input-group-btn > .btn-ml + .btn-ml, .input-group-btn > .btn-fb + .btn-ml, .input-group-btn > .btn-tw + .btn-ml, .input-group-btn > .btn-gl + .btn-ml, section.gray .input-group-btn > button + .btn-ml, .question-page header.page .r-col form .input-group-btn > button + .btn-ml, .lawyer-page section.header .input-group-btn > button + .btn-ml, .input-group-btn > .btn + .btn-fb, .input-group-btn > .btn-vk + .btn-fb, .input-group-btn > .btn-od + .btn-fb, .input-group-btn > .btn-ml + .btn-fb, .input-group-btn > .btn-fb + .btn-fb, .input-group-btn > .btn-tw + .btn-fb, .input-group-btn > .btn-gl + .btn-fb, section.gray .input-group-btn > button + .btn-fb, .question-page header.page .r-col form .input-group-btn > button + .btn-fb, .lawyer-page section.header .input-group-btn > button + .btn-fb, .input-group-btn > .btn + .btn-tw, .input-group-btn > .btn-vk + .btn-tw, .input-group-btn > .btn-od + .btn-tw, .input-group-btn > .btn-ml + .btn-tw, .input-group-btn > .btn-fb + .btn-tw, .input-group-btn > .btn-tw + .btn-tw, .input-group-btn > .btn-gl + .btn-tw, section.gray .input-group-btn > button + .btn-tw, .question-page header.page .r-col form .input-group-btn > button + .btn-tw, .lawyer-page section.header .input-group-btn > button + .btn-tw, .input-group-btn > .btn + .btn-gl, .input-group-btn > .btn-vk + .btn-gl, .input-group-btn > .btn-od + .btn-gl, .input-group-btn > .btn-ml + .btn-gl, .input-group-btn > .btn-fb + .btn-gl, .input-group-btn > .btn-tw + .btn-gl, .input-group-btn > .btn-gl + .btn-gl, section.gray .input-group-btn > button + .btn-gl, .question-page header.page .r-col form .input-group-btn > button + .btn-gl, .lawyer-page section.header .input-group-btn > button + .btn-gl, section.gray .input-group-btn > .btn + button, section.gray .input-group-btn > .btn-vk + button, section.gray .input-group-btn > .btn-od + button, section.gray .input-group-btn > .btn-ml + button, section.gray .input-group-btn > .btn-fb + button, section.gray .input-group-btn > .btn-tw + button, section.gray .input-group-btn > .btn-gl + button, section.gray .input-group-btn > button + button, .question-page header.page .r-col form section.gray .input-group-btn > button + button, section.gray .question-page header.page .r-col form .input-group-btn > button + button, .lawyer-page section.header section.gray .input-group-btn > button + button, section.gray .lawyer-page section.header .input-group-btn > button + button, .question-page header.page .r-col form .input-group-btn > .btn + button, .question-page header.page .r-col form .input-group-btn > .btn-vk + button, .question-page header.page .r-col form .input-group-btn > .btn-od + button, .question-page header.page .r-col form .input-group-btn > .btn-ml + button, .question-page header.page .r-col form .input-group-btn > .btn-fb + button, .question-page header.page .r-col form .input-group-btn > .btn-tw + button, .question-page header.page .r-col form .input-group-btn > .btn-gl + button, section.gray .question-page header.page .r-col form .input-group-btn > button + button, .question-page header.page .r-col form section.gray .input-group-btn > button + button, .question-page header.page .r-col form .input-group-btn > button + button, .lawyer-page section.header .question-page header.page .r-col form .input-group-btn > button + button, .question-page header.page .r-col form .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header .input-group-btn > .btn + button, .lawyer-page section.header .input-group-btn > .btn-vk + button, .lawyer-page section.header .input-group-btn > .btn-od + button, .lawyer-page section.header .input-group-btn > .btn-ml + button, .lawyer-page section.header .input-group-btn > .btn-fb + button, .lawyer-page section.header .input-group-btn > .btn-tw + button, .lawyer-page section.header .input-group-btn > .btn-gl + button, section.gray .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header section.gray .input-group-btn > button + button, .question-page header.page .r-col form .lawyer-page section.header .input-group-btn > button + button, .lawyer-page section.header .question-page header.page .r-col form .input-group-btn > button + button, .lawyer-page section.header .input-group-btn > button + button {
       margin-left: -1px; }
-    .input-group-btn > .btn:focus, .input-group-btn > .btn-vk:focus, .input-group-btn > .btn-od:focus, .input-group-btn > .btn-ml:focus, .input-group-btn > .btn-fb:focus, .input-group-btn > .btn-tw:focus, .input-group-btn > .btn-gl:focus, section.gray .input-group-btn > button:focus, .question-page header .r-col form .input-group-btn > button:focus, .lawyer-page section.header .input-group-btn > button:focus, .input-group-btn > .btn:active, .input-group-btn > .btn-vk:active, .input-group-btn > .btn-od:active, .input-group-btn > .btn-ml:active, .input-group-btn > .btn-fb:active, .input-group-btn > .btn-tw:active, .input-group-btn > .btn-gl:active, section.gray .input-group-btn > button:active, .question-page header .r-col form .input-group-btn > button:active, .lawyer-page section.header .input-group-btn > button:active, .input-group-btn > .btn:hover, .input-group-btn > .btn-vk:hover, .input-group-btn > .btn-od:hover, .input-group-btn > .btn-ml:hover, .input-group-btn > .btn-fb:hover, .input-group-btn > .btn-tw:hover, .input-group-btn > .btn-gl:hover, section.gray .input-group-btn > button:hover, .question-page header .r-col form .input-group-btn > button:hover, .lawyer-page section.header .input-group-btn > button:hover {
+    .input-group-btn > .btn:focus, .input-group-btn > .btn-vk:focus, .input-group-btn > .btn-od:focus, .input-group-btn > .btn-ml:focus, .input-group-btn > .btn-fb:focus, .input-group-btn > .btn-tw:focus, .input-group-btn > .btn-gl:focus, section.gray .input-group-btn > button:focus, .question-page header.page .r-col form .input-group-btn > button:focus, .lawyer-page section.header .input-group-btn > button:focus, .input-group-btn > .btn:active, .input-group-btn > .btn-vk:active, .input-group-btn > .btn-od:active, .input-group-btn > .btn-ml:active, .input-group-btn > .btn-fb:active, .input-group-btn > .btn-tw:active, .input-group-btn > .btn-gl:active, section.gray .input-group-btn > button:active, .question-page header.page .r-col form .input-group-btn > button:active, .lawyer-page section.header .input-group-btn > button:active, .input-group-btn > .btn:hover, .input-group-btn > .btn-vk:hover, .input-group-btn > .btn-od:hover, .input-group-btn > .btn-ml:hover, .input-group-btn > .btn-fb:hover, .input-group-btn > .btn-tw:hover, .input-group-btn > .btn-gl:hover, section.gray .input-group-btn > button:hover, .question-page header.page .r-col form .input-group-btn > button:hover, .lawyer-page section.header .input-group-btn > button:hover {
       z-index: 3; }
-  .input-group-btn:first-child > .btn + .btn, .input-group-btn:first-child > .btn-vk + .btn, .input-group-btn:first-child > .btn-od + .btn, .input-group-btn:first-child > .btn-ml + .btn, .input-group-btn:first-child > .btn-fb + .btn, .input-group-btn:first-child > .btn-tw + .btn, .input-group-btn:first-child > .btn-gl + .btn, section.gray .input-group-btn:first-child > button + .btn, .question-page header .r-col form .input-group-btn:first-child > button + .btn, .lawyer-page section.header .input-group-btn:first-child > button + .btn, .input-group-btn:first-child > .btn + .btn-vk, .input-group-btn:first-child > .btn-vk + .btn-vk, .input-group-btn:first-child > .btn-od + .btn-vk, .input-group-btn:first-child > .btn-ml + .btn-vk, .input-group-btn:first-child > .btn-fb + .btn-vk, .input-group-btn:first-child > .btn-tw + .btn-vk, .input-group-btn:first-child > .btn-gl + .btn-vk, section.gray .input-group-btn:first-child > button + .btn-vk, .question-page header .r-col form .input-group-btn:first-child > button + .btn-vk, .lawyer-page section.header .input-group-btn:first-child > button + .btn-vk, .input-group-btn:first-child > .btn + .btn-od, .input-group-btn:first-child > .btn-vk + .btn-od, .input-group-btn:first-child > .btn-od + .btn-od, .input-group-btn:first-child > .btn-ml + .btn-od, .input-group-btn:first-child > .btn-fb + .btn-od, .input-group-btn:first-child > .btn-tw + .btn-od, .input-group-btn:first-child > .btn-gl + .btn-od, section.gray .input-group-btn:first-child > button + .btn-od, .question-page header .r-col form .input-group-btn:first-child > button + .btn-od, .lawyer-page section.header .input-group-btn:first-child > button + .btn-od, .input-group-btn:first-child > .btn + .btn-ml, .input-group-btn:first-child > .btn-vk + .btn-ml, .input-group-btn:first-child > .btn-od + .btn-ml, .input-group-btn:first-child > .btn-ml + .btn-ml, .input-group-btn:first-child > .btn-fb + .btn-ml, .input-group-btn:first-child > .btn-tw + .btn-ml, .input-group-btn:first-child > .btn-gl + .btn-ml, section.gray .input-group-btn:first-child > button + .btn-ml, .question-page header .r-col form .input-group-btn:first-child > button + .btn-ml, .lawyer-page section.header .input-group-btn:first-child > button + .btn-ml, .input-group-btn:first-child > .btn + .btn-fb, .input-group-btn:first-child > .btn-vk + .btn-fb, .input-group-btn:first-child > .btn-od + .btn-fb, .input-group-btn:first-child > .btn-ml + .btn-fb, .input-group-btn:first-child > .btn-fb + .btn-fb, .input-group-btn:first-child > .btn-tw + .btn-fb, .input-group-btn:first-child > .btn-gl + .btn-fb, section.gray .input-group-btn:first-child > button + .btn-fb, .question-page header .r-col form .input-group-btn:first-child > button + .btn-fb, .lawyer-page section.header .input-group-btn:first-child > button + .btn-fb, .input-group-btn:first-child > .btn + .btn-tw, .input-group-btn:first-child > .btn-vk + .btn-tw, .input-group-btn:first-child > .btn-od + .btn-tw, .input-group-btn:first-child > .btn-ml + .btn-tw, .input-group-btn:first-child > .btn-fb + .btn-tw, .input-group-btn:first-child > .btn-tw + .btn-tw, .input-group-btn:first-child > .btn-gl + .btn-tw, section.gray .input-group-btn:first-child > button + .btn-tw, .question-page header .r-col form .input-group-btn:first-child > button + .btn-tw, .lawyer-page section.header .input-group-btn:first-child > button + .btn-tw, .input-group-btn:first-child > .btn + .btn-gl, .input-group-btn:first-child > .btn-vk + .btn-gl, .input-group-btn:first-child > .btn-od + .btn-gl, .input-group-btn:first-child > .btn-ml + .btn-gl, .input-group-btn:first-child > .btn-fb + .btn-gl, .input-group-btn:first-child > .btn-tw + .btn-gl, .input-group-btn:first-child > .btn-gl + .btn-gl, section.gray .input-group-btn:first-child > button + .btn-gl, .question-page header .r-col form .input-group-btn:first-child > button + .btn-gl, .lawyer-page section.header .input-group-btn:first-child > button + .btn-gl, section.gray .input-group-btn:first-child > .btn + button, section.gray .input-group-btn:first-child > .btn-vk + button, section.gray .input-group-btn:first-child > .btn-od + button, section.gray .input-group-btn:first-child > .btn-ml + button, section.gray .input-group-btn:first-child > .btn-fb + button, section.gray .input-group-btn:first-child > .btn-tw + button, section.gray .input-group-btn:first-child > .btn-gl + button, section.gray .input-group-btn:first-child > button + button, .question-page header .r-col form section.gray .input-group-btn:first-child > button + button, section.gray .question-page header .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header section.gray .input-group-btn:first-child > button + button, section.gray .lawyer-page section.header .input-group-btn:first-child > button + button, .question-page header .r-col form .input-group-btn:first-child > .btn + button, .question-page header .r-col form .input-group-btn:first-child > .btn-vk + button, .question-page header .r-col form .input-group-btn:first-child > .btn-od + button, .question-page header .r-col form .input-group-btn:first-child > .btn-ml + button, .question-page header .r-col form .input-group-btn:first-child > .btn-fb + button, .question-page header .r-col form .input-group-btn:first-child > .btn-tw + button, .question-page header .r-col form .input-group-btn:first-child > .btn-gl + button, section.gray .question-page header .r-col form .input-group-btn:first-child > button + button, .question-page header .r-col form section.gray .input-group-btn:first-child > button + button, .question-page header .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header .question-page header .r-col form .input-group-btn:first-child > button + button, .question-page header .r-col form .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header .input-group-btn:first-child > .btn + button, .lawyer-page section.header .input-group-btn:first-child > .btn-vk + button, .lawyer-page section.header .input-group-btn:first-child > .btn-od + button, .lawyer-page section.header .input-group-btn:first-child > .btn-ml + button, .lawyer-page section.header .input-group-btn:first-child > .btn-fb + button, .lawyer-page section.header .input-group-btn:first-child > .btn-tw + button, .lawyer-page section.header .input-group-btn:first-child > .btn-gl + button, section.gray .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header section.gray .input-group-btn:first-child > button + button, .question-page header .r-col form .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header .question-page header .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header .input-group-btn:first-child > button + button {
+  .input-group-btn:first-child > .btn + .btn, .input-group-btn:first-child > .btn-vk + .btn, .input-group-btn:first-child > .btn-od + .btn, .input-group-btn:first-child > .btn-ml + .btn, .input-group-btn:first-child > .btn-fb + .btn, .input-group-btn:first-child > .btn-tw + .btn, .input-group-btn:first-child > .btn-gl + .btn, section.gray .input-group-btn:first-child > button + .btn, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn, .lawyer-page section.header .input-group-btn:first-child > button + .btn, .input-group-btn:first-child > .btn + .btn-vk, .input-group-btn:first-child > .btn-vk + .btn-vk, .input-group-btn:first-child > .btn-od + .btn-vk, .input-group-btn:first-child > .btn-ml + .btn-vk, .input-group-btn:first-child > .btn-fb + .btn-vk, .input-group-btn:first-child > .btn-tw + .btn-vk, .input-group-btn:first-child > .btn-gl + .btn-vk, section.gray .input-group-btn:first-child > button + .btn-vk, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-vk, .lawyer-page section.header .input-group-btn:first-child > button + .btn-vk, .input-group-btn:first-child > .btn + .btn-od, .input-group-btn:first-child > .btn-vk + .btn-od, .input-group-btn:first-child > .btn-od + .btn-od, .input-group-btn:first-child > .btn-ml + .btn-od, .input-group-btn:first-child > .btn-fb + .btn-od, .input-group-btn:first-child > .btn-tw + .btn-od, .input-group-btn:first-child > .btn-gl + .btn-od, section.gray .input-group-btn:first-child > button + .btn-od, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-od, .lawyer-page section.header .input-group-btn:first-child > button + .btn-od, .input-group-btn:first-child > .btn + .btn-ml, .input-group-btn:first-child > .btn-vk + .btn-ml, .input-group-btn:first-child > .btn-od + .btn-ml, .input-group-btn:first-child > .btn-ml + .btn-ml, .input-group-btn:first-child > .btn-fb + .btn-ml, .input-group-btn:first-child > .btn-tw + .btn-ml, .input-group-btn:first-child > .btn-gl + .btn-ml, section.gray .input-group-btn:first-child > button + .btn-ml, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-ml, .lawyer-page section.header .input-group-btn:first-child > button + .btn-ml, .input-group-btn:first-child > .btn + .btn-fb, .input-group-btn:first-child > .btn-vk + .btn-fb, .input-group-btn:first-child > .btn-od + .btn-fb, .input-group-btn:first-child > .btn-ml + .btn-fb, .input-group-btn:first-child > .btn-fb + .btn-fb, .input-group-btn:first-child > .btn-tw + .btn-fb, .input-group-btn:first-child > .btn-gl + .btn-fb, section.gray .input-group-btn:first-child > button + .btn-fb, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-fb, .lawyer-page section.header .input-group-btn:first-child > button + .btn-fb, .input-group-btn:first-child > .btn + .btn-tw, .input-group-btn:first-child > .btn-vk + .btn-tw, .input-group-btn:first-child > .btn-od + .btn-tw, .input-group-btn:first-child > .btn-ml + .btn-tw, .input-group-btn:first-child > .btn-fb + .btn-tw, .input-group-btn:first-child > .btn-tw + .btn-tw, .input-group-btn:first-child > .btn-gl + .btn-tw, section.gray .input-group-btn:first-child > button + .btn-tw, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-tw, .lawyer-page section.header .input-group-btn:first-child > button + .btn-tw, .input-group-btn:first-child > .btn + .btn-gl, .input-group-btn:first-child > .btn-vk + .btn-gl, .input-group-btn:first-child > .btn-od + .btn-gl, .input-group-btn:first-child > .btn-ml + .btn-gl, .input-group-btn:first-child > .btn-fb + .btn-gl, .input-group-btn:first-child > .btn-tw + .btn-gl, .input-group-btn:first-child > .btn-gl + .btn-gl, section.gray .input-group-btn:first-child > button + .btn-gl, .question-page header.page .r-col form .input-group-btn:first-child > button + .btn-gl, .lawyer-page section.header .input-group-btn:first-child > button + .btn-gl, section.gray .input-group-btn:first-child > .btn + button, section.gray .input-group-btn:first-child > .btn-vk + button, section.gray .input-group-btn:first-child > .btn-od + button, section.gray .input-group-btn:first-child > .btn-ml + button, section.gray .input-group-btn:first-child > .btn-fb + button, section.gray .input-group-btn:first-child > .btn-tw + button, section.gray .input-group-btn:first-child > .btn-gl + button, section.gray .input-group-btn:first-child > button + button, .question-page header.page .r-col form section.gray .input-group-btn:first-child > button + button, section.gray .question-page header.page .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header section.gray .input-group-btn:first-child > button + button, section.gray .lawyer-page section.header .input-group-btn:first-child > button + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-vk + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-od + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-ml + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-fb + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-tw + button, .question-page header.page .r-col form .input-group-btn:first-child > .btn-gl + button, section.gray .question-page header.page .r-col form .input-group-btn:first-child > button + button, .question-page header.page .r-col form section.gray .input-group-btn:first-child > button + button, .question-page header.page .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header .question-page header.page .r-col form .input-group-btn:first-child > button + button, .question-page header.page .r-col form .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header .input-group-btn:first-child > .btn + button, .lawyer-page section.header .input-group-btn:first-child > .btn-vk + button, .lawyer-page section.header .input-group-btn:first-child > .btn-od + button, .lawyer-page section.header .input-group-btn:first-child > .btn-ml + button, .lawyer-page section.header .input-group-btn:first-child > .btn-fb + button, .lawyer-page section.header .input-group-btn:first-child > .btn-tw + button, .lawyer-page section.header .input-group-btn:first-child > .btn-gl + button, section.gray .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header section.gray .input-group-btn:first-child > button + button, .question-page header.page .r-col form .lawyer-page section.header .input-group-btn:first-child > button + button, .lawyer-page section.header .question-page header.page .r-col form .input-group-btn:first-child > button + button, .lawyer-page section.header .input-group-btn:first-child > button + button {
     margin-left: 0; }
-  .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-vk, .input-group-btn:not(:last-child) > .btn-od, .input-group-btn:not(:last-child) > .btn-ml, .input-group-btn:not(:last-child) > .btn-fb, .input-group-btn:not(:last-child) > .btn-tw, .input-group-btn:not(:last-child) > .btn-gl, section.gray .input-group-btn:not(:last-child) > button, .question-page header .r-col form .input-group-btn:not(:last-child) > button, .lawyer-page section.header .input-group-btn:not(:last-child) > button,
+  .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-vk, .input-group-btn:not(:last-child) > .btn-od, .input-group-btn:not(:last-child) > .btn-ml, .input-group-btn:not(:last-child) > .btn-fb, .input-group-btn:not(:last-child) > .btn-tw, .input-group-btn:not(:last-child) > .btn-gl, section.gray .input-group-btn:not(:last-child) > button, .question-page header.page .r-col form .input-group-btn:not(:last-child) > button, .lawyer-page section.header .input-group-btn:not(:last-child) > button,
   .input-group-btn:not(:last-child) > .btn-group {
     margin-right: -1px; }
-  .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-vk, .input-group-btn:not(:first-child) > .btn-od, .input-group-btn:not(:first-child) > .btn-ml, .input-group-btn:not(:first-child) > .btn-fb, .input-group-btn:not(:first-child) > .btn-tw, .input-group-btn:not(:first-child) > .btn-gl, section.gray .input-group-btn:not(:first-child) > button, .question-page header .r-col form .input-group-btn:not(:first-child) > button, .lawyer-page section.header .input-group-btn:not(:first-child) > button,
+  .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-vk, .input-group-btn:not(:first-child) > .btn-od, .input-group-btn:not(:first-child) > .btn-ml, .input-group-btn:not(:first-child) > .btn-fb, .input-group-btn:not(:first-child) > .btn-tw, .input-group-btn:not(:first-child) > .btn-gl, section.gray .input-group-btn:not(:first-child) > button, .question-page header.page .r-col form .input-group-btn:not(:first-child) > button, .lawyer-page section.header .input-group-btn:not(:first-child) > button,
   .input-group-btn:not(:first-child) > .btn-group {
     z-index: 2;
     margin-left: 0; }
-    .input-group-btn:not(:first-child) > .btn:first-child, .input-group-btn:not(:first-child) > .btn-vk:first-child, .input-group-btn:not(:first-child) > .btn-od:first-child, .input-group-btn:not(:first-child) > .btn-ml:first-child, .input-group-btn:not(:first-child) > .btn-fb:first-child, .input-group-btn:not(:first-child) > .btn-tw:first-child, .input-group-btn:not(:first-child) > .btn-gl:first-child, section.gray .input-group-btn:not(:first-child) > button:first-child, .question-page header .r-col form .input-group-btn:not(:first-child) > button:first-child, .lawyer-page section.header .input-group-btn:not(:first-child) > button:first-child,
+    .input-group-btn:not(:first-child) > .btn:first-child, .input-group-btn:not(:first-child) > .btn-vk:first-child, .input-group-btn:not(:first-child) > .btn-od:first-child, .input-group-btn:not(:first-child) > .btn-ml:first-child, .input-group-btn:not(:first-child) > .btn-fb:first-child, .input-group-btn:not(:first-child) > .btn-tw:first-child, .input-group-btn:not(:first-child) > .btn-gl:first-child, section.gray .input-group-btn:not(:first-child) > button:first-child, .question-page header.page .r-col form .input-group-btn:not(:first-child) > button:first-child, .lawyer-page section.header .input-group-btn:not(:first-child) > button:first-child,
     .input-group-btn:not(:first-child) > .btn-group:first-child {
       margin-left: -1px; }
-    .input-group-btn:not(:first-child) > .btn:focus, .input-group-btn:not(:first-child) > .btn-vk:focus, .input-group-btn:not(:first-child) > .btn-od:focus, .input-group-btn:not(:first-child) > .btn-ml:focus, .input-group-btn:not(:first-child) > .btn-fb:focus, .input-group-btn:not(:first-child) > .btn-tw:focus, .input-group-btn:not(:first-child) > .btn-gl:focus, section.gray .input-group-btn:not(:first-child) > button:focus, .question-page header .r-col form .input-group-btn:not(:first-child) > button:focus, .lawyer-page section.header .input-group-btn:not(:first-child) > button:focus, .input-group-btn:not(:first-child) > .btn:active, .input-group-btn:not(:first-child) > .btn-vk:active, .input-group-btn:not(:first-child) > .btn-od:active, .input-group-btn:not(:first-child) > .btn-ml:active, .input-group-btn:not(:first-child) > .btn-fb:active, .input-group-btn:not(:first-child) > .btn-tw:active, .input-group-btn:not(:first-child) > .btn-gl:active, section.gray .input-group-btn:not(:first-child) > button:active, .question-page header .r-col form .input-group-btn:not(:first-child) > button:active, .lawyer-page section.header .input-group-btn:not(:first-child) > button:active, .input-group-btn:not(:first-child) > .btn:hover, .input-group-btn:not(:first-child) > .btn-vk:hover, .input-group-btn:not(:first-child) > .btn-od:hover, .input-group-btn:not(:first-child) > .btn-ml:hover, .input-group-btn:not(:first-child) > .btn-fb:hover, .input-group-btn:not(:first-child) > .btn-tw:hover, .input-group-btn:not(:first-child) > .btn-gl:hover, section.gray .input-group-btn:not(:first-child) > button:hover, .question-page header .r-col form .input-group-btn:not(:first-child) > button:hover, .lawyer-page section.header .input-group-btn:not(:first-child) > button:hover,
+    .input-group-btn:not(:first-child) > .btn:focus, .input-group-btn:not(:first-child) > .btn-vk:focus, .input-group-btn:not(:first-child) > .btn-od:focus, .input-group-btn:not(:first-child) > .btn-ml:focus, .input-group-btn:not(:first-child) > .btn-fb:focus, .input-group-btn:not(:first-child) > .btn-tw:focus, .input-group-btn:not(:first-child) > .btn-gl:focus, section.gray .input-group-btn:not(:first-child) > button:focus, .question-page header.page .r-col form .input-group-btn:not(:first-child) > button:focus, .lawyer-page section.header .input-group-btn:not(:first-child) > button:focus, .input-group-btn:not(:first-child) > .btn:active, .input-group-btn:not(:first-child) > .btn-vk:active, .input-group-btn:not(:first-child) > .btn-od:active, .input-group-btn:not(:first-child) > .btn-ml:active, .input-group-btn:not(:first-child) > .btn-fb:active, .input-group-btn:not(:first-child) > .btn-tw:active, .input-group-btn:not(:first-child) > .btn-gl:active, section.gray .input-group-btn:not(:first-child) > button:active, .question-page header.page .r-col form .input-group-btn:not(:first-child) > button:active, .lawyer-page section.header .input-group-btn:not(:first-child) > button:active, .input-group-btn:not(:first-child) > .btn:hover, .input-group-btn:not(:first-child) > .btn-vk:hover, .input-group-btn:not(:first-child) > .btn-od:hover, .input-group-btn:not(:first-child) > .btn-ml:hover, .input-group-btn:not(:first-child) > .btn-fb:hover, .input-group-btn:not(:first-child) > .btn-tw:hover, .input-group-btn:not(:first-child) > .btn-gl:hover, section.gray .input-group-btn:not(:first-child) > button:hover, .question-page header.page .r-col form .input-group-btn:not(:first-child) > button:hover, .lawyer-page section.header .input-group-btn:not(:first-child) > button:hover,
     .input-group-btn:not(:first-child) > .btn-group:focus,
     .input-group-btn:not(:first-child) > .btn-group:active,
     .input-group-btn:not(:first-child) > .btn-group:hover {
@@ -3188,7 +3189,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 .custom-control {
   position: relative;
   display: inline-flex;
-  min-height: 1.25rem;
+  min-height: 1.3888888889rem;
   padding-left: 1.5rem;
   margin-right: 1rem; }
 
@@ -3211,7 +3212,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 
 .custom-control-indicator {
   position: absolute;
-  top: 0.125rem;
+  top: 0.1944444444rem;
   left: 0;
   display: block;
   width: 1rem;
@@ -3247,9 +3248,9 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 .custom-select {
   display: inline-block;
   max-width: 100%;
-  height: calc(2.5rem + 2px);
+  height: calc(2.6388888889rem + 2px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   color: #545454;
   vertical-align: middle;
   background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
@@ -3282,13 +3283,13 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   position: relative;
   display: inline-block;
   max-width: 100%;
-  height: calc(2.5rem + 2px);
+  height: calc(2.6388888889rem + 2px);
   margin-bottom: 0; }
 
 .custom-file-input {
   min-width: 14rem;
   max-width: 100%;
-  height: calc(2.5rem + 2px);
+  height: calc(2.6388888889rem + 2px);
   margin: 0;
   opacity: 0; }
   .custom-file-input:focus ~ .custom-file-control {
@@ -3300,9 +3301,9 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   right: 0;
   left: 0;
   z-index: 5;
-  height: calc(2.5rem + 2px);
+  height: calc(2.6388888889rem + 2px);
   padding: 0.625rem 0.875rem;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   color: #545454;
   pointer-events: none;
   user-select: none;
@@ -3318,9 +3319,9 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
     bottom: -1px;
     z-index: 6;
     display: block;
-    height: calc(2.5rem + 2px);
+    height: calc(2.6388888889rem + 2px);
     padding: 0.625rem 0.875rem;
-    line-height: 1.25;
+    line-height: 1.3888888889;
     color: #545454;
     background-color: #e6e6e6;
     border: 1px solid #e6e6e6;
@@ -3407,8 +3408,8 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.421875rem;
-  padding-bottom: 0.421875rem;
+  padding-top: 0.4131944444rem;
+  padding-bottom: 0.4131944444rem;
   margin-right: 1.875rem;
   font-size: 1.125rem;
   line-height: inherit;
@@ -3672,7 +3673,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
       color: #fff; }
 
 .mlo-navbar {
-  height: 6.25rem;
+  height: 6.9444444444rem;
   position: absolute;
   top: 0;
   right: 0;
@@ -3682,9 +3683,9 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   background-color: transparent !important; }
   @media (max-width: 767px) {
     .mlo-navbar {
-      height: 5rem;
-      padding-left: 0.625rem;
-      padding-right: 0.625rem; } }
+      height: 5.5555555556rem;
+      padding-left: 0.6944444444rem;
+      padding-right: 0.6944444444rem; } }
   .mlo-navbar .navbar-brand {
     position: relative;
     z-index: 1; }
@@ -3702,7 +3703,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
       display: block;
       text-decoration: none;
       font-weight: 600;
-      height: 2.5rem;
+      height: 2.7777777778rem;
       line-height: 38px;
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 0.25rem;
@@ -3711,7 +3712,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
       .mlo-navbar .actions a:hover {
         background-color: rgba(0, 0, 0, 0.2); }
       .mlo-navbar .actions a.sq {
-        width: 2.5rem;
+        width: 2.7777777778rem;
         padding: 0 !important; }
       .mlo-navbar .actions a.active {
         color: #fc6947; }
@@ -3721,7 +3722,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 
 .navbar-fixed .mlo-navbar {
   position: fixed;
-  height: 3.75rem;
+  height: 4.1666666667rem;
   box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3); }
   .navbar-fixed .mlo-navbar .navbar-brand img {
     width: 115px;
@@ -3988,7 +3989,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
   .badge:empty {
     display: none; }
 
-.btn .badge, .btn-vk .badge, .btn-od .badge, .btn-ml .badge, .btn-fb .badge, .btn-tw .badge, .btn-gl .badge, section.gray button .badge, .question-page header .r-col form button .badge, .lawyer-page section.header button .badge {
+.btn .badge, .btn-vk .badge, .btn-od .badge, .btn-ml .badge, .btn-fb .badge, .btn-tw .badge, .btn-gl .badge, section.gray button .badge, .question-page header.page .r-col form button .badge, .lawyer-page section.header button .badge {
   position: relative;
   top: -1px; }
 
@@ -4213,7 +4214,7 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
 
 .file-loader {
   position: relative;
-  height: 1.875rem;
+  height: 2.0833333333rem;
   overflow: hidden; }
   .file-loader:before {
     content: attr(data-filename);
@@ -4229,14 +4230,14 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
     top: 0;
     cursor: pointer;
     z-index: 1;
-    width: 6.25rem;
+    width: 6.9444444444rem;
     text-align: right;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), white); }
   .file-loader .bar {
-    margin-right: 1.875rem;
+    margin-right: 2.0833333333rem;
     height: 4px;
     position: relative;
-    top: 1.25rem; }
+    top: 1.3888888889rem; }
     .file-loader .bar :first-child {
       content: ''; }
 
@@ -4547,7 +4548,7 @@ button.close {
 
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.25; }
+  line-height: 1.3888888889; }
 
 .modal-body {
   position: relative;
@@ -4590,7 +4591,7 @@ button.close {
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-style: normal;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -4671,7 +4672,7 @@ button.close {
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-style: normal;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.3888888889;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -5012,7 +5013,7 @@ a.bg-white:focus, a.bg-white:hover {
 .bg-transparent {
   background-color: transparent !important; }
 
-.border, .question-page header .r-col form textarea {
+.border, .question-page header.page .r-col form textarea, .entry .answer-footer-like {
   border: 1px solid #e6e6e6 !important; }
 
 .border-0 {
@@ -5090,7 +5091,7 @@ a.bg-white:focus, a.bg-white:hover {
   clear: both;
   content: ""; }
 
-.d-none, .mlo-navbar .title, .mlo-navbar .lawyer-page section.header .r-col, .lawyer-page section.header .mlo-navbar .r-col, .question-page header .r-col form textarea {
+.d-none, .mlo-navbar .title, .mlo-navbar .lawyer-page section.header .r-col, .lawyer-page section.header .mlo-navbar .r-col, .question-page header.page .r-col form textarea {
   display: none !important; }
 
 .d-inline {
@@ -5111,10 +5112,10 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .question-page header .l-col, .question .info, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
+.d-flex, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.questions-section article .answer .answer-header, .slide-menu, .question-page header.page .l-col, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
   display: flex !important; }
 
-.d-inline-flex {
+.d-inline-flex, .entry .answer .answer-header-stat span, .entry .answer-footer-like {
   display: inline-flex !important; }
 
 @media (min-width: 576px) {
@@ -5181,7 +5182,7 @@ a.bg-white:focus, a.bg-white:hover {
   .d-lg-inline-block {
     display: inline-block !important; }
 
-  .d-lg-block, .question-page header .r-col form textarea {
+  .d-lg-block, .question-page header.page .r-col form textarea {
     display: block !important; }
 
   .d-lg-table {
@@ -5284,7 +5285,7 @@ a.bg-white:focus, a.bg-white:hover {
 .flex-row {
   flex-direction: row !important; }
 
-.flex-column, .slide-menu, .question-page header .l-col {
+.flex-column, .slide-menu, .question-page header.page .l-col {
   flex-direction: column !important; }
 
 .flex-row-reverse {
@@ -5308,7 +5309,7 @@ a.bg-white:focus, a.bg-white:hover {
 .justify-content-end {
   justify-content: flex-end !important; }
 
-.justify-content-center, section.header-section, .question-page header .l-col {
+.justify-content-center, section.header-section, .question-page header.page .l-col, .entry .answer-footer-like {
   justify-content: center !important; }
 
 .justify-content-between, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, .slide-menu {
@@ -5323,7 +5324,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div, .question .info, .lawyer-list .lawyer-list-item-header {
+.align-items-center, .mlo-navbar, section.header-section, section.questions-section article .answer .answer-header, footer.main-footer > div, .entry .answer .answer-header-stat span, .lawyer-list .lawyer-list-item-header {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -5876,7 +5877,7 @@ a.bg-white:focus, a.bg-white:hover {
 .mx-1 {
   margin-right: 0.25rem !important; }
 
-.mb-1, .question-page header .r-col form > *, .question .brick .file-item,
+.mb-1, .question-page header.page .r-col form > *, .entry .brick .file-item,
 .my-1 {
   margin-bottom: 0.25rem !important; }
 
@@ -5891,7 +5892,7 @@ a.bg-white:focus, a.bg-white:hover {
 .my-2 {
   margin-top: 0.5rem !important; }
 
-.mr-2, .question .rubrics .rubric-item:before, .question .brick .file-item:before, .lawyer-page section.about nav a i, .lawyer-list .consult-state:before,
+.mr-2, .entry .rubrics .rubric-item:before, .entry .brick .file-item:before, .entry .answer .answer-header-stat span i, .lawyer-page section.about nav a i, .lawyer-list .consult-state:before,
 .mx-2 {
   margin-right: 0.5rem !important; }
 
@@ -5910,11 +5911,11 @@ a.bg-white:focus, a.bg-white:hover {
 .my-3 {
   margin-top: 1rem !important; }
 
-.mr-3, .col-form-label, section.questions-section article .answer .answer-header .usr, .question .rubrics .rubric-item:after,
+.mr-3, .col-form-label, section.questions-section article .answer .answer-header .usr, .entry .rubrics .rubric-item:after, .entry .answer .answer-header-stat span,
 .mx-3 {
   margin-right: 1rem !important; }
 
-.mb-3, section.questions-section article .number, section.questions-section article .answer .answer-header, .question .info, .lawyer-page article .content h5, .lawyer-list .consult-state,
+.mb-3, section.questions-section article .number, section.questions-section article .answer .answer-header, .lawyer-page article .content h5, .lawyer-list .consult-state,
 .my-3 {
   margin-bottom: 1rem !important; }
 
@@ -6002,7 +6003,7 @@ footer.main-footer > div .mdd a {
 .px-1 {
   padding-left: 0.25rem !important; }
 
-.p-2, .question-page header .r-col form textarea {
+.p-2, .question-page header.page .r-col form textarea {
   padding: 0.5rem !important; }
 
 .pt-2,
@@ -6062,7 +6063,7 @@ section.lawyer-section .cards .cards-inner {
 .btn-group-sm > .btn-tw,
 .btn-group-sm > .btn-gl,
 section.gray .btn-group-sm > button,
-.question-page header .r-col form .btn-group-sm > button,
+.question-page header.page .r-col form .btn-group-sm > button,
 .lawyer-page section.header button,
 .win-round {
   padding-right: 1.5rem !important; }
@@ -6082,7 +6083,7 @@ section.gray .btn-group-sm > button,
 .btn-group-sm > .btn-tw,
 .btn-group-sm > .btn-gl,
 section.gray .btn-group-sm > button,
-.question-page header .r-col form .btn-group-sm > button,
+.question-page header.page .r-col form .btn-group-sm > button,
 .lawyer-page section.header button,
 .win-round {
   padding-left: 1.5rem !important; }
@@ -6115,7 +6116,7 @@ section.gray .btn-group-sm > button,
 .my-auto {
   margin-top: auto !important; }
 
-.mr-auto, .question-page header .r-col, .lawyer-page article .content,
+.mr-auto, .question-page header.page .r-col, .lawyer-page article .content,
 .mx-auto,
 section.advantage-section .content,
 section.lawyer-section .title,
@@ -6129,7 +6130,7 @@ section.lawyer-section .lawyer-page section.header .r-col,
 .my-auto {
   margin-bottom: auto !important; }
 
-.ml-auto, section.review-section .reviews, section.questions-section header h3, .question-page header .l-col, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col,
+.ml-auto, section.review-section .reviews, section.questions-section header h3, .question-page header.page .l-col, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col,
 .mx-auto,
 section.advantage-section .content,
 section.lawyer-section .title,
@@ -6839,7 +6840,7 @@ section.lawyer-section .lawyer-page section.header .r-col,
   .px-lg-4 {
     padding-right: 1.5rem !important; }
 
-  .pb-lg-4, .question-page header .l-col h2, .question-page header .l-col .question h1, .question .question-page header .l-col h1, .question-page header .l-col p,
+  .pb-lg-4, .question-page header.page .l-col h2, .question-page header.page .l-col .entry h1, .entry .question-page header.page .l-col h1, .question-page header.page .l-col p,
   .py-lg-4 {
     padding-bottom: 1.5rem !important; }
 
@@ -7145,7 +7146,7 @@ section.lawyer-section .lawyer-page section.header .r-col,
 .text-left {
   text-align: left !important; }
 
-.text-right, .question .published, .question .number {
+.text-right, .entry .l-col {
   text-align: right !important; }
 
 .text-center, .mlo-navbar .title, .mlo-navbar .lawyer-page section.header .r-col, .lawyer-page section.header .mlo-navbar .r-col, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .lawyer-page section.header .l-col {
@@ -7265,7 +7266,7 @@ a.text-dark:focus, a.text-dark:hover {
 a.text-white:focus, a.text-white:hover {
   color: #e6e6e6 !important; }
 
-.text-muted, .win-round .reg, .lawyer-page article .content h5 small, .lawyer-page article .content h5 .form-group .invalid-feedback, .form-group .lawyer-page article .content h5 .invalid-feedback, .lawyer-page article .content h5 .form-group .valid-feedback, .form-group .lawyer-page article .content h5 .valid-feedback {
+.text-muted, .win-round .reg, .entry .answer .answer-header-stat, .lawyer-page article .content h5 small, .lawyer-page article .content h5 .form-group .invalid-feedback, .form-group .lawyer-page article .content h5 .invalid-feedback, .lawyer-page article .content h5 .form-group .valid-feedback, .form-group .lawyer-page article .content h5 .valid-feedback {
   color: #878787 !important; }
 
 .text-hide {
@@ -7294,8 +7295,8 @@ body, #app {
   min-width: 320px; }
 
 section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 5.5555555556rem;
+  padding-bottom: 5.5555555556rem;
   position: relative;
   z-index: 0; }
   section:before {
@@ -7326,21 +7327,21 @@ section {
     color: #878787; }
     section.gray > .container, section.gray > section.advantage-section {
       position: relative; }
-    section.gray h1, section.gray h2, section.gray .question h1, .question section.gray h1, section.gray h3, section.gray h4 {
+    section.gray h1, section.gray h2, section.gray .entry h1, .entry section.gray h1, section.gray h3, section.gray h4 {
       color: #4c7efd; }
-    section.gray h2, section.gray .question h1, .question section.gray h1, section.gray .lead, section.gray .question-page header .l-col p, .question-page header .l-col section.gray p, section.gray .question .content .text, .question .content section.gray .text {
-      margin-bottom: 2.5rem; }
+    section.gray h2, section.gray .entry h1, .entry section.gray h1, section.gray .lead, section.gray .question-page header.page .l-col p, .question-page header.page .l-col section.gray p, section.gray .entry .content .text-lead, .entry .content section.gray .text-lead {
+      margin-bottom: 2.7777777778rem; }
     section.gray:before {
       background-color: #f5f5f5; }
   section.advantage-section {
-    padding-bottom: 2.5rem; }
+    padding-bottom: 2.7777777778rem; }
     section.advantage-section h3 {
-      margin-bottom: 3.75rem; }
+      margin-bottom: 4.1666666667rem; }
     section.advantage-section .advantages .advantage-item {
-      margin-bottom: 2.5rem;
-      padding-right: 2.5rem;
+      margin-bottom: 2.7777777778rem;
+      padding-right: 2.7777777778rem;
       color: #878787;
-      padding-left: 5.625rem; }
+      padding-left: 6.25rem; }
       section.advantage-section .advantages .advantage-item h5 {
         font-weight: 400;
         color: #212121; }
@@ -7351,7 +7352,7 @@ section {
         top: 0;
         left: 0;
         background-repeat: no-repeat;
-        width: 3.75rem;
+        width: 4.1666666667rem;
         height: 100%; }
       section.advantage-section .advantages .advantage-item.i1:before {
         background-image: url("/static/img/advantage/advantage-1.svg"); }
@@ -7367,10 +7368,10 @@ section {
         background-image: url("/static/img/advantage/advantage-6.svg"); }
   section.review-section {
     padding-bottom: 0;
-    height: 38.75rem; }
+    height: 43.0555555556rem; }
     @media (max-width: 767px) {
       section.review-section {
-        padding-bottom: 5rem;
+        padding-bottom: 5.5555555556rem;
         height: auto; } }
     section.review-section .gutter {
       z-index: 0; }
@@ -7381,11 +7382,11 @@ section {
       @media (max-width: 767px) {
         section.review-section .reviews {
           position: static;
-          padding-bottom: 1.25rem; } }
+          padding-bottom: 1.3888888889rem; } }
     section.review-section .review {
       background-color: white;
       position: relative;
-      max-height: 33.75rem;
+      max-height: 37.5rem;
       overflow-y: hidden;
       box-shadow: 0 -2.1rem 0 -1.5rem #fcfcfc, 0 -4.2rem 0 -3rem #fafafa; }
       @media (max-width: 767px) {
@@ -7393,37 +7394,37 @@ section {
           min-width: 600px; } }
       section.review-section .review .review-item {
         border-bottom: solid 4px #f5f5f5;
-        padding: 1.25rem 1.25rem 1.25rem 6.25rem;
+        padding: 1.3888888889rem 1.3888888889rem 1.3888888889rem 6.9444444444rem;
         position: relative;
         cursor: pointer; }
         section.review-section .review .review-item p {
           margin-bottom: 0; }
         @media (max-width: 991px) {
           section.review-section .review .review-item {
-            padding-left: 3.75rem; } }
+            padding-left: 4.1666666667rem; } }
         section.review-section .review .review-item:before {
           content: '\e901';
           font-family: icomoon;
           color: #2e67fb;
           position: absolute;
-          left: 1.875rem; }
+          left: 2.0833333333rem; }
           @media (max-width: 991px) {
             section.review-section .review .review-item:before {
-              left: 1.25rem; } }
+              left: 1.3888888889rem; } }
       section.review-section .review:after {
         content: '';
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 7.5rem;
+        height: 8.3333333333rem;
         box-shadow: inset 0px -9rem 5rem -4rem #f5f5f5; }
   section.lawyer-section {
     padding-bottom: 0;
-    height: 42.5rem; }
+    height: 47.2222222222rem; }
     @media (max-width: 575px) {
       section.lawyer-section {
-        padding-bottom: 3.75rem;
-        height: 51.25rem; } }
+        padding-bottom: 4.1666666667rem;
+        height: 56.9444444444rem; } }
     section.lawyer-section .cards {
       position: absolute;
       overflow: scroll;
@@ -7432,12 +7433,12 @@ section {
       width: 100%; }
     section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col {
       position: static;
-      height: 2.5rem;
+      height: 2.7777777778rem;
       z-index: 1; }
       @media (max-width: 575px) {
         section.lawyer-section .title > button, section.lawyer-section .lawyer-page section.header .r-col > button, .lawyer-page section.header section.lawyer-section .r-col > button {
           position: absolute;
-          bottom: 6.25rem; } }
+          bottom: 6.9444444444rem; } }
   section.questions-section article .date {
     line-height: 25px; }
   section.questions-section article h6 {
@@ -7454,18 +7455,18 @@ section {
       display: inline-block;
       margin-right: -10px; }
       section.questions-section article .answer .answer-header .usr a img {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.7777777778rem;
+        height: 2.7777777778rem;
         border-radius: 50%; }
   section.questions-section article .answer p {
     color: #878787; }
   section.questions-section hr {
-    margin-bottom: 1.875rem;
-    margin-top: 1.25rem; }
+    margin-bottom: 2.0833333333rem;
+    margin-top: 1.3888888889rem; }
 
 footer.main-footer {
   border-top: 1px solid #e6e6e6;
-  padding: 1.25rem 1.875rem;
+  padding: 1.3888888889rem 2.0833333333rem;
   color: #bababa;
   background-color: #f5f5f5; }
   footer.main-footer a {
@@ -7482,24 +7483,24 @@ footer.main-footer {
 .win-round {
   position: relative;
   background-color: white;
-  border-radius: 1.25rem;
-  box-shadow: 0 0 2.1875rem 0 rgba(0, 0, 0, 0.3);
+  border-radius: 1.3888888889rem;
+  box-shadow: 0 0 2.4305555556rem 0 rgba(0, 0, 0, 0.3);
   width: 770px;
   z-index: 10;
   color: #212121; }
   .win-round h4 {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.3888888889rem;
     color: #878787; }
   @media (max-width: 767px) {
     .win-round {
       border-radius: 0; } }
   .win-round .l-col {
-    margin-bottom: 3.75rem; }
+    margin-bottom: 4.1666666667rem; }
     @media (max-width: 767px) {
       .win-round .l-col {
-        margin-bottom: 1.25rem; } }
+        margin-bottom: 1.3888888889rem; } }
   .win-round .r-col {
-    margin-bottom: 3.75rem;
+    margin-bottom: 4.1666666667rem;
     font-weight: 300; }
   .win-round .hr:before {
     content: '';
@@ -7514,13 +7515,13 @@ footer.main-footer {
       .win-round .hr:before {
         width: 100%;
         height: 1px;
-        margin: 2.5rem 0; } }
+        margin: 2.7777777778rem 0; } }
   .win-round .reg {
     position: absolute;
     bottom: 0;
     left: 0; }
   .win-round .req {
-    margin-bottom: 0.625rem; }
+    margin-bottom: 0.6944444444rem; }
   .win-round.rec h4 {
     margin-left: 16px; }
     @media (max-width: 767px) {
@@ -7529,10 +7530,10 @@ footer.main-footer {
   @media (max-width: 767px) {
     .win-round.rec .l-col {
       order: 3;
-      margin-bottom: 3.75rem; }
+      margin-bottom: 4.1666666667rem; }
     .win-round.rec .r-col {
       order: 1;
-      margin-bottom: 0.625rem; } }
+      margin-bottom: 0.6944444444rem; } }
 
 #app, .slide-menu, .mlo-navbar {
   transition: all .2s; }
@@ -7557,25 +7558,25 @@ footer.main-footer {
   right: -430px;
   z-index: 1050;
   overflow-y: scroll;
-  padding: 1.25rem 1.25rem 3.75rem 2.5rem; }
+  padding: 1.3888888889rem 1.3888888889rem 4.1666666667rem 2.7777777778rem; }
   .slide-menu ul {
     font-size: 1.25rem;
     font-weight: 300;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    margin-top: 2.5rem; }
+    margin-top: 2.7777777778rem; }
     .slide-menu ul li {
-      margin-bottom: 1.125rem; }
+      margin-bottom: 1.25rem; }
       .slide-menu ul li a {
         text-decoration: none; }
   @media (max-width: 767px) {
     .slide-menu {
       width: 260px;
       right: -260px;
-      padding: 1.25rem; }
+      padding: 1.3888888889rem; }
       .slide-menu ul {
-        margin-top: 1.25rem; } }
+        margin-top: 1.3888888889rem; } }
   .slide-menu .text {
     color: #bababa; }
 
@@ -7611,7 +7612,7 @@ footer.main-footer {
   min-width: 320px;
   height: 620px;
   position: relative;
-  margin-right: 2.5rem; }
+  margin-right: 2.7777777778rem; }
   .lawyer-card .lawyer-card-title {
     width: 320px;
     height: 440px;
@@ -7661,95 +7662,117 @@ footer.main-footer {
     width: 320px;
     height: 440px; }
 
-.question-page header {
-  padding-top: 6.25rem;
-  padding-bottom: 2.5rem;
+.question-page header.page {
+  padding-top: 6.9444444444rem;
+  padding-bottom: 2.7777777778rem;
   background-image: url("/static/img/bgr/bg-1.jpg");
   background-position: center;
   background-size: cover; }
-  .question-page header .l-col {
+  .question-page header.page .l-col {
     color: #fff; }
-    .question-page header .l-col .tel {
+    .question-page header.page .l-col .tel {
       color: #ffffcc;
       white-space: nowrap;
       font-weight: 600; }
     @media (min-width: 768px) {
-      .question-page header .l-col .phone {
+      .question-page header.page .l-col .phone {
         display: none; } }
-  .question-page header .r-col form {
-    padding: 2.5rem;
+  .question-page header.page .r-col form {
+    padding: 2.7777777778rem;
     background-color: #fff;
-    border-radius: 1.25rem; }
-    .question-page header .r-col form > * {
+    border-radius: 1.3888888889rem; }
+    .question-page header.page .r-col form > * {
       display: inline-block;
       width: 100%; }
       @media (max-width: 991px) {
-        .question-page header .r-col form > * {
+        .question-page header.page .r-col form > * {
           width: auto; } }
-    .question-page header .r-col form textarea {
+    .question-page header.page .r-col form textarea {
       border-radius: 0.3rem;
-      height: 10.625rem; }
+      height: 11.8055555556rem; }
     @media (max-width: 991px) {
-      .question-page header .r-col form {
+      .question-page header.page .r-col form {
         background: none;
         padding: 0; } }
   @media (max-width: 991px) {
-    .question-page header {
+    .question-page header.page {
       text-align: center; }
-      .question-page header .l {
+      .question-page header.page .l {
         display: none; } }
   @media (min-width: 576px) {
-    .question-page header .s {
+    .question-page header.page .s {
       display: none; } }
 .question-page main {
-  padding-right: 2.8125rem; }
+  padding-right: 3.125rem; }
 .question-page aside {
-  padding-left: 2.8125rem; }
+  padding-left: 3.125rem; }
 
-.question h1 {
-  margin-bottom: 2.5rem; }
-.question .author h5 {
-  margin: 0; }
-.question .number {
-  margin-top: 0.3125rem;
+.entry .l-col {
   color: #bababa; }
-.question .content .text {
+.entry h1 {
+  margin-bottom: 2.7777777778rem; }
+.entry .content .text {
+  font-size: 1.125rem; }
+.entry .content .text-lead {
   font-weight: 300; }
-.question .rubrics .rubric-item:before {
+.entry .rubrics .rubric-item:before {
   content: '\e908';
   font-family: icomoon;
   color: #e6e6e6; }
-.question .rubrics .rubric-item:after {
+.entry .rubrics .rubric-item:after {
   content: ','; }
-.question .rubrics .rubric-item:last-of-type:after {
+.entry .rubrics .rubric-item:last-of-type:after {
   content: none; }
-.question .rubrics .rubric-item a {
+.entry .rubrics .rubric-item a {
   color: #545454; }
-.question .brick {
-  margin: 1.25rem 0 0;
-  padding: 0.9375rem 0.625rem 0.9375rem 1.875rem;
+.entry .brick {
+  margin: 1.3888888889rem 0 0;
+  padding: 1.0416666667rem 0.6944444444rem 1.0416666667rem 2.0833333333rem;
   background-color: #f5f5f5;
-  border-radius: 0.625rem;
+  border-radius: 0.6944444444rem;
   font-size: 1rem;
   font-weight: normal; }
-  .question .brick .file-item:before {
+  .entry .brick .file-item:before {
     content: '\e911';
     font-family: icomoon;
     color: #bababa; }
-  .question .brick .file-item:last-of-type {
+  .entry .brick .file-item:last-of-type {
     margin-bottom: 0; }
+.entry .answer .answer-header-photo {
+  display: inline-block;
+  width: 5.5555555556rem;
+  height: 5.5555555556rem;
+  border-radius: 50%;
+  overflow: hidden; }
+  .entry .answer .answer-header-photo img {
+    width: 100%; }
+.entry .answer .answer-header-stat span i {
+  color: #e6e6e6; }
+.entry .answer-footer-like {
+  border-radius: 2.7777777778rem;
+  padding: 0.6944444444rem 1.3888888889rem;
+  color: #bababa; }
+  .entry .answer-footer-like span {
+    padding: 0 0.6944444444rem; }
+  .entry .answer-footer-like i {
+    font-size: 1.3888888889rem;
+    cursor: pointer; }
+    .entry .answer-footer-like i.icon-dislike:hover, .entry .answer-footer-like i.icon-dislike.active {
+      color: #fc6947; }
+    .entry .answer-footer-like i.icon-like:hover, .entry .answer-footer-like i.icon-dislike.active {
+      color: #16c246; }
 
 .lawyer-page dt {
   color: #878787; }
 .lawyer-page dd {
-  line-height: 1.875rem;
+  line-height: 2.0833333333rem;
   margin-bottom: 0; }
 .lawyer-page section.header {
-  padding-top: 7.5rem;
+  padding-top: 8.3333333333rem;
   padding-bottom: 0; }
   .lawyer-page section.header h1 {
     margin-bottom: 30px; }
-  .lawyer-page section.header .lead, .lawyer-page section.header .question-page header .l-col p, .question-page header .l-col .lawyer-page section.header p, .lawyer-page section.header .question .content .text, .question .content .lawyer-page section.header .text {
+  .lawyer-page section.header .lead, .lawyer-page section.header .question-page header.page .l-col p, .question-page header.page .l-col .lawyer-page section.header p, .lawyer-page section.header .entry .content .text-lead, .entry .content .lawyer-page section.header .text-lead {
     font-size: 18px;
     margin-bottom: 40px; }
   .lawyer-page section.header .photo {
@@ -7764,28 +7787,28 @@ footer.main-footer {
         padding-left: 0;
         padding-right: 0; } }
 .lawyer-page section.about {
-  padding-top: 3.75rem;
-  padding-bottom: 3.75rem; }
-  .lawyer-page section.about .lead, .lawyer-page section.about .question-page header .l-col p, .question-page header .l-col .lawyer-page section.about p, .lawyer-page section.about .question .content .text, .question .content .lawyer-page section.about .text {
+  padding-top: 4.1666666667rem;
+  padding-bottom: 4.1666666667rem; }
+  .lawyer-page section.about .lead, .lawyer-page section.about .question-page header.page .l-col p, .question-page header.page .l-col .lawyer-page section.about p, .lawyer-page section.about .entry .content .text-lead, .entry .content .lawyer-page section.about .text-lead {
     font-size: 18px; }
   .lawyer-page section.about .medals {
     width: 300px; }
   .lawyer-page section.about .medal {
     position: relative;
-    width: 7.5rem;
-    height: 7.5rem;
-    line-height: 11.25rem;
+    width: 8.3333333333rem;
+    height: 8.3333333333rem;
+    line-height: 12.5rem;
     vertical-align: bottom;
     text-align: center; }
     .lawyer-page section.about .medal:before {
       position: absolute;
-      left: 1.875rem;
+      left: 2.0833333333rem;
       top: 0;
       z-index: 0;
       font-family: icomoon;
       content: attr(data-back);
-      font-size: 3.75rem;
-      line-height: 3.75rem;
+      font-size: 4.1666666667rem;
+      line-height: 4.1666666667rem;
       color: #fc6947; }
     .lawyer-page section.about .medal.blue:before {
       color: #2e67fb; }
@@ -7797,12 +7820,12 @@ footer.main-footer {
       z-index: 1;
       display: block;
       width: 100%;
-      line-height: 3.75rem;
+      line-height: 4.1666666667rem;
       color: #fff;
-      font-size: 1.1261261261rem;
+      font-size: 1.2512512513rem;
       text-align: center; }
   .lawyer-page section.about nav {
-    margin-top: 2.5rem; }
+    margin-top: 2.7777777778rem; }
     .lawyer-page section.about nav a {
       z-index: 0;
       text-align: center;
@@ -7811,8 +7834,8 @@ footer.main-footer {
       border: 1px #e6e6e6 solid;
       font-size: 1.125rem;
       border-right: none;
-      height: 5rem;
-      line-height: 5rem;
+      height: 5.5555555556rem;
+      line-height: 5.5555555556rem;
       margin-left: -1px; }
       .lawyer-page section.about nav a:first-of-type {
         border-bottom-left-radius: 0.25rem;
@@ -7837,9 +7860,9 @@ footer.main-footer {
           color: #2e67fb; }
 .lawyer-page article {
   border-top: 1px solid #e6e6e6;
-  padding-top: 2.5rem; }
+  padding-top: 2.7777777778rem; }
   .lawyer-page article .title h3, .lawyer-page article section.header .r-col h3, .lawyer-page section.header article .r-col h3 {
-    margin-bottom: 2.5rem; }
+    margin-bottom: 2.7777777778rem; }
   @media (max-width: 991px) {
     .lawyer-page article .gutter {
       display: none; } }
@@ -7868,11 +7891,11 @@ footer.main-footer {
       left: 2.9rem; }
 
 .lawyer-list h4 {
-  margin-bottom: 1.875rem; }
+  margin-bottom: 2.0833333333rem; }
 .lawyer-list .lawyer-list-item-header img {
-  margin-right: 0.625rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  margin-right: 0.6944444444rem;
+  width: 2.7777777778rem;
+  height: 2.7777777778rem;
   border-radius: 50%; }
 .lawyer-list .lawyer-list-item-about {
   color: #bababa; }

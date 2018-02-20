@@ -1,6 +1,6 @@
 import misaka
-from django.db import models
-from django.db.models.signals import post_save, pre_delete
+from django.db import models, connection
+from django.db.models.signals import post_save, pre_delete, post_delete
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -111,9 +111,15 @@ class Likes(models.Model):
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes')
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
+    value = models.SmallIntegerField(_('Балл'))
 
     class Meta:
         unique_together = ('entry', 'user')
+        verbose_name = _('Отметка «Полезно»')
+        verbose_name_plural = _('Отметки «Полезно»')
+
+    def __str__(self):
+        return self.entry.__str__()
 
 
 class Titled(models.Model):
@@ -371,3 +377,19 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
 pre_delete.connect(post_save_answer_receiver, sender=Answer)
+
+
+def post_save_like_receiver(sender, instance, *args, **kwargs):
+    """
+    Добавление или удаление лайка. Считаем суммы баллов и кешируем в entry.like_count
+    """
+    cursor = connection.cursor()
+    cursor.execute("""
+      UPDATE entry_entry SET entry_entry.like_count = 
+        (SELECT SUM(value) FROM entry_likes WHERE entry_id = %s)
+      WHERE id = %s LIMIT 1
+    """, [instance.entry.pk, instance.entry.pk])
+
+
+post_save.connect(post_save_like_receiver, sender=Likes)
+post_delete.connect(post_save_like_receiver, sender=Likes)
