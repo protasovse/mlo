@@ -79,6 +79,7 @@ header.page {
   @include media-breakpoint-down(lg) {
     max-width: none;
   }
+
   .gradient {
     position: relative;
     padding-top: line(3);
@@ -94,6 +95,16 @@ header.page {
       margin-right: -1000px;
       background: linear-gradient(180deg, $gray-100, $white);
     }
+  }
+
+  .l-col {
+    @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
+    color: $gray-500;
+    line-height: line(1);
+  }
+
+  .r-col {
+    @extend .col-12, .col-lg-9;
   }
 }
 
@@ -114,16 +125,6 @@ aside {
 }
 
 .entry {
-
-  .l-col {
-    @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
-    color: $gray-500;
-    line-height: line(1);
-  }
-
-  .r-col {
-    @extend .col-12, .col-lg-9;
-  }
 
   h1 {
     @extend .col, h2;
@@ -250,8 +251,12 @@ aside {
     }
   }
 
+  .answer-footer {
+
+  }
+
   .answer-footer-like {
-    @extend .d-flex, .align-items-center, .justify-content-end;
+    @extend .d-flex, .align-items-center;
     .answer-footer-like-sign {
       @extend .normal, .mr-2;
       color: $gray-500;

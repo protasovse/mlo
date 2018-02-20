@@ -73,10 +73,15 @@
 
         <div class="l-col">&nbsp;</div>
 
-        <div class="r-col">
+        <div class="r-col d-flex align-items-center justify-content-between">
+
+            <div class="answer-footer-action normal">
+                <a href="#"><!--i class="icon-pencil"></i-->Ответить</a>
+            </div>
+
             <div class="answer-footer-like">
                 {% if item.author.role > 1 %}
-                    <span class="answer-footer-like-sign">Ответ помог?</span>
+                    <span class="answer-footer-like-sign">Это полезно?</span>
                     <div class="answer-footer-like-block">
                         <i class="icon-dislike"></i>
                         <span class="{% if item.like_count < 0 %}dislike{% elif item.like_count > 0 %}like{% endif %}">
@@ -87,6 +92,7 @@
                     <span class="answer-footer-like-sign">Дополнительный вопрос</span>
                 {% endif %}
             </div>
+
         </div>
 
     </footer>
