@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('cost', models.PositiveIntegerField(verbose_name='Цена консультации')),
-                ('expert', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.fields.NOT_PROVIDED, to='mlo_auth.User', verbose_name='Эксперт')),
+                ('experts', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.fields.NOT_PROVIDED, to='mlo_auth.User', verbose_name='Эксперт')),
             ],
             options={
                 'verbose_name': 'Платная консультация',
