@@ -1,0 +1,13 @@
+<form>
+    <div class="form-group">
+        <label for="reply"><!--Ответить:--></label>
+        <textarea class="form-control" id="reply" rows="10" placeholder="Введите ваш ответ…"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="on_question" value="{{ on_question }}"/>
+        <input type="hidden" name="parent" value="{{ parent }}"/>
+
+        <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
+        <span class="ml-3 normal"><a href="#"> <i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
+    </div>
+</form>

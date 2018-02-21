@@ -242,7 +242,7 @@ aside {
   }
 
   .header-photo-small {
-    .answer-header-photo {
+    .answer-header-photo, &.answer-header-photo {
       width: line(2);
       height: line(2);
     }

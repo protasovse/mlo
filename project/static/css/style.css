@@ -7800,7 +7800,7 @@ aside {
     color: #e6e6e6; }
   .entry .answer-header-medal .item:hover i {
     color: #4c7efd; }
-.entry .header-photo-small .answer-header-photo {
+.entry .header-photo-small .answer-header-photo, .entry .header-photo-small.answer-header-photo {
   width: 2.7777777778rem;
   height: 2.7777777778rem; }
 .entry .header-photo-small .answer-header-stat {

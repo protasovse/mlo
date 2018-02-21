@@ -51,7 +51,8 @@
                                 <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
                                       itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
                                 <br>
-                                <span>№ {{ question.pk }}</span><br>
+                                <span>№ {{ question.pk }}</span>
+                                <br>
                                 <span>{{ question.author.info.city.name }}</span>
                             </div>
 
@@ -79,12 +80,17 @@
                                 <button type="button" class="btn btn-outline-primary btn-sm">
                                     Ответить на вопрос <i class="ml-2 icon-pencil"></i></button>
 
+                                {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
+
                                 <hr class="mb-4 mt-5">
 
+                                {# Здесь ошибка VUE #}
                                 {% include 'front/generic/yandex-share.html' %}
 
+                                {# Рубрики #}
                                 {% if question.rubrics.count %}
                                     <br>
+
                                     <p class="rubrics">{% for rubric in question.rubrics.all %}
                                         <span class="rubric-item"><a href="#">{{ rubric }}</a></span>
                                     {% endfor %}</p>
@@ -113,6 +119,7 @@
 
             </div>
 
+            {% if question.reply_count %}
             <div class="row gradient">
 
                 {# Основная часть — ответы #}
@@ -133,7 +140,25 @@
 
                     {% endif %}
 
-                    <div class="row mt-5">
+                </main>
+
+                {# Боковая колонка 2  #}
+                <aside>
+
+                    {% if rating.count and question.reply_count %}
+                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
+                    {% endif %}
+
+                </aside>
+
+            </div>
+            {% endif %}
+
+            {% comment %}<div class="row d-none">
+
+                <main>
+
+                    <div class="row">
 
                         <div class="l-col"></div>
 
@@ -157,70 +182,9 @@
 
                 </main>
 
-                {# Боковая колонка 2  #}
-                <aside>
-
-                    {% if rating.count and question.reply_count %}
-                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
-                    {% endif %}
-
-                </aside>
-
-            </div>
+            </div>{% endcomment %}
 
         </div>
     </div>
-    {% comment %}
 
-    <footer class="question-footer">
-        {# Файлы #}
-        {#% include 'questions/snippets/files.html' with files=question.files.all %#}
-        {% with rubrics=question.rubrics.all %}
-            {% if rubrics|length %}
-                <nav class="question-rubrics"><span>Рубрики:</span>{% for rubric in rubrics %}
-                    <a href="{{ rubric.get_absolute_url }}"
-                       class="question-rubrics_link"
-                       title="Показать все вопросы в рубрике: {{ rubric }}"
-                       rel="tag category">{{ rubric }}</a>
-                {% endfor %}</nav>{% endif %}
-        {% endwith %}
-    </footer>
-
-    <hr>
-
-    <footer class="actions">
-        <ul class="action-list">
-            <li class="action-item">
-                <a href="#" class="action-link" data-handler="show_answer_form"
-                   data-href="{% url 'action' %}" data-on_question="{{ question.pk }}">Ответить</a>
-            </li>
-            <li class="action-item">
-                {#% include 'questions/snippets/comment_action.html' with count=question.comment_count id=question.pk %#}
-            </li>
-            <li class="action-item">
-                <a href="#" class="action-link">Отметить вопрос как…</a>
-            </li>
-        </ul>
-        <div class="additional-content">
-            <div id="answer-form"></div>
-            <div id="comments-{{ question.pk }}"></div>
-        </div>
-    </footer>
-
-    {# Ответы #}
-
-        <section class="section section_answers">
-            <header class="section-header">
-                <h3>Ответы <span class="section-header__counter" id="answers_counter"
-                                 itemprop="answerCount">{{ question.answer_count }}</span></h3>
-            </header>
-            <div id="answers">
-                <ul class="answer-list">
-                    {% if answers|length %}{% for answer in answers %}
-                        {#% include 'questions/snippets/answer.html' with answer=answer %#}
-                    {% endfor %}{% endif %}
-                </ul>
-            </div>
-        </section>
-{% endcomment %}
 {% endblock %}

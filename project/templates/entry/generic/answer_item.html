@@ -53,14 +53,17 @@
             <span class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
                 {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</span>
             <br><span class="mt-2">№ {{ item.pk }}</span>
+            <br><span class="mt-2">on_question: {{ item.on_question.pk }}</span>
+            <br><span class="mt-2">parent: {{ item.parent.pk }}</span>
+            <br>
         </div>
 
         <div class="r-col content">
 
             {% if item.author.role == 1 %}
-            <h5 class="author-name mb-2" itemprop="name">
-                {{ item.author.get_full_name }}
-            </h5>
+                <h5 class="author-name mb-2" itemprop="name">
+                    {{ item.author.get_full_name }}
+                </h5>
             {% endif %}
 
             <div class="text" itemprop="text">{{ item.content|markdown|safe }}</div>
@@ -95,6 +98,14 @@
 
         </div>
 
+    </footer>
+
+    {# Форма ответа на вопрос #}
+    <footer class="row -d-none">
+        <div class="l-col"></div>
+        <div class="r-col">
+            {% include 'entry/generic/form_reply.html' with on_question=item.on_question.pk parent=item.pk %}
+        </div>
     </footer>
 
 </div>

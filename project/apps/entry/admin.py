@@ -63,7 +63,7 @@ class QuestionAdmin(admin.ModelAdmin):
     autocomplete_fields = ['rubrics', 'author']
     radio_fields = {'status': admin.HORIZONTAL}
     list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count')
-    search_fields = ['title', 'content', 'author__last_name', 'author__email']
+    search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
     list_filter = ('pub_date', 'status')
     inlines = (AnswersForQuestionInLine, FilesInLine,)
 
@@ -87,9 +87,9 @@ class ConsultAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
     search_fields = ['content', 'author__last_name', 'author__email']
-    readonly_fields = ('on_question',)
+    # readonly_fields = ('on_question',)
     fields = ('content', ('author', 'status'), 'on_question')
-    autocomplete_fields = ['author']
+    autocomplete_fields = ['author', 'on_question']
     radio_fields = {'status': admin.VERTICAL}
     inlines = (OfferInLine, AnswersForAnswerInLine, FilesInLine,)
 
