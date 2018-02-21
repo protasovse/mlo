@@ -376,7 +376,7 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
         parent.save(update_fields=('reply_count',))
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
-pre_delete.connect(post_save_answer_receiver, sender=Answer)
+post_delete.connect(post_save_answer_receiver, sender=Answer)
 
 
 def post_save_like_receiver(sender, instance, *args, **kwargs):

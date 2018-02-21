@@ -109,7 +109,7 @@ class RatingResult(models.Model):
         verbose_name_plural = _('Рейтинг: сумма балов')
 
     def __str__(self):
-        return '%d: %s' % (self.value, self.user)
+        return 'Рейтинг %s — %d' % (self.user, self.value)
 
 
 class Info(models.Model):

@@ -7632,18 +7632,28 @@ footer.main-footer {
       content: url("/static/img/lyr/lawyers-card-lanyard.svg");
       position: absolute;
       z-index: 3;
-      top: 0px;
+      top: 0;
       left: 115px;
       width: 90px;
       height: 212px; }
   .lawyer-card .lawyer-card-body {
     width: 320px;
-    height: 440px;
+    height: 600px;
     position: absolute;
     padding: 400px 30px 20px 30px;
-    z-index: 2; }
+    z-index: 2;
+    overflow: hidden; }
     .lawyer-card .lawyer-card-body p {
       color: #545454; }
+    .lawyer-card .lawyer-card-body:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 1px;
+      left: 20px;
+      right: 20px;
+      height: 40px;
+      background: linear-gradient(0deg, #fff, rgba(255, 255, 255, 0)); }
   .lawyer-card img {
     position: absolute;
     top: 249px;

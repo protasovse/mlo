@@ -28,7 +28,7 @@
       content: url("/static/img/lyr/lawyers-card-lanyard.svg");
       position: absolute;
       z-index: 3;
-      top: 0px;
+      top: 0;
       left: 115px;
       width: 90px;
       height: 212px;
@@ -36,16 +36,27 @@
   }
   .lawyer-card-body {
     width: 320px;
-    height: 440px;
+    height: 600px;
     position: absolute;
     padding: 400px 30px 20px 30px;
     z-index: 2;
+    overflow: hidden;
     p {
       @extend .normal;
       color: $gray-800;
     }
     h6 {
       @extend .subtitle;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 1px;
+      left: 20px;
+      right: 20px;
+      height: 40px;
+      background: linear-gradient(0deg, $white, rgba($white, 0));
     }
   }
   // Фото

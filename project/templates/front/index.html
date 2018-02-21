@@ -259,6 +259,10 @@
 
         <div class="cards">
             <div class="cards-inner">
+                {% for lawyer in lawyers %}
+                    {% include 'mlo_auth/generic/lawyer_card.html' with item=lawyer %}
+                {% endfor %}
+                {% comment %}
                 <div class="lawyer-card">
                     <div class="lanyard"></div>
                     <img src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
@@ -347,6 +351,7 @@
                             center)</p>
                     </div>
                 </div>
+                {% endcomment %}
             </div>
         </div>
 
@@ -362,81 +367,9 @@
 
             <hr>
 
-            <article>
-                <div class="date">19 октября в 20:42</div>
-                <h6><a href="#">Уйти на пенсию со службы по контракту с льготным стажем</a></h6>
-
-                <div class="number">№ 477818 <span>Ростов-на-Дону</span></div>
-                <div class="content">
-                    <p>Здравствуйте. В данный момент я военнослужащий по контракту, и хотелось бы поскорее на
-                        пенсию.</p>
-                    <p>У меня два года срочной службы, после этого 10 лет в органах ФСИН с льготным стажем год за
-                        полтора, следовательно 15 лет льготного стажа, и плюс три года контрактной службы.</p>
-                    <p>Могу ли я сейчас уйти на пенсию, так как у меня получается 20 лет с льготным стажем?
-                        Или же нужно еще 5 лет? И если могу уйти на пенсию, как мне лучше уволиться без последствий,
-                        до окончания контракта?</p>
-                </div>
-
-                <div class="col-md-3"></div>
-                <div class="answer">
-                    <div class="answer-header">
-                        <div class="usr">
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s5600.jpg"></a>
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s8195.jpg"></a>
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s9.jpg"></a>
-                        </div>
-                        <!--div>
-                            <a href="#">Бодылев Аркадий Олегович</a><br>
-                            <span class="text-muted">Волгоград</span>
-                        </div-->
-                        <div>
-                            <a href="#">3 ответа</a>
-                        </div>
-                    </div>
-                    <p>Вы можете обратиться в суд с исковым заявлением и обжаловать решение,
-                        которое приняла комиссия МСЭ. Всех вам благ. Успешного решения вашего вопроса.</p>
-                </div>
-            </article>
-
-            <hr>
-
-            <article>
-                <div class="date">19 октября в 20:42</div>
-                <h6><a href="#">Уйти на пенсию со службы по контракту с льготным стажем</a></h6>
-
-                <div class="number">№ 477818 <span>Ростов-на-Дону</span></div>
-                <div class="content">
-                    <p>Здравствуйте. В данный момент я военнослужащий по контракту, и хотелось бы поскорее на
-                        пенсию.</p>
-                    <p>У меня два года срочной службы, после этого 10 лет в органах ФСИН с льготным стажем год за
-                        полтора, следовательно 15 лет льготного стажа, и плюс три года контрактной службы.</p>
-                    <p>Могу ли я сейчас уйти на пенсию, так как у меня получается 20 лет с льготным стажем?
-                        Или же нужно еще 5 лет? И если могу уйти на пенсию, как мне лучше уволиться без последствий,
-                        до окончания контракта?</p>
-                </div>
-
-                <div class="col-md-3"></div>
-                <div class="answer">
-                    <div class="answer-header">
-                        <div class="usr">
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s5600.jpg"></a>
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s8195.jpg"></a>
-                            <a href="#"><img src="http://svem.ru/files/ephoto/s9.jpg"></a>
-                        </div>
-                        <!--div>
-                            <a href="#">Бодылев Аркадий Олегович</a><br>
-                            <span class="text-muted">Волгоград</span>
-                        </div-->
-                        <div>
-                            <a href="#">3 ответа</a>
-                        </div>
-                    </div>
-                    <p>Вы можете обратиться в суд с исковым заявлением и обжаловать решение,
-                        которое приняла комиссия МСЭ. Всех вам благ. Успешного решения вашего вопроса.</p>
-                </div>
-            </article>
-
-            <hr>
+            {% for question in questions %}
+                {% include 'entry/generic/question_item_main.html' with item=question %}
+            {% endfor %}
 
             <footer class="row">
                 <div class="col-9 ml-auto mt-2">

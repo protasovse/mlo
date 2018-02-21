@@ -1,4 +1,3 @@
-{% load markdown %}
 {% load cropping %}
 
 <div class="answer entry{% if push %} answer-push{% endif %}">
@@ -66,7 +65,7 @@
                 </h5>
             {% endif %}
 
-            <div class="text" itemprop="text">{{ item.content|markdown|safe }}</div>
+            <div class="text" itemprop="text">{{ item.html_content|safe }}</div>
         </div>
 
     </div>
