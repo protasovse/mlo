@@ -362,21 +362,29 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
     """
     Добавление или удаление ответа
     """
+
+    # Если удаляем ответ, то должны из общего количества должны отнять 1,
+    # так как сигнал у нас, перед удалением.
+    if 'created' in kwargs:
+        i = 0
+    else:
+        i = 1
+
     question = instance.on_question
 
     # Подсчёт количества ответов на вопрос и «ответов» на ответ
     if instance.is_parent:
         question.reply_count = \
-            sender.objects.filter(parent=None, on_question=question.pk).count()
+            sender.objects.filter(parent=None, on_question=question.pk).count() - i
         question.save(update_fields=('reply_count',))
     else:
         parent = instance.parent
         parent.reply_count = \
-            sender.objects.filter(parent=parent.pk).count()
+            sender.objects.filter(parent=parent.pk).count() - i
         parent.save(update_fields=('reply_count',))
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
-post_delete.connect(post_save_answer_receiver, sender=Answer)
+pre_delete.connect(post_save_answer_receiver, sender=Answer)
 
 
 def post_save_like_receiver(sender, instance, *args, **kwargs):

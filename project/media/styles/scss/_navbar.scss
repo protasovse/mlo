@@ -1,6 +1,8 @@
 .mlo-navbar {
-  @extend .navbar, .align-items-center;
+  @extend .d-flex, .align-items-center, .justify-content-between;
   height: line(5);
+  padding-left: line(1.5);
+  padding-right: line(1.5);
   position: absolute;
   top: 0;
   right: 0;
@@ -14,7 +16,7 @@
   }
   background-color: transparent !important;
 
-  .navbar-brand {
+  .mlo-navbar-brand {
     position: relative;
     z-index: 1;
     img {
@@ -24,11 +26,22 @@
     }
   }
 
-  .title {
+  .mlo-navbar-title {
     @extend .d-none, .d-md-block, .text-center;
     position: absolute;
     left: 0;
     right: 0;
+    line-height: line(1);
+    .t {
+      @extend .large, .font-weight-semibold;
+      display: block;
+    }
+    .tg, .g, .c {
+      @extend .normal;
+    }
+    .tg {
+      display: none;
+    }
   }
 
   .actions {
@@ -40,7 +53,7 @@
       @extend .ml-1, .px-3, .normal;
       text-decoration: none;
       font-weight: $font-weight-semibold;
-      height: line(2);
+      height: 40px;
       line-height: 38px;
       border: 1px solid rgba(255, 255, 255, .5);
       border-radius: $border-radius;
@@ -50,7 +63,7 @@
         background-color: rgba(0, 0, 0, .2);
       }
       &.sq {
-        width: line(2);
+        width: 40px;
         padding: 0 !important;
       }
       &.active {
@@ -67,11 +80,22 @@
 .navbar-fixed .mlo-navbar {
   @extend .bg-primary;
   position: fixed;
-  height: line(3);
-  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
+  height: 60px;
+  padding-bottom: 0;
+  padding-top: 0;
+  // box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
 
-  .navbar-brand img {
+  .mlo-navbar-brand img {
     width: 115px;
     height: 34px;
+  }
+
+  .mlo-navbar-title {
+    .tg, .t {
+      display: inline;
+    }
+    .g {
+      display: none;
+    }
   }
 }

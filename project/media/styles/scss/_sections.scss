@@ -227,50 +227,7 @@ section {
         @extend .col-md-11, .ml-auto;
       }
     }
-    article {
-      @extend .row;
-      .date {
-        @extend .col-12, .col-md-3, .subtitle, .text-md-right, .mb-2;
-        line-height: 25px;
-      }
-      h6 {
-        @extend .col-12, .col-md-9, .col-lg-7;
-        margin: 0;
-      }
-      .number {
-        @extend .col-12, .col-md-3, .text-md-right, .normal, .mb-3;
-        color: $gray-500;
-        span {
-          white-space: nowrap;
-        }
-      }
-      .content {
-        @extend .col-12, .col-md-9, .col-lg-7;
-        font-size: $font-size-lg;
-      }
-      .answer {
-        @extend .col-12, .col-md-9, .col-lg-7;
-        .answer-header {
-          @extend .normal, .d-flex, .align-items-center, .mb-3;
-          .usr {
-            @extend .mr-3;
-            padding-right: 10px;
-            a {
-              display: inline-block;
-              margin-right: -10px;
-              img {
-                width: line(2);
-                height: line(2);
-                border-radius: 50%;
-              }
-            }
-          }
-        }
-        p {
-          color: $gray-600;
-        }
-      }
-    }
+
     hr {
       margin-bottom: line(1.5);
       margin-top: line(1);

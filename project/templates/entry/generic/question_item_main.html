@@ -1,6 +1,6 @@
 {% load cropping %}
 
-<article id="question-{{ item.pk }}">
+<article id="question-{{ item.pk }}" class="question-item">
     <div class="date">{{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
     <h6><a href="{% url 'question:detail' item.pk %}">{{ item.title }}</a></h6>
 

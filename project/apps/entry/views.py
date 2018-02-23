@@ -1,8 +1,4 @@
-from collections import namedtuple
-
-from django.contrib.auth import get_user_model
-from django.db import connection
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from apps.account.models import RatingResult
 from apps.entry.models import Question, Answer
@@ -31,4 +27,18 @@ class QuestionDetail(DetailView):
 
         context['answers'] = Answer.answers.related_to_question(context['object']).filter(parent_id=None)
 
+        return context
+
+
+class QuestionsList(ListView):
+
+    context_object_name = 'questions'
+    paginate_by = 3
+    page_kwarg = 'page'
+
+    def get_queryset(self):
+        return Question.published.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionsList, self).get_context_data(**kwargs)
         return context

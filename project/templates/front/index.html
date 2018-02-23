@@ -260,7 +260,7 @@
         <div class="cards">
             <div class="cards-inner">
                 {% for lawyer in lawyers %}
-                    {% include 'mlo_auth/generic/lawyer_card.html' with item=lawyer %}
+                    {% include 'front/generic/lawyer_card.html' with item=lawyer %}
                 {% endfor %}
                 {% comment %}
                 <div class="lawyer-card">
@@ -373,8 +373,8 @@
 
             <footer class="row">
                 <div class="col-9 ml-auto mt-2">
-                    <button href="#" class="btn btn-primary">Ещё консультации… <i class="icon-check-circle ml-2"></i>
-                    </button>
+                    <a href="{% url 'questions:list' %}" class="btn btn-primary">Ещё консультации…
+                        <i class="icon-check-circle ml-2"></i></a>
                 </div>
             </footer>
 

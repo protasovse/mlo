@@ -28,11 +28,12 @@
             }
         });
 
+        $('#app').addClass("navbar-fixed");
         $('#app').on('scroll', function () {
             if ($('#app').scrollTop() > 60) {
-                $('#app').addClass("navbar-fixed");
+                // $('#app').addClass("navbar-fixed");
             }else{
-                $('#app').removeClass("navbar-fixed");
+                // $('#app').removeClass("navbar-fixed");
             }
         });
 
