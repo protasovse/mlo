@@ -3,12 +3,90 @@
 {% block navbar_title %}
     <div class="mlo-navbar-title question_feed-navbar_title">
 
-        <nav class="nav justify-content-center">
-            <a class="nav-link active" href="#">Новые</a>
-            <a class="nav-link" href="#">Уточнения</a>
-            <a class="nav-link" href="#">Без ответа</a>
-            <a class="nav-link disabled" href="#">Мой ответ</a>
+        {# Навигация для фильтрации списка вопросов #}
+        <nav class="nav">
+            <a class="nav-link" href="#" title="Актуальные вопросы">Новые <span class="badge badge-danger">56</span></a>
+            <a class="nav-link" href="#" title="Уточнения клиента к моим ответам">Уточнения <span class="badge badge-danger">13</span></a>
+            <div class="dropdown">
+                <a id="question_feed_additems-toggle" class="nav-link dropdown-toggle" href="#"
+                onclick="$('#question_feed_additems').show();">Ещё…</a>
+                <div id="question_feed_additems" class="dropdown-menu">
+                    <a class="dropdown-item active" href="#">Без ответа
+                        <span class="badge badge-danger">24</span>
+                        <span class="small">Актуальные вопросы без ответа</span></a>
+                    <a class="dropdown-item" href="#">С моими ответами
+                        <span class="badge badge-danger">13554</span>
+                        <span class="small">Все вопросы с моими ответами</span></a>
+                    <a id="question_feed_search-toggle" class="dropdown-item" href="#"
+                    onclick="$('#question_feed_search').show();$('#question_feed_additems').hide();">Расширенный поиск <i class="icon-nav-arrow-down"></i>
+                    <span class="small">Поиск по ключевым словам, рубрикам, городам и регионам</span></a>
+                </div>
+            </div>
         </nav>
+
+    </div>
+{% endblock %}
+
+{% block navbar_addbar %}
+    <div id="question_feed_search" class="mlo-navbar_addbar" style="display: none;">
+
+        <form class="mlo-navbar_form">
+
+            <div class="col-6 mx-auto d-flex align-items-center">
+                <i class="icon-search mr-1"></i>
+                <input type="text" class="form-control mlo-navbar_input"
+                       placeholder="ключевые слова, город, рубрика…">
+            </div>
+
+            {% comment %}
+
+            <div class="col-2 d-flex align-items-center dropdown">
+                <span class="dropdown-toggle">Выбрать рубрику</span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="-display: block;">
+                    <a class="dropdown-item" href="#">Автомобильное право</a>
+                    <a class="dropdown-item" href="#">Деньги и банки</a>
+                    <a class="dropdown-item active" href="#">Недвижимость</a>
+                    <a class="dropdown-item" href="#">Семейное право</a>
+                </div>
+            </div>
+
+            <div class="col-2 d-flex align-items-center dropdown">
+                <span class="dropdown-toggle">Выбрать регион<!--i class="icon-nav-arrow-down-small ml-2"></i--></span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2" style="-display: block;">
+                    <div class="px-3 pt-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder=""/>
+                        </div>
+                    </div>
+                    <div style="height: 20rem; overflow-y: scroll;">
+                        <a class="dropdown-item" href="#">Москва <span class="small">Московская область</span></a>
+                        <a class="dropdown-item" href="#">Уфа <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item active" href="#">Стерлитамак <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item" href="#">Саратов <span class="small">Саратовская область</span></a>
+                        <a class="dropdown-item" href="#">Москва <span class="small">Московская область</span></a>
+                        <a class="dropdown-item" href="#">Уфа <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item" href="#">Стерлитамак <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item" href="#">Саратов <span class="small">Саратовская область</span></a>
+                        <a class="dropdown-item" href="#">Москва <span class="small">Московская область</span></a>
+                        <a class="dropdown-item" href="#">Уфа <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item" href="#">Стерлитамак <span class="small">Башкирия</span></a>
+                        <a class="dropdown-item" href="#">Саратов <span class="small">Саратовская область</span></a>
+                    </div>
+                </div>
+            </div>
+
+            {% endcomment %}
+
+            <div class="col-2 mr-auto actions">
+                <a href="#">Найти вопросы</a>
+            </div>
+
+        </form>
+
+        <div class="actions">
+            <a href="#" class="navbar_addbar_close sq"
+            onclick="$('#question_feed_search').hide();"></a>
+        </div>
 
     </div>
 {% endblock %}

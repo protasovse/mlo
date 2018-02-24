@@ -142,7 +142,7 @@ $body-color:                $gray-800 !default;
 
 $link-color:                theme-color("primary") !default;
 $link-decoration:           none !default;
-$link-hover-color:          darken($link-color, 15%) !default;
+$link-hover-color:          $dark-blue; // darken($link-color, 15%) !default;
 $link-hover-decoration:     underline !default;
 
 // Paragraphs
@@ -203,9 +203,10 @@ $border-color:                $gray-200 !default;
 $border-radius:               .25rem !default;
 $border-radius-lg:            .3rem !default;
 $border-radius-sm:            .2rem !default;
+$border-radius-xl:            1.25rem !default;
 
 $component-active-color:      $white !default;
-$component-active-bg:         theme-color("primary") !default;
+$component-active-bg:         $light-blue; // theme-color("primary") !default;
 
 $caret-width:                 .3em !default;
 
@@ -225,8 +226,8 @@ $font-family-base:            $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem !default; // `16px`
-$font-size-lg:                ($font-size-base * 1.125) !default;
-$font-size-sm:                ($font-size-base * .875) !default;
+$font-size-lg:                ($font-size-base * 1.125) !default; // 14px
+$font-size-sm:                ($font-size-base * .875) !default; // 18px
 
 $font-weight-light:           300 !default;
 $font-weight-normal:          400 !default;
@@ -260,7 +261,7 @@ $display3-weight:             300 !default;
 $display4-weight:             300 !default;
 $display-line-height:         $headings-line-height !default;
 
-$lead-font-size:              ($font-size-base * 1.25) !default;
+$lead-font-size:              ($font-size-base * 1.25) !default; // 20px
 $lead-font-weight:            100 !default;
 
 $small-font-size:             80% !default;
@@ -485,25 +486,25 @@ $form-feedback-invalid-color:       theme-color("danger") !default;
 // Dropdown menu container and contents.
 
 $dropdown-min-width:                10rem !default;
-$dropdown-padding-y:                .5rem !default;
+$dropdown-padding-y:                .875rem !default;
 $dropdown-spacer:                   .125rem !default;
 $dropdown-bg:                       $white !default;
-$dropdown-border-color:             rgba($black,.15) !default;
+$dropdown-border-color:             transparent !default;
 $dropdown-border-width:             $border-width !default;
 $dropdown-divider-bg:               $gray-200 !default;
-$dropdown-box-shadow:               0 .5rem 1rem rgba($black,.175) !default;
+$dropdown-box-shadow:               0 0 40px 0 rgba($black, .1) !default;
 
-$dropdown-link-color:               $gray-900 !default;
-$dropdown-link-hover-color:         darken($gray-900, 5%) !default;
+$dropdown-link-color:               $gray-700 !default;
+$dropdown-link-hover-color:         darken($gray-700, 5%) !default;
 $dropdown-link-hover-bg:            $gray-100 !default;
 
 $dropdown-link-active-color:        $component-active-color !default;
 $dropdown-link-active-bg:           $component-active-bg !default;
 
-$dropdown-link-disabled-color:      $gray-600 !default;
+$dropdown-link-disabled-color:      $gray-400 !default;
 
 $dropdown-item-padding-y:           .25rem !default;
-$dropdown-item-padding-x:           1.5rem !default;
+$dropdown-item-padding-x:           1rem !default;
 
 $dropdown-header-color:             $gray-600 !default;
 
@@ -667,10 +668,10 @@ $popover-arrow-outer-color:         fade-in($popover-border-color, .05) !default
 // Badges
 
 $badge-font-size:                   75% !default;
-$badge-font-weight:                 $font-weight-bold !default;
-$badge-padding-y:                   .25em !default;
-$badge-padding-x:                   .4em !default;
-$badge-border-radius:               $border-radius !default;
+$badge-font-weight:                 $font-weight-semibold !default;
+$badge-padding-y:                   .4em !default;
+$badge-padding-x:                   .75em !default;
+$badge-border-radius:               1em !default;
 
 $badge-pill-padding-x:              .6em !default;
 // Use a higher than normal value to ensure completely rounded edges when

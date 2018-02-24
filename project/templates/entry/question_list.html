@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <div class="question_feed-page" style="margin-top: 60px; padding-top: 40px; background-color: #f8f8f8;">
+    <div class="question_feed-page" style="margin-top: 60px; padding-top: 40px; background-color: #fafafa;">
         <div class="question_feed-container container">
             <div class="row">
                 <div class="col-9 mx-auto">
@@ -16,20 +16,22 @@
                     {% endfor %}
 
                     <nav>
-                <ul class="pagination">
-                    <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
-                        <a class="page-link" href="{% url 'questions:list' %}{% if page_obj.has_previous and page_obj.previous_page_number > 1 %}{{ page_obj.previous_page_number }}/{% endif %}">
-                            Предыдущая</a>
-                    </li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">{{ page_obj.number }} из {{ paginator.num_pages }}</a>
-                    </li>
-                    <li class="page-item{% if not page_obj.has_next %} disabled{% endif %}">
-                        <a class="page-link" href="{% url 'questions:list' %}{% if page_obj.has_next %}{{ page_obj.next_page_number }}/{% endif %}">
-                            Следующая</a>
-                    </li>
-                </ul>
-            </nav>
+                        <ul class="pagination">
+                            <li class="page-item{% if not page_obj.has_previous %} disabled{% endif %}">
+                                <a class="page-link" href="
+                                        {% url 'questions:list' %}{% if page_obj.has_previous and page_obj.previous_page_number > 1 %}{{ page_obj.previous_page_number }}/{% endif %}">
+                                    Предыдущая</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">{{ page_obj.number }} из {{ paginator.num_pages }}</a>
+                            </li>
+                            <li class="page-item{% if not page_obj.has_next %} disabled{% endif %}">
+                                <a class="page-link" href="
+                                        {% url 'questions:list' %}{% if page_obj.has_next %}{{ page_obj.next_page_number }}/{% endif %}">
+                                    Следующая</a>
+                            </li>
+                        </ul>
+                    </nav>
 
                 </div>
             </div>

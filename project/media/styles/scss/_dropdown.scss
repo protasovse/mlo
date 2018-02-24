@@ -1,0 +1,17 @@
+.dropdown-menu {
+  border-radius: $border-radius-xl;
+  box-shadow: $dropdown-box-shadow;
+  overflow: hidden;
+  .dropdown-item {
+    .small {
+      display: block;
+      color: $gray-600;
+    }
+    &.active,
+    &:active {
+      .small {
+        color: rgba($component-active-color, .75);
+      }
+    }
+  }
+}

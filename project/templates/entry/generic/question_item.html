@@ -8,7 +8,7 @@
 
     <header class="question_feed-header">
 
-        <h2 class="question_feed-head">{{ item.title }}</h2>
+        <h2 class="question_feed-head"><a href="#">{{ item.title }}</a></h2>
 
         <div class="question_feed-subheader">
             <div class="subtitle">№{{ item.pk }} {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
@@ -24,17 +24,16 @@
             {{ item.html_content|safe }}
         </div>
 
-        <a href="#">{{ item.reply_count }} ответ</a>
-
     </div>
 
     <footer class="question_feed-footer align-items-center">
 
         <form class="question_feed-form">
 
-            <div class="form-group">
-                <textarea type="text" rows="7" class="form-control"
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <textarea type="text" rows="7" class="form-control col-11"
                           id="content" name="content" placeholder="Ваш ответ…"></textarea>
+                <a href="#">{{ item.reply_count }} ответ</a>
             </div>
 
             <div class="form-group acts">

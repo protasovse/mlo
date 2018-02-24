@@ -195,7 +195,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #043fd8;
+    color: #285de0;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -636,7 +636,7 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
-.row, section.advantage-section .advantages, section.questions-section header, footer.main-footer > div, .question_feed-header, .question_feed-body, .question_feed-footer, .question-item, .lawyer-page dl, .lawyer-page section.about nav {
+.row, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section.advantage-section .advantages, section.questions-section header, footer.main-footer > div, .question_feed-header, .question_feed-body, .question_feed-footer, .question-item, .lawyer-page dl, .lawyer-page section.about nav {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -2391,7 +2391,7 @@ fieldset[disabled] a.btn-gl {
   color: #2e67fb;
   background-color: transparent; }
   .btn-link:hover {
-    color: #043fd8;
+    color: #285de0;
     text-decoration: underline;
     background-color: transparent;
     border-color: transparent; }
@@ -2527,7 +2527,7 @@ tbody.collapse.show {
   display: none;
   float: left;
   min-width: 10rem;
-  padding: 0.5rem 0;
+  padding: 0.875rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #545454;
@@ -2535,7 +2535,7 @@ tbody.collapse.show {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
   border-radius: 0.25rem; }
 
 .dropup .dropdown-menu {
@@ -2564,24 +2564,24 @@ tbody.collapse.show {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #212121;
+  color: #494949;
   text-align: inherit;
   white-space: nowrap;
   background: none;
   border: 0; }
   .dropdown-item:focus, .dropdown-item:hover {
-    color: #141414;
+    color: #3c3c3c;
     text-decoration: none;
     background-color: #f5f5f5; }
   .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #2e67fb; }
+    background-color: #4c7efd; }
   .dropdown-item.disabled, .dropdown-item:disabled {
-    color: #878787;
+    color: #cdcdcd;
     background-color: transparent; }
 
 .dropdown-menu.show {
@@ -2589,11 +2589,21 @@ tbody.collapse.show {
 
 .dropdown-header {
   display: block;
-  padding: 0.5rem 1.5rem;
+  padding: 0.875rem 1rem;
   margin-bottom: 0;
   font-size: 0.875rem;
   color: #878787;
   white-space: nowrap; }
+
+.dropdown-menu {
+  border-radius: 1.25rem;
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden; }
+  .dropdown-menu .dropdown-item .small, .dropdown-menu .dropdown-item .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item .answer-header-medal {
+    display: block;
+    color: #878787; }
+  .dropdown-menu .dropdown-item.active .small, .dropdown-menu .dropdown-item.active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item.active .answer-header-medal, .dropdown-menu .dropdown-item:active .small, .dropdown-menu .dropdown-item:active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item:active .answer-header-medal {
+    color: rgba(255, 255, 255, 0.75); }
 
 .btn-group,
 .btn-group-vertical {
@@ -4004,7 +4014,7 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #2e67fb; }
+  background-color: #4c7efd; }
 
 .nav-fill .nav-item {
   flex: 1 1 auto;
@@ -4302,7 +4312,7 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
       color: #fff; }
 
 .mlo-navbar {
-  height: 6.9444444444rem;
+  height: 100px;
   padding-left: 2.0833333333rem;
   padding-right: 2.0833333333rem;
   position: absolute;
@@ -4314,7 +4324,6 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
   background-color: transparent !important; }
   @media (max-width: 767px) {
     .mlo-navbar {
-      height: 5.5555555556rem;
       padding-left: 0.6944444444rem;
       padding-right: 0.6944444444rem; } }
   .mlo-navbar .mlo-navbar-brand {
@@ -4368,6 +4377,34 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
     display: inline; }
   .navbar-fixed .mlo-navbar .mlo-navbar-title .g {
     display: none; }
+  .navbar-fixed .mlo-navbar .mlo-navbar_addbar {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #2e67fb;
+    border-top: solid 1px white;
+    padding-left: 2.0833333333rem;
+    padding-right: 2.0833333333rem; }
+    @media (max-width: 767px) {
+      .navbar-fixed .mlo-navbar .mlo-navbar_addbar {
+        padding-left: 0.6944444444rem;
+        padding-right: 0.6944444444rem; } }
+    .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form {
+      height: 100%;
+      width: 100%;
+      color: #fff; }
+      .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input {
+        background-color: transparent;
+        border: none;
+        color: white; }
+        .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input::placeholder {
+          color: rgba(255, 255, 255, 0.4); }
+    .navbar-fixed .mlo-navbar .mlo-navbar_addbar .navbar_addbar_close:before {
+      content: '\e906';
+      font-family: icomoon; }
 
 .card {
   position: relative;
@@ -4590,7 +4627,7 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
   background-color: #fff;
   border: 1px solid #ddd; }
   .page-link:focus, .page-link:hover {
-    color: #043fd8;
+    color: #285de0;
     text-decoration: none;
     background-color: #e6e6e6;
     border-color: #ddd; }
@@ -4619,14 +4656,14 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
 
 .badge {
   display: inline-block;
-  padding: 0.25em 0.4em;
+  padding: 0.4em 0.75em;
   font-size: 75%;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0.25rem; }
+  border-radius: 1em; }
   .badge:empty {
     display: none; }
 
@@ -4929,8 +4966,8 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
   .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #2e67fb;
-    border-color: #2e67fb; }
+    background-color: #4c7efd;
+    border-color: #4c7efd; }
 
 .list-group-flush .list-group-item {
   border-right: 0;
@@ -5654,7 +5691,7 @@ a.bg-white:focus, a.bg-white:hover {
 .bg-transparent {
   background-color: transparent !important; }
 
-.border, .question_feed-item, header.page .r-col form textarea, header.page .question-item h6 form textarea, .question-item header.page h6 form textarea, header.page .question-item .content form textarea, .question-item header.page .content form textarea, header.page .question-item .answer form textarea, .question-item header.page .answer form textarea, .entry .answer-footer-like .answer-footer-like-block {
+.border, header.page .r-col form textarea, header.page .question-item h6 form textarea, .question-item header.page h6 form textarea, header.page .question-item .content form textarea, .question-item header.page .content form textarea, header.page .question-item .answer form textarea, .question-item header.page .answer form textarea, .entry .answer-footer-like .answer-footer-like-block {
   border: 1px solid #e6e6e6 !important; }
 
 .border-0 {
@@ -5753,7 +5790,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar, .mlo-navbar .actions, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h6, .lawyer-page section.header .question-item section.lawyer-section h6, section.lawyer-section .question-item .lawyer-page section.header h6, .question-item .lawyer-page section.header section.lawyer-section h6, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
+.d-flex, .mlo-navbar, .mlo-navbar .actions, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h6, .lawyer-page section.header .question-item section.lawyer-section h6, section.lawyer-section .question-item .lawyer-page section.header h6, .question-item .lawyer-page section.header section.lawyer-section h6, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
   display: flex !important; }
 
 .d-inline-flex, .entry .answer-header-medal .item, .entry .answer-footer-like .answer-footer-like-block {
@@ -5950,10 +5987,10 @@ a.bg-white:focus, a.bg-white:hover {
 .justify-content-end {
   justify-content: flex-end !important; }
 
-.justify-content-center, section.header-section, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like .answer-footer-like-block {
+.justify-content-center, section.header-section, .question_feed-navbar_title .nav, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like .answer-footer-like-block {
   justify-content: center !important; }
 
-.justify-content-between, .mlo-navbar, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h6, .lawyer-page section.header .question-item section.lawyer-section h6, section.lawyer-section .question-item .lawyer-page section.header h6, .question-item .lawyer-page section.header section.lawyer-section h6, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu {
+.justify-content-between, .mlo-navbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h6, .lawyer-page section.header .question-item section.lawyer-section h6, section.lawyer-section .question-item .lawyer-page section.header h6, .question-item .lawyer-page section.header section.lawyer-section h6, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu {
   justify-content: space-between !important; }
 
 .justify-content-around, .lawyer-page section.about .medals {
@@ -5965,7 +6002,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, section.header-section, footer.main-footer > div, .entry .answer-header-medal .item, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-list .lawyer-list-item-header {
+.align-items-center, .mlo-navbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section.header-section, footer.main-footer > div, .entry .answer-header-medal .item, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-list .lawyer-list-item-header {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -8333,9 +8370,11 @@ footer.main-footer {
     height: 440px; }
 
 .question_feed-item {
-  border-radius: 2px;
+  border-radius: 1.25rem;
   background-color: #fff;
-  position: relative; }
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); }
   .question_feed-item.answering .acts {
     display: none; }
   .question_feed-item.answering .question_feed-form textarea {
@@ -8359,7 +8398,6 @@ footer.main-footer {
 
 .question_feed-footer {
   background-color: #f5f5f5;
-  border-top: solid 1px #e6e6e6;
   bottom: 0;
   left: 0;
   right: 0; }

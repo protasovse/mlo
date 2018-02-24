@@ -1,6 +1,6 @@
 .mlo-navbar {
   @extend .d-flex, .align-items-center, .justify-content-between;
-  height: line(5);
+  height: 100px;
   padding-left: line(1.5);
   padding-right: line(1.5);
   position: absolute;
@@ -10,7 +10,7 @@
   z-index: $zindex-fixed;
   color: white;
   @include media-breakpoint-down(sm) {
-    height: line(4);
+    // height: line(4);
     padding-left: line(.5);
     padding-right: line(.5);
   }
@@ -96,6 +96,46 @@
     }
     .g {
       display: none;
+    }
+  }
+
+  .mlo-navbar_addbar {
+    display: flex;
+    @extend .align-items-center, .justify-content-between;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: $blue;
+    border-top: solid 1px white;
+    padding-left: line(1.5);
+    padding-right: line(1.5);
+    @include media-breakpoint-down(sm) {
+      padding-left: line(.5);
+      padding-right: line(.5);
+    }
+
+    form.mlo-navbar_form {
+      @extend .row, .d-flex, .align-items-center;
+      height: 100%;
+      width: 100%;
+      color: $white;
+      input.mlo-navbar_input {
+        background-color: transparent;
+        border: none;
+        color: white;
+        &::placeholder {
+          color: rgba($white, .4);
+        }
+      }
+    }
+
+    .navbar_addbar_close {
+      &:before {
+        content: '\e906';
+        font-family: icomoon;
+      }
     }
   }
 }

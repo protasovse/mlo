@@ -6,14 +6,14 @@
     </a>
 
     {% block navbar_title %}
-    <div class="mlo-navbar-title">
+        <div class="mlo-navbar-title">
 
-        <span class="tg">горячая линия</span>
-        <span class="t">8 (927) 080-66-66</span>
-        <span class="g">горячая линия</span>
-        <span class="c">в Москве</span>
+            <span class="tg">горячая линия</span>
+            <span class="t">8 (927) 080-66-66</span>
+            <span class="g">горячая линия</span>
+            <span class="c">в Москве</span>
 
-    </div>
+        </div>
     {% endblock %}
 
     <div class="actions">
@@ -21,4 +21,7 @@
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
         <a href="#" class="slide-menu-toggle sq"></a>
     </div>
+
+    {% block navbar_addbar %}{% endblock %}
+
 </nav>
