@@ -1,0 +1,9 @@
+{% extends 'front/base.html' %}
+
+{% block content %}
+
+    {% for question in page_obj %}
+        {% include 'entry/generic/question_feed_item.html' with item=question %}
+    {% endfor %}
+
+{% endblock %}

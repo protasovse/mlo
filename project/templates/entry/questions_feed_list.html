@@ -12,7 +12,7 @@
                 <div class="col-9 mx-auto">
 
                     {% for question in page_obj %}
-                        {% include 'entry/generic/question_item.html' with item=question %}
+                        {% include 'entry/generic/question_feed_item.html' with item=question %}
                     {% endfor %}
 
                     <nav>

@@ -30,15 +30,25 @@ class QuestionDetail(DetailView):
         return context
 
 
-class QuestionsList(ListView):
-
+class QuestionsFeedList(ListView):
     context_object_name = 'questions'
     paginate_by = 3
     page_kwarg = 'page'
+
+    def get_template_names(self):
+        return 'entry/questions_feed_list.html'
 
     def get_queryset(self):
         return Question.published.all()
 
     def get_context_data(self, **kwargs):
-        context = super(QuestionsList, self).get_context_data(**kwargs)
+        context = super(QuestionsFeedList, self).get_context_data(**kwargs)
         return context
+
+
+class QuestionsList(ListView):
+    template_name = 'entry/questions_list.html'
+    context_object_name = 'questions'
+    queryset = Question.published.all()
+    paginate_by = 10
+    page_kwarg = 'page'

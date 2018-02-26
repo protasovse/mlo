@@ -5,15 +5,6 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 10px 0 rgba($black, .1);
-
-  &.answering {
-    .acts {
-      display: none;
-    }
-    .question_feed-form textarea {
-      height: 44px;
-    }
-  }
 }
 
 .question_feed-header {
@@ -52,17 +43,35 @@
 }
 
 .question_feed-footer {
-  @extend .row, .no-gutters;
+  @extend .px-4;
   background-color: $gray-100;
-  // border-top: solid 1px $gray-200;
-  // position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-}
+  .question_feed-form {
+    @extend .pt-3, .pb-2;
+    .form-group {
+      display: flex;
+      align-items: center;
+    }
+    textarea {
+      height: 44px;
+    }
+    .ans_count_1, .ans_count_2 {
+      @extend .text-right;
+      width: 7rem;
+      a {
+        color: $gray-600;
+      }
+    }
+    .ans_count_2 {
+      display: none;
+    }
+    .actions {
+      display: none;
+    }
 
-.question_feed-form {
-  @extend .col-12, .pt-3, .pb-2, .px-4;
+  }
 }
 
 .question_feed-navbar_title {
@@ -75,5 +84,24 @@
     &.active, &:hover {
       color: rgba($white, .4);
     }
+  }
+}
+
+/*
+    Стиль добавляется с <article class="question_feed-item">
+    при фокусе на поле ввода под вопросом
+ */
+.answering {
+  .actions {
+    display: flex !important;
+  }
+  .question_feed-form textarea {
+    height: auto !important;
+  }
+  .ans_count_2 {
+    display: block !important;
+  }
+  .ans_count_1 {
+    display: none !important;
   }
 }

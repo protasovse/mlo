@@ -13,6 +13,7 @@ urlpatterns = [
 
     url(r'^вопрос/', include('apps.entry.urls.question', namespace='question')),
     url(r'^вопросы/', include('apps.entry.urls.questions', namespace='questions')),
+    url(r'^личный-кабинет/вопросы/', include('apps.entry.urls.personal_questions', namespace='personal_questions')),
 
     url(r'^api/v0/entries/', include('apps.entry.api.urls', namespace='entries-api')),
     url(r'^api/v0/users/', include('apps.mlo_auth.api.urls', namespace="users-api")),

@@ -1,0 +1,60 @@
+{# Один вопрос для списка вопросов для ответа юристами на странице «личный-кабинет/вопросы»  #}
+{% load cropping %}
+
+<article id="question-{{ item.pk }}" class="question_feed-item yanswering">
+
+    <div class="question_feed-menu">
+        <i class="icon-dots"></i>
+    </div>
+
+    <header class="question_feed-header">
+
+        <h2 class="question_feed-head"><a href="#">{{ item.title }}</a></h2>
+
+        <div class="question_feed-subheader">
+            <div class="subtitle">№{{ item.pk }} {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
+            <h5 class="mb-0 mt-2">{{ item.author.get_short_name }}</h5>
+            <div class="normal"><span class="text-muted">{{ item.author.info.city.name }}</span></div>
+        </div>
+
+    </header>
+
+    <div class="question_feed-body">
+
+        <div class="question_feed-content">
+            {{ item.html_content|safe }}
+        </div>
+
+    </div>
+
+    <footer class="question_feed-footer align-items-center">
+
+        <form class="question_feed-form">
+
+            <div class="form-group">
+                <textarea type="text" rows="7" class="form-control"
+                          id="content" name="content" placeholder="Ваш ответ…"></textarea>
+                <span class="ans_count_1">
+                    <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответов</a>
+                </span>
+            </div>
+
+            <div class="form-group actions">
+
+                <input type="hidden" name="on_question" value="">
+                <input type="hidden" name="parent" value="1"/>
+                <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
+                <div class="file-input btn btn-sm btn-link">
+                    <input type="file" id="ask_file" multiple="multiple">
+                    <span class="icon-folder mr-2" style="text-decoration: none;"></span> Прикрепить файлы
+                </div>
+                <span class="ans_count_2 ml-auto">
+                    <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответов</a>
+                </span>
+            </div>
+
+        </form>
+
+    </footer>
+
+</article>
