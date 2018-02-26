@@ -2,8 +2,32 @@
 
 {% block content %}
 
-    {% for question in page_obj %}
-        {% include 'entry/generic/question_feed_item.html' with item=question %}
-    {% endfor %}
+    {# Хедер страницы вопроса #}
+    {% include 'front/generic/header_question.html' %}
+
+    <section class="questions-section">
+
+        <div class="container">
+
+            <header>
+                <h3>Консультации юристов по российскому законодательству</h3>
+            </header>
+
+            <hr>
+
+            {% for question in page_obj %}
+                {% include 'entry/generic/question_item.html' with item=question %}
+            {% endfor %}
+
+            <footer class="row">
+                <div class="col-12 text-center">
+                    <a href="{% url 'questions:list' %}" class="btn btn-outline-primary btn-sm">Ещё вопросы…
+                        <i class="icon-nav-arrow-down ml-2"></i></a>
+                </div>
+            </footer>
+
+        </div>
+
+    </section>
 
 {% endblock %}

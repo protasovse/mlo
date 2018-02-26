@@ -223,7 +223,7 @@ section {
   &.questions-section {
     header {
       @extend .row;
-      h3 {
+      h3, h2 {
         @extend .col-md-11, .ml-auto;
       }
     }

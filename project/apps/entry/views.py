@@ -49,6 +49,6 @@ class QuestionsFeedList(ListView):
 class QuestionsList(ListView):
     template_name = 'entry/questions_list.html'
     context_object_name = 'questions'
-    queryset = Question.published.all()
+    queryset = Question.published.filter(reply_count__gt=0)
     paginate_by = 10
     page_kwarg = 'page'

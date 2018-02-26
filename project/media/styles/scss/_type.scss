@@ -106,3 +106,22 @@ a.gray {
     content: '₽';
   }
 }
+
+.blockquote {
+  position: relative;
+  padding-left: 40px;
+  font-style: italic;
+  &:before {
+    content: '\e901';
+    font-family: icomoon;
+    color: $blue;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+blockquote {
+  @extend .blockquote;
+}

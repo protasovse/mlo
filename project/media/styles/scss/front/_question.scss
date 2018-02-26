@@ -3,7 +3,7 @@ header.page {
   padding-bottom: line(2);
   // height: line(8);
   background: {
-    image: url("#{$img_dir}/bgr/bg-1.jpg");
+    image: url("#{$img_dir}/bgr/bg-2.jpg");
     position: center;
     size: cover;
   }
@@ -69,7 +69,6 @@ header.page {
       display: none;
     }
   }
-
 }
 
 .question-page-content {
@@ -297,7 +296,7 @@ aside {
   }
 }
 
-/* вопрос на главной */
+/* список вопросов */
 .question-item {
   @extend .row;
 
@@ -313,7 +312,7 @@ aside {
     @extend .l-col, .subtitle, .mb-2;
     line-height: 25px;
   }
-  h6 {
+  h5 {
     @extend .r-col;
     margin: 0;
   }
@@ -326,7 +325,7 @@ aside {
   }
   .content {
     @extend .r-col;
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
   }
   .answer {
     @extend .r-col;
