@@ -1926,9 +1926,9 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     .form-inline .has-feedback .form-control-feedback {
       top: 0; } }
 
-form {
+form, div#form {
   color: #878787; }
-  form label {
+  form label, div#form label {
     font-size: 1rem;
     font-weight: 600; }
 
