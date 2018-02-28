@@ -45,7 +45,7 @@
                                     itemprop="name">{{ question.author.get_full_name }}</h5>
 
                                 {# Текст #}
-                                <div class="text-lead" itemprop="text">{{ question.content|markdown|safe }}</div>
+                                <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
 
                                 {# Файлы #}
                                 {% if question.files.count %}

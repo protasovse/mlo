@@ -4586,24 +4586,24 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e6e6e6;
+  background-color: transparent;
   border-radius: 0.25rem; }
 
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  color: #878787;
-  content: "/"; }
+  color: #bababa;
+  content: "•"; }
 .breadcrumb-item + .breadcrumb-item:hover::before {
   text-decoration: underline; }
 .breadcrumb-item + .breadcrumb-item:hover::before {
   text-decoration: none; }
 .breadcrumb-item.active {
-  color: #878787; }
+  color: #bababa; }
 
 .pagination {
   display: flex;

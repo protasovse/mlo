@@ -19,8 +19,7 @@ urlpatterns = [
     url(r'^api/v0/users/', include('apps.mlo_auth.api.urls', namespace="users-api")),
     url(r'^api/v0/auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
-
+    # url(r'^рубрики/', include('apps.rubric.urls', namespace='rubrics')),
     # url(r'^', include('apps.rubric.urls', namespace='rubrics')),
 
     path('auth/', include('apps.svem_auth.urls')),

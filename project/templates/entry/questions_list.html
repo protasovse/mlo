@@ -2,32 +2,101 @@
 
 {% block content %}
 
-    {# Хедер страницы вопроса #}
-    {% include 'front/generic/header_question.html' %}
+    <div class="question-page">
 
-    <section class="questions-section">
+        {# Хедер страницы вопроса #}
+        {% include 'front/generic/header_question.html' with title=rubric.get_root.call_to_action %}
 
-        <div class="container">
+        <div class="container mt-4">
+            <div class="row">
+                <nav aria-label="breadcrumb" class="col">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
+                        {% if rubrics.last.is_root_node %}
+                            <li class="breadcrumb-item active">{{ rubrics.first }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item">
+                                <a href="{{ rubrics.first.get_absolute_url }}">{{ rubrics.first }}</a></li>
+                            <li class="breadcrumb-item active">{{ rubrics.last }}</li>
+                        {% endif %}
+                    </ol>
+                </nav>
+            </div>
+        </div>
 
-            <header>
-                <h3>Консультации юристов по российскому законодательству</h3>
-            </header>
+        {# Содержание страницы вопроса #}
+        <div class="question-page-content mt-2">
 
-            <hr>
+            <div class="row">
 
-            {% for question in page_obj %}
-                {% include 'entry/generic/question_item.html' with item=question %}
-            {% endfor %}
+                {# Основная часть — вопрос #}
+                <main>
 
-            <footer class="row">
-                <div class="col-12 text-center">
-                    <a href="{% url 'questions:list' %}" class="btn btn-outline-primary btn-sm">Ещё вопросы…
-                        <i class="icon-nav-arrow-down ml-2"></i></a>
-                </div>
-            </footer>
+                    <article class="entry question">
+
+                        {# Заголовок #}
+                        <div class="row">
+                            <h2 class="col">{{ rubric }}</h2>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="lead">
+                                    {{ rubric.html_description|safe }}
+                                    <p><strong>Наши юристы и адвокаты проконсультируют Вас по жилищным вопросам
+                                        платно или бесплатно. Для этого заполните форму.</strong></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </main>
+
+                {# Боковая колонка 1  #}
+                <aside>
+
+                    {% if rating.count %}
+                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
+                    {% endif %}
+
+                </aside>
+
+            </div>
+
+            <div class="row gradient">
+
+                {# Основная часть — ответы #}
+                <main>
+
+                    <div class="row">
+                        <h3 class="answer-list-head">Консультации юристов по
+                            {% if rubric.name %}теме «{{ rubric.name }}»
+                            {% else %}российскому законодательству{% endif %}</h3>
+                    </div>
+
+                    <hr>
+
+                    {% for question in page_obj %}
+                        {% include 'entry/generic/question_item.html' with item=question %}
+                    {% endfor %}
+
+                    <footer class="row">
+                        <div class="col-12 text-center">
+                            <a href="{% url 'questions:list' %}" class="btn btn-outline-primary btn-sm">Ещё вопросы…
+                                <i class="icon-nav-arrow-down ml-2"></i></a>
+                        </div>
+                    </footer>
+
+                </main>
+
+            </div>
 
         </div>
 
-    </section>
+    </div>
 
 {% endblock %}

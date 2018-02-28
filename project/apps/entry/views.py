@@ -2,6 +2,7 @@ from django.views.generic import DetailView, ListView
 
 from apps.account.models import RatingResult
 from apps.entry.models import Question, Answer
+from apps.rubric.models import Rubric
 
 
 class QuestionDetail(DetailView):
@@ -42,7 +43,7 @@ class QuestionsFeedList(ListView):
         return Question.published.all()
 
     def get_context_data(self, **kwargs):
-        context = super(QuestionsFeedList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         return context
 
 
@@ -52,3 +53,19 @@ class QuestionsList(ListView):
     queryset = Question.published.filter(reply_count__gt=0)
     paginate_by = 10
     page_kwarg = 'page'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if 'subrubric_slug' in self.kwargs:
+            slug = self.kwargs['subrubric_slug']
+        elif 'rubric_slug' in self.kwargs:
+            slug = self.kwargs['rubric_slug']
+        else:
+            slug = None
+        # Получаем всех предков
+        context['rubrics'] = \
+            Rubric.objects.filter(slug=slug)[0].get_ancestors(include_self=True)
+        # print(context['rubrics'].last().is_root_node())
+
+        return context

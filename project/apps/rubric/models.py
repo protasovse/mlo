@@ -2,6 +2,7 @@
 
 import re
 
+import misaka
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -12,10 +13,28 @@ from mptt.models import MPTTModel
 
 class Rubric(MPTTModel):
 
-    name = models.CharField(_('Название'), max_length=128, unique=True)
-    description = models.TextField(_('Описание рубрики'), blank=True)
+    name = models.CharField(_('Name'), max_length=128,
+                            help_text=_('Название рубрики'), unique=True)
+
+    title = models.CharField(_('Title'), max_length=128,
+                             help_text=_('Заголовок страницы'), blank=True)
+
+    h1 = models.CharField(_('H1'), max_length=128,
+                          help_text=_('Заголовок h1'), blank=True)
+
+    call_to_action = models.CharField(_('Call to action'), max_length=128,
+                                      help_text=_('Призыв к действию. Например: Проконсультаруйся с'
+                                                  'жилищным юристом онлайн'), blank=True)
+
+    description = models.TextField(_('Description'),
+                                   help_text=_('Короткое описание'), blank=True)
+
+    content = models.TextField(_('Content'), blank=True,
+                               help_text=_('Содержание, статья'))
+
     slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'),
                             help_text=_('Можно не вводить. Автоматически генерируется из названия рубрики.'))
+
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
                             verbose_name=_('Родительская рубрика'), on_delete=models.CASCADE)
 
@@ -31,8 +50,20 @@ class Rubric(MPTTModel):
     def title_for_admin(self):
         return self.__str__()
 
+    @property
+    def html_description(self):
+        """
+        Возвращает "description" форматированное в HTML.
+        """
+        return misaka.html(self.description)
+
     def get_absolute_url(self):
-        return reverse('rubrics:rubric-detail', kwargs={'slug': self.slug})
+        if self.is_root_node():
+            return reverse('questions:list_rubric',
+                           kwargs={'rubric_slug': self.slug})
+        else:
+            return reverse('questions:list_subrubric',
+                           kwargs={'rubric_slug': self.slug, 'subrubric_slug': self.get_root().slug, })
 
     def _set_slug(self):
         """
