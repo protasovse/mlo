@@ -1,4 +1,3 @@
-@charset "UTF-8";
 $slide-menu-width: 430px;
 $slide-menu-width-mob: 260px;
 
@@ -85,12 +84,6 @@ $slide-menu-width-mob: 260px;
       &:before {
         content: '\e906';
       }
-    }
-    right: $slide-menu-width;
-    left: -$slide-menu-width;
-    @include media-breakpoint-down(sm) {
-      right: $slide-menu-width-mob;
-      left: -$slide-menu-width-mob;
     }
   }
   .slide-menu {

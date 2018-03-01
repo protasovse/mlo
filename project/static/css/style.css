@@ -649,7 +649,7 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
-.row, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section.advantage-section .advantages, section.questions-section header, footer.main-footer > div, .question_feed-header, .question_feed-body, .question-item, .lawyer-page dl, .lawyer-page section.about nav {
+.row, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section.advantage-section .advantages, section.questions-section header, footer.main-footer > div, .question_feed-header, .question_feed-body, .question-item, .lawyer-page dl, .lawyer-page section.about nav {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -4377,19 +4377,18 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
           border-color: white;
           background-color: white; }
 
-.navbar-fixed .mlo-navbar {
-  position: fixed;
+.mlo-navbar.static {
   height: 60px;
   padding-bottom: 0;
   padding-top: 0; }
-  .navbar-fixed .mlo-navbar .mlo-navbar-brand img {
+  .mlo-navbar.static .mlo-navbar-brand img {
     width: 115px;
     height: 34px; }
-  .navbar-fixed .mlo-navbar .mlo-navbar-title .tg, .navbar-fixed .mlo-navbar .mlo-navbar-title .t {
+  .mlo-navbar.static .mlo-navbar-title .tg, .mlo-navbar.static .mlo-navbar-title .t {
     display: inline; }
-  .navbar-fixed .mlo-navbar .mlo-navbar-title .g {
+  .mlo-navbar.static .mlo-navbar-title .g {
     display: none; }
-  .navbar-fixed .mlo-navbar .mlo-navbar_addbar {
+  .mlo-navbar.static .mlo-navbar_addbar {
     display: flex;
     position: absolute;
     top: 60px;
@@ -4401,20 +4400,20 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
     padding-left: 2.0833333333rem;
     padding-right: 2.0833333333rem; }
     @media (max-width: 767px) {
-      .navbar-fixed .mlo-navbar .mlo-navbar_addbar {
+      .mlo-navbar.static .mlo-navbar_addbar {
         padding-left: 0.6944444444rem;
         padding-right: 0.6944444444rem; } }
-    .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form {
+    .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form {
       height: 100%;
       width: 100%;
       color: #fff; }
-      .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input {
+      .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input {
         background-color: transparent;
         border: none;
         color: white; }
-        .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input::placeholder {
+        .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form input.mlo-navbar_input::placeholder {
           color: rgba(255, 255, 255, 0.4); }
-    .navbar-fixed .mlo-navbar .mlo-navbar_addbar .navbar_addbar_close:before {
+    .mlo-navbar.static .mlo-navbar_addbar .navbar_addbar_close:before {
       content: '\e906';
       font-family: icomoon; }
 
@@ -5643,10 +5642,10 @@ button.close {
 .align-text-top {
   vertical-align: text-top !important; }
 
-.bg-primary, .navbar-fixed .mlo-navbar {
+.bg-primary, .mlo-navbar.static {
   background-color: #2e67fb !important; }
 
-a.bg-primary:focus, .navbar-fixed a.mlo-navbar:focus, a.bg-primary:hover, .navbar-fixed a.mlo-navbar:hover {
+a.bg-primary:focus, a.mlo-navbar.static:focus, a.bg-primary:hover, a.mlo-navbar.static:hover {
   background-color: #0546f1 !important; }
 
 .bg-secondary, .file-loader .bar :first-child {
@@ -5802,7 +5801,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar, .mlo-navbar .actions, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
+.d-flex, .mlo-navbar, .mlo-navbar .actions, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
   display: flex !important; }
 
 .d-inline-flex, .entry .answer-header-medal .item, .entry .answer-footer-like .answer-footer-like-block {
@@ -6002,7 +6001,7 @@ a.bg-white:focus, a.bg-white:hover {
 .justify-content-center, section.header-section, .question_feed-navbar_title .nav, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like .answer-footer-like-block {
   justify-content: center !important; }
 
-.justify-content-between, .mlo-navbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu {
+.justify-content-between, .mlo-navbar, .mlo-navbar.static .mlo-navbar_addbar, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu {
   justify-content: space-between !important; }
 
 .justify-content-around, .lawyer-page section.about .medals {
@@ -6014,7 +6013,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar, .navbar-fixed .mlo-navbar .mlo-navbar_addbar form.mlo-navbar_form, section.header-section, footer.main-footer > div, .entry .answer-header-medal .item, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-list .lawyer-list-item-header {
+.align-items-center, .mlo-navbar, .mlo-navbar.static .mlo-navbar_addbar, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section.header-section, footer.main-footer > div, .entry .answer-header-medal .item, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-list .lawyer-list-item-header {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -8024,6 +8023,9 @@ a.text-white:focus, a.text-white:hover {
 body, #app {
   min-width: 320px; }
 
+.page {
+  position: relative; }
+
 section {
   padding-top: 5.5555555556rem;
   padding-bottom: 5.5555555556rem;
@@ -8301,18 +8303,11 @@ footer.main-footer {
     #app.open-slide-menu {
       margin-right: 260px;
       margin-left: -260px; } }
-  #app.open-slide-menu .mlo-navbar {
-    right: 430px;
-    left: -430px; }
-    #app.open-slide-menu .mlo-navbar .slide-menu-toggle {
-      position: relative;
-      z-index: 1041; }
-      #app.open-slide-menu .mlo-navbar .slide-menu-toggle:before {
-        content: '\e906'; }
-    @media (max-width: 767px) {
-      #app.open-slide-menu .mlo-navbar {
-        right: 260px;
-        left: -260px; } }
+  #app.open-slide-menu .mlo-navbar .slide-menu-toggle {
+    position: relative;
+    z-index: 1041; }
+    #app.open-slide-menu .mlo-navbar .slide-menu-toggle:before {
+      content: '\e906'; }
   #app.open-slide-menu .slide-menu {
     right: 0; }
 
