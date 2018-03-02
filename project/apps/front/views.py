@@ -27,12 +27,12 @@ class LawyerPage(TemplateView):
         context = super(LawyerPage, self).get_context_data(**kwargs)
 
         lawyer = get_object_or_404(get_user_model(), pk=kwargs['id'])
-        lawyer_info = Info.objects.filter(user=lawyer)
-        lawyer_contact = Contact.objects.filter(user=lawyer)
+        # lawyer_info = Info.objects.filter(user=lawyer)
+        # lawyer_contact = Contact.objects.filter(user=lawyer)
 
         context['lawyer'] = lawyer
-        context['lawyer_info'] = lawyer_info[0] if lawyer_info is None else None
-        context['lawyer_contact'] = lawyer_contact
+        # context['lawyer_info'] = lawyer_info if lawyer_info is None else None
+        # context['lawyer_contact'] = lawyer_contact
 
         return context
 

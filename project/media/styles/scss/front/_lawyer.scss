@@ -1,5 +1,5 @@
 // vars
-$medals-size: line(3);
+$medals-size: 60px;
 $photo-width: 300px;
 $photo-height: 360px;
 $photo-small-size: 40px;
@@ -25,7 +25,7 @@ $photo-small-size: 40px;
 .lawyer-page {
 
   dl {
-    @extend .row;
+    @extend .row, .align-items-center;
   }
   dt {
     @extend .col-12, .col-sm-5;
@@ -37,189 +37,219 @@ $photo-small-size: 40px;
     margin-bottom: 0;
   }
 
-  & section.header {
-    padding-top: line(6);
-    padding-bottom: 0;
-    h1 {
-      margin-bottom: 30px;
-    }
-    .lead {
-      font-size: 18px;
-      margin-bottom: 40px;
-    }
-    button {
-      @extend .btn, .btn-sm, .btn-white;
-    }
-    .photo {
-      clip-path: url("#photoSvgPath");
-      -webkit-clip-path: url("#photoSvgPath");
-      width: $photo-width;
-      height: $photo-height;
-    }
-    .l-col {
-      @extend .col-12, .col-sm-6, .col-md-6, .col-lg-5, .col-xl-4, .ml-xl-auto, .order-2, .order-sm-1, .text-center, .text-sm-left;
-      margin-bottom: -20px;
-      @include media-breakpoint-down(sm) {
-        padding-left: 0;
-        padding-right: 0;
-      }
-    }
-    .r-col {
-      @extend .title, .col-12, .col-sm-6, .col-md-6, .col-lg-7, .order-1, .order-sm-2, .text-sm-left, .mb-5;
-    }
+}
+
+.lawyer-page_container {
+  @extend .container;
+  @include media-breakpoint-down(md){
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+}
+
+.lawyer-page_l-col {
+  @extend .col-12, .col-md-5, .col-lg-4, .col-xl-3, .offset-lg-1;
+}
+
+.lawyer-page_r-col {
+  @extend .col-12, .col-md-6, .col-lg-6, .col-xl-6, .offset-lg-1;
+}
+
+.lawyer-page_header {
+  padding-top: line(6);
+  padding-bottom: 0;
+  position: relative;
+
+  h1 {
+    margin-bottom: 20px;
   }
 
-  & section.about {
-    padding-top: line(3);
-    padding-bottom: line(3);
-    .lead {
-      font-size: 18px;
-    }
-    .medals {
-      @extend .d-flex, .justify-content-around;
-      width: $photo-width;
-    }
-    .medal {
-      position: relative;
-      width: $medals-size*2;
-      height: $medals-size*2;
-      line-height: $medals-size*3;
-      @extend .subtitle;
-      vertical-align: bottom;
-      text-align: center;
-      &:before {
-        position: absolute;
-        left: $medals-size/2;
-        top: 0;
-        z-index: 0;
-        font-family: icomoon;
-        content: attr(data-back);
-        font-size: $medals-size;
-        line-height: $medals-size;
-        color: $red;
+  .lead {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  button {
+    @extend .btn, .btn-sm, .btn-white;
+  }
+  .photo {
+    width: $photo-width;
+    height: $photo-height;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: $photo-width+40px;
+      height: $photo-height+40px;
+      background: {
+        image: url("/static/img/lyr/shield_blue_white.svg");
+        repeat: no-repeat;
       }
-      &.blue {
-        &:before {
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.lawyer-page_header_l-col {
+  @extend .lawyer-page_l-col, .text-center, .order-2, .order-md-1;
+  margin-bottom: -20px;
+  @include media-breakpoint-down(sm) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.lawyer-page_header_r-col {
+  @extend .lawyer-page_r-col, .title, .text-center, .text-md-left, .order-1, .order-md-2, .mb-5;
+}
+
+.lawyer-page_about {
+
+  padding-top: line(3);
+
+  .medal {
+    position: relative;
+    width: $medals-size*2;
+    height: $medals-size*2;
+    line-height: $medals-size*3;
+    @extend .subtitle;
+    vertical-align: bottom;
+    text-align: center;
+    &:before {
+      position: absolute;
+      left: $medals-size/2;
+      top: 0;
+      z-index: 0;
+      font-family: icomoon;
+      content: attr(data-back);
+      font-size: $medals-size;
+      line-height: $medals-size;
+      color: $red;
+    }
+    &.blue {
+      &:before {
+        color: $blue;
+      }
+    }
+    &:after {
+      content: attr(data-value);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      line-height: $medals-size;
+      color: $white;
+      font-size: $medals-size/3.33;
+      text-align: center;
+    }
+  }
+  nav {
+    display: flex;
+    margin-top: line(2);
+    a {
+      @extend .col;
+      z-index: 0;
+      text-align: center;
+      color: $gray-600;
+      font-weight: $font-weight-semibold;
+      border: 1px $gray-200 solid;
+      font-size: $font-size-lg;
+      border-right: none;
+      height: line(4);
+      line-height: line(4);
+      margin-left: -1px;
+      &:first-of-type {
+        border-bottom-left-radius: $border-radius;
+        border-top-left-radius: $border-radius;
+      }
+      &:last-of-type {
+        border-bottom-right-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+        border-right: 1px $gray-200 solid;
+      }
+      i {
+        @extend .mr-2;
+        color: $gray-200;
+        font-size: 1.25em;
+        vertical-align: bottom;
+      }
+      @include media-breakpoint-down(sm) {
+        span {
+          display: none;
+        }
+      }
+      &:hover, &.active {
+        z-index: 1;
+        text-decoration: none;
+        background-color: $gray-100;
+        border: 1px $gray-500 solid;
+        i {
           color: $blue;
         }
       }
-      &:after {
-        content: attr(data-value);
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        display: block;
-        width: 100%;
-        line-height: $medals-size;
-        color: $white;
-        font-size: $medals-size/3.33;
-        text-align: center;
-      }
     }
-    nav {
-      @extend .col-12, .col-xl-10, .mx-auto, .row;
-      margin-top: line(2);
-      a {
-        @extend .col;
-        z-index: 0;
-        text-align: center;
-        color: $gray-600;
-        font-weight: $font-weight-semibold;
-        border: 1px $gray-200 solid;
-        font-size: $font-size-lg;
-        border-right: none;
-        height: line(4);
-        line-height: line(4);
-        margin-left: -1px;
-        &:first-of-type {
-          border-bottom-left-radius: $border-radius;
-          border-top-left-radius: $border-radius;
-        }
-        &:last-of-type {
-          border-bottom-right-radius: $border-radius;
-          border-top-right-radius: $border-radius;
-          border-right: 1px $gray-200 solid;
-        }
-        i {
-          @extend .mr-2;
-          color: $gray-200;
-          font-size: 1.25em;
-          vertical-align: bottom;
-        }
-        @include media-breakpoint-down(sm) {
-          span {
-            display: none;
-          }
-        }
-        &:hover, &.active {
-          z-index: 1;
-          text-decoration: none;
-          background-color: $gray-100;
-          border: 1px $gray-500 solid;
-          i {
-            color: $blue;
-          }
-        }
-      }
-    }
-    .l-col {
-      @extend .col-12, .col-md-5, .col-xl-4, .ml-xl-auto, .mb-4;
-    }
-    .r-col {
-      @extend .col-12, .col-lg-7, .col-xl-6, .mr-xl-auto;
+  }
+}
+
+.lawyer-page_about_l-col {
+  @extend .lawyer-page_l-col, .d-flex, .justify-content-center;
+}
+
+.lawyer-page_about_r-col {
+  @extend .lawyer-page_r-col;
+}
+
+article {
+  padding-top: line(2);
+  .title {
+    @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right;
+    h3 {
+      margin-bottom: line(2);
     }
   }
 
-  & article {
-    border-top: 1px solid $gray-200;
-    padding-top: line(2);
-    .title {
-      @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right;
-      h3 {
-        margin-bottom: line(2);
+  .content {
+    @extend .col-12, .col-lg-6, .mr-auto;
+    h5 {
+      @extend .mb-3;
+      small {
+        @extend .text-muted;
+        display: block;
       }
     }
-    .gutter {
-      @extend .col-1;
-      @include media-breakpoint-down(md) {
-        display: none;
-      }
+  }
+  .check {
+    @extend .normal;
+    display: block;
+    position: relative;
+    height: 2.5rem;
+    padding-top: 1.2rem;
+    padding-left: 2.9rem;
+    &:before {
+      content: '\e903';
+      font-family: icomoon;
+      font-size: 2rem;
+      color: $green;
+      position: absolute;
+      top: .55rem;
+      left: 0;
     }
-    .content {
-      @extend .col-12, .col-lg-6, .mr-auto;
-      h5 {
-        @extend .mb-3;
-        small {
-          @extend .text-muted;
-          display: block;
-        }
-      }
-    }
-    .check {
-      @extend .normal;
-      display: block;
-      position: relative;
-      height: 2.5rem;
-      padding-top: 1.2rem;
-      padding-left: 2.9rem;
-      &:before {
-        content: '\e903';
-        font-family: icomoon;
-        font-size: 2rem;
-        color: $green;
-        position: absolute;
-        top: .55rem;
-        left: 0;
-      }
-      &:after {
-        content: attr(data-label);
-        color: $gray-500;
-        position: absolute;
-        font-size: 1rem;
-        top: 0;
-        left: 2.9rem;
-      }
+    &:after {
+      content: attr(data-label);
+      color: $gray-500;
+      position: absolute;
+      font-size: 1rem;
+      top: 0;
+      left: 2.9rem;
     }
   }
 }

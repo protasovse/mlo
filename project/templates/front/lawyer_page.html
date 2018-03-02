@@ -1,43 +1,45 @@
 {% extends 'front/base.html' %}
+{% load cropping %}
 
 {% block content %}
     <div class="lawyer-page">
-        <section class="blue header">
 
-            <div class="container">
-                <div class="row">
-                    <div class="l-col">
-                        <img class="photo"
-                             src="https://res.cloudinary.com/svem/image/upload/c_fill,h_720,w_618/v1468947524/7QC_0328-3_ihqr8z.jpg">
-                        <svg height="0" width="0">
-                            <defs>
-                                <clipPath id="photoSvgPath">
-                                    <path d="M0,0V231.43C0,296.52,85.27,348,150,360c64.73-12,150-63.48,150-128.57V0Z"/>
-                                </clipPath>
-                            </defs>
-                        </svg>
+        <section class="blue lawyer-page_header">
+            <div class="lawyer-page_container">
+                <div class="row align-items-end">
+                    <div class="lawyer-page_header_l-col">
+                        <div class="photo">
+                            {% if lawyer.info.photo %}
+                                <img src="{% cropped_thumbnail lawyer.info 'photo' %}" alt="lawyer">
+                            {% else %}
+                                <img src="/static/img/lyr/person_photo.png">
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="r-col">
+                    <div class="lawyer-page_header_r-col">
                         <h1>{{ lawyer.get_full_name }}</h1>
-                        <div class="lead">{{ lawyer_info.status }}<br>
-                            <small>{{ lawyer_info.city.name }}</small>
+                        <div class="lead">{{ lawyer.info.status }}<br>
+                            <small>{{ lawyer.info.city.name }}</small>
                         </div>
                         <button type="button">Задать вопрос <i class="icon-message_bubble ml-2"></i></button>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="about">
-            <div class="container">
+
+        <div class="lawyer-page_about">
+
+            <div class="lawyer-page_container">
+
                 <div class="row">
-                    <div class="l-col">
-                        <div class="medals">
-                            <div class="medal" data-back="&#xe925;" data-value="3/5">рейтинг</div>
-                            <div class="medal blue" data-back="&#xe91e;" data-value="12">опыт, лет</div>
-                        </div>
+                    <div class="lawyer-page_about_l-col">
+                        <div class="medal" data-back="&#xe925;" data-value="3/5">рейтинг</div>
+                        <div class="medal blue" data-back="&#xe91e;" data-value="12">опыт, лет</div>
                     </div>
-                    <div class="r-col">
-                        <p class="lead">{{ lawyer_info.about }}</p>
+                    <div class="lawyer-page_about_r-col">
+                        <p class="lead">
+                            {{ lawyer.info.about|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
+                        </p>
                         <dl>
                             <dt>Зарегистрирован</dt>
                             <dd>{{ lawyer.date_joined }}</dd>
@@ -45,66 +47,60 @@
                             <dt>Последний визит</dt>
                             <dd>{{ lawyer.last_login }}</dd>
 
-                            {% for cnt in lawyer_contact %}
+                            {% for cnt in lawyer.contact.all %}
                                 <dt>{{ cnt.get_type_display }}</dt>
                                 <dd>{{ cnt.value|urlize }}</dd>
                             {% endfor %}
                         </dl>
                     </div>
                 </div>
-                <div class="tabs row">
-                    <nav>
+
+                <div class="row">
+                    <nav class="col-12">
                         <a href="#"><i class="icon-paper-text"></i><span> Биография</span></a>
                         <a href="#"><i class="icon-people"></i><span> Отзывы</span></a>
                         <a href="#" class="active"><i class="icon-message_bubble"></i><span> Ответы</span></a>
                     </nav>
                 </div>
-            </div>
-        </section>
 
-        <article class="bio container mb-5">
-            <div class="row">
-                <div class="title">
-                    <h3>Образование</h3>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="mt-5">
+                    </div>
                 </div>
-                <div class="gutter"></div>
-                <div class="content">
-                    <h5>Московский Государственный университет им. М.В. Ломоносова (выпуск 1998 г.)
-                        <small>Москва</small></h5>
+
+            </div>
+
+        </div>
+
+        <div class="lawyer-page_container">
+
+            <div class="row">
+
+                <div class="lawyer-page_l-col text-lg-right">
+                    <h3 class="mb-4">Образование</h3>
+                </div>
+
+                <div class="lawyer-page_r-col">
+                    {% for edu in lawyer.education.all %}
+                    <h5 class="mb-3">{{ edu.name }} (выпуск {{ edu.finish }} г.)
+                        <!--small>Ростов-на-Дону</small-->
+                    </h5>
                     <dl>
                         <dt>Факультет</dt>
-                        <dd>Юридический</dd>
+                        <dd>{{ edu.faculty }}</dd>
 
                         <dt>Специальность</dt>
-                        <dd>Правоведение</dd>
-
-                        <dt>Форма обучения</dt>
-                        <dd>вечерняя</dd>
-
-                        <dt>Статус</dt>
-                        <dd>выпускник</dd>
-                    </dl>
-
-                    <h5 class="mb-3">Ростовский государственный университет (выпуск 2003 г.)
-                        <small>Ростов-на-Дону</small></h5>
-                    <dl>
-                        <dt>Факультет</dt>
-                        <dd>Юридический</dd>
-
-                        <dt>Специальность</dt>
-                        <dd>Правоведение</dd>
-
-                        <dt>Форма обучения</dt>
-                        <dd>вечерняя</dd>
-
-                        <dt>Статус</dt>
-                        <dd>выпускник</dd>
+                        <dd>{{ edu.specialty }}</dd>
                     </dl>
                     <div class="check" data-label="Проверено">
-                        <a href="#">Посмотреть диплом</a>
+                        <a href="">{{ edu.diplom }}</a>
                     </div>
-                 </div>
+                    {% endfor %}
+                </div>
             </div>
-        </article>
+
+        </div>
+
     </div>
 {% endblock %}
