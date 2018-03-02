@@ -516,7 +516,7 @@ h1, .h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .mlo-navbar-title .tg, .mlo-navbar .mlo-navbar-title .g, .mlo-navbar .mlo-navbar-title .c, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .entry .rubrics, .entry .answer-footer-like .answer-footer-like-sign, .question-item .number, .question-item .answer .answer-header, .lawyer-medal .item i, .entry .answer-header-medal .item i, article .check, .lawyer-list .lawyer-list_item {
+.normal, .mlo-navbar .mlo-navbar-title .tg, .mlo-navbar .mlo-navbar-title .g, .mlo-navbar .mlo-navbar-title .c, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .entry .rubrics, .entry .answer-footer-like .answer-footer-like-sign, .question-item .number, .question-item .answer .answer-header, .lawyer-medal .item i, .entry .answer-header-medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
   font-size: 0.875rem;
   line-height: 1.3888888889rem; }
 
@@ -8755,27 +8755,6 @@ article {
     margin-bottom: 2.7777777778rem; }
   article .content h5 small, article .content h5 .form-group .invalid-feedback, .form-group article .content h5 .invalid-feedback, article .content h5 .form-group .valid-feedback, .form-group article .content h5 .valid-feedback {
     display: block; }
-  article .check {
-    display: block;
-    position: relative;
-    height: 2.5rem;
-    padding-top: 1.2rem;
-    padding-left: 2.9rem; }
-    article .check:before {
-      content: '\e903';
-      font-family: icomoon;
-      font-size: 2rem;
-      color: #16c246;
-      position: absolute;
-      top: .55rem;
-      left: 0; }
-    article .check:after {
-      content: attr(data-label);
-      color: #bababa;
-      position: absolute;
-      font-size: 1rem;
-      top: 0;
-      left: 2.9rem; }
 
 .lawyer-list h4 {
   margin-bottom: 2.0833333333rem; }
@@ -8871,5 +8850,27 @@ article {
     right: 0;
     bottom: 0;
     height: 100%; }
+
+.edu_check_diplom {
+  display: block;
+  position: relative;
+  height: 2.5rem;
+  padding-top: 1.2rem;
+  padding-left: 2.9rem; }
+  .edu_check_diplom:before {
+    content: '\e903';
+    font-family: icomoon;
+    font-size: 2rem;
+    color: #16c246;
+    position: absolute;
+    top: .55rem;
+    left: 0; }
+  .edu_check_diplom:after {
+    content: attr(data-label);
+    color: #bababa;
+    position: absolute;
+    font-size: 1rem;
+    top: 0;
+    left: 2.9rem; }
 
 /*# sourceMappingURL=style.css.map */

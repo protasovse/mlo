@@ -1,0 +1,16 @@
+<h5 class="mb-3">{{ item.name }} (выпуск {{ item.finish }} г.)
+    <!--small>Ростов-на-Дону</small-->
+</h5>
+<dl>
+    <dt>Факультет</dt>
+    <dd>{{ item.faculty }}</dd>
+
+    <dt>Специальность</dt>
+    <dd>{{ item.specialty }}</dd>
+</dl>
+{% if item.diplom %}
+<div class="edu_check_diplom" data-label="Проверено">
+    <a href="{{ item.diplom }}">Посмотреть диплом</a>
+</div>
+{% endif %}
+<div class="mt-5"></div>

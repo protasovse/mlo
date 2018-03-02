@@ -4,6 +4,7 @@
 {% block content %}
     <div class="lawyer-page">
 
+        {#  Header #}
         <section class="blue lawyer-page_header">
             <div class="lawyer-page_container">
                 <div class="row align-items-end">
@@ -27,6 +28,7 @@
             </div>
         </section>
 
+        {# Медальки, информация о себе, контакты, вкладки (биграфия, отзывы, ответы)  #}
         <div class="lawyer-page_about">
 
             <div class="lawyer-page_container">
@@ -57,9 +59,9 @@
 
                 <div class="row">
                     <nav class="col-12">
-                        <a href="#"><i class="icon-paper-text"></i><span> Биография</span></a>
+                        <a href="#" class="active"><i class="icon-paper-text"></i><span> Биография</span></a>
                         <a href="#"><i class="icon-people"></i><span> Отзывы</span></a>
-                        <a href="#" class="active"><i class="icon-message_bubble"></i><span> Ответы</span></a>
+                        <a href="#"><i class="icon-message_bubble"></i><span> Ответы</span></a>
                     </nav>
                 </div>
 
@@ -73,31 +75,39 @@
 
         </div>
 
-        <div class="lawyer-page_container">
+        {# Содержание вкладок #}
+        <div class="lawyer-page_content mt-3">
 
-            <div class="row">
+            <div class="lawyer-page_container">
 
-                <div class="lawyer-page_l-col text-lg-right">
-                    <h3 class="mb-4">Образование</h3>
-                </div>
+                <div class="row">
 
-                <div class="lawyer-page_r-col">
-                    {% for edu in lawyer.education.all %}
-                    <h5 class="mb-3">{{ edu.name }} (выпуск {{ edu.finish }} г.)
-                        <!--small>Ростов-на-Дону</small-->
-                    </h5>
-                    <dl>
-                        <dt>Факультет</dt>
-                        <dd>{{ edu.faculty }}</dd>
-
-                        <dt>Специальность</dt>
-                        <dd>{{ edu.specialty }}</dd>
-                    </dl>
-                    <div class="check" data-label="Проверено">
-                        <a href="">{{ edu.diplom }}</a>
+                    {% if lawyer.education.count %}
+                    <div class="lawyer-page_l-col text-lg-right">
+                        <h3 class="mb-4">Образование</h3>
                     </div>
-                    {% endfor %}
+
+                    <div class="lawyer-page_r-col">
+                        {% for edu in lawyer.education.all %}
+                            {% include 'account/education_item.html' with item=edu %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if lawyer.experience.count %}
+                    <div class="lawyer-page_l-col text-lg-right">
+                        <h3 class="mb-4">Опыт работы</h3>
+                    </div>
+
+                    <div class="lawyer-page_r-col">
+                        {% for edu in lawyer.experience.all %}
+                            {% include 'account/experience_item.html' with item=edu %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
                 </div>
+
             </div>
 
         </div>

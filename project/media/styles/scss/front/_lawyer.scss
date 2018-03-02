@@ -41,7 +41,7 @@ $photo-small-size: 40px;
 
 .lawyer-page_container {
   @extend .container;
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     width: 100%;
     max-width: none;
     margin: 0;
@@ -227,31 +227,6 @@ article {
       }
     }
   }
-  .check {
-    @extend .normal;
-    display: block;
-    position: relative;
-    height: 2.5rem;
-    padding-top: 1.2rem;
-    padding-left: 2.9rem;
-    &:before {
-      content: '\e903';
-      font-family: icomoon;
-      font-size: 2rem;
-      color: $green;
-      position: absolute;
-      top: .55rem;
-      left: 0;
-    }
-    &:after {
-      content: attr(data-label);
-      color: $gray-500;
-      position: absolute;
-      font-size: 1rem;
-      top: 0;
-      left: 2.9rem;
-    }
-  }
 }
 
 .lawyer-list {
@@ -335,5 +310,31 @@ article {
     h6 {
       @extend .ml-3;
     }
+  }
+}
+
+.edu_check_diplom {
+  @extend .normal;
+  display: block;
+  position: relative;
+  height: 2.5rem;
+  padding-top: 1.2rem;
+  padding-left: 2.9rem;
+  &:before {
+    content: '\e903';
+    font-family: icomoon;
+    font-size: 2rem;
+    color: $green;
+    position: absolute;
+    top: .55rem;
+    left: 0;
+  }
+  &:after {
+    content: attr(data-label);
+    color: $gray-500;
+    position: absolute;
+    font-size: 1rem;
+    top: 0;
+    left: 2.9rem;
   }
 }
