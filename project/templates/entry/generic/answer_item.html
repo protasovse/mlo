@@ -100,7 +100,7 @@
     </footer>
 
     {# Форма ответа на вопрос #}
-    <footer class="row -d-none">
+    <footer class="row d-none">
         <div class="l-col"></div>
         <div class="r-col">
             {% include 'entry/generic/form_reply.html' with on_question=item.on_question.pk parent=item.pk %}

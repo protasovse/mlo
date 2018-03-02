@@ -1,7 +1,10 @@
 {% extends 'front/base.html' %}
 
 {% block title %}
-    {{ rubrics.last.title|default:rubrics.last.h1 }} на сайте Мойюрист.онлайн
+    {% with rubrics.last as r %}
+        {% if r.title or r.h1 %}{{ r.title|default:r.h1 }}{% else %} Консультации юристов по теме «{{ r.name }}»
+        {% endif %} на сайте Мойюрист.онлайн
+    {% endwith %}
 {% endblock %}
 
 {% block content %}
@@ -12,9 +15,19 @@
         {% include 'front/generic/header_question.html' with title=rubrics.0.call_to_action %}
 
         {# Хлебные крошки #}
-        <div class="container mt-4">
+        <div class="mt-4">
             <div class="row">
-                <nav aria-label="breadcrumb" class="col">
+
+            </div>
+        </div>
+
+        {# Содержание страницы вопроса #}
+        <div class="question-page-content mt-2">
+
+            {# Основная часть — заголовок темы, тексты #}
+            <div class="row">
+
+                <nav aria-label="breadcrumb" class="col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Главная</a></li>
                         {% if rubrics %}
@@ -28,20 +41,12 @@
                                 <li class="breadcrumb-item active">{{ rubrics.last }}</li>
                             {% endif %}
                         {% else %}
-                            <li class="breadcrumb-item">Консультации юриста</li>
+                            <li class="breadcrumb-item active">Консультации юриста</li>
                         {% endif %}
 
                     </ol>
                 </nav>
-            </div>
-        </div>
 
-        {# Содержание страницы вопроса #}
-        <div class="question-page-content mt-2">
-
-            <div class="row">
-
-                {# Основная часть — заголовок темы, тексты #}
                 <main>
 
                     <article class="entry question">
@@ -86,8 +91,9 @@
                                     <div class="row mt-4">
                                         <h3 class="col-12 mb-4">Темы в этом разделе</h3>
                                         {% for rubric in rubrics.last.get_children %}
-                                            <div class="col-6 mb-3">
-                                                <a href="{{ rubric.get_absolute_url }}">{{ rubric }}</a>
+                                            <div class="col-12 col-sm-6 mb-3">
+                                                <a href="{{ rubric.get_absolute_url }}"
+                                                >{{ rubric.link|default:rubric.name }}</a>
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -102,11 +108,6 @@
 
                 {# Боковая колонка 1  #}
                 <aside>
-
-                    {% if rating.count %}
-                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
-                    {% endif %}
-
                 </aside>
 
             </div>
@@ -138,7 +139,10 @@
                 </main>
 
                 <aside>
-
+                    {% if rating.count and not question.reply_count %}
+                        <h4 class="mb-5">Лучшие эксперты</h4>
+                        {% include 'entry/generic/lawyer_best_large.html' with items=rating %}
+                    {% endif %}
                 </aside>
 
             </div>
@@ -146,14 +150,18 @@
         </div>
 
         {# Рубрикатор #}
-        <section class="gray">
+        <section class="gray d-none d-sm-block">
             <div class="container">
                 <div class="row">
-                    <h3 class="col-12 mb-5">Темы юридических консультаций</h3>
+                    <h2 class="col-12 mb-5">Темы юридических консультаций</h2>
                     {% for rubric in all_rubrics %}
-                        <div class="col-4 mb-3">
-                            <h5 style="font-weight: 500;">
-                                <a style="color:#545454;" href="{{ rubric.get_absolute_url }}">{{ rubric.link|default:rubric.name }}</a></h5>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3">
+                            <h5 class="mb-0" style="font-weight: 300;"><a style="color:#545454;"
+                                href="{{ rubric.get_absolute_url }}">{{ rubric.link|default:rubric.name }}</a></h5>
+                            {% for subrubric in rubric.get_children %}
+                                <a class="small" href="{{ subrubric.get_absolute_url }}">{{ subrubric.link|default:subrubric.name }}</a>
+                                •
+                            {% endfor %}
                         </div>
                     {% endfor %}
                 </div>

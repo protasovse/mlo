@@ -77,4 +77,7 @@ class QuestionsList(ListView):
         # Все рубрики
         context['all_rubrics'] = Rubric.objects.filter(level=0)
 
+        # Лучшие юристы
+        context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
+
         return context

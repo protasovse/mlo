@@ -2,6 +2,25 @@
 $medals-size: line(3);
 $photo-width: 300px;
 $photo-height: 360px;
+$photo-small-size: 40px;
+
+.lawyer-medal {
+  @extend .small;
+  color: $gray-600;
+  .item {
+    @extend .mr-4, .d-inline-flex, .align-items-center;
+    cursor: pointer;
+    i {
+      @extend .mr-2, .normal;
+      color: $gray-200;
+    }
+    &:hover {
+      i {
+        color: $light-blue;
+      }
+    }
+  }
+}
 
 .lawyer-page {
 
@@ -163,7 +182,7 @@ $photo-height: 360px;
     }
     .gutter {
       @extend .col-1;
-      @include media-breakpoint-down(md){
+      @include media-breakpoint-down(md) {
         display: none;
       }
     }
@@ -212,21 +231,52 @@ $photo-height: 360px;
     margin-bottom: line(1.5);
   }
 
-  .lawyer-list-item {
+  .lawyer-list_item {
     @extend .normal, .mb-4;
   }
 
-  .lawyer-list-item-header {
-    @extend .d-flex, .align-items-center;
-    img {
-      margin-right: line(.5);
-      width: line(2);
-      height: line(2);
+  .lawyer-list_header {
+    display: flex;
+    align-items: center;
+    a.ph {
+      flex-shrink: 0;
+      width: $photo-small-size;
+      height: $photo-small-size;
       border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .nm {
+      margin-left: 10px;
+    }
+
+    &.large_photo {
+      align-items: flex-start;
+      a.ph {
+        @include photo-mask(75px, 90px, "fff", "fff");
+        border-radius: 0;
+      }
+      .nm {
+        margin-left: 20px;
+        a.name {
+          font-weight: $font-weight-semibold;
+          font-size: $font-size-base;
+        }
+        .lawyer-medal {
+          @extend .mt-2, .mb-1;
+          white-space: nowrap;
+        }
+        .online {
+          color: $green;
+        }
+      }
     }
   }
 
-  .lawyer-list-item-about {
+  .lawyer-list_body {
     @extend .mt-2;
     color: $gray-500;
   }

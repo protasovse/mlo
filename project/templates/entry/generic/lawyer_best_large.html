@@ -1,0 +1,22 @@
+{% load cropping %}
+<div class="lawyer-list">
+{% for item in items %}
+    <div class="lawyer-list_item">
+        <div class="lawyer-list_header large_photo">
+            <a class="ph" href="{% url 'lawyer_page' item.user.pk %}">
+                <img src="{% cropped_thumbnail item.user.info 'photo' %}" alt="{{ item.user }}"/>
+            </a>
+            <div class="nm">
+                <a class="name" href="{% url 'lawyer_page' item.user.pk %}">{{ item.user }}</a>
+                <div class="lawyer-medal">
+                    <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
+                            class="v">635</span></span>
+                    <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
+                </div>
+                <div class="online">на сайте</div>
+                <div><a href="#">Задать вопрос</a></div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>

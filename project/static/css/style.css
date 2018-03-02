@@ -417,6 +417,7 @@ hr {
 
 small, .form-group .invalid-feedback, .form-group .valid-feedback,
 .small,
+.lawyer-medal,
 .entry .answer-header-medal {
   font-size: 80%;
   font-weight: 400; }
@@ -515,7 +516,7 @@ h1, .h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar .mlo-navbar-title .tg, .mlo-navbar .mlo-navbar-title .g, .mlo-navbar .mlo-navbar-title .c, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .entry .rubrics, .entry .answer-header-medal .item i, .entry .answer-footer-like .answer-footer-like-sign, .question-item .number, .question-item .answer .answer-header, .lawyer-page article .check, .lawyer-list .lawyer-list-item {
+.normal, .mlo-navbar .mlo-navbar-title .tg, .mlo-navbar .mlo-navbar-title .g, .mlo-navbar .mlo-navbar-title .c, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .entry .rubrics, .entry .answer-footer-like .answer-footer-like-sign, .question-item .number, .question-item .answer .answer-header, .lawyer-medal .item i, .entry .answer-header-medal .item i, .lawyer-page article .check, .lawyer-list .lawyer-list_item {
   font-size: 0.875rem;
   line-height: 1.3888888889rem; }
 
@@ -958,11 +959,11 @@ pre {
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%; }
 
-  .col-md-3, aside, .question-item .l-col, .question-item .date, .question-item .number {
+  .col-md-3, .question-item .l-col, .question-item .date, .question-item .number {
     flex: 0 0 25%;
     max-width: 25%; }
 
-  .col-md-4, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr {
+  .col-md-4, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, aside {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%; }
 
@@ -978,11 +979,11 @@ pre {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
-  .col-md-8 {
+  .col-md-8, main {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%; }
 
-  .col-md-9, main, .question-item .r-col, .question-item h5, .question-item .content, .question-item .answer {
+  .col-md-9, .question-item .r-col, .question-item h5, .question-item .content, .question-item .answer {
     flex: 0 0 75%;
     max-width: 75%; }
 
@@ -1091,7 +1092,7 @@ pre {
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%; }
 
-  .col-lg-3, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .question-page-content .question-item .number, .question-item .question-page-content .number, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .lawyer-page article section.header .question-item h5, .lawyer-page section.header .question-item article h5, .question-item .lawyer-page article section.header h5, .question-item .lawyer-page section.header article h5, .lawyer-page article section.header .question-item .content, .lawyer-page section.header .question-item article .content, .question-item .lawyer-page article section.header .content, .question-item .lawyer-page section.header article .content, .lawyer-page article section.header .question-item .answer, .lawyer-page section.header .question-item article .answer, .question-item .lawyer-page article section.header .answer, .question-item .lawyer-page section.header article .answer {
+  .col-lg-3, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .question-page-content .question-item .number, .question-item .question-page-content .number, aside, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .lawyer-page article section.header .question-item h5, .lawyer-page section.header .question-item article h5, .question-item .lawyer-page article section.header h5, .question-item .lawyer-page section.header article h5, .lawyer-page article section.header .question-item .content, .lawyer-page section.header .question-item article .content, .question-item .lawyer-page article section.header .content, .question-item .lawyer-page section.header article .content, .lawyer-page article section.header .question-item .answer, .lawyer-page section.header .question-item article .answer, .question-item .lawyer-page article section.header .answer, .question-item .lawyer-page section.header article .answer {
     flex: 0 0 25%;
     max-width: 25%; }
 
@@ -1115,7 +1116,7 @@ pre {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%; }
 
-  .col-lg-9, .question-page-content .r-col, .question-page-content .question-item h5, .question-item .question-page-content h5, .question-page-content .question-item .content, .question-item .question-page-content .content, .question-page-content .question-item .answer, .question-item .question-page-content .answer {
+  .col-lg-9, .question-page-content .r-col, .question-page-content .question-item h5, .question-item .question-page-content h5, .question-page-content .question-item .content, .question-item .question-page-content .content, .question-page-content .question-item .answer, .question-item .question-page-content .answer, main {
     flex: 0 0 75%;
     max-width: 75%; }
 
@@ -2611,10 +2612,10 @@ tbody.collapse.show {
   border-radius: 1.25rem;
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden; }
-  .dropdown-menu .dropdown-item .small, .dropdown-menu .dropdown-item .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item .answer-header-medal {
+  .dropdown-menu .dropdown-item .small, .dropdown-menu .dropdown-item .lawyer-medal, .dropdown-menu .dropdown-item .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item .answer-header-medal {
     display: block;
     color: #878787; }
-  .dropdown-menu .dropdown-item.active .small, .dropdown-menu .dropdown-item.active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item.active .answer-header-medal, .dropdown-menu .dropdown-item:active .small, .dropdown-menu .dropdown-item:active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item:active .answer-header-medal {
+  .dropdown-menu .dropdown-item.active .small, .dropdown-menu .dropdown-item.active .lawyer-medal, .dropdown-menu .dropdown-item.active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item.active .answer-header-medal, .dropdown-menu .dropdown-item:active .small, .dropdown-menu .dropdown-item:active .lawyer-medal, .dropdown-menu .dropdown-item:active .entry .answer-header-medal, .entry .dropdown-menu .dropdown-item:active .answer-header-medal {
     color: rgba(255, 255, 255, 0.75); }
 
 .btn-group,
@@ -4604,6 +4605,33 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
 .breadcrumb-item.active {
   color: #bababa; }
 
+.breadcrumb {
+  font-weight: 300; }
+  @media (max-width: 767px) {
+    .breadcrumb {
+      display: block; }
+      .breadcrumb .breadcrumb-item {
+        display: none;
+        margin-bottom: .5rem; }
+        .breadcrumb .breadcrumb-item.active {
+          display: inherit;
+          position: relative;
+          cursor: pointer; }
+          .breadcrumb .breadcrumb-item.active:after {
+            content: '\e923';
+            font-family: icomoon;
+            position: absolute;
+            right: 0;
+            top: 0; }
+      .breadcrumb .breadcrumb-item::before {
+        content: none; }
+      .breadcrumb.open .breadcrumb-item, .breadcrumb:hover .breadcrumb-item {
+        display: inherit; }
+        .breadcrumb.open .breadcrumb-item.active:after, .breadcrumb:hover .breadcrumb-item.active:after {
+          content: '\e922';
+          top: auto;
+          bottom: 0; } }
+
 .pagination {
   display: flex;
   padding-left: 0;
@@ -5801,10 +5829,10 @@ a.bg-white:focus, a.bg-white:hover {
 .d-table-cell {
   display: table-cell !important; }
 
-.d-flex, .mlo-navbar, .mlo-navbar .actions, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .lawyer-list-item-header, .lawyer-list .consult-lawyer {
+.d-flex, .mlo-navbar, .mlo-navbar .actions, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page section.header .r-col, .lawyer-page section.header section.lawyer-section .r-col, section.lawyer-section .lawyer-page section.header .question-item h5, .lawyer-page section.header .question-item section.lawyer-section h5, section.lawyer-section .question-item .lawyer-page section.header h5, .question-item .lawyer-page section.header section.lawyer-section h5, section.lawyer-section .lawyer-page section.header .question-item .content, .lawyer-page section.header .question-item section.lawyer-section .content, section.lawyer-section .question-item .lawyer-page section.header .content, .question-item .lawyer-page section.header section.lawyer-section .content, section.lawyer-section .lawyer-page section.header .question-item .answer, .lawyer-page section.header .question-item section.lawyer-section .answer, section.lawyer-section .question-item .lawyer-page section.header .answer, .question-item .lawyer-page section.header section.lawyer-section .answer, .slide-menu, header.page .l-col, header.page .question-item .date, .question-item header.page .date, header.page .question-item .number, .question-item header.page .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page section.about .medals, .lawyer-list .consult-lawyer {
   display: flex !important; }
 
-.d-inline-flex, .entry .answer-header-medal .item, .entry .answer-footer-like .answer-footer-like-block {
+.d-inline-flex, .entry .answer-footer-like .answer-footer-like-block, .lawyer-medal .item, .entry .answer-header-medal .item {
   display: inline-flex !important; }
 
 @media (min-width: 576px) {
@@ -6013,7 +6041,7 @@ a.bg-white:focus, a.bg-white:hover {
 .align-items-end {
   align-items: flex-end !important; }
 
-.align-items-center, .mlo-navbar, .mlo-navbar.static .mlo-navbar_addbar, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section.header-section, footer.main-footer > div, .entry .answer-header-medal .item, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-list .lawyer-list-item-header {
+.align-items-center, .mlo-navbar, .mlo-navbar.static .mlo-navbar_addbar, .mlo-navbar.static .mlo-navbar_addbar form.mlo-navbar_form, section.header-section, footer.main-footer > div, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-medal .item, .entry .answer-header-medal .item {
   align-items: center !important; }
 
 .align-items-baseline {
@@ -6566,7 +6594,7 @@ a.bg-white:focus, a.bg-white:hover {
 .mx-1 {
   margin-right: 0.25rem !important; }
 
-.mb-1, header.page .r-col form > *, header.page .question-item h5 form > *, .question-item header.page h5 form > *, header.page .question-item .content form > *, .question-item header.page .content form > *, header.page .question-item .answer form > *, .question-item header.page .answer form > *, .entry .brick .file-item,
+.mb-1, header.page .r-col form > *, header.page .question-item h5 form > *, .question-item header.page h5 form > *, header.page .question-item .content form > *, .question-item header.page .content form > *, header.page .question-item .answer form > *, .question-item header.page .answer form > *, .entry .brick .file-item, .lawyer-list .lawyer-list_header.large_photo .nm .lawyer-medal, .lawyer-list .lawyer-list_header.large_photo .nm .entry .answer-header-medal, .entry .lawyer-list .lawyer-list_header.large_photo .nm .answer-header-medal,
 .my-1 {
   margin-bottom: 0.25rem !important; }
 
@@ -6577,11 +6605,11 @@ a.bg-white:focus, a.bg-white:hover {
 .m-2 {
   margin: 0.5rem !important; }
 
-.mt-2, .file-loader, .lawyer-list .lawyer-list-item-about,
+.mt-2, .file-loader, .lawyer-list .lawyer-list_header.large_photo .nm .lawyer-medal, .lawyer-list .lawyer-list_header.large_photo .nm .entry .answer-header-medal, .entry .lawyer-list .lawyer-list_header.large_photo .nm .answer-header-medal, .lawyer-list .lawyer-list_body,
 .my-2 {
   margin-top: 0.5rem !important; }
 
-.mr-2, .entry .rubrics .rubric-item:before, .entry .brick .file-item:before, .entry .answer-header-medal .item i, .entry .answer-footer-like .answer-footer-like-sign, .lawyer-page section.about nav a i, .lawyer-list .consult-state:before,
+.mr-2, .entry .rubrics .rubric-item:before, .entry .brick .file-item:before, .entry .answer-footer-like .answer-footer-like-sign, .lawyer-medal .item i, .entry .answer-header-medal .item i, .lawyer-page section.about nav a i, .lawyer-list .consult-state:before,
 .mx-2 {
   margin-right: 0.5rem !important; }
 
@@ -6620,12 +6648,12 @@ a.bg-white:focus, a.bg-white:hover {
 footer.main-footer > div .mdd {
   margin-top: 1.5rem !important; }
 
-.mr-4, .entry .answer-header-medal .item,
+.mr-4, .lawyer-medal .item, .entry .answer-header-medal .item,
 .mx-4,
 footer.main-footer > div .mdd a {
   margin-right: 1.5rem !important; }
 
-.mb-4, .win-round h3, .question_feed-head, .lawyer-page section.about .l-col, .lawyer-page section.about .question-item .date, .question-item .lawyer-page section.about .date, .lawyer-page section.about .question-item .number, .question-item .lawyer-page section.about .number, .lawyer-list, .lawyer-list .lawyer-list-item,
+.mb-4, .win-round h3, .question_feed-head, .lawyer-page section.about .l-col, .lawyer-page section.about .question-item .date, .question-item .lawyer-page section.about .date, .lawyer-page section.about .question-item .number, .question-item .lawyer-page section.about .number, .lawyer-list, .lawyer-list .lawyer-list_item,
 .my-4,
 footer.main-footer > div .mdd {
   margin-bottom: 1.5rem !important; }
@@ -7894,7 +7922,7 @@ section.lawyer-section .question-item .lawyer-page section.header .answer,
   .text-md-left, footer.main-footer > div .cpr {
     text-align: left !important; }
 
-  .text-md-right, footer.main-footer > div .ttl, .question-item .l-col, .question-item .date, .question-item .number {
+  .text-md-right, footer.main-footer > div .ttl {
     text-align: right !important; }
 
   .text-md-center, footer.main-footer > div .mdd {
@@ -7903,7 +7931,7 @@ section.lawyer-section .question-item .lawyer-page section.header .answer,
   .text-lg-left {
     text-align: left !important; }
 
-  .text-lg-right, .question-page-content .l-col, .question-page-content .question-item .date, .question-item .question-page-content .date, .question-page-content .question-item .number, .question-item .question-page-content .number, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .lawyer-page article section.header .question-item h5, .lawyer-page section.header .question-item article h5, .question-item .lawyer-page article section.header h5, .question-item .lawyer-page section.header article h5, .lawyer-page article section.header .question-item .content, .lawyer-page section.header .question-item article .content, .question-item .lawyer-page article section.header .content, .question-item .lawyer-page section.header article .content, .lawyer-page article section.header .question-item .answer, .lawyer-page section.header .question-item article .answer, .question-item .lawyer-page article section.header .answer, .question-item .lawyer-page section.header article .answer {
+  .text-lg-right, .question-page-content .l-col, .question-item .l-col, .question-item .date, .question-item .number, .lawyer-page article .title, .lawyer-page article section.header .r-col, .lawyer-page section.header article .r-col, .lawyer-page article section.header .question-item h5, .lawyer-page section.header .question-item article h5, .question-item .lawyer-page article section.header h5, .question-item .lawyer-page section.header article h5, .lawyer-page article section.header .question-item .content, .lawyer-page section.header .question-item article .content, .question-item .lawyer-page article section.header .content, .question-item .lawyer-page section.header article .content, .lawyer-page article section.header .question-item .answer, .lawyer-page section.header .question-item article .answer, .question-item .lawyer-page article section.header .answer, .question-item .lawyer-page section.header article .answer {
     text-align: right !important; }
 
   .text-lg-center {
@@ -7995,7 +8023,7 @@ a.text-dark:focus, a.text-dark:hover {
 a.text-white:focus, a.text-white:hover {
   color: #e6e6e6 !important; }
 
-.text-muted, .win-round .reg, .entry .answer-header-medal, .lawyer-page article .content h5 small, .lawyer-page article .content h5 .form-group .invalid-feedback, .form-group .lawyer-page article .content h5 .invalid-feedback, .lawyer-page article .content h5 .form-group .valid-feedback, .form-group .lawyer-page article .content h5 .valid-feedback {
+.text-muted, .win-round .reg, .lawyer-page article .content h5 small, .lawyer-page article .content h5 .form-group .invalid-feedback, .form-group .lawyer-page article .content h5 .invalid-feedback, .lawyer-page article .content h5 .form-group .valid-feedback, .form-group .lawyer-page article .content h5 .valid-feedback {
   color: #bababa !important; }
 
 .text-hide {
@@ -8570,12 +8598,6 @@ aside {
       height: 2.7777777778rem; } }
   .entry .answer-header-photo img {
     width: 100%; }
-.entry .answer-header-medal .item {
-  cursor: pointer; }
-  .entry .answer-header-medal .item i {
-    color: #e6e6e6; }
-  .entry .answer-header-medal .item:hover i {
-    color: #4c7efd; }
 .entry .header-photo-small .answer-header-photo, .entry .header-photo-small.answer-header-photo {
   width: 2.7777777778rem;
   height: 2.7777777778rem; }
@@ -8627,6 +8649,15 @@ aside {
       border-radius: 50%; }
 .question-item .answer p {
   color: #878787; }
+
+.lawyer-medal, .entry .answer-header-medal {
+  color: #878787; }
+  .lawyer-medal .item, .entry .answer-header-medal .item {
+    cursor: pointer; }
+    .lawyer-medal .item i, .entry .answer-header-medal .item i {
+      color: #e6e6e6; }
+    .lawyer-medal .item:hover i, .entry .answer-header-medal .item:hover i {
+      color: #4c7efd; }
 
 .lawyer-page dt {
   color: #878787; }
@@ -8758,12 +8789,61 @@ aside {
 
 .lawyer-list h4 {
   margin-bottom: 2.0833333333rem; }
-.lawyer-list .lawyer-list-item-header img {
-  margin-right: 0.6944444444rem;
-  width: 2.7777777778rem;
-  height: 2.7777777778rem;
-  border-radius: 50%; }
-.lawyer-list .lawyer-list-item-about {
+.lawyer-list .lawyer-list_header {
+  display: flex;
+  align-items: center; }
+  .lawyer-list .lawyer-list_header a.ph {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden; }
+    .lawyer-list .lawyer-list_header a.ph img {
+      width: 100%;
+      height: 100%; }
+  .lawyer-list .lawyer-list_header .nm {
+    margin-left: 10px; }
+  .lawyer-list .lawyer-list_header.large_photo {
+    align-items: flex-start; }
+    .lawyer-list .lawyer-list_header.large_photo a.ph {
+      display: block;
+      position: relative;
+      width: 75px;
+      min-width: 75px;
+      max-width: 75px;
+      height: 90px;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 0; }
+      .lawyer-list .lawyer-list_header.large_photo a.ph:after {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'%0A  viewBox='0 0 300 360' style='enable-background:new 0 0 300 360;' xml:space='preserve'%3E%0A%3Cstyle type='text/css'%3E%0A  .st0%7Bfill-rule:evenodd;clip-rule:evenodd;fill:%23fff;%7D%0A  .st1%7Bfill-rule:evenodd;clip-rule:evenodd;fill:%23fff;%7D%0A%3C/style%3E%0A%3Cg%3E%0A  %3Cpath class='st0' d='M0,230.4V359h150c-19.4-3.6-38.8-10-59-20C43.6,315.7,0,276.1,0,230.4z'/%3E%0A %3Cpath class='st0' d='M150,359h150V230.4c0,45.8-43,85.3-90.6,108.6C189.4,348.8,169.1,355.5,150,359z'/%3E%0A%3C/g%3E%0A%3Cpath class='st1' d='M150,358c-18.9-3.5-39.2-9.4-59-19H0v21h300v-21h-90.6C189.6,348.6,168.9,354.5,150,358z'/%3E%0A%3C/svg%3E");
+        background-size: 100%;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0; }
+      .lawyer-list .lawyer-list_header.large_photo a.ph img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%; }
+    .lawyer-list .lawyer-list_header.large_photo .nm {
+      margin-left: 20px; }
+      .lawyer-list .lawyer-list_header.large_photo .nm a.name {
+        font-weight: 600;
+        font-size: 1rem; }
+      .lawyer-list .lawyer-list_header.large_photo .nm .lawyer-medal, .lawyer-list .lawyer-list_header.large_photo .nm .entry .answer-header-medal, .entry .lawyer-list .lawyer-list_header.large_photo .nm .answer-header-medal {
+        white-space: nowrap; }
+      .lawyer-list .lawyer-list_header.large_photo .nm .online {
+        color: #16c246; }
+.lawyer-list .lawyer-list_body {
   color: #bababa; }
 .lawyer-list .consult-state {
   color: #16c246;
