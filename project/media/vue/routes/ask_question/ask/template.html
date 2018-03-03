@@ -1,0 +1,90 @@
+<div id="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ask_title"
+                           placeholder="Суть вопроса"/>
+                    <small>Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?».</small>
+                </div>
+
+                <div class="form-group mt-4">
+                    <textarea class="form-control" id="ask_content"
+                              placeholder="Детали вопроса" rows="7"></textarea>
+                    <small>Опишите в подробностях свой вопрос, чтобы получить более точный ответ.</small>
+                </div>
+
+                <div class="form-group row mt-4">
+                    <label for="ask_rubric" class="col-form-label">Рубрика</label>
+                    <div class="col-sm-8">
+                        <v-select :options="options" @search="onSearch" id="ask_rubric"></v-select>
+                        <small>Выберите отрасль права</small>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-4">
+                    <label for="ask_file" class="col-form-label">Прикрепить файлы</label>
+                    <div class="col-sm-8">
+                        <div class="file-input btn btn-sm btn-outline-primary">
+                            <input type="file" id="ask_file" multiple />
+                            <span class="icon-folder mr-2"></span> Обзор
+                        </div>
+                        <div class="file-loader" data-filename="Договор.docx">
+                            <i class="bar"><i style="width:35%;"></i></i></div>
+
+                        <div class="file-loader"
+                             data-filename="Протокол заседания арбитражного суда Кировского района.docx">
+                            <i class="bar"><i style="width:4%;"></i></i></div>
+                    </div>
+                </div>
+
+                <h3>Тип консультации</h3>
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div class="pr-4">
+                                <h5>Развёрнутая письменная консультация</h5>
+                                <p class="text-muted">Письменная юридическая консультация с ссылками на
+                                    законодательство и алгоритмом
+                                    действия. Найдём самое выгодное для Вас решение.</p>
+                            </div>
+                            <div>800₽</div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div class="pr-4">
+                                <h5>Бесплатная консультация</h5>
+                                <p class="text-muted">Нет гарантии ответа. Если вопрос подразумевает платные
+                                    услуги,
+                                    то юрист может выставить счёт, и оказать их после оплаты этого счёта.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <h3>Личные данные</h3>
+
+                <div class="form-group row">
+                    <label for="ask_email" class="col-form-label required">Электронный ящик</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="ask_email" placeholder="Электронный ящик">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ask_name" class="col-form-label required">Ваше имя</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ask_phone" class="col-form-label required">Телефон</label>
+                    <div class="col-sm-8">
+                        <input type="tel" class="form-control" id="ask_phone" placeholder="Номер телефона">
+                        <small>Для уточнения данных.</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-4" style="float: right;" disabled>
+                    Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></button>
+</div>

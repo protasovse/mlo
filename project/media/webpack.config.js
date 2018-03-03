@@ -2,7 +2,8 @@ var path = require('path');
 
 module.exports = {
     "entry": {
-        authorization: "./vue/instances/authorization.js"
+        authorization: "./vue/instances/authorization.js",
+        ask_question: "./vue/instances/ask_question.js"
     },
     "output": {
         "path": path.resolve(__dirname, 'vue', 'bundles'),
