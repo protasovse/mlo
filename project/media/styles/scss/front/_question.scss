@@ -109,7 +109,7 @@ header.page {
 }
 
 main {
-  @extend .col-12, .col-md-9, .mb-5;
+  @extend .col-12, .col-md-8, .col-lg-9, .mb-5;
   padding-right: line(2.25);
   @include media-breakpoint-down(lg) {
     padding-right: line(1);
@@ -117,7 +117,7 @@ main {
 }
 
 aside {
-  @extend .col-12, .col-md-3;
+  @extend .col-12, .col-md-4, .col-lg-3;
   padding-left: line(2.25);
   @include media-breakpoint-down(lg) {
     padding-left: line(1);
@@ -225,20 +225,7 @@ aside {
   }
 
   .answer-header-medal {
-    @extend .small, .text-muted;
-    .item {
-      @extend .mr-4, .d-inline-flex, .align-items-center;
-      cursor: pointer;
-      i {
-        @extend .mr-2, .normal;
-        color: $gray-200;
-      }
-      &:hover {
-        i {
-          color: $light-blue;
-        }
-      }
-    }
+    @extend .lawyer-medal;
   }
 
   .header-photo-small {
@@ -302,7 +289,7 @@ aside {
   @extend .row;
 
   .l-col {
-    @extend .col-12, .col-md-3, .text-md-right;
+    @extend .col-12, .col-md-3, .text-lg-right;
   }
 
   .r-col {

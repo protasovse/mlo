@@ -1,3 +1,5 @@
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from apps.account.models import RatingResult
@@ -57,15 +59,25 @@ class QuestionsList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        # Выборка информации о рубриках
         if 'subrubric_slug' in self.kwargs:
             slug = self.kwargs['subrubric_slug']
         elif 'rubric_slug' in self.kwargs:
             slug = self.kwargs['rubric_slug']
         else:
-            slug = None
+            slug = ''
         # Получаем всех предков
-        context['rubrics'] = \
-            Rubric.objects.filter(slug=slug)[0].get_ancestors(include_self=True)
-        # print(context['rubrics'].last().is_root_node())
+        if slug:
+            rubric = get_object_or_404(Rubric, slug=slug)
+            rubrics = rubric.get_ancestors(include_self=True)
+            if rubrics[0].slug != self.kwargs['rubric_slug']:
+                raise Http404()
+            context['rubrics'] = rubrics
+
+        # Все рубрики
+        context['all_rubrics'] = Rubric.objects.filter(level=0)
+
+        # Лучшие юристы
+        context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
 
         return context

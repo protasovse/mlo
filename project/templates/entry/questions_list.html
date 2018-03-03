@@ -1,53 +1,103 @@
 {% extends 'front/base.html' %}
 
+{% block title %}
+    {% with rubrics.last as r %}
+        {% if r.title or r.h1 %}{{ r.title|default:r.h1 }}{% else %} Консультации юристов по теме «{{ r.name }}»
+        {% endif %} на сайте Мойюрист.онлайн
+    {% endwith %}
+{% endblock %}
+
 {% block content %}
 
     <div class="question-page">
 
         {# Хедер страницы вопроса #}
-        {% include 'front/generic/header_question.html' with title=rubric.get_root.call_to_action %}
+        {% include 'front/generic/header_question.html' with title=rubrics.0.call_to_action %}
 
-        <div class="container mt-4">
+        {# Хлебные крошки #}
+        <div class="mt-4">
             <div class="row">
-                <nav aria-label="breadcrumb" class="col">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                        {% if rubrics.last.is_root_node %}
-                            <li class="breadcrumb-item active">{{ rubrics.first }}</li>
-                        {% else %}
-                            <li class="breadcrumb-item">
-                                <a href="{{ rubrics.first.get_absolute_url }}">{{ rubrics.first }}</a></li>
-                            <li class="breadcrumb-item active">{{ rubrics.last }}</li>
-                        {% endif %}
-                    </ol>
-                </nav>
+
             </div>
         </div>
 
         {# Содержание страницы вопроса #}
         <div class="question-page-content mt-2">
 
+            {# Основная часть — заголовок темы, тексты #}
             <div class="row">
 
-                {# Основная часть — вопрос #}
+                <nav aria-label="breadcrumb" class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                        {% if rubrics %}
+                            <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a>
+                            </li>
+                            {% if rubrics.last.is_root_node %}
+                                <li class="breadcrumb-item active">{{ rubrics.0 }}</li>
+                            {% else %}
+                                <li class="breadcrumb-item">
+                                    <a href="{{ rubrics.0.get_absolute_url }}">{{ rubrics.0 }}</a></li>
+                                <li class="breadcrumb-item active">{{ rubrics.last }}</li>
+                            {% endif %}
+                        {% else %}
+                            <li class="breadcrumb-item active">Консультации юриста</li>
+                        {% endif %}
+
+                    </ol>
+                </nav>
+
                 <main>
 
                     <article class="entry question">
 
                         {# Заголовок #}
                         <div class="row">
-                            <h2 class="col">{{ rubric }}</h2>
+                            <h2 class="col mb-4">
+                                {% if rubrics.last.h1 %}
+                                    {{ rubrics.last.h1 }}
+                                {% elif rubrics.last %}
+                                    {{ rubrics.last }}
+                                {% else %}
+                                    Юридическая консультация онлайн
+                                {% endif %}
+                            </h2>
                         </div>
 
                         <div class="row">
 
                             <div class="col">
                                 <div class="lead">
-                                    {{ rubric.html_description|safe }}
-                                    <p><strong>Наши юристы и адвокаты проконсультируют Вас по жилищным вопросам
-                                        платно или бесплатно. Для этого заполните форму.</strong></p>
+                                    {% if rubrics.last %}
+                                        {{ rubrics.last.html_description|safe }}
+                                    {% else %}
+                                        <p>Проект Мойюрист.онлайн позволяет каждому человеку получить грамотный совет
+                                            юриста
+                                            в любой жизненной ситуации. На вопросы наших посетителей отвечают
+                                            профессиональные юристы. Специалисты, которые не только дают бесплатные
+                                            консультации, но и занимаются обширной юридической практикой.</p>
+                                    {% endif %}
+                                    <p><strong>Наши юристы и адвокаты проконсультируют Вас
+                                        {% if rubrics.last.advice_on %}
+                                            {{ rubrics.last.advice_on }}
+                                        {% elif rubrics.0.advice_on %}
+                                            {{ rubrics.0.advice_on }}
+                                        {% endif %}
+                                        платно или бесплатно. Для этого <a href="{% url 'ask_question' %}"
+                                        >заполните форму</a>.</strong></p>
                                 </div>
+
+                                {% if rubrics.last.get_children %}
+                                    <div class="row mt-4">
+                                        <h3 class="col-12 mb-4">Темы в этом разделе</h3>
+                                        {% for rubric in rubrics.last.get_children %}
+                                            <div class="col-12 col-sm-6 mb-3">
+                                                <a href="{{ rubric.get_absolute_url }}"
+                                                >{{ rubric.link|default:rubric.name }}</a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                         </div>
@@ -58,23 +108,18 @@
 
                 {# Боковая колонка 1  #}
                 <aside>
-
-                    {% if rating.count %}
-                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
-                    {% endif %}
-
                 </aside>
 
             </div>
 
             <div class="row gradient">
 
-                {# Основная часть — ответы #}
+                {# Основная часть — вопросы #}
                 <main>
 
                     <div class="row">
                         <h3 class="answer-list-head">Консультации юристов по
-                            {% if rubric.name %}теме «{{ rubric.name }}»
+                            {% if rubrics.last.name %}теме «{{ rubrics.last.name }}»
                             {% else %}российскому законодательству{% endif %}</h3>
                     </div>
 
@@ -93,9 +138,36 @@
 
                 </main>
 
+                <aside>
+                    {% if rating.count and not question.reply_count %}
+                        <h4 class="mb-5">Лучшие эксперты</h4>
+                        {% include 'entry/generic/lawyer_best_large.html' with items=rating %}
+                    {% endif %}
+                </aside>
+
             </div>
 
         </div>
+
+        {# Рубрикатор #}
+        <section class="gray d-none d-sm-block">
+            <div class="container">
+                <div class="row">
+                    <h2 class="col-12 mb-5">Темы юридических консультаций</h2>
+                    {% for rubric in all_rubrics %}
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3">
+                            <h5 class="mb-0" style="font-weight: 300;"><a style="color:#545454;"
+                                href="{{ rubric.get_absolute_url }}">{{ rubric.link|default:rubric.name }}</a></h5>
+                            {% for subrubric in rubric.get_children %}
+                                <a class="small" href="{{ subrubric.get_absolute_url }}">{{ subrubric.link|default:subrubric.name }}</a>
+                                •
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
 
     </div>
 

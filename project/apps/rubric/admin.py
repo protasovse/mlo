@@ -84,8 +84,8 @@ class RubricAdmin(DjangoMpttAdmin, admin.ModelAdmin):
         (None, {
             'fields': ('name', 'parent', 'slug',)}),
         (_('СЕО параметры'), {
-            'fields': ('title', 'h1', 'call_to_action', 'description', 'content',),
-            'classes': ('collapse', 'collapse-closed')
+            'fields': ('title', 'h1', 'link', 'call_to_action', 'advice_on', 'description', 'content',),
+            # 'classes': ('collapse', 'collapse-closed')
         }))
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)

@@ -16,7 +16,7 @@ DEBUG = env('DEBUG')
 STATIC_ROOT = environ.Path('staticfiles').__str__()
 STATICFILES_DIRS = [
     PROJECT_DIR + '/media/vue/bundles',
-    PROJECT_DIR + '/static'
+    PROJECT_DIR + '/static',
 ]
 
 STATIC_URL = '/static/'

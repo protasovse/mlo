@@ -21,13 +21,6 @@
 
 {% block block_js %}
     <script>
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                navbar_isfixed: true,
-            }
-        });
-
         $('#app').addClass("navbar-fixed");
         $('#app').on('scroll', function () {
             if ($('#app').scrollTop() > 60) {

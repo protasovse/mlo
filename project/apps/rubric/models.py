@@ -22,9 +22,15 @@ class Rubric(MPTTModel):
     h1 = models.CharField(_('H1'), max_length=128,
                           help_text=_('Заголовок h1'), blank=True)
 
+    link = models.CharField(_('Link'), max_length=128,
+                            help_text=_('Текст для ссылок и навигации'), blank=True)
+
     call_to_action = models.CharField(_('Call to action'), max_length=128,
                                       help_text=_('Призыв к действию. Например: Проконсультаруйся с'
                                                   'жилищным юристом онлайн'), blank=True)
+
+    advice_on = models.CharField(_('advice on'), max_length=128,
+                                 help_text=_('Юристы и адвокаты проконсультируют … платно или бесплатно'), blank=True)
 
     description = models.TextField(_('Description'),
                                    help_text=_('Короткое описание'), blank=True)
@@ -63,7 +69,7 @@ class Rubric(MPTTModel):
                            kwargs={'rubric_slug': self.slug})
         else:
             return reverse('questions:list_subrubric',
-                           kwargs={'rubric_slug': self.slug, 'subrubric_slug': self.get_root().slug, })
+                           kwargs={'subrubric_slug': self.slug, 'rubric_slug': self.get_root().slug, })
 
     def _set_slug(self):
         """

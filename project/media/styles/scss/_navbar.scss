@@ -77,9 +77,9 @@
   }
 }
 
-.navbar-fixed .mlo-navbar {
+.mlo-navbar.static {
   @extend .bg-primary;
-  position: fixed;
+  // position: relative;
   height: 60px;
   padding-bottom: 0;
   padding-top: 0;

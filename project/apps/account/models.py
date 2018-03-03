@@ -243,19 +243,16 @@ class Experience(AccountBase):
     name = models.CharField(_('Место работы'),
                             max_length=255)
 
-    position = models.CharField(_('Должность'),
-                                max_length=128)
+    position = models.CharField(_('Должность'), blank=True, null=True, max_length=128)
 
-    description = models.TextField(_('Описание организации'),
-                                   max_length=1024, blank=True)
+    description = models.TextField(_('Описание организации'), max_length=1024, blank=True)
 
-    site = models.URLField(_('Сайт'),
-                           blank=True)
+    site = models.URLField(_('Сайт'), blank=True)
 
-    start = models.PositiveSmallIntegerField(_('Год начала работы'))
+    start = models.DateField(_('Начало работы'))
 
-    finish = models.PositiveSmallIntegerField(_('Год окончания работы'),
-                                              blank=True, null=True)
+    finish = models.DateField(_('Окончание работы'), blank=True, null=True,
+                              help_text=_('Если не введено, то по настоящее время'))
 
     doc = models.ImageField(_('Документ подтверждающий трудовую деятельность'),
                             upload_to='account/experience/%Y/%m/', blank=True)

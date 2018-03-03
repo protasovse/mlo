@@ -1,0 +1,30 @@
+<div class="subtitle mb-2">
+    {{ item.start|date:"F Y" }} — {{ item.finish|date:"F Y"|default:"по настоящее время" }}
+</div>
+<h5 class="mb-3">{{ item.name }}
+    <!--br>
+    <small class="text-muted">Ростов-на-Дону</small-->
+</h5>
+
+{% if item.position or item.site %}
+    <dl>
+        {% if item.position %}
+            <dt>Должность</dt>
+            <dd>{{ item.position }}</dd>
+        {% endif %}
+
+        {% if item.site %}
+            <dt>Сайт</dt>
+            <dd>{{ item.site|urlize }}</dd>
+        {% endif %}
+    </dl>
+{% endif %}
+
+{{ item.description }}
+
+{% if item.diplom %}
+    <div class="edu_check_diplom" data-label="Проверено">
+        <a href="{{ item.diplom }}">Посмотреть диплом</a>
+    </div>
+{% endif %}
+<div class="mt-5"></div>

@@ -1,0 +1,37 @@
+.breadcrumb {
+  font-weight: $font-weight-light;
+  @include media-breakpoint-down(sm) {
+    display: block;
+    .breadcrumb-item {
+      display: none;
+      margin-bottom: .5rem;
+      &.active {
+        display: inherit;
+        position: relative;
+        cursor: pointer;
+        &:after {
+          content: '\e923';
+          font-family: icomoon;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+    .breadcrumb-item::before {
+      content: none;
+    }
+    &.open, &:hover {
+      .breadcrumb-item {
+        display: inherit;
+        &.active {
+          &:after {
+            content: '\e922';
+            top: auto;
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -62,7 +62,9 @@
                                 <button type="button" class="btn btn-outline-primary btn-sm">
                                     Ответить на вопрос <i class="ml-2 icon-pencil"></i></button>
 
-                                {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
+                                <div class="d-none">
+                                    {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
+                                </div>
 
                                 <hr class="mb-4 mt-5">
 
@@ -94,7 +96,7 @@
                     {% endif %}
 
                     {% if rating.count and not question.reply_count %}
-                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
+                        {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
                     {% endif %}
 
                 </aside>
@@ -128,7 +130,7 @@
                 <aside>
 
                     {% if rating.count and question.reply_count %}
-                        {% include 'entry/generic/lawyer_rate.html' with items=rating %}
+                        {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
                     {% endif %}
 
                 </aside>
