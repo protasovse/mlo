@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog
+from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog, Likes, Review
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -46,6 +46,10 @@ class OfferInLine(admin.StackedInline):
     fields = [('cost', 'status')]
     extra = 1
     # classes = ('collapse', 'collapse-closed')
+
+
+class ReviewInLine(admin.StackedInline):
+    model = Review
 
 
 @admin.register(Question)
@@ -104,3 +108,8 @@ class AnswerAdmin(admin.ModelAdmin):
 @admin.register(ConsultState)
 class ConsultState(admin.ModelAdmin):
     pass
+
+
+@admin.register(Likes)
+class LikesAdmin(admin.ModelAdmin):
+    inlines = (ReviewInLine,)

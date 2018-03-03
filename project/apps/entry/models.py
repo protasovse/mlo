@@ -108,9 +108,14 @@ class Likes(models.Model):
     """
     Лайки
     """
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes')
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes',
+                              verbose_name=_('Ответ'))
+
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Пользователь'),
+                             help_text=_('Пользователь, который поставил отметку'), on_delete=models.CASCADE)
+
+    date = models.DateTimeField(_('Дата'), default=timezone.now)
+
     value = models.SmallIntegerField(_('Балл'))
 
     class Meta:
@@ -120,6 +125,21 @@ class Likes(models.Model):
 
     def __str__(self):
         return self.entry.__str__()
+
+
+class Review(models.Model):
+    """
+    Отзывы и комментарии к лайкам
+    """
+    like = models.OneToOneField(Likes, on_delete=models.CASCADE)
+    review = models.TextField(_('Текст отзыва'))
+
+    class Meta:
+        verbose_name = _('Отзыв')
+        verbose_name_plural = _('Отзывы')
+
+    def __str__(self):
+        return self.review
 
 
 class Titled(models.Model):

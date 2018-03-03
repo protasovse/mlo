@@ -40,7 +40,7 @@
                     </div>
                     <div class="lawyer-page_about_r-col">
                         <p class="lead">
-                            {{ lawyer.info.about|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
+                            {{ lawyer.info.about|safe|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
                         </p>
                         <dl>
                             <dt>Зарегистрирован</dt>
@@ -80,8 +80,9 @@
 
             <div class="lawyer-page_container">
 
-                <div class="row">
+                <div id="bio" class="row">
 
+                    {# Образование #}
                     {% if lawyer.education.count %}
                     <div class="lawyer-page_l-col text-lg-right">
                         <h3 class="mb-4">Образование</h3>
@@ -94,6 +95,7 @@
                     </div>
                     {% endif %}
 
+                    {# Опыт работы #}
                     {% if lawyer.experience.count %}
                     <div class="lawyer-page_l-col text-lg-right">
                         <h3 class="mb-4">Опыт работы</h3>
