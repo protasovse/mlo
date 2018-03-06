@@ -43,12 +43,12 @@ class MloUserAdmin(UserAdmin):
 
     list_display = ('get_full_name', 'email', 'is_staff',)
 
-    list_filter = ('is_active', 'role')
+    list_filter = ('is_active', 'role',)
 
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'date_joined')}),
-        (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff')}),
+        (None, {'fields': ('email', 'password', 'date_joined', 'phone',)}),
+        (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role',)}),
+        (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff',)}),
 
     )
 

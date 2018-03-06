@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
+from django.db import connection
 from image_cropping import ImageCroppingMixin
 
 from apps.account.models import Info, Case, Education, Experience, Contact, RatingTypes, Rating, RatingResult
@@ -11,13 +13,38 @@ class CitiesAdmin(admin.ModelAdmin):
     list_display = ['full_name_ru']
 
 
+class CityListFilter(SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'Город'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'city'
+
+    def lookups(self, request, model_admin):
+        cursor = connection.cursor()
+        cursor.execute("""
+          SELECT sc.id, CONCAT(name_ru, ' (', count(sc.id), ')')
+          FROM account_info AS ai
+          LEFT JOIN sxgeo_cities AS sc ON (ai.city_id=sc.id)
+          GROUP BY sc.id
+          ORDER BY count(sc.id) DESC, sc.name_ru
+          """)
+
+        return cursor.fetchall()
+
+    def queryset(self, request, queryset):
+        return queryset.filter(city_id=self.value())
+
+
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
     fieldsets = (
-        (None, {'fields': ('user', 'city', 'birth_date', 'sex', )}),
-        ('Текст', {'fields': ('status', 'signature', 'about', )}),
+        (None, {'fields': ('user', 'city', 'birth_date', 'sex',)}),
+        ('Текст', {'fields': ('status', 'signature', 'about',)}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
+    list_filter = (CityListFilter, )
     search_fields = ['user__last_name']
     autocomplete_fields = ['city']
     raw_id_fields = ['user']

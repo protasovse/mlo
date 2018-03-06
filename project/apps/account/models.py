@@ -142,8 +142,8 @@ class Info(models.Model):
     signature = models.CharField(max_length=128, blank=True, null=True, verbose_name=_('Подпись под ответами'))
 
     class Meta:
-        verbose_name = _('Информация')
-        verbose_name_plural = _('Информация')
+        verbose_name = _('Профиль юриста')
+        verbose_name_plural = _('Профили юристов')
 
     def __str__(self):
         return self.user.get_full_name

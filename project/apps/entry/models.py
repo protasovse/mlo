@@ -68,7 +68,7 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '№%d. %s (%d отв.)' % (self.id, self.content[:64], self.reply_count)
+        return "%d. %s " % (self.pk, self.content[:64])
 
     def __int__(self):
         return self.pk
@@ -124,7 +124,7 @@ class Likes(models.Model):
         verbose_name_plural = _('Отметки «Полезно»')
 
     def __str__(self):
-        return self.entry.__str__()
+        return "%d: %s (%d)" % (self.entry.pk, self.user.get_full_name, self.value)
 
 
 class Review(models.Model):
