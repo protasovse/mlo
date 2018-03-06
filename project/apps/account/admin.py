@@ -34,7 +34,10 @@ class CityListFilter(SimpleListFilter):
         return cursor.fetchall()
 
     def queryset(self, request, queryset):
-        return queryset.filter(city_id=self.value())
+        if self.value():
+            return queryset.filter(city_id=self.value())
+        else:
+            queryset
 
 
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
@@ -45,7 +48,7 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
     list_filter = (CityListFilter, )
-    search_fields = ['user__last_name']
+    search_fields = ['user__last_name', 'user__id']
     autocomplete_fields = ['city']
     raw_id_fields = ['user']
 
@@ -82,7 +85,7 @@ class RatingTypesAdmin(admin.ModelAdmin):
 
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
-    pass
+    raw_id_fields = ('user',)
 
 
 @admin.register(RatingResult)

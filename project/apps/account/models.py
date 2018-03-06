@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, connection
+from django.db.models.signals import post_save, post_delete
 from django.utils.translation import ugettext_lazy as _
 from image_cropping import ImageCropField, ImageRatioField
 
@@ -93,10 +94,11 @@ class RatingResult(models.Model):
     """
     Рейтинг — суммы баллов
     """
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name=_('Пользователь')
+        verbose_name=_('Пользователь'),
+        primary_key=True
     )
 
     value = models.IntegerField(
@@ -265,3 +267,20 @@ class Experience(AccountBase):
 
     def __str__(self):
         return self.name
+
+
+def post_save_rating_receiver(sender, instance, *args, **kwargs):
+    """
+    Добавление или удаление баллов рейтинга. Считаем суммы баллов и кешируем в account_ratingresult
+    """
+    cursor = connection.cursor()
+    cursor.execute("""
+      REPLACE account_ratingresult
+        (user_id, value)
+        VALUES (%d, IFNULL((SELECT SUM(value) FROM account_rating WHERE user_id = %d), 0))
+    """ % (instance.user_id, instance.user_id, ))
+
+
+post_save.connect(post_save_rating_receiver, sender=Rating)
+post_delete.connect(post_save_rating_receiver, sender=Rating)
+
