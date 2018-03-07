@@ -270,6 +270,7 @@ class ConsultState(models.Model):
     """
     key = models.CharField(_('Название на латинице'), max_length=24)
     state = models.CharField(_('Название состояния'), max_length=24)
+    description = models.TextField(_('Описание'), blank=True)
 
     class Meta:
         verbose_name = _('Платные консультации: таблица состояний')

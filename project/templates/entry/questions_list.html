@@ -14,19 +14,13 @@
         {# Хедер страницы вопроса #}
         {% include 'front/generic/header_question.html' with title=rubrics.0.call_to_action %}
 
-        {# Хлебные крошки #}
-        <div class="mt-4">
-            <div class="row">
-
-            </div>
-        </div>
-
         {# Содержание страницы вопроса #}
         <div class="question-page-content mt-2">
 
             {# Основная часть — заголовок темы, тексты #}
             <div class="row">
 
+                {# Хлебные крошки #}
                 <nav aria-label="breadcrumb" class="col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -43,7 +37,6 @@
                         {% else %}
                             <li class="breadcrumb-item active">Консультации юриста</li>
                         {% endif %}
-
                     </ol>
                 </nav>
 

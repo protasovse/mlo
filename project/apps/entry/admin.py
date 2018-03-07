@@ -97,7 +97,7 @@ class ConsultAdmin(admin.ModelAdmin):
     """
     Админка для модели Consult.
     """
-    list_display = ('question', 'pk', 'cost', 'expert', 'state',)
+    list_display = ('question_id', 'pk', 'cost', 'expert_id', 'state',)
     fieldsets = (
         (_('Content'), {
             'fields': ('question', 'cost', 'expert', 'state')}),
