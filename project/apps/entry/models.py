@@ -120,8 +120,13 @@ class Likes(models.Model):
 
     class Meta:
         unique_together = ('entry', 'user')
-        verbose_name = _('Отметка «Полезно»')
-        verbose_name_plural = _('Отметки «Полезно»')
+        ordering = ('-date',)
+        verbose_name = _('Отзыв')
+        verbose_name_plural = _('Отзывы')
+
+    @property
+    def title_for_admin(self):
+        return "Вопрос: %d" % (self.entry.answer.on_question_id)
 
     def __str__(self):
         return "%d: %s (%d)" % (self.entry.pk, self.user.get_full_name, self.value)
@@ -267,8 +272,8 @@ class ConsultState(models.Model):
     state = models.CharField(_('Название состояния'), max_length=24)
 
     class Meta:
-        verbose_name = _('Состояние платной консультации')
-        verbose_name_plural = _('Состояния платных консультаций')
+        verbose_name = _('Платные консультации: таблица состояний')
+        verbose_name_plural = _('Платные консультации: таблица состояний')
 
     def __str__(self):
         return self.state
@@ -371,8 +376,8 @@ class ConsultStateLog(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Состояние')
-        verbose_name_plural = _('Состояния')
+        verbose_name = _('Платные консультации: журнал состояний')
+        verbose_name_plural = _('Платные консультации: журнал состояний')
 
     def __str__(self):
         return '%s (%s)' % (self.consult_state, self.date)
@@ -418,6 +423,15 @@ def post_save_like_receiver(sender, instance, *args, **kwargs):
       WHERE id = %s LIMIT 1
     """, [instance.entry.pk, instance.entry.pk])
 
-
 post_save.connect(post_save_like_receiver, sender=Likes)
 post_delete.connect(post_save_like_receiver, sender=Likes)
+
+
+def add_to_consult_state_log_receiver(sender, instance, *args, **kwargs):
+    """
+    Добавляем запись в журнал состояний при изменении состояния консультации
+    """
+    c = ConsultStateLog.objects.create(consult=instance, consult_state=instance.state)
+    c.save()
+
+post_save.connect(add_to_consult_state_log_receiver, sender=Consult)
