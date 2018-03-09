@@ -1,0 +1,115 @@
+<div id="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ask_title"
+                           placeholder="Суть вопроса"/>
+                    <small>Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?».</small>
+                </div>
+
+                <div class="form-group mt-4">
+                    <textarea class="form-control" id="ask_content"
+                              placeholder="Детали вопроса" rows="7"></textarea>
+                    <small>Опишите в подробностях свой вопрос, чтобы получить более точный ответ.</small>
+                </div>
+
+                <div class="form-group row mt-4">
+                    <label for="ask_rubric" class="col-form-label">Рубрика</label>
+                    <div class="col-sm-8">
+                        <v-select
+                                multiple
+                                :options="options"
+                                @search="onSearch"
+                                v-on:search:blur="optionsInit"
+                                id="ask_rubric"
+                                label="name"
+                                v-model="rubric"></v-select>
+                        <small>Выберите отрасль права</small>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group row mt-4">
+                    <label for="ask_file" class="col-form-label">Прикрепить файлы</label>
+                    <div class="col-sm-8">
+
+                        <file-upload
+                            :post-action="post_action"
+                            class="file-input btn btn-sm btn-outline-primary"
+                            extensions="gif,jpg,jpeg,png,webp,pdf"
+                            accept="image/png,image/gif,image/jpeg,image/webp"
+                            :multiple="true"
+                            :size="1024 * 1024 * 100"
+                            v-model="files"
+                            @input-filter="inputFilter"
+                            @input-file="inputFile"
+                            ref="upload"><span class="icon-folder mr-2"></span> Обзор
+                        </file-upload>
+
+
+                        <div v-for="(file, index) in files"  class="file-loader" :data-filename="file.name">
+                             <i class="bar" :id="file.id"><i style="width:100%;"></i></i>
+                        </div>
+
+                    </div>
+                </div>
+
+                <h3>Тип консультации</h3>
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div class="pr-4">
+                                <h5>Развёрнутая письменная консультация</h5>
+                                <p class="text-muted">Письменная юридическая консультация с ссылками на
+                                    законодательство и алгоритмом
+                                    действия. Найдём самое выгодное для Вас решение.</p>
+                            </div>
+                            <div>800₽</div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <div class="pr-4">
+                                <h5>Бесплатная консультация</h5>
+                                <p class="text-muted">Нет гарантии ответа. Если вопрос подразумевает платные
+                                    услуги,
+                                    то юрист может выставить счёт, и оказать их после оплаты этого счёта.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div v-if="is_authorized" id="user_data">
+                    <h3>Личные данные</h3>
+                    <div class="form-group row">
+                        <label for="ask_email" class="col-form-label required">Электронный ящик</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="ask_email" placeholder="Электронный ящик">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ask_name" class="col-form-label required">Ваше имя</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ask_phone" class="col-form-label required">Телефон</label>
+                        <div class="col-sm-8">
+                            <input type="tel" class="form-control" id="ask_phone" placeholder="Номер телефона">
+                            <small>Для уточнения данных.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" @click="save" @click.prevent="$refs.upload.active = true" class="btn btn-primary mt-4" style="float: right;" :disabled=success>
+                    <span v-if="loading">Загрузка...</span>
+                    <span v-else-if="success">Вопрос задан</span>
+                    <span v-else>Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></span>
+                </button>
+
+</div>

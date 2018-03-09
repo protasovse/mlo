@@ -1,24 +1,20 @@
-from rest_framework import generics
-
+from apps.svem_system.views.api import ApiView
 from apps.rubric.models import Rubric
-from apps.rubric.serializers import RubricListSerializer, RubricDetailSerializer
 
 
-class RubricList(generics.ListCreateAPIView):
+class Rubrics(ApiView):
+    def get(self, request):
+        filters = {}
+        if 'keyword' in request.GET.keys():
+            filters['name__icontains'] = request.GET.get('keyword')
+        if 'level' in request.GET.keys():
+            filters['level'] = request.GET.get('level')
 
-    queryset = Rubric.objects.all()
-    serializer_class = RubricListSerializer
-
-
-class RubricDetail(generics.RetrieveUpdateDestroyAPIView):
-
-    queryset = Rubric.objects.all()
-    serializer_class = RubricDetailSerializer
-
-
-class RubricChildrenOfList(generics.ListCreateAPIView):
-
-    serializer_class = RubricListSerializer
-
-    def get_queryset(self):
-        return Rubric.objects.get(pk=self.kwargs['pk']).get_children()
+        return [
+            {
+                'id': x['id'],
+                'name': x['name'],
+                'slug': x['slug']
+            }
+            for x in Rubric.objects.filter(**filters).order_by('id').values()
+        ]

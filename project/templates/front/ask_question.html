@@ -2,12 +2,14 @@
 {% load static %}
 
 {% block content %}
+
     <section class="blue">
         <div class="win-round rec" style="width: 770px;">
 
             <h2 class="logo mb-3">Консультация юриста</h2>
             <p class="lead mb-4">Задайте вопрос, что бы начать профессиональную юридическую консультацию
                 от топовых юристов Рунета.</p>
+            <router-view></router-view>
 
             <div id="form">
 
@@ -34,10 +36,12 @@
                 <div class="form-group row mt-4">
                     <label for="ask_file" class="col-form-label">Прикрепить файлы</label>
                     <div class="col-sm-8">
+
                         <div class="file-input btn btn-sm btn-outline-primary">
                             <input type="file" id="ask_file" multiple />
                             <span class="icon-folder mr-2"></span> Обзор
                         </div>
+
                         <div class="file-loader" data-filename="Договор.docx">
                             <i class="bar"><i style="width:35%;"></i></i>
                             <a href="#" class="close"><i class="icon-cancel"></i></a>
@@ -48,6 +52,7 @@
                             <i class="bar"><i style="width:4%;"></i></i>
                             <a href="#" class="close"><i class="icon-cancel"></i></a>
                         </div>
+
                     </div>
                 </div>
 

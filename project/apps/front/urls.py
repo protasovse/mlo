@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^$', Mainpage.as_view(), name='mainpage'),
 
     path('юрист/<int:id>/', LawyerPage.as_view(), name='lawyer_page'),
-    path('задать-вопрос/', AskQuestion.as_view(), name='ask_question')
+    path('задать-вопрос/', AskQuestion.as_view(), name='ask_question'),
 ]

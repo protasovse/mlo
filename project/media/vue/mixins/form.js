@@ -144,6 +144,14 @@ export default {
                 r => this.process_error(r, fn_error)
             ).catch(e => this.set_form_error(e.message))
         },
+        put(url, params, fn, fn_error=undefined) {
+            this.start_loading();
+            this.clear_error_field();
+            this.$http.put(url, {params: params}, {emulateJSON:true}).then(
+                r => this.process_success(r, fn),
+                r => this.process_error(r, fn_error)
+            ).catch(e => this.set_form_error(e.message))
+        },
         get_saved_field(field)
         {
             let f_arr = this.$store.state.values;
