@@ -14,24 +14,44 @@
                 <div class="form-group row mt-4">
                     <label for="ask_rubric" class="col-form-label">Рубрика</label>
                     <div class="col-sm-8">
-                        <v-select :options="options" @search="onSearch" id="ask_rubric"></v-select>
+                        <v-select
+                                multiple
+                                :options="options"
+                                @search="onSearch"
+                                v-on:search:blur="optionsInit"
+                                id="ask_rubric"
+                                label="name"
+                                v-model="rubric"></v-select>
                         <small>Выберите отрасль права</small>
                     </div>
                 </div>
 
+
+
+
+
                 <div class="form-group row mt-4">
                     <label for="ask_file" class="col-form-label">Прикрепить файлы</label>
                     <div class="col-sm-8">
-                        <div class="file-input btn btn-sm btn-outline-primary">
-                            <input type="file" id="ask_file" multiple />
-                            <span class="icon-folder mr-2"></span> Обзор
-                        </div>
-                        <div class="file-loader" data-filename="Договор.docx">
-                            <i class="bar"><i style="width:35%;"></i></i></div>
 
-                        <div class="file-loader"
-                             data-filename="Протокол заседания арбитражного суда Кировского района.docx">
-                            <i class="bar"><i style="width:4%;"></i></i></div>
+                        <file-upload
+                            :post-action="post_action"
+                            class="file-input btn btn-sm btn-outline-primary"
+                            extensions="gif,jpg,jpeg,png,webp,pdf"
+                            accept="image/png,image/gif,image/jpeg,image/webp"
+                            :multiple="true"
+                            :size="1024 * 1024 * 100"
+                            v-model="files"
+                            @input-filter="inputFilter"
+                            @input-file="inputFile"
+                            ref="upload"><span class="icon-folder mr-2"></span> Обзор
+                        </file-upload>
+
+
+                        <div v-for="(file, index) in files"  class="file-loader" :data-filename="file.name">
+                             <i class="bar" :id="file.id"><i style="width:100%;"></i></i>
+                        </div>
+
                     </div>
                 </div>
 
@@ -61,30 +81,35 @@
                     </a>
                 </div>
 
-                <h3>Личные данные</h3>
+                <div v-if="is_authorized" id="user_data">
+                    <h3>Личные данные</h3>
+                    <div class="form-group row">
+                        <label for="ask_email" class="col-form-label required">Электронный ящик</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="ask_email" placeholder="Электронный ящик">
+                        </div>
+                    </div>
 
-                <div class="form-group row">
-                    <label for="ask_email" class="col-form-label required">Электронный ящик</label>
-                    <div class="col-sm-8">
-                        <input type="email" class="form-control" id="ask_email" placeholder="Электронный ящик">
+                    <div class="form-group row">
+                        <label for="ask_name" class="col-form-label required">Ваше имя</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ask_phone" class="col-form-label required">Телефон</label>
+                        <div class="col-sm-8">
+                            <input type="tel" class="form-control" id="ask_phone" placeholder="Номер телефона">
+                            <small>Для уточнения данных.</small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="ask_name" class="col-form-label required">Ваше имя</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="ask_name" placeholder="Ваше имя">
-                    </div>
-                </div>
+                <button type="submit" @click="save" @click.prevent="$refs.upload.active = true" class="btn btn-primary mt-4" style="float: right;" :disabled=success>
+                    <span v-if="loading">Загрузка...</span>
+                    <span v-else-if="success">Вопрос задан</span>
+                    <span v-else>Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></span>
+                </button>
 
-                <div class="form-group row">
-                    <label for="ask_phone" class="col-form-label required">Телефон</label>
-                    <div class="col-sm-8">
-                        <input type="tel" class="form-control" id="ask_phone" placeholder="Номер телефона">
-                        <small>Для уточнения данных.</small>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary mt-4" style="float: right;" disabled>
-                    Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></button>
 </div>
