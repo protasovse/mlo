@@ -8,20 +8,31 @@
     content: attr(data-filename);
     white-space: nowrap;
     position: absolute;
+    display: block;
+    margin-right: 2rem;
     z-index: 0;
   }
 
   &:after {
-    font-family: icomoon;
-    content: '\e91b';
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    width: line(7);
+    height: 1.5rem;
+    display: block;
+    text-align: right;
+    background: linear-gradient(to right, rgba(255, 255, 255, .2), white);
+  }
+
+  .close {
+    font-size: 1rem;
     color: $gray-500;
     position: absolute;
-    right: 0; top: 0;
-    cursor: pointer;
-    z-index: 1;
-    width: line(5);
-    text-align: right;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+    right: 0;
+    top: 0;
+    z-index: 2;
   }
 
   .bar {

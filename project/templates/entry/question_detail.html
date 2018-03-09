@@ -85,7 +85,7 @@
                                     <br>
 
                                     <p class="rubrics">{% for rubric in question.rubrics.all %}
-                                        <span class="rubric-item"><a href="#">{{ rubric }}</a></span>
+                                        <span class="rubric-item"><a href="{{ rubric.get_absolute_url }}">{{ rubric }}</a></span>
                                     {% endfor %}</p>
                                 {% endif %}
 

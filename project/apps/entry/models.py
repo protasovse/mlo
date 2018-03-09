@@ -136,7 +136,7 @@ class Review(models.Model):
     """
     Отзывы и комментарии к лайкам
     """
-    like = models.OneToOneField(Likes, on_delete=models.CASCADE)
+    like = models.OneToOneField(Likes, on_delete=models.CASCADE, related_name='review')
     review = models.TextField(_('Текст отзыва'))
 
     class Meta:
@@ -223,6 +223,13 @@ class Answer(Entry):
         if self.parent_id is not None:
             return False
         return True
+
+    @property
+    def get_review(self):
+        """
+        Возвращает отзыв клиента, если такой есть.
+        """
+        return Review.objects.filter(like__entry=self, like__user=self.on_question.author).first()
 
     def save(self, *args, **kwargs):
         if not hasattr(self, 'on_question'):

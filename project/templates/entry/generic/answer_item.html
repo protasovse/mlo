@@ -52,8 +52,6 @@
             <span class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
                 {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</span>
             <br><span class="mt-2">№ {{ item.pk }}</span>
-            <br><span class="mt-2">on_question: {{ item.on_question.pk }}</span>
-            <br><span class="mt-2">parent: {{ item.parent.pk }}</span>
             <br>
         </div>
 
@@ -66,6 +64,7 @@
             {% endif %}
 
             <div class="text" itemprop="text">{{ item.html_content|safe }}</div>
+
         </div>
 
     </div>
@@ -81,9 +80,15 @@
                 <a href="#"><!--i class="icon-pencil"></i-->Ответить</a>
             </div>
 
-            <div class="answer-footer-like">
+            <div class="answer-footer-like dropdown">
                 {% if item.author.role > 1 %}
-                    <span class="answer-footer-like-sign">Это полезно?</span>
+                    <span class="answer-footer-like-sign">
+                        {% with item.get_review as review %}{% if review %}
+                            <a href="#">Читать отзыв клиента</a>
+                        {% else %}
+                            Ответ полезен?
+                        {% endif %}{% endwith %}
+                    </span>
                     <div class="answer-footer-like-block">
                         <i class="icon-dislike"></i>
                         <span class="{% if item.like_count < 0 %}dislike{% elif item.like_count > 0 %}like{% endif %}">
@@ -93,6 +98,42 @@
                 {% else %}
                     <span class="answer-footer-like-sign">Дополнительный вопрос</span>
                 {% endif %}
+
+                <div class="dropdown-menu" style="display: block; width: 470px;">
+                    {% if item.get_review %}
+                        <div class="px-4 py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-3" style="width:80px; height:80px; border-radius: 50%; background-color: #fc6947;text-align: center;">
+                                    <i class="icon-dislike" style="color:white;font-size:40px;line-height:80px;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">{{ item.get_review.like.user }}</h5>
+                                    <div class="subtitle">{{ item.get_review.like.date }}</div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <p>{{ item.get_review }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <form class="px-4 py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-3" style="width:80px; height:80px; border-radius: 50%; background-color: #fc6947;text-align: center;">
+                                    <i class="icon-dislike" style="color:white;font-size:40px;line-height:80px;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Оставьте свой отзыв о работе эксперта:</h5>
+                                    <div class="subtitle">{{ item.get_review.like.date }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea type="email" rows="7" class="form-control"
+                                          placeholder="Мой отзыв…"></textarea>
+                            </div>
+                            <button type="submit" class="col-12 btn btn-primary">Написать</button>
+                        </form>
+                    {% endif %}
+                </div>
             </div>
 
         </div>

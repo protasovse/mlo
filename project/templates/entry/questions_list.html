@@ -1,10 +1,18 @@
 {% extends 'front/base.html' %}
 
 {% block title %}
-    {% with rubrics.last as r %}
-        {% if r.title or r.h1 %}{{ r.title|default:r.h1 }}{% else %} Консультации юристов по теме «{{ r.name }}»
-        {% endif %} на сайте Мойюрист.онлайн
-    {% endwith %}
+    {% if rubrics.last %}
+        {% with rubrics.last as r %}
+            {% if r.title or r.h1 %}
+                {{ r.title|default:r.h1 }}
+            {% else %}
+                Консультации юристов по теме «{{ r.name }}»
+            {% endif %}
+            на сайте Мойюрист.онлайн
+        {% endwith %}
+    {% else %}
+        Консультации юристов и адвокатов на сайте Мойюрист.онлайн!
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -143,6 +151,7 @@
         </div>
 
         {# Рубрикатор #}
+        {% comment %}
         <section class="gray d-none d-sm-block">
             <div class="container">
                 <div class="row">
@@ -160,7 +169,7 @@
                 </div>
             </div>
         </section>
-
+        {% endcomment %}
 
     </div>
 
