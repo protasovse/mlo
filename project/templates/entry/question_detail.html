@@ -14,6 +14,15 @@
 
             <div class="row">
 
+                {# Хлебные крошки #}
+                <nav aria-label="breadcrumb" class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
+                        <li class="breadcrumb-item active">Вопрос №{{ question.pk }}</li>
+                    </ol>
+                </nav>
+
                 {# Основная часть — вопрос #}
                 <main>
 
@@ -109,7 +118,7 @@
                 {# Основная часть — ответы #}
                 <main>
                     {# Ответы #}
-                    {% if question.reply_count %}
+                    {% if answers.count %}
 
                         <div class="row">
                             <h3 class="answer-list-head">Ответы экспертов

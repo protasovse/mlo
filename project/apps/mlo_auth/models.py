@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth import get_user_model
+from phonenumber_field.modelfields import PhoneNumberField
+
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
 
 ROLES_CHOICES = (
@@ -58,6 +60,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     patronymic = models.CharField(_('Отчество'),
                                   max_length=32, blank=True)
+
+    phone = PhoneNumberField(blank=True, verbose_name=_('Телефон'))
 
     is_staff = models.BooleanField(_('Статус персонала'),
                                    default=False,

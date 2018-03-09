@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
 
-if 0 and DEBUG:
+if DEBUG:
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -62,12 +62,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_mptt_admin',
-    'rest_framework',
     'easy_thumbnails',
     'easy_select2',
     'django_select2',
+    'phonenumber_field',
     'image_cropping',
-    # 'vk_cities',
     'apps.mlo_auth',
     'apps.entry',
     'apps.rubric',

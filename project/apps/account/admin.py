@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
+from django.db import connection
 from image_cropping import ImageCroppingMixin
 
 from apps.account.models import Info, Case, Education, Experience, Contact, RatingTypes, Rating, RatingResult
-from apps.entry.models import Likes
 from apps.sxgeo.models import Cities
 
 
@@ -12,14 +13,38 @@ class CitiesAdmin(admin.ModelAdmin):
     list_display = ['full_name_ru']
 
 
+class CityListFilter(SimpleListFilter):
+    title = 'Город'
+    parameter_name = 'city'
+
+    def lookups(self, request, model_admin):
+        cursor = connection.cursor()
+        cursor.execute("""
+          SELECT sc.id, CONCAT(name_ru, ' (', count(sc.id), ')')
+          FROM account_info AS ai
+          LEFT JOIN sxgeo_cities AS sc ON (ai.city_id=sc.id)
+          GROUP BY sc.id
+          ORDER BY count(sc.id) DESC, sc.name_ru
+          """)
+
+        return cursor.fetchall()
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(city_id=self.value())
+        else:
+            queryset
+
+
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
     fieldsets = (
-        (None, {'fields': ('user', 'city', 'birth_date', 'sex', )}),
-        ('Текст', {'fields': ('status', 'signature', 'about', )}),
+        (None, {'fields': ('user', 'city', 'birth_date', 'sex',)}),
+        ('Текст', {'fields': ('status', 'signature', 'about',)}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
-    search_fields = ['user__last_name']
+    list_filter = (CityListFilter, )
+    search_fields = ['user__last_name', 'user__id']
     autocomplete_fields = ['city']
     raw_id_fields = ['user']
 
@@ -56,17 +81,12 @@ class RatingTypesAdmin(admin.ModelAdmin):
 
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
-    pass
+    raw_id_fields = ('user',)
 
 
 @admin.register(RatingResult)
 class RatingResultAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user']
-
-
-@admin.register(Likes)
-class RatingAdmin(admin.ModelAdmin):
-    pass
 
 
 admin.site.register(Info, InfoAdmin)

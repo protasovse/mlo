@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog
+from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog, Likes, Review, \
+    Entry
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -48,6 +50,10 @@ class OfferInLine(admin.StackedInline):
     # classes = ('collapse', 'collapse-closed')
 
 
+class ReviewInLine(admin.StackedInline):
+    model = Review
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     """
@@ -68,21 +74,6 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = (AnswersForQuestionInLine, FilesInLine,)
 
 
-@admin.register(Consult)
-class ConsultAdmin(admin.ModelAdmin):
-    """
-    Админка для модели Consult.
-    """
-    fieldsets = (
-        (_('Content'), {
-            'fields': ('question', 'cost', 'expert', 'state')}),
-        )
-    autocomplete_fields = ['expert']
-    raw_id_fields = ['question']
-    list_filter = ['state']
-    # inlines = (AnswersForQuestionInLine, FilesInLine,)
-
-
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
@@ -101,6 +92,59 @@ class AnswerAdmin(admin.ModelAdmin):
         return qs.filter(parent=None)
 
 
+@admin.register(Consult)
+class ConsultAdmin(admin.ModelAdmin):
+    """
+    Админка для модели Consult.
+    """
+    list_display = ('question_id', 'pk', 'cost', 'expert_id', 'state',)
+    fieldsets = (
+        (_('Content'), {
+            'fields': ('question', 'cost', 'expert', 'state')}),
+        )
+    autocomplete_fields = ['expert']
+    raw_id_fields = ['question']
+    list_filter = ['state']
+    # inlines = (AnswersForQuestionInLine, FilesInLine,)
+
+
 @admin.register(ConsultState)
-class ConsultState(admin.ModelAdmin):
+class ConsultStateAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(ConsultStateLog)
+class ConsultStateLogAdmin(admin.ModelAdmin):
+    list_display = ('consult', 'date', 'consult_state',)
+    list_filter = ('consult_state',)
+
+
+class LikeWithReviewFilter(SimpleListFilter):
+    title = 'Отзывы'
+    parameter_name = 'with_review'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('true', _('С текстом отзыва')),
+            ('false', _('Без текста отзыва'))
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'true':
+            return queryset.exclude(review__review=None)
+        else:
+            queryset
+
+
+@admin.register(Likes)
+class LikesAdmin(admin.ModelAdmin):
+    list_display = ('date', 'entry_id', 'value', 'user', 'review', 'title_for_admin')
+    search_fields = ['entry__pk', 'user__last_name']
+    raw_id_fields = ['user', 'entry', ]
+    inlines = (ReviewInLine,)
+    list_filter = (LikeWithReviewFilter,)
+
+
+@admin.register(Entry)
+class EntryAdmin(admin.ModelAdmin):
+    raw_id_fields = ['author', ]

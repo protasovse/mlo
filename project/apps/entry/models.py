@@ -68,7 +68,7 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '№%d. %s (%d отв.)' % (self.id, self.content[:64], self.reply_count)
+        return "%d. %s " % (self.pk, self.content[:64])
 
     def __int__(self):
         return self.pk
@@ -108,18 +108,43 @@ class Likes(models.Model):
     """
     Лайки
     """
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes')
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes',
+                              verbose_name=_('Ответ'))
+
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Пользователь'),
+                             help_text=_('Пользователь, который поставил отметку'), on_delete=models.CASCADE)
+
+    date = models.DateTimeField(_('Дата'), default=timezone.now)
+
     value = models.SmallIntegerField(_('Балл'))
 
     class Meta:
         unique_together = ('entry', 'user')
-        verbose_name = _('Отметка «Полезно»')
-        verbose_name_plural = _('Отметки «Полезно»')
+        ordering = ('-date',)
+        verbose_name = _('Отзыв')
+        verbose_name_plural = _('Отзывы')
+
+    @property
+    def title_for_admin(self):
+        return "Вопрос: %d" % (self.entry.answer.on_question_id)
 
     def __str__(self):
-        return self.entry.__str__()
+        return "%d: %s (%d)" % (self.entry.pk, self.user.get_full_name, self.value)
+
+
+class Review(models.Model):
+    """
+    Отзывы и комментарии к лайкам
+    """
+    like = models.OneToOneField(Likes, on_delete=models.CASCADE)
+    review = models.TextField(_('Текст отзыва'))
+
+    class Meta:
+        verbose_name = _('Отзыв')
+        verbose_name_plural = _('Отзывы')
+
+    def __str__(self):
+        return self.review
 
 
 class Titled(models.Model):
@@ -245,10 +270,11 @@ class ConsultState(models.Model):
     """
     key = models.CharField(_('Название на латинице'), max_length=24)
     state = models.CharField(_('Название состояния'), max_length=24)
+    description = models.TextField(_('Описание'), blank=True)
 
     class Meta:
-        verbose_name = _('Состояние платной консультации')
-        verbose_name_plural = _('Состояния платных консультаций')
+        verbose_name = _('Платные консультации: таблица состояний')
+        verbose_name_plural = _('Платные консультации: таблица состояний')
 
     def __str__(self):
         return self.state
@@ -351,8 +377,8 @@ class ConsultStateLog(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Состояние')
-        verbose_name_plural = _('Состояния')
+        verbose_name = _('Платные консультации: журнал состояний')
+        verbose_name_plural = _('Платные консультации: журнал состояний')
 
     def __str__(self):
         return '%s (%s)' % (self.consult_state, self.date)
@@ -398,6 +424,15 @@ def post_save_like_receiver(sender, instance, *args, **kwargs):
       WHERE id = %s LIMIT 1
     """, [instance.entry.pk, instance.entry.pk])
 
-
 post_save.connect(post_save_like_receiver, sender=Likes)
 post_delete.connect(post_save_like_receiver, sender=Likes)
+
+
+def add_to_consult_state_log_receiver(sender, instance, *args, **kwargs):
+    """
+    Добавляем запись в журнал состояний при изменении состояния консультации
+    """
+    c = ConsultStateLog.objects.create(consult=instance, consult_state=instance.state)
+    c.save()
+
+post_save.connect(add_to_consult_state_log_receiver, sender=Consult)

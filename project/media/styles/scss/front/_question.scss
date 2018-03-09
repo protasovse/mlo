@@ -73,8 +73,7 @@ header.page {
 }
 
 .question-page-content {
-  @extend .container;
-  margin-top: line(3);
+  @extend .container, .mt-2;
 
   @include media-breakpoint-down(lg) {
     max-width: none;

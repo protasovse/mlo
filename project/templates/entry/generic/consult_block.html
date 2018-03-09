@@ -1,11 +1,15 @@
 {% load cropping %}
 <div class="lawyer-list">
     <h5 class="consult-state {{ item.state.key }}">{{ item.state }}</h5>
+    <p>{{ item.state.description }}</p>
     <p class="subtitle">Цена консультации</p>
     <p class="cost rub">{{ item.cost }}</p>
+
+    {% if item.state.key == 'inwork' or item.state.key == 'answered' or item.state.key == 'closed'  %}
     <p class="subtitle">Консультацию ведёт эксперт</p>
     <div class="consult-lawyer">
         <a class="pht" href="{% url 'lawyer_page' item.expert.pk  %}"><img src="{% cropped_thumbnail item.expert.info 'photo' %}" /></a>
         <h6><a href="{% url 'lawyer_page' item.expert.pk  %}">{{ item.expert }}</a></h6>
     </div>
+    {% endif %}
 </div>
