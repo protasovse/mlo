@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'easy_select2',
     'django_select2',
+    'django_mysql',
     'phonenumber_field',
     'image_cropping',
     'apps.mlo_auth',
@@ -75,7 +76,9 @@ INSTALLED_APPS = [
     'apps.svem_system',
     'apps.sxgeo',
     'apps.front',
+    'apps.question',
     'dbmail',
+    'debug_toolbar',
 ]
 
 SITE_ID = env('SITE_ID')
@@ -90,6 +93,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -168,4 +172,6 @@ FB_CLIENT_SECRET = 'ddd3cae70cb3abb564c704731d79bdb7'
 FB_REDIRECT_URL = 'http://127.0.0.1:8000/auth/fb'
 
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10*1024*1024;
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10*1024*1024
+
+INTERNAL_IPS = ['127.0.0.1']

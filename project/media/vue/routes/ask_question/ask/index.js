@@ -12,7 +12,14 @@ export default {
             base_options: [],
             files: [],
             id: 0,
-            is_authorized: false
+            is_authorized: false,
+            is_paid_question: false,
+            title: '',
+            content: '',
+            r_fields: ['title', 'content'],
+            email: '',
+            name: '',
+            phone:'',
         }
     },
     computed: {
@@ -29,8 +36,13 @@ export default {
         );
         this.$http.get('/api/user/check').then(r=>{
             this.is_authorized = r.data.success;
+            console.log(this.is_authorized);
+            if (!this.is_authorized) {
+                this.r_fields.push('email', 'phone', 'name');
+            }
         });
     },
+
     methods: {
         onSearch(search, loading) {
             this.$http.get('/api/rubric', {params: {'keyword':search}}).then(
@@ -39,13 +51,11 @@ export default {
                 },
             );
         },
-        optionsInit()
-        {
-            this.options = this.base_options;
-        },
-
+        optionsInit() {this.options = this.base_options;},
+        get_requires_fields() {return this.r_fields},
         save() {
             try {
+                this.form_validate([this.requires_fields]);
                 this.put('/api/question', {rubric: this.rubric}, () => {
                     for (let i = 0; i < this.$refs.upload.files.length; i++) {
                         this.$refs.upload.files[i].data = {id:3};
@@ -59,15 +69,9 @@ export default {
         },
         inputFilter(newFile, oldFile, prevent) {
           if (newFile && !oldFile) {
-            // Before adding a file
-            // 添加文件前
-            // Filter system files or hide files
-            // 过滤系统文件 和隐藏文件
             if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
               return prevent()
             }
-            // Filter php html js file
-            // 过滤 php html js 文件
             if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
               return prevent()
             }
@@ -75,15 +79,12 @@ export default {
         },
         inputFile(newFile, oldFile) {
           if (newFile && !oldFile) {
-            // add
             console.log('add', newFile)
           }
           if (newFile && oldFile) {
-            // update
             console.log('update', newFile)
           }
           if (!newFile && oldFile) {
-            // remove
             console.log('remove', oldFile)
           }
         },

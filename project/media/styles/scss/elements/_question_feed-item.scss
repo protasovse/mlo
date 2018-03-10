@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .question_feed-item {
   @extend .mb-5;
   border-radius: $border-radius-xl;
@@ -88,8 +90,6 @@
 }
 
 /*
-    Стиль добавляется с <article class="question_feed-item">
-    при фокусе на поле ввода под вопросом
  */
 .answering {
   .actions {

@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.db import connection
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import JsonResponse, QueryDict
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from apps.svem_system.exceptions import ApiPublicException, ApiException
@@ -30,6 +30,14 @@ class ApiView(View):
 
     def response(self, kwargs):
         raise ApiException('method "get_data_for_response" is not declare')
+
+    @classmethod
+    def get_put(cls, request):
+        """
+        :param request:
+        :return: QueryDict
+        """
+        return QueryDict(request.body)
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):

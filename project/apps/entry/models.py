@@ -5,15 +5,14 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, AnswersManager
+from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager
 from apps.rubric.models import Classified
 from config.settings import AUTH_USER_MODEL
+from django_mysql.models import EnumField
+
 
 CONSULT_COST = 800
 
-STATUS_CHOICES = ((DELETED, _('Удалённый')),
-                  (DRAFT, _('Черновик')),
-                  (PUBLISHED, _('Опубликован')))
 
 OFFER_NEW = '0'
 OFFER_VIEWED = '1'
@@ -48,9 +47,9 @@ class Entry(models.Model):
         editable=False
     )
 
-    status = models.IntegerField(
+    status = EnumField(
         _('Статус'), db_index=True,
-        choices=STATUS_CHOICES, default=PUBLISHED)
+        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
 
     like_count = models.IntegerField(
         _('Лайки'), db_index=True,
@@ -427,8 +426,8 @@ def post_save_like_receiver(sender, instance, *args, **kwargs):
     cursor = connection.cursor()
     cursor.execute("""
       UPDATE entry_entry SET entry_entry.like_count = 
-        (SELECT SUM(value) FROM entry_likes WHERE entry_id = %s)
-      WHERE id = %s LIMIT 1
+        (SELECT SUM(value) FROM entry_likes WHERE entry_id = '%s')
+      WHERE id = '%s' LIMIT 1
     """, [instance.entry.pk, instance.entry.pk])
 
 post_save.connect(post_save_like_receiver, sender=Likes)

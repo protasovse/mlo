@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-# from apps.entry.models import Likes
 
-DELETED = 0
-DRAFT = 1
-PUBLISHED = 2
+DELETED = 'deleted'
+BLOCKED = 'blocked'
+DRAFT = 'draft'
+PUBLISHED = 'public'
 
 
 def entries_published(queryset):

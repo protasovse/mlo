@@ -1,4 +1,5 @@
 from apps.svem_system.views.api import ApiView
+from apps.entry.models import Question
 from django.http import QueryDict
 
 
@@ -14,14 +15,15 @@ class Question(ApiView):
         return 'file {} uploaded'.format(files['file'].name)
 
     def put(self, request):
-        if request.content_type.startswith('multipart'):
-            put, files = request.parse_file_upload(request.META, request)
-            request.FILES.update(files)
-            request.PUT = put.dict()
-        else:
-            request.PUT = QueryDict(request.body)
-
-        print(request.PUT)
-
+        """
+        create a question
+        :param request:
+        :return:
+        """
+        params = self.get_put(request)
+        q = Question(
+            title=params['title'],
+            content=params['content'],
+        )
         return 'file uploaded'
 

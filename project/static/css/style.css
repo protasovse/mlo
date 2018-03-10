@@ -8445,8 +8445,6 @@ footer.main-footer {
       color: rgba(255, 255, 255, 0.4); }
 
 /*
-    Стиль добавляется с <article class="question_feed-item">
-    при фокусе на поле ввода под вопросом
  */
 .answering .actions {
   display: flex !important; }
