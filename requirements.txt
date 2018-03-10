@@ -8,11 +8,10 @@ django-environ==0.4.4
 django-mptt
 django-mptt-admin
 
-# Python markdown parser library
-# misaka==2.1.0
-
 # Mysql driver
 mysqlclient==1.3.12
+# enum
+git+git://github.com/adamchainz/django-mysql.git
 
 django-js-asset==1.0.0
 
@@ -28,7 +27,6 @@ django-image-cropping==1.1.0
 requests==2.18.4
 
 # Геолокация, города
-# git+git://github.com/pyvim/django-vk-cities.git
 # sxgeo
 git+git://github.com/idlesign/pysyge.git
 
@@ -40,3 +38,5 @@ git+git://github.com/protasovse/django-db-mailer.git
 
 # Телефонные номера
 django-phonenumber-field==2.0.0
+
+git+git://github.com/jazzband/django-debug-toolbar.git

@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
 
-if DEBUG:
+if 0 and DEBUG:
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'image_cropping',
     'apps.mlo_auth',
     'apps.entry',
+    'apps.review',
     'apps.rubric',
     'apps.account',
     'apps.svem_auth',

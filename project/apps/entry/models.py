@@ -102,7 +102,7 @@ class Files(models.Model):
     def __str__(self):
         return str(self.get_basename())
 
-
+'''
 class Likes(models.Model):
     """
     Лайки
@@ -144,6 +144,8 @@ class Review(models.Model):
 
     def __str__(self):
         return self.review
+
+'''
 
 
 class Titled(models.Model):
@@ -228,7 +230,8 @@ class Answer(Entry):
         """
         Возвращает отзыв клиента, если такой есть.
         """
-        return Review.objects.filter(like__entry=self, like__user=self.on_question.author).first()
+        return self.likes.filter(user=self.on_question.author).first()
+        # Review.objects.filter(like__entry=self, like__user=self.on_question.author).first()
 
     def save(self, *args, **kwargs):
         if not hasattr(self, 'on_question'):
@@ -417,21 +420,6 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
 pre_delete.connect(post_save_answer_receiver, sender=Answer)
-
-
-def post_save_like_receiver(sender, instance, *args, **kwargs):
-    """
-    Добавление или удаление лайка. Считаем суммы баллов и кешируем в entry.like_count
-    """
-    cursor = connection.cursor()
-    cursor.execute("""
-      UPDATE entry_entry SET entry_entry.like_count = 
-        (SELECT SUM(value) FROM entry_likes WHERE entry_id = '%s')
-      WHERE id = '%s' LIMIT 1
-    """, [instance.entry.pk, instance.entry.pk])
-
-post_save.connect(post_save_like_receiver, sender=Likes)
-post_delete.connect(post_save_like_receiver, sender=Likes)
 
 
 def add_to_consult_state_log_receiver(sender, instance, *args, **kwargs):
