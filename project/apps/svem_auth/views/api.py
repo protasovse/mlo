@@ -1,7 +1,6 @@
 from datetime import date
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib import messages
-from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 
 from apps.svem_auth.models import emails
@@ -25,23 +24,6 @@ MSG_ACCOUNT_NOT_ACTIVE = 'Учётная запись не активна. ' \
 MSG_USER_IS_ACTIVE = 'Активация аккаунта не требуется. Аккаунт уже активирован'
 
 
-class PasswordValidator:
-    message = MSG_PASSWORD_STRENGTH
-    strength_len = 6
-
-    def __init__(self, message=None, code=None, strength_len=None):
-        if message is not None:
-            self.message = message
-        if code is not None:
-            self.code = code
-        if strength_len is not None:
-            self.strength_len = strength_len
-
-    def __call__(self, value):
-        if len(value) < self.strength_len:
-            raise ValidationError(self.message, code=self.code)
-
-
 class AppUser(ApiView):
 
     def post(self, request):
@@ -51,12 +33,6 @@ class AppUser(ApiView):
         try:
             _email = request.POST.get('email')
             _password = request.POST.get('password')
-
-            validate_email = EmailValidator(MSG_EMAIL_NOT_VALID.format(_email), 'email')
-            validate_password = PasswordValidator(MSG_PASSWORD_STRENGTH, 'password')
-
-            validate_email(_email)
-            validate_password(_password)
             try:
                 get_user_model().objects.get(email=_email)
                 raise ApiPublicException(

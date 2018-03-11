@@ -1,3 +1,4 @@
+import os,sys
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.db import connection
@@ -82,6 +83,10 @@ class ApiView(View):
             if self.is_debug_mode(request):
                 response['exception'] = type(e).__name__
                 response['error'] = str(e)
+                exc_type, exc_obj, exc_tb = sys.exc_info()
+                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                response['fname'] = fname
+                response['fnatb_linenome'] = exc_tb.tb_lineno
         if self.is_debug_mode(request):
             response['queries'] = connection.queries
         return JsonResponse(response, status=request_status)

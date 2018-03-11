@@ -39,6 +39,7 @@
                     <div class="col-sm-8">
 
                         <file-upload
+
                             :post-action="post_action"
                             class="file-input btn btn-sm btn-outline-primary"
                             extensions="gif,jpg,jpeg,png,webp,pdf"
@@ -126,11 +127,10 @@
 
                 <button type="submit"
                         @click="save"
-                        @click.prevent="$refs.upload.active = true"
                         class="btn btn-primary mt-4"
                         style="float: right;"
-                        :disabled=success>
-                    <span v-if="loading">Загрузка...</span>
+                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
                     <span v-else-if="success">Вопрос задан</span>
                     <span v-else>Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></span>
                 </button>

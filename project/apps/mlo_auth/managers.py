@@ -1,9 +1,14 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.core.validators import EmailValidator
+from apps.svem_auth.models.users import PasswordValidator
 from django.utils.translation import ugettext_lazy as _
 
 CLIENT = 1
 LAWYER = 2
 # EDITOR = 3
+
+MSG_EMAIL_NOT_VALID = '«{}» — неверный адрес электронной почты'
+MSG_PASSWORD_STRENGTH = 'Пароль недостаточно сложный'
 
 
 class UserManager(BaseUserManager):
@@ -20,6 +25,13 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
+
+        validate_email = EmailValidator(MSG_EMAIL_NOT_VALID.format(email), 'email')
+        validate_password = PasswordValidator(MSG_PASSWORD_STRENGTH, 'password')
+
+        validate_email(email)
+        validate_password(password)
+
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_active', False)

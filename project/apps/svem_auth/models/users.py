@@ -3,6 +3,24 @@ import os
 from django.db import models
 from django.conf import settings
 from datetime import date
+from django.core.exceptions import ValidationError
+
+
+class PasswordValidator:
+    message = ''
+    strength_len = 6
+
+    def __init__(self, message=None, code=None, strength_len=None):
+        if message is not None:
+            self.message = message
+        if code is not None:
+            self.code = code
+        if strength_len is not None:
+            self.strength_len = strength_len
+
+    def __call__(self, value):
+        if len(value) < self.strength_len:
+            raise ValidationError(self.message, code=self.code)
 
 
 class UserHash(models.Model):

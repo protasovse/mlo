@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager
 from apps.rubric.models import Classified
+from apps.svem_system.exceptions import BackendPublicException
 from config.settings import AUTH_USER_MODEL
 from django_mysql.models import EnumField
 
@@ -133,6 +134,16 @@ class Question(Entry, Titled, Classified):
 
     def get_absolute_url(self):
         return reverse('questions:question-detail', kwargs={'pk': self.pk})
+
+    def upload_document(self, file):
+        """
+        :param file:
+        :return: Files
+        """
+        if not self.pk:
+            raise BackendPublicException('model not load')
+        return Files.objects.create(entry=self, file=file)
+
 
     def __str__(self):
         return '№%d. %s: (%s)' % (self.pk, self.title, self.get_status_display())
