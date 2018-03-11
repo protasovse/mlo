@@ -144,7 +144,6 @@ class Question(Entry, Titled, Classified):
             raise BackendPublicException('model not load')
         return Files.objects.create(entry=self, file=file)
 
-
     def __str__(self):
         return '№%d. %s: (%s)' % (self.pk, self.title, self.get_status_display())
 
