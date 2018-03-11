@@ -88,7 +88,7 @@ export default {
             });
             this.stop_loading();
         },
-        set_form_success(txt) {
+        set_form_success(txt='') {
             this.$store.commit('set_success', {
                 txt: txt
             });
@@ -147,7 +147,7 @@ export default {
         put(url, params, fn, fn_error=undefined) {
             this.start_loading();
             this.clear_error_field();
-            this.$http.put(url, {params: params}, {emulateJSON:true}).then(
+            this.$http.put(url, params, {emulateJSON:true}).then(
                 r => this.process_success(r, fn),
                 r => this.process_error(r, fn_error)
             ).catch(e => this.set_form_error(e.message))

@@ -12,6 +12,6 @@ urlpatterns = [
     path("user/resend", api.ReSend.as_view()),
     path("user", api.AppUser.as_view()),
     path('rubric', rubric_api.Rubrics.as_view()),
-    path('question', question_api.Question.as_view())
+    path('question', question_api.QuestionView.as_view())
 ]
 

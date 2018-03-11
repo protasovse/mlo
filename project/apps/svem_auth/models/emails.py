@@ -51,3 +51,7 @@ def send_forgot_email(user):
         user.email,
         ctx,
     )
+
+
+def send_confirm_question(qestion):
+    pass

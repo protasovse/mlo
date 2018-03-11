@@ -11,7 +11,6 @@ export default {
             options: [],
             base_options: [],
             files: [],
-            id: 0,
             is_authorized: false,
             is_paid_question: false,
             title: '',
@@ -23,9 +22,7 @@ export default {
         }
     },
     computed: {
-        post_action() {
-            return '/api/question/' + this.id
-        },
+        post_action() {return '/api/question'},
     },
     mounted() {
         this.$http.get('/api/rubric', {params: {'level':0}},).then(
@@ -56,11 +53,25 @@ export default {
         save() {
             try {
                 this.form_validate([this.requires_fields]);
-                this.put('/api/question', {rubric: this.rubric}, () => {
+                let data = {
+                    rubric: this.rubric.map(function (x) {return x['id']}),
+                    title: this.title,
+                    content: this.content,
+                    is_paid_question: +this.is_paid_question,
+                };
+                if (!this.is_authorized) {
+                    data = Object.assign(data,  {
+                        email: this.email,
+                        name: this.name,
+                        phone: this.phone
+                    });
+                }
+                this.put('/api/question', data, (r) => {
                     for (let i = 0; i < this.$refs.upload.files.length; i++) {
-                        this.$refs.upload.files[i].data = {id:3};
+                        this.$refs.upload.files[i].data = {id:r.data.id};
                     }
-                    this.$refs.upload.active = true
+                    this.$refs.upload.active = true;
+                    this.set_form_success();
                 });
 
             } catch (err) {
