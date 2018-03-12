@@ -39,13 +39,12 @@ class CityListFilter(SimpleListFilter):
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
     fieldsets = (
-        (None, {'fields': ('user', 'city', 'birth_date', 'sex',)}),
+        (None, {'fields': ('user', 'birth_date', 'sex',)}),
         ('Текст', {'fields': ('status', 'signature', 'about',)}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
     list_filter = (CityListFilter, )
     search_fields = ['user__last_name', 'user__id']
-    autocomplete_fields = ['city']
     raw_id_fields = ['user']
 
 

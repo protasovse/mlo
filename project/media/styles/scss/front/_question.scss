@@ -72,7 +72,8 @@ header.page {
   }
 }
 
-.question-page-content {
+.question-page {
+
   @extend .container, .mt-2;
 
   @include media-breakpoint-down(lg) {
@@ -125,9 +126,8 @@ aside {
 
 .entry {
 
-  h1 {
-    @extend .col, h2;
-    margin-bottom: line(2);
+  .question-head {
+    @extend .h2, .mb-4;
   }
 
   .content {

@@ -1,0 +1,35 @@
+<div class="dropdown-menu" style="display: block; width: 470px;">
+    {% if item.get_review %}
+        <div class="px-4 py-3">
+            <div class="d-flex align-items-center">
+                <div class="mr-3" style="width:80px; height:80px; border-radius: 50%; background-color: #fc6947;text-align: center;">
+                    <i class="icon-dislike" style="color:white;font-size:40px;line-height:80px;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">{{ item.get_review.like.user }}</h5>
+                    <div class="subtitle">{{ item.get_review.like.date }}</div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <p>{{ item.get_review }}</p>
+            </div>
+        </div>
+    {% else %}
+        <form class="px-4 py-3">
+            <div class="d-flex align-items-center">
+                <div class="mr-3"
+                     style="width:80px; height:80px; border-radius: 50%; background-color: #fc6947;text-align: center;">
+                    <i class="icon-dislike" style="color:white;font-size:40px;line-height:80px;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-1">Оставьте свой отзыв о работе эксперта:</h5>
+                    <div class="subtitle">{{ item.get_review.like.date }}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea type="email" rows="7" class="form-control" placeholder="Мой отзыв…"></textarea>
+            </div>
+            <button type="submit" class="col-12 btn btn-primary">Написать</button>
+        </form>
+    {% endif %}
+</div>

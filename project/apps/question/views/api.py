@@ -7,9 +7,8 @@ from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED, PUBLISHED
 
 
-
-
 class QuestionView(ApiView):
+
     def get(self, request):
         return 'get question'
 

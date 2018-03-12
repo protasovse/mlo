@@ -46,7 +46,7 @@ class MloUserAdmin(UserAdmin):
     list_filter = ('is_active', 'role',)
 
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'date_joined', 'phone',)}),
+        (None, {'fields': ('email', 'password', 'date_joined', 'phone', 'city', )}),
         (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff',)}),
 
@@ -58,7 +58,8 @@ class MloUserAdmin(UserAdmin):
             'fields': ('first_name', 'last_name', 'role', 'email', 'password1', 'password2'),
         }),
     )
-    search_fields = ('email', 'first_name', 'patronymic', 'last_name', 'id')
+    search_fields = ('email', 'first_name', 'patronymic', 'last_name', 'id', )
+    autocomplete_fields = ('city', )
     ordering = ('id',)
     filter_horizontal = ()
 

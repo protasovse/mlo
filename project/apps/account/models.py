@@ -133,9 +133,8 @@ class Info(models.Model):
     orig = ImageCropField(blank=True, verbose_name=_('Оригинал'),
                           upload_to='account/photo/%Y/%m/')
     photo = ImageRatioField('orig', '600x720', verbose_name=_('Фото профиля'))
-    pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
 
-    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
+    pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
 
     status = models.CharField(max_length=140, null=True, blank=True, verbose_name=_('Статус'))
 

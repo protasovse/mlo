@@ -4,115 +4,110 @@
 
 {% block content %}
 
+    {# Хедер страницы вопроса #}
+    {% include 'front/generic/header_question.html' %}
+
+    {# Содержание страницы вопроса #}
     <div class="question-page">
 
-        {# Хедер страницы вопроса #}
-        {% include 'front/generic/header_question.html' %}
+        {# Вопрос и правая колонка напротив вопроса  #}
+        <div class="row">
 
-        {# Содержание страницы вопроса #}
-        <div class="question-page-content">
+            {# Хлебные крошки #}
+            <nav aria-label="breadcrumb" class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
+                    <li class="breadcrumb-item active">Вопрос №{{ question.pk }}</li>
+                </ol>
+            </nav>
 
-            <div class="row">
+            {# Основная часть — вопрос #}
+            <main>
 
-                {# Хлебные крошки #}
-                <nav aria-label="breadcrumb" class="col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                        <li class="breadcrumb-item active">Вопрос №{{ question.pk }}</li>
-                    </ol>
-                </nav>
+                {# Вопрос #}
+                <article id="question-{{ question.pk }}" class="entry" itemscope itemtype="http://schema.org/Question">
 
-                {# Основная часть — вопрос #}
-                <main>
+                    {# Заголовок #}
+                    <h1 class="question-head" itemprop="name">{{ question.title }}</h1>
 
-                    {# Вопрос #}
-                    <article id="question-{{ question.pk }}" class="entry question" itemscope
-                             itemtype="http://schema.org/Question">
+                    {# Инфо, текст #}
+                    <div class="row">
 
-                        {# Заголовок #}
-                        <div class="row">
-                            <h1 itemprop="name">{{ question.title }}</h1>
+                        <div class="l-col">
+                            <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
+                                  itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time><br>
+                            <span>№ {{ question.pk }}</span><br>
+                            <span>{{ question.author.city.name }}</span>
                         </div>
 
-                        {# Инфо, текст #}
-                        <div class="row">
+                        <div class="r-col content">
 
-                            <div class="l-col">
-                                <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
-                                      itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
-                                <br>
-                                <span>№ {{ question.pk }}</span>
-                                <br>
-                                <span>{{ question.author.info.city.name }}</span>
-                            </div>
+                            {# Имя #}
+                            <h5 class="my-3 mb-lg-1 mt-lg-0"
+                                itemprop="name">{{ question.author.get_full_name }}</h5>
 
-                            <div class="r-col content">
+                            {# Текст #}
+                            <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
 
-                                {# Имя #}
-                                <h5 class="my-3 mb-lg-1 mt-lg-0"
-                                    itemprop="name">{{ question.author.get_full_name }}</h5>
-
-                                {# Текст #}
-                                <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
-
-                                {# Файлы #}
-                                {% if question.files.count %}
-                                    <div class="files brick">
-                                        {% for file in question.files.all %}
-                                            <div class="file-item"><a
-                                                    href="/storage/{{ file.file }}">{{ file.get_basename }}</a></div>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-
-                                <br class="my-4">
-
-                                <button type="button" class="btn btn-outline-primary btn-sm">
-                                    Ответить на вопрос <i class="ml-2 icon-pencil"></i></button>
-
-                                <div class="d-none">
-                                    {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
+                            {# Файлы #}
+                            {% if question.files.count %}
+                                <div class="files brick">
+                                    {% for file in question.files.all %}
+                                        <div class="file-item"><a
+                                                href="/storage/{{ file.file }}">{{ file.get_basename }}</a></div>
+                                    {% endfor %}
                                 </div>
+                            {% endif %}
 
-                                <hr class="mb-4 mt-5">
+                            <br class="my-4">
 
-                                {# Здесь ошибка VUE #}
-                                {% include 'front/generic/yandex-share.html' %}
+                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                Ответить на вопрос <i class="ml-2 icon-pencil"></i></button>
 
-                                {# Рубрики #}
-                                {% if question.rubrics.count %}
-                                    <br>
-
-                                    <p class="rubrics">{% for rubric in question.rubrics.all %}
-                                        <span class="rubric-item"><a href="{{ rubric.get_absolute_url }}">{{ rubric }}</a></span>
-                                    {% endfor %}</p>
-                                {% endif %}
-
+                            <div class="d-none">
+                                {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
                             </div>
+
+                            <hr class="mb-4 mt-5">
+
+                            {# Здесь ошибка VUE #}
+                            {% include 'front/generic/yandex-share.html' %}
+
+                            {# Рубрики #}
+                            {% if question.rubrics.count %}
+                                <br>
+
+                                <p class="rubrics">{% for rubric in question.rubrics.all %}
+                                    <span class="rubric-item"><a
+                                            href="{{ rubric.get_absolute_url }}">{{ rubric }}</a></span>
+                                {% endfor %}</p>
+                            {% endif %}
 
                         </div>
 
-                    </article>
+                    </div>
 
-                </main>
+                </article>
 
-                {# Боковая колонка 1  #}
-                <aside>
+            </main>
 
-                    {% if question.is_pay %}
-                        {% include 'entry/generic/consult_block.html' with item=question.consult.first %}
-                    {% endif %}
+            {# Боковая колонка 1  #}
+            <aside>
 
-                    {% if rating.count and not question.reply_count %}
-                        {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
-                    {% endif %}
+                {% if question.is_pay %}
+                    {% include 'entry/generic/consult_block.html' with item=question.consult.first %}
+                {% endif %}
 
-                </aside>
+                {% if rating.count and not question.reply_count %}
+                    {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
+                {% endif %}
 
-            </div>
+            </aside>
 
-            {% if question.reply_count %}
+        </div>
+
+        {% if question.reply_count %}
             <div class="row gradient">
 
                 {# Основная часть — ответы #}
@@ -145,9 +140,9 @@
                 </aside>
 
             </div>
-            {% endif %}
+        {% endif %}
 
-            {% comment %}<div class="row d-none">
+        {% comment %}<div class="row d-none">
 
                 <main>
 
@@ -177,7 +172,6 @@
 
             </div>{% endcomment %}
 
-        </div>
     </div>
 
 {% endblock %}

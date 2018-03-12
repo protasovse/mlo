@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
+from apps.sxgeo.models import Cities
 
 ROLES_CHOICES = (
     (CLIENT, _('Клиент')),
@@ -62,6 +63,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                                   max_length=32, blank=True)
 
     phone = PhoneNumberField(blank=True, verbose_name=_('Телефон'))
+
+    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
 
     is_staff = models.BooleanField(_('Статус персонала'),
                                    default=False,
