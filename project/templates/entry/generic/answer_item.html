@@ -4,34 +4,35 @@
 
     <hr class="my-4">
 
-    {# Заголовок #}
+    {# Заголовок ответа #}
     {% if item.author.role > 1 %}{# Если тип учётной записи выше, чем «клиент» #}
-        <header class="answer-header{% if push %} header-photo-small{% endif %} row">
 
-            <div class="l-col">
+        <header class="answer-header{% if push %} answer-header_photo-small{% endif %}">
+
+            <div class="question-page_l-col">
                 {% if item.author.info.orig %}{# Если есть фото #}
-                    <a class="answer-header-photo" href="{% url 'lawyer_page' item.author.pk %}">
+                    <a class="answer-header_photo" href="{% url 'lawyer_page' item.author.pk %}">
                         <img src="{% cropped_thumbnail item.author.info 'pic' %}" alt="{{ item.author }}"/>
                     </a>
                 {% endif %}
             </div>
 
             {# Имя, статус, медали #}
-            <div class="r-col">
+            <div class="question-page_r-col">
 
                 {# Имя автора ответа #}
-                <h5 class="author-name mb-1" itemprop="name">
+                <h5 class="mb-1" itemprop="name">
                     <a href="{% url 'lawyer_page' item.author.pk %}">{{ item.author }}</a>
                 </h5>
 
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
-                    <div class="normal mb-1 text-muted">{{ item.author.info.status|default:item.author.get_role_display }}</div>
+                    <div class="normal mb-1 text-muted d-none d-sm-block">{{ item.author.info.status|default:item.author.get_role_display }}</div>
                 {% endif %}
 
                 {# Медали #}
                 {% if not push %}
-                    <div class="answer-header-medal mb-2">
+                    <div class="answer-header_medal mb-2">
                         <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span class="v">635</span></span>
                         <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
                         <span class="item" title="Всего консультаций"><i class="icon-forum"></i><span
@@ -48,14 +49,14 @@
     {# Подзаголовок: дата, номер, текс #}
     <div class="row">
 
-        <div class="l-col">
-            <span class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
-                {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</span>
+        <div class="question-page_l-col">
+            <time class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
+                {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
             <br><span class="mt-2">№ {{ item.pk }}</span>
             <br>
         </div>
 
-        <div class="r-col content">
+        <div class="question-page_r-col content">
 
             {% if item.author.role == 1 %}
                 <h5 class="author-name mb-2" itemprop="name">
@@ -72,9 +73,9 @@
     {# Футтер: лайки/дизлайки #}
     <footer class="answer-footer row">
 
-        <div class="l-col">&nbsp;</div>
+        <div class="question-page_l-col">&nbsp;</div>
 
-        <div class="r-col d-flex align-items-center justify-content-between">
+        <div class="question-page_r-col d-flex align-items-center justify-content-between">
 
             <div class="answer-footer-action normal">
                 <a href="#">Ответить</a>
@@ -99,7 +100,7 @@
                     <span class="answer-footer-like-sign">Дополнительный вопрос</span>
                 {% endif %}
 
-                {% include 'entry/generic/review_add_read.html' with item=item.get_review %}
+                {#% include 'entry/generic/review_add_read.html' with item=item.get_review %#}
             </div>
 
         </div>

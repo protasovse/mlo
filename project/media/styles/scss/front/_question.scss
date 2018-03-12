@@ -97,27 +97,32 @@ header.page {
     }
   }
 
-  .l-col {
-    @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
-    color: $gray-500;
-    line-height: line(1);
-  }
-
-  .r-col {
-    @extend .col-12, .col-lg-9;
-  }
 }
 
-main {
-  @extend .col-12, .col-md-8, .col-lg-9, .mb-5;
+// Левая и правая колонки для вопроса, ответа
+.question-page_l-col {
+  @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
+  color: $gray-500;
+  line-height: line(1);
+}
+
+.question-page_r-col {
+  @extend .col-12, .col-lg-9;
+}
+
+.question-page_main-part {
+  @extend .col-12, .col-md-9, .col-lg-9, .mb-5;
   padding-right: line(2.25);
   @include media-breakpoint-down(lg) {
     padding-right: line(1);
   }
+  @include media-breakpoint-down(sm) {
+    padding-right: $grid-gutter-width / 2;
+  }
 }
 
-aside {
-  @extend .col-12, .col-md-4, .col-lg-3;
+.question-page_aside-part {
+  @extend .col-12, .col-md-3, .col-lg-3;
   padding-left: line(2.25);
   @include media-breakpoint-down(lg) {
     padding-left: line(1);
@@ -194,25 +199,24 @@ aside {
   }
 
   .answer-header {
-    @extend .mb-2;
-    display: flex;
-    flex-direction: row;
-    @include media-breakpoint-down(md) {
-      flex-wrap: nowrap;
-      .l-col {
-        flex: auto;
+    @extend .row, .align-items-center, .mb-2;
+    @include media-breakpoint-down(md){
+      .question-page_l-col {
+        position: absolute;
+        right: $grid-gutter-width/2;
+        width: auto;
       }
-      .r-col {
-        flex: 1 0.11 auto;
+      .question-page_r-col {
+        padding-right: line(4)+$grid-gutter-width*1.5;
       }
     }
   }
 
-  .answer-header-photo {
+  .answer-header_photo {
     display: inline-block;
     width: line(4);
     height: line(4);
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       width: line(2);
       height: line(2);
     }
@@ -223,12 +227,12 @@ aside {
     }
   }
 
-  .answer-header-medal {
+  .answer-header_medal {
     @extend .lawyer-medal;
   }
 
-  .header-photo-small {
-    .answer-header-photo, &.answer-header-photo {
+  .answer-header_photo-small {
+    .answer-header_photo, &.answer-header_photo {
       width: line(2);
       height: line(2);
     }
