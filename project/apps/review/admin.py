@@ -29,7 +29,7 @@ class LikeWithReviewFilter(SimpleListFilter):
 @admin.register(Likes)
 class LikesAdmin(admin.ModelAdmin):
     list_display = ('date', 'entry_id', 'value', 'user', 'review', 'title_for_admin')
-    search_fields = ['entry__pk', 'user__last_name']
+    search_fields = ['entry__pk', 'user__last_name', 'review__review', ]
     raw_id_fields = ['user', 'entry', ]
     inlines = (ReviewInLine,)
     list_filter = (LikeWithReviewFilter,)

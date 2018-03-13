@@ -1,7 +1,6 @@
 .dropdown-menu {
   border-radius: $border-radius-xl;
   box-shadow: $dropdown-box-shadow;
-  // overflow: hidden;
   margin-top: 10px;
   .dropdown-item {
     .small {
@@ -15,6 +14,7 @@
       }
     }
   }
+
   &:before {
     content: '';
     position: absolute;
@@ -27,4 +27,13 @@
       repeat: no-repeat;
     }
   }
+}
+
+.dropdown-menu-close {
+  position: absolute;
+  display: block;
+  top: line(.75);
+  right: line(.75);
+  color: $gray-500;
+  cursor: pointer;
 }

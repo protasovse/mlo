@@ -516,8 +516,7 @@ h1, .h1 {
   color: #bababa; }
 
 .normal, .mlo-navbar .mlo-navbar-title .tg, .mlo-navbar .mlo-navbar-title .g, .mlo-navbar .mlo-navbar-title .c, .mlo-navbar .actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page_l-col, .entry .rubrics, .entry .answer-footer-like .answer-footer-like-sign, .question-item .number, .question-item .answer .answer-header, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
-  font-size: 0.875rem;
-  line-height: 20px; }
+  font-size: 0.875rem; }
 
 .large, .mlo-navbar .mlo-navbar-title .t {
   font-size: 1.125rem;
@@ -2625,6 +2624,14 @@ tbody.collapse.show {
     background-image: url("/static/img/dropdown/rectangle.png");
     background-position: center;
     background-repeat: no-repeat; }
+
+.dropdown-menu-close {
+  position: absolute;
+  display: block;
+  top: 15px;
+  right: 15px;
+  color: #bababa;
+  cursor: pointer; }
 
 .btn-group,
 .btn-group-vertical {
@@ -8876,5 +8883,73 @@ header.page {
     font-size: 1rem;
     top: 0;
     left: 2.9rem; }
+
+.review-modal {
+  z-index: 1050;
+  width: 470px; }
+  @media (max-width: 767px) {
+    .review-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      margin: 0;
+      border: none;
+      overflow: scroll; }
+      .review-modal:before {
+        content: none; } }
+
+.review-modal-dialog {
+  padding: 20px 40px; }
+  @media (max-width: 767px) {
+    .review-modal-dialog {
+      padding: 10px 20px; } }
+
+.review-modal-header {
+  position: relative;
+  padding-left: 100px;
+  min-height: 80px;
+  display: flex;
+  align-items: center; }
+  .review-modal-header:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    font-family: icomoon;
+    color: white;
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+    line-height: 80px; }
+  .review-modal-header.dislike:before {
+    content: '\e92c';
+    background-color: #fc6947; }
+  .review-modal-header.like:before {
+    content: '\e92e';
+    background-color: #16c246; }
+
+.review-modal-title {
+  margin: 0; }
+
+.review-modal-text {
+  color: #878787;
+  margin-top: 40px;
+  max-height: 280px;
+  overflow-y: scroll; }
+  .review-modal-text p:last-of-type {
+    margin-bottom: 0; }
+  .review-modal-text button {
+    margin-top: 10px;
+    width: 100%; }
+  @media (max-width: 767px) {
+    .review-modal-text {
+      max-height: none; }
+      .review-modal-text textarea {
+        min-height: 60vh; } }
 
 /*# sourceMappingURL=style.css.map */

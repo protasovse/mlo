@@ -1,3 +1,4 @@
+import misaka
 from django.db import models, connection
 from django.db.models.signals import post_save, post_delete
 from django.utils import timezone
@@ -46,6 +47,13 @@ class Review(models.Model):
         verbose_name = _('Отзыв')
         verbose_name_plural = _('Отзывы')
 
+    @property
+    def html_review(self):
+        """
+        Возвращает текст отзыва форматированное в HTML.
+        """
+        return misaka.html(self.review)
+
     def __str__(self):
         return self.review
 
@@ -57,7 +65,7 @@ def post_save_like_receiver(sender, instance, *args, **kwargs):
     cursor = connection.cursor()
     cursor.execute("""
       UPDATE entry_entry SET entry_entry.like_count = 
-        (SELECT SUM(value) FROM entry_likes WHERE entry_id = '%s')
+        (SELECT SUM(value) FROM review_likes WHERE entry_id = '%s')
       WHERE id = '%s' LIMIT 1
     """, [instance.entry.pk, instance.entry.pk])
 

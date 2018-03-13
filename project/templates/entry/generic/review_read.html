@@ -1,0 +1,14 @@
+<div class="dropdown-menu review-modal" style="display: block;">
+    <span class="dropdown-menu-close icon-close"></span>
+    <div class="review-modal-dialog">
+        <div class="review-modal-header {% if item.value < 0 %}dis{% endif %}like">
+            <div class="review-modal-header-inner">
+                <h5 class="review-modal-title">{{ item.user }}</h5>
+                <div class="subtitle">{{ item.date }}</div>
+            </div>
+        </div>
+        <div class="review-modal-text">
+            {{ item.review.html_review|safe }}
+        </div>
+    </div>
+</div>

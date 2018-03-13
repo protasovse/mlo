@@ -1,0 +1,88 @@
+$review_modal_width: 470px;
+$review-modal-header-icon-width: line(4);
+
+.review-modal {
+  z-index: $zindex-modal;
+  width: $review_modal_width;
+
+  @include media-breakpoint-down(sm){
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    border: none;
+    overflow: scroll;
+    &:before {
+      content: none;
+    }
+  }
+}
+
+.review-modal-dialog {
+  padding: line(1) line(2);
+
+  @include media-breakpoint-down(sm){
+    padding: line(.5) line(1);
+  }
+}
+
+.review-modal-header {
+  position: relative;
+  padding-left: $review-modal-header-icon-width+line(1);
+  min-height: $review-modal-header-icon-width;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    font-family: icomoon;
+    color: white;
+    width: $review-modal-header-icon-width;
+    height: $review-modal-header-icon-width;
+    font-size: $review-modal-header-icon-width/2;
+    line-height: $review-modal-header-icon-width;
+  }
+
+  &.dislike:before {
+    content: '\e92c';
+    background-color: $red;
+  }
+
+  &.like:before {
+    content: '\e92e';
+    background-color: $green;
+  }
+
+}
+
+.review-modal-title {
+  margin: 0;
+}
+
+.review-modal-text {
+  color: $gray-600;
+  margin-top: line(2);
+  max-height: line(14);
+  overflow-y: scroll;
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+  button {
+    margin-top: line(.5);
+    width: 100%;
+  }
+  @include media-breakpoint-down(sm){
+    max-height: none;
+    textarea {
+      min-height: 60vh;
+    }
+  }
+}

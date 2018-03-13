@@ -81,13 +81,15 @@
                 <a href="#">Ответить</a>
             </div>
 
-            <div class="answer-footer-like dropdown">
+            <div class="answer-footer-like">
                 {% if item.author.role > 1 %}
-                    <span class="answer-footer-like-sign">
+                    <span class="answer-footer-like-sign dropdown">
                         {% with item.get_review as review %}{% if review %}
                             <a href="#">Читать отзыв клиента</a>
+                            {% include 'entry/generic/review_read.html' with item=item.get_review %}
                         {% else %}
                             Ответ полезен?
+                            {% include 'entry/generic/review_add.html' with item=item.get_review %}
                         {% endif %}{% endwith %}
                     </span>
                     <div class="answer-footer-like-block">
@@ -100,7 +102,6 @@
                     <span class="answer-footer-like-sign">Дополнительный вопрос</span>
                 {% endif %}
 
-                {#% include 'entry/generic/review_add_read.html' with item=item.get_review %#}
             </div>
 
         </div>
