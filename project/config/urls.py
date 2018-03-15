@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^вопрос/', include('apps.entry.urls.question', namespace='question')),
     url(r'^вопросы/', include('apps.entry.urls.questions', namespace='questions')),
     url(r'^личный-кабинет/вопросы/', include('apps.entry.urls.personal_questions', namespace='personal_questions')),
+    url(r'^личный-кабинет/', include('apps.account.urls', namespace='personal')),
 
     path('auth/', include('apps.svem_auth.urls')),
     path('api/', include('config.api_urls')),

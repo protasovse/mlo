@@ -1,0 +1,71 @@
+{% extends 'front/base.html' %}
+{% load cropping %}
+{% block content %}
+
+    <div class="container py-5">
+
+        <div class="py-5">
+            <h2>Редактирование профиля</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 order-md-1 mb-4">
+
+                <div class="card p-3 mb-3 mx-auto">
+                    {% if user.info.photo %}
+                        <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
+                    {% else %}
+                        <img src="/static/img/lyr/person_photo.png">
+                    {% endif %}
+
+                    <button type="button" class="btn btn-outline-primary mt-3 w-100">Изменить фото</button>
+
+                </div>
+
+                <div class="list-group mb-3">
+                    {% with request.get_full_path as curl %}
+
+                    {% url 'personal:edit' as  pe_url %}
+                    <a href="{{ pe_url }}"
+                       class="list-group-item list-group-item-action{% if pe_url in curl %} active{% endif %}">
+                        <h6 class="my-0">Основная информация</h6>
+                        <small>Регистрационные и личные данные. Сменить пароль, электронный ящик.</small>
+                    </a>
+
+                    {% url 'personal:edit_about' as pea_url %}
+                    <a href="{{ pea_url }}"
+                       class="list-group-item list-group-item-action{% if pea_url in curl %} active{% endif %}">
+                        <h6 class="my-0">Статус, подпись, о себе</h6>
+                    </a>
+
+                    <a href="/личный-кабинет/образование/" class="list-group-item list-group-item-action">
+                        <h6 class="my-0">Образование</h6>
+                        <small>Информация об образовании, приложите копии диплома, чтоьбы был
+                            проверенный статус
+                        </small>
+                    </a>
+
+                    <a href="/личный-кабинет/опыт-работы/" class="list-group-item list-group-item-action">
+                        <h6 class="my-0">Опыт работы</h6>
+                    </a>
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div class="col-md-8 order-md-2 pl-md-5">
+                <form class="needs-validation">
+
+                    {% block account_edit_form %}{% endblock %}
+
+                    <hr class="mb-4 mt-4">
+
+                    <button class="btn btn-outline-primary btn-block" type="submit">Сохранить данные</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -21,8 +21,8 @@ class CityListFilter(SimpleListFilter):
         cursor = connection.cursor()
         cursor.execute("""
           SELECT sc.id, CONCAT(name_ru, ' (', count(sc.id), ')')
-          FROM account_info AS ai
-          LEFT JOIN sxgeo_cities AS sc ON (ai.city_id=sc.id)
+          FROM mlo_auth_user AS mau
+          LEFT JOIN sxgeo_cities AS sc ON (mau.city_id=sc.id)
           GROUP BY sc.id
           ORDER BY count(sc.id) DESC, sc.name_ru
           """)
