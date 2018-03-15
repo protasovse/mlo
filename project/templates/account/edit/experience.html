@@ -1,0 +1,59 @@
+{% extends 'account/edit/base.html' %}
+{% load staticfiles %}
+
+{% block account_edit_title %}Опыт работы{% endblock %}
+
+{% block account_edit_form %}
+
+    {% for item in user.experience.all %}
+
+        <div class="card mb-3">
+
+            <div class="close"><i class="icon-close"></i></div>
+
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="name">Место работы</label>
+                    <input type="text" class="form-control" id="name" value="{{ item.name }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="position">Должность</label>
+                    <input type="text" class="form-control" id="position" value="{{ item.position }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description">Описание организации</label>
+                    <textarea class="form-control" id="description" rows="7">{{ item.description }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="site">Сайт</label>
+                    <input type="url" class="form-control" id="site" value="{{ item.site }}">
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="start">Дата начала работы</label>
+                        <input type="date" class="form-control" id="finish" value="{{ item.start|date:'Y-m-d' }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="finish">Дата окончания работы</label>
+                        <input type="date" class="form-control" id="finish" value="{{ item.finish|date:'Y-m-d' }}">
+                        <small class="text-muted">Не заполняйте, если это Ваше текущее место работы.</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="mt-4">
+        <a href="#">Добавить место работы</a>
+    </div>
+
+{% endblock %}

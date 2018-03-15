@@ -6,3 +6,14 @@
     column-count: 1;
   }
 }
+
+.card {
+  .close {
+    position: absolute;
+    right: $spacer/2;
+    top: $spacer/2;
+    font-size: 1rem;
+    cursor: pointer;
+    color: $gray-600;
+  }
+}

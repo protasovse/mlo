@@ -4598,6 +4598,14 @@ header.page .question-item .answer form .input-group-btn:not(:last-child) > .btn
   .card-columns {
     column-count: 1; } }
 
+.card .close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #878787; }
+
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;

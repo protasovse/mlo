@@ -1,22 +1,65 @@
 {% extends 'account/edit/base.html' %}
+{% load staticfiles %}
+
+{% block account_edit_title %}Образование{% endblock %}
 
 {% block account_edit_form %}
 
-    <h4 class="mb-3">Статус, подпись, о себе</h4>
+    {% for item in user.education.all %}
 
-    <div class="mb-3">
-        <label for="status">Статус</label>
-        <textarea class="form-control" id="status" rows="2">{{ user.info.status }}</textarea>
-    </div>
+        <div class="card mb-3">
 
-    <div class="mb-3">
-        <label for="about">О себе</label>
-        <textarea class="form-control" id="about" rows="7">{{ user.info.about }}</textarea>
-    </div>
+            <div class="close"><i class="icon-close"></i></div>
 
-    <div class="mb-3">
-        <label for="signature">Подпись под Вашими ответами</label>
-        <textarea class="form-control" id="signature" rows="2">{{ user.info.signature }}</textarea>
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label for="name">Название учебного заведения</label>
+                    <input type="text" class="form-control" id="name" value="{{ item.name }}">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="faculty">Факультет</label>
+                        <input type="text" class="form-control" id="faculty" value="{{ item.faculty }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="specialty">Специальность</label>
+                        <input type="text" class="form-control" id="specialty" value="{{ item.specialty }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="finish">Год выпуска</label>
+                        <input type="number" class="form-control" id="finish" value="{{ item.finish }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="file">Копия диплома</label><br>
+                        <label class="btn btn-sm btn-outline-primary file-uploads file-uploads-html5">
+                            <span class="icon-folder mr-2"></span> Обзор
+                            <input type="file" name="file" id="file">
+                        </label>
+                        {% if item.diplom %}
+                            <a class="ml-3" href="{{ item.diplom.url }}" target="_blank">Посмотреть</a>
+                            {% if item.checked %}
+                                <div class="text-success"><i class="icon-check-box"></i> Подтверждено</div>
+                            {% else %}
+                                <div class="text-danger"><i class="icon-cancel"></i> Ещё не подтвеждено</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="mt-4">
+        <a href="#">Добавить учебное заведение</a>
     </div>
 
 {% endblock %}

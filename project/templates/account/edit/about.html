@@ -1,22 +1,30 @@
 {% extends 'account/edit/base.html' %}
 
+{% block account_edit_title %}Статус, подпись, о себе{% endblock %}
+
 {% block account_edit_form %}
 
-    <h4 class="mb-3">Статус, подпись, о себе</h4>
+    <div class="card mb-3">
 
-    <div class="mb-3">
-        <label for="status">Статус</label>
-        <textarea class="form-control" id="status" rows="2">{{ user.info.status }}</textarea>
-    </div>
+        <div class="card-body">
 
-    <div class="mb-3">
-        <label for="about">О себе</label>
-        <textarea class="form-control" id="about" rows="7">{{ user.info.about }}</textarea>
-    </div>
+            <div class="mb-3">
+                <label for="status">Статус</label>
+                <textarea class="form-control" id="status" rows="2">{{ user.info.status }}</textarea>
+            </div>
 
-    <div class="mb-3">
-        <label for="signature">Подпись под Вашими ответами</label>
-        <textarea class="form-control" id="signature" rows="2">{{ user.info.signature }}</textarea>
+            <div class="mb-3">
+                <label for="about">О себе</label>
+                <textarea class="form-control" id="about" rows="7">{{ user.info.about }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="signature">Подпись под Вашими ответами</label>
+                <textarea class="form-control" id="signature" rows="2">{{ user.info.signature }}</textarea>
+            </div>
+
+        </div>
+
     </div>
 
 {% endblock %}

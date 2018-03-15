@@ -1,79 +1,80 @@
 {% extends 'account/edit/base.html' %}
 
+{% block account_edit_title %}Основная информация{% endblock %}
+
 {% block account_edit_form %}
 
-    <h4 class="mb-3">Основная информация</h4>
-
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="lastName">Фамилия</label>
-            <input type="text" class="form-control" id="lastName" value="{{ user.last_name }}" required>
-            <div class="invalid-feedback">
-                Valid last name is required.
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" class="form-control" id="lastName" value="{{ user.last_name }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Имя</label>
+                    <input type="text" class="form-control" id="firstName" value="{{ user.first_name }}"
+                           required>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="patronymic">Отчество</label>
+                    <input type="text" class="form-control" id="patronymic" value="{{ user.patronymic }}"
+                           required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Пол</label>
+                    <fieldset class="form-group mt-3">
+                        <div class="form-check form-check-inline form-check-label mr-5">
+                            <input class="form-check-input" type="radio" name="role" id="radio1" value="">
+                            <label for="radio1">Мужской</label>
+                        </div>
+                        <div class="form-check form-check-inline form-check-label">
+                            <input class="form-check-input" type="radio" name="role" id="radio2" value="">
+                            <label for="radio2">Женский</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="birthDate">Дата рождения</label>
+                    <input type="date" class="form-control" id="birthDate"
+                           value="{{ user.info.birth_date|date:"Y-m-d" }}">
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="firstName">Имя</label>
-            <input type="text" class="form-control" id="firstName" value="{{ user.first_name }}"
-                   required>
-        </div>
-        <div class="col-md-12 mb-3">
-            <label for="patronymic">Отчество</label>
-            <input type="text" class="form-control" id="patronymic" value="{{ user.patronymic }}"
-                   required>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label>Пол</label>
-            <fieldset class="form-group mt-3">
-                <div class="form-check form-check-inline form-check-label mr-5">
-                    <input class="form-check-input" type="radio" name="role" id="radio1" value="">
-                    <label for="radio1">Мужской</label>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="phone">Телефон</label>
+                    <input type="text" class="form-control" id="phone" value="{{ user.phone }}">
+                    <div class="small text-muted">Для уведомлений, чата. Нигде не публикуется.</div>
                 </div>
-                <div class="form-check form-check-inline form-check-label">
-                    <input class="form-check-input" type="radio" name="role" id="radio2" value="">
-                    <label for="radio2">Женский</label>
+                <div class="col-md-6 mb-3">
+                    <label for="city">Город</label>
+                    <select class="custom-select d-block w-100" id="city" required>
+                        <option>Введите город или выбирите из списка…</option>
+                        <option selected>{{ user.city }}</option>
+                    </select>
                 </div>
-            </fieldset>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="birthDate">Дата рождения</label>
-            <input type="text" class="form-control" id="birthDate"
-                   value="{{ user.info.birth_date|date:"d.m.Y" }}" required>
-        </div>
-    </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="phone">Телефон</label>
-            <input type="text" class="form-control" id="phone" value="{{ user.phone }}">
-            <div class="small text-muted">Для уведомлений, чата. Нигде не публикуется.</div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="city">Город</label>
-            <select class="custom-select d-block w-100" id="city" required>
-                <option>Введите город или выбирите из списка…</option>
-                <option selected>{{ user.city }}</option>
-            </select>
-        </div>
-    </div>
+            <hr class="mb-4">
 
-    <hr class="mb-4">
+            <div class="mb-3">
+                <label for="email">Электронный ящик</label>
+                <input type="email" class="form-control" id="email" value="{{ user.email }}">
+            </div>
 
-    <div class="mb-3">
-        <label for="email">Электронный ящик</label>
-        <input type="email" class="form-control" id="email" value="{{ user.email }}">
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="password1">Новый пароль</label>
-            <input type="password" class="form-control" id="password1">
-            <div class="small text-muted">Введите новый пароль.</div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="password2">Пароль (еще раз)</label>
-            <input type="password" class="form-control" id="password2">
-            <div class="small text-muted">Для подтверждения введите пароль ещё раз.</div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="password1">Новый пароль</label>
+                    <input type="password" class="form-control" id="password1">
+                    <div class="small text-muted">Введите новый пароль.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password2">Пароль (еще раз)</label>
+                    <input type="password" class="form-control" id="password2">
+                    <div class="small text-muted">Для подтверждения введите пароль ещё раз.</div>
+                </div>
+            </div>
         </div>
     </div>
 
