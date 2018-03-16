@@ -18,7 +18,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Главная</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                <li class="breadcrumb-item active">Вопрос №{{ question.pk }}</li>
+                <li class="breadcrumb-item active">Вопрос №{{ question.id }}</li>
             </ol>
         </nav>
 
@@ -26,7 +26,7 @@
         <div class="question-page_main-part">
 
             {# Вопрос #}
-            <article id="question-{{ question.pk }}" class="entry" itemscope itemtype="http://schema.org/Question">
+            <article id="question-{{ question.id }}" class="entry" itemscope itemtype="http://schema.org/Question">
 
                 {# Заголовок #}
                 <h1 class="question-head" itemprop="name">{{ question.title }}</h1>
@@ -38,7 +38,7 @@
                         <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
                               itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
                         <br>
-                        <span>№ {{ question.pk }}</span><br>
+                        <span>№ {{ question.id }}</span><br>
                         <span>{{ question.author.city.name }}</span>
                     </div>
 
@@ -52,7 +52,7 @@
                         <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
 
                         {# Файлы #}
-                        {% if question.files.count %}
+                        {% if question.files.all|length %}
                             <div class="files brick">
                                 {% for file in question.files.all %}
                                     <div class="file-item"><a
@@ -67,7 +67,7 @@
                             Ответить на вопрос <i class="ml-2 icon-pencil"></i></button>
 
                         <div class="d-none">
-                            {% include 'entry/generic/form_reply.html' with on_question=question.pk %}
+                            {% include 'entry/generic/form_reply.html' with on_question=question.id %}
                         </div>
 
                         <hr class="mb-4 mt-5">

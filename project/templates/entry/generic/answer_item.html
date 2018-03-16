@@ -11,7 +11,7 @@
 
             <div class="question-page_l-col">
                 {% if item.author.info.orig %}{# Если есть фото #}
-                    <a class="answer-header_photo" href="{% url 'lawyer_page' item.author.pk %}">
+                    <a class="answer-header_photo" href="{% url 'lawyer_page' item.author_id %}">
                         <img src="{% cropped_thumbnail item.author.info 'pic' %}" alt="{{ item.author }}"/>
                     </a>
                 {% endif %}
@@ -22,7 +22,7 @@
 
                 {# Имя автора ответа #}
                 <h5 class="mb-1" itemprop="name">
-                    <a href="{% url 'lawyer_page' item.author.pk %}">{{ item.author }}</a>
+                    <a href="{% url 'lawyer_page' item.author_id %}">{{ item.author }}</a>
                 </h5>
 
                 {# Статус, только для юристов #}
@@ -33,7 +33,7 @@
                 {# Медали #}
                 {% if not push %}
                     <div class="answer-header_medal mb-2">
-                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span class="v">635</span></span>
+                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span class="v">{{ item.author.ratingresult.value }}</span></span>
                         <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
                         <span class="item" title="Всего консультаций"><i class="icon-forum"></i><span
                                 class="v">57345</span></span>
@@ -52,7 +52,7 @@
         <div class="question-page_l-col">
             <time class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
                 {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
-            <br><span class="mt-2">№ {{ item.pk }}</span>
+            <br><span class="mt-2">№ {{ item.id }}</span>
             <br>
         </div>
 
@@ -86,10 +86,10 @@
                     <span class="answer-footer-like-sign dropdown">
                         {% with item.get_review as review %}{% if review %}
                             <a href="#">Читать отзыв клиента</a>
-                            {% include 'entry/generic/review_read.html' with item=item.get_review %}
+                            {% include 'entry/generic/review_read.html' with item=review %}
                         {% else %}
                             Ответ полезен?
-                            {% include 'entry/generic/review_add.html' with item=item.get_review %}
+                            {% include 'entry/generic/review_add.html' with item=review %}
                         {% endif %}{% endwith %}
                     </span>
                     <div class="answer-footer-like-block">
@@ -112,14 +112,14 @@
     <footer class="row d-none">
         <div class="l-col"></div>
         <div class="r-col">
-            {% include 'entry/generic/form_reply.html' with on_question=item.on_question.pk parent=item.pk %}
+            {% include 'entry/generic/form_reply.html' with on_question=item.on_question_id parent=item.id %}
         </div>
     </footer>
 
 </div>
 
 
-{% if item.children.count %}
+{% if item.is_parent and item.children.count %}
     {% for answer in item.children %}
         {% include 'entry/generic/answer_item.html' with item=answer push=True %}
     {% endfor %}

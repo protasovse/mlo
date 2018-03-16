@@ -54,12 +54,11 @@ class Entry(models.Model):
 
     like_count = models.IntegerField(
         _('Лайки'), db_index=True,
-        default=0, editable=False
-    )
+        default=0)
 
     reply_count = models.IntegerField(
         _('Ответов'), db_index=True,
-        default=0, editable=False)
+        default=0)
 
     objects = models.Manager()
     published = EntryPublishedManager()
@@ -68,7 +67,7 @@ class Entry(models.Model):
         return super(Entry, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "%d. %s " % (self.pk, self.content[:64])
+        return "%s " % (self.content[:64])
 
     def __int__(self):
         return self.pk
@@ -172,14 +171,16 @@ class Answer(Entry):
         verbose_name=_('К ответу'),
     )
 
-    answers = AnswersManager()
+    objects = models.Manager()
+    # Менеджер для публикации на публичной версии сайта
+    published = AnswersManager()
 
     class Meta:
         verbose_name = _('Ответ')
         verbose_name_plural = _('Ответы')
 
     def children(self):
-        return Answer.answers.related_to_question(self.on_question_id).filter(parent=self)
+        return Answer.published.related_to_question(self.on_question_id).filter(parent=self)
 
     @property
     def is_parent(self):
@@ -196,7 +197,6 @@ class Answer(Entry):
         Возвращает отзыв клиента, если такой есть.
         """
         return self.likes.filter(user=self.on_question.author).first()
-        # Review.objects.filter(like__entry=self, like__user=self.on_question.author).first()
 
     def save(self, *args, **kwargs):
         if not hasattr(self, 'on_question'):
@@ -375,7 +375,8 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
     # Подсчёт количества ответов на вопрос и «ответов» на ответ
     if instance.is_parent:
         question.reply_count = \
-            sender.objects.filter(parent=None, on_question=question.pk).count() - i
+            sender.objects.filter(parent=None, on_question=instance.on_question_id).count() - i
+        print(sender.objects.filter(parent=None, on_question=instance.on_question_id).count())
         question.save(update_fields=('reply_count',))
     else:
         parent = instance.parent

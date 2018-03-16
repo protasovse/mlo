@@ -57,7 +57,7 @@ class QuestionAdmin(admin.ModelAdmin):
         (_('Content'), {
             'fields': ('title', 'content',)}),
         (_('Клиссификация'), {
-            'fields': ('status', 'author', 'rubrics', 'is_pay'),
+            'fields': ('status', 'author', 'rubrics', 'is_pay', 'reply_count', ),
             # 'classes': ('collapse', 'collapse-closed')
         }))
     autocomplete_fields = ['rubrics', 'author']

@@ -20,7 +20,12 @@ class EntryPublishedManager(models.Manager):
         """
         Только опубликованные записи
         """
-        return entries_published(super(EntryPublishedManager, self).get_queryset())
+        return entries_published(
+            super(EntryPublishedManager, self).get_queryset().select_related(
+                'author', 'author__info', 'author__ratingresult', 'author__city'
+            ).prefetch_related(
+            )
+        )
 
     def like(self, entry_id, user_id):
         """
@@ -45,15 +50,7 @@ class EntryPublishedManager(models.Manager):
 thread_data = None
 
 
-class AnswersManager(models.Manager):
-
-    def all(self):
-        """
-        Возвращаем только ответы 1-го уровня, у которых parent=None
-        :return: queryset
-        """
-        qs = super(AnswersManager, self).filter(parent=None)
-        return qs
+class AnswersManager(EntryPublishedManager):
 
     def related_to_question(self, question_id):
         """

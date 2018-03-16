@@ -1,9 +1,10 @@
 from django.db import models, connection
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, post_delete, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django_mysql.models import EnumField
 from image_cropping import ImageCropField, ImageRatioField
 
+from apps.entry.models import Answer
 from apps.sxgeo.models import Cities
 from config.settings import AUTH_USER_MODEL
 
@@ -77,6 +78,11 @@ class Rating(models.Model):
         editable=False,
     )
 
+    comment = models.CharField(
+        blank=True,
+        max_length=128,
+    )
+
     type = models.ForeignKey(RatingTypes, on_delete=models.NOT_PROVIDED)
 
     class Meta:
@@ -88,7 +94,7 @@ class Rating(models.Model):
         return super(Rating, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '%s: %d — %s (%s)' % (self.user, self.value, self.type.key, self.date)
+        return '%s: %d — %s (%s) — %s' % (self.user, self.value, self.type.key, self.date, self.comment)
 
 
 class RatingResult(models.Model):
@@ -268,10 +274,8 @@ class Experience(AccountBase):
         return self.name
 
 
+# Добавление или удаление баллов рейтинга. Считаем суммы баллов и кешируем в account_ratingresult
 def post_save_rating_receiver(sender, instance, *args, **kwargs):
-    """
-    Добавление или удаление баллов рейтинга. Считаем суммы баллов и кешируем в account_ratingresult
-    """
     cursor = connection.cursor()
     cursor.execute("""
       REPLACE account_ratingresult
@@ -283,3 +287,25 @@ def post_save_rating_receiver(sender, instance, *args, **kwargs):
 post_save.connect(post_save_rating_receiver, sender=Rating)
 post_delete.connect(post_save_rating_receiver, sender=Rating)
 
+
+# Юрист отвечает на вопрос — добавляем балл рейтинга
+def expert_add_answer(sender, instance, *args, **kwargs):
+
+    if 'created' in kwargs and kwargs['created']:
+        # Если первый ответ
+        if instance.is_parent:
+            Rating.objects.create(
+                type=RatingTypes.objects.get(key='answer'),
+                user=instance.author,
+                comment='За ответ %d' % (instance.pk,)
+            )
+        # если дополнительный ответ
+        else:
+            Rating.objects.create(
+                type=RatingTypes.objects.get(key='add_answer'),
+                user=instance.author,
+                comment='За дополнительный ответ %d' % (instance.pk,)
+            )
+
+
+post_save.connect(expert_add_answer, sender=Answer, dispatch_uid='signal_expert_add_answer')

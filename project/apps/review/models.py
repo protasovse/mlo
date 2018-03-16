@@ -30,7 +30,7 @@ class Likes(models.Model):
 
     @property
     def title_for_admin(self):
-        return "Вопрос: %d" % (self.entry.answer.on_question_id)
+        return "Вопрос: %d" % (self.entry.published.on_question_id)
 
     def __str__(self):
         return "%d: %s (%d)" % (self.entry.pk, self.user.get_full_name, self.value)

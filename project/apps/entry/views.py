@@ -26,9 +26,9 @@ class QuestionDetail(DetailView):
         context['rating'] = [nt_result(*row) for row in cursor.fetchall()]
         print(context['rating'])
         """
-        context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
+        # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
 
-        context['answers'] = Answer.answers.related_to_question(context['object']).filter(parent_id=None)
+        context['answers'] = Answer.published.by_question(context['object']).filter(parent_id=None)
 
         return context
 
