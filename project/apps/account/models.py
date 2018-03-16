@@ -1,6 +1,7 @@
 from django.db import models, connection
 from django.db.models.signals import post_save, post_delete
 from django.utils.translation import ugettext_lazy as _
+from django_mysql.models import EnumField
 from image_cropping import ImageCropField, ImageRatioField
 
 from apps.sxgeo.models import Cities
@@ -151,19 +152,18 @@ class Info(models.Model):
 
 
 class Contact(AccountBase):
-    C_EMAIL = 'E'
-    C_PHONE = 'P'
-    C_ADDRESS = 'A'
-    C_SITE = 'S'
+    C_EMAIL = 'Электронный ящик'
+    C_PHONE = 'Телефон'
+    C_ADDRESS = 'Адрес'
+    C_SITE = 'Сайт'
+    C_SKYPE = 'Skype'
+    C_WHATSAPP = 'WhatsApp'
+    C_TELEGRAM = 'Telegram'
 
-    CONTACT_TYPES = ((C_EMAIL, _('Электронный ящик')),
-                     (C_PHONE, _('Телефон')),
-                     (C_ADDRESS, _('Адрес')),
-                     (C_SITE, _('Сайт')))
+    CONTACT_TYPES = [C_EMAIL, C_PHONE, C_ADDRESS, C_SITE, C_SKYPE, C_WHATSAPP, C_TELEGRAM]
 
-    type = models.CharField(
-        _('Тип'), db_index=True, max_length=1,
-        choices=CONTACT_TYPES, default=C_EMAIL)
+    type = EnumField(
+        _('Тип'), db_index=True, choices=CONTACT_TYPES)
 
     value = models.CharField(
         _('Значение'), max_length=128)

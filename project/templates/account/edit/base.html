@@ -12,7 +12,7 @@
 
             <div class="col-md-4 order-md-1 mb-4">
 
-                {% comment %}
+                {#% comment %#}
                 <div class="card p-3 mb-3 mx-auto">
                     {% if user.info.photo %}
                         <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
@@ -22,7 +22,7 @@
 
                     <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото</button>
                 </div>
-                {% endcomment %}
+                {#% endcomment %#}
 
                 <div class="list-group mb-3">
 
@@ -37,6 +37,12 @@
                        class="list-group-item list-group-item-action{% if pe_url in curl %} active{% endif %}">
                         <h6 class="my-0">Основная информация</h6>
                         <small>Регистрационные и личные данные. Сменить пароль, электронный ящик.</small>
+                    </a>
+
+                    {% url 'personal:edit_contact' as contact_url %}
+                    <a href="{{ contact_url }}"
+                       class="list-group-item list-group-item-action{% if contact_url in curl %} active{% endif %}">
+                        <h6 class="my-0">Контактная информация</h6>
                     </a>
 
                     {% url 'personal:edit_about' as about_url %}
