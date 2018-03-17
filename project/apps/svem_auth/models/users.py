@@ -6,6 +6,8 @@ from datetime import date
 from django.core.exceptions import ValidationError
 
 
+
+
 class PasswordValidator:
     message = ''
     strength_len = 6

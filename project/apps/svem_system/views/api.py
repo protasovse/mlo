@@ -1,4 +1,6 @@
-import os,sys
+import os
+import sys
+import config.error_messages as error_txt
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.db import connection
@@ -58,7 +60,6 @@ class ApiView(View):
                     response['data'] = result
                 request_status = 200
         except ApiPublicException as e:
-
             response = {
                 'success': False,
                 'error': str(e),
@@ -69,7 +70,9 @@ class ApiView(View):
         except ValidationError as e:
             response = {
                 'success': False,
-                'error': e.messages[0]
+                'error': error_txt.MSG_DATA_NOT_VALID,
+                'code': 'error',
+                'fields': [{'field': getattr(e, 'code', ''), 'txt': e.message}]
             }
             if self.is_debug_mode(request):
                 response['exception'] = type(e).__name__

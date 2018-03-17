@@ -46,11 +46,41 @@ class Cities(models.Model):
         c = cursor.fetchone()
         return "%s (%s, %s)" % (c[0], c[2], c[1])
 
+    @staticmethod
+    def _get_cityes_not_uniq_like_as(city):
+        cursor = connection.cursor()
+        sql = """
+            select ct.name_ru from sxgeo_cities ct 
+            join sxgeo_regions rg on ct.`region_id` = rg.id
+            where ct.name_ru like "{}%" group by ct.name_ru having count(*)>1 
+        """.format(city)
+        cursor.execute(sql)
+        return [x[0] for x in cursor.fetchall()]
+
+    @staticmethod
+    def city_like_as(city):
+        names_not_unic = Cities._get_cityes_not_uniq_like_as(city)
+        cursor = connection.cursor()
+        sql = """
+            select ct.name_ru, ct.id, rg.name_ru region_name , cntr.`name_ru` country_name 
+            from sxgeo_cities ct
+            join sxgeo_regions rg on ct.`region_id` = rg.id
+            join `sxgeo_country` cntr on cntr.iso = rg.`country`
+            where ct.name_ru like "{}%" 
+        """.format(city)
+        cursor.execute(sql)
+        result_raw = cursor.fetchall()
+        return [
+            {
+                'name':
+                    obj[0] if obj[0] not in names_not_unic
+                    else '{0} ({2}, {1})'.format(obj[0], obj[2], obj[3]),
+                'id': obj[1]
+            } for obj in result_raw]
+
     def __str__(self):
         return self.full_name_ru
 
     class Meta:
         verbose_name = _('Город')
         verbose_name_plural = _('Города')
-
-

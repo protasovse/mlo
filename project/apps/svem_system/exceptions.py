@@ -16,7 +16,7 @@ class BackendPublicException(ControlledException):
     pass
 
 
-class ApiPublicException(ControlledException):
+class ApiPublicException(BackendPublicException):
     pass
 
 

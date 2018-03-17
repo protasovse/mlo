@@ -9,23 +9,21 @@ from apps.entry.managers import BLOCKED, PUBLISHED
 
 class QuestionView(ApiView):
 
-    def get(self, request):
-        return 'get question'
-
-    def post(self, request):
+    @classmethod
+    def post(cls, request):
         f = Question.objects.get(pk=request.POST['id'])\
             .upload_document(request.FILES['file'])
         return 'file {} uploaded'.format(f.file)
 
-    def put(self, request):
+    @classmethod
+    def put(cls, request):
         """
         create a question. If user doesn't authorised - we will send email whith link to confirmation question
         if user exits - then we will found his by email
         :param request:
         :return:
         """
-        params = self.get_put(request)
-        print(params['is_paid_question'])
+        params = cls.get_put(request)
         if request.user.is_authenticated:
             user = request.user
             status = PUBLISHED
@@ -49,10 +47,9 @@ class QuestionView(ApiView):
             is_pay=params['is_paid_question']
         )
         q.rubrics.set(params.getlist('rubric[]'))
-        print(q)
-        #if status == BLOCKED:
-        #    emails.send_confirm_question(q)
+        if status == BLOCKED:
+            emails.send_confirm_question(q)
         return {
-            'id': q.id
+            'id': q.id,
+            'status': status
         }
-
