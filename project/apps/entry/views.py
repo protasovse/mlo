@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from apps.account.models import RatingResult
 from apps.entry.models import Question, Answer
@@ -27,7 +27,6 @@ class QuestionDetail(DetailView):
         print(context['rating'])
         """
         # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
-
         context['answers'] = Answer.published.by_question(context['object']).filter(parent_id=None)
 
         return context
@@ -49,12 +48,12 @@ class QuestionsFeedList(ListView):
         return context
 
 
-class QuestionsList(ListView):
+class QuestionsList(TemplateView):
     template_name = 'entry/questions_list.html'
-    context_object_name = 'questions'
-    queryset = Question.published.filter(reply_count__gt=0)
-    paginate_by = 10
-    page_kwarg = 'page'
+    # context_object_name = 'questions'
+    # queryset = Question.published.all()
+    # paginate_by = 10
+    # page_kwarg = 'page'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -79,5 +78,8 @@ class QuestionsList(ListView):
 
         # Лучшие юристы
         context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
+
+        # Вопросы
+        context['questions'] = Question.published.all()[:10]
 
         return context

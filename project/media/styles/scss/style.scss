@@ -7,6 +7,7 @@
 @import "../../node_modules/bootstrap/scss/mixins";
   @import "mixins/text";
   @import "mixins/photo_mask";
+
 @import "../../node_modules/bootstrap/scss/root";
 @import "../../node_modules/bootstrap/scss/print";
 @import "../../node_modules/bootstrap/scss/reboot";
@@ -60,5 +61,5 @@ $img_dir: '/static/img';
   @import "front/lawyer";
 @import "elements/review_add_read";
 
-
+// @import "../../node_modules/select2-bootstrap4-theme/src/select2-bootstrap4";
 // // @import "form_elements/checkbox"; //
