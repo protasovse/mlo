@@ -125,8 +125,8 @@
 
                 <hr>
 
-                {% for question in page_obj %}
-                    {% include 'entry/generic/question_item.html' with item=question %}
+                {% for question in questions.all %}
+                    {% include 'entry/generic/question_item.html' with item=question show_answers=False %}
                 {% endfor %}
 
                 <footer class="row">

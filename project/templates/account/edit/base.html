@@ -1,5 +1,4 @@
 {% extends 'front/base.html' %}
-{% load cropping %}
 {% block content %}
 
     <div class="container py-5">
@@ -12,19 +11,9 @@
 
             <div class="col-md-4 order-md-1 mb-4">
 
-                {#% comment %#}
-                <div class="card p-3 mb-3 mx-auto">
-                    {% if user.info.photo %}
-                        <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
-                    {% else %}
-                        <img src="/static/img/lyr/person_photo.png">
-                    {% endif %}
-
-                    <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото</button>
-                </div>
-                {#% endcomment %#}
-
                 <div class="list-group mb-3">
+
+                    <span class="list-group-item list-group-item-dark">Персональные настройки</span>
 
                     <a href="{% url 'lawyer_page' user.pk %}" class="list-group-item list-group-item-action">
                         <h6 class="my-0">Моя страница</h6>

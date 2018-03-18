@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # 'haystack',
     'django_mptt_admin',
     'easy_thumbnails',
     'easy_select2',
@@ -176,3 +177,14 @@ FB_REDIRECT_URL = 'http://127.0.0.1:8000/auth/fb'
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10*1024*1024
 
 INTERNAL_IPS = ['127.0.0.1']
+
+'''
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+        # ...or for multicore...
+        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    },
+}
+'''

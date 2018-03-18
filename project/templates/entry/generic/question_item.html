@@ -2,6 +2,7 @@
 
 <article id="question-{{ item.pk }}" class="question-item">
     <div class="row">
+
         <div class="date">{{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
         <h5><a href="{% url 'question:detail' item.pk %}">{{ item.title }}</a></h5>
 
@@ -10,29 +11,39 @@
             <span>{{ item.author.get_short_name }}</span><br>
             <span>{{ item.author.info.city.name }}</span>
         </div>
-        <div class="content">{{ item.html_content|safe }}</div>
 
-        <div class="col-md-3"></div>
-        <div class="answer">
+        <p class="content">{{ item.content|safe|truncatechars:192 }}</p>
+
+        {# Ответы #}
+        {% if show_answers and item.answers.all|length %}
+        <div class="answer offset-md-3">
             <div class="answer-header">
                 <div class="usr">
                     {% for a in item.answers.all %}
                         {% if a.author.info.orig %}
-                            <a href="{% url 'lawyer_page' a.author.pk %}">
+                            <a href="{% url 'lawyer_page' a.author_id %}">
                                 <img src="{% cropped_thumbnail a.author.info 'pic' %}" alt="{{ a.author }}"/></a>
                         {% endif %}
                     {% endfor %}
                 </div>
-                <!--div>
-                    <a href="#">Бодылев Аркадий Олегович</a><br>
-                    <span class="text-muted">Волгоград</span>
-                </div-->
                 <div>
+                {% if item.reply_count > 1 %}
                     <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+                {% else %}
+                    <a href="{% url 'lawyer_page' item.answers.all.first.author_id %}">{{ item.answers.all.first.author }}</a><br>
+                    <span class="text-muted">{{ item.answers.all.first.author.city.name_ru }}</span>
+                {% endif %}
                 </div>
             </div>
             <p>{{ item.answers.last.html_content|safe|truncatechars:160 }}</p>
         </div>
+        {% else %}
+        <div class="normal col offset-md-3">
+            <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+        </div>
+        {% endif %}
+
     </div>
+
 </article>
 <hr>

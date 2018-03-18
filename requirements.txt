@@ -40,3 +40,7 @@ git+git://github.com/protasovse/django-db-mailer.git
 django-phonenumber-field==2.0.0
 
 git+git://github.com/jazzband/django-debug-toolbar.git
+
+# Поиск
+# django-haystack==2.8.0
+# pysolr==3.7.0

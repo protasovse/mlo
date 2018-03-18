@@ -1,4 +1,5 @@
 {% extends 'account/edit/base.html' %}
+{% load cropping %}
 
 {% block account_edit_title %}Основная информация{% endblock %}
 
@@ -6,21 +7,42 @@
 
     <div class="card mb-3">
         <div class="card-body">
+
             <div class="row">
+
                 <div class="col-md-6 mb-3">
-                    <label for="lastName">Фамилия</label>
-                    <input type="text" class="form-control" id="lastName" value="{{ user.last_name }}" required>
+
+                    <div class="mb-3">
+                        <label for="lastName">Фамилия</label>
+                        <input type="text" class="form-control" id="lastName" value="{{ user.last_name }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="firstName">Имя</label>
+                        <input type="text" class="form-control" id="firstName" value="{{ user.first_name }}"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="patronymic">Отчество</label>
+                        <input type="text" class="form-control" id="patronymic" value="{{ user.patronymic }}"
+                               required>
+                    </div>
+
                 </div>
+
                 <div class="col-md-6 mb-3">
-                    <label for="firstName">Имя</label>
-                    <input type="text" class="form-control" id="firstName" value="{{ user.first_name }}"
-                           required>
+                    <div class="mb-3 mx-auto">
+                        {% if user.info.photo %}
+                            <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
+                        {% else %}
+                            <img src="/static/img/lyr/person_photo.png">
+                        {% endif %}
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-12 mb-3">
-                    <label for="patronymic">Отчество</label>
-                    <input type="text" class="form-control" id="patronymic" value="{{ user.patronymic }}"
-                           required>
-                </div>
+
                 <div class="col-md-6 mb-3">
                     <label>Пол</label>
                     <fieldset class="form-group mt-3">
