@@ -31,7 +31,8 @@ class AppUser(ApiView):
             patronymic=request.POST.get('patronymic')
         )
         user.set_lawyer()
-        emails.send_activation_email(user)
+        token = UserHash.get_or_create(user)
+        emails.send_activation_email(user, token)
         return True
 
     @classmethod
@@ -59,7 +60,7 @@ class AppUser(ApiView):
 class CheckLogin(ApiView):
     @classmethod
     def get(cls, request):
-        return request.user.is_authenticated
+        return request.user.get_data() if request.user.is_authenticated else False
 
 
 class ForgotPassword(ApiView):

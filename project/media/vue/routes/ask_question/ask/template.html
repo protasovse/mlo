@@ -50,6 +50,7 @@
                     extensions="gif,jpg,jpeg,png,webp,pdf,xls"
                     accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
                     :multiple="true"
+
                     :size="1024 * 1024 * 100"
                     v-model="files"
                     ref="upload"><span class="icon-folder mr-2"></span> Обзор
@@ -92,7 +93,7 @@
         </a>
     </div>
 
-    <div v-if="!is_authorized" id="user_data">
+    <div id="user_data">
         <h3>Личные данные</h3>
         <div class="form-group row">
             <label for="ask_email" class="col-form-label required">Электронный ящик</label>
@@ -118,13 +119,15 @@
         </div>
 
         <div class="form-group row">
-            <label for="ask_city" class="col-form-label required">Город</label>
+            <label for="ask_city" class="col-form-label">Город</label>
             <div class="col-sm-8" :class="{'is-invalid': error_fields.city }">
                  <v-select
                      :class="{'is-invalid': error_fields.city }"
                     :options="options_city"
+                     v-on:input="cityInptut"
                     @search="getCity"
                     id="ask_city"
+
                     label="name"
                     v-model="city"></v-select>
                 <span class="invalid-feedback" v-if="error_fields.city">{{ error_fields.city }}</span>

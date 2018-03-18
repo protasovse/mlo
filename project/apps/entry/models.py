@@ -119,12 +119,12 @@ class Question(Entry, Titled, Classified):
     Вопросы. Вопрос может задать и Клиент и Юрист. Для Клиента — это юридическая консультация.
     Для юриста — это обсуждение какой-либо сложной профессиональной ситуации.
     """
-
     # Вопрос платный если есть запись в таблице Consult, и вопрос оплачен
     is_pay = models.BooleanField(
         _('Платный вопрос'),
         default=False,
     )
+    key = models.CharField("Key", max_length=40, db_index=True, null=True,blank=True)
 
     class Meta:
         ordering = ("-id",)

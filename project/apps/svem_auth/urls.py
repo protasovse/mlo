@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.views import logout
 from apps.svem_auth.views.social_network import VK, FB
 
+
 urlpatterns = [
 
     re_path('^logout', logout, {'next_page': '/'}, name='logout'),

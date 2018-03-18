@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
 
+DATA_DIR = PROJECT_DIR + '/media'+'/data/'
+
 if 0 and DEBUG:
     LOGGING = {
         'version': 1,

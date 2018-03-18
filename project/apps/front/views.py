@@ -36,13 +36,3 @@ class LawyerPage(TemplateView):
         return context
 
 
-class AskQuestion(TemplateView):
-
-    template_name = 'front/ask_question.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AskQuestion, self).get_context_data(**kwargs)
-        return context
-
-    def post(self, request):
-        pass

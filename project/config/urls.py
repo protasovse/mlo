@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, re_path
 from django.contrib import admin
 from apps.mlo_auth.admin import LoginView
 
@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('admin/login/', LoginView.as_view(), name='login'),
     url(r'^admin/', admin.site.urls),
+
+    re_path('^задать-вопрос/', include('apps.question.urls')),
 
     url(r'^вопрос/', include('apps.entry.urls.question', namespace='question')),
     url(r'^вопросы/', include('apps.entry.urls.questions', namespace='questions')),

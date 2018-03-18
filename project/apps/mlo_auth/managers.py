@@ -1,6 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.core.validators import EmailValidator
-from apps.svem_auth.models.users import PasswordValidator
+from apps.svem_auth.models.validators import PasswordValidator
 from django.utils.translation import ugettext_lazy as _
 import config.error_messages as err_txt
 

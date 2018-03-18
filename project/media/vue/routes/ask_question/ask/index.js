@@ -20,7 +20,11 @@ export default {
             email: '',
             name: '',
             phone:'',
-            require_confirm: false
+            require_confirm: false,
+            default_city: [
+                {'id':0, 'name': '-- Город не выбран --'},
+                {'id':-1, 'name': "-- Введите название города --"}
+            ]
         }
     },
     computed: {
@@ -33,14 +37,39 @@ export default {
                 this.optionsInit()
             },
         );
+        this.$http.get('/api/city/ip').then(
+            (r) => {
+                if (r.data.success) {
+                    this.city = r.data.data;
+                } else {
+                    this.city = this.default_city[0]
+                }
+            },
+        );
+        this.$http.get('/api/city/default').then(r=>{
+            this.options_city = this.default_city.concat(r.data.data);
+            this.options_city.tags = true
+        });
         this.$http.get('/api/user/check').then(r=>{
             this.is_authorized = r.data.success;
+            if (this.is_authorized) {
+                this.name = r.data.data.first_name;
+                this.phone = r.data.data.phone;
+                this.email = r.data.data.email;
+                this.city = {'id':r.data.data.city['id'], 'name':r.data.data.city['name']};
+            }
         });
+
     },
 
     methods: {
+        cityInptut(payload) {
+            if (payload && payload.id === -1) {
+                this.city = ''
+            }
+        },
         getCity(search, loading) {
-            this.$http.get('/api/city', {params: {'keyword':search}}).then(
+            this.$http.get('/api/city/search', {params: {'keyword':search}}).then(
                 (r) => {
                     this.options_city = r.data.data;
                 },
@@ -54,7 +83,7 @@ export default {
             );
         },
         optionsInit() {this.options = this.base_options;},
-        get_requires_fields() {return ['title', 'content', 'email', 'phone', 'name', 'city']},
+        get_requires_fields() {return ['title', 'content', 'email', 'phone', 'name']},
         save() {
             try {
                 this.form_validate([this.requires_fields]);

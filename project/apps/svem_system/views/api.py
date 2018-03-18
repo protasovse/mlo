@@ -42,6 +42,15 @@ class ApiView(View):
         """
         return QueryDict(request.body)
 
+    @classmethod
+    def get_client_ip(cls, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[-1].strip()
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         request_status = 500

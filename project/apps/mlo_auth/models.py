@@ -100,6 +100,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
 
+    def get_data(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'patronymic': self.patronymic,
+            'phone': self.phone,
+            'city': {
+                'id': self.city_id,
+                'name':self.city.name_ru
+            }
+        }
+
     @property
     def get_full_name(self):
 
@@ -150,7 +164,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Backend(object):
     def authenticate(self, email="", password="", **kwargs):
         try:
-            user = get_user_model().objects.get(email__iexact=email)
+            user = get_user_model().objects.select_related('city').get(email__iexact=email)
             if user.check_password(password):
                 return user
             else:
@@ -160,6 +174,6 @@ class Backend(object):
 
     def get_user(self, user_id):
         try:
-            return get_user_model().objects.get(pk=user_id)
+            return get_user_model().objects.select_related('city').get(pk=user_id)
         except get_user_model().DoesNotExist:
             return None

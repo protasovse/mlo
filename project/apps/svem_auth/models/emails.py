@@ -8,14 +8,11 @@ from datetime import date
 from config.settings import SITE_PROTOCOL
 
 
-def send_activation_email(user):
-
+def send_activation_email(user, token):
     if user.is_active:
         raise ApiPublicException(
             'Активационное письмо не было отправлено: Пользователь уже активирован.'
         )
-
-    token = UserHash.get_or_create(user)
 
     ctx = {
         'hash': token.key,
@@ -24,11 +21,7 @@ def send_activation_email(user):
         'protocol': SITE_PROTOCOL
     }
 
-    send_db_mail(
-        'sign-up',
-        user.email,
-        ctx,
-    )
+    send_db_mail('sign-up', user.email, ctx)
 
 
 def send_forgot_email(user):
@@ -46,12 +39,17 @@ def send_forgot_email(user):
         'protocol': SITE_PROTOCOL,
     }
 
-    send_db_mail(
-        'vosstanovlenie-parolya',
-        user.email,
-        ctx,
-    )
+    send_db_mail('vosstanovlenie-parolya', user.email, ctx)
 
 
-def send_confirm_question(qestion):
-    pass
+def send_confirm_question(user, question, token):
+    ctx = {
+        'hash': token.key,
+        'username': user.get_name,
+        'question_title': question.title,
+        'question_content': question.content,
+        'site': Site.objects.get_current(),
+        'protocol': SITE_PROTOCOL
+    }
+
+    send_db_mail('confirm-question', user.email, ctx)
