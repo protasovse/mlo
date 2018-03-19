@@ -1,13 +1,25 @@
-@charset "UTF-8";
-header.page {
+.question-page_header {
+
   padding-top: line(5);
   padding-bottom: line(2);
-  // height: line(8);
+
   background: {
-    image: url("#{$img_dir}/bgr/bg-2.jpg");
     position: center;
     size: cover;
   }
+
+  &.bg-1 {
+    background: {
+      image: url("#{$img_dir}/bgr/bg-1.jpg");
+    }
+  }
+
+  &.bg-2 {
+    background: {
+      image: url("#{$img_dir}/bgr/bg-2.jpg");
+    }
+  }
+
   .l-col {
     @extend .col-12, .col-lg-5, .ml-auto, .d-flex, .flex-column, .justify-content-center;
     color: $white;

@@ -1,96 +1,101 @@
 .mlo-navbar {
+
   @extend .d-flex, .align-items-center, .justify-content-between;
+  width: 100vw;
   height: 100px;
-  padding-left: line(1.5);
-  padding-right: line(1.5);
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
   z-index: $zindex-fixed;
   color: white;
+
+  padding-left: line(1.5);
+  padding-right: line(1.5);
   @include media-breakpoint-down(sm) {
-    // height: line(4);
     padding-left: line(.5);
     padding-right: line(.5);
   }
-  background-color: transparent !important;
 
-  .mlo-navbar-brand {
-    position: relative;
-    z-index: 1;
-    img {
-      padding: 0;
-      width: 153px;
-      height: 47px;
-    }
+  .mlo-navbar_addbar {
+    display: none;
   }
+}
 
-  .mlo-navbar-title {
-    @extend .d-none, .d-md-block, .text-center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    line-height: line(1);
-    .t {
-      @extend .large, .font-weight-semibold;
-      display: block;
-    }
-    .tg, .g, .c {
-      @extend .normal;
-    }
-    .tg {
-      display: none;
-    }
+.mlo-navbar_brand {
+  position: relative;
+  z-index: 1;
+  img {
+    padding: 0;
+    width: 153px;
+    height: 47px;
   }
+}
 
-  .actions {
-    @extend .d-flex;
-    position: relative;
+.mlo-navbar_title {
+  @extend .d-none, .d-md-block, .text-center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  line-height: line(1);
+  .t {
+    @extend .large, .font-weight-semibold;
+    display: block;
+  }
+  .tg, .g, .c {
+    @extend .normal;
+  }
+  .tg {
+    display: none;
+  }
+}
 
-    a {
-      display: block;
-      @extend .ml-1, .px-3, .normal;
-      text-decoration: none;
-      font-weight: $font-weight-semibold;
-      height: 40px;
-      line-height: 38px;
-      border: 1px solid rgba(255, 255, 255, .5);
-      border-radius: $border-radius;
-      text-align: center;
-      color: $white;
-      &:hover {
-        background-color: rgba(0, 0, 0, .2);
-      }
-      &.sq {
-        width: 40px;
-        padding: 0 !important;
-      }
-      &.active {
-        color: $red;
-        &:not(:hover) {
-          border-color: white;
-          background-color: white;
-        }
+.mlo-navbar_actions {
+
+  display: flex;
+  position: relative;
+
+  a {
+    display: block;
+    @extend .ml-1, .px-3, .normal;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: $border-radius;
+    text-align: center;
+    color: $white;
+    &:hover {
+      background-color: rgba(0, 0, 0, .2);
+    }
+    &.sq {
+      width: 40px;
+      padding: 0 !important;
+    }
+    &.active {
+      color: $red;
+      &:not(:hover) {
+        border-color: white;
+        background-color: white;
       }
     }
   }
 }
 
-.mlo-navbar.static {
+.mlo-navbar.fixed {
   @extend .bg-primary;
-  // position: relative;
+  position: fixed;
   height: 60px;
   padding-bottom: 0;
   padding-top: 0;
-  // box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
+  box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.3);
 
-  .mlo-navbar-brand img {
+  .mlo-navbar_brand img {
     width: 115px;
     height: 34px;
   }
 
-  .mlo-navbar-title {
+  .mlo-navbar_title {
     .tg, .t {
       display: inline;
     }

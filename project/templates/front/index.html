@@ -5,12 +5,12 @@
 
     <section class="header-section">
         <main class="text-center">
-            <h4>с 2005 года</h4>
+            <h4 class="mt-5">с 2005 года</h4>
             <h1 class="mb-5">Консультация юриста<br>онлайн</h1>
-            <p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p>
-            <p class="lead mt-5 mb-5">
-                <b>Профессиональная юридическая консультация удобным для Вас способом:</b><br>
-                В режиме вопрос-ответ, в чате, либо по телефону. <!--a href="/auth/login">Вход</a>, <a href="/auth/logout">Выход</a-->
+            <!--p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p-->
+            <p class="col-md-6 mx-auto lead mt-5 mb-5">
+                <b>Профессиональная юридические консультации онлайн от топовых юристов.</b>
+                В режиме вопрос-ответ, либо по телефону. Платно или бесплатно, в любое время.
             </p>
             <!--p class="lead text-center mb-4">{{ request.user.email }}</p-->
             <div>
@@ -368,7 +368,7 @@
             <hr>
 
             {% for question in questions %}
-                {% include 'entry/generic/question_item.html' with item=question %}
+                {% include 'entry/generic/question_item.html' with item=question show_answers=True %}
             {% endfor %}
 
             <footer class="row">

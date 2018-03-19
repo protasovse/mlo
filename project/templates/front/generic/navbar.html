@@ -1,12 +1,13 @@
 {% load static %}
 
-<nav class="mlo-navbar static">
-    <a class="mlo-navbar-brand" href="/">
+<nav class="mlo-navbar fixed">
+
+    <a class="mlo-navbar_brand" href="/">
         <img src="{% static "/img/nav/logo.svg" %}">
     </a>
 
     {% block navbar_title %}
-        <div class="mlo-navbar-title">
+        <div class="mlo-navbar_title">
 
             <span class="tg">горячая линия</span>
             <span class="t">8 (927) 080-66-66</span>
@@ -16,8 +17,8 @@
         </div>
     {% endblock %}
 
-    <div class="actions">
-        <!--a href="#" class="d-none d-sm-inline-flex">Спросить юриста</a-->
+    <div class="mlo-navbar_actions">
+        <a href="{% url 'ask_question' %}" class="d-none d-sm-inline-flex">Спросить юриста</a>
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
         <a href="#" class="slide-menu-toggle sq"></a>
     </div>

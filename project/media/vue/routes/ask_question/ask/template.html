@@ -13,7 +13,7 @@
                :class="{'is-invalid': error_fields.title }"
                placeholder="Суть вопроса"/>
         <span class="invalid-feedback" v-if="error_fields.title">{{ error_fields.title }}</span>
-        <small>Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?».</small>
+        <small>Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?»</small>
     </div>
 
     <div class="form-group mt-4">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="form-group row mt-4">
-        <label for="ask_rubric" class="col-form-label">Рубрика</label>
+        <label for="ask_rubric" class="col-form-label">Рубрика права</label>
         <div class="col-sm-8">
             <v-select
                     multiple
@@ -35,7 +35,7 @@
                     id="ask_rubric"
                     label="name"
                     v-model="rubric"></v-select>
-            <small>Выберите отрасль права</small>
+            <small>Правильно выбраная рубрика привлечёт экспертов, которые специализируются на Вашем вопросе.</small>
         </div>
     </div>
 
@@ -73,9 +73,11 @@
             <div class="d-flex justify-content-between">
                 <div class="pr-4">
                     <h5>Развёрнутая письменная консультация</h5>
-                    <p class="text-muted">Письменная юридическая консультация с ссылками на
-                        законодательство и алгоритмом
-                        действия. Найдём самое выгодное для Вас решение.</p>
+                    <p>Вам будет назначен персональный юрист,
+                        который специализируется в Вашем вопросе. Он подробно разберёт ситуацию, предложит план
+                        действий, ответит на все дополнительные вопросы.</p>
+                    <p class="small">Если Вы будете не довольны качеством услуг, то вернём деньги. Стоимость
+                    консультации фиксированная и состовляет: 800₽.</p>
                 </div>
                 <div>800₽</div>
             </div>
@@ -85,9 +87,8 @@
             <div class="d-flex justify-content-between">
                 <div class="pr-4">
                     <h5>Бесплатная консультация</h5>
-                    <p class="text-muted">Нет гарантии ответа. Если вопрос подразумевает платные
-                        услуги,
-                        то юрист может выставить счёт, и оказать их после оплаты этого счёта.</p>
+                    <p>Нет гарантии ответа, консультация краткая. Юрист может предложить платные
+                        услуги, если вопрос сложный.</p>
                 </div>
             </div>
         </a>
@@ -103,6 +104,7 @@
                        :class="{'is-invalid': error_fields.email }"
                        placeholder="Электронный ящик">
                 <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+                <small>Ваш электронный ящик не публикуется на сайте и используется для уведомлений об ответах.</small>
             </div>
 
         </div>
@@ -115,6 +117,7 @@
                        :class="{'is-invalid': error_fields.name }"
                        placeholder="Ваше имя">
                 <span class="invalid-feedback" v-if="error_fields.name">{{ error_fields.name }}</span>
+                <small>Как к Вам обращаться юристам на сайте?</small>
             </div>
         </div>
 
@@ -130,6 +133,8 @@
 
                     label="name"
                     v-model="city"></v-select>
+                <small>Город необходимо указать, что бы специалист мог учитывать региональные различия в
+                    законодательстве.</small>
                 <span class="invalid-feedback" v-if="error_fields.city">{{ error_fields.city }}</span>
             </div>
         </div>
@@ -141,6 +146,7 @@
                        v-model="phone"
                        :class="{'is-invalid': error_fields.phone }"
                        id="ask_phone" placeholder="Номер телефона">
+                <small>Не публикуется! Используется юристом для уточненение сути вопроса, при необходимости.</small>
                 <span class="invalid-feedback" v-if="error_fields.phone">{{ error_fields.phone }}</span>
             </div>
         </div>

@@ -13,7 +13,7 @@ class Mainpage(TemplateView):
         context = super(Mainpage, self).get_context_data(**kwargs)
         context['h1'] = "Консультация юриста онлайн"
 
-        context['questions'] = Question.published.all()[:3]
+        context['questions'] = Question.published.filter(reply_count__gt=0).all()[:3]
         context['lawyers'] = RatingResult.objects.all().order_by('-value')[:5]
 
         return context

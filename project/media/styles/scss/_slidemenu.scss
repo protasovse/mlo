@@ -3,8 +3,12 @@
 $slide-menu-width: 430px;
 $slide-menu-width-mob: 260px;
 
-#app, .slide-menu, .mlo-navbar {
-  transition: all .2s;
+#app {
+  transition: margin .2s
+}
+
+.slide-menu, .mlo-navbar {
+  transition: right .2s;
 }
 
 // Затенение
@@ -26,11 +30,12 @@ $slide-menu-width-mob: 260px;
 .slide-menu {
   @extend .d-flex, .justify-content-between, .flex-column;
   width: $slide-menu-width;
-  background-color: $gray-100;
-  position: fixed;
+  right: -$slide-menu-width;
   top: 0;
   bottom: 0;
-  right: -$slide-menu-width;
+
+  background-color: $gray-100;
+  position: fixed;
   z-index: $zindex-modal;
   overflow-y: scroll;
   padding: line(1) line(1) line(3) line(2);
@@ -71,13 +76,9 @@ $slide-menu-width-mob: 260px;
 }
 
 #app.open-slide-menu {
+
   overflow-y: hidden;
-  margin-right: $slide-menu-width;
-  margin-left: -$slide-menu-width;
-  @include media-breakpoint-down(sm) {
-    margin-right: $slide-menu-width-mob;
-    margin-left: -$slide-menu-width-mob;
-  }
+
   .mlo-navbar {
     @extend .shaded;
     .slide-menu-toggle {
@@ -88,7 +89,26 @@ $slide-menu-width-mob: 260px;
       }
     }
   }
+}
+
+#app.open-slide-menu {
+
+  margin-right: $slide-menu-width;
+  margin-left: -$slide-menu-width;
+
+  @include media-breakpoint-down(sm) {
+    margin-right: $slide-menu-width-mob;
+    margin-left: -$slide-menu-width-mob;
+  }
+
   .slide-menu {
     right: 0;
+  }
+
+  .mlo-navbar.fixed {
+    right: $slide-menu-width;
+    @include media-breakpoint-down(sm) {
+      right: $slide-menu-width-mob;
+    }
   }
 }
