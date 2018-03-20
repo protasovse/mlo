@@ -32,11 +32,11 @@ class Rubric(MPTTModel):
     advice_on = models.CharField(_('advice on'), max_length=128,
                                  help_text=_('Юристы и адвокаты проконсультируют … платно или бесплатно'), blank=True)
 
-    description = models.TextField(_('Description'),
-                                   help_text=_('Короткое описание'), blank=True)
+    description = models.TextField(_('Description'), help_text=_('Короткое описание'),
+                                   null=True, blank=True)
 
-    content = models.TextField(_('Content'), blank=True,
-                               help_text=_('Содержание, статья'))
+    content = models.TextField(_('Content'), help_text=_('Содержание, статья'),
+                               null=True, blank=True)
 
     slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'),
                             help_text=_('Можно не вводить. Автоматически генерируется из названия рубрики.'))

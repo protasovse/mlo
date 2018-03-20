@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.models import Question, Answer, Files, Offer, ConsultState, Consult, ConsultStateLog, Entry
+from apps.entry.models import Question, Answer, Files, Offer, Entry
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -84,33 +84,6 @@ class AnswerAdmin(admin.ModelAdmin):
         """
         qs = super().get_queryset(request)
         return qs.filter(parent=None)
-
-
-@admin.register(Consult)
-class ConsultAdmin(admin.ModelAdmin):
-    """
-    Админка для модели Consult.
-    """
-    list_display = ('question_id', 'pk', 'cost', 'expert_id', 'state',)
-    fieldsets = (
-        (_('Content'), {
-            'fields': ('question', 'cost', 'expert', 'state')}),
-        )
-    autocomplete_fields = ['expert']
-    raw_id_fields = ['question']
-    list_filter = ['state']
-    # inlines = (AnswersForQuestionInLine, FilesInLine,)
-
-
-@admin.register(ConsultState)
-class ConsultStateAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(ConsultStateLog)
-class ConsultStateLogAdmin(admin.ModelAdmin):
-    list_display = ('consult', 'date', 'consult_state',)
-    list_filter = ('consult_state',)
 
 
 @admin.register(Entry)

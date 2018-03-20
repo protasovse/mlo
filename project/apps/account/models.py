@@ -41,8 +41,9 @@ class RatingTypes(models.Model):
         max_length=128,
     )
 
-    description = models.TextField(
+    description = models.CharField(
         _('Описание'),
+        max_length=255,
     )
 
     value = models.IntegerField(
@@ -191,13 +192,13 @@ class Case(AccountBase):
     title = models.CharField(_('Заголовок'),
                              blank=True, max_length=255)
 
-    problem = models.TextField(_('Проблема'),
+    problem = models.TextField(_('Проблема'), blank=True, null=True,
                                help_text=_('Проблема, с которой столкнулся клиент'))
 
-    solution = models.TextField(_('Решение'),
+    solution = models.TextField(_('Решение'), blank=True, null=True,
                                 help_text=_('Какие действия были предприняты, чтобы решить проблему'))
 
-    result = models.TextField(_('Результат'),
+    result = models.TextField(_('Результат'), blank=True, null=True,
                               help_text=_('Какого результат достигли'))
 
     profit = models.IntegerField(_('Выгода'), blank=True, null=True,
@@ -252,7 +253,8 @@ class Experience(AccountBase):
 
     position = models.CharField(_('Должность'), blank=True, null=True, max_length=128)
 
-    description = models.TextField(_('Описание организации'), max_length=1024, blank=True)
+    description = models.TextField(_('Описание организации'), max_length=1024,
+                                   null=True, blank=True)
 
     site = models.URLField(_('Сайт'), blank=True)
 

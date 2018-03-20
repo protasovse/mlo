@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'apps.sxgeo',
     'apps.front',
     'apps.question',
+    'apps.advice',
     'dbmail',
     'debug_toolbar',
 ]

@@ -1,0 +1,17 @@
+{% load cropping %}
+<div class="lawyer-list">
+    <h5 class="consult-state {{ item.status.key }}">{{ item.status }}</h5>
+    <p>{{ item.status.description }}</p>
+    <p class="subtitle">Цена консультации</p>
+    <p class="cost rub">{{ item.cost }}</p>
+
+    {% if item.status == 'inwork' or item.status == 'answered' or item.status == 'closed'  %}
+    <p class="subtitle">Консультацию ведёт эксперт</p>
+    {% with item.expert as expert %}
+        <div class="consult-lawyer">
+        <a class="pht" href="{% url 'lawyer_page' expert.pk  %}"><img src="{% cropped_thumbnail expert.info 'photo' %}" /></a>
+        <h6><a href="{% url 'lawyer_page' expert.pk  %}">{{ expert }}</a></h6>
+    {% endwith %}
+    </div>
+    {% endif %}
+</div>

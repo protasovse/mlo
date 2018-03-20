@@ -97,7 +97,7 @@
         <aside class="question-page_aside-part">
 
             {% if question.is_pay %}
-                {% include 'entry/generic/consult_block.html' with item=question.consult.first %}
+                {% include 'entry/generic/advice_block.html' with item=question.advice.first %}
             {% endif %}
 
             {% if rating.count and not question.reply_count %}
