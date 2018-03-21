@@ -144,6 +144,9 @@ class Queue(models.Model):
         verbose_name = _('Очередь экспертов')
         verbose_name_plural = _('Очередь экспертов')
 
+    def __str__(self):
+        return '%s - %d - %s' % (self.expert, self.order, self.is_active)
+
 
 def update_expert_in_queue(user_id):
     """
@@ -234,6 +237,30 @@ class Scheduler(models.Model):
     def __str__(self):
         time = '24 часа' if self.all_time else 'с %s до %s' % (self.begin, self.end)
         return '%s (%s мск.)' % (self.user, time)
+
+
+def shift_queue():
+    """
+    Меняет очерёдность в очереди
+    """
+    queue = Queue.objects.filter(is_active=True)
+    # first = queue.first()
+    last_order = queue.last().order
+
+    order = 0
+    for q in queue:
+        swap_order = q.order
+        if order == 0:
+            q.order = last_order
+            order = swap_order
+        else:
+            if q.is_active:
+                q.order = order
+                order = swap_order
+
+        q.save(update_fields=['order', ])
+
+    return True  # first
 
 
 def add_status_log_receiver(sender, instance, *args, **kwargs):
