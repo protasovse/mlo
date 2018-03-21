@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from apps.advice.models import Advice, StatusLog
+from apps.advice.models import Advice, StatusLog, Queue, Scheduler, Expert
 
 
 @admin.register(Advice)
@@ -24,4 +24,21 @@ class ConsultAdmin(admin.ModelAdmin):
 class ConsultStateLogAdmin(admin.ModelAdmin):
     list_display = ('advice', 'date', 'status',)
     list_filter = ('status',)
+
+
+@admin.register(Queue)
+class QueueAdmin(admin.ModelAdmin):
+    list_display = ('expert', 'order', 'is_active',)
+    autocomplete_fields = ['expert', ]
+
+
+@admin.register(Scheduler)
+class SchedulerAdmin(admin.ModelAdmin):
+    # list_display = ('user', 'timezone',)
+    autocomplete_fields = ['user', ]
+
+
+@admin.register(Expert)
+class SchedulerAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['user', ]
 

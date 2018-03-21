@@ -44,3 +44,6 @@ git+git://github.com/jazzband/django-debug-toolbar.git
 # Поиск
 # django-haystack==2.8.0
 # pysolr==3.7.0
+
+# Поле временной зоны
+django-timezone-field==2.1

@@ -1,6 +1,6 @@
 {% load cropping %}
 <div class="lawyer-list">
-    <h5 class="consult-state {{ item.status.key }}">{{ item.status }}</h5>
+    <h5 class="consult-state {{ item.status }}">{{ item.get_status_display }}</h5>
     <p>{{ item.status.description }}</p>
     <p class="subtitle">Цена консультации</p>
     <p class="cost rub">{{ item.cost }}</p>

@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django_select2',
     'django_mysql',
     'phonenumber_field',
+    'timezone_field',
     'image_cropping',
     'apps.mlo_auth',
     'apps.entry',
