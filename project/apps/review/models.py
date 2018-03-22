@@ -57,17 +57,3 @@ class Review(models.Model):
     def __str__(self):
         return self.review
 
-
-def post_save_like_receiver(sender, instance, *args, **kwargs):
-    """
-    Добавление или удаление лайка. Считаем суммы баллов и кешируем в entry.like_count
-    """
-    cursor = connection.cursor()
-    cursor.execute("""
-      UPDATE entry_entry SET entry_entry.like_count = 
-        (SELECT SUM(value) FROM review_likes WHERE entry_id = '%s')
-      WHERE id = '%s' LIMIT 1
-    """, [instance.entry.pk, instance.entry.pk])
-
-post_save.connect(post_save_like_receiver, sender=Likes)
-post_delete.connect(post_save_like_receiver, sender=Likes)

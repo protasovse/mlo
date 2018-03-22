@@ -2,7 +2,6 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView, TemplateView
 
-from apps.account.models import RatingResult
 from apps.entry.models import Question, Answer
 from apps.rubric.models import Rubric
 
@@ -77,7 +76,7 @@ class QuestionsList(TemplateView):
         context['all_rubrics'] = Rubric.objects.filter(level=0)
 
         # Лучшие юристы
-        context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
+        # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
 
         # Вопросы
         context['questions'] = Question.published.all()[:10]

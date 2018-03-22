@@ -1,9 +1,8 @@
-from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.signals import post_save
-from django.utils.translation import ugettext_lazy as _
 from django_mysql.models import EnumField
 from timezone_field import TimeZoneField
+
+from django.utils.translation import ugettext_lazy as _
 
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL
@@ -148,36 +147,6 @@ class Queue(models.Model):
         return '%s - %d - %s' % (self.expert, self.order, self.is_active)
 
 
-def update_expert_in_queue(user_id):
-    """
-    Здесь нужно проверить условия, может ли пользователь быть в очереди и обновить его активность.
-
-    1. Пользователь есть в модели Expert, то
-
-        1. Если пользователя нет в модели Scheduler, то
-                Добавить со значениями по умолчанию
-
-        2. Если пользователя нет в модели Queue, то
-                Добавить с order = max(order)+1 и is_active=True
-                можно return is_active
-
-        3. Если текущая дата попадает в промежуток из модели Scheduler, то
-                Queue.is_active=True
-            иначе
-                Queue.is_active=False
-
-        return is_active
-
-    иначе
-
-        1. Если пользователь есть в модели Queue, то
-            Queue.is_active=False
-
-        return False
-    """
-    user = get_user_model().object.get(pk=user_id)
-
-
 class Expert(models.Model):
     # Эксперты. Является ли на данный момент пользователь экспертом
     user = models.OneToOneField(
@@ -237,37 +206,3 @@ class Scheduler(models.Model):
     def __str__(self):
         time = '24 часа' if self.all_time else 'с %s до %s' % (self.begin, self.end)
         return '%s (%s мск.)' % (self.user, time)
-
-
-def shift_queue():
-    """
-    Меняет очерёдность в очереди
-    """
-    queue = Queue.objects.filter(is_active=True)
-    # first = queue.first()
-    last_order = queue.last().order
-
-    order = 0
-    for q in queue:
-        swap_order = q.order
-        if order == 0:
-            q.order = last_order
-            order = swap_order
-        else:
-            if q.is_active:
-                q.order = order
-                order = swap_order
-
-        q.save(update_fields=['order', ])
-
-    return True  # first
-
-
-def add_status_log_receiver(sender, instance, *args, **kwargs):
-    """
-    Добавляем запись в журнал состояний при изменении состояния консультации
-    """
-    c = StatusLog.objects.create(advice=instance, status=instance.status)
-    c.save()
-
-post_save.connect(add_status_log_receiver, sender=Advice)

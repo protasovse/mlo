@@ -3,7 +3,7 @@ from django.contrib.admin import SimpleListFilter
 from django.db import connection
 from image_cropping import ImageCroppingMixin
 
-from apps.account.models import Info, Case, Education, Experience, Contact, RatingTypes, Rating, RatingResult
+from apps.account.models import Info, Case, Education, Experience, Contact
 from apps.sxgeo.models import Cities
 
 
@@ -70,21 +70,6 @@ class EducationAdmin(admin.ModelAdmin):
 @admin.register(Experience)
 class ExperienceAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
-    autocomplete_fields = ['user']
-
-
-@admin.register(RatingTypes)
-class RatingTypesAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Rating)
-class RatingAdmin(admin.ModelAdmin):
-    raw_id_fields = ('user',)
-
-
-@admin.register(RatingResult)
-class RatingResultAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user']
 
 

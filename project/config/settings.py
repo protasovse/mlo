@@ -74,7 +74,6 @@ INSTALLED_APPS = [
     'image_cropping',
     'apps.mlo_auth',
     'apps.entry',
-    'apps.review',
     'apps.rubric',
     'apps.account',
     'apps.svem_auth',
@@ -82,7 +81,9 @@ INSTALLED_APPS = [
     'apps.sxgeo',
     'apps.front',
     'apps.question',
-    'apps.advice',
+    'apps.review.apps.ReviewConfig',
+    'apps.advice.apps.AdviceConfig',
+    'apps.rating.apps.RatingConfig',
     'dbmail',
     'debug_toolbar',
 ]
