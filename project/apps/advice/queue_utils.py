@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.db import connection
 
 from apps.advice.models import Queue
 
@@ -33,10 +34,11 @@ def update_expert_in_queue(user_id):
     user = get_user_model().object.get(pk=user_id)
 
 
-def shift_queue():
+def queue_shift():
     """
     Меняет очерёдность в очереди
     """
+    '''
     queue = Queue.objects.filter(is_active=True)
     # first = queue.first()
     last_order = queue.last().order
@@ -53,7 +55,46 @@ def shift_queue():
                 order = swap_order
 
         q.save(update_fields=['order', ])
+    '''
+    cursor = connection.cursor()
+    cursor.execute("""
+        START TRANSACTION;
+        SELECT @i := (SELECT COUNT(`order`) FROM `advice_queue`);
+        UPDATE `advice_queue` SET `order` = @i + (@i := `order`) - @i
+        WHERE `is_active` ORDER BY `order`;
+        COMMIT;
+        """)
 
     return True  # first
 
 
+def queue_get_first():
+    """
+    Возвращает первого в очереди
+    """
+    return Queue.objects.filter(is_active=True).first().expert
+
+
+def queue_add_user(user_id):
+    """
+    Добавляет пользоваетля в очередь
+    """
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT IGNORE INTO `advice_queue` (`expert_id`, `order`, `is_active`)
+        SELECT {user_id}, IFNULL(MAX(`order`)+1, 1), true FROM `advice_queue`;
+        """.format(user_id=user_id))
+
+
+def queue_del_user(user_id):
+    """
+    Удаляет пользователя из очереди
+    """
+    cursor = connection.cursor()
+    cursor.execute("""
+        START TRANSACTION;
+        SELECT @i := (SELECT `order` FROM `advice_queue` WHERE `expert_id`={user_id});
+        UPDATE `advice_queue` SET `order`=`order`-1 WHERE `order`>@i;
+        DELETE FROM `advice_queue` WHERE `expert_id`={user_id} LIMIT 1;
+        COMMIT;
+        """.format(user_id=user_id))
