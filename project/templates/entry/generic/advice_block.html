@@ -1,11 +1,10 @@
 {% load cropping %}
 <div class="lawyer-list">
     <h5 class="consult-state {{ item.status }}">{{ item.get_status_display }}</h5>
-    <p>{{ item.status.description }}</p>
     <p class="subtitle">Цена консультации</p>
     <p class="cost rub">{{ item.cost }}</p>
 
-    {% if item.status == 'inwork' or item.status == 'answered' or item.status == 'closed'  %}
+    {% if item.expert  %}
     <p class="subtitle">Консультацию ведёт эксперт</p>
     {% with item.expert as expert %}
         <div class="consult-lawyer">

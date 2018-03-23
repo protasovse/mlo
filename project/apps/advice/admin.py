@@ -5,14 +5,14 @@ from apps.advice.models import Advice, StatusLog, Queue, Scheduler, Expert
 
 
 @admin.register(Advice)
-class ConsultAdmin(admin.ModelAdmin):
+class AdviceAdmin(admin.ModelAdmin):
     """
     Админка для модели Consult.
     """
-    list_display = ('question_id', 'pk', 'cost', 'expert', 'status',)
+    list_display = ('question_id', 'pk', 'cost', 'expert', 'status', 'payment_date',)
     fieldsets = (
         (_('Content'), {
-            'fields': ('question', 'cost', 'expert', 'status')}),
+            'fields': ('question', 'cost', 'expert', 'status', 'payment_date',)}),
         )
     autocomplete_fields = ['expert']
     raw_id_fields = ['question']
@@ -21,7 +21,7 @@ class ConsultAdmin(admin.ModelAdmin):
 
 
 @admin.register(StatusLog)
-class ConsultStateLogAdmin(admin.ModelAdmin):
+class StatusLogAdmin(admin.ModelAdmin):
     list_display = ('advice', 'date', 'status',)
     list_filter = ('status',)
 

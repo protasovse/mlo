@@ -1,9 +1,14 @@
+from datetime import timedelta
+
 from django.db import models
+from django.utils import timezone
 from django_mysql.models import EnumField
 from timezone_field import TimeZoneField
 
 from django.utils.translation import ugettext_lazy as _
 
+from apps.advice.setting import ADVICE_COST
+from . import emails
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL
 
@@ -11,6 +16,7 @@ ADVICE_NEW = 'new'
 ADVICE_PAID = 'paid'
 ADVICE_INWORK = 'inwork'
 ADVICE_ANSWERED = 'answered'
+ADVICE_ADDQUESTION = 'addquestion'
 ADVICE_CLOSED = 'closed'
 ADVICE_CANCELED = 'canceled'
 
@@ -18,7 +24,8 @@ ADVICE_STATUSES = [
       (ADVICE_NEW, 'Новая'),
       (ADVICE_PAID, 'Оплачена'),
       (ADVICE_INWORK, 'В работе'),
-      (ADVICE_ANSWERED, 'Есть ответ'),
+      (ADVICE_ANSWERED, 'Ответ эксперта'),
+      (ADVICE_ADDQUESTION, 'Дополнительный вопрос'),
       (ADVICE_CLOSED, 'Завершена'),
       (ADVICE_CANCELED, 'Отменена'),
     ]
@@ -46,7 +53,23 @@ class Advice(models.Model):
         _('Статус'), db_index=True,
         choices=ADVICE_STATUSES, default=ADVICE_NEW)
 
-    cost = models.PositiveIntegerField(_('Цена консультации'))
+    cost = models.PositiveIntegerField(
+        default=ADVICE_COST,
+        verbose_name=_('Цена консультации'),
+    )
+
+    payment_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_('Дата поступления оплаты'),
+    )
+
+    answered_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_('Дата ответа'),
+        help_text=_('Когда эксперт подготовит консультацию')
+    )
 
     class Meta:
         verbose_name = _('Платная консультация')
@@ -57,33 +80,46 @@ class Advice(models.Model):
     def is_paid(self):
         return self.status != ADVICE_NEW
 
-    # Переводим заявку в статус «Оплачено»
+    # Переводим заявку в статус «Оплачено», назначаем эксперта из очереди
     def to_paid(self):
-        if self.status == ADVICE_NEW:
+        if self.status in (ADVICE_NEW, ADVICE_PAID):
             self.status = ADVICE_PAID
-            self.save(update_fields=['status'])
-            self.question.is_pay = True
-            self.question.save(update_fields=['is_pay'])
+            from apps.advice.utils import queue_get_first
+            expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
+            self.expert = expert
+            self.payment_date = timezone.now()
+            self.save(update_fields=['expert', 'status', 'payment_date'])
+            # Уведомляем эксперта о назначении заявки
+            emails.send_advice_appoint_expert_email(self)
             return True
         return False
 
-    # Переводим заявку в статус «В работе», если есть user_id, то назначаем эксперта
-    def to_in_work(self, user_id=None):
+    # Переводим заявку в статус «В работе»
+    # (num_hours — через сколько часов эксперт обещает дать ответ)
+    def to_in_work(self, num_hours):
         if self.is_paid:
-            if user_id is not None:
-                self.expert_id = user_id
             self.status = ADVICE_INWORK
-            self.save(update_fields=['expert_id', 'status'])
+            self.answered_date = timezone.now() + timedelta(hours=num_hours)
+            self.save(update_fields=['status', 'answered_date'])
+            # Уведомляем клиента о новом назначении эксперта
             return True
         return False
 
-    # Переводим заявку в статус «Ответ юриста»
+    # Переводим заявку в статус «Ответ эксперта»
     def to_answered(self):
-        if self.status == ADVICE_ANSWERED:
-            return True
-        if self.status == ADVICE_INWORK:
+        if self.status in (ADVICE_ADDQUESTION, ADVICE_INWORK):
             self.status = ADVICE_ANSWERED
             self.save(update_fields=['status'])
+            # Уведомляем клиента о новом ответе
+            return True
+        return False
+
+    # Переводим заявку в статус «Дополнительный вопрос»
+    def to_addquestion(self):
+        if self.status in (ADVICE_ANSWERED, ADVICE_INWORK):
+            self.status = ADVICE_ADDQUESTION
+            self.save(update_fields=['status'])
+            # Уведомляем эксперта о дополнительном вопросе
             return True
         return False
 
@@ -92,6 +128,7 @@ class Advice(models.Model):
         if self.status == ADVICE_ANSWERED:
             self.status = ADVICE_CLOSED
             self.save(update_fields=['status'])
+            # Уведомляем эксперта о завершении консультации и переводе денег на счёт
             return True
         return False
 

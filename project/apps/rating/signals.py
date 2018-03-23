@@ -1,9 +1,6 @@
-# Добавление или удаление баллов рейтинга. Считаем суммы баллов и кешируем в account_ratingresult
-from django.db import connection
 from django.db.models.signals import post_save, post_delete
 
-from apps.entry.models import Answer
-from apps.rating.models import Rating, RatingScore
+from apps.rating.models import RatingScore
 
 
 def rating_calculation_receiver(sender, instance, *args, **kwargs):

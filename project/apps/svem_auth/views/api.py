@@ -73,7 +73,7 @@ class ForgotPassword(ApiView):
                 error_txt.MSG_EMAIL_NOT_FOUND_MSG,
                 field={'field': 'email', 'txt': error_txt.MSG_EMAIL_NOT_FOUND_FIELD}
             )
-        emails.send_forgot_email(user)
+        emails.send_forgot_password_email(user)
 
 
 class ResetPassword(ApiView):

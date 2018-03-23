@@ -22,7 +22,7 @@ class EntryPublishedManager(models.Manager):
         """
         return entries_published(
             super(EntryPublishedManager, self).get_queryset().select_related(
-                'author', 'author__info', 'author__ratingresult', 'author__city'
+                'author', 'author__info', 'author__rating', 'author__city'
             ).prefetch_related(
             )
         )

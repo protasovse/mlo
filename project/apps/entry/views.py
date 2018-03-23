@@ -12,19 +12,6 @@ class QuestionDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(QuestionDetail, self).get_context_data(**kwargs)
-        """
-        cursor = connection.cursor()
-        cursor.execute("/""
-          SELECT mau.* FROM account_ratingresult ar
-          LEFT JOIN mlo_auth_user mau ON (mau.id = ar.user_id) 
-          LEFT JOIN account_info ai ON (mau.id = ar.user_id) 
-          ORDER BY `value` DESC LIMIT 10
-          "/"")
-        desc = cursor.description
-        nt_result = namedtuple('Result', [col[0] for col in desc])
-        context['rating'] = [nt_result(*row) for row in cursor.fetchall()]
-        print(context['rating'])
-        """
         # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
         context['answers'] = Answer.published.by_question(context['object']).filter(parent_id=None)
 

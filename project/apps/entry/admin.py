@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
+from apps.advice.models import Advice
 from apps.entry.models import Question, Answer, Files, Offer, Entry
 
 
@@ -48,6 +49,13 @@ class OfferInLine(admin.StackedInline):
     # classes = ('collapse', 'collapse-closed')
 
 
+class AdviceInLine(admin.StackedInline):
+    model = Advice
+    fk_name = 'question'
+    autocomplete_fields = ['expert']
+    extra = 0
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     """
@@ -62,10 +70,10 @@ class QuestionAdmin(admin.ModelAdmin):
         }))
     autocomplete_fields = ['rubrics', 'author']
     radio_fields = {'status': admin.HORIZONTAL}
-    list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count')
+    list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count', 'is_pay')
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
-    list_filter = ('pub_date', 'status')
-    inlines = (AnswersForQuestionInLine, FilesInLine,)
+    list_filter = ('pub_date', 'status', 'is_pay')
+    inlines = (AnswersForQuestionInLine, FilesInLine, AdviceInLine)
 
 
 @admin.register(Answer)

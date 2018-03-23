@@ -132,7 +132,7 @@ class Question(Entry, Titled, Classified):
         verbose_name_plural = _("Вопросы")
 
     def get_absolute_url(self):
-        return reverse('questions:question-detail', kwargs={'pk': self.pk})
+        return reverse('question:detail', kwargs={'pk': self.pk})
 
     def upload_document(self, file):
         """

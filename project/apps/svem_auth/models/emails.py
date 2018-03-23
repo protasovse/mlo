@@ -21,10 +21,10 @@ def send_activation_email(user, token):
         'protocol': SITE_PROTOCOL
     }
 
-    send_db_mail('sign-up', user.email, ctx)
+    send_db_mail('activation', user.email, ctx)
 
 
-def send_forgot_email(user):
+def send_forgot_password_email(user):
 
     try:
         user_hash = UserHash.objects.get(user=user, live_until__gte=date.today().isoformat())
@@ -39,7 +39,7 @@ def send_forgot_email(user):
         'protocol': SITE_PROTOCOL,
     }
 
-    send_db_mail('vosstanovlenie-parolya', user.email, ctx)
+    send_db_mail('forgot-password', user.email, ctx)
 
 
 def send_confirm_question(user, question, token):
