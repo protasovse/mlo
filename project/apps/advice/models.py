@@ -73,7 +73,7 @@ class Advice(models.Model):
             if user_id is not None:
                 self.expert_id = user_id
             self.status = ADVICE_INWORK
-            self.save(update_fields=['is_pay', 'expert_id'])
+            self.save(update_fields=['expert_id', 'status'])
             return True
         return False
 
@@ -160,17 +160,23 @@ class Expert(models.Model):
         verbose_name_plural = _('Эксперты')
 
     def __str__(self):
-        return self.user
+        return self.user.__str__()
 
 
 class Scheduler(models.Model):
     """
     Планировщик рабочего дня
     """
-    user = models.OneToOneField(
+    expert = models.OneToOneField(
         AUTH_USER_MODEL,
         primary_key=True,
         on_delete=models.NOT_PROVIDED,
+    )
+
+    is_available = models.BooleanField(
+        default=True,
+        verbose_name=_('Принимать заявки'),
+        help_text=_('Я готов принимать заявки на платные консультации.'),
     )
 
     timezone = TimeZoneField(
@@ -190,13 +196,6 @@ class Scheduler(models.Model):
         help_text=_('Пожалуйста, вводите время по МСК.'),
     )
 
-    all_time = models.BooleanField(
-        default=True,
-        verbose_name=_('Принимать заявки 24 часа'),
-        help_text=_('Если не хотите принимать заявки круглосуточно, то снимите флажок и установите рабочий'
-                    ' временной промежуток. Заявки будут приходить только в это время.'),
-    )
-
     weekend = models.BooleanField(
         default=True,
         verbose_name=_('Принимать заявки в выходные дни'),
@@ -204,5 +203,5 @@ class Scheduler(models.Model):
     )
 
     def __str__(self):
-        time = '24 часа' if self.all_time else 'с %s до %s' % (self.begin, self.end)
-        return '%s (%s мск.)' % (self.user, time)
+        time = 'с %s до %s' % (self.begin, self.end)
+        return '%s (%s мск.)' % (self.expert, time)

@@ -35,10 +35,10 @@ class QueueAdmin(admin.ModelAdmin):
 @admin.register(Scheduler)
 class SchedulerAdmin(admin.ModelAdmin):
     # list_display = ('user', 'timezone',)
-    autocomplete_fields = ['user', ]
+    autocomplete_fields = ['expert', ]
 
 
 @admin.register(Expert)
-class SchedulerAdmin(admin.ModelAdmin):
+class ExpertAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user', ]
 
