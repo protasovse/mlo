@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from django.urls import path, re_path
-from apps.front.views import Mainpage, LawyerPage
+from django.urls import path
+from apps.front.views.front import Mainpage, LawyerPage
 
 urlpatterns = [
     url(r'^$', Mainpage.as_view(), name='mainpage'),

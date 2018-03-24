@@ -7,6 +7,8 @@ export default {
     name: 'ask_question',
     data() {
         return {
+            question_id: '',
+            question_url: '',
             rubric: [],
             options: [],
             options_city: [],
@@ -31,6 +33,11 @@ export default {
         post_action() {return '/api/question'},
     },
     mounted() {
+        this.$http.get('/api/default').then(
+            (r) => {
+                this.question_url = r.data.data['url']['show_question'];
+            },
+        );
         this.$http.get('/api/rubric', {params: {'level':0}},).then(
             (r) => {
                 this.base_options = r.data.data;
@@ -98,9 +105,14 @@ export default {
                     city: this.city,
                 };
                 this.put('/api/question', data, (r) => {
+                    this.question_id = r.data.id;
+                    this.question_url = this.question_url.replace('0', this.question_id);
                     this.require_confirm = (r.data.status === 'blocked');
                     for (let i = 0; i < this.$refs.upload.files.length; i++) {
-                        this.$refs.upload.files[i].data = {id:r.data.id};
+                        this.$refs.upload.files[i].data = {id:this.question_id}
+                    }
+                    if (!this.require_confirm) {
+                        window.location.href = this.question_url
                     }
                     this.$refs.upload.active = true;
                     this.set_form_success();
