@@ -36,11 +36,12 @@ class CityListFilter(SimpleListFilter):
             queryset
 
 
+@admin.register(Info)
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
     fieldsets = (
         (None, {'fields': ('user', 'birth_date', 'sex',)}),
-        ('Текст', {'fields': ('status', 'signature', 'about',)}),
+        ('Текст', {'fields': ('status', 'short', 'signature', 'about',)}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )
     list_filter = (CityListFilter, )
@@ -72,5 +73,3 @@ class ExperienceAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
     autocomplete_fields = ['user']
 
-
-admin.site.register(Info, InfoAdmin)

@@ -14,7 +14,7 @@ class Mainpage(TemplateView):
         context['h1'] = "Консультация юриста онлайн"
 
         context['questions'] = Question.published.filter(reply_count__gt=0).all()[:3]
-        context['lawyers'] = Rating.objects.all()[:5]
+        context['lawyers'] = Rating.objects.filter(month_rate__gt=0)[:15]
 
         return context
 

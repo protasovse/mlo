@@ -10,6 +10,8 @@ class TypesAdmin(admin.ModelAdmin):
 
 @admin.register(RatingScore)
 class RatingScoreAdmin(admin.ModelAdmin):
+    list_display = ['user', 'date', 'type', 'comment', ]
+    list_filter = ['date', ]
     autocomplete_fields = ['user']
 
 

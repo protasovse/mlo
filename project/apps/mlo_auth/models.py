@@ -16,39 +16,6 @@ ROLES_CHOICES = (
 )
 
 
-# class Roles(models.Model):
-#     """
-#     Роли пользователей на сайте.
-#     Изначально это «Юрист» или «Клиент»
-#     Roles.objects.create(pk = 1, key="client", value="Клиент",
-#         description="«Клиент» — это пользователь, который получает услуги", have_profile=False)
-#     Roles.objects.create(pk = 2, key="lawyer", value="Юрист",
-#         description="«Юрист» — это пользователь, который предоставляет услуги Клиентам", have_profile=True)
-#     Roles.objects.create(pk = 3, key="editor", value="Редактор",
-#         description="«Редактор» — это пользователь, который имеет право редактировать вопросы, ответы, данные пользователей", have_profile=False)
-#     Юристы будут иметь профайл, Клиетны не будут иметь
-#     """
-#     key = models.CharField(_('Ключ на латинице'),
-#                            max_length=16,
-#                            unique=True)
-#
-#     value = models.CharField(_('Название роли'),
-#                              max_length=16)
-#
-#     description = models.TextField(_('Описание роли'),
-#                                    blank=True)
-#
-#     have_profile = models.BooleanField(_('Имеет ли расширенный профайл'),
-#                                        default=False)
-#
-#     class Meta:
-#         verbose_name = _('Тип учётной записи')
-#         verbose_name_plural = _('Типы учётных записей')
-#
-#     def __str__(self):
-#         return self.value
-
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('Электронный ящик'),
                               unique=True, db_index=True)
@@ -85,10 +52,6 @@ class User(AbstractBaseUser, PermissionsMixin):
                                             choices=ROLES_CHOICES, default=1, db_index=True,
                                             help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
                                                         'или «Клиент», если хотите получать их.'))
-
-    # role = models.ManyToManyField(Roles, verbose_name=_('Тип учётной записи'), default=1, db_index=True,
-    #                               help_text=_('Выбирите «Юрист», если Вы оказываете юридические услуги; '
-    #                                           'или «Клиент», если хотите получать их.'))
 
     objects = UserManager()
 

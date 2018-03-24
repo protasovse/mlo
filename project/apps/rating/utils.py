@@ -1,42 +1,36 @@
 from django.db import connection
 
 
-def recount(user_id):
-
+# Пересчитываем рейтинг для всех юристов
+def recount():
     cursor = connection.cursor()
-
     cursor.execute("""
       REPLACE rating_rating
-        (user_id, rate, day_rate, week_rate, month_rate)
-        VALUES (
-          {user_id},
-    
+      (user_id, rate, day_rate, week_rate, month_rate)
+      SELECT
+          id,
           IFNULL((
               SELECT SUM(t.value) FROM rating_ratingscore s
               LEFT JOIN rating_type t ON (s.type_id = t.id)
-              WHERE user_id = {user_id}
+              WHERE s.user_id = u.id
           ), 0),
-    
           IFNULL((
               SELECT SUM(t.value) FROM rating_ratingscore s
               LEFT JOIN rating_type t ON (s.type_id = t.id)
-              WHERE user_id = {user_id} AND date >= DATE_SUB(NOW(), INTERVAL 1 DAY)), 0),
-    
+              WHERE s.user_id = u.id AND date >= DATE_SUB(NOW(), INTERVAL 1 DAY)), 0),
           IFNULL((
               SELECT SUM(t.value) FROM rating_ratingscore s
               LEFT JOIN rating_type t ON (s.type_id = t.id)
-              WHERE user_id = {user_id} AND date >= DATE_SUB(NOW(), INTERVAL 7 DAY)), 0),
-    
+              WHERE s.user_id = u.id AND date >= DATE_SUB(NOW(), INTERVAL 7 DAY)), 0),
           IFNULL((
               SELECT SUM(t.value) FROM rating_ratingscore s
               LEFT JOIN rating_type t ON (s.type_id = t.id)
-              WHERE user_id = {user_id} AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)), 0)
-        );
-    """.format(user_id=user_id))
+              WHERE s.user_id = u.id AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)), 0)
+	  FROM mlo_auth_user u WHERE role = 2;
+    """)
 
 
-def add_score(score, user_id):
-
+def add_score(user_id, score):
     cursor = connection.cursor()
 
     cursor.execute("""

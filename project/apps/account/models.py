@@ -55,14 +55,29 @@ class Info(models.Model):
     pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
 
     status = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        verbose_name=_('Подзаголовок-статус'),
+        help_text=_('Например: «Семейный юрист», «Юрист по трудовым спорам», «Адвокат по земельным вопросам в Уфе».'
+                    ' до 64 символов, можно указать регион. Нельзя указывать контактные данные!')
+    )
+
+    short = models.CharField(
         max_length=160,
         null=True,
         blank=True,
-        verbose_name=_('Короткая информация о себе.'),
-        help_text=_('Напишите краткий рекламный текст о себе, чем занимаетесть')
+        verbose_name=_('Короткая информация о себе'),
+        help_text=_('Напишите краткий рекламный текст о себе, в чём специализируетесь, какие услуги оказываете.'
+                    ' Размещается на карточках на странице профиля. Нельзя указывать контактные данные!')
     )
 
-    about = models.TextField(null=True, blank=True, verbose_name=_('О себе'))
+    about = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_('О себе'),
+        help_text=_('Несколько абзацев, размещается на странице профиля.')
+    )
 
     signature = models.CharField(max_length=128, blank=True, null=True, verbose_name=_('Подпись под ответами'))
 

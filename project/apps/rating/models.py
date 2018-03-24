@@ -57,7 +57,8 @@ class RatingScore(models.Model):
     type = models.ForeignKey(
         Type,
         on_delete=models.NOT_PROVIDED,
-        verbose_name=_('Тип балла')
+        verbose_name=_('Тип балла'),
+        # editable=False,
     )
 
     date = models.DateTimeField(

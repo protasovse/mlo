@@ -8,7 +8,7 @@
         <p class="rating">{{ item.get_rate }}</p>
     </div>
     <div class="lawyer-card-body">
-        <h6>{{ item.user.get_role_display }}</h6>
-        <p>{{ item.user.info.status }}</p>
+        <h6>{{ item.user.info.status|default:item.user.get_role_display }}</h6>
+        <p>{{ item.user.info.short }}</p>
     </div>
 </div>
