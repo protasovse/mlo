@@ -79,8 +79,9 @@ class Entry(models.Model):
         """
         return misaka.html(self.content)
 
-    # class Meta:
-    #     abstract = True
+    class Meta:
+        ordering = ("-id",)
+        # abstract = True
 
 
 class Files(models.Model):
@@ -127,7 +128,6 @@ class Question(Entry, Titled, Classified):
     key = models.CharField("Key", max_length=40, db_index=True, null=True,blank=True)
 
     class Meta:
-        ordering = ("-id",)
         verbose_name = _("Вопрос")
         verbose_name_plural = _("Вопросы")
 
@@ -135,13 +135,13 @@ class Question(Entry, Titled, Classified):
         return reverse('question:detail', kwargs={'pk': self.pk})
 
     def upload_document(self, file):
-        """
-        :param file:
-        :return: Files
-        """
+        """"""
         if not self.pk:
             raise BackendPublicException('model not load')
         return Files.objects.create(entry=self, file=file)
+
+    def get_answers(self):
+        return Answer.published.by_question(self.pk)
 
     def __str__(self):
         return '№%d. %s: (%s)' % (self.pk, self.title, self.get_status_display())
