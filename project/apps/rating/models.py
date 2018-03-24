@@ -95,6 +95,9 @@ class RatingScoreComment(models.Model):
         max_length=128,
     )
 
+    def __str__(self):
+        return self.comment
+
 
 class Rating(models.Model):
     """
