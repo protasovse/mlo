@@ -107,7 +107,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'patronymic': self.patronymic,
-            'phone': self.phone,
+            'phone': str(self.phone),
             'city': {
                 'id': self.city_id,
                 'name':self.city.name_ru

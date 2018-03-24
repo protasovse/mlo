@@ -7,6 +7,7 @@ export default {
     name: 'ask_question',
     data() {
         return {
+            completed: [],
             question_id: '',
             question_url: '',
             rubric: [],
@@ -16,7 +17,7 @@ export default {
             base_options: [],
             files: [],
             is_authorized: false,
-            is_paid_question: false,
+            is_paid_question: true,
             title: '',
             content: '',
             email: '',
@@ -31,11 +32,21 @@ export default {
     },
     computed: {
         post_action() {return '/api/question'},
+        is_completed_email() {return this.completed.includes('email')},
+        is_completed_name() {return this.completed.includes('name')},
+        is_completed_phone() {return this.completed.includes('phone')},
+        is_completed_city() {return this.completed.includes('city')},
+        is_completed() {
+            return this.is_completed_email
+                && this.is_completed_name
+                && this.is_completed_phone
+                && this.is_completed_city
+        }
     },
     mounted() {
         this.$http.get('/api/default').then(
             (r) => {
-                this.question_url = r.data.data['url']['show_question'];
+                this.question_url = r.data.data['urls']['show_question'];
             },
         );
         this.$http.get('/api/rubric', {params: {'level':0}},).then(
@@ -61,9 +72,21 @@ export default {
             this.is_authorized = r.data.success;
             if (this.is_authorized) {
                 this.name = r.data.data.first_name;
+                if (this.name) {
+                    this.completed.push('name');
+                }
                 this.phone = r.data.data.phone;
+                if (this.phone) {
+                    this.completed.push('phone');
+                }
                 this.email = r.data.data.email;
+                if (this.email) {
+                    this.completed.push('email');
+                }
                 this.city = {'id':r.data.data.city['id'], 'name':r.data.data.city['name']};
+                if (this.city) {
+                    this.completed.push('city');
+                }
             }
         });
 
@@ -90,7 +113,19 @@ export default {
             );
         },
         optionsInit() {this.options = this.base_options;},
-        get_requires_fields() {return ['title', 'content', 'email', 'phone', 'name']},
+        get_requires_fields() {
+            let fields = ['title', 'content'];
+            if (!this.is_completed_email) {
+                fields.push('email')
+            }
+            if (!this.is_completed_phone) {
+                fields.push('phone')
+            }
+            if (!this.is_completed_name) {
+                fields.push('name')
+            }
+            return fields
+        },
         save() {
             try {
                 this.form_validate([this.requires_fields]);
