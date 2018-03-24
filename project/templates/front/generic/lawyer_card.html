@@ -5,10 +5,10 @@
     <img src="{% cropped_thumbnail item.user.info 'photo' %}" alt="{{ a.author }}"/>
     <div class="lawyer-card-title">
         <h6><a href="{% url 'lawyer_page' item.user.pk %}">{{ item.user }}</a></h6>
-        <p class="rating">{{ item.value }}</p>
+        <p class="rating">{{ item.get_rate }}</p>
     </div>
     <div class="lawyer-card-body">
         <h6>{{ item.user.get_role_display }}</h6>
-        <p>{{ item.user.info.about }}</p>
+        <p>{{ item.user.info.status }}</p>
     </div>
 </div>

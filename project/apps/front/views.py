@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from apps.entry.models import Question
+from apps.rating.models import Rating
 
 
 class Mainpage(TemplateView):
@@ -13,7 +14,7 @@ class Mainpage(TemplateView):
         context['h1'] = "Консультация юриста онлайн"
 
         context['questions'] = Question.published.filter(reply_count__gt=0).all()[:3]
-        # context['lawyers'] = RatingResult.objects.all().order_by('-value')[:5]
+        context['lawyers'] = Rating.objects.all()[:5]
 
         return context
 

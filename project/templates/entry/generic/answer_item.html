@@ -46,7 +46,7 @@
         </header>
     {% endif %}
 
-    {# Подзаголовок: дата, номер, текс #}
+    {# Подзаголовок: дата, номер, текст #}
     <div class="row">
 
         <div class="question-page_l-col">
@@ -86,10 +86,10 @@
                     <span class="answer-footer-like-sign dropdown">
                         {% with item.get_review as review %}{% if review %}
                             <a href="#">Читать отзыв клиента</a>
-                            {% include 'entry/generic/review_read.html' with item=review %}
+                            {#% include 'entry/generic/review_read.html' with item=review %#}
                         {% else %}
                             Ответ полезен?
-                            {% include 'entry/generic/review_add.html' with item=review %}
+                            {#% include 'entry/generic/review_add.html' with item=review %#}
                         {% endif %}{% endwith %}
                     </span>
                     <div class="answer-footer-like-block">

@@ -2,10 +2,9 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+from apps.rating.settings import RATING_PERIOD
 from config import settings
 from config.settings import AUTH_USER_MODEL
-
-RATING_PERIOD = 'week'
 
 '''
 1	answer                  Ответ на вопрос	                                                2
@@ -145,7 +144,7 @@ class Rating(models.Model):
             return self.rate
 
     class Meta:
-        ordering = ('-week_rate', )
+        ordering = ('-{}_rate'.format(RATING_PERIOD), )
         verbose_name = _('Рейтинг')
         verbose_name_plural = _('Рейтинг')
 

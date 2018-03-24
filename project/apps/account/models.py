@@ -54,7 +54,13 @@ class Info(models.Model):
 
     pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
 
-    status = models.CharField(max_length=140, null=True, blank=True, verbose_name=_('Статус'))
+    status = models.CharField(
+        max_length=160,
+        null=True,
+        blank=True,
+        verbose_name=_('Короткая информация о себе.'),
+        help_text=_('Напишите краткий рекламный текст о себе, чем занимаетесть')
+    )
 
     about = models.TextField(null=True, blank=True, verbose_name=_('О себе'))
 
