@@ -15,11 +15,12 @@
         <p class="content">{{ item.content|safe|truncatechars:192 }}</p>
 
         {# Ответы #}
-        {% if show_answers and item.answers.all|length %}
+        {% if show_answers and item.reply_count %}
         <div class="answer offset-md-3">
             <div class="answer-header">
+            {% with item.get_answers as answers %}
                 <div class="usr">
-                    {% for a in item.answers.all %}
+                    {% for a in answers %}
                         {% if a.author.info.orig %}
                             <a href="{% url 'lawyer_page' a.author_id %}">
                                 <img src="{% cropped_thumbnail a.author.info 'pic' %}" alt="{{ a.author }}"/></a>
@@ -30,12 +31,13 @@
                 {% if item.reply_count > 1 %}
                     <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
                 {% else %}
-                    <a href="{% url 'lawyer_page' item.answers.all.first.author_id %}">{{ item.answers.all.first.author }}</a><br>
-                    <span class="text-muted">{{ item.answers.all.first.author.city.name_ru }}</span>
+                    <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
+                    <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
                 {% endif %}
                 </div>
+            {% endwith %}
             </div>
-            <p>{{ item.answers.last.html_content|safe|truncatechars:160 }}</p>
+            <p>{{ answers.last.html_content|safe|truncatechars:160 }}</p>
         </div>
         {% else %}
         <div class="normal col offset-md-3">

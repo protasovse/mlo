@@ -23,6 +23,7 @@ class CityListFilter(SimpleListFilter):
           SELECT sc.id, CONCAT(name_ru, ' (', count(sc.id), ')')
           FROM mlo_auth_user AS mau
           LEFT JOIN sxgeo_cities AS sc ON (mau.city_id=sc.id)
+          WHERE mau.role = 2
           GROUP BY sc.id
           ORDER BY count(sc.id) DESC, sc.name_ru
           """)
@@ -39,6 +40,8 @@ class CityListFilter(SimpleListFilter):
 @admin.register(Info)
 class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Info
+    list_display = ['user', ]
+    list_per_page = 10
     fieldsets = (
         (None, {'fields': ('user', 'birth_date', 'sex',)}),
         ('Текст', {'fields': ('status', 'short', 'signature', 'about',)}),

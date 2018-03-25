@@ -2,6 +2,7 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+from apps.rating.managers import RatingLawyerManager
 from apps.rating.settings import RATING_PERIOD
 from config import settings
 from config.settings import AUTH_USER_MODEL
@@ -134,6 +135,8 @@ class Rating(models.Model):
         db_index=True,
         default=0,
     )
+
+    lawyers = RatingLawyerManager()
 
     @property
     def get_rate(self):
