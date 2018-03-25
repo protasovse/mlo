@@ -36,6 +36,7 @@
                     :options="options"
                     @search="onSearch"
                     v-on:search:blur="optionsInit"
+                    v-on:input="onInputRubric"
                     id="ask_rubric"
                     label="name"
                     v-model="rubric"></v-select>
@@ -98,9 +99,9 @@
         </a>
     </div>
 
-    <div id="user_data" v-if="!is_completed">
+    <div id="user_data" v-if="is_require_form">
         <h3>Личные данные</h3>
-        <div class="form-group row" v-if="!is_completed_email">
+        <div class="form-group row" v-if="is_require_email">
             <label for="ask_email" class="col-form-label required">Электронный ящик</label>
             <div class="col-sm-8">
                 <input type="email" class="form-control" id="ask_email"
@@ -113,7 +114,7 @@
 
         </div>
 
-        <div class="form-group row" v-if="!is_completed_name">
+        <div class="form-group row" v-if="is_require_name">
             <label for="ask_name" class="col-form-label required">Ваше имя</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="ask_name"
@@ -125,7 +126,7 @@
             </div>
         </div>
 
-        <div class="form-group row" v-if="!is_completed_city" >
+        <div class="form-group row" v-if="is_require_city" >
             <label for="ask_city" class="col-form-label">Город</label>
             <div class="col-sm-8" :class="{'is-invalid': error_fields.city }">
                  <v-select
@@ -142,7 +143,7 @@
             </div>
         </div>
 
-        <div class="form-group row" v-if="!is_completed_phone">
+        <div class="form-group row" v-if="is_require_phone">
             <label for="ask_phone" class="col-form-label required">Телефон</label>
             <div class="col-sm-8">
                 <input type="tel" class="form-control"

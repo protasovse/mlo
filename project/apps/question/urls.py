@@ -1,6 +1,8 @@
-from django.urls import re_path
-from apps.question.views.front import AskQuestion
+from django.urls import path
+from apps.question.views.front import ConfirmQuestion, QuestionDetail
+app_name = 'question'
 
 urlpatterns = [
-    re_path('', AskQuestion.as_view(), name='ask_question'),
+    path('<int:pk>/', QuestionDetail.as_view(), name='detail'),
+    path('<int:pk>/<slug:token>', ConfirmQuestion.as_view(), name='confirm_q'),
 ]

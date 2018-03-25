@@ -1,5 +1,6 @@
 import os
 import binascii
+from phonenumber_field.phonenumber import PhoneNumber
 from apps.svem_system.views.api import ApiView
 from apps.entry.models import Question
 from django.contrib.auth import get_user_model
@@ -8,6 +9,8 @@ from apps.entry.managers import BLOCKED, PUBLISHED
 from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from apps.svem_auth.models.users import UserHash
+from django.contrib import messages
+from django.urls import reverse
 
 
 class QuestionView(ApiView):
@@ -26,6 +29,7 @@ class QuestionView(ApiView):
         :return:
         """
         params = cls.get_put(request)
+        city_id = params['city[id]'] if 'city[id]' in params.keys() else False
         if request.user.is_authenticated:
             user = request.user
             status = PUBLISHED
@@ -35,7 +39,7 @@ class QuestionView(ApiView):
             try:
                 user = get_user_model().objects.get(email=_email)
             except get_user_model().DoesNotExist:
-                city_id = params['city[id]'] if 'city[id]' in params.keys() else False
+
                 if int(city_id):
                     city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
                     city_validator(city_id)
@@ -56,12 +60,35 @@ class QuestionView(ApiView):
             author_id=user.id,
             status=status,
             is_pay=params['is_paid_question'],
-            key=token
+            key=token,
+            phone=user.phone if user.phone else params['phone'],
+            city_id=user.city_id if user.city_id else city_id
         )
         q.rubrics.set(params.getlist('rubric[]'))
-
         if status == BLOCKED:
             emails.send_confirm_question(user, q, token)
+            messages.add_message(
+                request,
+                messages.WARNING,
+                '<h4>Ваш вопрос принят</h4>'
+                '<p>Но он пока не виден юристам. Для публикации вопроса, подтвердите ваш электронный ящик, '
+                'кликнув по ссылки в отправленном письме.</p>',
+                'danger'
+            )
+            # add question_id to session
+            question_ids = request.session.get('question_ids', [])
+            question_ids.append(q.id)
+            request.session['question_ids'] = question_ids
+        else:
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                '<h4>Подтверждён и опубликован</h4>'
+                '<p>Вопросу присвоен номер {id}, и он будет доступен по ссылке: http://мойюрист.онлайн/{url}/</p>'
+                '<p>Вопрос будет находиться на рассмотрении в течение 7 дней, если к концу этого периода ответ не '
+                'поступит, то он больше не будет рассматриваться юристами.</p>'.format(id=q.id, url=reverse('question:detail', kwargs={'pk': 0})),
+                'success'
+            )
 
         return {
             'id': q.id,

@@ -4,12 +4,13 @@ from django.db.models.signals import post_save, pre_delete
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from phonenumber_field.modelfields import PhoneNumberField
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager
 from apps.rubric.models import Classified
 from apps.svem_system.exceptions import BackendPublicException
 from config.settings import AUTH_USER_MODEL
 from django_mysql.models import EnumField
+from apps.sxgeo.models import Cities
 
 
 CONSULT_COST = 800
@@ -124,7 +125,10 @@ class Question(Entry, Titled, Classified):
         _('Платный вопрос'),
         default=False,
     )
-    key = models.CharField("Key", max_length=40, db_index=True, null=True,blank=True)
+    key = models.CharField("Key", max_length=40, db_index=True, null=True, blank=True)
+    phone = models.CharField(max_length=15, blank=True, verbose_name=_('Телефон'))
+
+    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         ordering = ("-id",)
