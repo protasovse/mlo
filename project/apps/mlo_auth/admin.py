@@ -41,7 +41,7 @@ class MloUserAdmin(UserAdmin):
 
     add_form = UserCreationForm
 
-    list_display = ('get_full_name', 'email', 'is_staff',)
+    list_display = ('id', 'get_full_name', 'email', 'is_staff', 'is_active', 'role', )
 
     list_filter = ('is_active', 'role',)
 
@@ -60,7 +60,8 @@ class MloUserAdmin(UserAdmin):
     )
     search_fields = ('email', 'first_name', 'patronymic', 'last_name', 'id', )
     autocomplete_fields = ('city', )
-    ordering = ('id',)
+    ordering = ('-id',)
+    list_per_page = 15
     filter_horizontal = ()
 
     inlines = (ContactInLine, CaseInLine, EducationInLine, ExperienceInLine)

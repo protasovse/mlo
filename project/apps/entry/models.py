@@ -133,6 +133,7 @@ class Question(Entry, Titled, Classified):
 
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
 
+    objects = models.Manager()
     published = QuestionsPublishedManager()
 
     class Meta:

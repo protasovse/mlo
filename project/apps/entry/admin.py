@@ -70,7 +70,7 @@ class QuestionAdmin(admin.ModelAdmin):
         }))
     autocomplete_fields = ['rubrics', 'author']
     radio_fields = {'status': admin.HORIZONTAL}
-    list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count', 'is_pay')
+    list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count', 'status', 'is_pay')
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
     list_filter = ('pub_date', 'status', 'is_pay')
     inlines = (AnswersForQuestionInLine, FilesInLine, AdviceInLine)
