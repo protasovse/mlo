@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager
+from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
+    QuestionsPublishedManager
 from apps.rubric.models import Classified
 from apps.svem_system.exceptions import BackendPublicException
 from config.settings import AUTH_USER_MODEL
@@ -125,7 +126,16 @@ class Question(Entry, Titled, Classified):
         _('Платный вопрос'),
         default=False,
     )
-    key = models.CharField("Key", max_length=40, db_index=True, null=True,blank=True)
+
+    key = models.CharField(
+        _('Key'),
+        max_length=40,
+        db_index=True,
+        null=True,
+        blank=True
+    )
+
+    published = QuestionsPublishedManager()
 
     class Meta:
         verbose_name = _("Вопрос")
@@ -140,6 +150,7 @@ class Question(Entry, Titled, Classified):
             raise BackendPublicException('model not load')
         return Files.objects.create(entry=self, file=file)
 
+    # Получаем список ответов на вопрос. Оптимизировано.
     def get_answers(self):
         return Answer.published.by_question(self.pk)
 

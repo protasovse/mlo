@@ -7,13 +7,14 @@ from timezone_field import TimeZoneField
 
 from django.utils.translation import ugettext_lazy as _
 
-from apps.advice.setting import ADVICE_COST
+from apps.advice.settings import ADVICE_COST
 from . import emails
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL
 
 ADVICE_NEW = 'new'
 ADVICE_PAID = 'paid'
+ADVICE_PAYMENT_CONFIRMED = 'payment_confirmed'
 ADVICE_INWORK = 'inwork'
 ADVICE_ANSWERED = 'answered'
 ADVICE_ADDQUESTION = 'addquestion'
@@ -23,6 +24,7 @@ ADVICE_CANCELED = 'canceled'
 ADVICE_STATUSES = [
       (ADVICE_NEW, 'Новая'),
       (ADVICE_PAID, 'Оплачена'),
+      (ADVICE_PAYMENT_CONFIRMED, 'Оплата подтверждена'),
       (ADVICE_INWORK, 'В работе'),
       (ADVICE_ANSWERED, 'Ответ эксперта'),
       (ADVICE_ADDQUESTION, 'Дополнительный вопрос'),
@@ -75,22 +77,38 @@ class Advice(models.Model):
         verbose_name = _('Платная консультация')
         verbose_name_plural = _('Платные консультации')
 
+    # Назначить эксперта
+    def appoint_expert(self):
+        from apps.advice.utils import queue_get_first
+        expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
+        self.expert = expert
+        self.save(update_fields=['expert'])
+        # Уведомляем эксперта о назначении заявки
+        emails.send_advice_appoint_expert_email(self)
+        return True
+
     # Оплачена, если состояние не равно 'new'
     @property
     def is_paid(self):
         return self.status != ADVICE_NEW
 
-    # Переводим заявку в статус «Оплачено», назначаем эксперта из очереди
+    # Пользователь оплатил и перешёл на страницу вопроса
     def to_paid(self):
-        if self.status in (ADVICE_NEW, ADVICE_PAID):
+        if self.status == ADVICE_NEW:
             self.status = ADVICE_PAID
-            from apps.advice.utils import queue_get_first
-            expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
-            self.expert = expert
+            self.save(update_fields=['status'])
+            return True
+        return False
+
+    # Переводим заявку в статус «Оплата подтверждена», назначаем эксперта из очереди
+    # оплата подтверждается с помощью http уведомления: https://money.yandex.ru/myservices/online.xml
+    # док: https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
+    def to_payment_confirmed(self):
+        if self.status in (ADVICE_NEW, ADVICE_PAID):
+            self.status = ADVICE_PAYMENT_CONFIRMED
             self.payment_date = timezone.now()
-            self.save(update_fields=['expert', 'status', 'payment_date'])
-            # Уведомляем эксперта о назначении заявки
-            emails.send_advice_appoint_expert_email(self)
+            self.save(update_fields=['status', 'payment_date'])
+            self.appoint_expert()  # Назначаем эксперта
             return True
         return False
 

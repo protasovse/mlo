@@ -9,18 +9,31 @@
         <div class="card-body">
 
             <div class="mb-3">
-                <label for="status">Статус</label>
-                <textarea class="form-control" id="status" rows="2">{{ user.info.status }}</textarea>
+                <label for="status">Подзаголовок-статус</label>
+                <textarea class="form-control" id="status" rows="2" maxlength="64">{{ user.info.status }}</textarea>
+                <small>Например: «Семейный юрист», «Юрист по трудовым спорам», «Адвокат по земельным вопросам в Уфе».
+                    <br>До 64 символов, можно указать регион. Нельзя указывать контактные данные!</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="about">Короткая информация о себе</label>
+                <textarea class="form-control" id="about" rows="2" maxlength="160">{{ user.info.short }}</textarea>
+                <small>Напишите краткий рекламный текст о себе (160 символов), в чём специализируетесь,
+                    какие услуги оказываете. Размещается на карточках на странице профиля.
+                    Нельзя указывать контактные данные!</small>
             </div>
 
             <div class="mb-3">
                 <label for="about">О себе</label>
                 <textarea class="form-control" id="about" rows="7">{{ user.info.about }}</textarea>
+                <small>Несколько абзацев, размещается на странице профиля.</small>
             </div>
 
             <div class="mb-3">
                 <label for="signature">Подпись под Вашими ответами</label>
-                <textarea class="form-control" id="signature" rows="2">{{ user.info.signature }}</textarea>
+                <textarea class="form-control" id="signature" rows="2"
+                          maxlength="128">{{ user.info.signature }}</textarea>
+                <small>128 символов.</small>
             </div>
 
         </div>

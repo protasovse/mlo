@@ -3,7 +3,7 @@ from datetime import timedelta
 from dbmail import send_db_mail
 from django.contrib.sites.models import Site
 
-from apps.advice.setting import ADVICE_OVERDUE_TIME
+from apps.advice.settings import ADVICE_OVERDUE_TIME
 
 
 # Письмо уведомление эксперта о заявки на платную консультацию

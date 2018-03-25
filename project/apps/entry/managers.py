@@ -23,8 +23,7 @@ class EntryPublishedManager(models.Manager):
         return entries_published(
             super(EntryPublishedManager, self).get_queryset().select_related(
                 'author', 'author__info', 'author__rating', 'author__city'
-            ).prefetch_related(
-            )
+            ).prefetch_related()
         )
 
     def like(self, entry_id, user_id):
@@ -52,27 +51,19 @@ thread_data = None
 
 class AnswersManager(EntryPublishedManager):
 
+    # Выборка всех ответов, всех уровней, относящихся к вопросу question_id
     def related_to_question(self, question_id):
-        """
-        Выборка всех ответов, всех уровней, относящихся к вопросу question_id
-        :param question_id: номер вопроса
-        :return: queryset
-        """
         qs = super(AnswersManager, self).filter(on_question_id=question_id)
         return qs
 
+    # Ответы 1-го уровня на вопрос question_id
     def by_question(self, question_id):
-        """
-        Ответы 1-го уровня на вопрос question_id
-        :param question_id: номер вопроса
-        :return: queryset
-        """
         qs = self.related_to_question(question_id).filter(parent=None)
         return qs
 
+    # Создаём ответ пользоваетеля на вопрос.
     def create(self, question_id, content, author, parent=None):
         """
-        Создаём ответ пользоваетеля на вопрос.
         :param question_id: вопрос, на который создаём ответ
         :param content: текст ответа
         :param author: автор ответа
@@ -90,3 +81,19 @@ class AnswersManager(EntryPublishedManager):
             return instance
 
         return None
+
+
+# Менеджер для вывода вопросов для публикации
+class QuestionsPublishedManager(EntryPublishedManager):
+
+    def by_id(self, id_list):
+        qs = super(QuestionsPublishedManager, self).filter(entry_ptr_id__in=id_list)
+        return qs
+
+    def by_keywords(self, keyword):
+        qs = super(QuestionsPublishedManager, self).filter(content__icontains=keyword)
+        return qs
+
+    def by_rubric(self, rubric_id):
+        qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
+        return qs

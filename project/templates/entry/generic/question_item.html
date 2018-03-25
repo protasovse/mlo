@@ -17,8 +17,8 @@
         {# Ответы #}
         {% if show_answers and item.reply_count %}
         <div class="answer offset-md-3">
+        {% with item.get_answers as answers %}
             <div class="answer-header">
-            {% with item.get_answers as answers %}
                 <div class="usr">
                     {% for a in answers %}
                         {% if a.author.info.orig %}
@@ -35,9 +35,10 @@
                     <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
                 {% endif %}
                 </div>
-            {% endwith %}
+
             </div>
             <p>{{ answers.last.html_content|safe|truncatechars:160 }}</p>
+        {% endwith %}
         </div>
         {% else %}
         <div class="normal col offset-md-3">
