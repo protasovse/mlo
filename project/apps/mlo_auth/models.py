@@ -29,7 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(_('Отчество'),
                                   max_length=32, blank=True)
 
-    phone = PhoneNumberField(blank=True, verbose_name=_('Телефон'))
+    phone = models.CharField(max_length=15, blank=True, verbose_name=_('Телефон'))
 
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'patronymic': self.patronymic,
-            'phone': self.phone,
+            'phone': str(self.phone),
             'city': {
                 'id': self.city_id,
                 'name':self.city.name_ru

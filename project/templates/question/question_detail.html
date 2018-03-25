@@ -28,20 +28,14 @@
                 {# Вопрос #}
                 <article id="question-{{ question.id }}" class="entry" itemscope itemtype="http://schema.org/Question">
 
-                    <div class="alert alert-danger" role="alert">
-                        <h4 class="alert-heading">Ваш вопрос принят</h4>
-                        <p>Но он пока не виден юристам. Для публикации вопроса, подтвердите ваш электронный ящик,
-                            кликнув по ссылки в отправленном письме.</p>
-                    </div>
+                    {% for message in mess %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                             {% autoescape off %}
+                                 {{ message }}
+                             {%  endautoescape %}
+                        </div>
+                    {% endfor %}
 
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Подтверждён и опубликован</h4>
-                        <p>Вопросу присвоен номер 510775, и он будет доступен по ссылке:
-                            <a class="alert-link" href="http://мойюрист.онлайн/вопрос/510775/">
-                                http://мойюрист.онлайн/вопрос/510775/</a></p>
-                        <p>Вопрос будет находиться на рассмотрении в течение 7 дней, если к концу этого периода ответ
-                            не поступит, то он больше не будет рассматриваться юристами.</p>
-                    </div>
 
                     {# Заголовок #}
                     <h1 class="question-head" itemprop="name">{{ question.title }}</h1>

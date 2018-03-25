@@ -1,21 +1,8 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView, TemplateView
-
-from apps.entry.models import Question, Answer
+from django.views.generic import ListView, TemplateView
+from apps.entry.models import Question
 from apps.rubric.models import Rubric
-
-
-class QuestionDetail(DetailView):
-    queryset = Question.published.all()
-    context_object_name = 'question'
-
-    def get_context_data(self, **kwargs):
-        context = super(QuestionDetail, self).get_context_data(**kwargs)
-        # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
-        context['answers'] = Answer.published.by_question(context['object']).filter(parent_id=None)
-
-        return context
 
 
 class QuestionsFeedList(ListView):
