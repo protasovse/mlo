@@ -1,12 +1,12 @@
 @charset "UTF-8";
  
-form, div#form {
+/* form, div#form {
   label {
     font-size: $font-size-base;
     font-weight: $font-weight-semibold;
+    color: $gray-600;
   }
-  color: $gray-600;
-}
+} */
 
 .form-control {
   font-size: $font-size-base;

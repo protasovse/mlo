@@ -7,7 +7,7 @@
             если к концу этого периода ответ не поступит, то вопрос больше не будет рассматриваться юристами.</p>
     </div>
     <div v-else>
-        Вопросу присвоен номер {{ question_id }}, и он находится здесь: http://мойюрист.онлайн/{{this.question_url}}
+        Вопросу присвоен номер {{ question_id }}, и он находится здесь: http://мойюрист.онлайн/{{ this.question_url }}
     </div>
 </div>
 <div v-else id="form">
@@ -17,7 +17,8 @@
                :class="{'is-invalid': error_fields.title }"
                placeholder="Суть вопроса"/>
         <span class="invalid-feedback" v-if="error_fields.title">{{ error_fields.title }}</span>
-        <small>Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?»</small>
+        <small class="text-muted">Ваш вопрос, например: «Как уволиться без отработки?», или «Как взыскать алименты?»
+        </small>
     </div>
 
     <div class="form-group mt-4">
@@ -25,7 +26,7 @@
                               :class="{'is-invalid': error_fields.content }"
                               placeholder="Детали вопроса" rows="7"></textarea>
         <span class="invalid-feedback" v-if="error_fields.content">{{ error_fields.content }}</span>
-        <small>Опишите в подробностях свой вопрос, чтобы получить более точный ответ.</small>
+        <small class="text-muted">Опишите в подробностях свой вопрос, чтобы получить более точный ответ.</small>
     </div>
 
     <div class="form-group row mt-4">
@@ -40,7 +41,9 @@
                     id="ask_rubric"
                     label="name"
                     v-model="rubric"></v-select>
-            <small>Правильно выбраная рубрика привлечёт экспертов, которые специализируются на Вашем вопросе.</small>
+            <small class="text-muted">Правильно выбраная рубрика привлечёт экспертов, которые специализируются на Вашем
+                вопросе.
+            </small>
         </div>
     </div>
 
@@ -70,34 +73,6 @@
         </div>
     </div>
 
-    <h3>Тип консультации</h3>
-
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action" :class="{ active: is_paid_question }"
-           @click="is_paid_question=true">
-            <div class="d-flex justify-content-between">
-                <div class="pr-4">
-                    <h5>Развёрнутая письменная консультация</h5>
-                    <p>Вам будет назначен персональный юрист,
-                        который специализируется в вашем вопросе. Он подробно разберёт ситуацию, предложит план
-                        действий, ответит на все дополнительные вопросы.</p>
-                    <p class="small">Если вы будете не довольны качеством услуг, то вернём деньги.</p>
-                </div>
-                <div>800₽</div>
-            </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action" @click="is_paid_question=false"
-           :class="{ active: !is_paid_question }">
-            <div class="d-flex justify-content-between">
-                <div class="pr-4">
-                    <h5>Бесплатная консультация</h5>
-                    <p>Нет гарантии ответа, консультация краткая. Юрист может предложить платные
-                        услуги, если вопрос сложный.</p>
-                </div>
-            </div>
-        </a>
-    </div>
-
     <div id="user_data" v-if="is_require_form">
         <h3>Личные данные</h3>
         <div class="form-group row" v-if="is_require_email">
@@ -121,23 +96,24 @@
                        :class="{'is-invalid': error_fields.name }"
                        placeholder="Ваше имя">
                 <span class="invalid-feedback" v-if="error_fields.name">{{ error_fields.name }}</span>
-                <small>Как к Вам обращаться юристам на сайте?</small>
+                <small class="text-muted">Как к Вам обращаться юристам на сайте?</small>
             </div>
         </div>
 
-        <div class="form-group row" v-if="is_require_city" >
+        <div class="form-group row" v-if="is_require_city">
             <label for="ask_city" class="col-form-label">Город</label>
             <div class="col-sm-8" :class="{'is-invalid': error_fields.city }">
-                 <v-select
-                     :class="{'is-invalid': error_fields.city }"
-                    :options="options_city"
-                     v-on:input="cityInptut"
-                    @search="getCity"
-                    id="ask_city"
-                    label="name"
-                    v-model="city"></v-select>
-                <small>Город необходимо указать, что бы специалист мог учитывать региональные различия в
-                    законодательстве.</small>
+                <v-select
+                        :class="{'is-invalid': error_fields.city }"
+                        :options="options_city"
+                        v-on:input="cityInptut"
+                        @search="getCity"
+                        id="ask_city"
+                        label="name"
+                        v-model="city"></v-select>
+                <small class="text-muted">Город необходимо указать, что бы специалист мог учитывать региональные
+                    различия в законодательстве.
+                </small>
                 <span class="invalid-feedback" v-if="error_fields.city">{{ error_fields.city }}</span>
             </div>
         </div>
@@ -149,7 +125,9 @@
                        v-model="phone"
                        :class="{'is-invalid': error_fields.phone }"
                        id="ask_phone" placeholder="Номер телефона">
-                <small>Не публикуется! Используется юристом для уточненение сути вопроса, при необходимости.</small>
+                <small class="text-muted">Не публикуется! Используется юристом для уточненение сути вопроса, при
+                    необходимости.
+                </small>
                 <span class="invalid-feedback" v-if="error_fields.phone">{{ error_fields.phone }}</span>
             </div>
         </div>
@@ -157,16 +135,80 @@
 
     </div>
 
+    <h3>Тип консультации</h3>
 
-    <button type="submit"
-            @click="save"
-            class="btn btn-primary mt-4"
-            style="float: right;"
-            :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
-        <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
-        <span v-else-if="success">Вопрос задан</span>
-        <span v-else>Задать вопрос<span class="icon-nav-arrow-right ml-2"></span></span>
-    </button>
+    <div class="-list-group card-deck">
+        <div class="card box-shadow -list-group-item -list-group-item-action"
+             :class="{ active: is_paid_question }"
+             @click="is_paid_question=true">
+            <div class="card-header text-center">
+                <h5 class="my-0 font-weight-semibold">Развёрнутая консультация</h5>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title pricing-card-title text-center">800
+                    <small class="text-muted">руб.</small>
+                </h2>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="mb-3"><i class="icon-person mr-2 text-primary"></i>Персональный юрист;</li>
+                    <li class="mb-3"><i class="icon-star mr-2 text-primary"></i>Полная, подробная консультация до
+                        решения вопроса;
+                    </li>
+                    <li class="mb-3"><i class="icon-lightning mr-2 text-primary"></i>Контроль качества ответа;</li>
+                    <li class="mb-3"><i class="icon-forum mr-2 text-primary"></i>Неограниченное количество
+                        дополнительных вопросов;
+                    </li>
+                    <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег.</li>
+                </ul>
+                <button type="submit" class="btn btn-primary btn-sm mx-auto d-block mx-auto mt-3"
+                >Получить консультацию</button>
+            </div>
+            <!--div class="-d-flex -justify-content-between">
+                <div class="-pr-4">
+                    <h5>Развёрнутая письменная консультация</h5>
+                    <p>Вам будет назначен персональный юрист,
+                        который специализируется в вашем вопросе. Он подробно разберёт ситуацию, предложит план
+                        действий, ответит на все дополнительные вопросы.</p>
+                    <p class="small">Если вы будете не довольны качеством услуг, то вернём деньги.</p>
+                </div>
+                <div>800₽</div>
+            </div-->
+        </div>
+        <div href="#" class="card -list-group-item -list-group-item-action" @click="is_paid_question=false"
+             :class="{ active: !is_paid_question }">
+            <div class="card-header text-center">
+                <h5 class="my-0 font-weight-semibold">Бесплатная консультация</h5>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h2 class="card-title pricing-card-title text-center">0
+                    <small class="text-muted">руб.</small>
+                </h2>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="mb-3">Краткий совет;</li>
+                    <li class="mb-3">Гарантии ответа нет;</li>
+                </ul>
+                <p class="small text-muted">Юрист может предложить решить ваш вопрос платно, если ответ подразумевает
+                    достаточно длительную
+                    работу над вопросом.
+                </p>
+                <button type="submit"
+                        @click="save"
+                        class="btn btn-outline-primary btn-sm d-block mx-auto mt-3"
+                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                    <span v-else-if="success">Вопрос задан</span>
+                    <span v-else>Задать вопрос<!--span class="icon-nav-arrow-right ml-2"></span--></span>
+                </button>
+            </div>
+            <!--div class="-d-flex -justify-content-between">
+                <div class="-pr-4">
+                    <h5>Бесплатная консультация</h5>
+                    <p>Нет гарантии ответа, консультация краткая. Юрист может предложить платные
+                        услуги, если вопрос сложный.</p>
+                </div>
+            </div-->
+        </div>
+    </div>
+
 
     <!--form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
         <input type="hidden" name="receiver" value="4100155188774">

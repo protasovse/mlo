@@ -98,7 +98,7 @@ $theme-color-interval:      8% !default;
 
 $enable-caret:              true !default;
 $enable-rounded:            true !default;
-$enable-shadows:            false !default;
+$enable-shadows:            true !default;
 $enable-gradients:          false !default;
 $enable-transitions:        true !default;
 $enable-hover-media-query:  false !default;
@@ -267,7 +267,7 @@ $lead-font-weight:            100 !default;
 
 $small-font-size:             80% !default;
 
-$text-muted:                  $gray-500 !default;
+$text-muted:                  $gray-600 !default;
 
 $blockquote-small-color:      $gray-500 !default;
 $blockquote-font-size:        ($font-size-base * 1.25) !default;
