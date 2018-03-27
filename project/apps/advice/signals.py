@@ -20,28 +20,23 @@ def new_answer(sender, instance, *args, **kwargs):
 
         # Если ответ на платный вопрос
         if instance.on_question.is_pay:
-            # Если ответ первого уровня, т.е. отвечает эксперта
-            if instance.is_parent:
-                # Находим консультацию эксперта, который дал ответ, если такая есть
-                cur_adv = instance.on_question.advice.filter(expert=instance.author).first()
-                # Если есть, то это ответ эксперта
-                if cur_adv:
-                    # меняем статус на «Есть ответ»
+            if hasattr(instance.on_question, 'advice'):
+                cur_adv = instance.on_question.advice
+
+                if instance.is_parent:  # Если ответ первого уровня, т.е. отвечает эксперт
                     cur_adv.to_answered()
-            # Иначе ответ — комментарий в какой-то ветке или уточнение
-            else:
-                # Находим консультацию эксперта, в ветке которого пользователь задал уточнение
-                cur_adv = instance.on_question.advice.filter(expert=instance.parent.author).first()
-                # Если есть консультация
-                if cur_adv:
-                    # Если пользователь — эксперт
-                    if instance.author == cur_adv.expert:
-                        # меняем статус на «Есть ответ»
-                        cur_adv.to_answered()
-                    # Если пользователь — автор вопроса
-                    elif instance.author == instance.on_question.author:
-                        # меняем статус на «Дополнительный вопрос»
-                        cur_adv.to_addquestion()
+
+                else:  # Иначе ответ — комментарий в какой-то ветке или уточнение
+                    # Если есть консультация
+                    if cur_adv:
+                        # Если пользователь — эксперт
+                        if instance.author == instance.parent.author:
+                            # меняем статус на «Есть ответ»
+                            cur_adv.to_answered()
+                        # Если пользователь — автор вопроса
+                        elif instance.author == instance.on_question.author:
+                            # меняем статус на «Дополнительный вопрос»
+                            cur_adv.to_addquestion()
 post_save.connect(new_answer, sender=Answer)
 
 

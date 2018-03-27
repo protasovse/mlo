@@ -7,6 +7,7 @@ from timezone_field import TimeZoneField
 
 from django.utils.translation import ugettext_lazy as _
 
+from apps.advice.manager import AdviceManager
 from apps.advice.settings import ADVICE_COST
 from . import emails
 from apps.entry.models import Question
@@ -37,7 +38,7 @@ class Advice(models.Model):
     """
     Платные консультации.
     """
-    question = models.ForeignKey(
+    question = models.OneToOneField(
         Question,
         on_delete=models.NOT_PROVIDED,
         related_name='advice'
@@ -72,6 +73,9 @@ class Advice(models.Model):
         verbose_name=_('Дата ответа'),
         help_text=_('Когда эксперт подготовит консультацию')
     )
+
+    objects = models.Manager()
+    published = AdviceManager()
 
     class Meta:
         verbose_name = _('Платная консультация')

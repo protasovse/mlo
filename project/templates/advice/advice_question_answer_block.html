@@ -1,0 +1,38 @@
+{% with advice_context.advice as item %}
+
+    {% if item.expert_id == user.pk %}
+
+        {% if item.status == 'payment_confirmed' %}
+
+            <div>
+                <button type="button" class="btn btn-outline-danger btn-sm">
+                    Отказаться
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle">
+                        Принять
+                    </button>
+                    <div class="d-block dropdown-menu">
+                        <div class="dropdown-header">отвечу через…</div>
+                        <a class="dropdown-item" href="#">1 час</a>
+                        <a class="dropdown-item" href="#">2 часа</a>
+                        <a class="dropdown-item" href="#">3 часов</a>
+                        <a class="dropdown-item" href="#">4 часов</a>
+                        <a class="dropdown-item" href="#">6 часов</a>
+                        <a class="dropdown-item" href="#">12 часов</a>
+                        <a class="dropdown-item" href="#">24 часов</a>
+                    </div>
+                </div>
+            </div>
+
+        {% elif item.status == 'inwork' %}
+
+            <div class="-d-none">
+                {% include 'entry/generic/form_reply.html' with on_question=question.id %}
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+{% endwith %}

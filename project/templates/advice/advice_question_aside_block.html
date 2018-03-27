@@ -1,0 +1,46 @@
+{% load cropping %}
+
+{% with advice_context.advice as item %}
+<div class="lawyer-list">
+
+    <h5 class="consult-state {{ item.status }}">{{ item.get_status_display }}</h5>
+
+    <p class="subtitle">Цена консультации</p>
+    <p class="cost rub">{{ item.cost }}</p>
+
+    {% if item.expert %}
+
+        <p class="subtitle">Консультацию ведёт эксперт</p>
+
+        {% with item.expert as expert %}
+            <div class="consult-lawyer ">
+                <a class="pht" href="{% url 'lawyer_page' expert.pk %}"><img
+                        src="{% cropped_thumbnail expert.info 'photo' %}"/></a>
+                <h6><a href="{% url 'lawyer_page' expert.pk %}">{{ expert }}</a></h6>
+            </div>
+        {% endwith %}
+
+        <p class="normal mt-3 text-muted">
+            {% if item.status == 'payment_confirmed' %}
+                Эксперт назначен и оповещён, но еще не принял заявку. До принятия {{ advice_context.overdue_time }} мин.
+            {% elif item.status == 'inwork' %}
+                Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.
+            {% endif %}
+
+        </p>
+
+    {% else %}
+
+        <p class="subtitle">Эксперт ещё не назначен</p>
+
+        <p class="normal">
+            {% if item.status == 'new' %}
+                Эксперт будет назначен после оплаты и подвержения оплаты.
+            {% elif item.status == 'paid' %}
+                Заявка оплачена, ждём поступления оплаты!
+            {% endif %}
+        </p>
+
+    {% endif %}
+</div>
+{% endwith %}

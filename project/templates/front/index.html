@@ -6,7 +6,7 @@
     <section class="header-section">
         <main class="text-center">
             <h1 class="h4 mt-5">Юридическая консультация онлайн с 2005 года</h1>
-            <h2 class="h1 mb-5">100% гарантия решения юридического вопроса</h2>
+            <h2 class="h1 mb-5">100% гарантия решения вопроса</h2>
             <!--p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p-->
             <p class="col-md-7 mx-auto lead mt-5 mb-5">
                 <b>Вернём деньги за платный вопрос, если вы не будете удовлетворены консультацией нашего эксперта.</b>
@@ -19,38 +19,38 @@
     </section>
 
     <section class="advantage-section">
-            <div class="row">
-                <div class="row content">
-                    <h3>Наши преимущества<sup>*</sup></h3>
-                    <div class="advantages">
-                        <div class="advantage-item i1">
-                            <h5>Экономия денег</h5>
-                            <p>Услуги наших экспертов дешевле на 20-60%, чем у юриста в офисе.</p>
-                        </div>
-                        <div class="advantage-item i2">
-                            <h5>Консультация 7/24</h5>
-                            <p>Консультируем в любое время, каждый день.</p>
-                        </div>
-                        <div class="advantage-item i3">
-                            <h5>Консультации онлайн — удобно!</h5>
-                            <p>Нет необходимости искать юриста и посещать офис.</p>
-                        </div>
-                        <div class="advantage-item i4">
-                            <h5>Гарантия качества</h5>
-                            <p>Возвратим 100% оплаченных услуг, если вы не будете удовлетворены.</p>
-                        </div>
-                        <div class="advantage-item i5">
-                            <h5>Подтверждённая компетенция</h5>
-                            <p>Наши юристы только с подтверждённой компетенцией и хорошей репутацией.</p>
-                        </div>
-                        <div class="advantage-item i6">
-                            <h5>Полная защита</h5>
-                            <p>Данные передаются по защищённому протоколу и недоступны другим.</p>
-                        </div>
+        <div class="row">
+            <div class="row content">
+                <h3>Наши преимущества<sup>*</sup></h3>
+                <div class="advantages">
+                    <div class="advantage-item i1">
+                        <h5>Экономия денег</h5>
+                        <p>Услуги наших экспертов дешевле на 20-60%, чем у юриста в офисе.</p>
                     </div>
-                    <small class="text-muted">* Относится только к платным консультациям</small>
+                    <div class="advantage-item i2">
+                        <h5>Консультация 7/24</h5>
+                        <p>Консультируем в любое время, каждый день.</p>
+                    </div>
+                    <div class="advantage-item i3">
+                        <h5>Консультации онлайн — удобно!</h5>
+                        <p>Нет необходимости искать юриста и посещать офис.</p>
+                    </div>
+                    <div class="advantage-item i4">
+                        <h5>Гарантия качества</h5>
+                        <p>Возвратим 100% оплаченных услуг, если вы не будете удовлетворены.</p>
+                    </div>
+                    <div class="advantage-item i5">
+                        <h5>Подтверждённая компетенция</h5>
+                        <p>Наши юристы только с подтверждённой компетенцией и хорошей репутацией.</p>
+                    </div>
+                    <div class="advantage-item i6">
+                        <h5>Полная защита</h5>
+                        <p>Данные передаются по защищённому протоколу и недоступны другим.</p>
+                    </div>
                 </div>
+                <small class="text-muted">* Относится только к платным консультациям</small>
             </div>
+        </div>
     </section>
 
     <section class="gray review-section">
@@ -62,34 +62,13 @@
                 <div class="gutter"></div>
                 <div class="reviews">
                     <div class="review">
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
-                        <div class="review-item">
-                            <h6>Ольга Логинова</h6>
-                            <p>{% lorem 17 w random %}</p>
-                        </div>
+                        {% for item in reviews %}
+                            <a class="review-item"
+                               href="{% url 'question:detail' pk=item.like.entry.answer.on_question_id %}">
+                                <h6>{{ item.like.user.get_name }}</h6>
+                                <p>{{ item.review }}</p>
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="desc">
@@ -249,7 +228,7 @@
         <div class="container">
             <div class="row">
                 <div class="title">
-                    <h3>Лучшие юристы и адвокаты</h3>
+                    <h3>Юристы и адвокаты</h3>
                     <button type="button" class="btn btn-sm btn-white">Все эксперты <i class="icon-people ml-2"></i>
                     </button>
                 </div>

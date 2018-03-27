@@ -24,7 +24,6 @@ class Likes(models.Model):
 
     class Meta:
         unique_together = ('entry', 'user')
-        ordering = ('-date',)
         verbose_name = _('Отзыв')
         verbose_name_plural = _('Отзывы')
 
@@ -44,6 +43,7 @@ class Review(models.Model):
     review = models.TextField(_('Текст отзыва'))
 
     class Meta:
+        ordering = ('-id', )
         verbose_name = _('Отзыв')
         verbose_name_plural = _('Отзывы')
 

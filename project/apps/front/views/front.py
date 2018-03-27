@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 
 from apps.entry.models import Question
 from apps.rating.models import Rating
+from apps.review.models import Review
 
 
 class Mainpage(TemplateView):
@@ -13,8 +14,9 @@ class Mainpage(TemplateView):
         context = super(Mainpage, self).get_context_data(**kwargs)
         context['h1'] = "Консультация юриста онлайн"
 
-        context['questions'] = Question.published.filter(reply_count__gt=0).all()[:3]
+        context['questions'] = Question.published.filter(reply_count__gt=0, is_pay=True).all()[:5]
         context['lawyers'] = Rating.lawyers.filter(month_rate__gt=0)[:15]
+        context['reviews'] = Review.objects.filter(like__entry__answer__on_question__is_pay=True)[:7]
 
         return context
 

@@ -1,6 +1,6 @@
 
 # Начальная стоимость консультации
-ADVICE_COST = 800
+ADVICE_COST = 800  # руб.
 
 # Время через которое заявка переходит следующему по очереди
-ADVICE_OVERDUE_TIME = 30
+ADVICE_OVERDUE_TIME = 30  # min

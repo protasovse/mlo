@@ -1,25 +1,50 @@
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView, RedirectView
-from django.views.generic import DetailView
 from django.contrib.auth import login
+
+from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED, ADVICE_INWORK
+from apps.advice.settings import ADVICE_OVERDUE_TIME
 from apps.svem_auth.models.users import UserHash
 from apps.entry.models import Question, Answer
 from apps.entry.managers import PUBLISHED
 from django.contrib import messages
 from django.urls import reverse
-from datetime import date
+from datetime import date, timedelta
 from apps.svem_system.exceptions import ControlledException
 
 
-class QuestionDetail(DetailView):
+class QuestionDetail(TemplateView):
     template_name = 'question/question_detail.html'
-    queryset = Question.published.all()
-    context_object_name = 'question'
 
     def get_context_data(self, **kwargs):
-        context = super(QuestionDetail, self).get_context_data(**kwargs)
+        context = {}
+
+        question = get_object_or_404(Question, pk=kwargs['pk'])
+
+        context.update({
+            'question': question
+        })
+
+        if question.is_pay:
+            advice = Advice.objects.get(question=question)
+            advice_context = {
+                'advice': advice
+            }
+
+            if advice.status == ADVICE_PAYMENT_CONFIRMED:
+                overdue_time = timedelta(minutes=ADVICE_OVERDUE_TIME) - (timezone.now() - advice.payment_date)
+                advice_context.update({
+                    'overdue_time': overdue_time.seconds // 60
+                })
+
+            context.update({
+                'advice_context': advice_context
+            })
+
         context.update({
             'mess': messages.get_messages(self.request),
-            'answers': Answer.published.by_question(context['object']).filter(parent_id=None)
+            'answers': Answer.published.by_question(question).filter(parent_id=None)
         })
         return context
 
@@ -65,4 +90,3 @@ class ConfirmQuestion(RedirectView):
                 'danger'
             )
             return reverse('question:detail', kwargs={'pk': kwargs['pk']})
-

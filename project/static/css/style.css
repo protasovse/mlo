@@ -8197,6 +8197,9 @@ section {
         section.review-section .review {
           min-width: 600px; } }
       section.review-section .review .review-item {
+        display: block;
+        text-decoration: none;
+        color: inherit;
         border-bottom: solid 4px #f5f5f5;
         padding: 20px 20px 20px 100px;
         position: relative;

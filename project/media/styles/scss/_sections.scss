@@ -152,6 +152,9 @@ section {
         min-width: 600px;
       }
       .review-item {
+        display: block;
+        text-decoration: none;
+        color: inherit;
         border-bottom: solid 4px $gray-100;
         p {
           margin-bottom: 0;
