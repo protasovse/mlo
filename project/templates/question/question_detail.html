@@ -44,10 +44,9 @@
                     <div class="row">
 
                         <div class="question-page_l-col">
-                            <time class="subtitle" datetime="{{ question.pub_date|date:"c" }}"
-                                  itemprop="dateCreated">{{ question.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
-                            <br>
-                            <span>№ {{ question.id }}</span><br>
+                            <time class="subtitle d-block mt-1 mb-2" datetime="{{ question.pub_date|date:"c" }}"
+                                  itemprop="dateCreated">{{ question.pub_date|date:"j M Y G:i" }}</time>
+                            <span class="d-block">№ {{ question.id }}</span>
                             <span>{{ question.author.city.name }}</span>
                         </div>
 
@@ -55,7 +54,7 @@
 
                             {# Имя #}
                             <h5 class="my-3 mb-lg-1 mt-lg-0"
-                                itemprop="name">{{ question.author.get_full_name }}</h5>
+                                itemprop="name" data-user_id="{{ question.author.pk }}">{{ question.author.get_name }}</h5>
 
                             {# Текст #}
                             <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
@@ -75,7 +74,9 @@
                             {# Блок ответить на вопрос #}
                             {% if question.is_pay %}
                                 {# Если консультация платная #}
-                                {% include 'advice/advice_question_answer_block.html' with advice_context=advice_context %}
+                                {% include 'advice/advice_question_answer_block.html' %}
+                            {% else %}
+                                {#% include 'question/question_answer_block.html' %#}
                             {% endif %}
 
                             <hr class="mb-4 mt-5">

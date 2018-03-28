@@ -1,5 +1,4 @@
 {% load static %}
-{% load cropping %}
 
 <nav class="mlo-navbar fixed">
 
@@ -19,12 +18,15 @@
     {% endblock %}
 
     <div class="mlo-navbar_actions">
-        {% if user.is_authenticated %}
-            <a href="#" class="sq">
-                <img src="{% cropped_thumbnail user.info 'pic' %}" />
-            </a>
+        {% if user.is_authenticated and user.role == 2 %}
+            <a href="{% url 'lawyer_page' user.pk %}" class="sq"><img
+                    src="{% include 'account/generic/pic.html' with item=user %}"></a>
         {% endif %}
-        <a href="{% url 'ask_question' %}" class="d-none d-sm-inline-flex">Спросить юриста</a>
+        {% if user.role == 2 %}
+            <a href="{% url 'personal_questions:list' %}" class="d-none d-sm-inline-flex">Отвечать</a>
+        {% else %}
+            <a href="{% url 'ask_question' %}" class="d-none d-sm-inline-flex">Спросить юриста</a>
+        {% endif %}
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
         <a href="#" class="slide-menu-toggle sq"></a>
     </div>

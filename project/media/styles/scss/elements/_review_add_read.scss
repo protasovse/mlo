@@ -2,10 +2,25 @@ $review_modal_width: 470px;
 $review-modal-header-icon-width: line(4);
 
 .review-modal {
-  z-index: $zindex-modal;
+  border-radius: $border-radius-xl;
+  z-index: $zindex-dropdown;
   width: $review_modal_width;
 
-  @include media-breakpoint-down(sm){
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 10px;
+    background: {
+      image: url("/static/img/dropdown/rectangle.png");
+      position: center;
+      repeat: no-repeat;
+    }
+  }
+  margin-top: 10px;
+
+  @include media-breakpoint-down(sm) {
     position: fixed;
     top: 0;
     left: 0;
@@ -24,8 +39,9 @@ $review-modal-header-icon-width: line(4);
 .review-modal-dialog {
   padding: line(1) line(2);
 
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     padding: line(.5) line(1);
+    margin-top: 60px;
   }
 }
 
@@ -69,7 +85,7 @@ $review-modal-header-icon-width: line(4);
 
 .review-modal-text {
   color: $gray-600;
-  margin-top: line(2);
+  margin-top: line(1);
   max-height: line(14);
   overflow-y: scroll;
   p:last-of-type {
@@ -79,7 +95,7 @@ $review-modal-header-icon-width: line(4);
     margin-top: line(.5);
     width: 100%;
   }
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     max-height: none;
     textarea {
       min-height: 60vh;

@@ -1,0 +1,27 @@
+{% if item.author.role > 1 %}
+    <div class="answer-footer-like-sign dropdown">
+        {% with item.get_review as review %}{% if review %}
+            <a href="#">Читать отзыв клиента</a>
+            {% include 'entry/generic/answer_footer_like_review_read.html' with item=review %}
+        {% else %}
+            {% if not user.is_authenticated or user.role == 1 %}
+                Ответ полезен?
+            {% elif item.author.pk == user.pk %}
+                Мой ответ
+            {% else %}
+                Жалоба/согласен
+            {% endif %}
+            {#% include 'entry/generic/answer_footer_like_review_add.html' with item=review %#}
+        {% endif %}{% endwith %}
+    </div>
+    <div class="answer-footer-like-block">
+        {% if item.author.pk != user.pk %}
+            <i class="icon-dislike order-1"></i>
+            <i class="icon-like order-3"></i>
+        {% endif %}
+        <span class="{% if item.like_count < 0 %}dislike{% elif item.like_count > 0 %}like{% endif %} order-2"
+        >{{ item.like_count }}</span>
+    </div>
+{% else %}
+    <span class="answer-footer-like-sign">Дополнительный вопрос</span>
+{% endif %}

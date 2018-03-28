@@ -1,34 +1,3 @@
-.dropdown-menu {
-  border-radius: $border-radius-xl;
-  box-shadow: $dropdown-box-shadow;
-  margin-top: 10px;
-  .dropdown-item {
-    .small {
-      display: block;
-      color: $gray-600;
-    }
-    &.active,
-    &:active {
-      .small {
-        color: rgba($component-active-color, .75);
-      }
-    }
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    width: 100%;
-    height: 10px;
-    background: {
-      image: url("/static/img/dropdown/rectangle.png");
-      position: center;
-      repeat: no-repeat;
-    }
-  }
-}
-
 .dropdown-menu-close {
   position: absolute;
   display: block;

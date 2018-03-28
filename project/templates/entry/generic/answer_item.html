@@ -6,15 +6,12 @@
 
     {# Заголовок ответа #}
     {% if item.author.role > 1 %}{# Если тип учётной записи выше, чем «клиент» #}
-
         <header class="answer-header{% if push %} answer-header_photo-small{% endif %}">
 
             <div class="question-page_l-col">
-                {% if item.author.info.orig %}{# Если есть фото #}
-                    <a class="answer-header_photo" href="{% url 'lawyer_page' item.author_id %}">
-                        <img src="{% cropped_thumbnail item.author.info 'pic' %}" alt="{{ item.author }}"/>
-                    </a>
-                {% endif %}
+                <a class="answer-header_photo" href="{% url 'lawyer_page' item.author_id %}">
+                    <img src="{% include 'account/generic/pic.html' with item=item.author %}" alt="{{ item.author }}"/>
+                </a>
             </div>
 
             {# Имя, статус, медали #}
@@ -33,7 +30,8 @@
                 {# Медали #}
                 {% if not push %}
                     <div class="answer-header_medal mb-2">
-                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span class="v">{{ item.author.rating.month_rate }}</span></span>
+                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
+                                class="v">{{ item.author.rating.month_rate }}</span></span>
                         <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
                         <span class="item" title="Всего консультаций"><i class="icon-forum"></i><span
                                 class="v">57345</span></span>
@@ -50,10 +48,9 @@
     <div class="row">
 
         <div class="question-page_l-col">
-            <time class="subtitle" itemprop="dateCreated" datetime="{{ item.pub_date|date:"c" }}">
-                {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</time>
-            <br><span class="mt-2">№ {{ item.id }}</span>
-            <br>
+            <time class="subtitle d-block mb-2 mt-1" itemprop="dateCreated"
+                  datetime="{{ item.pub_date|date:"c" }}">{{ item.pub_date|date:"j M Y G:i" }}</time>
+            <span class="d-block mt-1">№ {{ item.id }}</span>
         </div>
 
         <div class="question-page_r-col content">
@@ -78,30 +75,13 @@
         <div class="question-page_r-col d-flex align-items-center justify-content-between">
 
             <div class="answer-footer-action normal">
-                <a href="#">Ответить</a>
+                {% if forloop.last %}
+                    <a href="#" class="btn btn-sm btn-primary">Дополнительный вопрос<i class="icon-message_buble ml-2"></i></a>
+                {% endif %}
             </div>
 
             <div class="answer-footer-like">
-                {% if item.author.role > 1 %}
-                    <span class="answer-footer-like-sign dropdown">
-                        {% with item.get_review as review %}{% if review %}
-                            <a href="#">Читать отзыв клиента</a>
-                            {#% include 'entry/generic/review_read.html' with item=review %#}
-                        {% else %}
-                            Ответ полезен?
-                            {#% include 'entry/generic/review_add.html' with item=review %#}
-                        {% endif %}{% endwith %}
-                    </span>
-                    <div class="answer-footer-like-block">
-                        <i class="icon-dislike"></i>
-                        <span class="{% if item.like_count < 0 %}dislike{% elif item.like_count > 0 %}like{% endif %}">
-                {{ item.like_count }}</span>
-                        <i class="icon-like"></i>
-                    </div>
-                {% else %}
-                    <span class="answer-footer-like-sign">Дополнительный вопрос</span>
-                {% endif %}
-
+                {% include 'entry/generic/answer_footer_like.html' %}
             </div>
 
         </div>
@@ -110,8 +90,7 @@
 
     {# Форма ответа на вопрос #}
     <footer class="row d-none">
-        <div class="l-col"></div>
-        <div class="r-col">
+        <div class="question-page_r-col ml-auto">
             {% include 'entry/generic/form_reply.html' with on_question=item.on_question_id parent=item.id %}
         </div>
     </footer>

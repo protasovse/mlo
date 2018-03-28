@@ -20,7 +20,7 @@ class QuestionDetail(TemplateView):
     def get_context_data(self, **kwargs):
         context = {}
 
-        question = get_object_or_404(Question, pk=kwargs['pk'])
+        question = Question.published.get(pk=kwargs['pk'])
 
         context.update({
             'question': question

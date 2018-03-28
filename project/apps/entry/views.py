@@ -53,6 +53,6 @@ class QuestionsList(TemplateView):
         # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
 
         # Вопросы
-        context['questions'] = Question.published.by_rubric(68)[:10]
+        context['questions'] = Question.published.order_by('-pk')[:10]
 
         return context

@@ -74,12 +74,13 @@ class QuestionAdmin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
     list_filter = ('pub_date', 'status', 'is_pay')
     inlines = (AnswersForQuestionInLine, FilesInLine, AdviceInLine)
+    list_per_page = 10
 
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
-    search_fields = ['content', 'author__last_name', 'author__email']
+    search_fields = ['id', ]
     # readonly_fields = ('on_question',)
     fields = ('content', ('author', 'status'), 'on_question')
     autocomplete_fields = ['author', 'on_question']

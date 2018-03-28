@@ -28,10 +28,13 @@ class LikeWithReviewFilter(SimpleListFilter):
 
 @admin.register(Likes)
 class LikesAdmin(admin.ModelAdmin):
-    list_display = ('date', 'entry_id', 'value', 'user', 'review', 'title_for_admin')
+    list_display = ['date', 'entry', 'value', 'user', 'review', ]
     search_fields = ['entry__pk', 'user__last_name', 'review__review', ]
     raw_id_fields = ['user', 'entry', ]
     inlines = (ReviewInLine,)
     list_filter = (LikeWithReviewFilter,)
+    ordering = ('-date', )
+    list_per_page = 15
+
 
 

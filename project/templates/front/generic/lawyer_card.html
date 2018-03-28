@@ -2,7 +2,7 @@
 
 <div class="lawyer-card">
     <div class="lanyard"></div>
-    <img src="{% cropped_thumbnail item.user.info 'photo' %}" alt="{{ a.author }}"/>
+    <img src="{% include 'account/generic/photo.html' with item=item.user %}" alt="{{ item.user }}"/>
     <div class="lawyer-card-title">
         <h6><a href="{% url 'lawyer_page' item.user.pk %}">{{ item.user }}</a></h6>
         <p class="rating">{{ item.get_rate }}</p>

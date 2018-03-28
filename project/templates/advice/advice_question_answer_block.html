@@ -1,8 +1,8 @@
-{% with advice_context.advice as item %}
+{% with advice_context.advice as advice %}
 
-    {% if item.expert_id == user.pk %}
+    {% if advice.expert_id == user.pk %}
 
-        {% if item.status == 'payment_confirmed' %}
+        {% if advice.status == 'payment_confirmed' %}
 
             <div>
                 <button type="button" class="btn btn-outline-danger btn-sm">
@@ -25,11 +25,9 @@
                 </div>
             </div>
 
-        {% elif item.status == 'inwork' %}
+        {% elif advice.status == 'inwork' %}
 
-            <div class="-d-none">
-                {% include 'entry/generic/form_reply.html' with on_question=question.id %}
-            </div>
+            {% include 'entry/generic/form_reply.html' with on_question=question.id %}
 
         {% endif %}
 

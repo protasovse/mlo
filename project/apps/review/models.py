@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from apps.entry.models import Entry
+from apps.review.managers import ReviewManager, LikeManager
 from config.settings import AUTH_USER_MODEL
 
 
@@ -22,6 +23,8 @@ class Likes(models.Model):
 
     value = models.SmallIntegerField(_('Балл'))
 
+    objects = LikeManager()
+
     class Meta:
         unique_together = ('entry', 'user')
         verbose_name = _('Отзыв')
@@ -29,7 +32,7 @@ class Likes(models.Model):
 
     @property
     def title_for_admin(self):
-        return "Вопрос: %d" % (self.entry.published.on_question_id)
+        return "Вопрос: %d" % (self.entry)
 
     def __str__(self):
         return "%d: %s (%d)" % (self.entry.pk, self.user.get_full_name, self.value)
@@ -41,6 +44,8 @@ class Review(models.Model):
     """
     like = models.OneToOneField(Likes, on_delete=models.CASCADE, related_name='review')
     review = models.TextField(_('Текст отзыва'))
+
+    objects = ReviewManager()
 
     class Meta:
         ordering = ('-id', )

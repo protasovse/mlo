@@ -16,34 +16,35 @@
 
         {# Ответы #}
         {% if show_answers and item.reply_count %}
-        <div class="answer offset-md-3">
-        {% with item.get_answers as answers %}
-            <div class="answer-header">
-                <div class="usr">
-                    {% for a in answers %}
-                        {% if a.author.info.orig %}
-                            <a href="{% url 'lawyer_page' a.author_id %}">
-                                <img src="{% cropped_thumbnail a.author.info 'pic' %}" alt="{{ a.author }}"/></a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div>
-                {% if item.reply_count > 1 %}
-                    <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
-                {% else %}
-                    <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
-                    <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
-                {% endif %}
-                </div>
+            <div class="answer offset-md-3">
+                {% with item.get_answers as answers %}
+                    <div class="answer-header">
+                        <div class="usr">
+                            {% for a in answers %}
+                                {% if a.author.info.orig %}
+                                    <a href="{% url 'lawyer_page' a.author_id %}"><img
+                                            src="{% include 'account/generic/pic.html' with item=a.author %}"
+                                            alt="{{ a.author }}"/></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            {% if item.reply_count > 1 %}
+                                <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+                            {% else %}
+                                <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
+                                <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
+                            {% endif %}
+                        </div>
 
+                    </div>
+                    <p>{{ answers.last.html_content|safe|truncatechars:160 }}</p>
+                {% endwith %}
             </div>
-            <p>{{ answers.last.html_content|safe|truncatechars:160 }}</p>
-        {% endwith %}
-        </div>
         {% else %}
-        <div class="normal col offset-md-3">
-            <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
-        </div>
+            <div class="normal col offset-md-3">
+                <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+            </div>
         {% endif %}
 
     </div>

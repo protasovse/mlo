@@ -10,16 +10,16 @@
             <i class="icon-message_bubble ml-2"></i></a></p>
 
         <ul>
-            {% if user.is_authenticated %}
-            <li><a href="#">Личный кабинет</a></li>
-            <li><a href="{% url 'personal:edit' %}">Редактировать профиль</a></li>
-            <li><a href="{% url 'personal_questions:list' %}">Отвечать на вопросы</a></li>
+            {% if user.is_authenticated and user.role == 2 %}
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="{% url 'personal:edit' %}">Редактировать профиль</a></li>
+                <li><a href="{% url 'personal_questions:list' %}">Отвечать на вопросы</a></li>
             {% else %}
-            <li><a href="#">Как это работает?</a></li>
-            <li><a href="{% url 'questions:list' %}">Вопросы и ответы</a></li>
-            <li><a href="#">Наши юристы</a></li>
-            <li><a href="#">Отзывы</a></li>
-            <li><a href="#">О проекте</a></li>
+                <li><a href="#">Как это работает?</a></li>
+                <li><a href="{% url 'questions:list' %}">Вопросы и ответы</a></li>
+                <li><a href="#">Наши юристы</a></li>
+                <li><a href="#">Отзывы</a></li>
+                <li><a href="#">О проекте</a></li>
             {% endif %}
         </ul>
     </div>
