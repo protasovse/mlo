@@ -11,6 +11,8 @@ def new_advice(sender, instance, *args, **kwargs):
     if 'created' in kwargs and kwargs['created']:
         instance.question.is_pay = True
         instance.question.save(update_fields=['is_pay'])
+
+
 post_save.connect(new_advice, sender=Advice)
 
 
@@ -27,16 +29,16 @@ def new_answer(sender, instance, *args, **kwargs):
                     cur_adv.to_answered()
 
                 else:  # Иначе ответ — комментарий в какой-то ветке или уточнение
-                    # Если есть консультация
-                    if cur_adv:
-                        # Если пользователь — эксперт
-                        if instance.author == instance.parent.author:
-                            # меняем статус на «Есть ответ»
-                            cur_adv.to_answered()
-                        # Если пользователь — автор вопроса
-                        elif instance.author == instance.on_question.author:
-                            # меняем статус на «Дополнительный вопрос»
-                            cur_adv.to_addquestion()
+                    # Если пользователь — эксперт
+                    if instance.author == instance.parent.author:
+                        # меняем статус на «Есть ответ»
+                        cur_adv.to_answered()
+                    # Если пользователь — автор вопроса
+                    elif instance.author == instance.on_question.author:
+                        # меняем статус на «Дополнительный вопрос»
+                        cur_adv.to_addquestion()
+
+
 post_save.connect(new_answer, sender=Answer)
 
 
@@ -45,6 +47,8 @@ def add_user_to_experts(sender, instance, *args, **kwargs):
     if 'created' in kwargs and kwargs['created']:
         Scheduler.objects.create(expert_id=instance.user_id)
         queue_add_user(instance.user_id)
+
+
 post_save.connect(add_user_to_experts, sender=Expert)
 
 
@@ -52,6 +56,8 @@ post_save.connect(add_user_to_experts, sender=Expert)
 def del_user_to_experts(sender, instance, *args, **kwargs):
     Scheduler.objects.filter(expert_id=instance.user_id).delete()
     queue_del_user(instance.user_id)
+
+
 pre_delete.connect(del_user_to_experts, sender=Expert)
 
 
@@ -59,4 +65,6 @@ pre_delete.connect(del_user_to_experts, sender=Expert)
 def add_status_log_receiver(sender, instance, *args, **kwargs):
     c = StatusLog.objects.create(advice=instance, status=instance.status)
     c.save()
+
+
 post_save.connect(add_status_log_receiver, sender=Advice)

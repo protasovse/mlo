@@ -4419,7 +4419,11 @@ section.gray .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > 
       background-color: rgba(0, 0, 0, 0.2); }
     .mlo-navbar_actions a.sq {
       width: 40px;
-      padding: 0 !important; }
+      padding: 0 !important;
+      overflow: hidden; }
+      .mlo-navbar_actions a.sq img {
+        width: 40px;
+        height: 40px; }
     .mlo-navbar_actions a.active {
       color: #fc6947; }
       .mlo-navbar_actions a.active:not(:hover) {

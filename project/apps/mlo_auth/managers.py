@@ -11,6 +11,12 @@ LAWYER = 2
 
 class UserManager(BaseUserManager):
 
+    def get_queryset(self):
+        """ """
+        return super(UserManager, self).get_queryset().select_related(
+                'info', 'rating', 'city'
+            ).prefetch_related()
+
     def _create_user(self, email, password, **extra_fields):
 
         if not email:

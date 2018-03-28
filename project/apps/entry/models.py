@@ -49,10 +49,6 @@ class Entry(models.Model):
         editable=False
     )
 
-    status = EnumField(
-        _('Статус'), db_index=True,
-        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
-
     like_count = models.IntegerField(
         _('Лайки'), db_index=True,
         default=0)
@@ -81,8 +77,9 @@ class Entry(models.Model):
         return misaka.html(self.content)
 
     class Meta:
-        ordering = ("-id",)
+        # ordering = ("-id",)
         # abstract = True
+        pass
 
 
 class Files(models.Model):
@@ -126,6 +123,10 @@ class Question(Entry, Titled, Classified):
         _('Платный вопрос'),
         default=False,
     )
+
+    status = EnumField(
+        _('Статус'), db_index=True,
+        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
 
     key = models.CharField("Key", max_length=40, db_index=True, null=True, blank=True)
 
@@ -181,11 +182,16 @@ class Answer(Entry):
         verbose_name=_('К ответу'),
     )
 
+    status = EnumField(
+        _('Статус'), db_index=True,
+        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
+
     objects = models.Manager()
     # Менеджер для публикации на публичной версии сайта
     published = AnswersManager()
 
     class Meta:
+        ordering = ('id', )
         verbose_name = _('Ответ')
         verbose_name_plural = _('Ответы')
 

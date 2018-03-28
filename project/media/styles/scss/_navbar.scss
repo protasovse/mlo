@@ -71,6 +71,11 @@
     &.sq {
       width: 40px;
       padding: 0 !important;
+      overflow: hidden;
+      img {
+        width: 40px;
+        height: 40px;
+      }
     }
     &.active {
       color: $red;

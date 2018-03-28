@@ -60,7 +60,7 @@ class MloUserAdmin(UserAdmin):
     )
     search_fields = ('email', 'first_name', 'patronymic', 'last_name', 'id', )
     autocomplete_fields = ('city', )
-    ordering = ('-id',)
+    ordering = ('id',)
     list_per_page = 15
     filter_horizontal = ()
 
