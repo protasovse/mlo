@@ -1,12 +1,12 @@
 {% load cropping %}
 
-<div class="answer entry{% if push %} answer-push{% endif %}">
+<div class="answer entry{% if item.id != item.thread %} answer-push{% endif %}">
 
     <hr class="my-4">
 
     {# Заголовок ответа #}
     {% if item.author.role > 1 %}{# Если тип учётной записи выше, чем «клиент» #}
-        <header class="answer-header{% if push %} answer-header_photo-small{% endif %}">
+        <header class="answer-header{% if item.id != item.thread %} answer-header_photo-small{% endif %}">
 
             <div class="question-page_l-col">
                 <a class="answer-header_photo" href="{% url 'lawyer_page' item.author_id %}">
@@ -29,7 +29,7 @@
                 {% endif %}
 
                 {# Медали #}
-                {% if not push %}
+                {% if item.id == item.thread %}
                     <div class="answer-header_medal mt-3">
                         <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
                                 class="v">{{ item.author.rating.month_rate }}</span></span>
@@ -52,6 +52,7 @@
             <time class="subtitle d-block mt-1" itemprop="dateCreated"
                   datetime="{{ item.pub_date|date:"c" }}">{{ item.pub_date|date:"j M Y G:i" }}</time>
             <span class="d-block">№ {{ item.id }}</span>
+            <span class="d-block">{{ item.thread }}</span>
             {% if item.author.role == 1 %}<span class="d-block">{{ item.author.city.name_ru }}</span>{% endif %}
         </div>
 
@@ -80,7 +81,7 @@
             </div>
 
             <div class="answer-footer-like align-self-end mt-3 mt-sm-0">
-                {% include 'entry/generic/answer_footer_like.html' %}
+                {#% include 'entry/generic/answer_footer_like.html' %#}
             </div>
 
         </div>

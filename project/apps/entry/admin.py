@@ -11,9 +11,9 @@ class AnswersForQuestionInLine(admin.StackedInline):
     """
     model = Answer
     fk_name = 'on_question'
-    fields = ('author', 'content',)
+    fields = ('author', 'content')
     autocomplete_fields = ['author']
-    extra = 0
+    extra = 1
     show_change_link = True
     classes = ('collapse', 'collapse-closed')
 
@@ -79,13 +79,15 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
+    list_display = ('content', 'on_question_id', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
     search_fields = ['id', ]
     # readonly_fields = ('on_question',)
+    ordering = ['-thread']
     fields = ('content', ('author', 'status'), 'on_question')
     autocomplete_fields = ['author', 'on_question']
     radio_fields = {'status': admin.VERTICAL}
     inlines = (OfferInLine, AnswersForAnswerInLine, FilesInLine,)
+    list_per_page = 30
 
     def get_queryset(self, request):
         """

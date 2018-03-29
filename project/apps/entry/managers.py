@@ -62,6 +62,7 @@ class AnswersManager(EntryPublishedManager):
         return qs
 
     # Создаём ответ пользоваетеля на вопрос.
+    '''
     def create(self, question_id, content, author, parent=None):
         """
         :param question_id: вопрос, на который создаём ответ
@@ -81,6 +82,7 @@ class AnswersManager(EntryPublishedManager):
             return instance
 
         return None
+    '''
 
 
 # Менеджер для вывода вопросов для публикации

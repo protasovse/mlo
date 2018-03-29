@@ -1,4 +1,5 @@
 import misaka
+from django.core.exceptions import FieldError
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.urls import reverse
@@ -182,6 +183,13 @@ class Answer(Entry):
         verbose_name=_('К ответу'),
     )
 
+    thread = models.IntegerField(
+        null=True,
+        blank=True,
+        db_index=True,
+        verbose_name=_('Ветка'),
+    )
+
     status = EnumField(
         _('Статус'), db_index=True,
         choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
@@ -191,7 +199,7 @@ class Answer(Entry):
     published = AnswersManager()
 
     class Meta:
-        ordering = ('id', )
+        ordering = ('thread', 'pub_date', )
         verbose_name = _('Ответ')
         verbose_name_plural = _('Ответы')
 
@@ -215,9 +223,21 @@ class Answer(Entry):
         return self.likes.filter(user=self.on_question.author).first()
 
     def save(self, *args, **kwargs):
+
         if not hasattr(self, 'on_question'):
             self.on_question = self.parent.on_question
-        return super(Answer, self).save()
+
+        if self.is_parent:
+            if self.author.role == 1:
+                raise FieldError('Клиент не может ответить на вопрос')
+            elif Answer.objects.filter(on_question=self.on_question, author=self.author, parent=None).count():
+                raise FieldError('На этот вопрос уже есть ответ этого юриста')
+
+        super(Answer, self).save()
+
+        self.thread = self.pk if self.is_parent else self.parent_id
+
+        return super(Answer, self).save(update_fields=['thread'])
 
 
 class Offer(models.Model):
