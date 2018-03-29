@@ -266,7 +266,9 @@
       color: $gray-500;
     }
     .answer-footer-like-block {
-      @extend .border, .d-inline-flex, .justify-content-center;
+      @extend .border;
+      display: inline-flex;
+      justify-content: center;
       border-radius: line(2);
       padding: line(.5) line(1);
       color: $gray-500;

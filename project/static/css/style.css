@@ -5892,7 +5892,7 @@ a.bg-white:focus, a.bg-white:hover {
 .d-flex, .mlo-navbar, .mlo-navbar.fixed .mlo-navbar_addbar form.mlo-navbar_form, section, section.lawyer-section .cards .cards-inner, section.lawyer-section .title, section.lawyer-section .lawyer-page_header_r-col, .slide-menu, .question-page_header .l-col, .question-page_header .question-item .date, .question-item .question-page_header .date, .question-page_header .question-item .number, .question-item .question-page_header .number, .entry .answer-footer-like, .question-item .answer .answer-header, .lawyer-page_about_l-col, .lawyer-list .consult-lawyer {
   display: flex !important; }
 
-.d-inline-flex, .entry .answer-footer-like .answer-footer-like-block, .lawyer-medal .item, .entry .answer-header_medal .item {
+.d-inline-flex, .lawyer-medal .item, .entry .answer-header_medal .item {
   display: inline-flex !important; }
 
 @media (min-width: 576px) {
@@ -6086,7 +6086,7 @@ a.bg-white:focus, a.bg-white:hover {
 .justify-content-end {
   justify-content: flex-end !important; }
 
-.justify-content-center, section.header-section, .question_feed-navbar_title .nav, .question-page_header .l-col, .question-page_header .question-item .date, .question-item .question-page_header .date, .question-page_header .question-item .number, .question-item .question-page_header .number, .entry .answer-footer-like .answer-footer-like-block, .lawyer-page_about_l-col {
+.justify-content-center, section.header-section, .question_feed-navbar_title .nav, .question-page_header .l-col, .question-page_header .question-item .date, .question-item .question-page_header .date, .question-page_header .question-item .number, .question-item .question-page_header .number, .lawyer-page_about_l-col {
   justify-content: center !important; }
 
 .justify-content-between, .mlo-navbar, .mlo-navbar.fixed .mlo-navbar_addbar, section.lawyer-section .title, section.lawyer-section .lawyer-page_header_r-col, .slide-menu {
@@ -8650,6 +8650,8 @@ footer.main-footer {
 .entry .answer-footer-like .answer-footer-like-sign {
   color: #bababa; }
 .entry .answer-footer-like .answer-footer-like-block {
+  display: inline-flex;
+  justify-content: center;
   border-radius: 40px;
   padding: 10px 20px;
   color: #bababa; }

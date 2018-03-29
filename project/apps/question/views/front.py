@@ -44,7 +44,7 @@ class QuestionDetail(TemplateView):
 
         context.update({
             'mess': messages.get_messages(self.request),
-            'answers': Answer.published.by_question(question).filter(parent_id=None)
+            'answers': Answer.published.related_to_question(question)
         })
         return context
 

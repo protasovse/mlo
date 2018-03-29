@@ -44,10 +44,10 @@
                     <div class="row">
 
                         <div class="question-page_l-col">
-                            <time class="subtitle d-block mt-1 mb-2" datetime="{{ question.pub_date|date:"c" }}"
+                            <time class="subtitle d-block mt-1" datetime="{{ question.pub_date|date:"c" }}"
                                   itemprop="dateCreated">{{ question.pub_date|date:"j M Y G:i" }}</time>
                             <span class="d-block">№ {{ question.id }}</span>
-                            <span>{{ question.author.city.name }}</span>
+                            <span class="d-block">{{ question.author.city.name }}</span>
                         </div>
 
                         <div class="question-page_r-col content">

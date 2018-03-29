@@ -18,18 +18,19 @@
             <div class="question-page_r-col">
 
                 {# Имя автора ответа #}
-                <h5 class="mb-1" itemprop="name">
+                <h6 class="mb-0" itemprop="name">
                     <a href="{% url 'lawyer_page' item.author_id %}">{{ item.author }}</a>
-                </h5>
+                </h6>
 
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
-                    <div class="normal mb-1 text-muted d-none d-sm-block">{{ item.author.info.status|default:item.author.get_role_display }}</div>
+                    <div class="normal text-muted"
+                    >{{ item.author.info.status|default:item.author.get_role_display }}, {{ item.author.city.name_ru  }}</div>
                 {% endif %}
 
                 {# Медали #}
                 {% if not push %}
-                    <div class="answer-header_medal mb-2">
+                    <div class="answer-header_medal mt-3">
                         <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
                                 class="v">{{ item.author.rating.month_rate }}</span></span>
                         <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
@@ -48,17 +49,16 @@
     <div class="row">
 
         <div class="question-page_l-col">
-            <time class="subtitle d-block mb-2 mt-1" itemprop="dateCreated"
+            <time class="subtitle d-block mt-1" itemprop="dateCreated"
                   datetime="{{ item.pub_date|date:"c" }}">{{ item.pub_date|date:"j M Y G:i" }}</time>
-            <span class="d-block mt-1">№ {{ item.id }}</span>
+            <span class="d-block">№ {{ item.id }}</span>
+            {% if item.author.role == 1 %}<span class="d-block">{{ item.author.city.name_ru }}</span>{% endif %}
         </div>
 
         <div class="question-page_r-col content">
 
             {% if item.author.role == 1 %}
-                <h5 class="author-name mb-2" itemprop="name">
-                    {{ item.author.get_full_name }}
-                </h5>
+                <h6 class="author-name mb-2" itemprop="name">{{ item.author.get_full_name }}</h6>
             {% endif %}
 
             <div class="text" itemprop="text">{{ item.html_content|safe }}</div>
@@ -70,17 +70,16 @@
     {# Футтер: лайки/дизлайки #}
     <footer class="answer-footer row">
 
-        <div class="question-page_l-col">&nbsp;</div>
+        <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
 
-        <div class="question-page_r-col d-flex align-items-center justify-content-between">
-
-            <div class="answer-footer-action normal">
-                {% if forloop.last %}
-                    <a href="#" class="btn btn-sm btn-primary">Дополнительный вопрос<i class="icon-message_buble ml-2"></i></a>
+            <div class="answer-footer-action normal align-self-start">
+                {% if forloop.last and item.author.role > 1 %}
+                    <a href="#" class="btn btn-sm btn-primary">Дополнительный вопрос<i
+                            class="icon-message_bubble ml-2"></i></a>
                 {% endif %}
             </div>
 
-            <div class="answer-footer-like">
+            <div class="answer-footer-like align-self-end mt-3 mt-sm-0">
                 {% include 'entry/generic/answer_footer_like.html' %}
             </div>
 
@@ -97,9 +96,10 @@
 
 </div>
 
-
+{% comment %}
 {% if item.is_parent and item.children.count %}
     {% for answer in item.children %}
         {% include 'entry/generic/answer_item.html' with item=answer push=True %}
     {% endfor %}
 {% endif %}
+{% endcomment %}
