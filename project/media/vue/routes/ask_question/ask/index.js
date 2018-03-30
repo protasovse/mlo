@@ -1,3 +1,5 @@
+
+
 import template from './template.html';
 import form_mixin from '../../../mixins/form';
 
@@ -32,6 +34,7 @@ export default {
 
         }
     },
+
     computed: {
         post_action() {return '/api/question'},
         is_require_email() {return !this.completed.includes('email')},
@@ -169,15 +172,13 @@ export default {
                     for (let i = 0; i < this.$refs.upload.files.length; i++) {
                         this.$refs.upload.files[i].data = {id:this.question_id}
                     }
-                    //redirect to question
-                    window.location.href = this.question_url;
-
                     this.$refs.upload.active = true;
                     this.set_form_success();
                 });
 
             } catch (err) {
-                this.set_form_error(err.message)
+                this.set_form_error(err.message);
+                window.scrollTo(0, 0);
             }
         },
     },
