@@ -65,10 +65,11 @@ class QuestionAdmin(admin.ModelAdmin):
         (_('Content'), {
             'fields': ('title', 'content',)}),
         (_('Клиссификация'), {
-            'fields': ('status', 'author', 'rubrics', 'is_pay', 'reply_count', ),
-            # 'classes': ('collapse', 'collapse-closed')
-        }))
-    autocomplete_fields = ['rubrics', 'author']
+            'fields': ('status', 'author', 'rubrics', 'is_pay', 'reply_count', )}),
+        (_('Дополнительные поля'), {
+            'fields': ('city', 'phone',)}),
+    )
+    autocomplete_fields = ['rubrics', 'author', 'city']
     radio_fields = {'status': admin.HORIZONTAL}
     list_display = ('title', 'author', 'pub_date', 'like_count', 'reply_count', 'status', 'is_pay')
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']

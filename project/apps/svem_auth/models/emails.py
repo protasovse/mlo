@@ -46,6 +46,7 @@ def send_confirm_question(user, question, token):
     ctx = {
         'hash': token.key,
         'username': user.get_name,
+        'question_url': question.get_absolute_url(),
         'question_title': question.title,
         'question_content': question.content,
         'site': Site.objects.get_current(),

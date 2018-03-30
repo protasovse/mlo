@@ -7,7 +7,8 @@
             если к концу этого периода ответ не поступит, то вопрос больше не будет рассматриваться юристами.</p>
     </div>
     <div v-else>
-        Вопросу присвоен номер {{ question_id }}, и он находится здесь: <a :href=question_url>Вопрос {{ question_id }} </a>
+        Вопросу присвоен номер {{ question_id }}, и он находится здесь: <a
+            :href=question_url>Вопрос {{ question_id }} </a>
     </div>
 </div>
 <div v-else id="form">
@@ -122,10 +123,10 @@
             <label for="ask_phone" class="col-form-label required">Телефон</label>
             <div class="col-sm-8">
                 <masked-input type="tel" class="form-control"
-                       v-model="phone"
-                       mask="\+\7 (111) 111-11-11"
-                       :class="{'is-invalid': error_fields.phone }"
-                       id="ask_phone" placeholder="Номер телефона"></masked-input>
+                              v-model="phone"
+                              mask="\+\7 (111) 111-11-11"
+                              :class="{'is-invalid': error_fields.phone }"
+                              id="ask_phone" placeholder="Номер телефона"></masked-input>
                 <small class="text-muted">Не публикуется! Используется юристом для уточненение сути вопроса, при
                     необходимости.
                 </small>
@@ -138,43 +139,34 @@
 
     <h3>Тип консультации</h3>
 
-    <div class="-list-group card-deck">
-        <div class="card box-shadow -list-group-item -list-group-item-action"
+    <div class="card-deck">
+        <div class="card"
              :class="{ active: is_paid_question }"
              @click="is_paid_question=true">
             <div class="card-header text-center">
-                <h5 class="my-0 font-weight-semibold">Развёрнутая консультация</h5>
+                <h5 class="my-0 font-weight-semibold">«Персональный юрист»</h5>
             </div>
             <div class="card-body">
                 <h2 class="card-title pricing-card-title text-center">800
                     <small class="text-muted">руб.</small>
                 </h2>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li class="mb-3"><i class="icon-person mr-2 text-primary"></i>Персональный юрист;</li>
+                    <li class="mb-3"><i class="icon-person mr-2 text-primary"></i>Вам будет назначен персональный
+                        юрист, который специализируется в вашем вопросе;</li>
                     <li class="mb-3"><i class="icon-star mr-2 text-primary"></i>Полная, подробная консультация до
-                        решения вопроса;
-                    </li>
-                    <li class="mb-3"><i class="icon-lightning mr-2 text-primary"></i>Контроль качества ответа;</li>
+                        решения вопроса;</li>
                     <li class="mb-3"><i class="icon-forum mr-2 text-primary"></i>Неограниченное количество
-                        дополнительных вопросов;
-                    </li>
-                    <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег.</li>
+                        дополнительных вопросов;</li>
+                    <li class="mb-3"><i class="icon-lightning mr-2 text-primary"></i>Контроль качества ответов;</li>
+                    <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег,
+                        если вас не устроит качество услуги.</li>
                 </ul>
                 <button type="submit" class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3"
-                >Получить консультацию</button>
+                >Получить консультацию
+                </button>
             </div>
-            <!--div class="-d-flex -justify-content-between">
-                <div class="-pr-4">
-                    <h5>Развёрнутая письменная консультация</h5>
-                    <p>Вам будет назначен персональный юрист,
-                        который специализируется в вашем вопросе. Он подробно разберёт ситуацию, предложит план
-                        действий, ответит на все дополнительные вопросы.</p>
-                    <p class="small">Если вы будете не довольны качеством услуг, то вернём деньги.</p>
-                </div>
-                <div>800₽</div>
-            </div-->
         </div>
-        <div href="#" class="card -list-group-item -list-group-item-action" @click="is_paid_question=false"
+        <div href="#" class="card" @click="is_paid_question=false"
              :class="{ active: !is_paid_question }">
             <div class="card-header text-center">
                 <h5 class="my-0 font-weight-semibold">Бесплатная консультация</h5>
@@ -187,7 +179,7 @@
                     <li class="mb-3">Краткий совет;</li>
                     <li class="mb-3">Гарантии ответа нет;</li>
                 </ul>
-                <p class="small text-muted">Юрист может предложить решить ваш вопрос платно, если ответ подразумевает
+                <p class="text-muted">Юрист может предложить решить ваш вопрос платно, если ответ подразумевает
                     достаточно длительную работу над вопросом.
                 </p>
                 <button type="submit"
@@ -199,13 +191,6 @@
                     <span v-else>Задать вопрос<!--span class="icon-nav-arrow-right ml-2"></span--></span>
                 </button>
             </div>
-            <!--div class="-d-flex -justify-content-between">
-                <div class="-pr-4">
-                    <h5>Бесплатная консультация</h5>
-                    <p>Нет гарантии ответа, консультация краткая. Юрист может предложить платные
-                        услуги, если вопрос сложный.</p>
-                </div>
-            </div-->
         </div>
     </div>
 

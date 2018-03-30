@@ -58,21 +58,18 @@ class MloUserAdmin(UserAdmin):
             'fields': ('first_name', 'last_name', 'role', 'email', 'password1', 'password2'),
         }),
     )
-    # search_fields = ('email', 'first_name', 'patronymic', 'last_name', )
+    search_fields = ('email', 'first_name', 'last_name', )
 
     autocomplete_fields = ('city', )
-    ordering = ('-role', 'id',)
+    ordering = ('id',)
     list_per_page = 15
     filter_horizontal = ()
     inlines = (ContactInLine, CaseInLine, EducationInLine, ExperienceInLine)
 
     def get_search_results(self, request, queryset, search_term):
-        queryset = get_user_model().objects.all()
-
+        queryset, use_distinct = super().get_search_results(request, queryset, search_term)
         if search_term.isdigit():
-            queryset = queryset.filter(pk=search_term)
-        else:
-            queryset = queryset.filter(last_name__istartswith=search_term)
+            queryset = get_user_model().filter(pk=search_term)
 
         return queryset, False
 
