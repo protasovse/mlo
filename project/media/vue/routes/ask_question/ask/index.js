@@ -36,6 +36,9 @@ export default {
     },
 
     computed: {
+        is_form_send_done() {
+            return this.success && (!this.loading) && (!(this.$refs.upload && this.$refs.upload.active))
+        },
         post_action() {return '/api/question'},
         is_require_email() {return !this.completed.includes('email')},
         is_require_name() {return !this.completed.includes('name')},
@@ -46,6 +49,13 @@ export default {
                 || this.is_require_name
                 || this.is_require_phone
                 || this.is_require_city
+        }
+    },
+    watch: {
+        is_form_send_done: function() {
+            if (this.is_form_send_done) {
+                  window.location.href = this.question_url;
+            }
         }
     },
     mounted() {
