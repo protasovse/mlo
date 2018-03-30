@@ -1,4 +1,4 @@
-<div v-if="success&&!loading&&(!($refs.upload&&$refs.upload.active))">
+<div v-if="is_form_send_done">
     <div v-if="require_confirm">
         <p> Ваш вопрос принят! Что он был он стал виден юристам, подтвердите Ваш электронный ящик,
             кликнув по ссылки в отправленном письме.</p>
@@ -7,7 +7,7 @@
             если к концу этого периода ответ не поступит, то вопрос больше не будет рассматриваться юристами.</p>
     </div>
     <div v-else>
-        Вопросу присвоен номер {{ question_id }}, и он находится здесь: http://мойюрист.онлайн/{{ this.question_url }}
+        Вопросу присвоен номер {{ question_id }}, и он находится здесь: <a :href=question_url>Вопрос {{ question_id }} </a>
     </div>
 </div>
 <div v-else id="form">
@@ -66,7 +66,7 @@
 
 
             <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
-                <i class="bar" :id="file.id"><i style="width:100%;"></i></i>
+                <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
                 <a href="#" @click.prevent="$refs.upload.remove(file)" class="close"><i class="icon-cancel"></i></a>
             </div>
 
@@ -121,10 +121,11 @@
         <div class="form-group row" v-if="is_require_phone">
             <label for="ask_phone" class="col-form-label required">Телефон</label>
             <div class="col-sm-8">
-                <input type="tel" class="form-control"
+                <masked-input type="tel" class="form-control"
                        v-model="phone"
+                       mask="\+\7 (111) 111-11-11"
                        :class="{'is-invalid': error_fields.phone }"
-                       id="ask_phone" placeholder="Номер телефона">
+                       id="ask_phone" placeholder="Номер телефона"></masked-input>
                 <small class="text-muted">Не публикуется! Используется юристом для уточненение сути вопроса, при
                     необходимости.
                 </small>
