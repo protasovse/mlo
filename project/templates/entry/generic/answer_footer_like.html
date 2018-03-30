@@ -1,8 +1,10 @@
+<div class="answer-like">
 {% if item.author.role > 1 %}
-    <div class="answer-footer-like-sign dropdown">
-        {% with item.get_review as review %}{% if review %}
+    <div class="answer-like-sign dropdown">
+        {#% with item.get_review as review %}{% if review %#}
+        {% if 0 %}
             <a href="#">Читать отзыв клиента</a>
-            {% include 'entry/generic/answer_footer_like_review_read.html' with item=review %}
+            {% include 'entry/generic/answer_footer_like_review_read.html' with item=item.get_review %}
         {% else %}
             {% if not user.is_authenticated or user.role == 1 %}
                 Ответ полезен?
@@ -12,9 +14,9 @@
                 Жалоба/согласен
             {% endif %}
             {#% include 'entry/generic/answer_footer_like_review_add.html' with item=review %#}
-        {% endif %}{% endwith %}
+        {% endif %}{#% endwith %#}
     </div>
-    <div class="answer-footer-like-block">
+    <div class="answer-like-block">
         {% if item.author.pk != user.pk %}
             <i class="icon-dislike order-1"></i>
             <i class="icon-like order-3"></i>
@@ -23,5 +25,6 @@
         >{{ item.like_count }}</span>
     </div>
 {% else %}
-    <span class="answer-footer-like-sign">Дополнительный вопрос</span>
+    <span class="answer-like-sign">Дополнительный вопрос</span>
 {% endif %}
+</div>

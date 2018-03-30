@@ -136,6 +136,7 @@ class Rating(models.Model):
         default=0,
     )
 
+    objects = models.Manager()
     lawyers = RatingLawyerManager()
 
     @property

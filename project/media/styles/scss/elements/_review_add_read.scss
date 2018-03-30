@@ -3,6 +3,7 @@ $review-modal-header-icon-width: line(4);
 
 .review-modal {
   border-radius: $border-radius-xl;
+  box-shadow: 0 0 line(1.75) 0 rgba(0,0,0,.3);
   z-index: $zindex-dropdown;
   width: $review_modal_width;
 

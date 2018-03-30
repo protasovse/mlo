@@ -216,13 +216,40 @@ $photo-small-size: 40px;
   }
 
   .lawyer-list_item {
-    @extend .normal, .mb-4;
+    @extend .normal;
+    margin-bottom: line(1.5);
+
+    &.lawyer-list_item-action.active, &.lawyer-list_item-action:hover {
+      cursor: pointer;
+      .ph {
+        position: relative;
+      }
+      .ph:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($white, .5);
+      }
+      a {
+        text-decoration: none;
+        color: $gray-600;
+      }
+      .lawyer-list_body {
+        color: $gray-400;
+      }
+      .nm {
+        color: $gray-400;
+      }
+    }
   }
 
   .lawyer-list_header {
     display: flex;
     align-items: center;
-    a.ph {
+    .ph {
       flex-shrink: 0;
       width: $photo-small-size;
       height: $photo-small-size;
@@ -235,6 +262,7 @@ $photo-small-size: 40px;
     }
     .nm {
       margin-left: 10px;
+      color: $blue;
     }
 
     &.large_photo {
@@ -249,20 +277,13 @@ $photo-small-size: 40px;
           font-weight: $font-weight-semibold;
           font-size: $font-size-base;
         }
-        .lawyer-medal {
-          @extend .mt-2, .mb-1;
-          white-space: nowrap;
-        }
-        .online {
-          color: $green;
-        }
       }
     }
   }
 
   .lawyer-list_body {
     @extend .mt-2;
-    color: $gray-500;
+    color: $gray-600;
   }
 
   .consult-state {

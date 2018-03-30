@@ -54,14 +54,15 @@
 
                             {# Имя #}
                             <h5 class="my-3 mb-lg-1 mt-lg-0"
-                                itemprop="name" data-user_id="{{ question.author.pk }}">{{ question.author.get_name }}</h5>
+                                itemprop="name"
+                                data-user_id="{{ question.author.pk }}">{{ question.author.get_name }}</h5>
 
                             {# Текст #}
                             <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
 
                             {# Файлы #}
                             {% if question.files.all|length %}
-                                <div class="files brick">
+                                <div class="files brick mb-4">
                                     {% for file in question.files.all %}
                                         <div class="file-item"><a
                                                 href="/storage/{{ file.file }}">{{ file.get_basename }}</a></div>
@@ -69,19 +70,17 @@
                                 </div>
                             {% endif %}
 
-                            <br class="my-4">
-
                             {# Блок ответить на вопрос #}
                             {% if question.is_pay %}
                                 {# Если консультация платная #}
                                 {% include 'advice/advice_question_answer_block.html' %}
-                            {% else %}
-                                {#% include 'question/question_answer_block.html' %#}
+                            {% elif user.role == 2 %}
+                                {% include 'question/question_answer_block.html' %}
                             {% endif %}
 
-                            <hr class="mb-4 mt-5">
+                            <hr class="my-4">
 
-                            {# Здесь ошибка VUE #}
+                            {# Яндекс кнопки #}
                             {% include 'front/generic/yandex-share.html' %}
 
                             {# Рубрики #}
@@ -107,10 +106,11 @@
 
                 {% if question.is_pay %}
                     {# Если консультация платная #}
-                    {% include 'advice/advice_question_aside_block.html' with advice_context=advice_context %}
+                    {% include 'advice/aside/advice_status.html' with advice_context=advice_context %}
 
-                {% elif rating.count and not question.reply_count %}
-                    {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
+                {% elif lawyers_from_rating.count %}
+                    <h4 class="mb-4">Лучшие эксперты</h4>
+                    {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
                 {% endif %}
 
             </aside>
@@ -126,8 +126,9 @@
 
                     {# Ответы #}
                     <div class="row">
-                        <h3 class="answer-list-head">Ответы экспертов
-                            <span class="answer__counter" itemprop="answerCount">{{ question.reply_count }}</span>
+                        <h3 class="answer-list-head">Ответ юристов
+                            <span class="d-none answer__counter"
+                                  itemprop="answerCount">{{ question.reply_count }}</span>
                         </h3>
                     </div>
 
@@ -140,45 +141,15 @@
                 {# Боковая колонка 2  #}
                 <aside class="question-page_aside-part">
 
-                    {% if rating.count and question.reply_count %}
-                        <h4 class="mb-5">Лучшие эксперты</h4>
-                        {% include 'entry/generic/lawyer_best_small.html' with items=rating %}
+                    {% if question.reply_count %}
+                        <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
+                        {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
                     {% endif %}
 
                 </aside>
 
             </div>
         {% endif %}
-
-        {% comment %}<div class="row d-none">
-
-                <main>
-
-                    <div class="row">
-
-                        <div class="l-col"></div>
-
-                        <div class="r-col">
-
-                            <form>
-                                <div class="form-group">
-                                    <label for="reply">Ответить:</label>
-                                    <textarea class="form-control" id="reply" rows="10"
-                                              placeholder="Введите ваш ответ…"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
-                                    <span class="ml-3 normal"><a href="#">
-                                        <i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-
-                </main>
-
-            </div>{% endcomment %}
 
     </div>
 

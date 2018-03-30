@@ -5,6 +5,7 @@ from django.contrib.auth import login
 
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED, ADVICE_INWORK
 from apps.advice.settings import ADVICE_OVERDUE_TIME
+from apps.rating.models import Rating
 from apps.svem_auth.models.users import UserHash
 from apps.entry.models import Question, Answer
 from apps.entry.managers import PUBLISHED
@@ -46,6 +47,12 @@ class QuestionDetail(TemplateView):
             'mess': messages.get_messages(self.request),
             'answers': Answer.published.related_to_question(question)
         })
+
+        # Лучшие юристы блок
+        context.update({
+            'lawyers_from_rating': Rating.lawyers.all()[:3]
+        })
+
         return context
 
 

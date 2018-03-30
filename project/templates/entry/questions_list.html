@@ -141,7 +141,7 @@
             <aside class="question-page_aside-part">
                 {% if rating.count and not question.reply_count %}
                     <h4 class="mb-5">Лучшие эксперты</h4>
-                    {% include 'entry/generic/lawyer_best_large.html' with items=rating %}
+                    {% include 'entry/generic/../question/aside/best_lawyers.html' with items=rating %}
                 {% endif %}
             </aside>
 

@@ -199,7 +199,7 @@ class Answer(Entry):
     published = AnswersManager()
 
     class Meta:
-        ordering = ('thread', 'pub_date', )
+        ordering = ('thread', 'pk', )
         verbose_name = _('Ответ')
         verbose_name_plural = _('Ответы')
 
@@ -227,17 +227,13 @@ class Answer(Entry):
         if not hasattr(self, 'on_question'):
             self.on_question = self.parent.on_question
 
-        if self.is_parent:
-            if self.author.role == 1:
-                raise FieldError('Клиент не может ответить на вопрос')
-            elif Answer.objects.filter(on_question=self.on_question, author=self.author, parent=None).count():
-                raise FieldError('На этот вопрос уже есть ответ этого юриста')
-
         super(Answer, self).save()
 
-        self.thread = self.pk if self.is_parent else self.parent_id
+        if not hasattr(self, 'thread') or self.thread is None:
+            self.thread = self.pk if self.is_parent else self.parent_id
+            super(Answer, self).save(update_fields=['thread'])
 
-        return super(Answer, self).save(update_fields=['thread'])
+        return self
 
 
 class Offer(models.Model):

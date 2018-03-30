@@ -1,13 +1,15 @@
 <form>
     <div class="form-group">
-        <label for="reply"><!--Ответить:--></label>
-        <textarea class="form-control" id="reply" rows="10" placeholder="Введите ваш ответ…"></textarea>
+        <!--h6 class="mb-3">Дополнительный вопрос:</h6-->
+        <h6 class="mb-3">Мой ответ:</h6>
+        <!--textarea class="form-control" id="reply" rows="7" placeholder="Хочу узнать…"></textarea-->
+        <textarea class="form-control" id="reply" rows="7"></textarea>
     </div>
     <div class="form-group">
         <input type="hidden" name="on_question" value="{{ on_question }}"/>
         <input type="hidden" name="parent" value="{{ parent }}"/>
 
-        <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
+        <button type="submit" class="btn btn-primary">Отправить</button>
         <span class="ml-3 normal"><a href="#"> <i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
     </div>
 </form>

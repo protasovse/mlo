@@ -1,0 +1,24 @@
+{% load cropping %}
+<div class="lawyer-list">
+    {% for item in items %}{% if item.is_parent %}
+
+        <div role="answers_selector" data-answer_id="{{ item.pk }}" class="lawyer-list_item lawyer-list_item-action">
+            <div class="lawyer-list_header">
+                <span class="ph">
+                    <img src="{% include 'account/generic/pic.html' with item=item.author %}" alt="{{ item.author }}"/>
+                </span>
+                <div class="nm">{{ item.author }}</div>
+            </div>
+            <p class="lawyer-list_body">{{ item.content|truncatewords:10|safe }}</p>
+        </div>
+
+    {% endif %}{% endfor %}
+</div>
+
+<script>
+    $('[role=answers_selector]').on('click', function () {
+        let id = this.getAttribute('data-answer_id');
+        $('[role="answer"]').hide();
+        $('[role="answer"][data-thread="'+id+'"]').show();
+    })
+</script>

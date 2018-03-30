@@ -1,6 +1,7 @@
 {% load cropping %}
 
-<div class="answer entry{% if item.id != item.thread %} answer-push{% endif %}">
+<div role="answer" data-answer_id="{{ item.pk }}" data-thread="{{ item.thread }}"
+     class="answer entry{% if item.id != item.thread %} answer-push{% endif %}">
 
     <hr class="my-4">
 
@@ -25,7 +26,7 @@
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
                     <div class="normal text-muted"
-                    >{{ item.author.info.status|default:item.author.get_role_display }}, {{ item.author.city.name_ru  }}</div>
+                    >{{ item.author.info.status|default:item.author.get_role_display }}, {{ item.author.city.name_ru }}</div>
                 {% endif %}
 
                 {# Медали #}
@@ -52,7 +53,6 @@
             <time class="subtitle d-block mt-1" itemprop="dateCreated"
                   datetime="{{ item.pub_date|date:"c" }}">{{ item.pub_date|date:"j M Y G:i" }}</time>
             <span class="d-block">№ {{ item.id }}</span>
-            <span class="d-block">{{ item.thread }}</span>
             {% if item.author.role == 1 %}<span class="d-block">{{ item.author.city.name_ru }}</span>{% endif %}
         </div>
 
@@ -73,34 +73,24 @@
 
         <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
 
-            <div class="answer-footer-action normal align-self-start">
-                {% if forloop.last and item.author.role > 1 %}
-                    <a href="#" class="btn btn-sm btn-primary">Дополнительный вопрос<i
-                            class="icon-message_bubble ml-2"></i></a>
+            <div class="answer-footer-action normal align-self-start align-self-md-center">
+                {% if 1 and item.author.role > 1 %}
+                    <a href="#">Спросить ещё</a>
+                    <!--button type="button" class="btn btn-sm btn-primary">Дополнительный вопрос<i
+                            class="icon-message_bubble ml-2"></i></button-->
                 {% endif %}
             </div>
 
-            <div class="answer-footer-like align-self-end mt-3 mt-sm-0">
-                {#% include 'entry/generic/answer_footer_like.html' %#}
+            <div class="align-self-end mt-3 mt-sm-0">
+                {% include 'entry/generic/answer_footer_like.html' %}
             </div>
 
         </div>
 
-    </footer>
-
-    {# Форма ответа на вопрос #}
-    <footer class="row d-none">
-        <div class="question-page_r-col ml-auto">
+        <div class="d-none question-page_r-col ml-auto mt-4">
             {% include 'entry/generic/form_reply.html' with on_question=item.on_question_id parent=item.id %}
         </div>
+
     </footer>
 
 </div>
-
-{% comment %}
-{% if item.is_parent and item.children.count %}
-    {% for answer in item.children %}
-        {% include 'entry/generic/answer_item.html' with item=answer push=True %}
-    {% endfor %}
-{% endif %}
-{% endcomment %}
