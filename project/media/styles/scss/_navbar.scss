@@ -1,10 +1,10 @@
 .mlo-navbar {
 
   @extend .d-flex, .align-items-center, .justify-content-between;
-  width: 100vw;
   height: 100px;
   position: absolute;
   top: 0;
+  left: 0;
   right: 0;
   z-index: $zindex-fixed;
   color: white;

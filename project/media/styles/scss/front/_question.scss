@@ -308,24 +308,25 @@
 
 /* список вопросов */
 .question-item {
-  @extend .row;
 
   .l-col {
-    @extend .col-12, .col-md-3, .text-lg-right;
+    @extend .col-12, .col-md-3, .text-lg-right, .normal;
+    color: $gray-500;
   }
 
   .r-col {
     @extend .col-12, .col-md-9, .col-lg-7;
   }
 
-  .date {
+  /*.date {
     @extend .l-col, .subtitle, .mb-2;
-    line-height: 25px;
   }
+
   h5 {
     @extend .r-col;
     margin: 0;
   }
+
   .number {
     @extend .l-col, .normal, .mb-3;
     color: $gray-500;
@@ -336,7 +337,8 @@
   .content {
     @extend .r-col;
     font-size: $font-size-base;
-  }
+  } */
+
   .answer {
     @extend .r-col;
     .answer-header {

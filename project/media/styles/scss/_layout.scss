@@ -1,10 +1,4 @@
-#app {
-  height: 100vh;
-  width: 100vw;
-}
-body, #app {
-  min-width: 320px;
-}
 .page {
-  position: relative;
+  min-width: 320px;
+  overflow-x: hidden;
 }

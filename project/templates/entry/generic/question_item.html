@@ -1,18 +1,22 @@
 {% load cropping %}
 
 <article id="question-{{ item.pk }}" class="question-item">
+
     <div class="row">
 
-        <div class="date">{{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
-        <h5><a href="{% url 'question:detail' item.pk %}">{{ item.title }}</a></h5>
+        <div class="l-col subtitle pt-2 mb-3">{{ item.pub_date|date:"j M Y G:i" }}</div>
 
-        <div class="number">
-            <span>№ {{ item.pk }}</span><br>
-            <span>{{ item.author.get_short_name }}</span><br>
-            <span>{{ item.author.info.city.name }}</span>
+        <h5 class="r-col mb-0 mb-lg-3">
+            <a href="{% url 'question:detail' item.pk %}">{{ item.title }}</a>
+        </h5>
+
+        <div class="l-col pt-lg-1 mb-3">
+            <span class="d-lg-block">№ {{ item.pk }}</span>
+            <span class="d-lg-block pl-1">{{ item.author.get_short_name }}</span>
+            <span class="d-lg-block pl-1">{{ item.author.city.name }}</span>
         </div>
 
-        <p class="content">{{ item.content|safe|truncatechars:192 }}</p>
+        <p class="r-col large">{{ item.content|safe|truncatechars:192 }}</p>
 
         {# Ответы #}
         {% if show_answers and item.reply_count %}

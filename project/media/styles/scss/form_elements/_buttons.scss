@@ -3,13 +3,9 @@
   &:disabled {
     cursor: auto;
   }
-  border: {
-    width: 2px;
-  }
 }
 
 .btn-sm {
-  @extend .px-4;
   border-width: 1px;
 }
 

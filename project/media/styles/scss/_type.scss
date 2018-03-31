@@ -65,7 +65,7 @@ h1, .h1 {
 
 .subtitle {
   font: {
-    size: ($font-size-base * .75);
+    size: ($font-size-base * .75)!important;
     weight: $font-weight-semibold;
   }
   text-transform: uppercase;
