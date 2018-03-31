@@ -1,9 +1,9 @@
+from django.http import Http404
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
+from django.db import transaction
 from django.views.generic.base import TemplateView, RedirectView
 from django.contrib.auth import login
-
-from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED, ADVICE_INWORK
+from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.advice.settings import ADVICE_OVERDUE_TIME
 from apps.rating.models import Rating
 from apps.svem_auth.models.users import UserHash
@@ -13,15 +13,20 @@ from django.contrib import messages
 from django.urls import reverse
 from datetime import date, timedelta
 from apps.svem_system.exceptions import ControlledException
+from django.shortcuts import get_object_or_404
 
 
 class QuestionDetail(TemplateView):
     template_name = 'question/question_detail.html'
 
     def get_context_data(self, **kwargs):
-        context = {}
+        context = super().get_context_data(**kwargs)
+        question = get_object_or_404(Question, pk=kwargs['pk'])
 
-        question = Question.published.get(pk=kwargs['pk'])
+        if question.status == 'blocked':
+            ids = self.request.session.get('question_ids', [])
+            if question.id not in ids:
+                raise Http404("Question does not exist")
 
         context.update({
             'question': question
@@ -62,32 +67,39 @@ class AskQuestion(TemplateView):
 
 class ConfirmQuestion(RedirectView):
     def get_redirect_url(self, **kwargs):
+
         try:
-            pk = kwargs['pk']
-            token = kwargs['token']
-            try:
-                hash_obj = UserHash.objects.get(key=token)
-            except UserHash.DoesNotExist as e:
-                raise ControlledException(e)
-            # if hash exists, but too late
-            if hash_obj.live_until.date() < date.today():
-                raise ControlledException()
-            # do activate question
-            q = Question.objects.get(key=token)
-            if q.id != pk:
-                raise ControlledException()
-
-            q.status = PUBLISHED
-            q.save()
-
-            user = hash_obj.user
-            # if user doesnt active
-            user.activate(True)
-
-            hash_obj.delete()
-            # to do login user
-            if not self.request.user.is_authenticated:
-                login(self.request, user)
+            with transaction.atomic():
+                pk = kwargs['pk']
+                token = kwargs['token']
+                try:
+                    hash_obj = UserHash.objects.get(key=token)
+                except UserHash.DoesNotExist as e:
+                    raise ControlledException(e)
+                # if hash exists, but too late
+                if hash_obj.live_until.date() < date.today():
+                    raise ControlledException()
+                # do activate question
+                q = Question.objects.get(key=token)
+                if q.id != pk:
+                    raise ControlledException()
+                # to public the question
+                q.status = PUBLISHED
+                q.save()
+                # find user from hash
+                user = hash_obj.user
+                # if user doesnt active
+                user.activate(False)
+                # save to user personal info from question
+                user.first_name = q.first_name
+                user.city_id = q.city_id
+                user.phone = q.phone
+                user.save()
+                # remove hash
+                hash_obj.delete()
+                # to do login user
+                if not self.request.user.is_authenticated:
+                    login(self.request, user)
             return reverse('question:detail', kwargs={'pk': q.id})
         except ControlledException:
             messages.add_message(

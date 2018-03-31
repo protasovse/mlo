@@ -1,6 +1,6 @@
 import os
 import binascii
-from phonenumber_field.phonenumber import PhoneNumber
+from phonenumbers import PhoneNumberFormat, format_number, parse
 from apps.svem_system.views.api import ApiView
 from apps.entry.models import Question
 from django.contrib.auth import get_user_model
@@ -29,6 +29,7 @@ class QuestionView(ApiView):
         :return:
         """
         params = cls.get_put(request)
+        phone_number = format_number(parse(params['phone'], 'RU'), PhoneNumberFormat.E164) if params['phone'] else None
         city_id = params['city[id]'] if 'city[id]' in params.keys() else False
         if request.user.is_authenticated:
             user = request.user
@@ -48,7 +49,7 @@ class QuestionView(ApiView):
                 user = get_user_model().objects.create_user(
                     _email, binascii.hexlify(os.urandom(6)).decode(),
                     first_name=params['name'],
-                    phone=params['phone'],
+                    phone=phone_number,
                     city_id=city_id
                 )
 
@@ -61,7 +62,8 @@ class QuestionView(ApiView):
             status=status,
             is_pay=params['is_paid_question'],
             key=token,
-            phone=user.phone if user.phone else params['phone'],
+            first_name=params['name'] if params['name'] else user.first_name,
+            phone=phone_number,
             city_id=user.city_id if user.city_id else city_id
         )
         q.rubrics.set(params.getlist('rubric[]'))

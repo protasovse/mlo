@@ -42,7 +42,7 @@ export default {
         post_action() {return '/api/question'},
         is_require_email() {return !this.completed.includes('email')},
         is_require_name() {return !this.completed.includes('name')},
-        is_require_phone() {return !this.is_paid_question && !this.completed.includes('phone')},
+        is_require_phone() {return !this.completed.includes('phone')},
         is_require_city() {return !this.completed.includes('city')},
         is_require_form() {
             return this.is_require_email
@@ -188,7 +188,7 @@ export default {
 
             } catch (err) {
                 this.set_form_error(err.message);
-                window.scrollTo(0, 0);
+                this.$SmoothScroll(0, 500);
             }
         },
     },

@@ -1,5 +1,4 @@
 import misaka
-from django.core.exceptions import FieldError
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.urls import reverse
@@ -130,6 +129,8 @@ class Question(Entry, Titled, Classified):
         choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
 
     key = models.CharField("Key", max_length=40, db_index=True, null=True, blank=True)
+
+    first_name = models.CharField(_('first name'), max_length=32, blank=True)
 
     phone = models.CharField(max_length=15, blank=True, verbose_name=_('Телефон'))
 
