@@ -3,7 +3,9 @@
 @import url('../../../static/font/style.css');
 // Bootstrap
 @import "../../node_modules/bootstrap/scss/functions";
+
   @import "variables";
+
 @import "../../node_modules/bootstrap/scss/mixins";
   @import "mixins/text";
   @import "mixins/photo_mask";
