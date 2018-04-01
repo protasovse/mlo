@@ -206,22 +206,6 @@ class Queue(models.Model):
         return '%s - %d - %s' % (self.expert, self.order, self.is_active)
 
 
-class Expert(models.Model):
-    # Эксперты. Является ли на данный момент пользователь экспертом
-    user = models.OneToOneField(
-        AUTH_USER_MODEL,
-        primary_key=True,
-        on_delete=models.NOT_PROVIDED,
-    )
-
-    class Meta:
-        verbose_name = _('Эксперт')
-        verbose_name_plural = _('Эксперты')
-
-    def __str__(self):
-        return self.user.__str__()
-
-
 class Scheduler(models.Model):
     """
     Планировщик рабочего дня

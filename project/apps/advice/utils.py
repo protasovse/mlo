@@ -1,6 +1,6 @@
 from django.db import connection
 
-from apps.advice.models import Queue, Expert, Scheduler
+from apps.advice.models import Queue, Scheduler
 
 
 def queue_update():

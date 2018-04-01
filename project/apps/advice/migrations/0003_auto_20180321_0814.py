@@ -14,16 +14,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Expert',
-            fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.fields.NOT_PROVIDED, primary_key=True, serialize=False, to='mlo_auth.User')),
-            ],
-            options={
-                'verbose_name': 'Эксперт',
-                'verbose_name_plural': 'Эксперты',
-            },
-        ),
-        migrations.CreateModel(
             name='Scheduler',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
