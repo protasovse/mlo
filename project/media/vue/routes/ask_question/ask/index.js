@@ -20,7 +20,7 @@ export default {
             base_options: [],
             files: [],
             is_authorized: false,
-            is_paid_question: true,
+            is_paid_question: false,
             title: '',
             content: '',
             email: '',

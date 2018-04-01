@@ -52,7 +52,7 @@ def queue_get_first():
 
 def queue_add_user(user_id):
     """
-    Добавляет пользоваетля в очередь
+    Добавляет пользователя в очередь
     """
     cursor = connection.cursor()
     cursor.execute("""

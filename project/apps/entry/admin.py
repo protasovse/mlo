@@ -67,7 +67,7 @@ class QuestionAdmin(admin.ModelAdmin):
         (_('Клиссификация'), {
             'fields': ('status', 'author', 'rubrics', 'is_pay', 'reply_count', )}),
         (_('Дополнительные поля'), {
-            'fields': ('city', 'phone',)}),
+            'fields': ('city', 'phone', 'first_name')}),
     )
     autocomplete_fields = ['rubrics', 'author', 'city']
     radio_fields = {'status': admin.HORIZONTAL}

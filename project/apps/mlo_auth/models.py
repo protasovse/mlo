@@ -42,6 +42,11 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Указывает, должен ли этот пользователь считаться активным.'
                                                 'Снимите этот флажок, а не удаляйте аккаунты.'))
 
+    is_expert = models.BooleanField(_('Эксперт'),
+                                    default=False,
+                                    help_text=_('Указывает, является ли пользователь экспертом, имеющим право '
+                                                'отвечать на платные вопросы.'))
+
     date_joined = models.DateTimeField(_('Дата регистрации'),
                                        default=timezone.now)
 

@@ -147,7 +147,7 @@
                 <h5 class="my-0 font-weight-semibold">«Персональный юрист»</h5>
             </div>
             <div class="card-body">
-                <h2 class="card-title pricing-card-title text-center">800
+                <h2 class="card-title pricing-card-title text-center">{advice.sittings.ADVICE_COST}
                     <small class="text-muted">руб.</small>
                 </h2>
                 <ul class="list-unstyled mt-3 mb-4">
@@ -162,7 +162,7 @@
                         если вас не устроит качество услуги.</li>
                 </ul>
                 <button type="submit" class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3"
-                >Получить консультацию
+                >Оплатить услугу
                 </button>
             </div>
         </div>
@@ -198,12 +198,13 @@
     <!--form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
         <input type="hidden" name="receiver" value="4100155188774">
         <input type="hidden" name="quickpay-form" value="shop">
-        <input type="hidden" name="referer" value="http://мойюрист.онлайн">
-        <input type="hidden" name="formcomment" value="Мойюрист.онлайн — юридическая консультация онлайн">
-        <input type="hidden" name="label" value="vip_question.456456">
-        <input type="hidden" name="targets" value="Развёрнутая юридическая консультация. Вопрос №456456">
-        <input type="hidden" name="successURL" value="http://мойюрист.онлайн/вопрос/456456/успешная-оплата/">
-        <input type="hidden" name="sum" value="800" data-type="number">
+        <input type="hidden" name="referer" value="http://мойюрист.онлайн/задать-вопрос/">
+        <input type="hidden" name="formcomment" value="{advice.sittings.PAYMENT_FORM_TITLE}">
+        <input type="hidden" name="label" value="paid_question.456456">
+        <input type="hidden" name="targets" value="{PAYMENT_FORM_TARGET}">
+        <input type="hidden" name="successURL" value="http://мойюрист.онлайн/вопрос/456456/здесь можно ключ сгенерить
+        аналог того, что на почту приходит. Этот ключ будет разблокировать вопрос после оплаты/">
+        <input type="hidden" name="sum" value="{advice.sittings.ADVICE_COST}" data-type="number">
         <input type="hidden" name="paymentType" value="AC" />
         <input type="submit" value="Перевести">
     </form-->

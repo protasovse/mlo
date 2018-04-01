@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'apps.review.apps.ReviewConfig',
     'apps.advice.apps.AdviceConfig',
     'apps.rating.apps.RatingConfig',
+    'apps.billing.apps.BillingConfig',
     'dbmail',
     'debug_toolbar',
 ]
