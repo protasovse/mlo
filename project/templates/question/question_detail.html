@@ -62,7 +62,7 @@
 
                             {# Файлы #}
                             {% if question.files.all|length %}
-                                <div class="files brick mb-4">
+                                <div class="files alert alert-secondary mb-4">
                                     {% for file in question.files.all %}
                                         <div class="file-item"><a target="_blank"
                                                 href="/storage/{{ file.file }}">{{ file.get_basename }}</a></div>
