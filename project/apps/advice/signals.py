@@ -42,7 +42,6 @@ def new_answer_for_advice(sender, instance, *args, **kwargs):
                         # меняем статус на «Дополнительный вопрос»
                         cur_adv.to_addquestion()
 
-
 post_save.connect(new_answer_for_advice, sender=Answer)
 
 

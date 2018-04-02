@@ -54,7 +54,8 @@ class History(models.Model):
         verbose_name_plural = _('Истории платежей')
 
 
-def transfer(user, value, comment):
+# Перевод юристу в кошелёк ±value рублей
+def transfer_to_user(user, value, comment):
     purse, created = Purse.objects.get_or_create(user=user)
     purse.balance += value
     purse.save()

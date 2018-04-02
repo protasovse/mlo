@@ -8,7 +8,7 @@ from timezone_field import TimeZoneField
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.manager import AdviceManager
-from apps.advice.settings import ADVICE_COST
+from apps.advice.settings import ADVICE_COST, EXPERT_FEE_IN_PERCENT
 from . import emails
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL
@@ -91,13 +91,11 @@ class Advice(models.Model):
         emails.send_advice_appoint_expert_email(self)
         return True
 
-    # Оплачена, если состояние не равно 'new'
-    @property
-    def is_paid(self):
-        return self.status != ADVICE_NEW
-
     # Пользователь оплатил и перешёл на страницу вопроса
     def to_paid(self):
+        # Если подтверждение платежа произошло быстрее чем, перевод в статус: ADVICE_NEW
+        if self.status == ADVICE_PAYMENT_CONFIRMED:
+            return True
         if self.status == ADVICE_NEW:
             self.status = ADVICE_PAID
             self.save(update_fields=['status'])
@@ -119,11 +117,12 @@ class Advice(models.Model):
     # Переводим заявку в статус «В работе»
     # (num_hours — через сколько часов эксперт обещает дать ответ)
     def to_in_work(self, num_hours):
-        if self.is_paid:
+        if self.status == ADVICE_PAYMENT_CONFIRMED:
             self.status = ADVICE_INWORK
             self.answered_date = timezone.now() + timedelta(hours=num_hours)
             self.save(update_fields=['status', 'answered_date'])
             # Уведомляем клиента о новом назначении эксперта
+            emails.send_advice_to_in_work_to_client_message(self, num_hours)
             return True
         return False
 
@@ -133,15 +132,17 @@ class Advice(models.Model):
             self.status = ADVICE_ANSWERED
             self.save(update_fields=['status'])
             # Уведомляем клиента о новом ответе
+            emails.send_advice_new_answer(self)
             return True
         return False
 
     # Переводим заявку в статус «Дополнительный вопрос»
     def to_addquestion(self):
-        if self.status in (ADVICE_ANSWERED, ADVICE_INWORK):
+        if self.status in (ADVICE_ANSWERED, ADVICE_INWORK, ADVICE_ADDQUESTION):
             self.status = ADVICE_ADDQUESTION
             self.save(update_fields=['status'])
             # Уведомляем эксперта о дополнительном вопросе
+            emails.send_advice_additional_question(self)
             return True
         return False
 
@@ -150,7 +151,11 @@ class Advice(models.Model):
         if self.status == ADVICE_ANSWERED:
             self.status = ADVICE_CLOSED
             self.save(update_fields=['status'])
+            from apps.billing.models import transfer_to_user
+            transfer_to_user(self.expert, self.cost*EXPERT_FEE_IN_PERCENT/100,
+                             'Гонорар за платный вопрос №{id}'.format(id=self.question_id))
             # Уведомляем эксперта о завершении консультации и переводе денег на счёт
+            emails.send_advice_closed(self)
             return True
         return False
 

@@ -11,3 +11,6 @@ YANDEX_MONEY_PURSE = 4100155188774
 PAYMENT_FORM_TITLE = "Мойюрист.онлайн — юридическая консультация онлайн"
 
 PAYMENT_FORM_TARGET = "Услуга «Персональный юрист». Вопрос №{question_id}"
+
+# Гонорар эксперта в процентах
+EXPERT_FEE_IN_PERCENT = 55  # %
