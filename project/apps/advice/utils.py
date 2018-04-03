@@ -1,6 +1,6 @@
 from django.db import connection
 
-from apps.advice.models import Queue, Expert, Scheduler
+from apps.advice.models import Queue, Scheduler
 
 
 def queue_update():
@@ -52,7 +52,7 @@ def queue_get_first():
 
 def queue_add_user(user_id):
     """
-    Добавляет пользоваетля в очередь
+    Добавляет пользователя в очередь
     """
     cursor = connection.cursor()
     cursor.execute("""

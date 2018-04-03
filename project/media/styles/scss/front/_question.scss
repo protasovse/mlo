@@ -185,28 +185,6 @@
     }
   }
 
-  .brick {
-    margin: line(1) 0 0;
-    padding: line(.75) line(.5) line(.75) line(1.5);
-    background-color: $gray-100;
-    border-radius: line(.5);
-    font-size: $font-size-base;
-    font-weight: normal;
-
-    .file-item {
-      @extend .mb-1;
-      &:before {
-        @extend .mr-2;
-        content: '\e911';
-        font-family: icomoon;
-        color: $gray-500;
-      }
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   &.answer-push {
     padding-left: line(4);
     @include media-breakpoint-down(md) {
@@ -216,7 +194,7 @@
 
   .answer-header {
     @extend .row, .align-items-center, .mb-2;
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       .question-page_l-col {
         position: absolute;
         right: $grid-gutter-width/2;
@@ -362,3 +340,17 @@
     }
   }
 }
+
+.file-list-item {
+  @extend .mb-1;
+  &:before {
+    @extend .mr-2;
+    content: '\e911';
+    font-family: icomoon;
+    color: $gray-500;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+

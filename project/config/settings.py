@@ -49,10 +49,6 @@ if 0 and DEBUG:
         },
     }
 
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
-vars().update(EMAIL_CONFIG)
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,6 +80,7 @@ INSTALLED_APPS = [
     'apps.review.apps.ReviewConfig',
     'apps.advice.apps.AdviceConfig',
     'apps.rating.apps.RatingConfig',
+    'apps.billing.apps.BillingConfig',
     'dbmail',
     'debug_toolbar',
 ]
@@ -194,3 +191,20 @@ HAYSTACK_CONNECTIONS = {
 }
 '''
 
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
+vars().update(EMAIL_CONFIG)
+
+# DB_MAILER iqsms.ru provider settings
+# DB_MAILER_SMS_PROVIDER = 'dbmail.providers.smsbliss.sms'
+
+# IQSMS_API_LOGIN = "z1522654896889"
+# IQSMS_API_PASSWORD = "972276"
+# IQSMS_FROM = "YURIST24"
+
+# smsbliss.ru/
+# SMSBLISS_API_URL = 'http://api.smsbliss.net/messages/v2/send.json'
+# SMSBLISS_LOGIN = 'protasovse'
+# SMSBLISS_PASSWORD = 'hui7586381'
+# SMSBLISS_FROM = 'TEST'

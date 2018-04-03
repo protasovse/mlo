@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
@@ -41,6 +42,11 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     default=True,
                                     help_text=_('Указывает, должен ли этот пользователь считаться активным.'
                                                 'Снимите этот флажок, а не удаляйте аккаунты.'))
+
+    is_expert = models.BooleanField(_('Эксперт'),
+                                    default=False,
+                                    help_text=_('Указывает, является ли пользователь экспертом, имеющим право '
+                                                'отвечать на платные вопросы.'))
 
     date_joined = models.DateTimeField(_('Дата регистрации'),
                                        default=timezone.now)
@@ -119,6 +125,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.role = LAWYER
         if do_save:
             self.save()
+
+    def get_absolute_url(self):
+        return reverse('lawyer_page', kwargs={'id': self.pk})
 
     def __str__(self):
         return self.get_full_name

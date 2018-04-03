@@ -43,12 +43,12 @@ class MloUserAdmin(UserAdmin):
 
     list_display = ('id', 'get_full_name', 'email', 'is_staff', 'is_active', 'role', )
 
-    list_filter = ('is_active', 'role',)
+    list_filter = ('is_active', 'role', 'is_expert')
 
     fieldsets = (
         (None, {'fields': ('email', 'password', 'date_joined', 'phone', 'city', )}),
         (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role',)}),
-        (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff',)}),
+        (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff', 'is_expert')}),
 
     )
 
@@ -69,7 +69,7 @@ class MloUserAdmin(UserAdmin):
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)
         if search_term.isdigit():
-            queryset = get_user_model().filter(pk=search_term)
+            queryset = get_user_model().objects.filter(pk=search_term)
 
         return queryset, False
 

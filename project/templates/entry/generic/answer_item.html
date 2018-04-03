@@ -64,6 +64,16 @@
 
             <div class="text" itemprop="text">{{ item.html_content|safe }}</div>
 
+            {# Файлы #}
+            {% if item.files.all|length %}
+                <div class="alert alert-secondary">
+                    {% for file in item.files.all %}
+                        <p class="file-list-item"><a target="_blank"
+                                                     href="/storage/{{ file.file }}">{{ file.get_basename }}</a></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
         </div>
 
     </div>

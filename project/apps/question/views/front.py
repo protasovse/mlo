@@ -33,12 +33,12 @@ class QuestionDetail(TemplateView):
         })
 
         if question.is_pay:
-            advice = Advice.objects.get(question=question)
+            advice = Advice.objects.filter(question=question).first()
             advice_context = {
                 'advice': advice
             }
 
-            if advice.status == ADVICE_PAYMENT_CONFIRMED:
+            if advice and advice.status == ADVICE_PAYMENT_CONFIRMED:
                 overdue_time = timedelta(minutes=ADVICE_OVERDUE_TIME) - (timezone.now() - advice.payment_date)
                 advice_context.update({
                     'overdue_time': overdue_time.seconds // 60
