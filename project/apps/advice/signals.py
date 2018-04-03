@@ -11,11 +11,8 @@ from apps.entry.models import Answer, Question
 
 # Создание новой платной консультации
 def new_advice(sender, instance, *args, **kwargs):
-    if 'created' in kwargs and instance.is_pay:
+    if 'created' in kwargs and kwargs['created'] and instance.is_pay:
         Advice.objects.get_or_create(question=instance, cost=ADVICE_COST)
-        # instance.question.is_pay = True
-        # instance.question.pub_date = timezone.now
-        # instance.question.save(update_fields=['is_pay', 'pub_date'])
 
 post_save.connect(new_advice, sender=Question)
 

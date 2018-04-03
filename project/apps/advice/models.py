@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.manager import AdviceManager
 from apps.advice.settings import ADVICE_COST, EXPERT_FEE_IN_PERCENT
+from apps.entry.managers import DELETED
 from . import emails
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL
@@ -161,9 +162,12 @@ class Advice(models.Model):
 
     # Переводим заявку в статус «Отменено»
     def to_canceled(self):
-        self.status = ADVICE_CANCELED
-        self.save(update_fields=['status'])
-        return True
+        if self.status != ADVICE_CLOSED:
+            self.status = ADVICE_CANCELED
+            self.save(update_fields=['status'])
+            self.question.status = DELETED
+            self.question.save(update_fields=['status'])
+            return True
 
     def __str__(self):
         return self.question.__str__()
