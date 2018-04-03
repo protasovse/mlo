@@ -1,17 +1,4 @@
-<div v-if="is_form_send_done">
-    <div v-if="require_confirm">
-        <p> Ваш вопрос принят! Что он был он стал виден юристам, подтвердите Ваш электронный ящик,
-            кликнув по ссылки в отправленном письме.</p>
-
-        <p> Вопрос будет находиться на рассмотрении в течение 7 дней,
-            если к концу этого периода ответ не поступит, то вопрос больше не будет рассматриваться юристами.</p>
-    </div>
-    <div v-else>
-        Вопросу присвоен номер {{ question_id }}, и он находится здесь: <a
-            :href=question_url>Вопрос {{ question_id }} </a>
-    </div>
-</div>
-<div v-else id="form">
+<div id="form">
 
     <div class="form-group">
         <input type="text" class="form-control" id="ask_title" v-model="title"
@@ -161,8 +148,13 @@
                     <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег,
                         если вас не устроит качество услуги.</li>
                 </ul>
-                <button type="submit" @click="save_paid" class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3">
-                    Оплатить услугу
+                <button type="submit"
+                        @click="save_paid"
+                        class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3"
+                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                    <span v-else-if="success">Вопрос задан</span>
+                    <span v-else>Оплатить услугу</span>
                 </button>
             </div>
         </div>
