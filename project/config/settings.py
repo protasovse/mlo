@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'haystack',
+
     'django_mptt_admin',
     'easy_thumbnails',
     'easy_select2',
@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'timezone_field',
     'image_cropping',
+
     'apps.mlo_auth',
     'apps.entry',
     'apps.rubric',
@@ -120,8 +121,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {'default': env.db()}
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -153,13 +152,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAdminUser',
-    ],
-    'PAGE_SIZE': 10
-}
-
 THUMBNAIL_PROCESSORS = (
                            'image_cropping.thumbnail_processors.crop_corners',
                        ) + thumbnail_settings.THUMBNAIL_PROCESSORS
@@ -180,31 +172,16 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10*1024*1024
 
 INTERNAL_IPS = ['127.0.0.1']
 
-'''
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr'
-        # ...or for multicore...
-        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
-    },
-}
-'''
-
-
 EMAIL_BACKEND = env('EMAIL_BACKEND')
 EMAIL_CONFIG = env.email_url('EMAIL_URL', backend=EMAIL_BACKEND)
 vars().update(EMAIL_CONFIG)
 
-# DB_MAILER iqsms.ru provider settings
-# DB_MAILER_SMS_PROVIDER = 'dbmail.providers.smsbliss.sms'
+DATABASES = {'default': env.db()}
 
-# IQSMS_API_LOGIN = "z1522654896889"
-# IQSMS_API_PASSWORD = "972276"
-# IQSMS_FROM = "YURIST24"
+IQSMS_API_LOGIN = "z1522654896889"
+IQSMS_API_PASSWORD = "972276"
+IQSMS_FROM = "YURIST24"
+IQSMS_URL = "http://api.iqsms.ru/messages/v2/send/"
 
-# smsbliss.ru/
-# SMSBLISS_API_URL = 'http://api.smsbliss.net/messages/v2/send.json'
-# SMSBLISS_LOGIN = 'protasovse'
-# SMSBLISS_PASSWORD = 'hui7586381'
-# SMSBLISS_FROM = 'TEST'
+GOOGLE_HORT_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
+GOOGLE_HORT_API_KEY = 'AIzaSyD7GJizTAQaQ3C0v_ysFTJz2HWZMopHb5E'
