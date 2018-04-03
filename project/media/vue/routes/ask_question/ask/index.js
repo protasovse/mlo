@@ -20,7 +20,7 @@ export default {
             base_options: [],
             files: [],
             is_authorized: false,
-            is_paid_question: true,
+            is_paid_question: false,
             title: '',
             content: '',
             email: '',
@@ -155,6 +155,10 @@ export default {
                 fields.push('name')
             }
             return fields
+        },
+        save_paid() {
+            this.is_paid_question = true;
+            this.save()
         },
         save() {
             try {
