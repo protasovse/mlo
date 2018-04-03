@@ -1,5 +1,6 @@
 @charset "UTF-8";
- 
+
+
 /* form, div#form {
   label {
     font-size: $font-size-base;
@@ -21,6 +22,9 @@
   font-size: $font-size-base;
   .invalid-feedback, .valid-feedback {
     @extend small;
+  }
+  .text-muted {
+    color: $gray-600 !important;
   }
 }
 

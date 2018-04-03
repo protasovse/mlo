@@ -36,7 +36,6 @@
                         </div>
                     {% endfor %}
 
-
                     {# Заголовок #}
                     <h1 class="question-head" itemprop="name">{{ question.title }}</h1>
 
@@ -62,10 +61,11 @@
 
                             {# Файлы #}
                             {% if question.files.all|length %}
-                                <div class="files alert alert-secondary mb-4">
+                                <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
-                                        <div class="file-item"><a target="_blank"
-                                                href="/storage/{{ file.file }}">{{ file.get_basename }}</a></div>
+                                        <p class="file-list-item"><a target="_blank"
+                                                                     href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                        </p>
                                     {% endfor %}
                                 </div>
                             {% endif %}

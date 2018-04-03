@@ -65,7 +65,10 @@
                         {% for item in reviews %}
                             <a class="review-item"
                                href="{% url 'question:detail' pk=item.like.entry.answer.on_question_id %}">
-                                <h6>{{ item.like.user.get_name }}</h6>
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <h6>{{ item.like.user.get_name }}</h6>
+                                    <small class="text-muted">Вопрос №{{ item.like.entry.answer.on_question_id }}</small>
+                                </div>
                                 <p>{{ item.review }}</p>
                             </a>
                         {% endfor %}
