@@ -147,7 +147,7 @@
                 <h5 class="my-0 font-weight-semibold">«Персональный юрист»</h5>
             </div>
             <div class="card-body">
-                <h2 class="card-title pricing-card-title text-center">{advice.sittings.ADVICE_COST}
+                <h2 class="card-title pricing-card-title text-center">{{ advice_cost }}
                     <small class="text-muted">руб.</small>
                 </h2>
                 <ul class="list-unstyled mt-3 mb-4">
@@ -161,8 +161,8 @@
                     <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег,
                         если вас не устроит качество услуги.</li>
                 </ul>
-                <button type="submit" class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3"
-                >Оплатить услугу
+                <button type="submit" @click="save_paid" class="btn btn-success btn-sm mx-auto d-block mx-auto mt-3">
+                    Оплатить услугу
                 </button>
             </div>
         </div>

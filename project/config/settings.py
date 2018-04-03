@@ -208,3 +208,6 @@ vars().update(EMAIL_CONFIG)
 # SMSBLISS_LOGIN = 'protasovse'
 # SMSBLISS_PASSWORD = 'hui7586381'
 # SMSBLISS_FROM = 'TEST'
+
+
+ADVICE_COST = 800  # руб.
