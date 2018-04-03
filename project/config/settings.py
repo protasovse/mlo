@@ -183,5 +183,8 @@ IQSMS_API_PASSWORD = "972276"
 IQSMS_FROM = "YURIST24"
 IQSMS_URL = "http://api.iqsms.ru/messages/v2/send/"
 
+
 GOOGLE_HORT_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOOGLE_HORT_API_KEY = 'AIzaSyD7GJizTAQaQ3C0v_ysFTJz2HWZMopHb5E'
+
+ADVICE_COST = 800  # руб.

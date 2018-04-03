@@ -9,6 +9,7 @@ export default {
     name: 'ask_question',
     data() {
         return {
+            advice_cost: 0,
             completed: [],
             question_id: '',
             question_url: '',
@@ -62,6 +63,7 @@ export default {
         this.$http.get('/api/default').then(
             (r) => {
                 this.question_url = r.data.data['urls']['show_question'];
+                this.advice_cost = r.data.data['settings']['advice_cost'];
             },
         );
         this.$http.get('/api/rubric', {params: {'level':0}},).then(
@@ -155,6 +157,10 @@ export default {
                 fields.push('name')
             }
             return fields
+        },
+        save_paid() {
+            this.is_paid_question = true;
+            this.save()
         },
         save() {
             try {
