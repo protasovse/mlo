@@ -8,11 +8,11 @@ from timezone_field import TimeZoneField
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.manager import AdviceManager
-from apps.advice.settings import ADVICE_COST, EXPERT_FEE_IN_PERCENT
+from apps.advice.settings import EXPERT_FEE_IN_PERCENT
 from apps.entry.managers import DELETED
 from . import emails
 from apps.entry.models import Question
-from config.settings import AUTH_USER_MODEL
+from config.settings import AUTH_USER_MODEL, ADVICE_COST
 
 ADVICE_NEW = 'new'
 ADVICE_PAID = 'paid'

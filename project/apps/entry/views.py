@@ -41,10 +41,11 @@ class QuestionsList(TemplateView):
         # Получаем всех предков
         if slug:
             rubric = get_object_or_404(Rubric, slug=slug)
-            rubrics = rubric.get_ancestors(include_self=True)
-            if rubrics[0].slug != self.kwargs['rubric_slug']:
-                raise Http404()
-            context['rubrics'] = rubrics
+            # rubrics = rubric.get_ancestors(include_self=True)
+            # if rubrics[0].slug != self.kwargs['rubric_slug']:
+            #     raise Http404()
+            # context['rubrics'] = rubrics
+            context['rubric'] = rubric
 
         # Все рубрики
         context['all_rubrics'] = Rubric.objects.filter(level=0)
@@ -53,6 +54,12 @@ class QuestionsList(TemplateView):
         # context['rating'] = RatingResult.objects.all().order_by('-value')[:5]
 
         # Вопросы
-        context['questions'] = Question.published.order_by('-pk')[:10]
+        if slug:
+            context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
+        else:
+            context['questions'] = Question.published.order_by('-pk')[:10]
+
+        # Список рубрик для aside
+        context['rubrics_list'] = Rubric.objects.filter(level__in=(0, ))
 
         return context

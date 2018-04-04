@@ -1112,7 +1112,7 @@ pre {
     flex: 0 0 50%;
     max-width: 50%; }
 
-  .col-lg-7, .question-item .r-col, .question-item .answer {
+  .col-lg-7 {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
@@ -1120,7 +1120,7 @@ pre {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%; }
 
-  .col-lg-9, .question-page_r-col, .question-page_main-part {
+  .col-lg-9, .question-page_r-col, .question-page_main-part, .question-item .r-col, .question-item .answer {
     flex: 0 0 75%;
     max-width: 75%; }
 
@@ -8679,40 +8679,19 @@ footer.main-footer {
     content: ')'; }
 
 /* список вопросов */
-.question-item {
-  /*.date {
-    @extend .l-col, .subtitle, .mb-2;
-  }
-
-  h5 {
-    @extend .r-col;
-    margin: 0;
-  }
-
-  .number {
-    @extend .l-col, .normal, .mb-3;
-    color: $gray-500;
-    span {
-      white-space: nowrap;
-    }
-  }
-  .content {
-    @extend .r-col;
-    font-size: $font-size-base;
-  } */ }
-  .question-item .l-col {
-    color: #bababa; }
-  .question-item .answer .answer-header .usr {
-    padding-right: 10px; }
-    .question-item .answer .answer-header .usr a {
-      display: inline-block;
-      margin-right: -10px; }
-      .question-item .answer .answer-header .usr a img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%; }
-  .question-item .answer p {
-    color: #878787; }
+.question-item .l-col {
+  color: #bababa; }
+.question-item .answer .answer-header .usr {
+  padding-right: 10px; }
+  .question-item .answer .answer-header .usr a {
+    display: inline-block;
+    margin-right: -10px; }
+    .question-item .answer .answer-header .usr a img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%; }
+.question-item .answer p {
+  color: #878787; }
 
 .file-list-item:before {
   content: '\e911';

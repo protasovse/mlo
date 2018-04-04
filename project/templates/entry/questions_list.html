@@ -1,15 +1,13 @@
 {% extends 'front/base.html' %}
 
 {% block title %}
-    {% if rubrics.last %}
-        {% with rubrics.last as r %}
-            {% if r.title or r.h1 %}
-                {{ r.title|default:r.h1 }}
-            {% else %}
-                Консультации юристов по теме «{{ r.name }}»
-            {% endif %}
-            на сайте Мойюрист.онлайн
-        {% endwith %}
+    {% if rubric %}
+        {% if rubric.title or rubric.h1 %}
+            {{ rubric.title|default:rubric.h1 }}
+        {% else %}
+            Консультации юристов по теме «{{ rubric.name }}»
+        {% endif %}
+        на сайте Мойюрист.онлайн
     {% else %}
         Консультации юристов и адвокатов на сайте Мойюрист.онлайн!
     {% endif %}
@@ -19,7 +17,7 @@
 
 
     {# Хедер страницы вопроса #}
-    {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubrics.0.call_to_action %}
+    {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
 
     {# Содержание страницы вопроса #}
     <div class="question-page mt-2">
@@ -31,18 +29,9 @@
             <nav aria-label="breadcrumb" class="col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                    {% if rubrics %}
-                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a>
-                        </li>
-                        {% if rubrics.last.is_root_node %}
-                            <li class="breadcrumb-item active">{{ rubrics.0 }}</li>
-                        {% else %}
-                            <li class="breadcrumb-item">
-                                <a href="{{ rubrics.0.get_absolute_url }}">{{ rubrics.0 }}</a></li>
-                            <li class="breadcrumb-item active">{{ rubrics.last }}</li>
-                        {% endif %}
-                    {% else %}
-                        <li class="breadcrumb-item active">Консультации юриста</li>
+                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
+                    {% if rubric %}
+                        <li class="breadcrumb-item active">{{ rubric }}</li>
                     {% endif %}
                 </ol>
             </nav>
@@ -54,10 +43,8 @@
                     {# Заголовок #}
                     <div class="row">
                         <h2 class="col mb-4">
-                            {% if rubrics.last.h1 %}
-                                {{ rubrics.last.h1 }}
-                            {% elif rubrics.last %}
-                                {{ rubrics.last }}
+                            {% if rubric %}
+                                {{ rubric.h1|default:rubric }}
                             {% else %}
                                 Юридическая консультация онлайн
                             {% endif %}
@@ -68,8 +55,8 @@
 
                         <div class="col">
                             <div class="lead">
-                                {% if rubrics.last %}
-                                    {{ rubrics.last.html_description|safe }}
+                                {% if rubric %}
+                                    {{ rubric.html_description|safe }}
                                 {% else %}
                                     <p>Проект Мойюрист.онлайн позволяет каждому человеку получить грамотный совет
                                         юриста
@@ -141,8 +128,20 @@
             <aside class="question-page_aside-part">
                 {% if rating.count and not question.reply_count %}
                     <h4 class="mb-5">Лучшие эксперты</h4>
-                    {% include 'entry/generic/../question/aside/best_lawyers.html' with items=rating %}
+                    {% include 'rating/aside/best_lawyers.html' with items=rating %}
                 {% endif %}
+
+                <h4>Рубрики</h4>
+
+                <ul class="list-unstyled mt-4">
+                    {% for rubric in rubrics_list %}
+                        <li class="mb-2">
+                            <a class="text-muted"
+                               href="{{ rubric.get_absolute_url }}">{{ rubric.link|default:rubric }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
             </aside>
 
         </div>

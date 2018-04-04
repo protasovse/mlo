@@ -293,29 +293,8 @@
   }
 
   .r-col {
-    @extend .col-12, .col-md-9, .col-lg-7;
+    @extend .col-12, .col-md-9, .col-lg-9;
   }
-
-  /*.date {
-    @extend .l-col, .subtitle, .mb-2;
-  }
-
-  h5 {
-    @extend .r-col;
-    margin: 0;
-  }
-
-  .number {
-    @extend .l-col, .normal, .mb-3;
-    color: $gray-500;
-    span {
-      white-space: nowrap;
-    }
-  }
-  .content {
-    @extend .r-col;
-    font-size: $font-size-base;
-  } */
 
   .answer {
     @extend .r-col;

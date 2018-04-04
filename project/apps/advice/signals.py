@@ -3,10 +3,10 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 
 from apps.advice.models import StatusLog, Advice, Scheduler
-from apps.advice.settings import ADVICE_COST
 from apps.advice.utils import queue_add_user, queue_del_user
 
 from apps.entry.models import Answer, Question
+from config.settings import ADVICE_COST
 
 
 # Создание новой платной консультации

@@ -64,12 +64,12 @@ class Rubric(MPTTModel):
         return misaka.html(self.description)
 
     def get_absolute_url(self):
-        if self.is_root_node():
-            return reverse('questions:list_rubric',
+        # if self.is_root_node():
+        return reverse('questions:list_rubric',
                            kwargs={'rubric_slug': self.slug})
-        else:
-            return reverse('questions:list_subrubric',
-                           kwargs={'subrubric_slug': self.slug, 'rubric_slug': self.get_root().slug, })
+        # else:
+            # return reverse('questions:list_subrubric',
+            #                kwargs={'subrubric_slug': self.slug, 'rubric_slug': self.get_root().slug, })
 
     def _set_slug(self):
         """
@@ -91,7 +91,22 @@ class Rubric(MPTTModel):
 
 class Classified(models.Model):
 
-    rubrics = TreeManyToManyField(Rubric, blank=True, verbose_name=_('Рубрика'))
+    rubrics = TreeManyToManyField(
+        Rubric,
+        blank=True,
+        related_name='rubrics',
+        verbose_name=_('Рубрики')
+    )
+
+    rubric = TreeForeignKey(
+        Rubric,
+        blank=True,
+        null=True,
+        default=None,
+        related_name='rubric',
+        verbose_name=_('Рубрика'),
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         abstract = True

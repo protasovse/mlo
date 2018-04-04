@@ -88,6 +88,11 @@ class AnswersManager(EntryPublishedManager):
 # Менеджер для вывода вопросов для публикации
 class QuestionsPublishedManager(EntryPublishedManager):
 
+    def get_queryset(self):
+        return super(QuestionsPublishedManager, self).get_queryset().select_related(
+                'rubric'
+            )
+
     def by_id(self, id_list):
         qs = super(QuestionsPublishedManager, self).filter(entry_ptr_id__in=id_list)
         return qs
