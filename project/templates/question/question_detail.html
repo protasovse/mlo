@@ -84,13 +84,11 @@
                             {% include 'front/generic/yandex-share.html' %}
 
                             {# Рубрики #}
-                            {% if question.rubrics.count %}
-                                <br>
-
-                                <p class="rubrics">{% for rubric in question.rubrics.all %}
-                                    <span class="rubric-item"><a
-                                            href="{{ rubric.get_absolute_url }}">{{ rubric }}</a></span>
-                                {% endfor %}</p>
+                            {% if question.rubric %}
+                                <p class="rubrics-list mt-5">
+                                    <span class="rubrics-list-item"><a
+                                            href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></span>
+                                </p>
                             {% endif %}
 
                         </div>

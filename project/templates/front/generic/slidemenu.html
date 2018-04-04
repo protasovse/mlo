@@ -3,8 +3,14 @@
     <div>
         <p class="text">
             <!--span>Консультация юриста</span><br-->
-            <span class="large font-weight-semibold"><a class="gray" href="tel:84955682478">8 495 568-24-78</a></span>
-            <br>горячая линия в Москве
+            {% if user.hot_line_phone %}
+            <span class="large font-weight-semibold">
+                <a class="gray" href="tel:{{ user.hot_line_phone }}">{{ user.hot_line_phone }}</a>
+            </span>
+            <br>горячая линия в {{ user.location.city_name_loc }}
+            {% else %}
+                <span>Консультация юриста в {{ user.location.city_name_loc }}</span>
+            {% endif %}
         </p>
         <p><a href="{% url 'ask_question' %}" class="btn btn-outline-primary btn-sm">Задать вопрос
             <i class="icon-message_bubble ml-2"></i></a></p>

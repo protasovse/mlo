@@ -16,7 +16,10 @@
             <span class="d-lg-block pl-1">{{ item.author.city.name }}</span>
         </div>
 
-        <p class="r-col large">{{ item.content|safe|truncatechars:192 }}</p>
+        <div class="r-col large">
+            <p>{{ item.content|safe|truncatechars:192 }}</p>
+
+        </div>
 
         {# Ответы #}
         {% if show_answers and item.reply_count %}
@@ -50,6 +53,11 @@
                 <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
             </div>
         {% endif %}
+
+        <!--div class="ml-auto r-col">
+            <p class="rubrics-list mt-3"><span class="rubrics-list-item"><a
+                        href="{{ item.rubric.get_absolute_url }}">{{ item.rubric }}</a></span></p>
+        </div-->
 
     </div>
 

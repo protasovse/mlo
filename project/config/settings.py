@@ -98,6 +98,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.sxgeo.middleware.loc.LocationIdentify',
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
@@ -188,3 +189,11 @@ GOOGLE_HORT_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOOGLE_HORT_API_KEY = 'AIzaSyD7GJizTAQaQ3C0v_ysFTJz2HWZMopHb5E'
 
 ADVICE_COST = 800  # руб.
+
+HOT_LINE_PHONES = {
+    'Московская область': '8 (495) 568-24-78',
+    'Москва': '8 (495) 568-24-78',
+    'Санкт-Петербург': '8 (812) 458-04-71',
+    'Ленинградская область': '8 (812) 458-04-71',
+    'остальные': None
+}

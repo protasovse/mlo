@@ -161,30 +161,6 @@
     }
   }
 
-  .rubrics {
-    @extend .normal;
-    .rubric-item {
-      &:before {
-        @extend .mr-2;
-        content: '\e908';
-        font-family: icomoon;
-        color: $gray-200;
-      }
-      &:after {
-        @extend .mr-3;
-        content: ',';
-      }
-      &:last-of-type {
-        &:after {
-          content: none;
-        }
-      }
-      a {
-        color: $gray-800;
-      }
-    }
-  }
-
   &.answer-push {
     padding-left: line(4);
     @include media-breakpoint-down(md) {
@@ -332,4 +308,29 @@
     margin-bottom: 0;
   }
 }
+
+.rubrics-list {
+  @extend .normal;
+  .rubrics-list-item {
+    &:before {
+      @extend .mr-2;
+      content: '\e908';
+      font-family: icomoon;
+      color: $gray-200;
+    }
+    &:after {
+      @extend .mr-3;
+      content: ',';
+    }
+    &:last-of-type {
+      &:after {
+        content: none;
+      }
+    }
+    a {
+      color: $gray-800;
+    }
+  }
+}
+
 
