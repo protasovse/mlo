@@ -12,6 +12,8 @@ urlpatterns = [
     path('admin/login/', LoginView.as_view(), name='login'),
     url(r'^admin/', admin.site.urls),
 
+    url(r'^advice/', include('apps.advice.urls')),
+
     re_path('^задать-вопрос/', AskQuestion.as_view(), name='ask_question'),
 
     url(r'^вопрос/', include('apps.question.urls', namespace='question')),

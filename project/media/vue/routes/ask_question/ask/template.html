@@ -188,11 +188,11 @@
 
 
     <!--form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-        <input type="hidden" name="receiver" value="4100155188774">
+        <input type="hidden" name="receiver" value="{MONEY_YANDEX_PURSE}">
         <input type="hidden" name="quickpay-form" value="shop">
         <input type="hidden" name="referer" value="http://мойюрист.онлайн/задать-вопрос/">
-        <input type="hidden" name="formcomment" value="{advice.sittings.PAYMENT_FORM_TITLE}">
-        <input type="hidden" name="label" value="paid_question.456456">
+        <input type="hidden" name="formcomment" value="{settings.PAYMENT_FORM_TITLE}">
+        <input type="hidden" name="label" value="advice.456456">
         <input type="hidden" name="targets" value="{PAYMENT_FORM_TARGET}">
         <input type="hidden" name="successURL" value="http://мойюрист.онлайн/вопрос/456456/здесь можно ключ сгенерить
         аналог того, что на почту приходит. Этот ключ будет разблокировать вопрос после оплаты/">

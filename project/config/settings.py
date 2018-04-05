@@ -188,8 +188,6 @@ IQSMS_URL = "http://api.iqsms.ru/messages/v2/send/"
 GOOGLE_HORT_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOOGLE_HORT_API_KEY = 'AIzaSyD7GJizTAQaQ3C0v_ysFTJz2HWZMopHb5E'
 
-ADVICE_COST = 800  # руб.
-
 HOT_LINE_PHONES = {
     'Московская область': '8 (495) 568-24-78',
     'Москва': '8 (495) 568-24-78',
@@ -197,3 +195,23 @@ HOT_LINE_PHONES = {
     'Ленинградская область': '8 (812) 458-04-71',
     'остальные': None
 }
+
+
+# Платёжная информация об money.yandex аккаунте
+MONEY_YANDEX_SECRET = 'FT4aTj51dQLblW6HQxjxqkfT'
+
+# Номер кошелька для оплаты
+MONEY_YANDEX_PURSE = 410014165217866
+
+PAYMENT_FORM_TITLE = "Мойюрист.онлайн — юридическая консультация онлайн"
+PAYMENT_FORM_TARGET = "Услуга «Персональный юрист». Вопрос №{question_id}"
+
+# Стоимость консультации
+ADVICE_COST = 800  # руб.
+
+# Время через которое заявка переходит следующему по очереди
+ADVICE_OVERDUE_TIME = 30  # min
+
+# Гонорар эксперта в процентах
+ADVICE_EXPERT_FEE_IN_PERCENT = 55  # %
+

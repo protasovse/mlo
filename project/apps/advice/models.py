@@ -8,11 +8,10 @@ from timezone_field import TimeZoneField
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.manager import AdviceManager
-from apps.advice.settings import EXPERT_FEE_IN_PERCENT
 from apps.entry.managers import DELETED
 from . import emails
 from apps.entry.models import Question
-from config.settings import AUTH_USER_MODEL, ADVICE_COST
+from config.settings import AUTH_USER_MODEL, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT
 
 ADVICE_NEW = 'new'
 ADVICE_PAID = 'paid'
@@ -153,7 +152,7 @@ class Advice(models.Model):
             self.status = ADVICE_CLOSED
             self.save(update_fields=['status'])
             from apps.billing.models import transfer_to_user
-            transfer_to_user(self.expert, self.cost * EXPERT_FEE_IN_PERCENT / 100,
+            transfer_to_user(self.expert, self.cost * ADVICE_EXPERT_FEE_IN_PERCENT / 100,
                              'Гонорар за платный вопрос №{id}'.format(id=self.question_id))
             # Уведомляем эксперта о завершении консультации и переводе денег на счёт
             emails.send_advice_closed(self)

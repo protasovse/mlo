@@ -7,11 +7,10 @@ from dbmail import send_db_mail, send_db_sms
 from django.contrib.sites.models import Site
 from requests.auth import HTTPBasicAuth
 
-from apps.advice.settings import ADVICE_OVERDUE_TIME, EXPERT_FEE_IN_PERCENT
 from apps.entry.models import Answer
 
 from config.settings import SITE_PROTOCOL, IQSMS_URL, IQSMS_API_LOGIN, IQSMS_API_PASSWORD, IQSMS_FROM, \
-    GOOGLE_HORT_API_URL, GOOGLE_HORT_API_KEY
+    GOOGLE_HORT_API_URL, GOOGLE_HORT_API_KEY, ADVICE_OVERDUE_TIME, ADVICE_EXPERT_FEE_IN_PERCENT
 
 
 # Письмо уведомление эксперта о заявки на платную консультацию
@@ -103,7 +102,7 @@ def send_advice_closed(advice):
     ctx = {
         'username': advice.question.author.get_name,
         'advice': advice,
-        'fee': advice.cost*EXPERT_FEE_IN_PERCENT/100,
+        'fee': advice.cost*ADVICE_EXPERT_FEE_IN_PERCENT/100,
         'site': Site.objects.get_current(),
         'protocol': SITE_PROTOCOL
     }

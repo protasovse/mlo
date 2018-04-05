@@ -73,4 +73,3 @@ def queue_del_user(user_id):
         DELETE FROM `advice_queue` WHERE `expert_id`={user_id} LIMIT 1;
         COMMIT;
         """.format(user_id=user_id))
-
