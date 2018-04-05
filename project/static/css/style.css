@@ -8326,13 +8326,13 @@ footer.main-footer {
       order: 1;
       margin-bottom: 10px; } }
 
-#app {
+body {
   transition: margin 0.2s; }
 
 .slide-menu, .mlo-navbar {
-  transition: right .2s; }
+  transition: right .2s, left .2s; }
 
-.shaded:before, #app.open-slide-menu .mlo-navbar:before {
+.shaded:before, body.open-slide-menu .mlo-navbar:before {
   content: '';
   position: fixed;
   z-index: 1040;
@@ -8378,28 +8378,30 @@ footer.main-footer {
   content: '\e907';
   font-family: icomoon; }
 
-#app.open-slide-menu {
+body.open-slide-menu {
   overflow-y: hidden; }
-  #app.open-slide-menu .mlo-navbar .slide-menu-toggle {
+  body.open-slide-menu .mlo-navbar .slide-menu-toggle {
     position: relative;
     z-index: 1041; }
-    #app.open-slide-menu .mlo-navbar .slide-menu-toggle:before {
+    body.open-slide-menu .mlo-navbar .slide-menu-toggle:before {
       content: '\e906'; }
 
-#app.open-slide-menu {
+body.open-slide-menu {
   margin-right: 430px;
   margin-left: -430px; }
   @media (max-width: 767.98px) {
-    #app.open-slide-menu {
+    body.open-slide-menu {
       margin-right: 260px;
       margin-left: -260px; } }
-  #app.open-slide-menu .slide-menu {
+  body.open-slide-menu .slide-menu {
     right: 0; }
-  #app.open-slide-menu .mlo-navbar.fixed {
-    right: 430px; }
+  body.open-slide-menu .mlo-navbar.fixed {
+    right: 430px;
+    left: -430px; }
     @media (max-width: 767.98px) {
-      #app.open-slide-menu .mlo-navbar.fixed {
-        right: 260px; } }
+      body.open-slide-menu .mlo-navbar.fixed {
+        right: 260px;
+        left: -260px; } }
 
 .lawyer-card {
   width: 320px;

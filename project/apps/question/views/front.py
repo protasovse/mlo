@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.advice.settings import ADVICE_OVERDUE_TIME
 from apps.rating.models import Rating
+from apps.rubric.models import Rubric
 from apps.svem_auth.models.users import UserHash
 from apps.entry.models import Question, Answer
 from apps.entry.managers import PUBLISHED
@@ -52,6 +53,52 @@ class QuestionDetail(TemplateView):
             'mess': messages.get_messages(self.request),
             'answers': Answer.published.related_to_question(question)
         })
+
+        # Лучшие юристы блок
+        context.update({
+            'lawyers_from_rating': Rating.lawyers.all()[:3]
+        })
+
+        return context
+
+
+class QuestionsList(TemplateView):
+    template_name = 'entry/questions_list.html'
+    # context_object_name = 'questions'
+    # queryset = Question.published.all()
+    # paginate_by = 10
+    # page_kwarg = 'page'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Выборка информации о рубриках
+        if 'subrubric_slug' in self.kwargs:
+            slug = self.kwargs['subrubric_slug']
+        elif 'rubric_slug' in self.kwargs:
+            slug = self.kwargs['rubric_slug']
+        else:
+            slug = ''
+        # Получаем всех предков
+        if slug:
+            rubric = get_object_or_404(Rubric, slug=slug)
+            # rubrics = rubric.get_ancestors(include_self=True)
+            # if rubrics[0].slug != self.kwargs['rubric_slug']:
+            #     raise Http404()
+            # context['rubrics'] = rubrics
+            context['rubric'] = rubric
+
+        # Все рубрики
+        context['all_rubrics'] = Rubric.objects.filter(level=0)
+
+        # Вопросы
+        if slug:
+            context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
+        else:
+            context['questions'] = Question.published.order_by('-pk')[:10]
+
+        # Список рубрик для aside
+        context['rubrics_list'] = Rubric.objects.filter(level__in=(0, ))
 
         # Лучшие юристы блок
         context.update({

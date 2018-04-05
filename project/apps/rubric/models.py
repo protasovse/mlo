@@ -63,6 +63,13 @@ class Rubric(MPTTModel):
         """
         return misaka.html(self.description)
 
+    @property
+    def html_content(self):
+        """
+        Возвращает "content" форматированное в HTML.
+        """
+        return misaka.html(self.content)
+
     def get_absolute_url(self):
         # if self.is_root_node():
         return reverse('questions:list_rubric',

@@ -58,20 +58,25 @@
                                 {% if rubric %}
                                     {{ rubric.html_description|safe }}
                                 {% else %}
-                                    <p>Проект Мойюрист.онлайн позволяет каждому человеку получить грамотный совет
-                                        юриста
-                                        в любой жизненной ситуации. На вопросы наших посетителей отвечают
+                                    <p>«Мойюрист.онлайн» — это проект бесплатной юридической консультации онлайн.
+                                        «Мойюрист.онлайн» объединяет профессиональных юристов и тех, кому нужен
+                                        грамотный юридический совет.</p>
+                                    <p>Проект «Мойюрист.онлайн» позволяет каждому человеку получить грамотный совет
+                                        юриста в любой жизненной ситуации. На вопросы наших посетителей отвечают
                                         профессиональные юристы. Специалисты, которые не только дают бесплатные
                                         консультации, но и занимаются обширной юридической практикой.</p>
                                 {% endif %}
-                                <p><strong>Наши юристы и адвокаты проконсультируют Вас
-                                    {% if rubrics.last.advice_on %}
-                                        {{ rubrics.last.advice_on }}
-                                    {% elif rubrics.0.advice_on %}
-                                        {{ rubrics.0.advice_on }}
-                                    {% endif %}
-                                    платно или бесплатно. Для этого <a href="{% url 'ask_question' %}"
-                                    >заполните форму</a>.</strong></p>
+                            </div>
+                            <div>
+                                {% if rubric %}
+                                    {{ rubric.html_content|safe }}
+                                {% else %}
+                                {% endif %}
+                            </div>
+                            <div class="alert alert-secondary mt-5">
+                                <p>Наши юристы и адвокаты проконсультируют Вас {{ rubric.advice_on }} платно или
+                                    бесплатно. Для этого просто <a href="{% url 'ask_question' %}"
+                                    >заполните форму</a>.</p>
                             </div>
 
                             {% if rubrics.last.get_children %}
@@ -95,6 +100,12 @@
 
             {# Боковая колонка 1  #}
             <aside class="question-page_aside-part">
+
+                {% if lawyers_from_rating.count %}
+                    <h4 class="mb-4">Наши эксперты</h4>
+                    {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
+                {% endif %}
+
             </aside>
 
         </div>
@@ -113,7 +124,7 @@
                 <hr>
 
                 {% for question in questions.all %}
-                    {% include 'entry/generic/question_item.html' with item=question show_answers=False %}
+                    {% include 'question/generic/question_item_in_list.html' with item=question show_answers=False %}
                 {% endfor %}
 
                 <footer class="row">
@@ -126,12 +137,8 @@
             </div>
 
             <aside class="question-page_aside-part">
-                {% if rating.count and not question.reply_count %}
-                    <h4 class="mb-5">Лучшие эксперты</h4>
-                    {% include 'rating/aside/best_lawyers.html' with items=rating %}
-                {% endif %}
 
-                <h4>Рубрики</h4>
+                <h4>Темы консультаций</h4>
 
                 <ul class="list-unstyled mt-4">
                     {% for r in rubrics_list %}

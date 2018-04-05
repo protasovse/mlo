@@ -2,16 +2,21 @@
     <div class="container">
         <div class="row">
             <div class="l-col">
-                <h2><span class="l">{% if title %}{{ title }}{% else %}Консультируйся с юристом онлайн{% endif %}</span>
-                    <span class="s">Бесплатный звонок юристу</span></h2>
-                <p class="phone"><span class="l">или по телефону: </span><a class="tel" href="tel:84955682478">8
-                    495 568-24-78</a></p>
+                <h2>
+                    <span class="l">{% if title %}{{ title }}{% else %}Консультируйтесь с юристом онлайн{% endif %}</span>
+                    <span class="s">{% if user.hot_line_phone %}Бесплатный звонок юристу{% else %}Получите<br>консультацию юриста<br><br>{% endif %}</span>
+                </h2>
+                {% if user.hot_line_phone %}
+                <p class="phone">
+                    <a class="tel" href="tel:{{ user.hot_line_phone }}">{{ user.hot_line_phone }}</a>
+                </p>
+                {% endif %}
                 <p class="l">Бесплатные или платные юридические консультации, лучших юристов.</p>
             </div>
             <div class="r-col">
-                <form class="l" action="{% url 'ask_question' %}">
-                    <textarea id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
-                    <button type="submit">Задать вопрос юристу</button>
+                <form action="{% url 'ask_question' %}">
+                    <textarea class="l" id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
+                    <button type="submit">Задать вопрос</button>
                 </form>
             </div>
         </div>

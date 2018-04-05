@@ -6,10 +6,10 @@
     <section class="header-section">
         <main class="text-center row">
             <h1 class="h4 mt-5 col-12">Юридическая консультация онлайн с&nbsp;2005 года</h1>
-            <h2 class="h1 mb-5 col-12">Ваш персональный онлайн юрист</h2>
+            <h2 class="h1 mb-5 col-12">Ваш персональный <nobr>онлайн юрист</nobr></h2>
             <!--p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p-->
             <p class="col-md-7 mx-auto lead mb-5">
-                <b>Вернём деньги за платный вопрос, если вы не будете удовлетворены консультацией нашего эксперта.</b>
+                <b>Просто задайте вопрос <nobr>и получите грамотный совет юриста</nobr> <nobr>в любой жизненной ситуации.</nobr></b>
             </p>
             <!--p class="lead text-center mb-4">{{ request.user.email }}</p-->
             <div class="col-12">
@@ -116,7 +116,7 @@
             <hr>
 
             {% for question in questions %}
-                {% include 'entry/generic/question_item.html' with item=question show_answers=True %}
+                {% include 'question/generic/question_item_in_list.html' with item=question show_answers=True %}
             {% endfor %}
 
             <footer class="row">

@@ -10,23 +10,26 @@ class LocationIdentify(MiddlewareMixin):
         geo_data = GeoLocator(settings.DATA_DIR + 'SxGeoCity.dat')
         ip = self.get_client_ip(request)
         location = geo_data.get_location(ip, detailed=True)
-        if not location:
-            location = geo_data.get_location('195.239.1.253', detailed=True)
 
-        city_name = location['info']['city']['name_ru']
-        city_id = location['info']['city']['id']
-        region_name = location['info']['region']['name_ru']
-        region_id = location['info']['region']['id']
+        if location:
+            type = 'city'
+            name = location['info']['city']['name_ru']
+            id = location['info']['city']['id']
+            region_name = location['info']['region']['name_ru']
+        else:
+            type = 'country'
+            name = 'Россия'
+            id = -1
+            region_name = None
 
         morph = pymorphy2.MorphAnalyzer()
-        c = morph.parse(city_name)[0]
+        c = morph.parse(name)[0]
 
         request.user.location = {
-            'city_id': city_id,
-            'city_name': city_name,
-            'city_name_loc': c.inflect({'loc2'}).word.title(),
-            'region_id': region_id,
-            'region_name': region_name,
+            'loc_id': id,
+            'loc_name': name,
+            'loc_name_loct': c.inflect({'loc2'}).word.title(),
+            'loc_type': type
         }
 
         request.user.hot_line_phone = settings.HOT_LINE_PHONES[region_name] \

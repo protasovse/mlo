@@ -7,7 +7,7 @@
         <div class="l-col subtitle pt-2 mb-3">{{ item.pub_date|date:"j M Y G:i" }}</div>
 
         <h5 class="r-col mb-0 mb-lg-3">
-            <a href="{% url 'question:detail' item.pk %}">{{ item.title }}</a>
+            <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.title }}</a>
         </h5>
 
         <div class="l-col pt-lg-1 mb-3">
@@ -18,7 +18,6 @@
 
         <div class="r-col large">
             <p>{{ item.content|safe|truncatechars:192 }}</p>
-
         </div>
 
         {# Ответы #}
@@ -37,7 +36,7 @@
                         </div>
                         <div>
                             {% if item.reply_count > 1 %}
-                                <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+                                <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
                             {% else %}
                                 <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
                                 <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
@@ -50,7 +49,7 @@
             </div>
         {% else %}
             <div class="normal col offset-md-3">
-                <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+                <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
             </div>
         {% endif %}
 

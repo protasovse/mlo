@@ -21,7 +21,7 @@
 
 {% block block_js %}
     <script>
-        $('#app').addClass("navbar-fixed");
+        $('.page').addClass("navbar-fixed");
         $('#app').on('scroll', function () {
             if ($('#app').scrollTop() > 60) {
                 // $('#app').addClass("navbar-fixed");
@@ -29,12 +29,13 @@
                 // $('#app').removeClass("navbar-fixed");
             }
         });
-
-        $('.slide-menu-toggle').click(function () {
-            $('#app').toggleClass("open-slide-menu");
+        $('.slide-menu-toggle').click(function (event) {
+            event.preventDefault();
+            $('body').toggleClass("open-slide-menu");
         });
-        $('.fix-navbar').click(function () {
-            $('#app').toggleClass("navbar-fixed");
+        $('.fix-navbar').click(function (event) {
+            event.preventDefault();
+            $(body).toggleClass("navbar-fixed");
         });
     </script>
 {% endblock %}

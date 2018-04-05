@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 
-from apps.entry.views import QuestionsList
+from apps.question.views.front import QuestionsList
+
 app_name = 'entry'
 
 urlpatterns = [
