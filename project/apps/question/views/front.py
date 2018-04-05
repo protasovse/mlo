@@ -4,7 +4,6 @@ from django.db import transaction
 from django.views.generic.base import TemplateView, RedirectView
 from django.contrib.auth import login
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
-from apps.advice.settings import ADVICE_OVERDUE_TIME
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
 from apps.svem_auth.models.users import UserHash
@@ -15,6 +14,8 @@ from django.urls import reverse
 from datetime import date, timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
+
+from config.settings import ADVICE_OVERDUE_TIME
 
 
 class QuestionDetail(TemplateView):

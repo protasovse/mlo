@@ -3,18 +3,19 @@ import hashlib
 from django.http import HttpResponse
 from django.shortcuts import render
 
-SECRET = 'bhpC6s2sVFnJQF8l/b3K9nV0'
+from apps.advice.models import Advice
+from config.settings import MONEY_YANDEX_SECRET
 
 
 def advice_to_payment_confirmed(request):
-
     """
-    ?operation_id=904035776918098009&notification_type=p2p-incoming&datetime=2014-04-28T16:31:28Z&sha1_hash=9d9f21efc89f44a8d5125e5360a8194e1e292e2a&sender=41003188981230&codepro=false&currency=643&amount=0.99&withdraw_amount=1.00&label=advice.456456
-    9d9f21efc89f44a8d5125e5360a8194e1e292e2a
-    9d9f21efc89f44a8d5125e5360a8194e1e292e2a
+    http://мойюрист.онлайн/advice/to_payment_confirmed — url подтверждения
+    ?operation_id=904035776918098009&notification_type=p2p-incoming&datetime=2014-04-28T16:31:28Z&sha1_hash=8cd2341395aa45f4bfe1f5d5079b878949d3e3cc&sender=41003188981230&codepro=false&currency=643&amount=800.00&withdraw_amount=800.00&label=advice.1500026
+    8cd2341395aa45f4bfe1f5d5079b878949d3e3cc
     """
-
-    data = request.GET
+    resp = ''
+    # data = request.GET
+    data = request.POST
 
     result_string = "&".join((
         data['notification_type'],
@@ -24,19 +25,31 @@ def advice_to_payment_confirmed(request):
         data['datetime'],
         data['sender'],
         data['codepro'],
-        SECRET,
+        MONEY_YANDEX_SECRET,
         data['label']
     ))
 
     sha = hashlib.sha1(result_string.encode()).hexdigest()
-
-    print(sha)
-    print(data['sha1_hash'])
+    # print(sha)
 
     if sha == data['sha1_hash']:
 
         # Пример label=advice.456456
-        question_id = data['label'].split('.')[1]
         label = data['label'].split('.')[0]
 
-    return HttpResponse(sha)
+        if label == 'advice':
+            question_id = data['label'].split('.')[1]
+            advice = Advice.objects.get(question_id=question_id)
+            if advice.to_payment_confirmed():
+                # Обновляем цену оплаченную по факту
+                if 'withdraw_amount' in data:
+                    advice.cost = int(float(data['withdraw_amount']))
+                    advice.save(update_fields=['cost'])
+                resp = 'Платёж подтверждён, вопрос: {}'.format(question_id)
+            else:
+                resp = 'Не удалось обновить статус завки'
+
+    else:
+        resp = 'Хеш неверен! Проверьте секретное слово'
+
+    return HttpResponse(resp)
