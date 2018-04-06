@@ -94,7 +94,8 @@ class QuestionsList(TemplateView):
 
         # Вопросы
         if slug:
-            context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
+            # context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
+            context['questions'] = Question.published.search(rubric.name, 0, 10)
         else:
             context['questions'] = Question.published.order_by('-pk')[:10]
 

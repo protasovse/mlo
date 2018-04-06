@@ -1,3 +1,4 @@
+import sphinxapi
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -103,4 +104,21 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
     def by_rubric(self, rubric_id):
         qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
+        return qs
+
+    def search(self, query, offset=0, limit=10):
+        client = sphinxapi.SphinxClient()
+        client.SetServer('127.0.0.1', 9312)
+
+        client.SetLimits(offset, limit, 100)
+
+        # client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, 'date DESC')
+        result = client.Query(query, 'question')
+
+        ids = list()
+        for r in result['matches']:
+            ids += (r['id'],)
+
+        qs = self.get_queryset().filter(entry_ptr_id__in=ids)
+
         return qs

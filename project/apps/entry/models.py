@@ -4,6 +4,7 @@ from django.db.models.signals import post_save, pre_delete
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
     QuestionsPublishedManager
 from apps.rubric.models import Classified

@@ -42,9 +42,14 @@ django-phonenumber-field==2.0.0
 git+git://github.com/jazzband/django-debug-toolbar.git
 
 # Поиск
-# django_sphinxsearch==2.1.0
-# django-haystack==2.8.0
-# pysolr==3.7.0
+# установить SphinxSearch
+# brew install sphinx --with-mysql
+# создать индексы
+# cd /Users/ProtasovSE/PycharmProjects/mlo_rest/mlo_rest/project/
+# indexer --config config/sphinx.conf --all # --rotate
+# запустить
+# searchd --config config/sphinx.conf
+sphinxapi-py3==2.1.11
 
 # Поле временной зоны
 django-timezone-field==2.1
