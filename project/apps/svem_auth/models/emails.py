@@ -44,7 +44,7 @@ def send_forgot_password_email(user):
 
 def send_confirm_question(user, question, token):
     ctx = {
-        'hash': token.key,
+        'hash': token,
         'username': user.get_name,
         'question_url': question.get_absolute_url(),
         'question_title': question.title,

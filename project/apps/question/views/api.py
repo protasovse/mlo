@@ -8,7 +8,6 @@ from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED, PUBLISHED
 from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
-from apps.svem_auth.models.users import UserHash
 from django.contrib import messages
 from django.urls import reverse
 
@@ -30,7 +29,8 @@ class QuestionView(ApiView):
         """
         params = cls.get_put(request)
         phone_number = format_number(parse(params['phone'], 'RU'), PhoneNumberFormat.E164) if params['phone'] else None
-        city_id = params['city[id]'] if 'city[id]' in params.keys() else False
+        city_id = params['city[id]'] if 'city[id]' in params.keys() else None
+        city_id = int(city_id) or None
         if request.user.is_authenticated:
             user = request.user
             status = PUBLISHED
@@ -41,7 +41,7 @@ class QuestionView(ApiView):
                 user = get_user_model().objects.get(email=_email)
             except get_user_model().DoesNotExist:
 
-                if int(city_id):
+                if city_id:
                     city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
                     city_validator(city_id)
                 else:
@@ -53,7 +53,7 @@ class QuestionView(ApiView):
                     city_id=city_id
                 )
 
-        token = UserHash.get_or_create(user) if status == BLOCKED else None
+        token = binascii.hexlify(os.urandom(20)).decode()
 
         q = Question.objects.create(
             title=params['title'],
@@ -61,11 +61,12 @@ class QuestionView(ApiView):
             author_id=user.id,
             status=status,
             is_pay=params['is_paid_question'],
-            key=token,
+            token=token,
             first_name=params['name'] if params['name'] else user.first_name,
             phone=phone_number,
             city_id=user.city_id if user.city_id else city_id
         )
+
         q.rubrics.set(params.getlist('rubric[]'))
         if status == BLOCKED:
             emails.send_confirm_question(user, q, token)
