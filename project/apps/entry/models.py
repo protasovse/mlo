@@ -49,7 +49,10 @@ class Entry(models.Model):
         db_index=True, default=timezone.now,
         editable=False
     )
-
+    # technical fields
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    #
     like_count = models.IntegerField(
         _('Лайки'), db_index=True,
         default=0)
@@ -129,13 +132,13 @@ class Question(Entry, Titled, Classified):
         _('Статус'), db_index=True,
         choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
 
-    key = models.CharField("Key", max_length=40, db_index=True, null=True, blank=True)
+    token = models.CharField("Key", max_length=40, db_index=True, unique=True, null=True, blank=True)
 
     first_name = models.CharField(_('first name'), max_length=32, blank=True)
 
     phone = models.CharField(max_length=15, blank=True, verbose_name=_('Телефон'))
 
-    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.SET_NULL, blank=True, null=True)
 
     objects = models.Manager()
     published = QuestionsPublishedManager()

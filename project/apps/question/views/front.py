@@ -6,7 +6,6 @@ from django.contrib.auth import login
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
-from apps.svem_auth.models.users import UserHash
 from apps.entry.models import Question, Answer
 from apps.entry.managers import PUBLISHED
 from django.contrib import messages
@@ -116,27 +115,22 @@ class AskQuestion(TemplateView):
 
 class ConfirmQuestion(RedirectView):
     def get_redirect_url(self, **kwargs):
-
         try:
             with transaction.atomic():
                 pk = kwargs['pk']
                 token = kwargs['token']
                 try:
-                    hash_obj = UserHash.objects.get(key=token)
-                except UserHash.DoesNotExist as e:
+                    q = Question.objects.get(token=token)
+                except Question.DoesNotExist as e:
                     raise ControlledException(e)
-                # if hash exists, but too late
-                if hash_obj.live_until.date() < date.today():
-                    raise ControlledException()
                 # do activate question
-                q = Question.objects.get(key=token)
                 if q.id != pk:
                     raise ControlledException()
                 # to public the question
                 q.status = PUBLISHED
                 q.save()
                 # find user from hash
-                user = hash_obj.user
+                user = q.author
                 # if user doesnt active
                 user.activate(False)
                 # save to user personal info from question
@@ -144,11 +138,9 @@ class ConfirmQuestion(RedirectView):
                 user.city_id = q.city_id
                 user.phone = q.phone
                 user.save()
-                # remove hash
-                hash_obj.delete()
-                # to do login user
-                if not self.request.user.is_authenticated:
-                    login(self.request, user)
+            # to do login user
+            if not self.request.user.is_authenticated:
+                login(self.request, user)
             return reverse('question:detail', kwargs={'pk': q.id})
         except ControlledException:
             messages.add_message(
