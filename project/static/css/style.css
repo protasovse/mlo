@@ -1112,7 +1112,7 @@ pre {
     flex: 0 0 50%;
     max-width: 50%; }
 
-  .col-lg-7 {
+  .col-lg-7, .question-item .r-col, .question-item .answer {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
@@ -1120,7 +1120,7 @@ pre {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%; }
 
-  .col-lg-9, .question-page_r-col, .question-page_main-part, .question-item .r-col, .question-item .answer {
+  .col-lg-9, .question-page_r-col, .question-page_main-part {
     flex: 0 0 75%;
     max-width: 75%; }
 
@@ -1652,7 +1652,6 @@ select.form-control:focus::-ms-value {
   .question-page_header .r-col form .input-group-sm > .input-group-prepend > button.form-control-plaintext,
   .question-page_header .question-item .answer form .input-group-sm > .input-group-prepend > button.form-control-plaintext,
   .question-item .question-page_header .answer form .input-group-sm > .input-group-prepend > button.form-control-plaintext,
-  .lawyer-page_header .input-group-sm > .input-group-prepend > button.form-control-plaintext,
   .input-group-sm > .input-group-append > .form-control-plaintext.btn,
   .input-group-sm > .input-group-append > .form-control-plaintext.btn-vk,
   .input-group-sm > .input-group-append > .form-control-plaintext.btn-od,
@@ -1663,8 +1662,7 @@ select.form-control:focus::-ms-value {
   section.gray .input-group-sm > .input-group-append > button.form-control-plaintext,
   .question-page_header .r-col form .input-group-sm > .input-group-append > button.form-control-plaintext,
   .question-page_header .question-item .answer form .input-group-sm > .input-group-append > button.form-control-plaintext,
-  .question-item .question-page_header .answer form .input-group-sm > .input-group-append > button.form-control-plaintext,
-  .lawyer-page_header .input-group-sm > .input-group-append > button.form-control-plaintext, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
+  .question-item .question-page_header .answer form .input-group-sm > .input-group-append > button.form-control-plaintext, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
   .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,
   .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,
   .input-group-lg > .input-group-prepend > .form-control-plaintext.btn,
@@ -1678,7 +1676,6 @@ select.form-control:focus::-ms-value {
   .question-page_header .r-col form .input-group-lg > .input-group-prepend > button.form-control-plaintext,
   .question-page_header .question-item .answer form .input-group-lg > .input-group-prepend > button.form-control-plaintext,
   .question-item .question-page_header .answer form .input-group-lg > .input-group-prepend > button.form-control-plaintext,
-  .lawyer-page_header .input-group-lg > .input-group-prepend > button.form-control-plaintext,
   .input-group-lg > .input-group-append > .form-control-plaintext.btn,
   .input-group-lg > .input-group-append > .form-control-plaintext.btn-vk,
   .input-group-lg > .input-group-append > .form-control-plaintext.btn-od,
@@ -1689,8 +1686,7 @@ select.form-control:focus::-ms-value {
   section.gray .input-group-lg > .input-group-append > button.form-control-plaintext,
   .question-page_header .r-col form .input-group-lg > .input-group-append > button.form-control-plaintext,
   .question-page_header .question-item .answer form .input-group-lg > .input-group-append > button.form-control-plaintext,
-  .question-item .question-page_header .answer form .input-group-lg > .input-group-append > button.form-control-plaintext,
-  .lawyer-page_header .input-group-lg > .input-group-append > button.form-control-plaintext {
+  .question-item .question-page_header .answer form .input-group-lg > .input-group-append > button.form-control-plaintext {
     padding-right: 0;
     padding-left: 0; }
 
@@ -1708,7 +1704,6 @@ section.gray .input-group-sm > .input-group-prepend > button,
 .question-page_header .r-col form .input-group-sm > .input-group-prepend > button,
 .question-page_header .question-item .answer form .input-group-sm > .input-group-prepend > button,
 .question-item .question-page_header .answer form .input-group-sm > .input-group-prepend > button,
-.lawyer-page_header .input-group-sm > .input-group-prepend > button,
 .input-group-sm > .input-group-append > .btn,
 .input-group-sm > .input-group-append > .btn-vk,
 .input-group-sm > .input-group-append > .btn-od,
@@ -1719,8 +1714,7 @@ section.gray .input-group-sm > .input-group-prepend > button,
 section.gray .input-group-sm > .input-group-append > button,
 .question-page_header .r-col form .input-group-sm > .input-group-append > button,
 .question-page_header .question-item .answer form .input-group-sm > .input-group-append > button,
-.question-item .question-page_header .answer form .input-group-sm > .input-group-append > button,
-.lawyer-page_header .input-group-sm > .input-group-append > button {
+.question-item .question-page_header .answer form .input-group-sm > .input-group-append > button {
   padding: 0.5rem 1.25rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -1759,7 +1753,6 @@ section.gray .input-group-lg > .input-group-prepend > button,
 .question-page_header .r-col form .input-group-lg > .input-group-prepend > button,
 .question-page_header .question-item .answer form .input-group-lg > .input-group-prepend > button,
 .question-item .question-page_header .answer form .input-group-lg > .input-group-prepend > button,
-.lawyer-page_header .input-group-lg > .input-group-prepend > button,
 .input-group-lg > .input-group-append > .btn,
 .input-group-lg > .input-group-append > .btn-vk,
 .input-group-lg > .input-group-append > .btn-od,
@@ -1770,8 +1763,7 @@ section.gray .input-group-lg > .input-group-prepend > button,
 section.gray .input-group-lg > .input-group-append > button,
 .question-page_header .r-col form .input-group-lg > .input-group-append > button,
 .question-page_header .question-item .answer form .input-group-lg > .input-group-append > button,
-.question-item .question-page_header .answer form .input-group-lg > .input-group-append > button,
-.lawyer-page_header .input-group-lg > .input-group-append > button {
+.question-item .question-page_header .answer form .input-group-lg > .input-group-append > button {
   padding: 1.25rem 1.5rem;
   font-size: 1.125rem;
   line-height: 1.5;
@@ -2113,7 +2105,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     cursor: pointer;
     display: block; }
 
-.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button, .lawyer-page_header button {
+.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button {
   display: inline-block;
   font-weight: 600;
   text-align: center;
@@ -2126,16 +2118,16 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   line-height: 1.3888888889;
   border-radius: 0.25rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
-  .btn:hover, .btn-vk:hover, .btn-od:hover, .btn-ml:hover, .btn-fb:hover, .btn-tw:hover, .btn-gl:hover, section.gray button:hover, .question-page_header .r-col form button:hover, .question-page_header .question-item .answer form button:hover, .question-item .question-page_header .answer form button:hover, .lawyer-page_header button:hover, .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page_header .r-col form button:focus, .question-page_header .question-item .answer form button:focus, .question-item .question-page_header .answer form button:focus, .lawyer-page_header button:focus {
+  .btn:hover, .btn-vk:hover, .btn-od:hover, .btn-ml:hover, .btn-fb:hover, .btn-tw:hover, .btn-gl:hover, section.gray button:hover, .question-page_header .r-col form button:hover, .question-page_header .question-item .answer form button:hover, .question-item .question-page_header .answer form button:hover, .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page_header .r-col form button:focus, .question-page_header .question-item .answer form button:focus, .question-item .question-page_header .answer form button:focus {
     text-decoration: none; }
-  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page_header .r-col form button:focus, .question-page_header .question-item .answer form button:focus, .question-item .question-page_header .answer form button:focus, .lawyer-page_header button:focus, .btn.focus, .focus.btn-vk, .focus.btn-od, .focus.btn-ml, .focus.btn-fb, .focus.btn-tw, .focus.btn-gl, section.gray button.focus, .question-page_header .r-col form button.focus, .question-page_header .question-item .answer form button.focus, .question-item .question-page_header .answer form button.focus, .lawyer-page_header button.focus {
+  .btn:focus, .btn-vk:focus, .btn-od:focus, .btn-ml:focus, .btn-fb:focus, .btn-tw:focus, .btn-gl:focus, section.gray button:focus, .question-page_header .r-col form button:focus, .question-page_header .question-item .answer form button:focus, .question-item .question-page_header .answer form button:focus, .btn.focus, .focus.btn-vk, .focus.btn-od, .focus.btn-ml, .focus.btn-fb, .focus.btn-tw, .focus.btn-gl, section.gray button.focus, .question-page_header .r-col form button.focus, .question-page_header .question-item .answer form button.focus, .question-item .question-page_header .answer form button.focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(76, 126, 253, 0.25); }
-  .btn.disabled, .disabled.btn-vk, .disabled.btn-od, .disabled.btn-ml, .disabled.btn-fb, .disabled.btn-tw, .disabled.btn-gl, section.gray button.disabled, .question-page_header .r-col form button.disabled, .question-page_header .question-item .answer form button.disabled, .question-item .question-page_header .answer form button.disabled, .lawyer-page_header button.disabled, .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page_header .r-col form button:disabled, .question-page_header .question-item .answer form button:disabled, .question-item .question-page_header .answer form button:disabled, .lawyer-page_header button:disabled {
+  .btn.disabled, .disabled.btn-vk, .disabled.btn-od, .disabled.btn-ml, .disabled.btn-fb, .disabled.btn-tw, .disabled.btn-gl, section.gray button.disabled, .question-page_header .r-col form button.disabled, .question-page_header .question-item .answer form button.disabled, .question-item .question-page_header .answer form button.disabled, .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page_header .r-col form button:disabled, .question-page_header .question-item .answer form button:disabled, .question-item .question-page_header .answer form button:disabled {
     opacity: 0.5; }
-  .btn:not(:disabled):not(.disabled), .btn-vk:not(:disabled):not(.disabled), .btn-od:not(:disabled):not(.disabled), .btn-ml:not(:disabled):not(.disabled), .btn-fb:not(:disabled):not(.disabled), .btn-tw:not(:disabled):not(.disabled), .btn-gl:not(:disabled):not(.disabled), section.gray button:not(:disabled):not(.disabled), .question-page_header .r-col form button:not(:disabled):not(.disabled), .question-page_header .question-item .answer form button:not(:disabled):not(.disabled), .question-item .question-page_header .answer form button:not(:disabled):not(.disabled), .lawyer-page_header button:not(:disabled):not(.disabled) {
+  .btn:not(:disabled):not(.disabled), .btn-vk:not(:disabled):not(.disabled), .btn-od:not(:disabled):not(.disabled), .btn-ml:not(:disabled):not(.disabled), .btn-fb:not(:disabled):not(.disabled), .btn-tw:not(:disabled):not(.disabled), .btn-gl:not(:disabled):not(.disabled), section.gray button:not(:disabled):not(.disabled), .question-page_header .r-col form button:not(:disabled):not(.disabled), .question-page_header .question-item .answer form button:not(:disabled):not(.disabled), .question-item .question-page_header .answer form button:not(:disabled):not(.disabled) {
     cursor: pointer; }
-  .btn:not(:disabled):not(.disabled):active, .btn-vk:not(:disabled):not(.disabled):active, .btn-od:not(:disabled):not(.disabled):active, .btn-ml:not(:disabled):not(.disabled):active, .btn-fb:not(:disabled):not(.disabled):active, .btn-tw:not(:disabled):not(.disabled):active, .btn-gl:not(:disabled):not(.disabled):active, section.gray button:not(:disabled):not(.disabled):active, .question-page_header .r-col form button:not(:disabled):not(.disabled):active, .question-page_header .question-item .answer form button:not(:disabled):not(.disabled):active, .question-item .question-page_header .answer form button:not(:disabled):not(.disabled):active, .lawyer-page_header button:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .btn-vk:not(:disabled):not(.disabled).active, .btn-od:not(:disabled):not(.disabled).active, .btn-ml:not(:disabled):not(.disabled).active, .btn-fb:not(:disabled):not(.disabled).active, .btn-tw:not(:disabled):not(.disabled).active, .btn-gl:not(:disabled):not(.disabled).active, section.gray button:not(:disabled):not(.disabled).active, .question-page_header .r-col form button:not(:disabled):not(.disabled).active, .question-page_header .question-item .answer form button:not(:disabled):not(.disabled).active, .question-item .question-page_header .answer form button:not(:disabled):not(.disabled).active, .lawyer-page_header button:not(:disabled):not(.disabled).active {
+  .btn:not(:disabled):not(.disabled):active, .btn-vk:not(:disabled):not(.disabled):active, .btn-od:not(:disabled):not(.disabled):active, .btn-ml:not(:disabled):not(.disabled):active, .btn-fb:not(:disabled):not(.disabled):active, .btn-tw:not(:disabled):not(.disabled):active, .btn-gl:not(:disabled):not(.disabled):active, section.gray button:not(:disabled):not(.disabled):active, .question-page_header .r-col form button:not(:disabled):not(.disabled):active, .question-page_header .question-item .answer form button:not(:disabled):not(.disabled):active, .question-item .question-page_header .answer form button:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .btn-vk:not(:disabled):not(.disabled).active, .btn-od:not(:disabled):not(.disabled).active, .btn-ml:not(:disabled):not(.disabled).active, .btn-fb:not(:disabled):not(.disabled).active, .btn-tw:not(:disabled):not(.disabled).active, .btn-gl:not(:disabled):not(.disabled).active, section.gray button:not(:disabled):not(.disabled).active, .question-page_header .r-col form button:not(:disabled):not(.disabled).active, .question-page_header .question-item .answer form button:not(:disabled):not(.disabled).active, .question-item .question-page_header .answer form button:not(:disabled):not(.disabled).active {
     background-image: none; }
 
 a.btn.disabled, a.disabled.btn-vk, a.disabled.btn-od, a.disabled.btn-ml, a.disabled.btn-fb, a.disabled.btn-tw, a.disabled.btn-gl,
@@ -2316,25 +2308,25 @@ fieldset:disabled a.btn-gl {
     .btn-dark:not(:disabled):not(.disabled):active:focus, .btn-dark:not(:disabled):not(.disabled).active:focus, .show > .btn-dark.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(84, 84, 84, 0.5); }
 
-.btn-white, .lawyer-page_header button {
+.btn-white {
   color: #212121;
   background-color: #fff;
   border-color: #fff; }
-  .btn-white:hover, .lawyer-page_header button:hover {
+  .btn-white:hover {
     color: #212121;
     background-color: #ececec;
     border-color: #e6e6e6; }
-  .btn-white:focus, .lawyer-page_header button:focus, .btn-white.focus, .lawyer-page_header button.focus {
+  .btn-white:focus, .btn-white.focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
-  .btn-white.disabled, .lawyer-page_header button.disabled, .btn-white:disabled, .lawyer-page_header button:disabled {
+  .btn-white.disabled, .btn-white:disabled {
     color: #212121;
     background-color: #fff;
     border-color: #fff; }
-  .btn-white:not(:disabled):not(.disabled):active, .lawyer-page_header button:not(:disabled):not(.disabled):active, .btn-white:not(:disabled):not(.disabled).active, .lawyer-page_header button:not(:disabled):not(.disabled).active, .show > .btn-white.dropdown-toggle, .lawyer-page_header .show > button.dropdown-toggle {
+  .btn-white:not(:disabled):not(.disabled):active, .btn-white:not(:disabled):not(.disabled).active, .show > .btn-white.dropdown-toggle {
     color: #212121;
     background-color: #e6e6e6;
     border-color: #dfdfdf; }
-    .btn-white:not(:disabled):not(.disabled):active:focus, .lawyer-page_header button:not(:disabled):not(.disabled):active:focus, .btn-white:not(:disabled):not(.disabled).active:focus, .lawyer-page_header button:not(:disabled):not(.disabled).active:focus, .show > .btn-white.dropdown-toggle:focus, .lawyer-page_header .show > button.dropdown-toggle:focus {
+    .btn-white:not(:disabled):not(.disabled):active:focus, .btn-white:not(:disabled):not(.disabled).active:focus, .show > .btn-white.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
 
 .btn-outline-primary {
@@ -2542,13 +2534,13 @@ fieldset:disabled a.btn-gl {
   .btn-link:disabled, .btn-link.disabled {
     color: #878787; }
 
-.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .btn-vk, .btn-group-lg > .btn-od, .btn-group-lg > .btn-ml, .btn-group-lg > .btn-fb, .btn-group-lg > .btn-tw, .btn-group-lg > .btn-gl, section.gray .btn-group-lg > button, .lawyer-page_header .btn-group-lg > button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button {
+.btn-lg, .btn-group-lg > .btn, .btn-group-lg > .btn-vk, .btn-group-lg > .btn-od, .btn-group-lg > .btn-ml, .btn-group-lg > .btn-fb, .btn-group-lg > .btn-tw, .btn-group-lg > .btn-gl, section.gray .btn-group-lg > button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button {
   padding: 1.25rem 1.5rem;
   font-size: 1.125rem;
   line-height: 1.5;
   border-radius: 0.625rem; }
 
-.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page_header .r-col form .btn-group-sm > button, .question-page_header .question-item .answer form .btn-group-sm > button, .question-item .question-page_header .answer form .btn-group-sm > button, .lawyer-page_header .btn-group-sm > button, .lawyer-page_header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page_header .r-col form .btn-group-sm > button, .question-page_header .question-item .answer form .btn-group-sm > button, .question-item .question-page_header .answer form .btn-group-sm > button {
   padding: 0.5rem 1.25rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -2565,12 +2557,12 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
 
-.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button, .lawyer-page_header button {
+.btn, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, section.gray button, .question-page_header .r-col form button, .question-page_header .question-item .answer form button, .question-item .question-page_header .answer form button {
   cursor: pointer; }
-  .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page_header .r-col form button:disabled, .question-page_header .question-item .answer form button:disabled, .question-item .question-page_header .answer form button:disabled, .lawyer-page_header button:disabled {
+  .btn:disabled, .btn-vk:disabled, .btn-od:disabled, .btn-ml:disabled, .btn-fb:disabled, .btn-tw:disabled, .btn-gl:disabled, section.gray button:disabled, .question-page_header .r-col form button:disabled, .question-page_header .question-item .answer form button:disabled, .question-item .question-page_header .answer form button:disabled {
     cursor: auto; }
 
-.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page_header .r-col form .btn-group-sm > button, .question-page_header .question-item .answer form .btn-group-sm > button, .question-item .question-page_header .answer form .btn-group-sm > button, .lawyer-page_header .btn-group-sm > button, .lawyer-page_header button {
+.btn-sm, .btn-group-sm > .btn, .btn-group-sm > .btn-vk, .btn-group-sm > .btn-od, .btn-group-sm > .btn-ml, .btn-group-sm > .btn-fb, .btn-group-sm > .btn-tw, .btn-group-sm > .btn-gl, section.gray .btn-group-sm > button, .question-page_header .r-col form .btn-group-sm > button, .question-page_header .question-item .answer form .btn-group-sm > button, .question-item .question-page_header .answer form .btn-group-sm > button {
   border-width: 1px; }
 
 .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl {
@@ -2610,12 +2602,13 @@ input[type="button"].btn-block {
   .btn-gl:hover {
     background-color: #e97568; }
 
-.btn-white, .lawyer-page_header button {
-  color: #2e67fb; }
-  .btn-white:hover, .lawyer-page_header button:hover {
-    background-color: #285de0;
-    color: white;
-    border-color: #285de0; }
+.btn-white, .btn-white:not(:disabled):not(.disabled):active, .btn-white:not(:disabled):not(.disabled).active {
+  color: #2e67fb;
+  background-color: #fff; }
+.btn-white:hover, .btn-white:active {
+  background-color: #285de0;
+  color: #fff;
+  border-color: #285de0; }
 
 .fade {
   opacity: 0;
@@ -2795,7 +2788,7 @@ tbody.collapse.show {
   position: relative;
   display: inline-flex;
   vertical-align: middle; }
-  .btn-group > .btn, .btn-group > .btn-vk, .btn-group > .btn-od, .btn-group > .btn-ml, .btn-group > .btn-fb, .btn-group > .btn-tw, .btn-group > .btn-gl, section.gray .btn-group > button, .question-page_header .r-col form .btn-group > button, .question-page_header .question-item .answer form .btn-group > button, .question-item .question-page_header .answer form .btn-group > button, .lawyer-page_header .btn-group > button,
+  .btn-group > .btn, .btn-group > .btn-vk, .btn-group > .btn-od, .btn-group > .btn-ml, .btn-group > .btn-fb, .btn-group > .btn-tw, .btn-group > .btn-gl, section.gray .btn-group > button, .question-page_header .r-col form .btn-group > button, .question-page_header .question-item .answer form .btn-group > button, .question-item .question-page_header .answer form .btn-group > button,
   .btn-group-vertical > .btn,
   .btn-group-vertical > .btn-vk,
   .btn-group-vertical > .btn-od,
@@ -2806,11 +2799,10 @@ tbody.collapse.show {
   section.gray .btn-group-vertical > button,
   .question-page_header .r-col form .btn-group-vertical > button,
   .question-page_header .question-item .answer form .btn-group-vertical > button,
-  .question-item .question-page_header .answer form .btn-group-vertical > button,
-  .lawyer-page_header .btn-group-vertical > button {
+  .question-item .question-page_header .answer form .btn-group-vertical > button {
     position: relative;
     flex: 0 1 auto; }
-    .btn-group > .btn:hover, .btn-group > .btn-vk:hover, .btn-group > .btn-od:hover, .btn-group > .btn-ml:hover, .btn-group > .btn-fb:hover, .btn-group > .btn-tw:hover, .btn-group > .btn-gl:hover, section.gray .btn-group > button:hover, .question-page_header .r-col form .btn-group > button:hover, .question-page_header .question-item .answer form .btn-group > button:hover, .question-item .question-page_header .answer form .btn-group > button:hover, .lawyer-page_header .btn-group > button:hover,
+    .btn-group > .btn:hover, .btn-group > .btn-vk:hover, .btn-group > .btn-od:hover, .btn-group > .btn-ml:hover, .btn-group > .btn-fb:hover, .btn-group > .btn-tw:hover, .btn-group > .btn-gl:hover, section.gray .btn-group > button:hover, .question-page_header .r-col form .btn-group > button:hover, .question-page_header .question-item .answer form .btn-group > button:hover, .question-item .question-page_header .answer form .btn-group > button:hover,
     .btn-group-vertical > .btn:hover,
     .btn-group-vertical > .btn-vk:hover,
     .btn-group-vertical > .btn-od:hover,
@@ -2821,10 +2813,9 @@ tbody.collapse.show {
     section.gray .btn-group-vertical > button:hover,
     .question-page_header .r-col form .btn-group-vertical > button:hover,
     .question-page_header .question-item .answer form .btn-group-vertical > button:hover,
-    .question-item .question-page_header .answer form .btn-group-vertical > button:hover,
-    .lawyer-page_header .btn-group-vertical > button:hover {
+    .question-item .question-page_header .answer form .btn-group-vertical > button:hover {
       z-index: 1; }
-    .btn-group > .btn:focus, .btn-group > .btn-vk:focus, .btn-group > .btn-od:focus, .btn-group > .btn-ml:focus, .btn-group > .btn-fb:focus, .btn-group > .btn-tw:focus, .btn-group > .btn-gl:focus, section.gray .btn-group > button:focus, .question-page_header .r-col form .btn-group > button:focus, .question-page_header .question-item .answer form .btn-group > button:focus, .question-item .question-page_header .answer form .btn-group > button:focus, .lawyer-page_header .btn-group > button:focus, .btn-group > .btn:active, .btn-group > .btn-vk:active, .btn-group > .btn-od:active, .btn-group > .btn-ml:active, .btn-group > .btn-fb:active, .btn-group > .btn-tw:active, .btn-group > .btn-gl:active, section.gray .btn-group > button:active, .question-page_header .r-col form .btn-group > button:active, .question-page_header .question-item .answer form .btn-group > button:active, .question-item .question-page_header .answer form .btn-group > button:active, .lawyer-page_header .btn-group > button:active, .btn-group > .btn.active, .btn-group > .active.btn-vk, .btn-group > .active.btn-od, .btn-group > .active.btn-ml, .btn-group > .active.btn-fb, .btn-group > .active.btn-tw, .btn-group > .active.btn-gl, section.gray .btn-group > button.active, .question-page_header .r-col form .btn-group > button.active, .question-page_header .question-item .answer form .btn-group > button.active, .question-item .question-page_header .answer form .btn-group > button.active, .lawyer-page_header .btn-group > button.active,
+    .btn-group > .btn:focus, .btn-group > .btn-vk:focus, .btn-group > .btn-od:focus, .btn-group > .btn-ml:focus, .btn-group > .btn-fb:focus, .btn-group > .btn-tw:focus, .btn-group > .btn-gl:focus, section.gray .btn-group > button:focus, .question-page_header .r-col form .btn-group > button:focus, .question-page_header .question-item .answer form .btn-group > button:focus, .question-item .question-page_header .answer form .btn-group > button:focus, .btn-group > .btn:active, .btn-group > .btn-vk:active, .btn-group > .btn-od:active, .btn-group > .btn-ml:active, .btn-group > .btn-fb:active, .btn-group > .btn-tw:active, .btn-group > .btn-gl:active, section.gray .btn-group > button:active, .question-page_header .r-col form .btn-group > button:active, .question-page_header .question-item .answer form .btn-group > button:active, .question-item .question-page_header .answer form .btn-group > button:active, .btn-group > .btn.active, .btn-group > .active.btn-vk, .btn-group > .active.btn-od, .btn-group > .active.btn-ml, .btn-group > .active.btn-fb, .btn-group > .active.btn-tw, .btn-group > .active.btn-gl, section.gray .btn-group > button.active, .question-page_header .r-col form .btn-group > button.active, .question-page_header .question-item .answer form .btn-group > button.active, .question-item .question-page_header .answer form .btn-group > button.active,
     .btn-group-vertical > .btn:focus,
     .btn-group-vertical > .btn-vk:focus,
     .btn-group-vertical > .btn-od:focus,
@@ -2836,7 +2827,6 @@ tbody.collapse.show {
     .question-page_header .r-col form .btn-group-vertical > button:focus,
     .question-page_header .question-item .answer form .btn-group-vertical > button:focus,
     .question-item .question-page_header .answer form .btn-group-vertical > button:focus,
-    .lawyer-page_header .btn-group-vertical > button:focus,
     .btn-group-vertical > .btn:active,
     .btn-group-vertical > .btn-vk:active,
     .btn-group-vertical > .btn-od:active,
@@ -2848,7 +2838,6 @@ tbody.collapse.show {
     .question-page_header .r-col form .btn-group-vertical > button:active,
     .question-page_header .question-item .answer form .btn-group-vertical > button:active,
     .question-item .question-page_header .answer form .btn-group-vertical > button:active,
-    .lawyer-page_header .btn-group-vertical > button:active,
     .btn-group-vertical > .btn.active,
     .btn-group-vertical > .active.btn-vk,
     .btn-group-vertical > .active.btn-od,
@@ -2859,10 +2848,9 @@ tbody.collapse.show {
     section.gray .btn-group-vertical > button.active,
     .question-page_header .r-col form .btn-group-vertical > button.active,
     .question-page_header .question-item .answer form .btn-group-vertical > button.active,
-    .question-item .question-page_header .answer form .btn-group-vertical > button.active,
-    .lawyer-page_header .btn-group-vertical > button.active {
+    .question-item .question-page_header .answer form .btn-group-vertical > button.active {
       z-index: 1; }
-  .btn-group .btn + .btn, .btn-group .btn-vk + .btn, .btn-group .btn-od + .btn, .btn-group .btn-ml + .btn, .btn-group .btn-fb + .btn, .btn-group .btn-tw + .btn, .btn-group .btn-gl + .btn, .btn-group section.gray button + .btn, section.gray .btn-group button + .btn, .btn-group .question-page_header .r-col form button + .btn, .question-page_header .r-col form .btn-group button + .btn, .btn-group .question-page_header .question-item .answer form button + .btn, .question-page_header .question-item .answer form .btn-group button + .btn, .btn-group .question-item .question-page_header .answer form button + .btn, .question-item .question-page_header .answer form .btn-group button + .btn, .btn-group .lawyer-page_header button + .btn, .lawyer-page_header .btn-group button + .btn, .btn-group .btn + .btn-vk, .btn-group .btn-vk + .btn-vk, .btn-group .btn-od + .btn-vk, .btn-group .btn-ml + .btn-vk, .btn-group .btn-fb + .btn-vk, .btn-group .btn-tw + .btn-vk, .btn-group .btn-gl + .btn-vk, .btn-group section.gray button + .btn-vk, section.gray .btn-group button + .btn-vk, .btn-group .question-page_header .r-col form button + .btn-vk, .question-page_header .r-col form .btn-group button + .btn-vk, .btn-group .question-page_header .question-item .answer form button + .btn-vk, .question-page_header .question-item .answer form .btn-group button + .btn-vk, .btn-group .question-item .question-page_header .answer form button + .btn-vk, .question-item .question-page_header .answer form .btn-group button + .btn-vk, .btn-group .lawyer-page_header button + .btn-vk, .lawyer-page_header .btn-group button + .btn-vk, .btn-group .btn + .btn-od, .btn-group .btn-vk + .btn-od, .btn-group .btn-od + .btn-od, .btn-group .btn-ml + .btn-od, .btn-group .btn-fb + .btn-od, .btn-group .btn-tw + .btn-od, .btn-group .btn-gl + .btn-od, .btn-group section.gray button + .btn-od, section.gray .btn-group button + .btn-od, .btn-group .question-page_header .r-col form button + .btn-od, .question-page_header .r-col form .btn-group button + .btn-od, .btn-group .question-page_header .question-item .answer form button + .btn-od, .question-page_header .question-item .answer form .btn-group button + .btn-od, .btn-group .question-item .question-page_header .answer form button + .btn-od, .question-item .question-page_header .answer form .btn-group button + .btn-od, .btn-group .lawyer-page_header button + .btn-od, .lawyer-page_header .btn-group button + .btn-od, .btn-group .btn + .btn-ml, .btn-group .btn-vk + .btn-ml, .btn-group .btn-od + .btn-ml, .btn-group .btn-ml + .btn-ml, .btn-group .btn-fb + .btn-ml, .btn-group .btn-tw + .btn-ml, .btn-group .btn-gl + .btn-ml, .btn-group section.gray button + .btn-ml, section.gray .btn-group button + .btn-ml, .btn-group .question-page_header .r-col form button + .btn-ml, .question-page_header .r-col form .btn-group button + .btn-ml, .btn-group .question-page_header .question-item .answer form button + .btn-ml, .question-page_header .question-item .answer form .btn-group button + .btn-ml, .btn-group .question-item .question-page_header .answer form button + .btn-ml, .question-item .question-page_header .answer form .btn-group button + .btn-ml, .btn-group .lawyer-page_header button + .btn-ml, .lawyer-page_header .btn-group button + .btn-ml, .btn-group .btn + .btn-fb, .btn-group .btn-vk + .btn-fb, .btn-group .btn-od + .btn-fb, .btn-group .btn-ml + .btn-fb, .btn-group .btn-fb + .btn-fb, .btn-group .btn-tw + .btn-fb, .btn-group .btn-gl + .btn-fb, .btn-group section.gray button + .btn-fb, section.gray .btn-group button + .btn-fb, .btn-group .question-page_header .r-col form button + .btn-fb, .question-page_header .r-col form .btn-group button + .btn-fb, .btn-group .question-page_header .question-item .answer form button + .btn-fb, .question-page_header .question-item .answer form .btn-group button + .btn-fb, .btn-group .question-item .question-page_header .answer form button + .btn-fb, .question-item .question-page_header .answer form .btn-group button + .btn-fb, .btn-group .lawyer-page_header button + .btn-fb, .lawyer-page_header .btn-group button + .btn-fb, .btn-group .btn + .btn-tw, .btn-group .btn-vk + .btn-tw, .btn-group .btn-od + .btn-tw, .btn-group .btn-ml + .btn-tw, .btn-group .btn-fb + .btn-tw, .btn-group .btn-tw + .btn-tw, .btn-group .btn-gl + .btn-tw, .btn-group section.gray button + .btn-tw, section.gray .btn-group button + .btn-tw, .btn-group .question-page_header .r-col form button + .btn-tw, .question-page_header .r-col form .btn-group button + .btn-tw, .btn-group .question-page_header .question-item .answer form button + .btn-tw, .question-page_header .question-item .answer form .btn-group button + .btn-tw, .btn-group .question-item .question-page_header .answer form button + .btn-tw, .question-item .question-page_header .answer form .btn-group button + .btn-tw, .btn-group .lawyer-page_header button + .btn-tw, .lawyer-page_header .btn-group button + .btn-tw, .btn-group .btn + .btn-gl, .btn-group .btn-vk + .btn-gl, .btn-group .btn-od + .btn-gl, .btn-group .btn-ml + .btn-gl, .btn-group .btn-fb + .btn-gl, .btn-group .btn-tw + .btn-gl, .btn-group .btn-gl + .btn-gl, .btn-group section.gray button + .btn-gl, section.gray .btn-group button + .btn-gl, .btn-group .question-page_header .r-col form button + .btn-gl, .question-page_header .r-col form .btn-group button + .btn-gl, .btn-group .question-page_header .question-item .answer form button + .btn-gl, .question-page_header .question-item .answer form .btn-group button + .btn-gl, .btn-group .question-item .question-page_header .answer form button + .btn-gl, .question-item .question-page_header .answer form .btn-group button + .btn-gl, .btn-group .lawyer-page_header button + .btn-gl, .lawyer-page_header .btn-group button + .btn-gl, .btn-group section.gray .btn + button, section.gray .btn-group .btn + button, .btn-group section.gray .btn-vk + button, section.gray .btn-group .btn-vk + button, .btn-group section.gray .btn-od + button, section.gray .btn-group .btn-od + button, .btn-group section.gray .btn-ml + button, section.gray .btn-group .btn-ml + button, .btn-group section.gray .btn-fb + button, section.gray .btn-group .btn-fb + button, .btn-group section.gray .btn-tw + button, section.gray .btn-group .btn-tw + button, .btn-group section.gray .btn-gl + button, section.gray .btn-group .btn-gl + button, .btn-group section.gray button + button, section.gray .btn-group button + button, .btn-group .question-page_header .r-col form section.gray button + button, section.gray .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group section.gray button + button, section.gray .question-page_header .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer form section.gray button + button, section.gray .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group section.gray button + button, section.gray .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form section.gray button + button, section.gray .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group section.gray button + button, section.gray .question-item .question-page_header .answer form .btn-group button + button, .btn-group .lawyer-page_header section.gray button + button, section.gray .btn-group .lawyer-page_header button + button, .lawyer-page_header .btn-group section.gray button + button, section.gray .lawyer-page_header .btn-group button + button, .btn-group .question-page_header .r-col form .btn + button, .question-page_header .r-col form .btn-group .btn + button, .btn-group .question-page_header .r-col form .btn-vk + button, .question-page_header .r-col form .btn-group .btn-vk + button, .btn-group .question-page_header .r-col form .btn-od + button, .question-page_header .r-col form .btn-group .btn-od + button, .btn-group .question-page_header .r-col form .btn-ml + button, .question-page_header .r-col form .btn-group .btn-ml + button, .btn-group .question-page_header .r-col form .btn-fb + button, .question-page_header .r-col form .btn-group .btn-fb + button, .btn-group .question-page_header .r-col form .btn-tw + button, .question-page_header .r-col form .btn-group .btn-tw + button, .btn-group .question-page_header .r-col form .btn-gl + button, .question-page_header .r-col form .btn-group .btn-gl + button, .btn-group section.gray .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group section.gray button + button, section.gray .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form section.gray .btn-group button + button, .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer .r-col form button + button, .btn-group .question-page_header .r-col .question-item .answer form button + button, .question-page_header .question-item .answer .r-col form .btn-group button + button, .question-page_header .r-col .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer .r-col form button + button, .btn-group .question-item .question-page_header .r-col .answer form button + button, .question-item .question-page_header .answer .r-col form .btn-group button + button, .question-item .question-page_header .r-col .answer form .btn-group button + button, .btn-group .lawyer-page_header .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .lawyer-page_header .btn-group button + button, .btn-group .question-page_header .question-item .answer form .btn + button, .question-page_header .question-item .answer form .btn-group .btn + button, .btn-group .question-page_header .question-item .answer form .btn-vk + button, .question-page_header .question-item .answer form .btn-group .btn-vk + button, .btn-group .question-page_header .question-item .answer form .btn-od + button, .question-page_header .question-item .answer form .btn-group .btn-od + button, .btn-group .question-page_header .question-item .answer form .btn-ml + button, .question-page_header .question-item .answer form .btn-group .btn-ml + button, .btn-group .question-page_header .question-item .answer form .btn-fb + button, .question-page_header .question-item .answer form .btn-group .btn-fb + button, .btn-group .question-page_header .question-item .answer form .btn-tw + button, .question-page_header .question-item .answer form .btn-group .btn-tw + button, .btn-group .question-page_header .question-item .answer form .btn-gl + button, .question-page_header .question-item .answer form .btn-group .btn-gl + button, .btn-group section.gray .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group section.gray button + button, section.gray .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form section.gray .btn-group button + button, .btn-group .question-page_header .r-col .question-item .answer form button + button, .btn-group .question-page_header .question-item .answer .r-col form button + button, .question-page_header .r-col .question-item .answer form .btn-group button + button, .question-page_header .question-item .answer .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .question-item .answer form button + button, .question-item .question-page_header .question-item .answer form .btn-group button + button, .btn-group .lawyer-page_header .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .lawyer-page_header .btn-group button + button, .btn-group .question-item .question-page_header .answer form .btn + button, .question-item .question-page_header .answer form .btn-group .btn + button, .btn-group .question-item .question-page_header .answer form .btn-vk + button, .question-item .question-page_header .answer form .btn-group .btn-vk + button, .btn-group .question-item .question-page_header .answer form .btn-od + button, .question-item .question-page_header .answer form .btn-group .btn-od + button, .btn-group .question-item .question-page_header .answer form .btn-ml + button, .question-item .question-page_header .answer form .btn-group .btn-ml + button, .btn-group .question-item .question-page_header .answer form .btn-fb + button, .question-item .question-page_header .answer form .btn-group .btn-fb + button, .btn-group .question-item .question-page_header .answer form .btn-tw + button, .question-item .question-page_header .answer form .btn-group .btn-tw + button, .btn-group .question-item .question-page_header .answer form .btn-gl + button, .question-item .question-page_header .answer form .btn-group .btn-gl + button, .btn-group section.gray .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group section.gray button + button, section.gray .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form section.gray .btn-group button + button, .btn-group .question-item .question-page_header .r-col .answer form button + button, .question-item .btn-group .question-page_header .r-col .answer form button + button, .btn-group .question-item .question-page_header .answer .r-col form button + button, .question-item .btn-group .question-page_header .answer .r-col form button + button, .question-item .question-page_header .r-col .answer form .btn-group button + button, .question-item .question-page_header .answer .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .question-page_header .answer form button + button, .question-page_header .question-item .question-page_header .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group button + button, .btn-group .lawyer-page_header .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .lawyer-page_header .btn-group button + button, .btn-group .lawyer-page_header .btn + button, .lawyer-page_header .btn-group .btn + button, .btn-group .lawyer-page_header .btn-vk + button, .lawyer-page_header .btn-group .btn-vk + button, .btn-group .lawyer-page_header .btn-od + button, .lawyer-page_header .btn-group .btn-od + button, .btn-group .lawyer-page_header .btn-ml + button, .lawyer-page_header .btn-group .btn-ml + button, .btn-group .lawyer-page_header .btn-fb + button, .lawyer-page_header .btn-group .btn-fb + button, .btn-group .lawyer-page_header .btn-tw + button, .lawyer-page_header .btn-group .btn-tw + button, .btn-group .lawyer-page_header .btn-gl + button, .lawyer-page_header .btn-group .btn-gl + button, .btn-group section.gray .lawyer-page_header button + button, .lawyer-page_header .btn-group section.gray button + button, section.gray .btn-group .lawyer-page_header button + button, .lawyer-page_header section.gray .btn-group button + button, .btn-group .question-page_header .r-col form .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group .lawyer-page_header button + button, .lawyer-page_header .question-page_header .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer form .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group .lawyer-page_header button + button, .lawyer-page_header .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form .lawyer-page_header button + button, .lawyer-page_header .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group .lawyer-page_header button + button, .lawyer-page_header .question-item .question-page_header .answer form .btn-group button + button, .btn-group .lawyer-page_header button + button, .lawyer-page_header .btn-group button + button,
+  .btn-group .btn + .btn, .btn-group .btn-vk + .btn, .btn-group .btn-od + .btn, .btn-group .btn-ml + .btn, .btn-group .btn-fb + .btn, .btn-group .btn-tw + .btn, .btn-group .btn-gl + .btn, .btn-group section.gray button + .btn, section.gray .btn-group button + .btn, .btn-group .question-page_header .r-col form button + .btn, .question-page_header .r-col form .btn-group button + .btn, .btn-group .question-page_header .question-item .answer form button + .btn, .question-page_header .question-item .answer form .btn-group button + .btn, .btn-group .question-item .question-page_header .answer form button + .btn, .question-item .question-page_header .answer form .btn-group button + .btn, .btn-group .btn + .btn-vk, .btn-group .btn-vk + .btn-vk, .btn-group .btn-od + .btn-vk, .btn-group .btn-ml + .btn-vk, .btn-group .btn-fb + .btn-vk, .btn-group .btn-tw + .btn-vk, .btn-group .btn-gl + .btn-vk, .btn-group section.gray button + .btn-vk, section.gray .btn-group button + .btn-vk, .btn-group .question-page_header .r-col form button + .btn-vk, .question-page_header .r-col form .btn-group button + .btn-vk, .btn-group .question-page_header .question-item .answer form button + .btn-vk, .question-page_header .question-item .answer form .btn-group button + .btn-vk, .btn-group .question-item .question-page_header .answer form button + .btn-vk, .question-item .question-page_header .answer form .btn-group button + .btn-vk, .btn-group .btn + .btn-od, .btn-group .btn-vk + .btn-od, .btn-group .btn-od + .btn-od, .btn-group .btn-ml + .btn-od, .btn-group .btn-fb + .btn-od, .btn-group .btn-tw + .btn-od, .btn-group .btn-gl + .btn-od, .btn-group section.gray button + .btn-od, section.gray .btn-group button + .btn-od, .btn-group .question-page_header .r-col form button + .btn-od, .question-page_header .r-col form .btn-group button + .btn-od, .btn-group .question-page_header .question-item .answer form button + .btn-od, .question-page_header .question-item .answer form .btn-group button + .btn-od, .btn-group .question-item .question-page_header .answer form button + .btn-od, .question-item .question-page_header .answer form .btn-group button + .btn-od, .btn-group .btn + .btn-ml, .btn-group .btn-vk + .btn-ml, .btn-group .btn-od + .btn-ml, .btn-group .btn-ml + .btn-ml, .btn-group .btn-fb + .btn-ml, .btn-group .btn-tw + .btn-ml, .btn-group .btn-gl + .btn-ml, .btn-group section.gray button + .btn-ml, section.gray .btn-group button + .btn-ml, .btn-group .question-page_header .r-col form button + .btn-ml, .question-page_header .r-col form .btn-group button + .btn-ml, .btn-group .question-page_header .question-item .answer form button + .btn-ml, .question-page_header .question-item .answer form .btn-group button + .btn-ml, .btn-group .question-item .question-page_header .answer form button + .btn-ml, .question-item .question-page_header .answer form .btn-group button + .btn-ml, .btn-group .btn + .btn-fb, .btn-group .btn-vk + .btn-fb, .btn-group .btn-od + .btn-fb, .btn-group .btn-ml + .btn-fb, .btn-group .btn-fb + .btn-fb, .btn-group .btn-tw + .btn-fb, .btn-group .btn-gl + .btn-fb, .btn-group section.gray button + .btn-fb, section.gray .btn-group button + .btn-fb, .btn-group .question-page_header .r-col form button + .btn-fb, .question-page_header .r-col form .btn-group button + .btn-fb, .btn-group .question-page_header .question-item .answer form button + .btn-fb, .question-page_header .question-item .answer form .btn-group button + .btn-fb, .btn-group .question-item .question-page_header .answer form button + .btn-fb, .question-item .question-page_header .answer form .btn-group button + .btn-fb, .btn-group .btn + .btn-tw, .btn-group .btn-vk + .btn-tw, .btn-group .btn-od + .btn-tw, .btn-group .btn-ml + .btn-tw, .btn-group .btn-fb + .btn-tw, .btn-group .btn-tw + .btn-tw, .btn-group .btn-gl + .btn-tw, .btn-group section.gray button + .btn-tw, section.gray .btn-group button + .btn-tw, .btn-group .question-page_header .r-col form button + .btn-tw, .question-page_header .r-col form .btn-group button + .btn-tw, .btn-group .question-page_header .question-item .answer form button + .btn-tw, .question-page_header .question-item .answer form .btn-group button + .btn-tw, .btn-group .question-item .question-page_header .answer form button + .btn-tw, .question-item .question-page_header .answer form .btn-group button + .btn-tw, .btn-group .btn + .btn-gl, .btn-group .btn-vk + .btn-gl, .btn-group .btn-od + .btn-gl, .btn-group .btn-ml + .btn-gl, .btn-group .btn-fb + .btn-gl, .btn-group .btn-tw + .btn-gl, .btn-group .btn-gl + .btn-gl, .btn-group section.gray button + .btn-gl, section.gray .btn-group button + .btn-gl, .btn-group .question-page_header .r-col form button + .btn-gl, .question-page_header .r-col form .btn-group button + .btn-gl, .btn-group .question-page_header .question-item .answer form button + .btn-gl, .question-page_header .question-item .answer form .btn-group button + .btn-gl, .btn-group .question-item .question-page_header .answer form button + .btn-gl, .question-item .question-page_header .answer form .btn-group button + .btn-gl, .btn-group section.gray .btn + button, section.gray .btn-group .btn + button, .btn-group section.gray .btn-vk + button, section.gray .btn-group .btn-vk + button, .btn-group section.gray .btn-od + button, section.gray .btn-group .btn-od + button, .btn-group section.gray .btn-ml + button, section.gray .btn-group .btn-ml + button, .btn-group section.gray .btn-fb + button, section.gray .btn-group .btn-fb + button, .btn-group section.gray .btn-tw + button, section.gray .btn-group .btn-tw + button, .btn-group section.gray .btn-gl + button, section.gray .btn-group .btn-gl + button, .btn-group section.gray button + button, section.gray .btn-group button + button, .btn-group .question-page_header .r-col form section.gray button + button, section.gray .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group section.gray button + button, section.gray .question-page_header .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer form section.gray button + button, section.gray .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group section.gray button + button, section.gray .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form section.gray button + button, section.gray .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group section.gray button + button, section.gray .question-item .question-page_header .answer form .btn-group button + button, .btn-group .question-page_header .r-col form .btn + button, .question-page_header .r-col form .btn-group .btn + button, .btn-group .question-page_header .r-col form .btn-vk + button, .question-page_header .r-col form .btn-group .btn-vk + button, .btn-group .question-page_header .r-col form .btn-od + button, .question-page_header .r-col form .btn-group .btn-od + button, .btn-group .question-page_header .r-col form .btn-ml + button, .question-page_header .r-col form .btn-group .btn-ml + button, .btn-group .question-page_header .r-col form .btn-fb + button, .question-page_header .r-col form .btn-group .btn-fb + button, .btn-group .question-page_header .r-col form .btn-tw + button, .question-page_header .r-col form .btn-group .btn-tw + button, .btn-group .question-page_header .r-col form .btn-gl + button, .question-page_header .r-col form .btn-group .btn-gl + button, .btn-group section.gray .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group section.gray button + button, section.gray .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form section.gray .btn-group button + button, .btn-group .question-page_header .r-col form button + button, .question-page_header .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer .r-col form button + button, .btn-group .question-page_header .r-col .question-item .answer form button + button, .question-page_header .question-item .answer .r-col form .btn-group button + button, .question-page_header .r-col .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer .r-col form button + button, .btn-group .question-item .question-page_header .r-col .answer form button + button, .question-item .question-page_header .answer .r-col form .btn-group button + button, .question-item .question-page_header .r-col .answer form .btn-group button + button, .btn-group .question-page_header .question-item .answer form .btn + button, .question-page_header .question-item .answer form .btn-group .btn + button, .btn-group .question-page_header .question-item .answer form .btn-vk + button, .question-page_header .question-item .answer form .btn-group .btn-vk + button, .btn-group .question-page_header .question-item .answer form .btn-od + button, .question-page_header .question-item .answer form .btn-group .btn-od + button, .btn-group .question-page_header .question-item .answer form .btn-ml + button, .question-page_header .question-item .answer form .btn-group .btn-ml + button, .btn-group .question-page_header .question-item .answer form .btn-fb + button, .question-page_header .question-item .answer form .btn-group .btn-fb + button, .btn-group .question-page_header .question-item .answer form .btn-tw + button, .question-page_header .question-item .answer form .btn-group .btn-tw + button, .btn-group .question-page_header .question-item .answer form .btn-gl + button, .question-page_header .question-item .answer form .btn-group .btn-gl + button, .btn-group section.gray .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group section.gray button + button, section.gray .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form section.gray .btn-group button + button, .btn-group .question-page_header .r-col .question-item .answer form button + button, .btn-group .question-page_header .question-item .answer .r-col form button + button, .question-page_header .r-col .question-item .answer form .btn-group button + button, .question-page_header .question-item .answer .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .question-item .answer form button + button, .question-item .question-page_header .question-item .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form .btn + button, .question-item .question-page_header .answer form .btn-group .btn + button, .btn-group .question-item .question-page_header .answer form .btn-vk + button, .question-item .question-page_header .answer form .btn-group .btn-vk + button, .btn-group .question-item .question-page_header .answer form .btn-od + button, .question-item .question-page_header .answer form .btn-group .btn-od + button, .btn-group .question-item .question-page_header .answer form .btn-ml + button, .question-item .question-page_header .answer form .btn-group .btn-ml + button, .btn-group .question-item .question-page_header .answer form .btn-fb + button, .question-item .question-page_header .answer form .btn-group .btn-fb + button, .btn-group .question-item .question-page_header .answer form .btn-tw + button, .question-item .question-page_header .answer form .btn-group .btn-tw + button, .btn-group .question-item .question-page_header .answer form .btn-gl + button, .question-item .question-page_header .answer form .btn-group .btn-gl + button, .btn-group section.gray .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group section.gray button + button, section.gray .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form section.gray .btn-group button + button, .btn-group .question-item .question-page_header .r-col .answer form button + button, .question-item .btn-group .question-page_header .r-col .answer form button + button, .btn-group .question-item .question-page_header .answer .r-col form button + button, .question-item .btn-group .question-page_header .answer .r-col form button + button, .question-item .question-page_header .r-col .answer form .btn-group button + button, .question-item .question-page_header .answer .r-col form .btn-group button + button, .btn-group .question-page_header .question-item .question-page_header .answer form button + button, .question-page_header .question-item .question-page_header .answer form .btn-group button + button, .btn-group .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .btn-group button + button,
   .btn-group .btn + .btn-group,
   .btn-group .btn-vk + .btn-group,
   .btn-group .btn-od + .btn-group,
@@ -2878,8 +2866,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group button + .btn-group,
   .btn-group .question-item .question-page_header .answer form button + .btn-group,
   .question-item .question-page_header .answer form .btn-group button + .btn-group,
-  .btn-group .lawyer-page_header button + .btn-group,
-  .lawyer-page_header .btn-group button + .btn-group,
   .btn-group .btn-group + .btn,
   .btn-group .btn-group + .btn-vk,
   .btn-group .btn-group + .btn-od,
@@ -2895,8 +2881,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group .btn-group + button,
   .btn-group .question-item .question-page_header .answer form .btn-group + button,
   .question-item .question-page_header .answer form .btn-group .btn-group + button,
-  .btn-group .lawyer-page_header .btn-group + button,
-  .lawyer-page_header .btn-group .btn-group + button,
   .btn-group .btn-group + .btn-group,
   .btn-group-vertical .btn + .btn,
   .btn-group-vertical .btn-vk + .btn,
@@ -2913,8 +2897,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn,
-  .btn-group-vertical .lawyer-page_header button + .btn,
-  .lawyer-page_header .btn-group-vertical button + .btn,
   .btn-group-vertical .btn + .btn-vk,
   .btn-group-vertical .btn-vk + .btn-vk,
   .btn-group-vertical .btn-od + .btn-vk,
@@ -2930,8 +2912,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-vk,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-vk,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-vk,
-  .btn-group-vertical .lawyer-page_header button + .btn-vk,
-  .lawyer-page_header .btn-group-vertical button + .btn-vk,
   .btn-group-vertical .btn + .btn-od,
   .btn-group-vertical .btn-vk + .btn-od,
   .btn-group-vertical .btn-od + .btn-od,
@@ -2947,8 +2927,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-od,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-od,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-od,
-  .btn-group-vertical .lawyer-page_header button + .btn-od,
-  .lawyer-page_header .btn-group-vertical button + .btn-od,
   .btn-group-vertical .btn + .btn-ml,
   .btn-group-vertical .btn-vk + .btn-ml,
   .btn-group-vertical .btn-od + .btn-ml,
@@ -2964,8 +2942,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-ml,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-ml,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-ml,
-  .btn-group-vertical .lawyer-page_header button + .btn-ml,
-  .lawyer-page_header .btn-group-vertical button + .btn-ml,
   .btn-group-vertical .btn + .btn-fb,
   .btn-group-vertical .btn-vk + .btn-fb,
   .btn-group-vertical .btn-od + .btn-fb,
@@ -2981,8 +2957,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-fb,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-fb,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-fb,
-  .btn-group-vertical .lawyer-page_header button + .btn-fb,
-  .lawyer-page_header .btn-group-vertical button + .btn-fb,
   .btn-group-vertical .btn + .btn-tw,
   .btn-group-vertical .btn-vk + .btn-tw,
   .btn-group-vertical .btn-od + .btn-tw,
@@ -2998,8 +2972,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-tw,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-tw,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-tw,
-  .btn-group-vertical .lawyer-page_header button + .btn-tw,
-  .lawyer-page_header .btn-group-vertical button + .btn-tw,
   .btn-group-vertical .btn + .btn-gl,
   .btn-group-vertical .btn-vk + .btn-gl,
   .btn-group-vertical .btn-od + .btn-gl,
@@ -3015,8 +2987,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-gl,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-gl,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-gl,
-  .btn-group-vertical .lawyer-page_header button + .btn-gl,
-  .lawyer-page_header .btn-group-vertical button + .btn-gl,
   .btn-group-vertical section.gray .btn + button,
   section.gray .btn-group-vertical .btn + button,
   .btn-group-vertical section.gray .btn-vk + button,
@@ -3045,10 +3015,6 @@ tbody.collapse.show {
   section.gray .btn-group-vertical .question-item .question-page_header .answer form button + button,
   .question-item .question-page_header .answer form .btn-group-vertical section.gray button + button,
   section.gray .question-item .question-page_header .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header section.gray button + button,
-  section.gray .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical section.gray button + button,
-  section.gray .lawyer-page_header .btn-group-vertical button + button,
   .btn-group-vertical .question-page_header .r-col form .btn + button,
   .question-page_header .r-col form .btn-group-vertical .btn + button,
   .btn-group-vertical .question-page_header .r-col form .btn-vk + button,
@@ -3077,10 +3043,6 @@ tbody.collapse.show {
   .btn-group-vertical .question-item .question-page_header .r-col .answer form button + button,
   .question-item .question-page_header .answer .r-col form .btn-group-vertical button + button,
   .question-item .question-page_header .r-col .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .lawyer-page_header .btn-group-vertical button + button,
   .btn-group-vertical .question-page_header .question-item .answer form .btn + button,
   .question-page_header .question-item .answer form .btn-group-vertical .btn + button,
   .btn-group-vertical .question-page_header .question-item .answer form .btn-vk + button,
@@ -3107,10 +3069,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + button,
   .btn-group-vertical .question-item .question-page_header .question-item .answer form button + button,
   .question-item .question-page_header .question-item .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .lawyer-page_header .btn-group-vertical button + button,
   .btn-group-vertical .question-item .question-page_header .answer form .btn + button,
   .question-item .question-page_header .answer form .btn-group-vertical .btn + button,
   .btn-group-vertical .question-item .question-page_header .answer form .btn-vk + button,
@@ -3139,42 +3097,6 @@ tbody.collapse.show {
   .question-page_header .question-item .question-page_header .answer form .btn-group-vertical button + button,
   .btn-group-vertical .question-item .question-page_header .answer form button + button,
   .question-item .question-page_header .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .lawyer-page_header .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header .btn + button,
-  .lawyer-page_header .btn-group-vertical .btn + button,
-  .btn-group-vertical .lawyer-page_header .btn-vk + button,
-  .lawyer-page_header .btn-group-vertical .btn-vk + button,
-  .btn-group-vertical .lawyer-page_header .btn-od + button,
-  .lawyer-page_header .btn-group-vertical .btn-od + button,
-  .btn-group-vertical .lawyer-page_header .btn-ml + button,
-  .lawyer-page_header .btn-group-vertical .btn-ml + button,
-  .btn-group-vertical .lawyer-page_header .btn-fb + button,
-  .lawyer-page_header .btn-group-vertical .btn-fb + button,
-  .btn-group-vertical .lawyer-page_header .btn-tw + button,
-  .lawyer-page_header .btn-group-vertical .btn-tw + button,
-  .btn-group-vertical .lawyer-page_header .btn-gl + button,
-  .lawyer-page_header .btn-group-vertical .btn-gl + button,
-  .btn-group-vertical section.gray .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical section.gray button + button,
-  section.gray .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header section.gray .btn-group-vertical button + button,
-  .btn-group-vertical .question-page_header .r-col form .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .question-page_header .r-col form .btn-group-vertical button + button,
-  .btn-group-vertical .question-page_header .question-item .answer form .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .question-page_header .question-item .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .question-item .question-page_header .answer form .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .question-item .question-page_header .answer form .btn-group-vertical button + button,
-  .btn-group-vertical .lawyer-page_header button + button,
-  .lawyer-page_header .btn-group-vertical button + button,
   .btn-group-vertical .btn + .btn-group,
   .btn-group-vertical .btn-vk + .btn-group,
   .btn-group-vertical .btn-od + .btn-group,
@@ -3190,8 +3112,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical button + .btn-group,
   .btn-group-vertical .question-item .question-page_header .answer form button + .btn-group,
   .question-item .question-page_header .answer form .btn-group-vertical button + .btn-group,
-  .btn-group-vertical .lawyer-page_header button + .btn-group,
-  .lawyer-page_header .btn-group-vertical button + .btn-group,
   .btn-group-vertical .btn-group + .btn,
   .btn-group-vertical .btn-group + .btn-vk,
   .btn-group-vertical .btn-group + .btn-od,
@@ -3207,8 +3127,6 @@ tbody.collapse.show {
   .question-page_header .question-item .answer form .btn-group-vertical .btn-group + button,
   .btn-group-vertical .question-item .question-page_header .answer form .btn-group + button,
   .question-item .question-page_header .answer form .btn-group-vertical .btn-group + button,
-  .btn-group-vertical .lawyer-page_header .btn-group + button,
-  .lawyer-page_header .btn-group-vertical .btn-group + button,
   .btn-group-vertical .btn-group + .btn-group {
     margin-left: -2px; }
 
@@ -3219,9 +3137,9 @@ tbody.collapse.show {
   .btn-toolbar .input-group {
     width: auto; }
 
-.btn-group > .btn:first-child, .btn-group > .btn-vk:first-child, .btn-group > .btn-od:first-child, .btn-group > .btn-ml:first-child, .btn-group > .btn-fb:first-child, .btn-group > .btn-tw:first-child, .btn-group > .btn-gl:first-child, section.gray .btn-group > button:first-child, .question-page_header .r-col form .btn-group > button:first-child, .question-page_header .question-item .answer form .btn-group > button:first-child, .question-item .question-page_header .answer form .btn-group > button:first-child, .lawyer-page_header .btn-group > button:first-child {
+.btn-group > .btn:first-child, .btn-group > .btn-vk:first-child, .btn-group > .btn-od:first-child, .btn-group > .btn-ml:first-child, .btn-group > .btn-fb:first-child, .btn-group > .btn-tw:first-child, .btn-group > .btn-gl:first-child, section.gray .btn-group > button:first-child, .question-page_header .r-col form .btn-group > button:first-child, .question-page_header .question-item .answer form .btn-group > button:first-child, .question-item .question-page_header .answer form .btn-group > button:first-child {
   margin-left: 0; }
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-page_header .r-col form .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-page_header .question-item .answer form .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-item .question-page_header .answer form .btn-group > button:not(:last-child):not(.dropdown-toggle), .lawyer-page_header .btn-group > button:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-vk:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-od:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-ml:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-fb:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-tw:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-gl:not(:last-child):not(.dropdown-toggle), section.gray .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-page_header .r-col form .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-page_header .question-item .answer form .btn-group > button:not(:last-child):not(.dropdown-toggle), .question-item .question-page_header .answer form .btn-group > button:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn,
 .btn-group > .btn-group:not(:last-child) > .btn-vk,
 .btn-group > .btn-group:not(:last-child) > .btn-od,
@@ -3232,11 +3150,10 @@ tbody.collapse.show {
 section.gray .btn-group > .btn-group:not(:last-child) > button,
 .question-page_header .r-col form .btn-group > .btn-group:not(:last-child) > button,
 .question-page_header .question-item .answer form .btn-group > .btn-group:not(:last-child) > button,
-.question-item .question-page_header .answer form .btn-group > .btn-group:not(:last-child) > button,
-.lawyer-page_header .btn-group > .btn-group:not(:last-child) > button {
+.question-item .question-page_header .answer form .btn-group > .btn-group:not(:last-child) > button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0; }
-.btn-group > .btn:not(:first-child), .btn-group > .btn-vk:not(:first-child), .btn-group > .btn-od:not(:first-child), .btn-group > .btn-ml:not(:first-child), .btn-group > .btn-fb:not(:first-child), .btn-group > .btn-tw:not(:first-child), .btn-group > .btn-gl:not(:first-child), section.gray .btn-group > button:not(:first-child), .question-page_header .r-col form .btn-group > button:not(:first-child), .question-page_header .question-item .answer form .btn-group > button:not(:first-child), .question-item .question-page_header .answer form .btn-group > button:not(:first-child), .lawyer-page_header .btn-group > button:not(:first-child),
+.btn-group > .btn:not(:first-child), .btn-group > .btn-vk:not(:first-child), .btn-group > .btn-od:not(:first-child), .btn-group > .btn-ml:not(:first-child), .btn-group > .btn-fb:not(:first-child), .btn-group > .btn-tw:not(:first-child), .btn-group > .btn-gl:not(:first-child), section.gray .btn-group > button:not(:first-child), .question-page_header .r-col form .btn-group > button:not(:first-child), .question-page_header .question-item .answer form .btn-group > button:not(:first-child), .question-item .question-page_header .answer form .btn-group > button:not(:first-child),
 .btn-group > .btn-group:not(:first-child) > .btn,
 .btn-group > .btn-group:not(:first-child) > .btn-vk,
 .btn-group > .btn-group:not(:first-child) > .btn-od,
@@ -3247,8 +3164,7 @@ section.gray .btn-group > .btn-group:not(:last-child) > button,
 section.gray .btn-group > .btn-group:not(:first-child) > button,
 .question-page_header .r-col form .btn-group > .btn-group:not(:first-child) > button,
 .question-page_header .question-item .answer form .btn-group > .btn-group:not(:first-child) > button,
-.question-item .question-page_header .answer form .btn-group > .btn-group:not(:first-child) > button,
-.lawyer-page_header .btn-group > .btn-group:not(:first-child) > button {
+.question-item .question-page_header .answer form .btn-group > .btn-group:not(:first-child) > button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
 
@@ -3258,11 +3174,11 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   .dropdown-toggle-split::after {
     margin-left: 0; }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .question-page_header .r-col form .btn-group-sm > button + .dropdown-toggle-split, .question-page_header .question-item .answer form .btn-group-sm > button + .dropdown-toggle-split, .question-item .question-page_header .answer form .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page_header .btn-group-sm > button + .dropdown-toggle-split, .lawyer-page_header button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .btn-group-sm > .btn-vk + .dropdown-toggle-split, .btn-group-sm > .btn-od + .dropdown-toggle-split, .btn-group-sm > .btn-ml + .dropdown-toggle-split, .btn-group-sm > .btn-fb + .dropdown-toggle-split, .btn-group-sm > .btn-tw + .dropdown-toggle-split, .btn-group-sm > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-sm > button + .dropdown-toggle-split, .question-page_header .r-col form .btn-group-sm > button + .dropdown-toggle-split, .question-page_header .question-item .answer form .btn-group-sm > button + .dropdown-toggle-split, .question-item .question-page_header .answer form .btn-group-sm > button + .dropdown-toggle-split {
   padding-right: 0.9375rem;
   padding-left: 0.9375rem; }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .btn-vk + .dropdown-toggle-split, .btn-group-lg > .btn-od + .dropdown-toggle-split, .btn-group-lg > .btn-ml + .dropdown-toggle-split, .btn-group-lg > .btn-fb + .dropdown-toggle-split, .btn-group-lg > .btn-tw + .dropdown-toggle-split, .btn-group-lg > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .r-col form .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .question-item .answer form .btn-group-lg > button + .dropdown-toggle-split, .question-item .question-page_header .answer form .btn-group-lg > button + .dropdown-toggle-split, .lawyer-page_header .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .r-col form button + .dropdown-toggle-split, .question-page_header .question-item .answer form button + .dropdown-toggle-split, .question-item .question-page_header .answer form button + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .btn-group-lg > .btn-vk + .dropdown-toggle-split, .btn-group-lg > .btn-od + .dropdown-toggle-split, .btn-group-lg > .btn-ml + .dropdown-toggle-split, .btn-group-lg > .btn-fb + .dropdown-toggle-split, .btn-group-lg > .btn-tw + .dropdown-toggle-split, .btn-group-lg > .btn-gl + .dropdown-toggle-split, section.gray .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .r-col form .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .question-item .answer form .btn-group-lg > button + .dropdown-toggle-split, .question-item .question-page_header .answer form .btn-group-lg > button + .dropdown-toggle-split, .question-page_header .r-col form button + .dropdown-toggle-split, .question-page_header .question-item .answer form button + .dropdown-toggle-split, .question-item .question-page_header .answer form button + .dropdown-toggle-split {
   padding-right: 1.125rem;
   padding-left: 1.125rem; }
 
@@ -3270,10 +3186,10 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  .btn-group-vertical .btn, .btn-group-vertical .btn-vk, .btn-group-vertical .btn-od, .btn-group-vertical .btn-ml, .btn-group-vertical .btn-fb, .btn-group-vertical .btn-tw, .btn-group-vertical .btn-gl, .btn-group-vertical section.gray button, section.gray .btn-group-vertical button, .btn-group-vertical .question-page_header .r-col form button, .question-page_header .r-col form .btn-group-vertical button, .btn-group-vertical .question-page_header .question-item .answer form button, .question-page_header .question-item .answer form .btn-group-vertical button, .btn-group-vertical .question-item .question-page_header .answer form button, .question-item .question-page_header .answer form .btn-group-vertical button, .btn-group-vertical .lawyer-page_header button, .lawyer-page_header .btn-group-vertical button,
+  .btn-group-vertical .btn, .btn-group-vertical .btn-vk, .btn-group-vertical .btn-od, .btn-group-vertical .btn-ml, .btn-group-vertical .btn-fb, .btn-group-vertical .btn-tw, .btn-group-vertical .btn-gl, .btn-group-vertical section.gray button, section.gray .btn-group-vertical button, .btn-group-vertical .question-page_header .r-col form button, .question-page_header .r-col form .btn-group-vertical button, .btn-group-vertical .question-page_header .question-item .answer form button, .question-page_header .question-item .answer form .btn-group-vertical button, .btn-group-vertical .question-item .question-page_header .answer form button, .question-item .question-page_header .answer form .btn-group-vertical button,
   .btn-group-vertical .btn-group {
     width: 100%; }
-  .btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn-vk + .btn, .btn-group-vertical > .btn-od + .btn, .btn-group-vertical > .btn-ml + .btn, .btn-group-vertical > .btn-fb + .btn, .btn-group-vertical > .btn-tw + .btn, .btn-group-vertical > .btn-gl + .btn, section.gray .btn-group-vertical > button + .btn, .question-page_header .r-col form .btn-group-vertical > button + .btn, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn, .lawyer-page_header .btn-group-vertical > button + .btn, .btn-group-vertical > .btn + .btn-vk, .btn-group-vertical > .btn-vk + .btn-vk, .btn-group-vertical > .btn-od + .btn-vk, .btn-group-vertical > .btn-ml + .btn-vk, .btn-group-vertical > .btn-fb + .btn-vk, .btn-group-vertical > .btn-tw + .btn-vk, .btn-group-vertical > .btn-gl + .btn-vk, section.gray .btn-group-vertical > button + .btn-vk, .question-page_header .r-col form .btn-group-vertical > button + .btn-vk, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-vk, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-vk, .lawyer-page_header .btn-group-vertical > button + .btn-vk, .btn-group-vertical > .btn + .btn-od, .btn-group-vertical > .btn-vk + .btn-od, .btn-group-vertical > .btn-od + .btn-od, .btn-group-vertical > .btn-ml + .btn-od, .btn-group-vertical > .btn-fb + .btn-od, .btn-group-vertical > .btn-tw + .btn-od, .btn-group-vertical > .btn-gl + .btn-od, section.gray .btn-group-vertical > button + .btn-od, .question-page_header .r-col form .btn-group-vertical > button + .btn-od, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-od, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-od, .lawyer-page_header .btn-group-vertical > button + .btn-od, .btn-group-vertical > .btn + .btn-ml, .btn-group-vertical > .btn-vk + .btn-ml, .btn-group-vertical > .btn-od + .btn-ml, .btn-group-vertical > .btn-ml + .btn-ml, .btn-group-vertical > .btn-fb + .btn-ml, .btn-group-vertical > .btn-tw + .btn-ml, .btn-group-vertical > .btn-gl + .btn-ml, section.gray .btn-group-vertical > button + .btn-ml, .question-page_header .r-col form .btn-group-vertical > button + .btn-ml, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-ml, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-ml, .lawyer-page_header .btn-group-vertical > button + .btn-ml, .btn-group-vertical > .btn + .btn-fb, .btn-group-vertical > .btn-vk + .btn-fb, .btn-group-vertical > .btn-od + .btn-fb, .btn-group-vertical > .btn-ml + .btn-fb, .btn-group-vertical > .btn-fb + .btn-fb, .btn-group-vertical > .btn-tw + .btn-fb, .btn-group-vertical > .btn-gl + .btn-fb, section.gray .btn-group-vertical > button + .btn-fb, .question-page_header .r-col form .btn-group-vertical > button + .btn-fb, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-fb, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-fb, .lawyer-page_header .btn-group-vertical > button + .btn-fb, .btn-group-vertical > .btn + .btn-tw, .btn-group-vertical > .btn-vk + .btn-tw, .btn-group-vertical > .btn-od + .btn-tw, .btn-group-vertical > .btn-ml + .btn-tw, .btn-group-vertical > .btn-fb + .btn-tw, .btn-group-vertical > .btn-tw + .btn-tw, .btn-group-vertical > .btn-gl + .btn-tw, section.gray .btn-group-vertical > button + .btn-tw, .question-page_header .r-col form .btn-group-vertical > button + .btn-tw, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-tw, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-tw, .lawyer-page_header .btn-group-vertical > button + .btn-tw, .btn-group-vertical > .btn + .btn-gl, .btn-group-vertical > .btn-vk + .btn-gl, .btn-group-vertical > .btn-od + .btn-gl, .btn-group-vertical > .btn-ml + .btn-gl, .btn-group-vertical > .btn-fb + .btn-gl, .btn-group-vertical > .btn-tw + .btn-gl, .btn-group-vertical > .btn-gl + .btn-gl, section.gray .btn-group-vertical > button + .btn-gl, .question-page_header .r-col form .btn-group-vertical > button + .btn-gl, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-gl, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-gl, .lawyer-page_header .btn-group-vertical > button + .btn-gl, section.gray .btn-group-vertical > .btn + button, section.gray .btn-group-vertical > .btn-vk + button, section.gray .btn-group-vertical > .btn-od + button, section.gray .btn-group-vertical > .btn-ml + button, section.gray .btn-group-vertical > .btn-fb + button, section.gray .btn-group-vertical > .btn-tw + button, section.gray .btn-group-vertical > .btn-gl + button, section.gray .btn-group-vertical > button + button, .question-page_header .r-col form section.gray .btn-group-vertical > button + button, section.gray .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer form section.gray .btn-group-vertical > button + button, section.gray .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form section.gray .btn-group-vertical > button + button, section.gray .question-item .question-page_header .answer form .btn-group-vertical > button + button, .lawyer-page_header section.gray .btn-group-vertical > button + button, section.gray .lawyer-page_header .btn-group-vertical > button + button, .question-page_header .r-col form .btn-group-vertical > .btn + button, .question-page_header .r-col form .btn-group-vertical > .btn-vk + button, .question-page_header .r-col form .btn-group-vertical > .btn-od + button, .question-page_header .r-col form .btn-group-vertical > .btn-ml + button, .question-page_header .r-col form .btn-group-vertical > .btn-fb + button, .question-page_header .r-col form .btn-group-vertical > .btn-tw + button, .question-page_header .r-col form .btn-group-vertical > .btn-gl + button, section.gray .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .r-col form section.gray .btn-group-vertical > button + button, .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer .r-col form .btn-group-vertical > button + button, .question-page_header .r-col .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer .r-col form .btn-group-vertical > button + button, .question-item .question-page_header .r-col .answer form .btn-group-vertical > button + button, .lawyer-page_header .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .r-col form .lawyer-page_header .btn-group-vertical > button + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-vk + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-od + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-ml + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-fb + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-tw + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-gl + button, section.gray .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer form section.gray .btn-group-vertical > button + button, .question-page_header .r-col .question-item .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .question-item .answer form .btn-group-vertical > button + button, .lawyer-page_header .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer form .lawyer-page_header .btn-group-vertical > button + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-vk + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-od + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-ml + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-fb + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-tw + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-gl + button, section.gray .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form section.gray .btn-group-vertical > button + button, .question-item .question-page_header .r-col .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form .btn-group-vertical > button + button, .lawyer-page_header .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form .lawyer-page_header .btn-group-vertical > button + button, .lawyer-page_header .btn-group-vertical > .btn + button, .lawyer-page_header .btn-group-vertical > .btn-vk + button, .lawyer-page_header .btn-group-vertical > .btn-od + button, .lawyer-page_header .btn-group-vertical > .btn-ml + button, .lawyer-page_header .btn-group-vertical > .btn-fb + button, .lawyer-page_header .btn-group-vertical > .btn-tw + button, .lawyer-page_header .btn-group-vertical > .btn-gl + button, section.gray .lawyer-page_header .btn-group-vertical > button + button, .lawyer-page_header section.gray .btn-group-vertical > button + button, .question-page_header .r-col form .lawyer-page_header .btn-group-vertical > button + button, .lawyer-page_header .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer form .lawyer-page_header .btn-group-vertical > button + button, .lawyer-page_header .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form .lawyer-page_header .btn-group-vertical > button + button, .lawyer-page_header .question-item .question-page_header .answer form .btn-group-vertical > button + button, .lawyer-page_header .btn-group-vertical > button + button,
+  .btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn-vk + .btn, .btn-group-vertical > .btn-od + .btn, .btn-group-vertical > .btn-ml + .btn, .btn-group-vertical > .btn-fb + .btn, .btn-group-vertical > .btn-tw + .btn, .btn-group-vertical > .btn-gl + .btn, section.gray .btn-group-vertical > button + .btn, .question-page_header .r-col form .btn-group-vertical > button + .btn, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn, .btn-group-vertical > .btn + .btn-vk, .btn-group-vertical > .btn-vk + .btn-vk, .btn-group-vertical > .btn-od + .btn-vk, .btn-group-vertical > .btn-ml + .btn-vk, .btn-group-vertical > .btn-fb + .btn-vk, .btn-group-vertical > .btn-tw + .btn-vk, .btn-group-vertical > .btn-gl + .btn-vk, section.gray .btn-group-vertical > button + .btn-vk, .question-page_header .r-col form .btn-group-vertical > button + .btn-vk, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-vk, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-vk, .btn-group-vertical > .btn + .btn-od, .btn-group-vertical > .btn-vk + .btn-od, .btn-group-vertical > .btn-od + .btn-od, .btn-group-vertical > .btn-ml + .btn-od, .btn-group-vertical > .btn-fb + .btn-od, .btn-group-vertical > .btn-tw + .btn-od, .btn-group-vertical > .btn-gl + .btn-od, section.gray .btn-group-vertical > button + .btn-od, .question-page_header .r-col form .btn-group-vertical > button + .btn-od, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-od, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-od, .btn-group-vertical > .btn + .btn-ml, .btn-group-vertical > .btn-vk + .btn-ml, .btn-group-vertical > .btn-od + .btn-ml, .btn-group-vertical > .btn-ml + .btn-ml, .btn-group-vertical > .btn-fb + .btn-ml, .btn-group-vertical > .btn-tw + .btn-ml, .btn-group-vertical > .btn-gl + .btn-ml, section.gray .btn-group-vertical > button + .btn-ml, .question-page_header .r-col form .btn-group-vertical > button + .btn-ml, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-ml, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-ml, .btn-group-vertical > .btn + .btn-fb, .btn-group-vertical > .btn-vk + .btn-fb, .btn-group-vertical > .btn-od + .btn-fb, .btn-group-vertical > .btn-ml + .btn-fb, .btn-group-vertical > .btn-fb + .btn-fb, .btn-group-vertical > .btn-tw + .btn-fb, .btn-group-vertical > .btn-gl + .btn-fb, section.gray .btn-group-vertical > button + .btn-fb, .question-page_header .r-col form .btn-group-vertical > button + .btn-fb, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-fb, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-fb, .btn-group-vertical > .btn + .btn-tw, .btn-group-vertical > .btn-vk + .btn-tw, .btn-group-vertical > .btn-od + .btn-tw, .btn-group-vertical > .btn-ml + .btn-tw, .btn-group-vertical > .btn-fb + .btn-tw, .btn-group-vertical > .btn-tw + .btn-tw, .btn-group-vertical > .btn-gl + .btn-tw, section.gray .btn-group-vertical > button + .btn-tw, .question-page_header .r-col form .btn-group-vertical > button + .btn-tw, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-tw, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-tw, .btn-group-vertical > .btn + .btn-gl, .btn-group-vertical > .btn-vk + .btn-gl, .btn-group-vertical > .btn-od + .btn-gl, .btn-group-vertical > .btn-ml + .btn-gl, .btn-group-vertical > .btn-fb + .btn-gl, .btn-group-vertical > .btn-tw + .btn-gl, .btn-group-vertical > .btn-gl + .btn-gl, section.gray .btn-group-vertical > button + .btn-gl, .question-page_header .r-col form .btn-group-vertical > button + .btn-gl, .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-gl, .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-gl, section.gray .btn-group-vertical > .btn + button, section.gray .btn-group-vertical > .btn-vk + button, section.gray .btn-group-vertical > .btn-od + button, section.gray .btn-group-vertical > .btn-ml + button, section.gray .btn-group-vertical > .btn-fb + button, section.gray .btn-group-vertical > .btn-tw + button, section.gray .btn-group-vertical > .btn-gl + button, section.gray .btn-group-vertical > button + button, .question-page_header .r-col form section.gray .btn-group-vertical > button + button, section.gray .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer form section.gray .btn-group-vertical > button + button, section.gray .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form section.gray .btn-group-vertical > button + button, section.gray .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-page_header .r-col form .btn-group-vertical > .btn + button, .question-page_header .r-col form .btn-group-vertical > .btn-vk + button, .question-page_header .r-col form .btn-group-vertical > .btn-od + button, .question-page_header .r-col form .btn-group-vertical > .btn-ml + button, .question-page_header .r-col form .btn-group-vertical > .btn-fb + button, .question-page_header .r-col form .btn-group-vertical > .btn-tw + button, .question-page_header .r-col form .btn-group-vertical > .btn-gl + button, section.gray .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .r-col form section.gray .btn-group-vertical > button + button, .question-page_header .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer .r-col form .btn-group-vertical > button + button, .question-page_header .r-col .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer .r-col form .btn-group-vertical > button + button, .question-item .question-page_header .r-col .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-vk + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-od + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-ml + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-fb + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-tw + button, .question-page_header .question-item .answer form .btn-group-vertical > .btn-gl + button, section.gray .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer form section.gray .btn-group-vertical > button + button, .question-page_header .r-col .question-item .answer form .btn-group-vertical > button + button, .question-page_header .question-item .answer .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .question-item .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-vk + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-od + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-ml + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-fb + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-tw + button, .question-item .question-page_header .answer form .btn-group-vertical > .btn-gl + button, section.gray .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form section.gray .btn-group-vertical > button + button, .question-item .question-page_header .r-col .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer .r-col form .btn-group-vertical > button + button, .question-page_header .question-item .question-page_header .answer form .btn-group-vertical > button + button, .question-item .question-page_header .answer form .btn-group-vertical > button + button,
   .btn-group-vertical > .btn + .btn-group,
   .btn-group-vertical > .btn-vk + .btn-group,
   .btn-group-vertical > .btn-od + .btn-group,
@@ -3285,7 +3201,6 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   .question-page_header .r-col form .btn-group-vertical > button + .btn-group,
   .question-page_header .question-item .answer form .btn-group-vertical > button + .btn-group,
   .question-item .question-page_header .answer form .btn-group-vertical > button + .btn-group,
-  .lawyer-page_header .btn-group-vertical > button + .btn-group,
   .btn-group-vertical > .btn-group + .btn,
   .btn-group-vertical > .btn-group + .btn-vk,
   .btn-group-vertical > .btn-group + .btn-od,
@@ -3297,11 +3212,10 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   .question-page_header .r-col form .btn-group-vertical > .btn-group + button,
   .question-page_header .question-item .answer form .btn-group-vertical > .btn-group + button,
   .question-item .question-page_header .answer form .btn-group-vertical > .btn-group + button,
-  .lawyer-page_header .btn-group-vertical > .btn-group + button,
   .btn-group-vertical > .btn-group + .btn-group {
     margin-top: -2px;
     margin-left: 0; }
-  .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-vk:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-od:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-ml:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-fb:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-tw:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-gl:not(:last-child):not(.dropdown-toggle), section.gray .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-page_header .r-col form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-page_header .question-item .answer form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-item .question-page_header .answer form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .lawyer-page_header .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
+  .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-vk:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-od:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-ml:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-fb:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-tw:not(:last-child):not(.dropdown-toggle), .btn-group-vertical > .btn-gl:not(:last-child):not(.dropdown-toggle), section.gray .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-page_header .r-col form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-page_header .question-item .answer form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle), .question-item .question-page_header .answer form .btn-group-vertical > button:not(:last-child):not(.dropdown-toggle),
   .btn-group-vertical > .btn-group:not(:last-child) > .btn,
   .btn-group-vertical > .btn-group:not(:last-child) > .btn-vk,
   .btn-group-vertical > .btn-group:not(:last-child) > .btn-od,
@@ -3312,11 +3226,10 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   section.gray .btn-group-vertical > .btn-group:not(:last-child) > button,
   .question-page_header .r-col form .btn-group-vertical > .btn-group:not(:last-child) > button,
   .question-page_header .question-item .answer form .btn-group-vertical > .btn-group:not(:last-child) > button,
-  .question-item .question-page_header .answer form .btn-group-vertical > .btn-group:not(:last-child) > button,
-  .lawyer-page_header .btn-group-vertical > .btn-group:not(:last-child) > button {
+  .question-item .question-page_header .answer form .btn-group-vertical > .btn-group:not(:last-child) > button {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
-  .btn-group-vertical > .btn:not(:first-child), .btn-group-vertical > .btn-vk:not(:first-child), .btn-group-vertical > .btn-od:not(:first-child), .btn-group-vertical > .btn-ml:not(:first-child), .btn-group-vertical > .btn-fb:not(:first-child), .btn-group-vertical > .btn-tw:not(:first-child), .btn-group-vertical > .btn-gl:not(:first-child), section.gray .btn-group-vertical > button:not(:first-child), .question-page_header .r-col form .btn-group-vertical > button:not(:first-child), .question-page_header .question-item .answer form .btn-group-vertical > button:not(:first-child), .question-item .question-page_header .answer form .btn-group-vertical > button:not(:first-child), .lawyer-page_header .btn-group-vertical > button:not(:first-child),
+  .btn-group-vertical > .btn:not(:first-child), .btn-group-vertical > .btn-vk:not(:first-child), .btn-group-vertical > .btn-od:not(:first-child), .btn-group-vertical > .btn-ml:not(:first-child), .btn-group-vertical > .btn-fb:not(:first-child), .btn-group-vertical > .btn-tw:not(:first-child), .btn-group-vertical > .btn-gl:not(:first-child), section.gray .btn-group-vertical > button:not(:first-child), .question-page_header .r-col form .btn-group-vertical > button:not(:first-child), .question-page_header .question-item .answer form .btn-group-vertical > button:not(:first-child), .question-item .question-page_header .answer form .btn-group-vertical > button:not(:first-child),
   .btn-group-vertical > .btn-group:not(:first-child) > .btn,
   .btn-group-vertical > .btn-group:not(:first-child) > .btn-vk,
   .btn-group-vertical > .btn-group:not(:first-child) > .btn-od,
@@ -3327,12 +3240,11 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
   section.gray .btn-group-vertical > .btn-group:not(:first-child) > button,
   .question-page_header .r-col form .btn-group-vertical > .btn-group:not(:first-child) > button,
   .question-page_header .question-item .answer form .btn-group-vertical > .btn-group:not(:first-child) > button,
-  .question-item .question-page_header .answer form .btn-group-vertical > .btn-group:not(:first-child) > button,
-  .lawyer-page_header .btn-group-vertical > .btn-group:not(:first-child) > button {
+  .question-item .question-page_header .answer form .btn-group-vertical > .btn-group:not(:first-child) > button {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 
-.btn-group-toggle > .btn, .btn-group-toggle > .btn-vk, .btn-group-toggle > .btn-od, .btn-group-toggle > .btn-ml, .btn-group-toggle > .btn-fb, .btn-group-toggle > .btn-tw, .btn-group-toggle > .btn-gl, section.gray .btn-group-toggle > button, .question-page_header .r-col form .btn-group-toggle > button, .question-page_header .question-item .answer form .btn-group-toggle > button, .question-item .question-page_header .answer form .btn-group-toggle > button, .lawyer-page_header .btn-group-toggle > button,
+.btn-group-toggle > .btn, .btn-group-toggle > .btn-vk, .btn-group-toggle > .btn-od, .btn-group-toggle > .btn-ml, .btn-group-toggle > .btn-fb, .btn-group-toggle > .btn-tw, .btn-group-toggle > .btn-gl, section.gray .btn-group-toggle > button, .question-page_header .r-col form .btn-group-toggle > button, .question-page_header .question-item .answer form .btn-group-toggle > button, .question-item .question-page_header .answer form .btn-group-toggle > button,
 .btn-group-toggle > .btn-group > .btn,
 .btn-group-toggle > .btn-group > .btn-vk,
 .btn-group-toggle > .btn-group > .btn-od,
@@ -3343,10 +3255,9 @@ section.gray .btn-group > .btn-group:not(:first-child) > button,
 section.gray .btn-group-toggle > .btn-group > button,
 .question-page_header .r-col form .btn-group-toggle > .btn-group > button,
 .question-page_header .question-item .answer form .btn-group-toggle > .btn-group > button,
-.question-item .question-page_header .answer form .btn-group-toggle > .btn-group > button,
-.lawyer-page_header .btn-group-toggle > .btn-group > button {
+.question-item .question-page_header .answer form .btn-group-toggle > .btn-group > button {
   margin-bottom: 0; }
-  .btn-group-toggle > .btn input[type="radio"], .btn-group-toggle > .btn-vk input[type="radio"], .btn-group-toggle > .btn-od input[type="radio"], .btn-group-toggle > .btn-ml input[type="radio"], .btn-group-toggle > .btn-fb input[type="radio"], .btn-group-toggle > .btn-tw input[type="radio"], .btn-group-toggle > .btn-gl input[type="radio"], section.gray .btn-group-toggle > button input[type="radio"], .question-page_header .r-col form .btn-group-toggle > button input[type="radio"], .question-page_header .question-item .answer form .btn-group-toggle > button input[type="radio"], .question-item .question-page_header .answer form .btn-group-toggle > button input[type="radio"], .lawyer-page_header .btn-group-toggle > button input[type="radio"],
+  .btn-group-toggle > .btn input[type="radio"], .btn-group-toggle > .btn-vk input[type="radio"], .btn-group-toggle > .btn-od input[type="radio"], .btn-group-toggle > .btn-ml input[type="radio"], .btn-group-toggle > .btn-fb input[type="radio"], .btn-group-toggle > .btn-tw input[type="radio"], .btn-group-toggle > .btn-gl input[type="radio"], section.gray .btn-group-toggle > button input[type="radio"], .question-page_header .r-col form .btn-group-toggle > button input[type="radio"], .question-page_header .question-item .answer form .btn-group-toggle > button input[type="radio"], .question-item .question-page_header .answer form .btn-group-toggle > button input[type="radio"],
   .btn-group-toggle > .btn input[type="checkbox"],
   .btn-group-toggle > .btn-vk input[type="checkbox"],
   .btn-group-toggle > .btn-od input[type="checkbox"],
@@ -3358,7 +3269,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .r-col form .btn-group-toggle > button input[type="checkbox"],
   .question-page_header .question-item .answer form .btn-group-toggle > button input[type="checkbox"],
   .question-item .question-page_header .answer form .btn-group-toggle > button input[type="checkbox"],
-  .lawyer-page_header .btn-group-toggle > button input[type="checkbox"],
   .btn-group-toggle > .btn-group > .btn input[type="radio"],
   .btn-group-toggle > .btn-group > .btn-vk input[type="radio"],
   .btn-group-toggle > .btn-group > .btn-od input[type="radio"],
@@ -3370,7 +3280,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .r-col form .btn-group-toggle > .btn-group > button input[type="radio"],
   .question-page_header .question-item .answer form .btn-group-toggle > .btn-group > button input[type="radio"],
   .question-item .question-page_header .answer form .btn-group-toggle > .btn-group > button input[type="radio"],
-  .lawyer-page_header .btn-group-toggle > .btn-group > button input[type="radio"],
   .btn-group-toggle > .btn-group > .btn input[type="checkbox"],
   .btn-group-toggle > .btn-group > .btn-vk input[type="checkbox"],
   .btn-group-toggle > .btn-group > .btn-od input[type="checkbox"],
@@ -3381,8 +3290,7 @@ section.gray .btn-group-toggle > .btn-group > button,
   section.gray .btn-group-toggle > .btn-group > button input[type="checkbox"],
   .question-page_header .r-col form .btn-group-toggle > .btn-group > button input[type="checkbox"],
   .question-page_header .question-item .answer form .btn-group-toggle > .btn-group > button input[type="checkbox"],
-  .question-item .question-page_header .answer form .btn-group-toggle > .btn-group > button input[type="checkbox"],
-  .lawyer-page_header .btn-group-toggle > .btn-group > button input[type="checkbox"] {
+  .question-item .question-page_header .answer form .btn-group-toggle > .btn-group > button input[type="checkbox"] {
     position: absolute;
     clip: rect(0, 0, 0, 0);
     pointer-events: none; }
@@ -3435,7 +3343,7 @@ section.gray .btn-group-toggle > .btn-group > button,
 .input-group-prepend,
 .input-group-append {
   display: flex; }
-  .input-group-prepend .btn, .input-group-prepend .btn-vk, .input-group-prepend .btn-od, .input-group-prepend .btn-ml, .input-group-prepend .btn-fb, .input-group-prepend .btn-tw, .input-group-prepend .btn-gl, .input-group-prepend section.gray button, section.gray .input-group-prepend button, .input-group-prepend .question-page_header .r-col form button, .question-page_header .r-col form .input-group-prepend button, .input-group-prepend .question-page_header .question-item .answer form button, .question-page_header .question-item .answer form .input-group-prepend button, .input-group-prepend .question-item .question-page_header .answer form button, .question-item .question-page_header .answer form .input-group-prepend button, .input-group-prepend .lawyer-page_header button, .lawyer-page_header .input-group-prepend button,
+  .input-group-prepend .btn, .input-group-prepend .btn-vk, .input-group-prepend .btn-od, .input-group-prepend .btn-ml, .input-group-prepend .btn-fb, .input-group-prepend .btn-tw, .input-group-prepend .btn-gl, .input-group-prepend section.gray button, section.gray .input-group-prepend button, .input-group-prepend .question-page_header .r-col form button, .question-page_header .r-col form .input-group-prepend button, .input-group-prepend .question-page_header .question-item .answer form button, .question-page_header .question-item .answer form .input-group-prepend button, .input-group-prepend .question-item .question-page_header .answer form button, .question-item .question-page_header .answer form .input-group-prepend button,
   .input-group-append .btn,
   .input-group-append .btn-vk,
   .input-group-append .btn-od,
@@ -3450,12 +3358,10 @@ section.gray .btn-group-toggle > .btn-group > button,
   .input-group-append .question-page_header .question-item .answer form button,
   .question-page_header .question-item .answer form .input-group-append button,
   .input-group-append .question-item .question-page_header .answer form button,
-  .question-item .question-page_header .answer form .input-group-append button,
-  .input-group-append .lawyer-page_header button,
-  .lawyer-page_header .input-group-append button {
+  .question-item .question-page_header .answer form .input-group-append button {
     position: relative;
     z-index: 2; }
-  .input-group-prepend .btn + .btn, .input-group-prepend .btn-vk + .btn, .input-group-prepend .btn-od + .btn, .input-group-prepend .btn-ml + .btn, .input-group-prepend .btn-fb + .btn, .input-group-prepend .btn-tw + .btn, .input-group-prepend .btn-gl + .btn, .input-group-prepend section.gray button + .btn, section.gray .input-group-prepend button + .btn, .input-group-prepend .question-page_header .r-col form button + .btn, .question-page_header .r-col form .input-group-prepend button + .btn, .input-group-prepend .question-page_header .question-item .answer form button + .btn, .question-page_header .question-item .answer form .input-group-prepend button + .btn, .input-group-prepend .question-item .question-page_header .answer form button + .btn, .question-item .question-page_header .answer form .input-group-prepend button + .btn, .input-group-prepend .lawyer-page_header button + .btn, .lawyer-page_header .input-group-prepend button + .btn, .input-group-prepend .btn + .btn-vk, .input-group-prepend .btn-vk + .btn-vk, .input-group-prepend .btn-od + .btn-vk, .input-group-prepend .btn-ml + .btn-vk, .input-group-prepend .btn-fb + .btn-vk, .input-group-prepend .btn-tw + .btn-vk, .input-group-prepend .btn-gl + .btn-vk, .input-group-prepend section.gray button + .btn-vk, section.gray .input-group-prepend button + .btn-vk, .input-group-prepend .question-page_header .r-col form button + .btn-vk, .question-page_header .r-col form .input-group-prepend button + .btn-vk, .input-group-prepend .question-page_header .question-item .answer form button + .btn-vk, .question-page_header .question-item .answer form .input-group-prepend button + .btn-vk, .input-group-prepend .question-item .question-page_header .answer form button + .btn-vk, .question-item .question-page_header .answer form .input-group-prepend button + .btn-vk, .input-group-prepend .lawyer-page_header button + .btn-vk, .lawyer-page_header .input-group-prepend button + .btn-vk, .input-group-prepend .btn + .btn-od, .input-group-prepend .btn-vk + .btn-od, .input-group-prepend .btn-od + .btn-od, .input-group-prepend .btn-ml + .btn-od, .input-group-prepend .btn-fb + .btn-od, .input-group-prepend .btn-tw + .btn-od, .input-group-prepend .btn-gl + .btn-od, .input-group-prepend section.gray button + .btn-od, section.gray .input-group-prepend button + .btn-od, .input-group-prepend .question-page_header .r-col form button + .btn-od, .question-page_header .r-col form .input-group-prepend button + .btn-od, .input-group-prepend .question-page_header .question-item .answer form button + .btn-od, .question-page_header .question-item .answer form .input-group-prepend button + .btn-od, .input-group-prepend .question-item .question-page_header .answer form button + .btn-od, .question-item .question-page_header .answer form .input-group-prepend button + .btn-od, .input-group-prepend .lawyer-page_header button + .btn-od, .lawyer-page_header .input-group-prepend button + .btn-od, .input-group-prepend .btn + .btn-ml, .input-group-prepend .btn-vk + .btn-ml, .input-group-prepend .btn-od + .btn-ml, .input-group-prepend .btn-ml + .btn-ml, .input-group-prepend .btn-fb + .btn-ml, .input-group-prepend .btn-tw + .btn-ml, .input-group-prepend .btn-gl + .btn-ml, .input-group-prepend section.gray button + .btn-ml, section.gray .input-group-prepend button + .btn-ml, .input-group-prepend .question-page_header .r-col form button + .btn-ml, .question-page_header .r-col form .input-group-prepend button + .btn-ml, .input-group-prepend .question-page_header .question-item .answer form button + .btn-ml, .question-page_header .question-item .answer form .input-group-prepend button + .btn-ml, .input-group-prepend .question-item .question-page_header .answer form button + .btn-ml, .question-item .question-page_header .answer form .input-group-prepend button + .btn-ml, .input-group-prepend .lawyer-page_header button + .btn-ml, .lawyer-page_header .input-group-prepend button + .btn-ml, .input-group-prepend .btn + .btn-fb, .input-group-prepend .btn-vk + .btn-fb, .input-group-prepend .btn-od + .btn-fb, .input-group-prepend .btn-ml + .btn-fb, .input-group-prepend .btn-fb + .btn-fb, .input-group-prepend .btn-tw + .btn-fb, .input-group-prepend .btn-gl + .btn-fb, .input-group-prepend section.gray button + .btn-fb, section.gray .input-group-prepend button + .btn-fb, .input-group-prepend .question-page_header .r-col form button + .btn-fb, .question-page_header .r-col form .input-group-prepend button + .btn-fb, .input-group-prepend .question-page_header .question-item .answer form button + .btn-fb, .question-page_header .question-item .answer form .input-group-prepend button + .btn-fb, .input-group-prepend .question-item .question-page_header .answer form button + .btn-fb, .question-item .question-page_header .answer form .input-group-prepend button + .btn-fb, .input-group-prepend .lawyer-page_header button + .btn-fb, .lawyer-page_header .input-group-prepend button + .btn-fb, .input-group-prepend .btn + .btn-tw, .input-group-prepend .btn-vk + .btn-tw, .input-group-prepend .btn-od + .btn-tw, .input-group-prepend .btn-ml + .btn-tw, .input-group-prepend .btn-fb + .btn-tw, .input-group-prepend .btn-tw + .btn-tw, .input-group-prepend .btn-gl + .btn-tw, .input-group-prepend section.gray button + .btn-tw, section.gray .input-group-prepend button + .btn-tw, .input-group-prepend .question-page_header .r-col form button + .btn-tw, .question-page_header .r-col form .input-group-prepend button + .btn-tw, .input-group-prepend .question-page_header .question-item .answer form button + .btn-tw, .question-page_header .question-item .answer form .input-group-prepend button + .btn-tw, .input-group-prepend .question-item .question-page_header .answer form button + .btn-tw, .question-item .question-page_header .answer form .input-group-prepend button + .btn-tw, .input-group-prepend .lawyer-page_header button + .btn-tw, .lawyer-page_header .input-group-prepend button + .btn-tw, .input-group-prepend .btn + .btn-gl, .input-group-prepend .btn-vk + .btn-gl, .input-group-prepend .btn-od + .btn-gl, .input-group-prepend .btn-ml + .btn-gl, .input-group-prepend .btn-fb + .btn-gl, .input-group-prepend .btn-tw + .btn-gl, .input-group-prepend .btn-gl + .btn-gl, .input-group-prepend section.gray button + .btn-gl, section.gray .input-group-prepend button + .btn-gl, .input-group-prepend .question-page_header .r-col form button + .btn-gl, .question-page_header .r-col form .input-group-prepend button + .btn-gl, .input-group-prepend .question-page_header .question-item .answer form button + .btn-gl, .question-page_header .question-item .answer form .input-group-prepend button + .btn-gl, .input-group-prepend .question-item .question-page_header .answer form button + .btn-gl, .question-item .question-page_header .answer form .input-group-prepend button + .btn-gl, .input-group-prepend .lawyer-page_header button + .btn-gl, .lawyer-page_header .input-group-prepend button + .btn-gl, .input-group-prepend section.gray .btn + button, section.gray .input-group-prepend .btn + button, .input-group-prepend section.gray .btn-vk + button, section.gray .input-group-prepend .btn-vk + button, .input-group-prepend section.gray .btn-od + button, section.gray .input-group-prepend .btn-od + button, .input-group-prepend section.gray .btn-ml + button, section.gray .input-group-prepend .btn-ml + button, .input-group-prepend section.gray .btn-fb + button, section.gray .input-group-prepend .btn-fb + button, .input-group-prepend section.gray .btn-tw + button, section.gray .input-group-prepend .btn-tw + button, .input-group-prepend section.gray .btn-gl + button, section.gray .input-group-prepend .btn-gl + button, .input-group-prepend section.gray button + button, section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form section.gray button + button, section.gray .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend section.gray button + button, section.gray .question-page_header .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form section.gray button + button, section.gray .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend section.gray button + button, section.gray .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form section.gray button + button, section.gray .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend section.gray button + button, section.gray .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .lawyer-page_header section.gray button + button, section.gray .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend section.gray button + button, section.gray .lawyer-page_header .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form .btn + button, .question-page_header .r-col form .input-group-prepend .btn + button, .input-group-prepend .question-page_header .r-col form .btn-vk + button, .question-page_header .r-col form .input-group-prepend .btn-vk + button, .input-group-prepend .question-page_header .r-col form .btn-od + button, .question-page_header .r-col form .input-group-prepend .btn-od + button, .input-group-prepend .question-page_header .r-col form .btn-ml + button, .question-page_header .r-col form .input-group-prepend .btn-ml + button, .input-group-prepend .question-page_header .r-col form .btn-fb + button, .question-page_header .r-col form .input-group-prepend .btn-fb + button, .input-group-prepend .question-page_header .r-col form .btn-tw + button, .question-page_header .r-col form .input-group-prepend .btn-tw + button, .input-group-prepend .question-page_header .r-col form .btn-gl + button, .question-page_header .r-col form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer .r-col form button + button, .input-group-prepend .question-page_header .r-col .question-item .answer form button + button, .question-page_header .question-item .answer .r-col form .input-group-prepend button + button, .question-page_header .r-col .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer .r-col form button + button, .input-group-prepend .question-item .question-page_header .r-col .answer form button + button, .question-item .question-page_header .answer .r-col form .input-group-prepend button + button, .question-item .question-page_header .r-col .answer form .input-group-prepend button + button, .input-group-prepend .lawyer-page_header .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .lawyer-page_header .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form .btn + button, .question-page_header .question-item .answer form .input-group-prepend .btn + button, .input-group-prepend .question-page_header .question-item .answer form .btn-vk + button, .question-page_header .question-item .answer form .input-group-prepend .btn-vk + button, .input-group-prepend .question-page_header .question-item .answer form .btn-od + button, .question-page_header .question-item .answer form .input-group-prepend .btn-od + button, .input-group-prepend .question-page_header .question-item .answer form .btn-ml + button, .question-page_header .question-item .answer form .input-group-prepend .btn-ml + button, .input-group-prepend .question-page_header .question-item .answer form .btn-fb + button, .question-page_header .question-item .answer form .input-group-prepend .btn-fb + button, .input-group-prepend .question-page_header .question-item .answer form .btn-tw + button, .question-page_header .question-item .answer form .input-group-prepend .btn-tw + button, .input-group-prepend .question-page_header .question-item .answer form .btn-gl + button, .question-page_header .question-item .answer form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col .question-item .answer form button + button, .input-group-prepend .question-page_header .question-item .answer .r-col form button + button, .question-page_header .r-col .question-item .answer form .input-group-prepend button + button, .question-page_header .question-item .answer .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .question-item .answer form button + button, .question-item .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .lawyer-page_header .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .lawyer-page_header .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form .btn + button, .question-item .question-page_header .answer form .input-group-prepend .btn + button, .input-group-prepend .question-item .question-page_header .answer form .btn-vk + button, .question-item .question-page_header .answer form .input-group-prepend .btn-vk + button, .input-group-prepend .question-item .question-page_header .answer form .btn-od + button, .question-item .question-page_header .answer form .input-group-prepend .btn-od + button, .input-group-prepend .question-item .question-page_header .answer form .btn-ml + button, .question-item .question-page_header .answer form .input-group-prepend .btn-ml + button, .input-group-prepend .question-item .question-page_header .answer form .btn-fb + button, .question-item .question-page_header .answer form .input-group-prepend .btn-fb + button, .input-group-prepend .question-item .question-page_header .answer form .btn-tw + button, .question-item .question-page_header .answer form .input-group-prepend .btn-tw + button, .input-group-prepend .question-item .question-page_header .answer form .btn-gl + button, .question-item .question-page_header .answer form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form section.gray .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .r-col .answer form button + button, .question-item .input-group-prepend .question-page_header .r-col .answer form button + button, .input-group-prepend .question-item .question-page_header .answer .r-col form button + button, .question-item .input-group-prepend .question-page_header .answer .r-col form button + button, .question-item .question-page_header .r-col .answer form .input-group-prepend button + button, .question-item .question-page_header .answer .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .question-page_header .answer form button + button, .question-page_header .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .lawyer-page_header .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .lawyer-page_header .input-group-prepend button + button, .input-group-prepend .lawyer-page_header .btn + button, .lawyer-page_header .input-group-prepend .btn + button, .input-group-prepend .lawyer-page_header .btn-vk + button, .lawyer-page_header .input-group-prepend .btn-vk + button, .input-group-prepend .lawyer-page_header .btn-od + button, .lawyer-page_header .input-group-prepend .btn-od + button, .input-group-prepend .lawyer-page_header .btn-ml + button, .lawyer-page_header .input-group-prepend .btn-ml + button, .input-group-prepend .lawyer-page_header .btn-fb + button, .lawyer-page_header .input-group-prepend .btn-fb + button, .input-group-prepend .lawyer-page_header .btn-tw + button, .lawyer-page_header .input-group-prepend .btn-tw + button, .input-group-prepend .lawyer-page_header .btn-gl + button, .lawyer-page_header .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend section.gray button + button, section.gray .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .question-page_header .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .lawyer-page_header button + button, .lawyer-page_header .input-group-prepend button + button,
+  .input-group-prepend .btn + .btn, .input-group-prepend .btn-vk + .btn, .input-group-prepend .btn-od + .btn, .input-group-prepend .btn-ml + .btn, .input-group-prepend .btn-fb + .btn, .input-group-prepend .btn-tw + .btn, .input-group-prepend .btn-gl + .btn, .input-group-prepend section.gray button + .btn, section.gray .input-group-prepend button + .btn, .input-group-prepend .question-page_header .r-col form button + .btn, .question-page_header .r-col form .input-group-prepend button + .btn, .input-group-prepend .question-page_header .question-item .answer form button + .btn, .question-page_header .question-item .answer form .input-group-prepend button + .btn, .input-group-prepend .question-item .question-page_header .answer form button + .btn, .question-item .question-page_header .answer form .input-group-prepend button + .btn, .input-group-prepend .btn + .btn-vk, .input-group-prepend .btn-vk + .btn-vk, .input-group-prepend .btn-od + .btn-vk, .input-group-prepend .btn-ml + .btn-vk, .input-group-prepend .btn-fb + .btn-vk, .input-group-prepend .btn-tw + .btn-vk, .input-group-prepend .btn-gl + .btn-vk, .input-group-prepend section.gray button + .btn-vk, section.gray .input-group-prepend button + .btn-vk, .input-group-prepend .question-page_header .r-col form button + .btn-vk, .question-page_header .r-col form .input-group-prepend button + .btn-vk, .input-group-prepend .question-page_header .question-item .answer form button + .btn-vk, .question-page_header .question-item .answer form .input-group-prepend button + .btn-vk, .input-group-prepend .question-item .question-page_header .answer form button + .btn-vk, .question-item .question-page_header .answer form .input-group-prepend button + .btn-vk, .input-group-prepend .btn + .btn-od, .input-group-prepend .btn-vk + .btn-od, .input-group-prepend .btn-od + .btn-od, .input-group-prepend .btn-ml + .btn-od, .input-group-prepend .btn-fb + .btn-od, .input-group-prepend .btn-tw + .btn-od, .input-group-prepend .btn-gl + .btn-od, .input-group-prepend section.gray button + .btn-od, section.gray .input-group-prepend button + .btn-od, .input-group-prepend .question-page_header .r-col form button + .btn-od, .question-page_header .r-col form .input-group-prepend button + .btn-od, .input-group-prepend .question-page_header .question-item .answer form button + .btn-od, .question-page_header .question-item .answer form .input-group-prepend button + .btn-od, .input-group-prepend .question-item .question-page_header .answer form button + .btn-od, .question-item .question-page_header .answer form .input-group-prepend button + .btn-od, .input-group-prepend .btn + .btn-ml, .input-group-prepend .btn-vk + .btn-ml, .input-group-prepend .btn-od + .btn-ml, .input-group-prepend .btn-ml + .btn-ml, .input-group-prepend .btn-fb + .btn-ml, .input-group-prepend .btn-tw + .btn-ml, .input-group-prepend .btn-gl + .btn-ml, .input-group-prepend section.gray button + .btn-ml, section.gray .input-group-prepend button + .btn-ml, .input-group-prepend .question-page_header .r-col form button + .btn-ml, .question-page_header .r-col form .input-group-prepend button + .btn-ml, .input-group-prepend .question-page_header .question-item .answer form button + .btn-ml, .question-page_header .question-item .answer form .input-group-prepend button + .btn-ml, .input-group-prepend .question-item .question-page_header .answer form button + .btn-ml, .question-item .question-page_header .answer form .input-group-prepend button + .btn-ml, .input-group-prepend .btn + .btn-fb, .input-group-prepend .btn-vk + .btn-fb, .input-group-prepend .btn-od + .btn-fb, .input-group-prepend .btn-ml + .btn-fb, .input-group-prepend .btn-fb + .btn-fb, .input-group-prepend .btn-tw + .btn-fb, .input-group-prepend .btn-gl + .btn-fb, .input-group-prepend section.gray button + .btn-fb, section.gray .input-group-prepend button + .btn-fb, .input-group-prepend .question-page_header .r-col form button + .btn-fb, .question-page_header .r-col form .input-group-prepend button + .btn-fb, .input-group-prepend .question-page_header .question-item .answer form button + .btn-fb, .question-page_header .question-item .answer form .input-group-prepend button + .btn-fb, .input-group-prepend .question-item .question-page_header .answer form button + .btn-fb, .question-item .question-page_header .answer form .input-group-prepend button + .btn-fb, .input-group-prepend .btn + .btn-tw, .input-group-prepend .btn-vk + .btn-tw, .input-group-prepend .btn-od + .btn-tw, .input-group-prepend .btn-ml + .btn-tw, .input-group-prepend .btn-fb + .btn-tw, .input-group-prepend .btn-tw + .btn-tw, .input-group-prepend .btn-gl + .btn-tw, .input-group-prepend section.gray button + .btn-tw, section.gray .input-group-prepend button + .btn-tw, .input-group-prepend .question-page_header .r-col form button + .btn-tw, .question-page_header .r-col form .input-group-prepend button + .btn-tw, .input-group-prepend .question-page_header .question-item .answer form button + .btn-tw, .question-page_header .question-item .answer form .input-group-prepend button + .btn-tw, .input-group-prepend .question-item .question-page_header .answer form button + .btn-tw, .question-item .question-page_header .answer form .input-group-prepend button + .btn-tw, .input-group-prepend .btn + .btn-gl, .input-group-prepend .btn-vk + .btn-gl, .input-group-prepend .btn-od + .btn-gl, .input-group-prepend .btn-ml + .btn-gl, .input-group-prepend .btn-fb + .btn-gl, .input-group-prepend .btn-tw + .btn-gl, .input-group-prepend .btn-gl + .btn-gl, .input-group-prepend section.gray button + .btn-gl, section.gray .input-group-prepend button + .btn-gl, .input-group-prepend .question-page_header .r-col form button + .btn-gl, .question-page_header .r-col form .input-group-prepend button + .btn-gl, .input-group-prepend .question-page_header .question-item .answer form button + .btn-gl, .question-page_header .question-item .answer form .input-group-prepend button + .btn-gl, .input-group-prepend .question-item .question-page_header .answer form button + .btn-gl, .question-item .question-page_header .answer form .input-group-prepend button + .btn-gl, .input-group-prepend section.gray .btn + button, section.gray .input-group-prepend .btn + button, .input-group-prepend section.gray .btn-vk + button, section.gray .input-group-prepend .btn-vk + button, .input-group-prepend section.gray .btn-od + button, section.gray .input-group-prepend .btn-od + button, .input-group-prepend section.gray .btn-ml + button, section.gray .input-group-prepend .btn-ml + button, .input-group-prepend section.gray .btn-fb + button, section.gray .input-group-prepend .btn-fb + button, .input-group-prepend section.gray .btn-tw + button, section.gray .input-group-prepend .btn-tw + button, .input-group-prepend section.gray .btn-gl + button, section.gray .input-group-prepend .btn-gl + button, .input-group-prepend section.gray button + button, section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form section.gray button + button, section.gray .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend section.gray button + button, section.gray .question-page_header .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form section.gray button + button, section.gray .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend section.gray button + button, section.gray .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form section.gray button + button, section.gray .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend section.gray button + button, section.gray .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form .btn + button, .question-page_header .r-col form .input-group-prepend .btn + button, .input-group-prepend .question-page_header .r-col form .btn-vk + button, .question-page_header .r-col form .input-group-prepend .btn-vk + button, .input-group-prepend .question-page_header .r-col form .btn-od + button, .question-page_header .r-col form .input-group-prepend .btn-od + button, .input-group-prepend .question-page_header .r-col form .btn-ml + button, .question-page_header .r-col form .input-group-prepend .btn-ml + button, .input-group-prepend .question-page_header .r-col form .btn-fb + button, .question-page_header .r-col form .input-group-prepend .btn-fb + button, .input-group-prepend .question-page_header .r-col form .btn-tw + button, .question-page_header .r-col form .input-group-prepend .btn-tw + button, .input-group-prepend .question-page_header .r-col form .btn-gl + button, .question-page_header .r-col form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col form button + button, .question-page_header .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer .r-col form button + button, .input-group-prepend .question-page_header .r-col .question-item .answer form button + button, .question-page_header .question-item .answer .r-col form .input-group-prepend button + button, .question-page_header .r-col .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer .r-col form button + button, .input-group-prepend .question-item .question-page_header .r-col .answer form button + button, .question-item .question-page_header .answer .r-col form .input-group-prepend button + button, .question-item .question-page_header .r-col .answer form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form .btn + button, .question-page_header .question-item .answer form .input-group-prepend .btn + button, .input-group-prepend .question-page_header .question-item .answer form .btn-vk + button, .question-page_header .question-item .answer form .input-group-prepend .btn-vk + button, .input-group-prepend .question-page_header .question-item .answer form .btn-od + button, .question-page_header .question-item .answer form .input-group-prepend .btn-od + button, .input-group-prepend .question-page_header .question-item .answer form .btn-ml + button, .question-page_header .question-item .answer form .input-group-prepend .btn-ml + button, .input-group-prepend .question-page_header .question-item .answer form .btn-fb + button, .question-page_header .question-item .answer form .input-group-prepend .btn-fb + button, .input-group-prepend .question-page_header .question-item .answer form .btn-tw + button, .question-page_header .question-item .answer form .input-group-prepend .btn-tw + button, .input-group-prepend .question-page_header .question-item .answer form .btn-gl + button, .question-page_header .question-item .answer form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form section.gray .input-group-prepend button + button, .input-group-prepend .question-page_header .r-col .question-item .answer form button + button, .input-group-prepend .question-page_header .question-item .answer .r-col form button + button, .question-page_header .r-col .question-item .answer form .input-group-prepend button + button, .question-page_header .question-item .answer .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .answer form button + button, .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .question-item .answer form button + button, .question-item .question-page_header .question-item .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form .btn + button, .question-item .question-page_header .answer form .input-group-prepend .btn + button, .input-group-prepend .question-item .question-page_header .answer form .btn-vk + button, .question-item .question-page_header .answer form .input-group-prepend .btn-vk + button, .input-group-prepend .question-item .question-page_header .answer form .btn-od + button, .question-item .question-page_header .answer form .input-group-prepend .btn-od + button, .input-group-prepend .question-item .question-page_header .answer form .btn-ml + button, .question-item .question-page_header .answer form .input-group-prepend .btn-ml + button, .input-group-prepend .question-item .question-page_header .answer form .btn-fb + button, .question-item .question-page_header .answer form .input-group-prepend .btn-fb + button, .input-group-prepend .question-item .question-page_header .answer form .btn-tw + button, .question-item .question-page_header .answer form .input-group-prepend .btn-tw + button, .input-group-prepend .question-item .question-page_header .answer form .btn-gl + button, .question-item .question-page_header .answer form .input-group-prepend .btn-gl + button, .input-group-prepend section.gray .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend section.gray button + button, section.gray .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form section.gray .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .r-col .answer form button + button, .question-item .input-group-prepend .question-page_header .r-col .answer form button + button, .input-group-prepend .question-item .question-page_header .answer .r-col form button + button, .question-item .input-group-prepend .question-page_header .answer .r-col form button + button, .question-item .question-page_header .r-col .answer form .input-group-prepend button + button, .question-item .question-page_header .answer .r-col form .input-group-prepend button + button, .input-group-prepend .question-page_header .question-item .question-page_header .answer form button + button, .question-page_header .question-item .question-page_header .answer form .input-group-prepend button + button, .input-group-prepend .question-item .question-page_header .answer form button + button, .question-item .question-page_header .answer form .input-group-prepend button + button,
   .input-group-prepend .btn + .input-group-text,
   .input-group-prepend .btn-vk + .input-group-text,
   .input-group-prepend .btn-od + .input-group-text,
@@ -3471,8 +3377,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-prepend button + .input-group-text,
   .input-group-prepend .question-item .question-page_header .answer form button + .input-group-text,
   .question-item .question-page_header .answer form .input-group-prepend button + .input-group-text,
-  .input-group-prepend .lawyer-page_header button + .input-group-text,
-  .lawyer-page_header .input-group-prepend button + .input-group-text,
   .input-group-prepend .input-group-text + .input-group-text,
   .input-group-prepend .input-group-text + .btn,
   .input-group-prepend .input-group-text + .btn-vk,
@@ -3489,8 +3393,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-prepend .input-group-text + button,
   .input-group-prepend .question-item .question-page_header .answer form .input-group-text + button,
   .question-item .question-page_header .answer form .input-group-prepend .input-group-text + button,
-  .input-group-prepend .lawyer-page_header .input-group-text + button,
-  .lawyer-page_header .input-group-prepend .input-group-text + button,
   .input-group-append .btn + .btn,
   .input-group-append .btn-vk + .btn,
   .input-group-append .btn-od + .btn,
@@ -3506,8 +3408,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn,
   .input-group-append .question-item .question-page_header .answer form button + .btn,
   .question-item .question-page_header .answer form .input-group-append button + .btn,
-  .input-group-append .lawyer-page_header button + .btn,
-  .lawyer-page_header .input-group-append button + .btn,
   .input-group-append .btn + .btn-vk,
   .input-group-append .btn-vk + .btn-vk,
   .input-group-append .btn-od + .btn-vk,
@@ -3523,8 +3423,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-vk,
   .input-group-append .question-item .question-page_header .answer form button + .btn-vk,
   .question-item .question-page_header .answer form .input-group-append button + .btn-vk,
-  .input-group-append .lawyer-page_header button + .btn-vk,
-  .lawyer-page_header .input-group-append button + .btn-vk,
   .input-group-append .btn + .btn-od,
   .input-group-append .btn-vk + .btn-od,
   .input-group-append .btn-od + .btn-od,
@@ -3540,8 +3438,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-od,
   .input-group-append .question-item .question-page_header .answer form button + .btn-od,
   .question-item .question-page_header .answer form .input-group-append button + .btn-od,
-  .input-group-append .lawyer-page_header button + .btn-od,
-  .lawyer-page_header .input-group-append button + .btn-od,
   .input-group-append .btn + .btn-ml,
   .input-group-append .btn-vk + .btn-ml,
   .input-group-append .btn-od + .btn-ml,
@@ -3557,8 +3453,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-ml,
   .input-group-append .question-item .question-page_header .answer form button + .btn-ml,
   .question-item .question-page_header .answer form .input-group-append button + .btn-ml,
-  .input-group-append .lawyer-page_header button + .btn-ml,
-  .lawyer-page_header .input-group-append button + .btn-ml,
   .input-group-append .btn + .btn-fb,
   .input-group-append .btn-vk + .btn-fb,
   .input-group-append .btn-od + .btn-fb,
@@ -3574,8 +3468,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-fb,
   .input-group-append .question-item .question-page_header .answer form button + .btn-fb,
   .question-item .question-page_header .answer form .input-group-append button + .btn-fb,
-  .input-group-append .lawyer-page_header button + .btn-fb,
-  .lawyer-page_header .input-group-append button + .btn-fb,
   .input-group-append .btn + .btn-tw,
   .input-group-append .btn-vk + .btn-tw,
   .input-group-append .btn-od + .btn-tw,
@@ -3591,8 +3483,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-tw,
   .input-group-append .question-item .question-page_header .answer form button + .btn-tw,
   .question-item .question-page_header .answer form .input-group-append button + .btn-tw,
-  .input-group-append .lawyer-page_header button + .btn-tw,
-  .lawyer-page_header .input-group-append button + .btn-tw,
   .input-group-append .btn + .btn-gl,
   .input-group-append .btn-vk + .btn-gl,
   .input-group-append .btn-od + .btn-gl,
@@ -3608,8 +3498,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .btn-gl,
   .input-group-append .question-item .question-page_header .answer form button + .btn-gl,
   .question-item .question-page_header .answer form .input-group-append button + .btn-gl,
-  .input-group-append .lawyer-page_header button + .btn-gl,
-  .lawyer-page_header .input-group-append button + .btn-gl,
   .input-group-append section.gray .btn + button,
   section.gray .input-group-append .btn + button,
   .input-group-append section.gray .btn-vk + button,
@@ -3638,10 +3526,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   section.gray .input-group-append .question-item .question-page_header .answer form button + button,
   .question-item .question-page_header .answer form .input-group-append section.gray button + button,
   section.gray .question-item .question-page_header .answer form .input-group-append button + button,
-  .input-group-append .lawyer-page_header section.gray button + button,
-  section.gray .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append section.gray button + button,
-  section.gray .lawyer-page_header .input-group-append button + button,
   .input-group-append .question-page_header .r-col form .btn + button,
   .question-page_header .r-col form .input-group-append .btn + button,
   .input-group-append .question-page_header .r-col form .btn-vk + button,
@@ -3670,10 +3554,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .input-group-append .question-item .question-page_header .r-col .answer form button + button,
   .question-item .question-page_header .answer .r-col form .input-group-append button + button,
   .question-item .question-page_header .r-col .answer form .input-group-append button + button,
-  .input-group-append .lawyer-page_header .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .lawyer-page_header .input-group-append button + button,
   .input-group-append .question-page_header .question-item .answer form .btn + button,
   .question-page_header .question-item .answer form .input-group-append .btn + button,
   .input-group-append .question-page_header .question-item .answer form .btn-vk + button,
@@ -3700,10 +3580,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + button,
   .input-group-append .question-item .question-page_header .question-item .answer form button + button,
   .question-item .question-page_header .question-item .answer form .input-group-append button + button,
-  .input-group-append .lawyer-page_header .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .lawyer-page_header .input-group-append button + button,
   .input-group-append .question-item .question-page_header .answer form .btn + button,
   .question-item .question-page_header .answer form .input-group-append .btn + button,
   .input-group-append .question-item .question-page_header .answer form .btn-vk + button,
@@ -3732,42 +3608,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .question-page_header .answer form .input-group-append button + button,
   .input-group-append .question-item .question-page_header .answer form button + button,
   .question-item .question-page_header .answer form .input-group-append button + button,
-  .input-group-append .lawyer-page_header .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .lawyer-page_header .input-group-append button + button,
-  .input-group-append .lawyer-page_header .btn + button,
-  .lawyer-page_header .input-group-append .btn + button,
-  .input-group-append .lawyer-page_header .btn-vk + button,
-  .lawyer-page_header .input-group-append .btn-vk + button,
-  .input-group-append .lawyer-page_header .btn-od + button,
-  .lawyer-page_header .input-group-append .btn-od + button,
-  .input-group-append .lawyer-page_header .btn-ml + button,
-  .lawyer-page_header .input-group-append .btn-ml + button,
-  .input-group-append .lawyer-page_header .btn-fb + button,
-  .lawyer-page_header .input-group-append .btn-fb + button,
-  .input-group-append .lawyer-page_header .btn-tw + button,
-  .lawyer-page_header .input-group-append .btn-tw + button,
-  .input-group-append .lawyer-page_header .btn-gl + button,
-  .lawyer-page_header .input-group-append .btn-gl + button,
-  .input-group-append section.gray .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append section.gray button + button,
-  section.gray .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header section.gray .input-group-append button + button,
-  .input-group-append .question-page_header .r-col form .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-page_header .r-col form button + button,
-  .question-page_header .r-col form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .question-page_header .r-col form .input-group-append button + button,
-  .input-group-append .question-page_header .question-item .answer form .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-page_header .question-item .answer form button + button,
-  .question-page_header .question-item .answer form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .question-page_header .question-item .answer form .input-group-append button + button,
-  .input-group-append .question-item .question-page_header .answer form .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append .question-item .question-page_header .answer form button + button,
-  .question-item .question-page_header .answer form .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .question-item .question-page_header .answer form .input-group-append button + button,
-  .input-group-append .lawyer-page_header button + button,
-  .lawyer-page_header .input-group-append button + button,
   .input-group-append .btn + .input-group-text,
   .input-group-append .btn-vk + .input-group-text,
   .input-group-append .btn-od + .input-group-text,
@@ -3783,8 +3623,6 @@ section.gray .btn-group-toggle > .btn-group > button,
   .question-page_header .question-item .answer form .input-group-append button + .input-group-text,
   .input-group-append .question-item .question-page_header .answer form button + .input-group-text,
   .question-item .question-page_header .answer form .input-group-append button + .input-group-text,
-  .input-group-append .lawyer-page_header button + .input-group-text,
-  .lawyer-page_header .input-group-append button + .input-group-text,
   .input-group-append .input-group-text + .input-group-text,
   .input-group-append .input-group-text + .btn,
   .input-group-append .input-group-text + .btn-vk,
@@ -3800,9 +3638,7 @@ section.gray .btn-group-toggle > .btn-group > button,
   .input-group-append .question-page_header .question-item .answer form .input-group-text + button,
   .question-page_header .question-item .answer form .input-group-append .input-group-text + button,
   .input-group-append .question-item .question-page_header .answer form .input-group-text + button,
-  .question-item .question-page_header .answer form .input-group-append .input-group-text + button,
-  .input-group-append .lawyer-page_header .input-group-text + button,
-  .lawyer-page_header .input-group-append .input-group-text + button {
+  .question-item .question-page_header .answer form .input-group-append .input-group-text + button {
     margin-left: -1px; }
 
 .input-group-prepend {
@@ -3829,7 +3665,7 @@ section.gray .btn-group-toggle > .btn-group > button,
   .input-group-text input[type="checkbox"] {
     margin-top: 0; }
 
-.input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .btn-vk, .input-group > .input-group-prepend > .btn-od, .input-group > .input-group-prepend > .btn-ml, .input-group > .input-group-prepend > .btn-fb, .input-group > .input-group-prepend > .btn-tw, .input-group > .input-group-prepend > .btn-gl, section.gray .input-group > .input-group-prepend > button, .question-page_header .r-col form .input-group > .input-group-prepend > button, .question-page_header .question-item .answer form .input-group > .input-group-prepend > button, .question-item .question-page_header .answer form .input-group > .input-group-prepend > button, .lawyer-page_header .input-group > .input-group-prepend > button,
+.input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .btn-vk, .input-group > .input-group-prepend > .btn-od, .input-group > .input-group-prepend > .btn-ml, .input-group > .input-group-prepend > .btn-fb, .input-group > .input-group-prepend > .btn-tw, .input-group > .input-group-prepend > .btn-gl, section.gray .input-group > .input-group-prepend > button, .question-page_header .r-col form .input-group > .input-group-prepend > button, .question-page_header .question-item .answer form .input-group > .input-group-prepend > button, .question-item .question-page_header .answer form .input-group > .input-group-prepend > button,
 .input-group > .input-group-prepend > .input-group-text,
 .input-group > .input-group-append:not(:last-child) > .btn,
 .input-group > .input-group-append:not(:last-child) > .btn-vk,
@@ -3842,7 +3678,6 @@ section.gray .input-group > .input-group-append:not(:last-child) > button,
 .question-page_header .r-col form .input-group > .input-group-append:not(:last-child) > button,
 .question-page_header .question-item .answer form .input-group > .input-group-append:not(:last-child) > button,
 .question-item .question-page_header .answer form .input-group > .input-group-append:not(:last-child) > button,
-.lawyer-page_header .input-group > .input-group-append:not(:last-child) > button,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .btn-vk:not(:last-child):not(.dropdown-toggle),
@@ -3855,12 +3690,11 @@ section.gray .input-group > .input-group-append:last-child > button:not(:last-ch
 .question-page_header .r-col form .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
 .question-page_header .question-item .answer form .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
 .question-item .question-page_header .answer form .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
-.lawyer-page_header .input-group > .input-group-append:last-child > button:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0; }
 
-.input-group > .input-group-append > .btn, .input-group > .input-group-append > .btn-vk, .input-group > .input-group-append > .btn-od, .input-group > .input-group-append > .btn-ml, .input-group > .input-group-append > .btn-fb, .input-group > .input-group-append > .btn-tw, .input-group > .input-group-append > .btn-gl, section.gray .input-group > .input-group-append > button, .question-page_header .r-col form .input-group > .input-group-append > button, .question-page_header .question-item .answer form .input-group > .input-group-append > button, .question-item .question-page_header .answer form .input-group > .input-group-append > button, .lawyer-page_header .input-group > .input-group-append > button,
+.input-group > .input-group-append > .btn, .input-group > .input-group-append > .btn-vk, .input-group > .input-group-append > .btn-od, .input-group > .input-group-append > .btn-ml, .input-group > .input-group-append > .btn-fb, .input-group > .input-group-append > .btn-tw, .input-group > .input-group-append > .btn-gl, section.gray .input-group > .input-group-append > button, .question-page_header .r-col form .input-group > .input-group-append > button, .question-page_header .question-item .answer form .input-group > .input-group-append > button, .question-item .question-page_header .answer form .input-group > .input-group-append > button,
 .input-group > .input-group-append > .input-group-text,
 .input-group > .input-group-prepend:not(:first-child) > .btn,
 .input-group > .input-group-prepend:not(:first-child) > .btn-vk,
@@ -3873,7 +3707,6 @@ section.gray .input-group > .input-group-prepend:not(:first-child) > button,
 .question-page_header .r-col form .input-group > .input-group-prepend:not(:first-child) > button,
 .question-page_header .question-item .answer form .input-group > .input-group-prepend:not(:first-child) > button,
 .question-item .question-page_header .answer form .input-group > .input-group-prepend:not(:first-child) > button,
-.lawyer-page_header .input-group > .input-group-prepend:not(:first-child) > button,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
 .input-group > .input-group-prepend:first-child > .btn-vk:not(:first-child),
@@ -3886,7 +3719,6 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
 .question-page_header .r-col form .input-group > .input-group-prepend:first-child > button:not(:first-child),
 .question-page_header .question-item .answer form .input-group > .input-group-prepend:first-child > button:not(:first-child),
 .question-item .question-page_header .answer form .input-group > .input-group-prepend:first-child > button:not(:first-child),
-.lawyer-page_header .input-group > .input-group-prepend:first-child > button:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0; }
@@ -4823,7 +4655,7 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   .badge:empty {
     display: none; }
 
-.btn .badge, .btn-vk .badge, .btn-od .badge, .btn-ml .badge, .btn-fb .badge, .btn-tw .badge, .btn-gl .badge, section.gray button .badge, .question-page_header .r-col form button .badge, .question-page_header .question-item .answer form button .badge, .question-item .question-page_header .answer form button .badge, .lawyer-page_header button .badge {
+.btn .badge, .btn-vk .badge, .btn-od .badge, .btn-ml .badge, .btn-fb .badge, .btn-tw .badge, .btn-gl .badge, section.gray button .badge, .question-page_header .r-col form button .badge, .question-page_header .question-item .answer form button .badge, .question-item .question-page_header .answer form button .badge {
   position: relative;
   top: -1px; }
 
@@ -8713,7 +8545,8 @@ body.open-slide-menu {
       color: #4c7efd; }
 
 .lawyer-page dt {
-  color: #878787; }
+  color: #878787;
+  font-weight: 600; }
 .lawyer-page dd {
   line-height: 30px;
   margin-bottom: 0; }
@@ -8944,8 +8777,7 @@ body.open-slide-menu {
 .edu_check_diplom {
   display: block;
   position: relative;
-  height: 2.5rem;
-  padding-top: 1.2rem;
+  padding-top: 1.375rem;
   padding-left: 2.9rem; }
   .edu_check_diplom:before {
     content: '\e903';
@@ -8953,11 +8785,11 @@ body.open-slide-menu {
     font-size: 2rem;
     color: #16c246;
     position: absolute;
-    top: .55rem;
-    left: 0; }
+    left: 0;
+    top: 0; }
   .edu_check_diplom:after {
     content: attr(data-label);
-    color: #bababa;
+    color: #878787;
     position: absolute;
     font-size: 1rem;
     top: 0;

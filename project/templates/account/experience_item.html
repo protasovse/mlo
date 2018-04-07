@@ -1,7 +1,7 @@
 <div class="subtitle mb-2">
     {{ item.start|date:"F Y" }} — {{ item.finish|date:"F Y"|default:"по настоящее время" }}
 </div>
-<h5 class="mb-3">{{ item.name }}
+<h5 class="mb-3">{{ item.name|safe }}
     <!--br>
     <small class="text-muted">Ростов-на-Дону</small-->
 </h5>
@@ -10,7 +10,7 @@
     <dl>
         {% if item.position %}
             <dt>Должность</dt>
-            <dd>{{ item.position }}</dd>
+            <dd>{{ item.position|safe }}</dd>
         {% endif %}
 
         {% if item.site %}

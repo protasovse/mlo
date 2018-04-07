@@ -30,6 +30,7 @@ $photo-small-size: 40px;
   dt {
     @extend .col-12, .col-sm-5;
     color: $gray-600;
+    font-weight: $font-weight-semibold;
   }
   dd {
     @extend .col-12, .col-sm-7;
@@ -68,9 +69,6 @@ $photo-small-size: 40px;
   .lead {
     font-size: 18px;
     margin-bottom: 30px;
-  }
-  button {
-    @extend .btn, .btn-sm, .btn-white;
   }
   .photo {
     width: $photo-width;
@@ -317,8 +315,8 @@ $photo-small-size: 40px;
   @extend .normal;
   display: block;
   position: relative;
-  height: 2.5rem;
-  padding-top: 1.2rem;
+  // height: 2.5rem;
+  padding-top: 1.375rem;
   padding-left: 2.9rem;
   &:before {
     content: '\e903';
@@ -326,12 +324,12 @@ $photo-small-size: 40px;
     font-size: 2rem;
     color: $green;
     position: absolute;
-    top: .55rem;
     left: 0;
+    top:0;
   }
   &:after {
     content: attr(data-label);
-    color: $gray-500;
+    color: $gray-600;
     position: absolute;
     font-size: 1rem;
     top: 0;

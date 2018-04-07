@@ -10,6 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.fields import TreeForeignKey, TreeManyToManyField
 from mptt.models import MPTTModel
 
+from apps.rubric.managers import RubricManager
+
 
 class Rubric(MPTTModel):
 
@@ -38,11 +40,22 @@ class Rubric(MPTTModel):
     content = models.TextField(_('Content'), help_text=_('Содержание, статья'),
                                null=True, blank=True)
 
+    keywords = models.TextField(_('Ключевые слова'), help_text=_('Ключевые слова для поиска вопросов'),
+                                null=True, blank=True)
+
     slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'),
                             help_text=_('Можно не вводить. Автоматически генерируется из названия рубрики.'))
 
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
                             verbose_name=_('Родительская рубрика'), on_delete=models.CASCADE)
+
+    is_public = models.BooleanField(
+        db_index=True,
+        default=False
+    )
+
+    objects = models.Manager()
+    rubricator = RubricManager()
 
     class MPTTMeta:
         order_insertion_by = ('-id',)

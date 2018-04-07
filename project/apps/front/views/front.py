@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
@@ -27,13 +29,16 @@ class LawyerPage(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(LawyerPage, self).get_context_data(**kwargs)
 
-        lawyer = get_object_or_404(get_user_model(), pk=kwargs['id'])
-        # lawyer_info = Info.objects.filter(user=lawyer)
-        # lawyer_contact = Contact.objects.filter(user=lawyer)
+        try:
+            lawyer = get_user_model().objects.get(pk=kwargs['id'], role__gt=1)
+        except ObjectDoesNotExist:
+            raise Http404
 
         context['lawyer'] = lawyer
-        # context['lawyer_info'] = lawyer_info if lawyer_info is None else None
-        # context['lawyer_contact'] = lawyer_contact
+
+        context.update({
+            'reviews': Review.objects.filter(like__entry__author=lawyer)[:10]
+        })
 
         return context
 

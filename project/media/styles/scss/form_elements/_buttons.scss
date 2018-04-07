@@ -67,12 +67,15 @@
 }
 
 .btn-white {
-  color: $blue;
-  &:hover {
+  &,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: $blue;
+    background-color: $white;
+  }
+  &:hover, &:active {
     background-color: $dark-blue;
-    color: white;
+    color: $white;
     border-color: $dark-blue;
   }
-
-
 }

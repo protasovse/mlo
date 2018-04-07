@@ -83,10 +83,10 @@ class QuestionsList(TemplateView):
         # Получаем всех предков
         if slug:
             rubric = get_object_or_404(Rubric, slug=slug)
-            # rubrics = rubric.get_ancestors(include_self=True)
+            rubrics = rubric.get_ancestors(include_self=True)
             # if rubrics[0].slug != self.kwargs['rubric_slug']:
             #     raise Http404()
-            # context['rubrics'] = rubrics
+            context['rubrics'] = rubrics
             context['rubric'] = rubric
 
         # Все рубрики
@@ -95,12 +95,15 @@ class QuestionsList(TemplateView):
         # Вопросы
         if slug:
             # context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
-            context['questions'] = Question.published.search(rubric.name, 0, 10)
+            res = context['questions'] = Question.published.search(rubric.name, 0, 10)
+            if not res.count():
+                res = context['questions'] = Question.published.search(rubric.keywords, 0, 10)
+
         else:
             context['questions'] = Question.published.order_by('-pk')[:10]
 
         # Список рубрик для aside
-        context['rubrics_list'] = Rubric.objects.filter(level__in=(0, ))
+        context['rubrics_list'] = Rubric.rubricator.filter(level__in=(0, ))
 
         # Лучшие юристы блок
         context.update({

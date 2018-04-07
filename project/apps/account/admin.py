@@ -69,6 +69,7 @@ class CaseAdmin(admin.ModelAdmin):
 class EducationAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
     autocomplete_fields = ['user']
+    search_fields = ['user__last_name']
 
 
 @admin.register(Experience)

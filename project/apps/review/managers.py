@@ -5,7 +5,7 @@ class ReviewManager(models.Manager):
 
     def get_queryset(self):
         return super(ReviewManager, self).get_queryset().select_related(
-                'like', 'like__user', 'like__entry__answer'
+                'like', 'like__user', 'like__entry__answer', 'like__entry__answer__on_question', 'like__user__city'
             ).prefetch_related()
 
 

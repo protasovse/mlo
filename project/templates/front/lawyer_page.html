@@ -10,19 +10,16 @@
                 <div class="row align-items-end">
                     <div class="lawyer-page_header_l-col">
                         <div class="photo">
-                            {% if lawyer.info.photo %}
-                                <img src="{% cropped_thumbnail lawyer.info 'photo' %}" alt="lawyer">
-                            {% else %}
-                                <img src="/static/img/lyr/person_photo.png">
-                            {% endif %}
+                            <img src="{% include 'account/generic/photo.html' with item=lawyer %}" alt="lawyer">
                         </div>
                     </div>
                     <div class="lawyer-page_header_r-col">
                         <h1>{{ lawyer.get_full_name }}</h1>
-                        <div class="lead">{{ lawyer.info.status }}<br>
+                        <div class="lead">{{ lawyer.info.short|default:lawyer.get_role_display }}<br>
                             <small>{{ lawyer.info.city.name }}</small>
                         </div>
-                        <button type="button">Задать вопрос <i class="icon-message_bubble ml-2"></i></button>
+                        <a class="btn btn-sm btn-white" href="{% url "ask_question" %}">Задать вопрос <i
+                                class="icon-message_bubble ml-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -35,7 +32,7 @@
 
                 <div class="row">
                     <div class="lawyer-page_about_l-col">
-                        <div class="medal" data-back="&#xe925;" data-value="3/5">рейтинг</div>
+                        <div class="medal" data-back="&#xe925;" data-value="{{ lawyer.rating.get_rate }}">рейтинг</div>
                         <div class="medal blue" data-back="&#xe91e;" data-value="12">опыт, лет</div>
                     </div>
                     <div class="lawyer-page_about_r-col">
@@ -83,31 +80,41 @@
                 <div id="bio" class="row">
 
                     {# Образование #}
-                    {% if lawyer.education.count %}
-                    <div class="lawyer-page_l-col text-lg-right">
-                        <h3 class="mb-4">Образование</h3>
-                    </div>
+                    {% if lawyer.education.all|length %}
+                        <div class="lawyer-page_l-col text-lg-right">
+                            <h3 class="mb-4">Образование</h3>
+                        </div>
 
-                    <div class="lawyer-page_r-col">
-                        {% for edu in lawyer.education.all %}
-                            {% include 'account/education_item.html' with item=edu %}
-                        {% endfor %}
-                    </div>
+                        <div class="lawyer-page_r-col">
+                            {% for edu in lawyer.education.all %}
+                                {% include 'account/education_item.html' with item=edu %}
+                            {% endfor %}
+                        </div>
                     {% endif %}
 
                     {# Опыт работы #}
-                    {% if lawyer.experience.count %}
-                    <div class="lawyer-page_l-col text-lg-right">
-                        <h3 class="mb-4">Опыт работы</h3>
-                    </div>
+                    {% if lawyer.experience.all|length %}
+                        <div class="lawyer-page_l-col text-lg-right">
+                            <h3 class="mb-4">Опыт работы</h3>
+                        </div>
 
-                    <div class="lawyer-page_r-col">
-                        {% for edu in lawyer.experience.all %}
-                            {% include 'account/experience_item.html' with item=edu %}
-                        {% endfor %}
-                    </div>
+                        <div class="lawyer-page_r-col">
+                            {% for edu in lawyer.experience.all %}
+                                {% include 'account/experience_item.html' with item=edu %}
+                            {% endfor %}
+                        </div>
                     {% endif %}
 
+                </div>
+
+                <div id="review" class="row">
+
+                    <div class="container">
+                        {% for review in reviews %}
+                            {% include 'account/review_item.html' with review=review %}
+                        {% endfor %}
+
+                    </div>
                 </div>
 
             </div>

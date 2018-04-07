@@ -46,7 +46,7 @@ git+git://github.com/jazzband/django-debug-toolbar.git
 # brew install sphinx --with-mysql
 # создать индексы
 # cd /Users/ProtasovSE/PycharmProjects/mlo_rest/mlo_rest/project/
-# indexer --config config/sphinx.conf --all # --rotate
+# indexer --config config/sphinx.conf --all --rotate
 # запустить
 # searchd --config config/sphinx.conf
 sphinxapi-py3==2.1.11

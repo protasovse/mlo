@@ -44,9 +44,9 @@
                     <div class="row">
                         <h2 class="col mb-4">
                             {% if rubric %}
-                                {{ rubric.h1|default:rubric }}
+                                {{ rubric.h1|default:rubric.title|default:rubric }}
                             {% else %}
-                                Юридическая консультация онлайн
+                                Консультация юриста и адвоката онлайн
                             {% endif %}
                         </h2>
                     </div>
@@ -58,7 +58,8 @@
                                 {% if rubric %}
                                     {{ rubric.html_description|safe }}
                                 {% else %}
-                                    <p>«Мойюрист.онлайн» — это проект бесплатной юридической консультации онлайн.
+                                    <p>«Мойюрист.онлайн» — это проект платной либо бесплатной юридической консультации
+                                        онлайн.
                                         «Мойюрист.онлайн» объединяет профессиональных юристов и тех, кому нужен
                                         грамотный юридический совет.</p>
                                     <p>Проект «Мойюрист.онлайн» позволяет каждому человеку получить грамотный совет
@@ -66,30 +67,19 @@
                                         профессиональные юристы. Специалисты, которые не только дают бесплатные
                                         консультации, но и занимаются обширной юридической практикой.</p>
                                 {% endif %}
-                            </div>
-                            <div>
+
                                 {% if rubric %}
                                     {{ rubric.html_content|safe }}
                                 {% else %}
                                 {% endif %}
                             </div>
-                            <div class="alert alert-secondary mt-5">
-                                <p>Наши юристы и адвокаты проконсультируют Вас {{ rubric.advice_on }} платно или
-                                    бесплатно. Для этого просто <a href="{% url 'ask_question' %}"
-                                    >заполните форму</a>.</p>
-                            </div>
 
-                            {% if rubrics.last.get_children %}
-                                <div class="row mt-4">
-                                    <h3 class="col-12 mb-4">Темы в этом разделе</h3>
-                                    {% for rubric in rubrics.last.get_children %}
-                                        <div class="col-12 col-sm-6 mb-3">
-                                            <a href="{{ rubric.get_absolute_url }}"
-                                            >{{ rubric.link|default:rubric.name }}</a>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+                            <p class="lead"><strong>Юристы и адвокаты сайта «Мойюрист.онлайн» проконсультируют Вас
+                                {{ rubric.advice_on }} платно или бесплатно. Для этого просто задайте вопрос.</strong>
+                            </p>
+                            <p class="text-center"><a href="{% url 'ask_question' %}" class="btn btn-primary btn-sm">Начать
+                                консультацию</a></p>
+
                         </div>
 
                     </div>
@@ -126,6 +116,18 @@
                 {% for question in questions.all %}
                     {% include 'question/generic/question_item_in_list.html' with item=question show_answers=False %}
                 {% endfor %}
+
+                {% if rubrics.last.get_children %}
+                    <div class="row mt-3">
+                        <h4 class="col-12 mb-4">Также консультации по темам:</h4>
+                        {% for rubric in rubrics.last.get_children %}
+                            <div class="col-12 col-sm-6 mb-3">
+                                <a href="{{ rubric.get_absolute_url }}"
+                                >{{ rubric.link|default:rubric.name }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
                 <footer class="row">
                     <div class="col-12 text-center">

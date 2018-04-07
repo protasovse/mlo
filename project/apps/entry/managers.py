@@ -112,12 +112,12 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         client.SetLimits(offset, limit, 100)
 
-        # client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, 'date DESC')
+        client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, 'pub_date DESC')
+        client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED2)
+
         result = client.Query(query, 'question')
 
-        ids = list()
-        for r in result['matches']:
-            ids += (r['id'],)
+        ids = [r['id'] for r in result['matches']]
 
         qs = self.get_queryset().filter(entry_ptr_id__in=ids)
 
