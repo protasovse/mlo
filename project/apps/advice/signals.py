@@ -52,8 +52,7 @@ def user_to_experts(sender, instance, *args, **kwargs):
             Scheduler.objects.filter(expert_id=instance.pk).delete()
             queue_del_user(instance.pk)
 
-post_save.connect(user_to_experts, sender=get_user_model())
-# pre_delete.connect(user_to_experts, sender=get_user_model())
+# post_save.connect(user_to_experts, sender=get_user_model())
 
 
 # Удаляем пользователя из экспертов

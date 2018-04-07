@@ -32,6 +32,7 @@ class Entry(models.Model):
     """
     Базовая модель записи. Все записи (вопросы, ответы, комментарии)
     будут наследовать свойства этой модели
+    content, author
     """
 
     content = models.TextField(_('Содержание'),)
@@ -170,6 +171,9 @@ class Answer(Entry):
     Так же ответ может относиться к вопросу и другому ответу на этот вопрос, т.е. юрист может добавить только
     один ответ, который относится только к вопросу. Далее диалог между клиентом и юристом будет происходить
     «под» 1-м ответом юриста на вопрос.
+
+    on_question, parent_id,
+
     """
     # К какой записи (вопросу) относится, так же равна question.pk
     on_question = models.ForeignKey(
@@ -229,6 +233,8 @@ class Answer(Entry):
 
     def save(self, *args, **kwargs):
 
+        print(self.pk)
+
         if not hasattr(self, 'on_question'):
             self.on_question = self.parent.on_question
 
@@ -267,6 +273,7 @@ class Offer(models.Model):
         return "%d. стоимость: %d₽. (ответ %d, вопрос %d)" % \
                (self.pk, self.cost, self.answer.id, self.answer.on_question.id)
 
+'''
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):
     """
@@ -296,3 +303,5 @@ def post_save_answer_receiver(sender, instance, *args, **kwargs):
 
 post_save.connect(post_save_answer_receiver, sender=Answer)
 pre_delete.connect(post_save_answer_receiver, sender=Answer)
+
+'''
