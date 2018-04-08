@@ -40,7 +40,7 @@ class Advice(models.Model):
     """
     question = models.OneToOneField(
         Question,
-        on_delete=models.NOT_PROVIDED,
+        on_delete=models.CASCADE,
         related_name='advice'
     )
 
@@ -168,15 +168,12 @@ class Advice(models.Model):
             self.question.save(update_fields=['status'])
             return True
 
-    def __str__(self):
-        return self.question.__str__()
-
 
 class StatusLog(models.Model):
     """
     Журнал состояний консультаций
     """
-    advice = models.ForeignKey(Advice, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     status = EnumField(
         _('Статус'), db_index=True,
@@ -188,12 +185,16 @@ class StatusLog(models.Model):
         editable=False
     )
 
+    comment = models.CharField(
+        _('Комментарий'),
+        null=True,
+        blank=True,
+        max_length=255
+    )
+
     class Meta:
         verbose_name = _('Журнал состояний')
         verbose_name_plural = _('Журнал состояний')
-
-    def __str__(self):
-        return '%s (%s)' % (self.status, self.date)
 
 
 class Queue(models.Model):

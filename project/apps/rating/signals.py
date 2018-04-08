@@ -13,8 +13,8 @@ def rating_calculation_receiver(sender, instance, *args, **kwargs):
         add_score(instance.user_id, instance.type.value)
     elif 'created' not in kwargs:
         add_score(instance.user_id, -instance.type.value)
-post_save.connect(rating_calculation_receiver, sender=RatingScore)
-post_delete.connect(rating_calculation_receiver, sender=RatingScore)
+# post_save.connect(rating_calculation_receiver, sender=RatingScore)
+# post_delete.connect(rating_calculation_receiver, sender=RatingScore)
 
 
 # Юрист отвечает на вопрос — добавляем балл рейтинга
@@ -45,4 +45,4 @@ def add_answer(sender, instance, *args, **kwargs):
                     comment='За уточнение %d' % (instance.pk,)
                 )
                 com.save()
-post_save.connect(add_answer, sender=Answer, dispatch_uid='signal_expert_add_answer')
+# post_save.connect(add_answer, sender=Answer, dispatch_uid='signal_expert_add_answer')

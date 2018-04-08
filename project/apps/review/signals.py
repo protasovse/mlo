@@ -15,5 +15,5 @@ def add_like_receiver(sender, instance, *args, **kwargs):
       WHERE id = '%s' LIMIT 1
     """, [instance.entry.pk, instance.entry.pk])
 
-post_save.connect(add_like_receiver, sender=Likes)
-post_delete.connect(add_like_receiver, sender=Likes)
+# post_save.connect(add_like_receiver, sender=Likes)
+# post_delete.connect(add_like_receiver, sender=Likes)

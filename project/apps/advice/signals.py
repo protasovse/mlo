@@ -14,7 +14,7 @@ def new_advice(sender, instance, *args, **kwargs):
     if 'created' in kwargs and kwargs['created'] and instance.is_pay:
         Advice.objects.get_or_create(question=instance, cost=ADVICE_COST)
 
-post_save.connect(new_advice, sender=Question)
+# post_save.connect(new_advice, sender=Question)
 
 
 # Ответ или уточнение на платную консультацию, меняем статус на «Ответ эксперта» или «Дополнительный вопрос»
@@ -39,7 +39,7 @@ def new_answer_for_advice(sender, instance, *args, **kwargs):
                         # меняем статус на «Дополнительный вопрос»
                         cur_adv.to_addquestion()
 
-post_save.connect(new_answer_for_advice, sender=Answer)
+# post_save.connect(new_answer_for_advice, sender=Answer)
 
 
 # Добавляем пользователя в эксперты
@@ -67,4 +67,4 @@ def add_status_log_receiver(sender, instance, *args, **kwargs):
     c = StatusLog.objects.create(advice=instance, status=instance.status)
     # c.save()
 
-post_save.connect(add_status_log_receiver, sender=Advice)
+# post_save.connect(add_status_log_receiver, sender=Advice)

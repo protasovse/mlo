@@ -23,7 +23,7 @@ class AdviceAdmin(admin.ModelAdmin):
 
 @admin.register(StatusLog)
 class StatusLogAdmin(admin.ModelAdmin):
-    list_display = ('advice', 'date', 'status',)
+    list_display = ('question', 'date', 'status',)
     list_filter = ('status',)
 
 
