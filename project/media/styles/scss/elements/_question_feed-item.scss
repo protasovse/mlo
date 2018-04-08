@@ -10,11 +10,11 @@
 }
 
 .question_feed-header {
-  @extend .row, .pl-4, .pr-5, .pt-4;
+  @extend .pl-4, .pr-5, .pt-4;
 }
 
 .question_feed-head {
-  @extend .col-12, .mb-4, .mt-0;
+  @extend .mt-0;
   color: $gray-900;
 }
 
@@ -31,17 +31,15 @@
   }
 }
 
-.question_feed-subheader {
-  @extend .col-12;
-}
-
 .question_feed-body {
-  @extend .row, .px-4;
+  @extend .px-4;
 }
 
 .question_feed-content {
-  @extend .lead, .col-12, .mt-4;
   color: $gray-800;
+}
+
+.question_feed-subheader {
 }
 
 .question_feed-footer {

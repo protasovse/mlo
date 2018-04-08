@@ -15,8 +15,8 @@
     <meta name="keywords" content="{% block meta_keywords %}{% endblock %}"/>
     <meta http-equiv="content-language" content="ru"/>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!--link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="{% static 'js/vue.js' %}{# https://unpkg.com/vue@2/dist/vue.js #}"></script>
     <script src="{% static 'js/vue-router.js' %}{# https://unpkg.com/vue-router@3.0.1/dist/vue-router.js #}"></script>
@@ -28,7 +28,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<div id="app" class="page">{% block body %}{% endblock %}</div>
+<div id="app" class="page {% block navbar_fixed %}{% endblock %}">{% block body %}{% endblock %}</div>
 {% block block_js %}{% endblock %}
 </body>
 </html>

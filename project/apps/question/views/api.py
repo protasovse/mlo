@@ -68,6 +68,7 @@ class QuestionView(ApiView):
         )
 
         q.rubrics.set(params.getlist('rubric[]'))
+
         if status == BLOCKED:
             emails.send_confirm_question(user, q, token)
             messages.add_message(
@@ -86,10 +87,9 @@ class QuestionView(ApiView):
             messages.add_message(
                 request,
                 messages.SUCCESS,
-                '<h4>Подтверждён и опубликован</h4>'
-                '<p>Вопросу присвоен номер {id}, и он будет доступен по ссылке: http://мойюрист.онлайн/{url}/</p>'
-                '<p>Вопрос будет находиться на рассмотрении в течение 7 дней, если к концу этого периода ответ не '
-                'поступит, то он больше не будет рассматриваться юристами.</p>'.format(id=q.id, url=reverse('question:detail', kwargs={'pk': 0})),
+                '<h4>Ваш вопрос опубликован</h4>'
+                '<p>Благодарим вас! Вопросу присвоен номер {id}, и он будет находиться на этой странице. '
+                'При поступлении ответа, мы уведомим вас по электронной почте.</p>'.format(id=q.id),
                 'success'
             )
 

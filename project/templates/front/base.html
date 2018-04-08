@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% block navbar_fixed %}navbar-fixed-always{% endblock %}
+
 {% block body %}
 
     {% block navbar %}
@@ -21,12 +23,13 @@
 
 {% block block_js %}
     <script>
-        $('.page').addClass("navbar-fixed");
-        $('#app').on('scroll', function () {
-            if ($('#app').scrollTop() > 60) {
-                // $('#app').addClass("navbar-fixed");
+        // $('.page').addClass("navbar-fixed");
+        $(window).on('scroll', function () {
+            console.log('ttt');
+            if ($(window).scrollTop() > 60) {
+                $('#app').addClass("navbar-fixed");
             }else{
-                // $('#app').removeClass("navbar-fixed");
+                $('#app').removeClass("navbar-fixed");
             }
         });
         $('.slide-menu-toggle').click(function (event) {

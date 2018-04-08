@@ -105,7 +105,7 @@ body.open-slide-menu {
     right: 0;
   }
 
-  .mlo-navbar.fixed {
+  .mlo-navbar {
     right: $slide-menu-width;
     left: -$slide-menu-width;
     @include media-breakpoint-down(sm) {

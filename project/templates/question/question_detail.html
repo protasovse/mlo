@@ -116,15 +116,16 @@
         </div>
 
         {# Если есть ответы  #}
-        {% if question.reply_count %}
-            <div class="row gradient">
+
+        <div class="row gradient">
+
+            <div class="question-page_main-part">
 
                 {# Основная часть — ответы #}
-                <div class="question-page_main-part">
-
+                {% if question.reply_count %}
                     {# Ответы #}
                     <div class="row">
-                        <h3 class="answer-list-head">Ответ юристов
+                        <h3 class="answer-list-head">Ответы юристов
                             <span class="d-none answer__counter"
                                   itemprop="answerCount">{{ question.reply_count }}</span>
                         </h3>
@@ -133,21 +134,23 @@
                     {% for answer in answers %}
                         {% include 'entry/generic/answer_item.html' with item=answer %}
                     {% endfor %}
-
-                </div>
-
-                {# Боковая колонка 2  #}
-                <aside class="question-page_aside-part">
-
-                    {% if question.reply_count %}
-                        <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
-                        {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
-                    {% endif %}
-
-                </aside>
+                {% else %}
+                {% endif %}
 
             </div>
-        {% endif %}
+
+            {# Боковая колонка 2  #}
+            <aside class="question-page_aside-part">
+
+                {% if question.reply_count %}
+                    <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
+                    {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
+                {% endif %}
+
+            </aside>
+
+        </div>
+
 
     </div>
 

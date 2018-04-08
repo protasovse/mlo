@@ -17,90 +17,103 @@
 
 
     {# Хедер страницы вопроса #}
-    {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
+    {% if not user.is_authenticated %}
+        {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
+    {% endif %}
+
+    {% if not user.is_authenticated or user.role == 1 %}
+        {# Хлебные крошки #}
+        <div class="question-page_container">
+            <div class="row">
+                <nav aria-label="breadcrumb" class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
+                        {% if rubric %}
+                            <li class="breadcrumb-item active">{{ rubric }}</li>
+                        {% endif %}
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
 
     {# Содержание страницы вопроса #}
-    <div class="question-page mt-2">
+    <div class="question-page_container">
 
-        {# Основная часть — заголовок темы, тексты #}
-        <div class="row">
+        {% if not user.is_authenticated or user.role == 1 %}
+            {# Основная часть — заголовок темы, тексты #}
+            <div class="row">
 
-            {# Хлебные крошки #}
-            <nav aria-label="breadcrumb" class="col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                    {% if rubric %}
-                        <li class="breadcrumb-item active">{{ rubric }}</li>
-                    {% endif %}
-                </ol>
-            </nav>
+                <div class="question-page_main-part">
 
-            <div class="question-page_main-part">
+                    <article class="entry question">
 
-                <article class="entry question">
-
-                    {# Заголовок #}
-                    <div class="row">
-                        <h2 class="col mb-4">
-                            {% if rubric %}
-                                {{ rubric.h1|default:rubric.title|default:rubric }}
-                            {% else %}
-                                Консультация юриста и адвоката онлайн
-                            {% endif %}
-                        </h2>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col">
-                            <div class="lead">
+                        {# Заголовок #}
+                        <div class="row">
+                            <h2 class="col mb-4">
                                 {% if rubric %}
-                                    {{ rubric.html_description|safe }}
+                                    {{ rubric.h1|default:rubric.title|default:rubric }}
                                 {% else %}
-                                    <p>«Мойюрист.онлайн» — это проект платной либо бесплатной юридической консультации
-                                        онлайн.
-                                        «Мойюрист.онлайн» объединяет профессиональных юристов и тех, кому нужен
-                                        грамотный юридический совет.</p>
-                                    <p>Проект «Мойюрист.онлайн» позволяет каждому человеку получить грамотный совет
-                                        юриста в любой жизненной ситуации. На вопросы наших посетителей отвечают
-                                        профессиональные юристы. Специалисты, которые не только дают бесплатные
-                                        консультации, но и занимаются обширной юридической практикой.</p>
+                                    Консультация юриста и адвоката онлайн
                                 {% endif %}
+                            </h2>
+                        </div>
 
-                                {% if rubric %}
-                                    {{ rubric.html_content|safe }}
-                                {% else %}
-                                {% endif %}
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="lead">
+                                    {% if rubric %}
+                                        {{ rubric.html_description|safe }}
+                                    {% else %}
+                                        <p>«Мойюрист.онлайн» — это проект платной либо бесплатной юридической
+                                            консультации
+                                            онлайн.
+                                            «Мойюрист.онлайн» объединяет профессиональных юристов и тех, кому нужен
+                                            грамотный юридический совет.</p>
+                                        <p>Проект «Мойюрист.онлайн» позволяет каждому человеку получить грамотный совет
+                                            юриста в любой жизненной ситуации. На вопросы наших посетителей отвечают
+                                            профессиональные юристы. Специалисты, которые не только дают бесплатные
+                                            консультации, но и занимаются обширной юридической практикой.</p>
+                                    {% endif %}
+
+                                    {% if rubric %}
+                                        {{ rubric.html_content|safe }}
+                                    {% else %}
+                                    {% endif %}
+                                </div>
+
+                                <p class="lead"><strong>Юристы и адвокаты сайта «Мойюрист.онлайн» проконсультируют Вас
+                                    {{ rubric.advice_on }} платно или бесплатно. Для этого просто задайте
+                                    вопрос.</strong>
+                                </p>
+                                <p class="text-center mt-5"><a href="{% url 'ask_question' %}"
+                                                               class="btn btn-primary btn-sm">Начать
+                                    консультацию</a></p>
+
                             </div>
-
-                            <p class="lead"><strong>Юристы и адвокаты сайта «Мойюрист.онлайн» проконсультируют Вас
-                                {{ rubric.advice_on }} платно или бесплатно. Для этого просто задайте вопрос.</strong>
-                            </p>
-                            <p class="text-center"><a href="{% url 'ask_question' %}" class="btn btn-primary btn-sm">Начать
-                                консультацию</a></p>
 
                         </div>
 
-                    </div>
+                    </article>
 
-                </article>
+                </div>
+
+                {# Боковая колонка 1  #}
+                <aside class="question-page_aside-part">
+
+                    {% if lawyers_from_rating.count %}
+                        <h4 class="mb-4">Наши эксперты</h4>
+                        {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
+                    {% endif %}
+
+                </aside>
 
             </div>
+        {% endif %}
 
-            {# Боковая колонка 1  #}
-            <aside class="question-page_aside-part">
-
-                {% if lawyers_from_rating.count %}
-                    <h4 class="mb-4">Наши эксперты</h4>
-                    {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
-                {% endif %}
-
-            </aside>
-
-        </div>
-
-        <div class="row gradient">
+        <div class="row question-page_gradient">
 
             {# Основная часть — вопросы #}
             <div class="question-page_main-part">

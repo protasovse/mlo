@@ -14,6 +14,8 @@ class QuestionsFeedList(ListView):
         return 'entry/questions_feed_list.html'
 
     def get_queryset(self):
+        if self.request.user.role == 1:
+            return Question.objects.filter(author=self.request.user).order_by('-id')
         return Question.published.all().order_by('-id')
 
     def get_context_data(self, **kwargs):

@@ -90,7 +90,7 @@
   }
 }
 
-.mlo-navbar.fixed {
+.navbar-fixed .mlo-navbar, .navbar-fixed-always .mlo-navbar {
   @extend .bg-primary;
   position: fixed;
   height: 60px;
@@ -156,4 +156,8 @@
       }
     }
   }
+}
+
+.navbar-fixed-always {
+  margin-top: 60px;
 }

@@ -5,23 +5,29 @@
 
         {# Навигация для фильтрации списка вопросов #}
         <nav class="nav">
-            <a class="nav-link" href="#" title="Актуальные вопросы">Новые <span class="badge badge-danger">56</span></a>
-            <a class="nav-link" href="#" title="Уточнения клиента к моим ответам">Уточнения <span class="badge badge-danger">13</span></a>
-            <div class="dropdown">
-                <a id="question_feed_additems-toggle" class="nav-link dropdown-toggle" href="#"
-                onclick="$('#question_feed_additems').show();">Ещё…</a>
-                <div id="question_feed_additems" class="dropdown-menu">
-                    <a class="dropdown-item active" href="#">Без ответа
-                        <span class="badge badge-danger">24</span>
-                        <span class="small">Актуальные вопросы без ответа</span></a>
-                    <a class="dropdown-item" href="#">С моими ответами
-                        <span class="badge badge-danger">13554</span>
-                        <span class="small">Все вопросы с моими ответами</span></a>
-                    <a id="question_feed_search-toggle" class="dropdown-item" href="#"
-                    onclick="$('#question_feed_search').show();$('#question_feed_additems').hide();">Расширенный поиск <i class="icon-nav-arrow-down"></i>
-                    <span class="small">Поиск по ключевым словам, рубрикам, городам и регионам</span></a>
+            {% if user.role > 1 %}
+                <a class="nav-link" href="#" title="Актуальные вопросы">Новые <span class="badge badge-danger">56</span></a>
+                <a class="nav-link" href="#" title="Уточнения клиента к моим ответам">Уточнения <span
+                        class="badge badge-danger">13</span></a>
+                <div class="dropdown">
+                    <a id="question_feed_additems-toggle" class="nav-link dropdown-toggle" href="#"
+                       onclick="$('#question_feed_additems').show();">Ещё…</a>
+                    <div id="question_feed_additems" class="dropdown-menu">
+                        <a class="dropdown-item active" href="#">Без ответа
+                            <span class="badge badge-danger">24</span>
+                            <span class="small">Актуальные вопросы без ответа</span></a>
+                        <a class="dropdown-item" href="#">С моими ответами
+                            <span class="badge badge-danger">13554</span>
+                            <span class="small">Все вопросы с моими ответами</span></a>
+                        <a id="question_feed_search-toggle" class="dropdown-item" href="#"
+                           onclick="$('#question_feed_search').show();$('#question_feed_additems').hide();">Расширенный
+                            поиск <i class="icon-nav-arrow-down"></i>
+                            <span class="small">Поиск по ключевым словам, рубрикам, городам и регионам</span></a>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <span class="nav-link" title="Актуальные вопросы">Мои вопросы</span>
+            {% endif %}
         </nav>
 
     </div>
@@ -85,7 +91,7 @@
 
         <div class="actions">
             <a href="#" class="navbar_addbar_close sq"
-            onclick="$('#question_feed_search').hide();"></a>
+               onclick="$('#question_feed_search').hide();"></a>
         </div>
 
     </div>

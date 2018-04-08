@@ -9,52 +9,55 @@
 
     <header class="question_feed-header">
 
-        <h2 class="question_feed-head"><a href="#">{{ item.title }}</a></h2>
-
-        <div class="question_feed-subheader">
-            <div class="subtitle">№{{ item.pk }} {{ item.pub_date|date:"SHORT_DATETIME_FORMAT" }}</div>
-            <h5 class="mb-0 mt-2">{{ item.author.get_short_name }}</h5>
-            <div class="normal"><span class="text-muted">{{ item.author.info.city.name }}</span></div>
-        </div>
+        <h3 class="question_feed-head"><a href="{% url 'question:detail' pk=item.pk %}">{{ item.title }}</a></h3>
 
     </header>
 
-    <div class="question_feed-body">
+    <div class="question_feed-body mb-4">
 
         <div class="question_feed-content">
             {{ item.html_content|safe }}
         </div>
 
+        <div class="question_feed-subheader d-flex align-items-center justify-content-between">
+            <div class="subtitle">№{{ item.pk }} от {{ item.pub_date|date:"j M Y G:i" }}</div>
+            <div class="normal font-weight-semibold">{{ item.author.get_short_name }}, {{ item.author.city.name }}</div>
+        </div>
+
     </div>
 
-    <footer class="question_feed-footer align-items-center">
 
-        <form class="question_feed-form">
+        <footer class="question_feed-footer align-items-center">
+            {% if user.role > 1 %}
+            <form class="question_feed-form">
 
-            <div class="form-group">
+                <div class="form-group">
                 <textarea type="text" rows="7" class="form-control"
                           id="content" name="content" placeholder="Ваш ответ…"></textarea>
-                <span class="ans_count_1">
+                    <span class="ans_count_1">
                     <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответов</a>
                 </span>
-            </div>
-
-            <div class="form-group actions">
-
-                <input type="hidden" name="on_question" value="">
-                <input type="hidden" name="parent" value="1"/>
-                <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
-                <div class="file-input btn btn-sm btn-link">
-                    <input type="file" id="ask_file" multiple="multiple">
-                    <span class="icon-folder mr-2" style="text-decoration: none;"></span> Прикрепить файлы
                 </div>
-                <span class="ans_count_2 ml-auto">
+
+                <div class="form-group actions">
+
+                    <input type="hidden" name="on_question" value="">
+                    <input type="hidden" name="parent" value="1"/>
+                    <button type="submit" class="btn btn-primary btn-sm">Ответить</button>
+                    <div class="file-input btn btn-sm btn-link">
+                        <input type="file" id="ask_file" multiple="multiple">
+                        <span class="icon-folder mr-2" style="text-decoration: none;"></span> Прикрепить файлы
+                    </div>
+                    <span class="ans_count_2 ml-auto">
                     <a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответов</a>
                 </span>
-            </div>
+                </div>
 
-        </form>
+            </form>
+            {% else %}
+                <p class="py-3"><a href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответов</a></p>
+            {% endif %}
+        </footer>
 
-    </footer>
 
 </article>

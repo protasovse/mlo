@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="mlo-navbar fixed">
+<nav class="mlo-navbar">
 
     <a class="mlo-navbar_brand" href="/">
         <img src="{% static "/img/nav/logo.svg" %}">
@@ -14,10 +14,10 @@
             <span class="t">{{ user.hot_line_phone }}</span>
             <span class="g">горячая линия</span>
             {% else %}
-            <span class="tg">Консультация юриста</span>
-            <span class="g">Консультация юриста</span>
+            <span class="tg">Консультация юриста онлайн</span>
+            <span class="g">Консультация юриста онлайн</span>
             {% endif %}
-            <span class="c">в {{ user.location.loc_name_loct }}</span>
+            {% if  user.location.loc_id > 0 %}<span class="c">в {{ user.location.loc_name_loct }}</span>{% endif %}
 
         </div>
     {% endblock %}
