@@ -2,7 +2,6 @@ import sphinxapi
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 DELETED = 'deleted'
 BLOCKED = 'blocked'
 DRAFT = 'draft'
@@ -106,19 +105,33 @@ class QuestionsPublishedManager(EntryPublishedManager):
         qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
         return qs
 
-    def search(self, query, offset=0, limit=10):
+    def search(self, query='', offset=0, limit=10, filters={}):
+        """
+        :param query:
+        :param offset:
+        :param limit:
+        :param filters: Словарь фильтров
+        :return:
+        """
+
         client = sphinxapi.SphinxClient()
         client.SetServer('127.0.0.1', 9312)
 
-        client.SetLimits(offset, limit, 100)
+        client.SetLimits(offset, limit, 1000)
 
         client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, 'pub_date DESC')
         client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED2)
 
+        for key in filters:
+            client.SetFilter(key, filters[key])
+
         result = client.Query(query, 'question')
 
-        ids = [r['id'] for r in result['matches']]
+        # ids = [r['id'] for r in result['matches']]
+        qss = [self.get_queryset().filter(entry_ptr_id=r['id']) for r in result['matches']]
+        qs = self.get_queryset().none().union(*qss)
 
-        qs = self.get_queryset().filter(entry_ptr_id__in=ids)
+        # qs = self.get_queryset().filter(entry_ptr_id__in=list(ids))
 
+        # print(qs.sort())
         return qs

@@ -62,7 +62,7 @@
                 <h6 class="author-name mb-2" itemprop="name">{{ item.author.get_full_name }}</h6>
             {% endif %}
 
-            <div class="text" itemprop="text">{{ item.html_content|safe }}</div>
+            <div class="text" itemprop="text">{{ item.html_content|safe|urlize }}</div>
 
             {# Файлы #}
             {% if item.files.all|length %}

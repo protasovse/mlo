@@ -79,7 +79,7 @@ class Entry(models.Model):
         """
         Возвращает "content" форматированное в HTML.
         """
-        return misaka.html(self.content)
+        return misaka.html(self.content.replace("\n", "\n\n"))
 
     class Meta:
         # ordering = ("-id",)
@@ -272,6 +272,16 @@ class Offer(models.Model):
     def __str__(self):
         return "%d. стоимость: %d₽. (ответ %d, вопрос %d)" % \
                (self.pk, self.cost, self.answer.id, self.answer.on_question.id)
+
+
+# Счётчик для SphinxSearch
+class SphCounter(models.Model):
+    counter_id = models.IntegerField(
+        primary_key=True,
+        auto_created=True,
+    )
+
+    max_id = models.IntegerField()
 
 '''
 

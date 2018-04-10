@@ -136,6 +136,11 @@ $photo-small-size: 40px;
         color: $blue;
       }
     }
+    &.light {
+      &:before {
+        color: $gray-300;
+      }
+    }
     &:after {
       content: attr(data-value);
       position: absolute;

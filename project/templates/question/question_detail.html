@@ -7,13 +7,9 @@
     {# Хедер страницы вопроса #}
     {% include 'front/generic/header_question.html' with bg_class='bg-1' %}
 
-    {# Содержание страницы вопроса #}
-    <div class="question-page">
-
-        {# Вопрос и правая колонка напротив вопроса  #}
+    {# Хлебные крошки #}
+    <div class="question-page_container">
         <div class="row">
-
-            {# Хлебные крошки #}
             <nav aria-label="breadcrumb" class="col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Главная</a></li>
@@ -21,6 +17,14 @@
                     <li class="breadcrumb-item active">Вопрос №{{ question.id }}</li>
                 </ol>
             </nav>
+        </div>
+    </div>
+
+    {# Содержание страницы вопроса #}
+    <div class="question-page_container">
+
+        {# Вопрос и правая колонка напротив вопроса  #}
+        <div class="row">
 
             {# Центральная часть — вопрос #}
             <div class="question-page_main-part">
@@ -117,7 +121,7 @@
 
         {# Если есть ответы  #}
 
-        <div class="row gradient">
+        <div class="row question-page_gradient">
 
             <div class="question-page_main-part">
 

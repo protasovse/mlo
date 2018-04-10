@@ -512,7 +512,7 @@ h1, .h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar_title .tg, .mlo-navbar_title .g, .mlo-navbar_title .c, .mlo-navbar_actions a, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page_l-col, .entry .answer-like .answer-like-sign, .question-item .l-col, .question-item .answer .answer-header, .rubrics-list, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
+.normal, .mlo-navbar_title .tg, .mlo-navbar_title .g, .mlo-navbar_title .c, .mlo-navbar_actions a, .badge-price, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page_l-col, .entry .answer-like .answer-like-sign, .question-item .l-col, .question-item .answer .answer-header, .rubrics-list, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
   font-size: 0.875rem; }
 
 .large, .mlo-navbar_title .t {
@@ -654,7 +654,7 @@ pre {
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col, .col, .col-form-label, .win-round .r-col, .win-round .question-item .answer, .question-item .win-round .answer, .lawyer-page_about nav a,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, section.lawyer-section .title, section.lawyer-section .lawyer-page_header_r-col, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, section.questions-section header h3, section.questions-section header h2, .col-md-12, .col-md,
-.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .question-page_header .question-item .answer, .question-item .question-page_header .answer, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
+.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .question-page_header .question-item .answer, .question-item .question-page_header .answer, .col-lg-6, .col-lg-7, .questions-section .question-item .r-col, .questions-section .question-item .answer, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
 .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
 .col-xl-auto {
   position: relative;
@@ -1112,7 +1112,7 @@ pre {
     flex: 0 0 50%;
     max-width: 50%; }
 
-  .col-lg-7, .question-item .r-col, .question-item .answer {
+  .col-lg-7, .questions-section .question-item .r-col, .questions-section .question-item .answer {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
@@ -4654,7 +4654,7 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 1em; }
+  border-radius: 0.25rem; }
   .badge:empty {
     display: none; }
 
@@ -4738,6 +4738,24 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     color: #212121;
     text-decoration: none;
     background-color: #e6e6e6; }
+
+.badge-price {
+  position: relative;
+  font-weight: 400;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between; }
+  .badge-price:after {
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 40%;
+    top: 0;
+    background-image: url("/static/img/badge/price.svg");
+    background-repeat: no-repeat;
+    background-position: 100%; }
 
 .jumbotron {
   padding: 2rem 1rem;
@@ -6566,7 +6584,7 @@ button.bg-white:focus {
 .my-2 {
   margin-top: 0.5rem !important; }
 
-.mr-2, .entry .answer-like .answer-like-sign, .file-list-item:before, .rubrics-list .rubrics-list-item:before, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-page_about nav a i, .lawyer-list .consult-state:before,
+.mr-2, .entry .answer-like .answer-like-sign, .file-list-item:before, .rubrics-list-item:before, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-page_about nav a i, .lawyer-list .consult-state:before,
 .mx-2 {
   margin-right: 0.5rem !important; }
 
@@ -6585,7 +6603,7 @@ button.bg-white:focus {
 .my-3 {
   margin-top: 1rem !important; }
 
-.mr-3, .col-form-label, .question-item .answer .answer-header .usr, .rubrics-list .rubrics-list-item:after,
+.mr-3, .col-form-label, .question-item .answer .answer-header .usr, .rubrics-list-item:after,
 .mx-3 {
   margin-right: 1rem !important; }
 
@@ -7954,7 +7972,7 @@ section {
     left: 0;
     right: 0; }
   section.header-section {
-    height: 100vh;
+    height: 720px;
     min-height: 720px;
     color: white; }
     section.header-section:before {
@@ -8530,15 +8548,15 @@ body.open-slide-menu {
 .file-list-item:last-of-type {
   margin-bottom: 0; }
 
-.rubrics-list .rubrics-list-item:before {
+.rubrics-list-item:before {
   content: '\e908';
   font-family: icomoon;
   color: #e6e6e6; }
-.rubrics-list .rubrics-list-item:after {
+.rubrics-list-item:after {
   content: ','; }
-.rubrics-list .rubrics-list-item:last-of-type:after {
+.rubrics-list-item:last-of-type:after {
   content: none; }
-.rubrics-list .rubrics-list-item a {
+.rubrics-list-item a {
   color: #545454; }
 
 .lawyer-medal, .entry .answer-header_medal {
@@ -8619,6 +8637,8 @@ body.open-slide-menu {
       color: #fc6947; }
     .lawyer-page_about .medal.blue:before {
       color: #2e67fb; }
+    .lawyer-page_about .medal.light:before {
+      color: #dedede; }
     .lawyer-page_about .medal:after {
       content: attr(data-value);
       position: absolute;

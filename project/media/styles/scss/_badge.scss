@@ -1,0 +1,22 @@
+.badge-price {
+  position: relative;
+  @extend .normal;
+  font-weight: $font-weight-normal;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  //overflow-y: hidden;
+  &:after {
+    // content: '';
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 40%;
+    top: 0;
+    background-image: url("/static/img/badge/price.svg");
+    background-repeat: no-repeat;
+    background-position: 100%;
+  }
+}

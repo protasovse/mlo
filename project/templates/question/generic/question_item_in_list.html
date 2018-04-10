@@ -7,17 +7,20 @@
         <div class="l-col subtitle pt-2 mb-3">{{ item.pub_date|date:"j M Y G:i" }}</div>
 
         <h5 class="r-col mb-0 mb-lg-3">
-            <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.title|safe }}</a>
+            <a target="_blank" href="{% url 'question:detail' item.pk %}">
+                {% if item.title %}{{ item.title|safe }}{% else %}{{ item.content|truncatechars:64 }}{% endif %}</a>
+            <!--span class="badge badge-price badge-success">{{ item.advice.cost }}</span-->
         </h5>
 
         <div class="l-col pt-lg-1 mb-3">
             <span class="d-lg-block">№ {{ item.pk }}</span>
             <span class="d-lg-block pl-1">{{ item.author.get_short_name }}</span>
             <span class="d-lg-block pl-1">{{ item.author.city.name }}</span>
+            {% if item.is_pay %}<span class="d-lg-block pl-1">{{ item.advice.cost }} ₽</span>{% endif %}
         </div>
 
         <div class="r-col large">
-            <p>{{ item.content|safe|truncatechars:192 }}</p>
+            <p>{{ item.content|safe|urlize|truncatechars:192 }}</p>
         </div>
 
         {# Ответы #}
@@ -36,7 +39,8 @@
                         </div>
                         <div>
                             {% if item.reply_count > 1 %}
-                                <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+                                <a target="_blank" href="{% url 'question:detail' item.pk %}"
+                                   rel="nofollow">{{ item.reply_count }} ответа</a>
                             {% else %}
                                 <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
                                 <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
@@ -48,15 +52,16 @@
                 {% endwith %}
             </div>
         {% else %}
-            <div class="normal col offset-md-3">
-                <a target="_blank" href="{% url 'question:detail' item.pk %}">{{ item.reply_count }} ответа</a>
+            <div class="normal r-col offset-md-3 d-flex justify-content-between">
+                {% if item.rubric %}
+                    <span class="rubrics-list-item"><a
+                            href="{{ item.rubric.get_absolute_url }}">{{ item.rubric }}</a></span>
+                {% endif %}
+                <a class="ml-auto" target="_blank" href="{% url 'question:detail' item.pk %}"
+                   rel="nofollow">{{ item.reply_count }}
+                    ответа</a>
             </div>
         {% endif %}
-
-        <!--div class="ml-auto r-col">
-            <p class="rubrics-list mt-3"><span class="rubrics-list-item"><a
-                        href="{{ item.rubric.get_absolute_url }}">{{ item.rubric }}</a></span></p>
-        </div-->
 
     </div>
 

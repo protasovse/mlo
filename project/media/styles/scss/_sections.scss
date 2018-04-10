@@ -22,7 +22,7 @@ section {
   // section.header
   &.header-section {
     @extend .align-items-center, .justify-content-center;
-    height: 100vh;
+    height: 720px;
     min-height: 720px;
     color: white;
     &:before {

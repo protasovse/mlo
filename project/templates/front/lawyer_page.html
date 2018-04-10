@@ -32,7 +32,13 @@
 
                 <div class="row">
                     <div class="lawyer-page_about_l-col">
-                        <div class="medal" data-back="&#xe925;" data-value="{{ lawyer.rating.get_rate }}">рейтинг</div>
+                        {% if lawyer.rating.get_rate %}
+                            <div class="medal" data-back="&#xe925;" data-value="{{ lawyer.rating.get_rate }}">рейтинг
+                            </div>
+                        {% else %}
+                            <div class="medal light" data-back="&#xe924;" data-value="{{ lawyer.rating.get_rate }}">нет рейтинга
+                            </div>
+                        {% endif %}
                         <div class="medal blue" data-back="&#xe91e;" data-value="12">опыт, лет</div>
                     </div>
                     <div class="lawyer-page_about_r-col">

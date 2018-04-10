@@ -266,7 +266,7 @@
   }
 
   .r-col {
-    @extend .col-12, .col-md-9, .col-lg-7;
+    @extend .col-12, .col-md-9;
   }
 
   .answer {
@@ -293,6 +293,15 @@
   }
 }
 
+// Для главной страницы и списка вопросов в секции
+.questions-section {
+  .question-item {
+    .r-col {
+      @extend .col-lg-7;
+    }
+  }
+}
+
 .file-list-item {
   @extend .mb-1;
   &:before {
@@ -308,25 +317,26 @@
 
 .rubrics-list {
   @extend .normal;
-  .rubrics-list-item {
-    &:before {
-      @extend .mr-2;
-      content: '\e908';
-      font-family: icomoon;
-      color: $gray-200;
-    }
+}
+
+.rubrics-list-item {
+  &:before {
+    @extend .mr-2;
+    content: '\e908';
+    font-family: icomoon;
+    color: $gray-200;
+  }
+  &:after {
+    @extend .mr-3;
+    content: ',';
+  }
+  &:last-of-type {
     &:after {
-      @extend .mr-3;
-      content: ',';
+      content: none;
     }
-    &:last-of-type {
-      &:after {
-        content: none;
-      }
-    }
-    a {
-      color: $gray-800;
-    }
+  }
+  a {
+    color: $gray-800;
   }
 }
 

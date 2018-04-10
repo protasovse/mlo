@@ -1,3 +1,5 @@
+import urllib
+
 from django.http import Http404
 from django.utils import timezone
 from django.db import transaction
@@ -64,21 +66,17 @@ class QuestionDetail(TemplateView):
 
 class QuestionsList(TemplateView):
     template_name = 'entry/questions_list.html'
-    # context_object_name = 'questions'
-    # queryset = Question.published.all()
-    # paginate_by = 10
-    # page_kwarg = 'page'
+    page_size = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Выборка информации о рубриках
-        if 'subrubric_slug' in self.kwargs:
-            slug = self.kwargs['subrubric_slug']
-        elif 'rubric_slug' in self.kwargs:
+        rubric = None
+        if 'rubric_slug' in self.kwargs:
             slug = self.kwargs['rubric_slug']
         else:
-            slug = ''
+            slug = None
         # Получаем всех предков
         if slug:
             rubric = get_object_or_404(Rubric, slug=slug)
@@ -88,25 +86,51 @@ class QuestionsList(TemplateView):
             context['rubrics'] = rubrics
             context['rubric'] = rubric
 
-        # Все рубрики
-        context['all_rubrics'] = Rubric.objects.filter(level=0)
+        # Вычисляем страницу
+        if 'page' in self.kwargs:
+            current_page = self.kwargs['page']
+            start = self.page_size * (current_page - 1)
+        else:
+            current_page = 1
+            start = 0
+
+        filters = {}
+        query = ''
+        current_url = reverse('questions:list')  # текущий url без параметров и страниц
 
         # Вопросы
-        if slug:
-            # context['questions'] = Question.published.filter(rubric=rubric).order_by('-pk')[:10]
-            res = context['questions'] = Question.published.search(rubric.name, 0, 10)
-            if not res.count():
-                res = context['questions'] = Question.published.search(rubric.keywords, 0, 10)
+        if rubric:
+            query = rubric.keywords if rubric.keywords else rubric.name
+            current_url = reverse('questions:list_rubric', kwargs={
+                'rubric_slug': rubric.slug
+            })
 
-        else:
-            context['questions'] = Question.published.order_by('-pk')[:10]
+        if 'paid' in self.request.GET:
+            filters.update({'is_pay': (True,)})
+
+        if 'free' in self.request.GET:
+            filters.update({'is_pay': (False,)})
+
+        filters.update({'answers_authors_id': (1,)})
+
+        question_set = Question.published.search(query, start, self.page_size, filters)
+
+        context.update({
+            'current_url': current_url,
+            'current_page': current_page,
+            'next_page': current_page + 1,
+            'questions': question_set
+        })
 
         # Список рубрик для aside
-        context['rubrics_list'] = Rubric.rubricator.filter(level__in=(0, ))
+        context.update({
+            'rubrics_list': Rubric.objects.filter(level__in=(0,)),
+            # 'rubrics_list': Rubric.rubricator.filter(level__in=(0,)),
+        })
 
         # Лучшие юристы блок
         context.update({
-            'lawyers_from_rating': Rating.lawyers.all()[:3]
+            'lawyers_from_rating': Rating.lawyers.all()[:4]
         })
 
         return context
