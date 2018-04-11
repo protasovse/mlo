@@ -16,7 +16,7 @@
             <span class="d-lg-block">№ {{ item.pk }}</span>
             <span class="d-lg-block pl-1">{{ item.author.get_short_name }}</span>
             <span class="d-lg-block pl-1">{{ item.author.city.name }}</span>
-            {% if item.is_pay %}<span class="d-lg-block pl-1">{{ item.advice.cost }} ₽</span>{% endif %}
+            {% if item.is_pay %}<span class="pl-1 badge badge-price badge-success">{{ item.advice.cost }} ₽</span>{% endif %}
         </div>
 
         <div class="r-col large">
@@ -58,8 +58,7 @@
                             href="{{ item.rubric.get_absolute_url }}">{{ item.rubric }}</a></span>
                 {% endif %}
                 <a class="ml-auto" target="_blank" href="{% url 'question:detail' item.pk %}"
-                   rel="nofollow">{{ item.reply_count }}
-                    ответа</a>
+                   rel="nofollow">{{ item.reply_count }} ответа</a>
             </div>
         {% endif %}
 

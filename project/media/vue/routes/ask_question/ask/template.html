@@ -71,7 +71,7 @@
                        :class="{'is-invalid': error_fields.email }"
                        placeholder="Электронный ящик">
                 <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
-                <small class="text-muted">Не публикуется! Введите действующий почтовый ящик, что бы вопрос был опубликован.</small>
+                <small class="text-muted">На этот адрес вы получите ответ от юристов.</small>
             </div>
 
         </div>
@@ -171,9 +171,8 @@
                     <li class="mb-3">Краткий совет;</li>
                     <li class="mb-3">Гарантии ответа нет;</li>
                 </ul>
-                <p class="text-muted">Юрист может предложить решить ваш вопрос платно, если ответ подразумевает
-                    достаточно длительную работу над вопросом.
-                </p>
+                <p class="text-muted">Юрист может предложить решить ваш вопрос платно, если требуется длительная работа
+                    над вопросом.</p>
                 <button type="submit"
                         @click="save"
                         class="btn btn-outline-primary btn-sm d-block mx-auto mt-3"

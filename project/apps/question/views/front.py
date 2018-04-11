@@ -3,6 +3,7 @@ import urllib
 from django.http import Http404
 from django.utils import timezone
 from django.db import transaction
+from django.utils.http import urlencode
 from django.views.generic.base import TemplateView, RedirectView
 from django.contrib.auth import login
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
@@ -97,32 +98,45 @@ class QuestionsList(TemplateView):
         filters = {}
         query = ''
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
+        url_params = {}  # GET параметры для url, используется в пагинаторе
 
         # Вопросы
         if rubric:
-            query = rubric.keywords if rubric.keywords else rubric.name
+            if rubric.keywords:
+                query = rubric.keywords
+            else:
+                filters.update({'rubric_id': (rubric.pk,)})
+
             current_url = reverse('questions:list_rubric', kwargs={
                 'rubric_slug': rubric.slug
             })
 
         if 'paid' in self.request.GET:
             filters.update({'is_pay': (True,)})
+            url_params.update({
+                'paid': True
+            })
 
         if 'free' in self.request.GET:
             filters.update({'is_pay': (False,)})
+            url_params.update({
+                'free': True
+            })
 
-        filters.update({'answers_authors_id': (1,)})
+        # filters.update({'answers_authors_id': (1,)})
 
+        # QuerySet для списка вопросов
         question_set = Question.published.search(query, start, self.page_size, filters)
 
         context.update({
             'current_url': current_url,
+            'url_params': "?"+urlencode(url_params) if url_params else '',
             'current_page': current_page,
             'next_page': current_page + 1,
-            'questions': question_set
+            'questions': question_set,
         })
 
-        # Список рубрик для aside
+        # Список рубрик для aside «Темы консультаций, рубрикатор»
         context.update({
             'rubrics_list': Rubric.objects.filter(level__in=(0,)),
             # 'rubrics_list': Rubric.rubricator.filter(level__in=(0,)),

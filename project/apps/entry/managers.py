@@ -90,7 +90,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
     def get_queryset(self):
         return super(QuestionsPublishedManager, self).get_queryset().select_related(
-                'rubric'
+                'rubric', 'advice'
             )
 
     def by_id(self, id_list):

@@ -82,7 +82,7 @@ class RubricAdmin(DjangoMpttAdmin, admin.ModelAdmin):
     form = RubricAdminForm
     fieldsets = (
         (None, {
-            'fields': ('name', 'parent', 'slug', 'is_public')}),
+            'fields': ('name', 'parent', 'slug', 'is_question_rubric', 'is_guide_rubric', )}),
         (_('СЕО параметры'), {
             'fields': ('title', 'h1', 'link', 'call_to_action', 'advice_on', 'description', 'content', 'keywords',),
             # 'classes': ('collapse', 'collapse-closed')

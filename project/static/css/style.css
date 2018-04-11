@@ -4745,8 +4745,9 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between; }
-  .badge-price:after {
+  justify-content: space-between;
+  /* &:after {
+    // content: '';
     z-index: 1;
     position: absolute;
     height: 100%;
@@ -4755,7 +4756,17 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     top: 0;
     background-image: url("/static/img/badge/price.svg");
     background-repeat: no-repeat;
-    background-position: 100%; }
+    background-position: 100%;
+  } */ }
+  .badge-price:after {
+    content: '';
+    background-color: #fff;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: -4px;
+    margin-left: 6px;
+    border-radius: 50%; }
 
 .jumbotron {
   padding: 2rem 1rem;
@@ -8384,7 +8395,7 @@ body.open-slide-menu {
   display: none !important; }
 
 .question-page_header {
-  padding-top: 100px;
+  padding-top: 40px;
   padding-bottom: 40px;
   background-position: center;
   background-size: cover; }

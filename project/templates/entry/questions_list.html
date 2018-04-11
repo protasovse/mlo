@@ -2,9 +2,9 @@
 
 {% block title %}
     {% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}
-    {% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн.
-    {% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн.{% endif %}{% if current_page > 1 %} Страница
-        {{ current_page }}.{% endif %}
+    {% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн
+    {% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница
+        {{ current_page }}{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@
         {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
     {% endif %}
 
+    {% comment %}
     {% if current_page == 1 %}
         {% if not user.is_authenticated or user.role == 1 %}
             {# Хлебные крошки #}
@@ -35,6 +36,7 @@
             </div>
         {% endif %}
     {% endif %}
+    {% endcomment %}
 
     {# Содержание страницы вопроса #}
     <div class="question-page_container">
@@ -116,6 +118,18 @@
             <div class="question-page_main-part">
 
                 <div class="row">
+                    <nav aria-label="breadcrumb" class="col-12 mb-3">
+                        <ol class="breadcrumb pt-0" style="margin:0!important;">
+                            <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Все консультации юриста</a>
+                            </li>
+                            {% if rubric %}
+                                <li class="breadcrumb-item active">{{ rubric }}</li>
+                            {% endif %}
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="row">
                     <h3 class="answer-list-head">
                         {% if not user.is_authenticated or user.role == 1 %}
                             Консультации юристов по {% if rubric.name %}теме «{{ rubric.name }}»
@@ -165,8 +179,8 @@
 
                 <footer class="row">
                     <div class="col-12 text-center mt-5">
-                        <a href="{{ current_url }}{{ next_page }}/"
-                           class="btn btn-outline-primary btn-sm">Ещё вопросы… <i class="icon-nav-arrow-down ml-2"></i></a>
+                        <a href="{{ current_url }}{{ next_page }}/{{ url_params }}"
+                           class="btn btn-outline-primary btn-sm">Ещё вопросы…</a>
                     </div>
                 </footer>
 

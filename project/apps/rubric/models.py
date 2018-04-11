@@ -49,9 +49,16 @@ class Rubric(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
                             verbose_name=_('Родительская рубрика'), on_delete=models.CASCADE)
 
-    is_public = models.BooleanField(
+    is_question_rubric = models.BooleanField(
+        _('Рубрика консультаций'),
         db_index=True,
-        default=False
+        default=False,
+    )
+
+    is_guide_rubric = models.BooleanField(
+        _('Рубрика полезных материалов'),
+        db_index=True,
+        default=False,
     )
 
     objects = models.Manager()

@@ -6,8 +6,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  //overflow-y: hidden;
-  &:after {
+&:after {
+  content: '';
+  background-color: $white;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: -4px;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+
+  /* &:after {
     // content: '';
     z-index: 1;
     position: absolute;
@@ -18,5 +28,5 @@
     background-image: url("/static/img/badge/price.svg");
     background-repeat: no-repeat;
     background-position: 100%;
-  }
+  } */
 }
