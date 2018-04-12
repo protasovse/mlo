@@ -43,7 +43,7 @@
 
         {# Для клиентов и первая страница #}
         {% if current_page == 1 %}
-            {% if not user.is_authenticated or user.role == 1 %}
+            {% if not user.is_authenticated or user.role == 1 or user.pk == 1 %}
                 {# Основная часть — заголовок темы, тексты #}
                 <div class="row">
 
@@ -53,7 +53,7 @@
 
                             {# Заголовок #}
                             <div class="row">
-                                <h2 class="col mb-4">
+                                <h2 class="col mt-5 mb-4">
                                     {% if rubric %}
                                         {{ rubric.h1|default:rubric.title|default:rubric }}
                                     {% else %}
@@ -117,11 +117,17 @@
             {# Основная часть — список вопросов #}
             <div class="question-page_main-part">
 
+                {# Хлебные крошки #}
                 <div class="row">
                     <nav aria-label="breadcrumb" class="col-12 mb-3">
                         <ol class="breadcrumb pt-0" style="margin:0!important;">
                             <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Все консультации юриста</a>
                             </li>
+                            {% if rubric.get_level > 0 %}
+                                <li class="breadcrumb-item active">
+                                    <a href="{{ rubric.get_root.get_absolute_url }}">{{ rubric.get_root }}</a>
+                                </li>
+                            {% endif %}
                             {% if rubric %}
                                 <li class="breadcrumb-item active">{{ rubric }}</li>
                             {% endif %}
@@ -158,13 +164,13 @@
                     {% include 'question/generic/question_item_in_list.html' with item=question show_answers=False %}
                 {% endfor %}
 
-                {% if rubric.get_children %}
+                {% if rubrics_also_list %}
                     <div class="question-item">
                         <div class="row">
                             <div class="r-col ml-auto">
                                 <h6 class="mb-3">Также консультируем по темам:</h6>
                                 <div class="row">
-                                    {% for rubric in rubrics.last.get_children %}
+                                    {% for rubric in rubrics_also_list %}
                                         <div class="col-12 col-sm-6 normal mb-2"
                                              style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
                                             <a href="{{ rubric.get_absolute_url }}"

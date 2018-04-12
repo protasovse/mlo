@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'timezone_field',
     'image_cropping',
+    'pagedown',
 
     'apps.mlo_auth',
     'apps.entry',

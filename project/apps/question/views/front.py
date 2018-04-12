@@ -74,6 +74,7 @@ class QuestionsList(TemplateView):
 
         # Выборка информации о рубриках
         rubric = None
+        rubrics_also_list = None
         if 'rubric_slug' in self.kwargs:
             slug = self.kwargs['rubric_slug']
         else:
@@ -82,6 +83,7 @@ class QuestionsList(TemplateView):
         if slug:
             rubric = get_object_or_404(Rubric, slug=slug)
             rubrics = rubric.get_ancestors(include_self=True)
+            rubrics_also_list = rubric.get_children().filter(is_question_rubric=True)
             # if rubrics[0].slug != self.kwargs['rubric_slug']:
             #     raise Http404()
             context['rubrics'] = rubrics
@@ -103,7 +105,8 @@ class QuestionsList(TemplateView):
         # Вопросы
         if rubric:
             if rubric.keywords:
-                query = rubric.keywords
+                query = '({})'.format(')|('.join(rubric.keywords.split("\n")))
+
             else:
                 filters.update({'rubric_id': (rubric.pk,)})
 
@@ -136,9 +139,10 @@ class QuestionsList(TemplateView):
             'questions': question_set,
         })
 
-        # Список рубрик для aside «Темы консультаций, рубрикатор»
+        # Списки рубрик для aside «Темы консультаций, рубрикатор» и «Консультируем так же»
         context.update({
-            'rubrics_list': Rubric.objects.filter(level__in=(0,)),
+            'rubrics_list': Rubric.objects.filter(level__in=(0,), is_question_rubric=True),
+            'rubrics_also_list': rubrics_also_list,
             # 'rubrics_list': Rubric.rubricator.filter(level__in=(0,)),
         })
 

@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_mptt_admin.admin import DjangoMpttAdmin
 from easy_select2 import Select2
 from mptt.forms import TreeNodeChoiceField
+from pagedown.widgets import AdminPagedownWidget
 
 from apps.rubric.models import Rubric
 
@@ -87,6 +89,11 @@ class RubricAdmin(DjangoMpttAdmin, admin.ModelAdmin):
             'fields': ('title', 'h1', 'link', 'call_to_action', 'advice_on', 'description', 'content', 'keywords',),
             # 'classes': ('collapse', 'collapse-closed')
         }))
+
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
+
     list_display = ('title_for_admin', 'slug')
     search_fields = ('name',)
     list_filter = (TreeIdFilter,)
