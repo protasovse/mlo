@@ -74,7 +74,10 @@ class Rubric(MPTTModel):
 
     @property
     def title_for_admin(self):
-        return self.__str__()
+        r = 'R' if self.is_question_rubric else ''
+        g = ' G' if self.is_guide_rubric else ''
+        d = ' descr' if self.description else ''
+        return "{} ({}{}{})".format(self.name, r, g, d)
 
     @property
     def html_description(self):

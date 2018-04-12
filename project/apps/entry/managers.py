@@ -1,6 +1,7 @@
 import sphinxapi
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.http import Http404
 
 DELETED = 'deleted'
 BLOCKED = 'blocked'
@@ -105,7 +106,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
         qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
         return qs
 
-    def search(self, query='', offset=0, limit=10, filters={}):
+    def search(self, query='', offset=0, limit=10, filters={}, sort=[]):
         """
         :param query:
         :param offset:
@@ -119,20 +120,25 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         client.SetLimits(offset, limit, 1000)
 
-        client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, 'pub_date DESC')
+        if not sort:
+            sort.append('pub_date DESC')
+
+        client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, ', '.join(sort))
         client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED)
 
         for key in filters:
             client.SetFilter(key, filters[key])
 
         result = client.Query(query, 'question')
-        print(query)
 
         # ids = [r['id'] for r in result['matches']]
+        if not result:
+            raise Http404
+
         qss = [self.get_queryset().filter(entry_ptr_id=r['id']) for r in result['matches']]
         qs = self.get_queryset().none().union(*qss)
 
         # qs = self.get_queryset().filter(entry_ptr_id__in=list(ids))
 
-        # print(qs.sort())
+        qs.count = result['total_found']
         return qs

@@ -356,7 +356,7 @@ template {
   display: none !important; }
 
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .entry .question-head, .h3, .h4, .h5, .h6 {
+.h1, .h2, .entry .question-head, .h3, .question-page_article h2, .h4, .question-page_article h3, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
   font-weight: 100;
@@ -369,10 +369,10 @@ h1, .h1 {
 h2, .h2, .entry .question-head {
   font-size: 2.5rem; }
 
-h3, .h3 {
+h3, .h3, .question-page_article h2 {
   font-size: 1.625rem; }
 
-h4, .h4 {
+h4, .h4, .question-page_article h3 {
   font-size: 1.25rem; }
 
 h5, .h5 {
@@ -460,13 +460,13 @@ h6, .h6 {
 h5, .h5 {
   line-height: 1.3888889em; }
 
-h4, .h4 {
+h4, .h4, .question-page_article h3 {
   line-height: 1.5em; }
 
-h3, .h3 {
+h3, .h3, .question-page_article h2 {
   line-height: 1.3461539em; }
   @media (max-width: 767.98px) {
-    h3, .h3 {
+    h3, .h3, .question-page_article h2 {
       font-size: 1.25rem;
       line-height: 1.5em; } }
 

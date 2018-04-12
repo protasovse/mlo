@@ -340,4 +340,12 @@
   }
 }
 
+.question-page_article {
+  h2 {
+    @extend .h3;
+  }
+  h3 {
+    @extend .h4;
+  }
+}
 
