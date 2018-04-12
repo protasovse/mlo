@@ -35,6 +35,8 @@ git+git://github.com/protasovse/django-db-mailer.git
 
 # Markdown рендеринг
 misaka==2.1.0
+# Markdown редактор
+django-pagedown==1.0.4
 
 # Телефонные номера
 django-phonenumber-field==2.0.0
