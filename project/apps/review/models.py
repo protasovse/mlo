@@ -13,7 +13,7 @@ class Likes(models.Model):
     """
     Лайки
     """
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='likes',
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE,
                               verbose_name=_('Ответ'))
 
     user = models.ForeignKey(AUTH_USER_MODEL, verbose_name=_('Пользователь'),
@@ -42,7 +42,7 @@ class Review(models.Model):
     """
     Отзывы и комментарии к лайкам
     """
-    like = models.OneToOneField(Likes, on_delete=models.CASCADE, related_name='review')
+    like = models.OneToOneField(Likes, on_delete=models.CASCADE)
     review = models.TextField(_('Текст отзыва'))
 
     objects = ReviewManager()

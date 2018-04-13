@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 
 from apps.entry.models import Question
 from apps.rating.models import Rating
-from apps.review.models import Review
+from apps.review.models import Review, Likes
 
 
 class Mainpage(TemplateView):
@@ -18,7 +18,7 @@ class Mainpage(TemplateView):
 
         context['questions'] = Question.published.filter(reply_count__gt=0, is_pay=True).order_by('-pk')[:5]
         context['lawyers'] = Rating.lawyers.filter(month_rate__gt=0)[:15]
-        context['reviews'] = Review.objects.filter(like__entry__answer__on_question__is_pay=True)[:5]
+        context['reviews'] = Review.objects.all()[:8]
 
         return context
 
@@ -34,12 +34,36 @@ class LawyerPage(TemplateView):
         except ObjectDoesNotExist:
             raise Http404
 
-        context['lawyer'] = lawyer
-
         context.update({
-            'reviews': Review.objects.filter(like__entry__author=lawyer)[:10]
+            'likes': Likes.objects.filter(entry__author=lawyer, user__role=1).order_by("-date")[:10],
+            'lawyer': lawyer
         })
 
         return context
 
 
+class ReviewsPage(TemplateView):
+    template_name = 'front/reviews_page.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super(ReviewsPage, self).get_context_data(**kwargs)
+        likes = Likes.objects.filter(user__role=1).order_by("-date")
+        lawyer = None
+
+        # Отзывы юриста
+        if 'id' in kwargs:
+            likes = likes.filter(entry__author_id=kwargs['id'])
+            try:
+                lawyer = get_user_model().objects.get(pk=kwargs['id'], role__gt=1)
+            except ObjectDoesNotExist:
+                raise Http404
+
+        context.update({
+            'likes': likes[:40],
+            'lawyer': lawyer,
+            'like_positive_count': likes.filter(value__gt=0).count(),
+            'like_negative_count': likes.filter(value__lt=0).count(),
+        })
+
+        return context

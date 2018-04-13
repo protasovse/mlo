@@ -130,6 +130,24 @@ class QuestionsList(TemplateView):
                 'free': True
             })
 
+        if 'my_advice' in self.request.GET:
+            filters.update({'advice_expert_id': (self.request.user.pk,)})
+            url_params.update({
+                'my_advice': True
+            })
+
+        if 'unanswered' in self.request.GET:
+            filters.update({'reply_count': (0,)})
+            url_params.update({
+                'unanswered': True
+            })
+
+        if 'additionals' in self.request.GET:
+            filters.update({'reply_count': (0,)})
+            url_params.update({
+                'additionals': True
+            })
+
         # filters.update({'answers_authors_id': (1,)})
 
         # QuerySet для списка вопросов
@@ -137,10 +155,10 @@ class QuestionsList(TemplateView):
 
         context.update({
             'current_url': current_url,
-            'url_params': "?"+urlencode(url_params) if url_params else '',
+            'url_params': "?" + urlencode(url_params) if url_params else '',
             'total_found': question_set.count,
             'current_page': current_page,
-            'next_page': current_page + 1 if current_page*self.page_size < question_set.count else None,
+            'next_page': current_page + 1 if current_page * self.page_size < question_set.count else None,
             'questions': question_set,
         })
 

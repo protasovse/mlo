@@ -1,0 +1,45 @@
+<article class="question-item">
+    <div class="row">
+
+        <div class="l-col subtitle pt-2 mb-3">{{ like.date|date:"j E Y" }}</div>
+
+        <h5 class="r-col mb-0 mb-lg-3">
+            <a target="_blank" href="{% url 'question:detail' like.entry.answer.on_question.pk %}"
+            >{{ like.entry.answer.on_question.title|safe }}</a>
+        </h5>
+
+        <div class="l-col mb-3" style="margin-top: 2px;">
+            {% if like.value > 0 %}
+                <span class="d-lg-block text-danger">
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                </span>
+            {% else %}
+                <span class="d-lg-block text-danger">
+                    <i class="icon-star"></i>
+                    <i class="icon-star-empty text-light"></i>
+                    <i class="icon-star-empty text-light"></i>
+                    <i class="icon-star-empty text-light"></i>
+                    <i class="icon-star-empty text-light"></i>
+                </span>
+            {% endif %}
+            {# <span class="d-lg-block">№ { { like.entry.answer.on_question.pk } }</span> #}
+            <span class="d-lg-block pl-1">{{ like.user.city.name }}</span>
+        </div>
+
+        <div class="r-col">
+            <h6>{{ like.user.get_name }}</h6>
+            <p>{% if like.review %}{{ like.review|safe }}{% else %}
+                {{ like.user.get_name }}, остался{% if like.value < 0 %} не{% endif %} доволен ответом юриста.
+            {% endif %}</p>
+            <p class="text-muted">За ответ юриста
+                <a class="text-muted " href="{% url "lawyer_page" like.entry.author.pk %}">{{ like.entry.author }}</a>
+            </p>
+        </div>
+
+    </div>
+    <hr class="mb-4">
+</article>

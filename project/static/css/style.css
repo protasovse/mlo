@@ -22,7 +22,7 @@
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #fc6947;
-  --light: #f5f5f5;
+  --light: #e6e6e6;
   --dark: #545454;
   --white: #fff;
   --breakpoint-xs: 0;
@@ -1461,13 +1461,13 @@ pre {
 .table-light,
 .table-light > th,
 .table-light > td {
-  background-color: #fcfcfc; }
+  background-color: #f8f8f8; }
 
 .table-hover .table-light:hover {
-  background-color: #efefef; }
+  background-color: #ebebeb; }
   .table-hover .table-light:hover > td,
   .table-hover .table-light:hover > th {
-    background-color: #efefef; }
+    background-color: #ebebeb; }
 
 .table-dark,
 .table-dark > th,
@@ -2268,24 +2268,24 @@ fieldset:disabled a.btn-gl {
 
 .btn-light {
   color: #212121;
-  background-color: #f5f5f5;
-  border-color: #f5f5f5; }
+  background-color: #e6e6e6;
+  border-color: #e6e6e6; }
   .btn-light:hover {
     color: #212121;
-    background-color: #e2e2e2;
-    border-color: gainsboro; }
+    background-color: lightgray;
+    border-color: #cdcdcd; }
   .btn-light:focus, .btn-light.focus {
-    box-shadow: 0 0 0 0.2rem rgba(245, 245, 245, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(230, 230, 230, 0.5); }
   .btn-light.disabled, .btn-light:disabled {
     color: #212121;
-    background-color: #f5f5f5;
-    border-color: #f5f5f5; }
+    background-color: #e6e6e6;
+    border-color: #e6e6e6; }
   .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
     color: #212121;
-    background-color: gainsboro;
-    border-color: #d5d5d5; }
+    background-color: #cdcdcd;
+    border-color: #c6c6c6; }
     .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(245, 245, 245, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(230, 230, 230, 0.5); }
 
 .btn-dark {
   color: #fff;
@@ -2456,25 +2456,25 @@ fieldset:disabled a.btn-gl {
       box-shadow: 0 0 0 0.2rem rgba(252, 105, 71, 0.5); }
 
 .btn-outline-light {
-  color: #f5f5f5;
+  color: #e6e6e6;
   background-color: transparent;
   background-image: none;
-  border-color: #f5f5f5; }
+  border-color: #e6e6e6; }
   .btn-outline-light:hover {
     color: #212121;
-    background-color: #f5f5f5;
-    border-color: #f5f5f5; }
+    background-color: #e6e6e6;
+    border-color: #e6e6e6; }
   .btn-outline-light:focus, .btn-outline-light.focus {
-    box-shadow: 0 0 0 0.2rem rgba(245, 245, 245, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(230, 230, 230, 0.5); }
   .btn-outline-light.disabled, .btn-outline-light:disabled {
-    color: #f5f5f5;
+    color: #e6e6e6;
     background-color: transparent; }
   .btn-outline-light:not(:disabled):not(.disabled):active, .btn-outline-light:not(:disabled):not(.disabled).active, .show > .btn-outline-light.dropdown-toggle {
     color: #212121;
-    background-color: #f5f5f5;
-    border-color: #f5f5f5; }
+    background-color: #e6e6e6;
+    border-color: #e6e6e6; }
     .btn-outline-light:not(:disabled):not(.disabled):active:focus, .btn-outline-light:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-light.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(245, 245, 245, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(230, 230, 230, 0.5); }
 
 .btn-outline-dark {
   color: #545454;
@@ -4717,11 +4717,11 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
 
 .badge-light {
   color: #212121;
-  background-color: #f5f5f5; }
+  background-color: #e6e6e6; }
   .badge-light[href]:hover, .badge-light[href]:focus {
     color: #212121;
     text-decoration: none;
-    background-color: gainsboro; }
+    background-color: #cdcdcd; }
 
 .badge-dark {
   color: #fff;
@@ -4859,13 +4859,13 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     color: #6f2e20; }
 
 .alert-light {
-  color: #939393;
-  background-color: #fdfdfd;
-  border-color: #fcfcfc; }
+  color: #8a8a8a;
+  background-color: #fafafa;
+  border-color: #f8f8f8; }
   .alert-light hr {
-    border-top-color: #efefef; }
+    border-top-color: #ebebeb; }
   .alert-light .alert-link {
-    color: #7a7a7a; }
+    color: #717171; }
 
 .alert-dark {
   color: #323232;
@@ -5078,15 +5078,15 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     border-color: #833725; }
 
 .list-group-item-light {
-  color: #7f7f7f;
-  background-color: #fcfcfc; }
+  color: #787878;
+  background-color: #f8f8f8; }
   .list-group-item-light.list-group-item-action:hover, .list-group-item-light.list-group-item-action:focus {
-    color: #7f7f7f;
-    background-color: #efefef; }
+    color: #787878;
+    background-color: #ebebeb; }
   .list-group-item-light.list-group-item-action.active {
     color: #fff;
-    background-color: #7f7f7f;
-    border-color: #7f7f7f; }
+    background-color: #787878;
+    border-color: #787878; }
 
 .list-group-item-dark {
   color: #2c2c2c;
@@ -5670,12 +5670,12 @@ button.bg-danger:focus {
   background-color: #fb4015 !important; }
 
 .bg-light {
-  background-color: #f5f5f5 !important; }
+  background-color: #e6e6e6 !important; }
 
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
 button.bg-light:focus {
-  background-color: gainsboro !important; }
+  background-color: #cdcdcd !important; }
 
 .bg-dark {
   background-color: #545454 !important; }
@@ -5748,7 +5748,7 @@ button.bg-white:focus {
   border-color: #fc6947 !important; }
 
 .border-light {
-  border-color: #f5f5f5 !important; }
+  border-color: #e6e6e6 !important; }
 
 .border-dark {
   border-color: #545454 !important; }
@@ -7930,10 +7930,10 @@ a.text-danger:hover, .win-round a.err:hover, a.text-danger:focus, .win-round a.e
   color: #fb4015 !important; }
 
 .text-light {
-  color: #f5f5f5 !important; }
+  color: #e6e6e6 !important; }
 
 a.text-light:hover, a.text-light:focus {
-  color: gainsboro !important; }
+  color: #cdcdcd !important; }
 
 .text-dark {
   color: #545454 !important; }
@@ -8593,7 +8593,7 @@ body.open-slide-menu {
     margin: 0; } }
 
 .lawyer-page_header {
-  padding-top: 120px;
+  padding-top: 60px;
   padding-bottom: 0;
   position: relative; }
   .lawyer-page_header h1 {

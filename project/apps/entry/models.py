@@ -274,6 +274,17 @@ class Offer(models.Model):
                (self.pk, self.cost, self.answer.id, self.answer.on_question.id)
 
 
+class Additionals(models.Model):
+    """
+    Уточнения на вопрос. На какой вопрос, в ветки какого юриста
+    """
+    question_id = models.IntegerField()
+    user_id = models.IntegerField()
+
+    class Meta:
+        unique_together = ['question_id', 'user_id',]
+
+
 # Счётчик для SphinxSearch
 class SphCounter(models.Model):
     counter_id = models.IntegerField(

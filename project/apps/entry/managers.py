@@ -129,7 +129,8 @@ class QuestionsPublishedManager(EntryPublishedManager):
         for key in filters:
             client.SetFilter(key, filters[key])
 
-        result = client.Query(query, 'question')
+        result = client.Query(query, 'question, question_delta')
+        print(result)
 
         # ids = [r['id'] for r in result['matches']]
         if not result:
