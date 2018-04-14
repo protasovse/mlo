@@ -33,10 +33,10 @@ class QuestionView(ApiView):
             if params['phone'] else None
         params['phone'] = phone
         city_id = params['city[id]'] if 'city[id]' in params.keys() else None
-        if city_id:
-            city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
-            city_validator(city_id)
         params['city_id'] = int(city_id) or None
+        if params['city_id']:
+            city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
+            city_validator(params['city_id'])
 
         if request.user.is_authenticated:
             user = request.user
@@ -51,9 +51,10 @@ class QuestionView(ApiView):
                     city_id=params['city_id']
                 )
 
-        q = Question.objects.create_paid_question(user, params) \
-            if params['is_paid_question'] \
-            else Question.objects.create_free_question(user, params)
+        if int(params['is_paid_question']) == 1:
+            q = Question.objects.create_paid_question(user, params)
+        else:
+            q = Question.objects.create_free_question(user, params)
         q.rubrics.set(cls.get_put(request).getlist('rubric[]'))
 
         if q.status == BLOCKED:

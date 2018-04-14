@@ -162,6 +162,10 @@ export default {
             this.is_paid_question = true;
             this.save()
         },
+        save_free() {
+             this.is_paid_question = false;
+            this.save()
+        },
         save() {
             try {
                 this.form_validate([this.requires_fields]);

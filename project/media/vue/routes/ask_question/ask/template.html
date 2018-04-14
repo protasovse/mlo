@@ -174,7 +174,7 @@
                 <p class="text-muted">Юрист может предложить решить ваш вопрос платно, если требуется длительная работа
                     над вопросом.</p>
                 <button type="submit"
-                        @click="save"
+                        @click="save_free"
                         class="btn btn-outline-primary btn-sm d-block mx-auto mt-3"
                         :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
                     <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
