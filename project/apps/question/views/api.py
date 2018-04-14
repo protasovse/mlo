@@ -39,6 +39,9 @@ class QuestionView(ApiView):
         params['phone'] = phone
         city_id = params['city[id]'] if 'city[id]' in params.keys() else None
         params['city_id'] = int(city_id) or None
+
+        params['rubric_id'] = params['rubric[id]']
+
         if params['city_id']:
             city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
             city_validator(params['city_id'])
@@ -63,7 +66,6 @@ class QuestionView(ApiView):
             Advice.objects.create(question=q, cost=ADVICE_COST)
         else:
             q = Question.objects.create_free_question(user, is_authenticated, params)
-        q.rubrics.set(cls.get_put(request).getlist('rubric[]'))
 
         if q.status == BLOCKED:
             # add question_id to session
@@ -75,7 +77,6 @@ class QuestionView(ApiView):
                 emails.send_paid_question(user, q)
             else:
                 emails.send_confirm_question(user, q, q.token)
-                messages.add_message(request, messages.WARNING, flash_messages.QUESTION_CREATE_BLOCKED, 'danger')
         else:
             messages.add_message(
                 request, messages.SUCCESS, flash_messages.QUESTION_CREATE_ACTIVE.format(id=q.id), 'success'

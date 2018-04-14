@@ -13,7 +13,7 @@ export default {
             completed: [],
             question_id: '',
             question_url: '',
-            rubric: ['не выбрано'],
+            rubric: 'не выбрано',
             options: [],
             options_city: [],
             main_city:[],
@@ -133,16 +133,16 @@ export default {
         },
         onInputRubric()
         {
-             if (this.rubric.length === 0) {
-                this.rubric = ['не выбрано']
+            if (!this.rubric) {
+                this.rubric = 'не выбрано'
             }
         },
         optionsInit() {
             this.options = this.base_options;
 
-            if (this.rubric.length > 1 &&  this.rubric[0] === 'не выбрано') {
-                this.rubric.shift()
-            }
+            //if (this.rubric.length > 1 &&  this.rubric[0] === 'не выбрано') {
+            //    this.rubric.shift()
+            //}
 
         },
         get_requires_fields() {
@@ -163,20 +163,15 @@ export default {
             this.save()
         },
         save_free() {
-             this.is_paid_question = false;
+            this.is_paid_question = false;
             this.save()
         },
         save() {
             try {
                 this.form_validate([this.requires_fields]);
-                let rubrics;
-                if (this.rubric.length === 1 &&  this.rubric[0] === 'не выбрано') {
-                    rubrics = []
-                } else {
-                    rubrics = this.rubric.map(function (x) {return x['id']});
-                }
+
                 let data = {
-                    rubric: rubrics,
+                    rubric: this.rubric,
                     title: this.title,
                     content: this.content,
                     is_paid_question: +this.is_paid_question,

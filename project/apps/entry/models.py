@@ -131,7 +131,8 @@ class QuestionManager(models.Manager):
             is_pay=1,
             first_name=params['name'] if params['name'] else user.first_name,
             phone=params['phone'],
-            city_id=user.city_id if user.city_id else params['city_id']
+            city_id=user.city_id if user.city_id else params['city_id'],
+            rubric_id=params['rubric_id']
         )
 
         return question
@@ -153,7 +154,8 @@ class QuestionManager(models.Manager):
             token=token,
             first_name=params['name'] if params['name'] else user.first_name,
             phone=params['phone'],
-            city_id=user.city_id if user.city_id else params['city_id']
+            city_id=user.city_id if user.city_id else params['city_id'],
+            rubric_id=params['rubric_id']
         )
 
 
