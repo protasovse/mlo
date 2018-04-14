@@ -154,7 +154,7 @@
                         :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
                     <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
                     <span v-else-if="success">Вопрос задан</span>
-                    <span v-else>Оплатить услугу</span>
+                    <span v-else>Задать вопрос</span>
                 </button>
             </div>
         </div>
@@ -184,20 +184,4 @@
             </div>
         </div>
     </div>
-
-
-    <!--form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-        <input type="hidden" name="receiver" value="{MONEY_YANDEX_PURSE}">
-        <input type="hidden" name="quickpay-form" value="shop">
-        <input type="hidden" name="referer" value="http://мойюрист.онлайн/задать-вопрос/">
-        <input type="hidden" name="formcomment" value="{settings.PAYMENT_FORM_TITLE}">
-        <input type="hidden" name="label" value="advice.456456">
-        <input type="hidden" name="targets" value="{PAYMENT_FORM_TARGET}">
-        <input type="hidden" name="successURL" value="http://мойюрист.онлайн/вопрос/456456/здесь можно ключ сгенерить
-        аналог того, что на почту приходит. Этот ключ будет разблокировать вопрос после оплаты/">
-        <input type="hidden" name="sum" value="{advice.sittings.ADVICE_COST}" data-type="number">
-        <input type="hidden" name="paymentType" value="AC" />
-        <input type="submit" value="Перевести">
-    </form-->
-
 </div>

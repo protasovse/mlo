@@ -6,11 +6,12 @@ from phonenumbers import PhoneNumberFormat, format_number, parse
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
     QuestionsPublishedManager
 from apps.rubric.models import Classified
 from apps.svem_system.exceptions import BackendPublicException
-from config.settings import AUTH_USER_MODEL
+from config.settings import AUTH_USER_MODEL, ADVICE_COST
 from django_mysql.models import EnumField
 from apps.sxgeo.models import Cities
 
@@ -122,7 +123,7 @@ class Titled(models.Model):
 class QuestionManager(models.Manager):
     @classmethod
     def create_paid_question(cls, user, params):
-        return Question.objects.create(
+        question = Question.objects.create(
             title=params['title'],
             content=params['content'],
             author_id=user.id,
@@ -132,6 +133,8 @@ class QuestionManager(models.Manager):
             phone=params['phone'],
             city_id=user.city_id if user.city_id else params['city_id']
         )
+
+        return question
 
     @classmethod
     def create_free_question(cls, user, is_authenticated, params):

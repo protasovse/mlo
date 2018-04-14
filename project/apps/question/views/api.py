@@ -1,6 +1,8 @@
 import os
 import binascii
 from phonenumbers import PhoneNumberFormat, format_number, parse
+
+from apps.advice.models import Advice
 from apps.svem_system.views.api import ApiView
 from apps.entry.models import Question
 from django.contrib.auth import get_user_model
@@ -11,6 +13,8 @@ import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
 from django.contrib.auth import logout
+
+from config.settings import ADVICE_COST
 
 
 class QuestionView(ApiView):
@@ -56,6 +60,7 @@ class QuestionView(ApiView):
 
         if int(params['is_paid_question']) == 1:
             q = Question.objects.create_paid_question(user, params)
+            Advice.objects.create(question=q, cost=ADVICE_COST)
         else:
             q = Question.objects.create_free_question(user, is_authenticated, params)
         q.rubrics.set(cls.get_put(request).getlist('rubric[]'))

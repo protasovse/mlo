@@ -205,7 +205,7 @@ MONEY_YANDEX_SECRET = 'FT4aTj51dQLblW6HQxjxqkfT'
 MONEY_YANDEX_PURSE = 410014165217866
 
 PAYMENT_FORM_TITLE = "Мойюрист.онлайн — юридическая консультация онлайн"
-PAYMENT_FORM_TARGET = "Услуга «Персональный юрист». Вопрос №{question_id}"
+PAYMENT_FORM_TARGET = "Услуга «Персональный юрист». Вопрос №"
 
 # Стоимость консультации
 ADVICE_COST = 800  # руб.

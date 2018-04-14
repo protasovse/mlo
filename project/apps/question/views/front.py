@@ -15,7 +15,9 @@ from datetime import timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
 
-from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE
+from config.flash_messages import QUESTION_CREATE_PAID, QUESTION_CREATE_BLOCKED
+from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE, PAYMENT_FORM_TITLE, PAYMENT_FORM_TARGET, \
+    ADVICE_COST
 
 
 class QuestionDetail(TemplateView):
@@ -27,8 +29,11 @@ class QuestionDetail(TemplateView):
 
         if question.status == 'blocked':
             ids = self.request.session.get('question_ids', [])
-            if question.id not in ids:
+            if question.id not in ids and question.author != self.request.user:
                 raise Http404("Question does not exist")
+
+            messages.add_message(self.request, messages.WARNING,
+                                 QUESTION_CREATE_PAID if question.is_pay else QUESTION_CREATE_BLOCKED)
 
         context.update({
             'question': question
@@ -38,7 +43,10 @@ class QuestionDetail(TemplateView):
             advice = Advice.objects.filter(question=question).first()
             advice_context = {
                 'advice': advice,
-                'yandex_money': MONEY_YANDEX_PURSE
+                'money_yandex_purse': MONEY_YANDEX_PURSE,
+                'payment_form_title': PAYMENT_FORM_TITLE,
+                'payment_form_target': PAYMENT_FORM_TARGET,
+                'advice_cost': ADVICE_COST
             }
 
             if advice and advice.status == ADVICE_PAYMENT_CONFIRMED:
