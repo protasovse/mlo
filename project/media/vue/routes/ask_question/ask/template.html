@@ -21,7 +21,6 @@
         <label for="ask_rubric" class="col-form-label">Рубрика права</label>
         <div class="col-sm-8">
             <v-select
-                    multiple
                     :options="options"
                     @search="onSearch"
                     v-on:search:blur="optionsInit"
