@@ -135,7 +135,7 @@ class QuestionManager(models.Manager):
 
     @classmethod
     def create_free_question(cls, user, is_authenticated, params):
-        token = False
+        token = None
         if is_authenticated:
             status = PUBLISHED
         else:
