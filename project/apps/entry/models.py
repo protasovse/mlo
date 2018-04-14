@@ -134,9 +134,9 @@ class QuestionManager(models.Manager):
         )
 
     @classmethod
-    def create_free_question(cls, user, params):
+    def create_free_question(cls, user, is_authenticated, params):
         token = False
-        if user.is_authenticated:
+        if is_authenticated:
             status = PUBLISHED
         else:
             token = binascii.hexlify(os.urandom(20)).decode()

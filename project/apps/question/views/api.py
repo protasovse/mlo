@@ -10,6 +10,7 @@ from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
+from django.contrib.auth import logout
 
 
 class QuestionView(ApiView):
@@ -38,8 +39,10 @@ class QuestionView(ApiView):
             city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
             city_validator(params['city_id'])
 
+        is_authenticated = False
         if request.user.is_authenticated:
             user = request.user
+            is_authenticated = True
         else:
             try:
                 user = get_user_model().objects.get(email=params['email'])
@@ -48,13 +51,13 @@ class QuestionView(ApiView):
                     params['email'], binascii.hexlify(os.urandom(6)).decode(),
                     first_name=params['name'],
                     phone=params['phone'],
-                    city_id=params['city_id']
+                    city_id=params['city_id'],
                 )
 
         if int(params['is_paid_question']) == 1:
             q = Question.objects.create_paid_question(user, params)
         else:
-            q = Question.objects.create_free_question(user, params)
+            q = Question.objects.create_free_question(user, is_authenticated, params)
         q.rubrics.set(cls.get_put(request).getlist('rubric[]'))
 
         if q.status == BLOCKED:
