@@ -30,6 +30,7 @@ def recount():
     """)
 
 
+# Добавить балл к рейтингу пользователя
 def add_score(user_id, score):
     cursor = connection.cursor()
 

@@ -1,7 +1,5 @@
 import sphinxapi
-from django.contrib.auth import get_user_model
 from django.db import models
-from django.http import Http404
 
 DELETED = 'deleted'
 BLOCKED = 'blocked'
@@ -51,7 +49,6 @@ thread_data = None
 
 
 class AnswersManager(EntryPublishedManager):
-
     # Выборка всех ответов, всех уровней, относящихся к вопросу question_id
     def related_to_question(self, question_id):
         qs = super(AnswersManager, self).filter(on_question_id=question_id)
@@ -62,37 +59,13 @@ class AnswersManager(EntryPublishedManager):
         qs = self.related_to_question(question_id).filter(parent=None)
         return qs
 
-    # Создаём ответ пользоваетеля на вопрос.
-    '''
-    def create(self, question_id, content, author, parent=None):
-        """
-        :param question_id: вопрос, на который создаём ответ
-        :param content: текст ответа
-        :param author: автор ответа
-        :param parent: если ответ не 1-го уровня, то задаёт родительский ответ
-        :return: созданный ответ
-        """
-
-        if isinstance(author, get_user_model()):
-            instance = self.model()
-            instance.on_question_id = question_id
-            instance.author = author
-            instance.content = content
-            instance.parent = parent
-            instance.save()
-            return instance
-
-        return None
-    '''
-
 
 # Менеджер для вывода вопросов для публикации
 class QuestionsPublishedManager(EntryPublishedManager):
-
     def get_queryset(self):
         return super(QuestionsPublishedManager, self).get_queryset().select_related(
-                'rubric', 'advice'
-            )
+            'rubric', 'advice'
+        )
 
     def by_id(self, id_list):
         qs = super(QuestionsPublishedManager, self).filter(entry_ptr_id__in=id_list)
@@ -134,7 +107,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         # ids = [r['id'] for r in result['matches']]
         if not result:
-            raise Http404
+            return None
 
         qss = [self.get_queryset().filter(entry_ptr_id=r['id']) for r in result['matches']]
         qs = self.get_queryset().none().union(*qss)
