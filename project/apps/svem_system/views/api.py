@@ -9,6 +9,7 @@ from django.http import JsonResponse, QueryDict
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from apps.svem_system.exceptions import ApiPublicException, ApiException
+import traceback
 
 
 class ApiView(View):
@@ -95,10 +96,7 @@ class ApiView(View):
             if self.is_debug_mode(request):
                 response['exception'] = type(e).__name__
                 response['error'] = str(e)
-                exc_type, exc_obj, exc_tb = sys.exc_info()
-                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                response['fname'] = fname
-                response['fnatb_linenome'] = exc_tb.tb_lineno
+                response['traceback'] = traceback.format_exception(*sys.exc_info())
         if self.is_debug_mode(request):
             response['queries'] = connection.queries
         return JsonResponse(response, status=request_status)

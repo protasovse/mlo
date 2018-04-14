@@ -28,8 +28,10 @@ class QuestionView(ApiView):
         :return:
         """
         params = cls.get_put(request)
-        params['phone'] = format_number(parse(params['phone'], 'RU'), PhoneNumberFormat.E164) \
+        params = params.dict()
+        phone = format_number(parse(params['phone'], 'RU'), PhoneNumberFormat.E164) \
             if params['phone'] else None
+        params['phone'] = phone
         city_id = params['city[id]'] if 'city[id]' in params.keys() else None
         if city_id:
             city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
@@ -52,7 +54,7 @@ class QuestionView(ApiView):
         q = Question.objects.create_paid_question(user, params) \
             if params['is_paid_question'] \
             else Question.objects.create_free_question(user, params)
-        q.rubrics.set(params.getlist('rubric[]'))
+        q.rubrics.set(cls.get_put(request).getlist('rubric[]'))
 
         if q.status == BLOCKED:
             # add question_id to session

@@ -122,14 +122,14 @@ class Titled(models.Model):
 class QuestionManager(models.Manager):
     @classmethod
     def create_paid_question(cls, user, params):
-        return cls.create(
+        return Question.objects.create(
             title=params['title'],
             content=params['content'],
             author_id=user.id,
             status=BLOCKED,
             is_pay=1,
             first_name=params['name'] if params['name'] else user.first_name,
-            phone=phone_number,
+            phone=params['phone'],
             city_id=user.city_id if user.city_id else params['city_id']
         )
 
@@ -141,7 +141,7 @@ class QuestionManager(models.Manager):
         else:
             token = binascii.hexlify(os.urandom(20)).decode()
             status = BLOCKED
-        return cls.create(
+        return Question.objects.create(
             title=params['title'],
             content=params['content'],
             author_id=user.id,
@@ -149,7 +149,7 @@ class QuestionManager(models.Manager):
             is_pay=0,
             token=token,
             first_name=params['name'] if params['name'] else user.first_name,
-            phone=phone_number,
+            phone=params['phone'],
             city_id=user.city_id if user.city_id else params['city_id']
         )
 
@@ -177,7 +177,7 @@ class Question(Entry, Titled, Classified):
 
     city = models.ForeignKey(Cities, on_delete=models.SET_NULL, blank=True, null=True)
 
-    objects = QuestionManager
+    objects = QuestionManager()
     published = QuestionsPublishedManager()
 
     class Meta:

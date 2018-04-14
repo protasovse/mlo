@@ -16,7 +16,7 @@ from datetime import date, timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
 
-from config.settings import ADVICE_OVERDUE_TIME
+from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE
 
 
 class QuestionDetail(TemplateView):
@@ -38,7 +38,8 @@ class QuestionDetail(TemplateView):
         if question.is_pay:
             advice = Advice.objects.filter(question=question).first()
             advice_context = {
-                'advice': advice
+                'advice': advice,
+                'yandex_money': MONEY_YANDEX_PURSE
             }
 
             if advice and advice.status == ADVICE_PAYMENT_CONFIRMED:

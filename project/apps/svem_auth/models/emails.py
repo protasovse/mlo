@@ -65,4 +65,4 @@ def send_paid_question(user, question):
         'site': Site.objects.get_current(),
         'protocol': SITE_PROTOCOL
     }
-    send_db_mail('pain-question', user.email, ctx)
+    send_db_mail('paid-question', user.email, ctx)
