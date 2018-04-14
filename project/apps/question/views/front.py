@@ -74,6 +74,7 @@ class QuestionsList(TemplateView):
         # Выборка информации о рубриках
         rubric = None
         rubrics_also_list = None
+        rubrics_useful = None
         if 'rubric_slug' in self.kwargs:
             slug = self.kwargs['rubric_slug']
         else:
@@ -83,6 +84,7 @@ class QuestionsList(TemplateView):
             rubric = get_object_or_404(Rubric, slug=slug)
             rubrics = rubric.get_ancestors(include_self=True)
             rubrics_also_list = rubric.get_children().filter(is_question_rubric=True)
+            rubrics_useful = rubric.get_children().filter(is_guide_rubric=True, is_question_rubric=False)
             # if rubrics[0].slug != self.kwargs['rubric_slug']:
             #     raise Http404()
             context['rubrics'] = rubrics
@@ -97,6 +99,7 @@ class QuestionsList(TemplateView):
             start = 0
 
         filters = {}
+        sort = []
         query = ''
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
         url_params = {}  # GET параметры для url, используется в пагинаторе
@@ -105,6 +108,7 @@ class QuestionsList(TemplateView):
         if rubric:
             if rubric.keywords:
                 query = '({})'.format(')|('.join(rubric.keywords.split("\n")))
+                sort.append('@relevance DESC')
 
             else:
                 filters.update({'rubric_id': (rubric.pk,)})
@@ -125,16 +129,35 @@ class QuestionsList(TemplateView):
                 'free': True
             })
 
+        if 'my_advice' in self.request.GET:
+            filters.update({'advice_expert_id': (self.request.user.pk,)})
+            url_params.update({
+                'my_advice': True
+            })
+
+        if 'unanswered' in self.request.GET:
+            filters.update({'reply_count': (0,)})
+            url_params.update({
+                'unanswered': True
+            })
+
+        if 'additionals' in self.request.GET:
+            filters.update({'reply_count': (0,)})
+            url_params.update({
+                'additionals': True
+            })
+
         # filters.update({'answers_authors_id': (1,)})
 
         # QuerySet для списка вопросов
-        question_set = Question.published.search(query, start, self.page_size, filters)
+        question_set = Question.published.search(query, start, self.page_size, filters, sort)
 
         context.update({
             'current_url': current_url,
-            'url_params': "?"+urlencode(url_params) if url_params else '',
+            'url_params': "?" + urlencode(url_params) if url_params else '',
+            'total_found': question_set.count,
             'current_page': current_page,
-            'next_page': current_page + 1,
+            'next_page': current_page + 1 if current_page * self.page_size < question_set.count else None,
             'questions': question_set,
         })
 
@@ -142,6 +165,7 @@ class QuestionsList(TemplateView):
         context.update({
             'rubrics_list': Rubric.objects.filter(level__in=(0,), is_question_rubric=True),
             'rubrics_also_list': rubrics_also_list,
+            'rubrics_useful': rubrics_useful,
             # 'rubrics_list': Rubric.rubricator.filter(level__in=(0,)),
         })
 

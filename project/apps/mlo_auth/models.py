@@ -93,7 +93,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             full_name = self.email
 
-        return full_name.strip()
+        return full_name.strip().title()
 
     @property
     def get_short_name(self):
@@ -110,7 +110,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             full_name = self.email
 
-        return full_name.strip()
+        return full_name.strip().title()
 
     def activate(self, do_save=True):
         if self.is_active:

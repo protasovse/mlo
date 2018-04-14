@@ -1,0 +1,38 @@
+{% extends 'front/base.html' %}
+{% load cropping %}
+
+{% block title %}Отзывы пользователей, которые получили юридическую консультацию, либо
+    воспользовались улугами сайта Мойюрист.онлайн{% endblock %}
+
+{% block content %}
+    {% if lawyer %}
+        {% include 'front/generic/lawyer_header.html' %}
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mx-auto">
+                {% if lawyer %}
+                    <h1 class="h3 mt-5">Все отзывы пользователей</h1>
+                    <p class="lead mb-5">Всего отзывов —
+                        <span class="text-success font-weight-semibold">{{ like_positive_count }}</span>/<span
+                                class="text-danger font-weight-semibold">{{ like_negative_count }}</span></p>
+                {% else %}
+                    <h1 class="h2 mt-5">Отзывы наших пользователей</h1>
+                    <p class="lead">Всего отзывов — {{ like_positive_count }}</p>
+                    <p class="lead mb-5">Уважаемые посетители сайта юридических консультаций Мойюрист.онлайн, позвольте
+                        искренне поблагодарить вас за отзывы, положительные или отрицательные. Мы ценим обратную связь,
+                        это делает наш проект лучше и удобнее!</p>
+                {% endif %}
+
+                {% for like in likes %}
+                    {% include 'review/generic/review_item.html' with like=like %}
+                {% endfor %}
+                <div class="text-center mb-5">
+                    <a href="#" class="btn btn-outline-primary">Показать ещё</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
