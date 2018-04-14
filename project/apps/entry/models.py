@@ -197,9 +197,21 @@ class Question(Entry, Titled, Classified):
     def get_answers(self):
         return Answer.published.by_question(self.pk)
 
-    def pay(self):
+    def confirm(self):
         self.status = PUBLISHED
         self.save()
+        # find user from hash
+        user = self.author
+        # if user doesnt active
+        user.activate(False)
+        # save to user personal info from question
+        user.first_name = self.first_name
+        user.city_id = self.city_id
+        user.phone = self.phone
+        user.save()
+
+    def pay(self):
+        self.confirm()
 
     def create(self):
         super()

@@ -64,12 +64,9 @@ class QuestionView(ApiView):
 
             if q.is_pay:
                 emails.send_paid_question(user, q)
-                flash_tpl = flash_messages.QUESTION_CREATE_PAID
             else:
                 emails.send_confirm_question(user, q, q.token)
-                flash_tpl = flash_messages.QUESTION_CREATE_BLOCKED
-
-            messages.add_message(request, messages.WARNING, flash_tpl, 'danger')
+                messages.add_message(request, messages.WARNING, flash_messages.QUESTION_CREATE_BLOCKED, 'danger')
         else:
             messages.add_message(
                 request, messages.SUCCESS, flash_messages.QUESTION_CREATE_ACTIVE.format(id=q.id), 'success'

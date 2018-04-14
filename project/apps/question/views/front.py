@@ -9,10 +9,9 @@ from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
 from apps.entry.models import Question, Answer
-from apps.entry.managers import PUBLISHED
 from django.contrib import messages
 from django.urls import reverse
-from datetime import date, timedelta
+from datetime import timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
 
@@ -185,6 +184,7 @@ class AskQuestion(TemplateView):
 class ConfirmQuestion(RedirectView):
     def get_redirect_url(self, **kwargs):
         try:
+            q = None
             with transaction.atomic():
                 pk = kwargs['pk']
                 token = kwargs['token']
@@ -196,20 +196,10 @@ class ConfirmQuestion(RedirectView):
                 if q.id != pk:
                     raise ControlledException()
                 # to public the question
-                q.status = PUBLISHED
-                q.save()
-                # find user from hash
-                user = q.author
-                # if user doesnt active
-                user.activate(False)
-                # save to user personal info from question
-                user.first_name = q.first_name
-                user.city_id = q.city_id
-                user.phone = q.phone
-                user.save()
+                q.confirm()
             # to do login user
             if not self.request.user.is_authenticated:
-                login(self.request, user)
+                login(self.request, q.author)
             return reverse('question:detail', kwargs={'pk': q.id})
         except ControlledException:
             messages.add_message(self.request, messages.ERROR, flash_messages.QUESTION_CONFIRM_ERROR, 'danger')
