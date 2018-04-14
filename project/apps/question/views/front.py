@@ -1,5 +1,4 @@
-import urllib
-
+from config import flash_messages
 from django.http import Http404
 from django.utils import timezone
 from django.db import transaction
@@ -188,10 +187,5 @@ class ConfirmQuestion(RedirectView):
                 login(self.request, user)
             return reverse('question:detail', kwargs={'pk': q.id})
         except ControlledException:
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                '<h4>Произошла ошибка</h4> <p>Не удалось подтвердить вопрос</p>',
-                'danger'
-            )
+            messages.add_message(self.request, messages.ERROR, flash_messages.QUESTION_CONFIRM_ERROR, 'danger')
             return reverse('question:detail', kwargs={'pk': kwargs['pk']})
