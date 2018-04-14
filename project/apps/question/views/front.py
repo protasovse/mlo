@@ -143,7 +143,7 @@ class QuestionsList(TemplateView):
             })
 
         if 'additionals' in self.request.GET:
-            filters.update({'reply_count': (0,)})
+            filters.update({'additionals_user_id': (self.request.user.pk,)})
             url_params.update({
                 'additionals': True
             })

@@ -1,45 +1,5 @@
-from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
-from django.utils import timezone
-
 from apps.advice.models import StatusLog, Advice, Scheduler
 from apps.advice.utils import queue_add_user, queue_del_user
-
-from apps.entry.models import Answer, Question
-from config.settings import ADVICE_COST
-
-
-# Создание новой платной консультации
-def new_advice(sender, instance, *args, **kwargs):
-    if 'created' in kwargs and kwargs['created'] and instance.is_pay:
-        Advice.objects.get_or_create(question=instance, cost=ADVICE_COST)
-
-# post_save.connect(new_advice, sender=Question)
-
-
-# Ответ или уточнение на платную консультацию, меняем статус на «Ответ эксперта» или «Дополнительный вопрос»
-def new_answer_for_advice(sender, instance, *args, **kwargs):
-    if 'created' in kwargs and kwargs['created']:
-
-        # Если ответ на платный вопрос
-        if instance.on_question.is_pay:
-            if hasattr(instance.on_question, 'advice'):
-                cur_adv = instance.on_question.advice
-
-                if instance.is_parent:  # Если ответ первого уровня, т.е. отвечает эксперт
-                    cur_adv.to_answered()
-
-                else:  # Иначе ответ — комментарий в какой-то ветке или уточнение
-                    # Если пользователь — эксперт
-                    if instance.author == instance.parent.author:
-                        # меняем статус на «Есть ответ»
-                        cur_adv.to_answered()
-                    # Если пользователь — автор вопроса
-                    elif instance.author == instance.on_question.author:
-                        # меняем статус на «Дополнительный вопрос»
-                        cur_adv.to_addquestion()
-
-# post_save.connect(new_answer_for_advice, sender=Answer)
 
 
 # Добавляем пользователя в эксперты
