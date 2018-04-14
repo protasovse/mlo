@@ -197,6 +197,10 @@ class Question(Entry, Titled, Classified):
     def get_answers(self):
         return Answer.published.by_question(self.pk)
 
+    def pay(self):
+        self.status = PUBLISHED
+        self.save()
+
     def create(self):
         super()
 
