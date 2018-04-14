@@ -1,7 +1,6 @@
 import hashlib
 
 from django.http import HttpResponse
-from django.shortcuts import render
 
 from apps.advice.models import Advice
 from config.settings import MONEY_YANDEX_SECRET
