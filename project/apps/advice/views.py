@@ -1,8 +1,9 @@
 import hashlib
 
 from django.http import HttpResponse
-
+from django.shortcuts import get_object_or_404
 from apps.advice.models import Advice
+from apps.entry.models import Question
 from config.settings import MONEY_YANDEX_SECRET
 
 
@@ -38,12 +39,16 @@ def advice_to_payment_confirmed(request):
 
         if label == 'advice':
             question_id = data['label'].split('.')[1]
+            question = get_object_or_404(Question, pk=question_id)
+            question.pay()
             advice = Advice.objects.get(question_id=question_id)
+
             if advice.to_payment_confirmed():
                 # Обновляем цену оплаченную по факту
                 if 'withdraw_amount' in data:
                     advice.cost = int(float(data['withdraw_amount']))
                     advice.save(update_fields=['cost'])
+
                 resp = 'Платёж подтверждён, вопрос: {}'.format(question_id)
             else:
                 resp = 'Не удалось обновить статус завки'

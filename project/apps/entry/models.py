@@ -1,10 +1,11 @@
+import os
+import binascii
 import misaka
 from django.db import models
-from django.db.models.signals import post_save, pre_delete
+from phonenumbers import PhoneNumberFormat, format_number, parse
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
     QuestionsPublishedManager
 from apps.rubric.models import Classified
@@ -118,6 +119,41 @@ class Titled(models.Model):
         abstract = True
 
 
+class QuestionManager(models.Manager):
+    @classmethod
+    def create_paid_question(cls, user, params):
+        return Question.objects.create(
+            title=params['title'],
+            content=params['content'],
+            author_id=user.id,
+            status=BLOCKED,
+            is_pay=1,
+            first_name=params['name'] if params['name'] else user.first_name,
+            phone=params['phone'],
+            city_id=user.city_id if user.city_id else params['city_id']
+        )
+
+    @classmethod
+    def create_free_question(cls, user, params):
+        token = False
+        if user.is_authenticated:
+            status = PUBLISHED
+        else:
+            token = binascii.hexlify(os.urandom(20)).decode()
+            status = BLOCKED
+        return Question.objects.create(
+            title=params['title'],
+            content=params['content'],
+            author_id=user.id,
+            status=status,
+            is_pay=0,
+            token=token,
+            first_name=params['name'] if params['name'] else user.first_name,
+            phone=params['phone'],
+            city_id=user.city_id if user.city_id else params['city_id']
+        )
+
+
 class Question(Entry, Titled, Classified):
     """
     Вопросы. Вопрос может задать и Клиент и Юрист. Для Клиента — это юридическая консультация.
@@ -141,7 +177,7 @@ class Question(Entry, Titled, Classified):
 
     city = models.ForeignKey(Cities, on_delete=models.SET_NULL, blank=True, null=True)
 
-    objects = models.Manager()
+    objects = QuestionManager()
     published = QuestionsPublishedManager()
 
     class Meta:
@@ -160,6 +196,25 @@ class Question(Entry, Titled, Classified):
     # Получаем список ответов на вопрос. Оптимизировано.
     def get_answers(self):
         return Answer.published.by_question(self.pk)
+
+    def confirm(self):
+        self.status = PUBLISHED
+        self.save()
+        # find user from hash
+        user = self.author
+        # if user doesnt active
+        user.activate(False)
+        # save to user personal info from question
+        user.first_name = self.first_name
+        user.city_id = self.city_id
+        user.phone = self.phone
+        user.save()
+
+    def pay(self):
+        self.confirm()
+
+    def create(self):
+        super()
 
     def __str__(self):
         return '№%d. %s: (%s)' % (self.pk, self.title, self.get_status_display())

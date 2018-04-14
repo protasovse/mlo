@@ -54,3 +54,15 @@ def send_confirm_question(user, question, token):
     }
 
     send_db_mail('confirm-question', user.email, ctx)
+
+
+def send_paid_question(user, question):
+    ctx = {
+        'username': user.get_name,
+        'question_url': question.get_absolute_url(),
+        'question_title': question.title,
+        'question_content': question.content,
+        'site': Site.objects.get_current(),
+        'protocol': SITE_PROTOCOL
+    }
+    send_db_mail('paid-question', user.email, ctx)

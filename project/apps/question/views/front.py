@@ -1,5 +1,4 @@
-import urllib
-
+from config import flash_messages
 from django.http import Http404
 from django.utils import timezone
 from django.db import transaction
@@ -10,14 +9,13 @@ from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
 from apps.entry.models import Question, Answer
-from apps.entry.managers import PUBLISHED
 from django.contrib import messages
 from django.urls import reverse
-from datetime import date, timedelta
+from datetime import timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
 
-from config.settings import ADVICE_OVERDUE_TIME
+from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE
 
 
 class QuestionDetail(TemplateView):
@@ -39,7 +37,8 @@ class QuestionDetail(TemplateView):
         if question.is_pay:
             advice = Advice.objects.filter(question=question).first()
             advice_context = {
-                'advice': advice
+                'advice': advice,
+                'yandex_money': MONEY_YANDEX_PURSE
             }
 
             if advice and advice.status == ADVICE_PAYMENT_CONFIRMED:
@@ -185,6 +184,7 @@ class AskQuestion(TemplateView):
 class ConfirmQuestion(RedirectView):
     def get_redirect_url(self, **kwargs):
         try:
+            q = None
             with transaction.atomic():
                 pk = kwargs['pk']
                 token = kwargs['token']
@@ -196,26 +196,11 @@ class ConfirmQuestion(RedirectView):
                 if q.id != pk:
                     raise ControlledException()
                 # to public the question
-                q.status = PUBLISHED
-                q.save()
-                # find user from hash
-                user = q.author
-                # if user doesnt active
-                user.activate(False)
-                # save to user personal info from question
-                user.first_name = q.first_name
-                user.city_id = q.city_id
-                user.phone = q.phone
-                user.save()
+                q.confirm()
             # to do login user
             if not self.request.user.is_authenticated:
-                login(self.request, user)
+                login(self.request, q.author)
             return reverse('question:detail', kwargs={'pk': q.id})
         except ControlledException:
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                '<h4>Произошла ошибка</h4> <p>Не удалось подтвердить вопрос</p>',
-                'danger'
-            )
+            messages.add_message(self.request, messages.ERROR, flash_messages.QUESTION_CONFIRM_ERROR, 'danger')
             return reverse('question:detail', kwargs={'pk': kwargs['pk']})
