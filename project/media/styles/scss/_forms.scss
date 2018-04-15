@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 /* form, div#form {
   label {
     font-size: $font-size-base;
@@ -38,20 +37,26 @@
   // color: $gray-700;
 }
 
+label.required {
+  &:after {
+    position: absolute;
+    margin-left: .5rem;
+    content: '*';
+    color: $red;
+  }
+}
+
 .col-form-label {
   text-align: right;
   @include media-breakpoint-down(xs) {
     text-align: left;
   }
-  @extend .col, .mr-3, .pr-4;
   &.required {
-    &:after {
-      position: absolute;
+    &:after{
       right: 0;
-      content: '*';
-      color: $red;
     }
   }
+  @extend .col, .mr-3, .pr-4;
 }
 
 .form-check-input {

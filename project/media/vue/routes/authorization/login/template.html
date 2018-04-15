@@ -1,45 +1,59 @@
 <div class="row">
-    <div class="l-col col-12">
-        <div class="form-group">
-            <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
-                   placeholder="Электронный ящик" name="email" v-model="email" @change="save_field_value('email', email)">
-            <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+    <div class="_l-col col-12">
+        <div class="form-group row">
+            <label class="col-form-label required">Электронный ящик</label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
+                       placeholder="" name="email" v-model="email"
+                       @change="save_field_value('email', email)">
+                <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="password" class="form-control" :class="{'is-invalid': error_fields.password }"
-                   placeholder="Пароль" v-model="password" name="password" @keyup.13="save">
-            <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
-        </div>
-
-        <p class="req">
-            <router-link :to="{name: 'forgot'}">Восстановить пароль</router-link>
-        </p>
-
-
-        <button type="submit" class="btn btn-outline-primary col-12" @click="save" :disabled=loading>
-            <span v-if="loading">Загрузка...</span><span v-else>Войти</span>
-        </button>
-
-
-        <div class="msg" v-if="success"><!-- .l-col .msg -->
-            <p class="suc">{{ success_txt }}</p>
+        <div class="form-group row">
+            <label class="col-form-label required">Пароль</label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" :class="{'is-invalid': error_fields.password }"
+                       placeholder="Пароль" v-model="password" name="password" @keyup.13="save">
+                <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
+            </div>
         </div>
 
-        <div class="msg" v-if="error"><!-- .l-col .msg -->
-            <p class="err">{{ error_txt }}</p>
+        <div class="form-group row">
+            <div class="col-sm-8 ml-auto">
+
+                <button type="submit" class="btn btn-outline-primary" @click="save" :disabled=loading>
+                    <span v-if="loading">Загрузка...</span><span v-else>Войти</span>
+                </button>
+
+
+                <div class="msg" v-if="success"><!-- .l-col .msg -->
+                    <p class="suc">{{ success_txt }}</p>
+                </div>
+
+                <div class="msg" v-if="error"><!-- .l-col .msg -->
+                    <p class="err">{{ error_txt }}</p>
+                </div>
+
+                <div class="msg" v-if="unactive"><!-- .l-col .msg -->
+                    <p class="err">
+                        Не пришло письмо с подтверждением?<br/>
+                        <a @click="send_activation" href="javascript:void(0)">Выслать активационное письмо еще раз</a>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="msg" v-if="unactive"><!-- .l-col .msg -->
-            <p class="err">
-                Не пришло письмо с подтверждением?<br/>
-                <a @click="send_activation" href="javascript:void(0)">Выслать активационное письмо еще раз</a>
+        <div class="col-12">
+            <hr class="my-4">
+            <p class="_reg normal text-muted">
+                Ещё не зарегистрированны?
+                <router-link :to="{name: 'registration'}">Регистрация юриста</router-link><br>
+                <router-link :to="{name: 'forgot'}">Восстановить пароль</router-link>
             </p>
         </div>
-
-
     </div>
 
-    <div class="hr"></div>
+    <!--div class="hr"></div>
 
     <div class="r-col">
         <h4>войти через соцсети:</h4>
@@ -51,12 +65,9 @@
         <button type="submit" class="btn-gl"><span class="icon-gl"></span></button-->
 
 
-        <div class="msg" v-if="error_fields.social">
+    <!--div class="msg" v-if="error_fields.social">
             <p class="err" v-if="error_fields.social">{{ error_fields.social }}</p>
-        </div>
-    </div>
+        </div-->
+    <!--/div-->
 
-    <p class="reg">Ещё не зарегистрированны?
-        <router-link :to="{name: 'registration'}">Регистрация юриста</router-link>
-    </p>
 </div>

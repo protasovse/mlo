@@ -1,72 +1,95 @@
 <div class="row">
-    <div class="l-col">
+    <div class="_l-col col-12">
 
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Имя" v-model="first_name"
-                   name="first_name" :class="{'is-invalid': error_fields.first_name }">
-            <span class="invalid-feedback" v-if="error_fields.first_name">{{ error_fields.first_name }}</span>
+        <div class="form-group row">
+            <label class="col-form-label required">Фамилия</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="" v-model="last_name"
+                       name="last_name" :class="{'is-invalid': error_fields.last_name }">
+                <span class="invalid-feedback" v-if="error_fields.last_name">{{ error_fields.last_name }}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label required">Имя</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="" v-model="first_name"
+                       name="first_name" :class="{'is-invalid': error_fields.first_name }">
+                <span class="invalid-feedback" v-if="error_fields.first_name">{{ error_fields.first_name }}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label required">Отчество</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="" v-model="patronymic"
+                       name="patronymic" :class="{'is-invalid': error_fields.patronymic }">
+                <span class="invalid-feedback" v-if="error_fields.patronymic">{{ error_fields.patronymic }}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label required">Электронный ящик</label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control" placeholder="" v-model="email"
+                       name="email" :class="{'is-invalid': error_fields.email }"
+                       @change="save_field_value('email', email)">
+                <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label required">Пароль</label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" placeholder="Пароль" v-model="password"
+                       name="password" @keyup.13="save" :class="{'is-invalid': error_fields.password }">
+                <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
+            </div>
+        </div>
 
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Фамилия" v-model="last_name"
-                   name="last_name" :class="{'is-invalid': error_fields.last_name }">
-            <span class="invalid-feedback" v-if="error_fields.last_name">{{ error_fields.last_name }}</span>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Отчество" v-model="patronymic"
-                   name="patronymic" :class="{'is-invalid': error_fields.patronymic }">
-            <span class="invalid-feedback" v-if="error_fields.patronymic">{{ error_fields.patronymic }}</span>
-        </div>
-        <div class="form-group">
-            <input type="email" class="form-control" placeholder="Электронный ящик" v-model="email"
-                   name="email" :class="{'is-invalid': error_fields.email }" @change="save_field_value('email', email)">
-            <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Пароль" v-model="password"
-                   name="password" @keyup.13="save" :class="{'is-invalid': error_fields.password }">
-            <span class="invalid-feedback" v-if="error_fields.password">{{ error_fields.password }}</span>
-        </div>
+        <div class="form-group row">
+            <div class="col-sm-8 ml-auto">
+                <button type="submit" @click="save" class="btn btn-outline-primary mt-4" :disabled='loading||success'>
+                    <span v-if="loading">Загрузка...</span>
+                    <span v-else-if="success">Успешно</span>
+                    <span v-else>Зарегистрироваться</span>
+                </button>
 
-        <button type="submit" @click="save" class="btn btn-outline-primary col-12" :disabled='loading||success'>
-            <span v-if="loading">Загрузка...</span>
-            <span v-else-if="success">Успешно</span>
-            <span v-else>Зарегистрироваться</span>
-        </button>
+                <div class="msg" v-if="success"><!-- .l-col .msg -->
+                    <p class="suc">{{ success_txt }}</p>
+                </div>
 
-         <div class="msg" v-if="success"><!-- .l-col .msg -->
-            <p class="suc">{{ success_txt }}</p>
-        </div>
-
-        <div class="msg" v-if="error"><!-- .l-col .msg -->
-            <p class="err">{{ error_txt }}</p>
+                <div class="msg" v-if="error"><!-- .l-col .msg -->
+                    <p class="err">{{ error_txt }}</p>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <div class="hr"></div>
+    <!--div class="hr"></div-->
 
-    <div class="r-col">
-        <!--i class="icon-logo"></i-->
-        <h4>Что даёт юристу регистрация на Мойюрист.онлайн?</h4>
-        <p>1. Удалённый заработок в удобное время</p>
-        <p>2. Новые клиенты и репутация</p>
-        <p>3. Узнаваемость в Интернете</p>
-        <p>4. Реализация способностей, опыт, общение с коллегами</p>
-        <p>5. Юридическая клиника</p>
-        <!--h4>войти через соцсети:</h4>
-        <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
-        <button type="submit" class="btn-od"><span class="icon-od"></span></button>
-        <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
-        <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
-        <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
-        <button type="submit" class="btn-gl"><span class="icon-gl"></span></button-->
+    <!--div class="r-col"-->
+    <!--i class="icon-logo"></i-->
+    <!--h4>Что даёт юристу регистрация на Мойюрист.онлайн?</h4>
+    <p>1. Удалённый заработок в удобное время</p>
+    <p>2. Новые клиенты и репутация</p>
+    <p>3. Узнаваемость в Интернете</p>
+    <p>4. Реализация способностей, опыт, общение с коллегами</p>
+    <p>5. Юридическая клиника</p-->
+    <!--h4>войти через соцсети:</h4>
+    <button type="submit" class="btn-vk" @click="vk"><span class="icon-vk"></span></button>
+    <button type="submit" class="btn-od"><span class="icon-od"></span></button>
+    <button type="submit" class="btn-ml"><span class="icon-ml"></span></button>
+    <button type="submit" class="btn-fb" @click="fb"><span class="icon-fb"></span></button>
+    <button type="submit" class="btn-tw"><span class="icon-tw"></span></button>
+    <button type="submit" class="btn-gl"><span class="icon-gl"></span></button-->
+    <!--/div-->
+
+    <div class="col-12">
+        <hr class="my-4">
+        <p class="_reg normal text-muted">Уже зарегистрированны?
+            <router-link :to="{name: 'login'}">Войдите</router-link>
+            <br>
+            <router-link :to="{name: 'forgot'}">Восстановить пароль</router-link>
+        </p>
     </div>
-
-    <p class="reg">Уже зарегистрированны?
-        <router-link :to="{name: 'login'}">Войдите</router-link>
-        <br><router-link :to="{name: 'forgot'}">Восстановить пароль</router-link>
-    </p>
 </div>
 
 

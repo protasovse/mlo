@@ -2037,16 +2037,19 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .form-check-label {
   font-size: 1rem; }
 
+label.required:after {
+  position: absolute;
+  margin-left: .5rem;
+  content: '*';
+  color: #fc6947; }
+
 .col-form-label {
   text-align: right; }
   @media (max-width: 575.98px) {
     .col-form-label {
       text-align: left; } }
   .col-form-label.required:after {
-    position: absolute;
-    right: 0;
-    content: '*';
-    color: #fc6947; }
+    right: 0; }
 
 .form-check-input[type="checkbox"]:not(:checked), .form-check-input[type="checkbox"]:checked, .form-check-input[type="radio"]:not(:checked), .form-check-input[type="radio"]:checked {
   display: none; }
