@@ -81,7 +81,8 @@
                             {% elif user.role == 2 %}
                                 {% include 'question/question_answer_block.html' %}
                                 <reply-form
-                                    v-bind:question = "{{ question.id }}">
+                                    v-bind:question_id = "{{ question.id }}"
+                                    v-bind:parent_id = "null">
                                 </reply-form>
                             {% endif %}
 
