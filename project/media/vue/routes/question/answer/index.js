@@ -6,16 +6,14 @@ export default {
     mixins: [form_mixin],
     name: 'answer',
     data() {
-        return {
-            tre: 0
-        }
+        return {}
     },
 
 
     template: template,
 }
 
-Vue.component('answer', {
-  props: ['todo'],
-  template: template
+Vue.component('reply-form', {
+    props: ['question', 'parent'],
+    template: template
 });

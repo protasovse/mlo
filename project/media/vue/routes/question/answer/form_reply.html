@@ -6,8 +6,8 @@
         <textarea class="form-control" id="reply" rows="7" placeholder="Мой ответ…"></textarea>
     </div>
     <div class="form-group">
-        <input type="hidden" name="on_question" value="{ { on_question } }"/>
-        <input type="hidden" name="parent" value="{ { parent } }"/>
+        <input type="text" v-model="question" name="question" />
+        <input type="text" v-model="parent"  name="parent" />
 
         <button type="submit" class="btn btn-primary">Отправить</button>
         <span class="ml-3 normal"><a href="#"> <i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>

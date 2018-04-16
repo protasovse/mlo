@@ -80,7 +80,9 @@
                                 {% include 'advice/advice_question_answer_block.html' %}
                             {% elif user.role == 2 %}
                                 {% include 'question/question_answer_block.html' %}
-                                <answer></answer>
+                                <reply-form
+                                    v-bind:question = "{{ question.id }}">
+                                </reply-form>
                             {% endif %}
 
                             <hr class="my-4">
