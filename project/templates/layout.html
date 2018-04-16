@@ -30,5 +30,24 @@
 <body>
 <div id="app" class="page {% block navbar_fixed %}{% endblock %}">{% block body %}{% endblock %}</div>
 {% block block_js %}{% endblock %}
+<script>
+    // $('.page').addClass("navbar-fixed");
+    $(window).on('scroll', function () {
+        console.log('ttt');
+        if ($(window).scrollTop() > 60) {
+            $('#app').addClass("navbar-fixed");
+        } else {
+            $('#app').removeClass("navbar-fixed");
+        }
+    });
+    $('.slide-menu-toggle').click(function (event) {
+        event.preventDefault();
+        $('body').toggleClass("open-slide-menu");
+    });
+    $('.fix-navbar').click(function (event) {
+        event.preventDefault();
+        $(body).toggleClass("navbar-fixed");
+    });
+</script>
 </body>
 </html>

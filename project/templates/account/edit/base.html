@@ -1,71 +1,69 @@
 {% extends 'front/base.html' %}
 {% block content %}
 
-    <div class="container py-5">
+    <div class="container py-3">
 
-        <div class="py-5">
-            <h2>{% block account_edit_title %}Редактирование профиля{% endblock %}</h2>
-        </div>
+        <h2 class="my-4">{% block account_edit_title %}Редактирование профиля{% endblock %}</h2>
 
         <div class="row">
 
-            <div class="col-md-4 order-md-1 mb-4">
-
-                <div class="list-group mb-3">
-
-                    <span class="list-group-item list-group-item-dark">Персональные настройки</span>
-
-                    <a href="{% url 'lawyer_page' user.pk %}" class="list-group-item list-group-item-action">
-                        <h6 class="my-0">Моя страница</h6>
-                        <small>Мой рейтинг: {{ user.ratingresult.value }}</small>
-                    </a>
-
-                    {% with request.get_full_path as curl %}
-
-                    {% url 'personal:edit' as  pe_url %}
-                    <a href="{{ pe_url }}"
-                       class="list-group-item list-group-item-action{% if pe_url in curl %} active{% endif %}">
-                        <h6 class="my-0">Основная информация</h6>
-                        <small>Регистрационные и личные данные. Сменить пароль, электронный ящик.</small>
-                    </a>
-
-                    {% url 'personal:edit_contact' as contact_url %}
-                    <a href="{{ contact_url }}"
-                       class="list-group-item list-group-item-action{% if contact_url in curl %} active{% endif %}">
-                        <h6 class="my-0">Контактная информация</h6>
-                    </a>
-
-                    {% url 'personal:edit_about' as about_url %}
-                    <a href="{{ about_url }}"
-                       class="list-group-item list-group-item-action{% if about_url in curl %} active{% endif %}">
-                        <h6 class="my-0">Статус, подпись, о себе</h6>
-                    </a>
-
-                    {% url 'personal:edit_education' as edu_url %}
-                    <a href="{{ edu_url }}"
-                       class="list-group-item list-group-item-action{% if edu_url in curl %} active{% endif %}">
-                        <h6 class="my-0">Образование</h6>
-                    </a>
-
-                    {% url 'personal:edit_experience' as exp_url %}
-                    <a href="{{ exp_url }}"
-                       class="list-group-item list-group-item-action{% if exp_url in curl %} active{% endif %}">
-                        <h6 class="my-0">Опыт работы</h6>
-                    </a>
-                    {% endwith %}
-                </div>
-            </div>
-
-            <div class="col-md-8 order-md-2 pl-md-">
-                <form class="needs-validation">
+            <div class="col-md-8 order-2 order-md-1 pl-md-">
+                <form action="" method="post" class="needs-validation">
 
                     {% block account_edit_form %}{% endblock %}
 
                     <hr class="mb-4 mt-4">
 
-                    <button class="btn btn-primary" type="submit">Сохранить данные</button>
+                    <button type="submit" class="btn btn-primary">Сохранить данные</button>
 
                 </form>
+            </div>
+
+            <div class="col-md-4 order-1 order-md-2 mb-4">
+
+                <div class="list-group mb-3">
+
+                    <!--span class="list-group-item list-group-item-dark">Персональные настройки</span-->
+
+                    <!--a href="{% url 'lawyer_page' user.pk %}" class="list-group-item list-group-item-action">
+                        <h6 class="my-0">Моя страница</h6>
+                        <small>Мой рейтинг: {{ user.ratingresult.value }}</small>
+                    </a-->
+
+                    {% with request.get_full_path as curl %}
+
+                        {% url 'personal:edit' as  pe_url %}
+                        <a href="{{ pe_url }}"
+                           class="list-group-item list-group-item-action{% if pe_url in curl %} active{% endif %}">
+                            <h6 class="my-0">Основная информация</h6>
+                            <small>Регистрационные и личные данные. Сменить пароль, электронный ящик.</small>
+                        </a>
+
+                        {% url 'personal:edit_about' as about_url %}
+                        <a href="{{ about_url }}"
+                           class="list-group-item list-group-item-action{% if about_url in curl %} active{% endif %}">
+                            <h6 class="my-0">Статус, подпись, о себе</h6>
+                        </a>
+
+                        {% url 'personal:edit_contact' as contact_url %}
+                        <a href="{{ contact_url }}"
+                           class="list-group-item list-group-item-action{% if contact_url in curl %} active{% endif %}">
+                            <h6 class="my-0">Контактная информация</h6>
+                        </a>
+
+                        {% url 'personal:edit_education' as edu_url %}
+                        <a href="{{ edu_url }}"
+                           class="list-group-item list-group-item-action{% if edu_url in curl %} active{% endif %}">
+                            <h6 class="my-0">Образование</h6>
+                        </a>
+
+                        {% url 'personal:edit_experience' as exp_url %}
+                        <a href="{{ exp_url }}"
+                           class="list-group-item list-group-item-action{% if exp_url in curl %} active{% endif %}">
+                            <h6 class="my-0">Опыт работы</h6>
+                        </a>
+                    {% endwith %}
+                </div>
             </div>
 
         </div>

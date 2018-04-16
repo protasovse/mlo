@@ -21,24 +21,4 @@
 {% endblock %}
 
 
-{% block block_js %}
-    <script>
-        // $('.page').addClass("navbar-fixed");
-        $(window).on('scroll', function () {
-            console.log('ttt');
-            if ($(window).scrollTop() > 60) {
-                $('#app').addClass("navbar-fixed");
-            }else{
-                $('#app').removeClass("navbar-fixed");
-            }
-        });
-        $('.slide-menu-toggle').click(function (event) {
-            event.preventDefault();
-            $('body').toggleClass("open-slide-menu");
-        });
-        $('.fix-navbar').click(function (event) {
-            event.preventDefault();
-            $(body).toggleClass("navbar-fixed");
-        });
-    </script>
-{% endblock %}
+{% block block_js %}{% endblock %}

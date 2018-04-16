@@ -1,8 +1,5 @@
-
-
 import template from './template.html';
 import form_mixin from '../../../mixins/form';
-
 
 export default {
     mixins: [form_mixin],

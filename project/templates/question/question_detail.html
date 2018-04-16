@@ -80,12 +80,13 @@
                                 {% include 'advice/advice_question_answer_block.html' %}
                             {% elif user.role == 2 %}
                                 {% include 'question/question_answer_block.html' %}
+                                <answer></answer>
                             {% endif %}
 
                             <hr class="my-4">
 
                             {# Яндекс share кнопки #}
-                            {% include 'front/generic/yandex-share.html' %}
+                            {#% include 'front/generic/yandex-share.html' %#}
 
                             {# Рубрики #}
                             {% if question.rubric %}
@@ -158,4 +159,8 @@
 
     </div>
 
+{% endblock %}
+
+{% block block_js %}
+<script src='{% static "question.js" %}'></script>
 {% endblock %}

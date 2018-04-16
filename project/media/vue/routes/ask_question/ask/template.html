@@ -10,9 +10,8 @@
     </div>
 
     <div class="form-group mt-4">
-                    <textarea class="form-control" id="ask_content" v-model="content"
-                              :class="{'is-invalid': error_fields.content }"
-                              placeholder="Детали вопроса" rows="7"></textarea>
+        <textarea class="form-control" id="ask_content" v-model="content" :class="{'is-invalid': error_fields.content }"
+                  placeholder="Детали вопроса" rows="7"></textarea>
         <span class="invalid-feedback" v-if="error_fields.content">{{ error_fields.content }}</span>
         <small class="text-muted">Опишите в подробностях свой вопрос, чтобы получить более точный ответ.</small>
     </div>
@@ -138,14 +137,18 @@
                 </h2>
                 <ul class="list-unstyled mt-3 mb-4">
                     <li class="mb-3"><i class="icon-person mr-2 text-primary"></i>Вам будет назначен персональный
-                        юрист, который специализируется в вашем вопросе;</li>
+                        юрист, который специализируется в вашем вопросе;
+                    </li>
                     <li class="mb-3"><i class="icon-star mr-2 text-primary"></i>Полная, подробная консультация до
-                        решения вопроса;</li>
+                        решения вопроса;
+                    </li>
                     <li class="mb-3"><i class="icon-forum mr-2 text-primary"></i>Неограниченное количество
-                        дополнительных вопросов;</li>
+                        дополнительных вопросов;
+                    </li>
                     <li class="mb-3"><i class="icon-lightning mr-2 text-primary"></i>Контроль качества ответов;</li>
                     <li><i class="icon-wallet mr-2 text-primary"></i>Возврат денег,
-                        если вас не устроит качество услуги.</li>
+                        если вас не устроит качество услуги.
+                    </li>
                 </ul>
                 <button type="submit"
                         @click="save_paid"

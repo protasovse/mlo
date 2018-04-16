@@ -1,9 +1,10 @@
-var path = require('path');
+let path = require('path');
 
 module.exports = {
     "entry": {
         authorization: "./vue/instances/authorization.js",
-        ask_question: "./vue/instances/ask_question.js"
+        ask_question: "./vue/instances/ask_question.js",
+        question: "./vue/instances/question.js",
     },
     "output": {
         "path": path.resolve(__dirname, 'vue', 'bundles'),
@@ -46,5 +47,5 @@ module.exports = {
             }
         ]
     }
-}
+};
 

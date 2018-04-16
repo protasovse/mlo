@@ -28,7 +28,7 @@
                     src="{% include 'account/generic/pic.html' with item=user %}"></a>
         {% endif %}
         {% if user.role == 2 %}
-            <a href="{% url 'personal_questions:list' %}" class="d-none d-sm-inline-flex">Отвечать</a>
+            <a href="{% url 'questions:list' %}" class="d-none d-sm-inline-flex">Отвечать</a>
         {% else %}
             <a href="{% url 'ask_question' %}" class="d-none d-sm-inline-flex">Спросить юриста</a>
         {% endif %}

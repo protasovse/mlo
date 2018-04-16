@@ -1,4 +1,4 @@
-import routes from '../routes/authorization/index.js';
+import routes from '../routes/question/index.js';
 import form_store from '../stores/form_store/index.js'
 
 let app = new Vue({

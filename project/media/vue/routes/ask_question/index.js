@@ -7,5 +7,3 @@ export default [
         component: ask_question,
     }
 ]
-
-
