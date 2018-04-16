@@ -107,7 +107,9 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         # ids = [r['id'] for r in result['matches']]
         if not result:
-            return None
+            qs = self.get_queryset().none()
+            qs.count = 0
+            return qs
 
         qss = [self.get_queryset().filter(entry_ptr_id=r['id']) for r in result['matches']]
         qs = self.get_queryset().none().union(*qss)

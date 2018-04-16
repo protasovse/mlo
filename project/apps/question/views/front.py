@@ -137,23 +137,24 @@ class QuestionsList(TemplateView):
                 'free': True
             })
 
-        if 'my_advice' in self.request.GET:
-            filters.update({'advice_expert_id': (self.request.user.pk,)})
-            url_params.update({
-                'my_advice': True
-            })
-
         if 'unanswered' in self.request.GET:
             filters.update({'reply_count': (0,)})
             url_params.update({
                 'unanswered': True
             })
 
-        if 'additionals' in self.request.GET:
-            filters.update({'additionals_user_id': (self.request.user.pk,)})
-            url_params.update({
-                'additionals': True
-            })
+        if self.request.user.is_authenticated and self.request.user.role == 2:
+            if 'my_advice' in self.request.GET:
+                filters.update({'advice_expert_id': (self.request.user.pk,)})
+                url_params.update({
+                    'my_advice': True
+                })
+
+            if 'additionals' in self.request.GET:
+                filters.update({'additionals_user_id': (self.request.user.pk,)})
+                url_params.update({
+                    'additionals': True
+                })
 
         # filters.update({'answers_authors_id': (1,)})
 

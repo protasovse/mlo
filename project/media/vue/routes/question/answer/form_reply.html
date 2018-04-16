@@ -3,13 +3,13 @@
         <!--h6 class="mb-3">Дополнительный вопрос:</h6-->
         <label for="reply" class="h6 mb-2">Ответить на вопрос:</label>
         <!--textarea class="form-control" id="reply" rows="7" placeholder="Хочу узнать…"></textarea-->
-        <textarea class="form-control" id="reply" rows="7" placeholder="Мой ответ…"></textarea>
+        <textarea class="form-control" v-model="content" id="reply" rows="7" placeholder="Мой ответ…"></textarea>
     </div>
     <div class="form-group">
         <input type="text" v-model="question" name="question" />
         <input type="text" v-model="parent"  name="parent" />
 
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" @click="save" class="btn btn-primary">Отправить</button>
         <span class="ml-3 normal"><a href="#"> <i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
     </div>
 </form>

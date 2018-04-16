@@ -139,10 +139,10 @@
                     </h3>
 
                     <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ current_url }}">Все</a>
+                        </li>
                         {% if user.is_authenticated and user.role == 2 %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}?free">Бесплатные</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ current_url }}?unanswered">Без ответа</a>
                             </li>
@@ -154,7 +154,7 @@
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}">Все</a>
+                                <a class="nav-link" href="{{ current_url }}?free">Бесплатные</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ current_url }}?paid">Платные</a>
@@ -167,6 +167,8 @@
 
                 {% for question in questions.all %}
                     {% include 'question/generic/question_item_in_list.html' with item=question show_answers=False %}
+                {% empty %}
+                    <p class="lead">По выбранным параметрам вопросов не найдено</p>
                 {% endfor %}
 
                 {% if rubrics_also_list %}
