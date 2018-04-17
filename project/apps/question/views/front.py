@@ -39,7 +39,7 @@ class QuestionDetail(TemplateView):
             'question': question
         })
 
-        if question.is_pay:
+        if hasattr(question, 'advice'):
             advice = Advice.objects.filter(question=question).first()
             advice_context = {
                 'advice': advice,
@@ -49,7 +49,7 @@ class QuestionDetail(TemplateView):
                 'advice_cost': ADVICE_COST
             }
 
-            if advice and advice.status == ADVICE_PAYMENT_CONFIRMED:
+            if advice.status == ADVICE_PAYMENT_CONFIRMED:
                 overdue_time = timedelta(minutes=ADVICE_OVERDUE_TIME) - (timezone.now() - advice.payment_date)
                 advice_context.update({
                     'overdue_time': overdue_time.seconds // 60
@@ -63,6 +63,12 @@ class QuestionDetail(TemplateView):
             'mess': messages.get_messages(self.request),
             'answers': Answer.published.related_to_question(question)
         })
+
+        if self.request.user.is_authenticated and self.request.user.role == 2:
+            context.update({
+                'is_my_answer': not not Answer.objects.filter(on_question=question, author_id=self.request.user,
+                                                              parent=None).count()
+            })
 
         # Лучшие юристы блок
         context.update({

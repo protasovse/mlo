@@ -512,7 +512,7 @@ h1, .h1 {
   letter-spacing: 0.75pt;
   color: #bababa; }
 
-.normal, .mlo-navbar_title .tg, .mlo-navbar_title .g, .mlo-navbar_title .c, .mlo-navbar_actions a, .badge-price, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page_l-col, .entry .answer-like .answer-like-sign, .question-item .l-col, .question-item .answer .answer-header, .rubrics-list, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
+.normal, .mlo-navbar_title .tg, .mlo-navbar_title .g, .mlo-navbar_title .c, .mlo-navbar_actions .action_item, .badge-price, .file-loader, section.advantage-section .advantages, footer.main-footer, .win-round .reg, .win-round .req, .win-round .err, .win-round .suc, .slide-menu .text, .lawyer-card .lawyer-card-body p, .question-page_l-col, .entry .answer-like .answer-like-sign, .question-item .l-col, .question-item .answer .answer-header, .rubrics-list, .lawyer-medal .item i, .entry .answer-header_medal .item i, .lawyer-list .lawyer-list_item, .edu_check_diplom {
   font-size: 0.875rem; }
 
 .large, .mlo-navbar_title .t {
@@ -4276,7 +4276,7 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
 .mlo-navbar_actions {
   display: flex;
   position: relative; }
-  .mlo-navbar_actions a {
+  .mlo-navbar_actions .action_item {
     display: block;
     text-decoration: none;
     font-weight: 600;
@@ -4286,22 +4286,22 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     border-radius: 0.25rem;
     text-align: center;
     color: #fff; }
-    .mlo-navbar_actions a:hover {
+    .mlo-navbar_actions .action_item:hover {
       background-color: rgba(0, 0, 0, 0.2); }
-    .mlo-navbar_actions a.sq {
+    .mlo-navbar_actions .action_item.sq {
       width: 40px;
       padding: 0 !important;
       overflow: hidden;
       position: relative; }
-      .mlo-navbar_actions a.sq img {
+      .mlo-navbar_actions .action_item.sq img {
         position: absolute;
         top: 0;
         left: 0;
         width: 40px;
         height: 40px; }
-    .mlo-navbar_actions a.active {
+    .mlo-navbar_actions .action_item.active {
       color: #fc6947; }
-      .mlo-navbar_actions a.active:not(:hover) {
+      .mlo-navbar_actions .action_item.active:not(:hover) {
         border-color: white;
         background-color: white; }
 
@@ -6587,7 +6587,7 @@ button.bg-white:focus {
 .my-1 {
   margin-bottom: 0.25rem !important; }
 
-.ml-1, .mlo-navbar_actions a,
+.ml-1, .mlo-navbar_actions .action_item,
 .mx-1 {
   margin-left: 0.25rem !important; }
 
@@ -6737,7 +6737,7 @@ footer.main-footer > div .mdd a {
 
 .pr-3,
 .px-3,
-.mlo-navbar_actions a,
+.mlo-navbar_actions .action_item,
 section.lawyer-section .cards .cards-inner {
   padding-right: 1rem !important; }
 
@@ -6747,7 +6747,7 @@ section.lawyer-section .cards .cards-inner {
 
 .pl-3,
 .px-3,
-.mlo-navbar_actions a,
+.mlo-navbar_actions .action_item,
 section.lawyer-section .cards .cards-inner {
   padding-left: 1rem !important; }
 

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
-from apps.front.views.front import Mainpage, LawyerPage, ReviewsPage
+from apps.front.views.front import Mainpage, LawyerPage, ReviewsPage, TermsOfUse, About
 
 urlpatterns = [
     # Не менять порядок правил
@@ -8,4 +8,6 @@ urlpatterns = [
     path('юрист/<int:id>/отзывы/', ReviewsPage.as_view(), name='lawyer_reviews'),
     path('юрист/<int:id>/', LawyerPage.as_view(), name='lawyer_page'),
     path('отзывы/', ReviewsPage.as_view(), name='reviews_page'),
+    path('пользовательское-соглашение/', TermsOfUse.as_view(), name='terms_of_use'),
+    path('о-проекте/', About.as_view(), name='about'),
 ]

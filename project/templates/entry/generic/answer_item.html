@@ -49,6 +49,7 @@
     {# Подзаголовок: дата, номер, текст #}
     <div class="row">
 
+        {# Дата, номер, город #}
         <div class="question-page_l-col">
             <time class="subtitle d-block mt-1" itemprop="dateCreated"
                   datetime="{{ item.pub_date|date:"c" }}">{{ item.pub_date|date:"j M Y G:i" }}</time>
@@ -58,26 +59,23 @@
 
         <div class="question-page_r-col content">
 
+            {# Имя для клиента #}
             {% if item.author.role == 1 %}
                 <h6 class="author-name mb-2" itemprop="name">{{ item.author.get_full_name }}</h6>
             {% endif %}
 
+            {# Текст вопроса #}
             <div class="text" itemprop="text">{{ item.html_content|safe|urlize }}</div>
 
             {# Файлы #}
             {% if item.files.all|length %}
                 <div class="alert alert-secondary">
                     {% for file in item.files.all %}
-                        <p class="file-list-item"><a target="_blank"
-                                                     href="/storage/{{ file.file }}">{{ file.get_basename }}</a></p>
+                        <p class="file-list-item">
+                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                        </p>
                     {% endfor %}
                 </div>
-            {% endif %}
-
-            {% if not user.is_authenticated or user.role == 1 %}
-            <div class="normal">
-                <a class="text-success" href="{% url "ask_question" %}">Задать похожий вопрос</a>
-            </div>
             {% endif %}
 
         </div>
@@ -90,10 +88,19 @@
         <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
 
             <div class="answer-footer-action normal align-self-start align-self-md-center">
-                {% if 1 and item.author.role > 1 %}
-                    <a href="#">Дополнительный вопрос</a>
-                    <!--button type="button" class="btn btn-sm btn-primary">Дополнительный вопрос<i
-                            class="icon-message_bubble ml-2"></i></button-->
+                {% if user.is_authenticated %}
+                    {% if user == item.author %}
+                        <a href="#">Изменить</a>
+                    {% elif item.parent.author == user %}
+                        <a href="#">Ответить</a>
+                    {% endif %}
+                {% else %}
+                    {% if item.author.role > 1 %}
+                        <a href="#">Дополнительный вопрос</a>
+                    {% else %}
+                        <a class="text-success" href="{% url "ask_question" %}?similar_question">Задать похожий
+                            вопрос</a>
+                    {% endif %}
                 {% endif %}
             </div>
 

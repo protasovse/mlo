@@ -20,12 +20,10 @@ Vue.component('reply-form', {
     data() {
         return {
             content: '',
-            // question: '',
-            // parent: ''
         }
     },
 
-    props: ['question_id', 'parent_id'],
+    props: ['question_id', 'parent_id', 'title'],
 
     methods: {
         get_requires_fields() {

@@ -10,12 +10,12 @@
         <div class="mlo-navbar_title">
 
             {% if user.hot_line_phone %}
-            <span class="tg">горячая линия</span>
-            <span class="t">{{ user.hot_line_phone }}</span>
-            <span class="g">горячая линия</span>
+                <span class="tg">горячая линия</span>
+                <span class="t">{{ user.hot_line_phone }}</span>
+                <span class="g">горячая линия</span>
             {% else %}
-            <span class="tg">Консультация юриста онлайн</span>
-            <span class="g">Консультация юриста онлайн</span>
+                <span class="tg">Консультация юриста онлайн</span>
+                <span class="g">Консультация юриста онлайн</span>
             {% endif %}
             {% if  user.location.loc_id > 0 %}<span class="c">в {{ user.location.loc_name_loct }}</span>{% endif %}
 
@@ -23,17 +23,17 @@
     {% endblock %}
 
     <div class="mlo-navbar_actions">
-        {% if user.is_authenticated and user.role == 2 %}
-            <a href="{% url 'lawyer_page' user.pk %}" class="sq"><img
-                    src="{% include 'account/generic/pic.html' with item=user %}"></a>
-        {% endif %}
         {% if user.role == 2 %}
-            <a href="{% url 'questions:list' %}" class="d-none d-sm-inline-flex">Отвечать</a>
+            <a href="{% url 'questions:list' %}" class="action_item d-none d-sm-inline-flex">Отвечать</a>
         {% else %}
-            <a href="{% url 'ask_question' %}" class="d-none d-sm-inline-flex">Спросить юриста</a>
+            <a href="{% url 'ask_question' %}" class="action_item d-none d-sm-inline-flex">Спросить юриста</a>
         {% endif %}
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
-        <a href="#" class="slide-menu-toggle sq"></a>
+        <a href="#" class="action_item slide-menu-toggle sq">
+            {% if user.is_authenticated and user.role > 0 %}
+                <img src="{% include 'account/generic/pic.html' with item=user %}">
+            {% endif %}
+        </a>
     </div>
 
     {% block navbar_addbar %}{% endblock %}

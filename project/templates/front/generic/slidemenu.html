@@ -27,12 +27,12 @@
                 <li><a href="{% url 'questions:list' %}">Отвечать на вопросы</a></li>
             {% else %}
                 <li><a href="{% url 'ask_question' %}">Задать вопрос юристу</a></li>
-                <li><a href="{% url 'questions:list' %}">Мои вопросы</a></li>
-                <li><a href="#">Как это работает?</a></li>
+                <!--li><a href="{% url 'questions:list' %}">Мои вопросы</a></li-->
+                <!--li><a href="#">Как это работает?</a></li-->
                 <li><a href="{% url 'questions:list' %}">Вопросы и ответы</a></li>
-                <li><a href="#">Наши юристы</a></li>
+                <!--li><a href="#">Наши юристы</a></li-->
                 <li><a href="{% url 'reviews_page' %}">Отзывы</a></li>
-                <li><a href="#">О проекте</a></li>
+                <li><a href="{% url 'about' %}">О проекте</a></li>
             {% endif %}
         </ul>
     </div>

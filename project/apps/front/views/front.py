@@ -67,3 +67,11 @@ class ReviewsPage(TemplateView):
         })
 
         return context
+
+
+class TermsOfUse(TemplateView):
+    template_name = 'front/terms_of_use.html'
+
+
+class About(TemplateView):
+    template_name = 'front/about.html'

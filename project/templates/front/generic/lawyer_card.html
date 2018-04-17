@@ -7,8 +7,19 @@
         <h6><a href="{% url 'lawyer_page' item.user.pk %}">{{ item.user }}</a></h6>
         <p class="rating">{{ item.get_rate }}</p>
     </div>
-    <div class="lawyer-card-body">
-        <h6>{{ item.user.info.status|default:item.user.get_role_display }}</h6>
-        <p>{{ item.user.info.short }}</p>
+    <div class="lawyer-card-body d-flex flex-column justify-content-between">
+        <div>
+            <h6>{{ item.user.info.status|default:item.user.get_role_display }}</h6>
+            <p>{{ item.user.info.short }}</p>
+        </div>
+        <div class="lawyer-card-body_review d-flex align-items-center justify-content-between">
+            <span class="text-danger">
+                <i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i
+                    class="icon-star mr-1"></i>
+            </span>
+            <a class="text-muted small" href="{% url 'lawyer_reviews' item.user.pk %}">
+                Смотреть отзывы
+            </a>
+        </div>
     </div>
 </div>

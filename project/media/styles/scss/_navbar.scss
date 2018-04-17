@@ -54,7 +54,7 @@
   display: flex;
   position: relative;
 
-  a {
+  .action_item {
     display: block;
     @extend .ml-1, .px-3, .normal;
     text-decoration: none;
