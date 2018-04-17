@@ -6,10 +6,10 @@
         <span class="invalid-feedback" v-if="error_fields.content">{{ error_fields.content }}</span>
     </div>
     <div class="form-group">
-        <input type="hidden" v-model="question_id" name="question_id" />
-        <input type="hidden" v-model="parent_id"  name="parent_id" />
+        <input type="hidden" v-model="question_id" name="question_id"/>
+        <input type="hidden" v-model="parent_id" name="parent_id"/>
 
-        <button type="submit" @click="save" class="btn btn-primary">Отправить</button>
-        <span class="ml-3 normal"><a href="#"><i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
+        <button type="submit" @click="save" class="btn btn-primary btn-sm">Отправить</button>
+        <span class="ml-3 normal"><i class="mr-2 icon-folder text-primary"></i><a href="#">Прикрепить файлы</a></span>
     </div>
 </div>

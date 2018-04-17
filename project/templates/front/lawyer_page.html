@@ -1,6 +1,9 @@
 {% extends 'front/base.html' %}
 {% load cropping %}
 
+{% block title %}{{ lawyer.info.status|default:lawyer.get_role_display }}, {{ lawyer.get_full_name }}.
+    {% if lawyer.city.name %}г. {{ lawyer.city.name }}{% endif %}{% endblock %}
+
 {% block content %}
     <div class="lawyer-page">
 

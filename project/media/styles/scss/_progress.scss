@@ -1,5 +1,7 @@
 .file-loader {
-  @extend .normal, .mb-2, .mt-2;
+  @extend .normal;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   position: relative;
   height: line(1.5);
   overflow: hidden;
@@ -45,5 +47,23 @@
       content: '';
       @extend .progress-bar, .bg-secondary;
     }
+  }
+}
+
+.file-loader_easy {
+  color: $gray-500;
+  display: flex;
+  align-items: center;
+  margin: .5rem 0;
+  .file-name {
+    white-space: nowrap;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: .75rem;
+  }
+  i {
+    margin-left: 1rem;
+    cursor: pointer;
   }
 }

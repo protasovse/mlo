@@ -2,6 +2,8 @@
 {% load static %}
 {% load markdown %}
 
+{% block title %}{{ question.title }} — вопрос №{{ question.id }} на «Мойюрист.онлайн»{% endblock %}
+
 {% block content %}
 
     {# Хедер страницы вопроса #}

@@ -51,7 +51,7 @@
                         </div>
 
                     </div>
-                    <p>{{ answers.last.html_content|safe|truncatechars:160 }}</p>
+                    <p>{{ answers.last.content|safe|truncatechars:160 }}</p>
                 {% endwith %}
             </div>
         {% else %}
