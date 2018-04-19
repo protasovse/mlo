@@ -12,6 +12,6 @@ def delete_nonexistent_photos():
             print(i.orig.file)
         except:
             i.orig = None
-            i.pic = None
-            i.photo = None
+            i.pic = ''
+            i.photo = ''
             i.save()
