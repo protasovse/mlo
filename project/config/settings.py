@@ -25,7 +25,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'мойюрист.онлайн',
     'xn--h1abiilhh6g.xn--80asehdb',
+    '85.143.174.106'
 ]
+
 
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
