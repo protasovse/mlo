@@ -96,6 +96,9 @@
 .question-page_gradient {
   position: relative;
   padding-top: line(3);
+  @include media-breakpoint-down(sm){
+    padding-top: line(1);
+  }
   &:before {
     content: '';
     position: absolute;

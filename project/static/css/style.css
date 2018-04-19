@@ -4556,7 +4556,7 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   font-weight: 300; }
   @media (max-width: 767.98px) {
     .breadcrumb {
-      display: block; }
+      display: none; }
       .breadcrumb .breadcrumb-item {
         display: none;
         margin-bottom: .5rem; }
@@ -8463,6 +8463,9 @@ body.open-slide-menu {
 .question-page_gradient {
   position: relative;
   padding-top: 60px; }
+  @media (max-width: 767.98px) {
+    .question-page_gradient {
+      padding-top: 20px; } }
   .question-page_gradient:before {
     content: '';
     position: absolute;
