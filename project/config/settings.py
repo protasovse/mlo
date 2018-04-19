@@ -215,3 +215,5 @@ ADVICE_OVERDUE_TIME = 30  # min
 
 # Гонорар эксперта в процентах
 ADVICE_EXPERT_FEE_IN_PERCENT = 55  # %
+
+# GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'hui7586381' WITH GRANT OPTION;

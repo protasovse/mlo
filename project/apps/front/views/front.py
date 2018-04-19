@@ -36,7 +36,8 @@ class LawyerPage(TemplateView):
 
         context.update({
             'likes': Likes.objects.filter(entry__author=lawyer, user__role=1).order_by("-date")[:10],
-            'lawyer': lawyer
+            'lawyer': lawyer,
+            'questions': Question.published.search('', 0, 10, {'answers_authors_id': (lawyer.pk,)})
         })
 
         return context

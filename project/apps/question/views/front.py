@@ -149,6 +149,12 @@ class QuestionsList(TemplateView):
                 'unanswered': True
             })
 
+        if 'lawyer' in self.request.GET:
+            filters.update({'answers_authors_id': (int(self.request.GET['lawyer']),)})
+            url_params.update({
+                'lawyer': self.request.GET['lawyer']
+            })
+
         if self.request.user.is_authenticated and self.request.user.role == 2:
             if 'my_advice' in self.request.GET:
                 filters.update({'advice_expert_id': (self.request.user.pk,)})
