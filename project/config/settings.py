@@ -64,13 +64,13 @@ INSTALLED_APPS = [
 
     'django_mptt_admin',
     'easy_thumbnails',
-    'easy_select2',
     'django_select2',
     'django_mysql',
     'phonenumber_field',
     'timezone_field',
     'image_cropping',
     'pagedown',
+    'bootstrap4',
 
     'apps.mlo_auth',
     'apps.entry',

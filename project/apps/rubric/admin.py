@@ -4,7 +4,6 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_mptt_admin.admin import DjangoMpttAdmin
-from easy_select2 import Select2
 from mptt.forms import TreeNodeChoiceField
 from pagedown.widgets import AdminPagedownWidget
 
@@ -20,7 +19,7 @@ class RubricAdminForm(forms.ModelForm):
         empty_label=_('Нет родительской рубрики'),
         level_indicator='• • ', required=False,
         queryset=Rubric.objects.all(),
-        widget=Select2({'width': '100ex'}),
+        # widget=Select2({'width': '100ex'}),
     )
 
     # def __init__(self, *args, **kwargs):

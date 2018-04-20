@@ -1,0 +1,34 @@
+{% extends 'account/edit/base.html' %}
+{% load cropping %}
+{% load bootstrap4 %}
+
+{% block account_edit_title %}Дополнительно{% endblock %}
+
+{% block account_edit_form %}
+    <div class="row">
+        {% comment %}
+                <div class="col mb-3" style="max-width: 350px;">
+                    <div class="mb-3 mx-auto">
+                        {% if user.info.photo %}
+                            <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
+                        {% else %}
+                            <img src="/static/img/lyr/person_photo.png">
+                        {% endif %}
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото
+                        </button>
+                    </div>
+                </div>
+                {% endcomment %}
+        <div class="col mb-3">
+            <div class="container">
+                <div class="row">{% bootstrap_javascript jquery=True %}
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_formset_errors form %}
+                        {% bootstrap_messages %}
+                    </div>
+                </div>
+                {% bootstrap_formset form layout='horizontal' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

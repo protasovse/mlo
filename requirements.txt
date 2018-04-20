@@ -16,7 +16,6 @@ git+git://github.com/adamchainz/django-mysql.git
 django-js-asset==1.0.0
 
 # Select2
-django-easy-select2==1.3.4
 django-select2==6.0.0
 
 # Обработка фото, аватор

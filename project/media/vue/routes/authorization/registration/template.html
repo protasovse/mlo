@@ -2,7 +2,7 @@
     <div class="_l-col col-12">
 
         <div class="form-group row">
-            <label class="col-form-label required">Фамилия</label>
+            <label class="col-sm-4 col-form-label required">Фамилия</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="" v-model="last_name"
                        name="last_name" :class="{'is-invalid': error_fields.last_name }">
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label required">Имя</label>
+            <label class="col-sm-4 col-form-label required">Имя</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="" v-model="first_name"
                        name="first_name" :class="{'is-invalid': error_fields.first_name }">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label required">Отчество</label>
+            <label class="col-sm-4 col-form-label required">Отчество</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="" v-model="patronymic"
                        name="patronymic" :class="{'is-invalid': error_fields.patronymic }">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label required">Электронный ящик</label>
+            <label class="col-sm-4 col-form-label required">Электронный ящик</label>
             <div class="col-sm-8">
                 <input type="email" class="form-control" placeholder="" v-model="email"
                        name="email" :class="{'is-invalid': error_fields.email }"
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label required">Пароль</label>
+            <label class="col-sm-4 col-form-label required">Пароль</label>
             <div class="col-sm-8">
                 <input type="password" class="form-control" placeholder="Пароль" v-model="password"
                        name="password" @keyup.13="save" :class="{'is-invalid': error_fields.password }">
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-8 ml-auto">
+            <div class="col-sm-4 col-sm-8 ml-auto">
                 <button type="submit" @click="save" class="btn btn-outline-primary mt-4" :disabled='loading||success'>
                     <span v-if="loading">Загрузка...</span>
                     <span v-else-if="success">Успешно</span>

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="_l-col col-12">
         <div class="form-group row">
-            <label class="col-form-label required">Электронный ящик</label>
+            <label class="col-sm-4 col-form-label required">Электронный ящик</label>
             <div class="col-sm-8">
                 <input type="email" class="form-control" :class="{'is-invalid': error_fields.email }"
                        placeholder="" name="email" v-model="email"
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label required">Пароль</label>
+            <label class="col-sm-4 col-form-label required">Пароль</label>
             <div class="col-sm-8">
                 <input type="password" class="form-control" :class="{'is-invalid': error_fields.password }"
                        placeholder="Пароль" v-model="password" name="password" @keyup.13="save">
