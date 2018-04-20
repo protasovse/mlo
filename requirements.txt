@@ -58,3 +58,5 @@ django-timezone-field==2.1
 # Морфология
 pymorphy2==0.8
 pymorphy2-dicts-ru
+
+django-bootstrap4==0.0.6
