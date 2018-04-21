@@ -131,6 +131,12 @@ class QuestionsList(TemplateView):
                 'rubric_slug': rubric.slug
             })
 
+        if 'last' in self.request.GET:
+            filters.update({'is_pay': (True,)})
+            url_params.update({
+                'last': True
+            })
+
         if 'paid' in self.request.GET:
             filters.update({'is_pay': (True,)})
             url_params.update({

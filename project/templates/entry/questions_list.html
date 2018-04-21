@@ -132,17 +132,17 @@
                             Юридические консультации по {% if rubric.name %}теме «{{ rubric.name }}»
                         {% else %}российскому законодательству{% endif %}
                         {% else %}
-                            Последние вопросы{% if rubric.name %} по теме «{{ rubric.name }}»{% endif %}
+                            Вопросы{% if rubric.name %} по теме «{{ rubric.name }}»{% endif %}
                         {% endif %} <sup>
                         <small class="text-muted">{{ questions.count }}</small>
                     </sup>
                     </h3>
 
                     <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ current_url }}">Все</a>
-                        </li>
                         {% if user.is_authenticated and user.role == 2 %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ current_url }}?last">Последние</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ current_url }}?unanswered">Без ответа</a>
                             </li>
@@ -153,6 +153,9 @@
                                 <a class="nav-link" href="{{ current_url }}?additionals">C дополнительным вопросом</a>
                             </li>
                         {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ current_url }}">Все</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ current_url }}?free">Бесплатные</a>
                             </li>

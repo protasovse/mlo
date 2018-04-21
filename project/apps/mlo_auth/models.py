@@ -30,9 +30,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(_('Отчество'),
                                   max_length=32, blank=True)
 
-    phone = models.CharField(max_length=15, blank=True, verbose_name=_('Телефон'))
+    phone = models.CharField(max_length=15, blank=True,
+                             verbose_name=_('Телефон'))
 
-    city = models.ForeignKey(Cities, on_delete=models.CASCADE, blank=True, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.CASCADE,
+                             blank=True, null=True,
+                             verbose_name=_('Город'))
 
     is_staff = models.BooleanField(_('Статус персонала'),
                                    default=False,

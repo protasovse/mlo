@@ -49,7 +49,10 @@ class Info(models.Model):
     sex = models.CharField(choices=SEX, max_length=1, null=True, blank=True, verbose_name=_('Пол'))
 
     orig = ImageCropField(blank=True, verbose_name=_('Оригинал'),
-                          upload_to='account/photo/%Y/%m/')
+                          upload_to='account/photo/%Y/%m/',
+                          help_text='Вначале загрузите файл фотографии, нажмите на кнопку «Сохранить данные», потом '
+                                    'отредактируйте область видимости для портретной и квадратной миниатюры. И ещё раз'
+                                    ' сохраните.')
     photo = ImageRatioField('orig', '600x720', verbose_name=_('Фото профиля'))
 
     pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
@@ -80,7 +83,13 @@ class Info(models.Model):
         help_text=_('Несколько абзацев о себе, размещается на странице профиля.')
     )
 
-    signature = models.CharField(max_length=128, blank=True, null=True, verbose_name=_('Подпись'))
+    signature = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+        verbose_name=_('Подпись'),
+        help_text=_('Подпись может выводиться под ответом.')
+    )
 
     class Meta:
         verbose_name = _('Профиль юриста')

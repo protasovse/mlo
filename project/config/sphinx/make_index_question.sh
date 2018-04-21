@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-ps xc|fgrep "searchd" > /dev/null
-./start.sh
+# каталог в котором лежит скрипт
+DIRECTORY=$(cd $(dirname $0) && pwd)
 
-indexer -c ./sphinx.conf --rotate question
+ps xc|fgrep "searchd" > /dev/null
+$DIRECTORY/start.sh
+
+indexer -c $DIRECTORY/sphinx.conf --rotate question
 
 exit 0

@@ -24,7 +24,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
     <script src="https://unpkg.com/vue-select@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-upload-component"></script>
-    <script type="text/javascript" src="http://s1.nice-cream.ru/widget2.2/widget.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--script type="text/javascript" src="http://s1.nice-cream.ru/widget2.2/widget.js"></script-->
+    <!--script src="{% static 'js/allp/init_.js' %}" charset="utf-8"></script-->
+    {% block block_head_js %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -49,7 +52,6 @@
     });
 </script>
 
-<script src="{% static 'js/allp/init_.js' %}" charset="utf-8"></script>
 {% include 'front/widgets/phone.html' %}
 
 </body>

@@ -21,7 +21,9 @@
                 {% endcomment %}
         <div class="col mb-3">
             <div class="container">
-                <div class="row">{% bootstrap_javascript jquery=True %}
+                <div class="row">
+                    {{ form.media }}
+                    {% bootstrap_javascript jquery=True %}
                     <div class="col-md-9 ml-auto">
                         {% bootstrap_formset_errors form %}
                         {% bootstrap_messages %}
