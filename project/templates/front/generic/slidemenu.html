@@ -1,6 +1,6 @@
 <div class="slide-menu">
 
-    <div>
+    <div class="mt-4">
         {% comment %}
         <!-- Убрал потому, что дубрирует информацию на navbar -->
         <p class="text">
@@ -22,8 +22,8 @@
 
         <ul>
             {% if user.is_authenticated and user.role == 2 %}
-                <li><a href="#">Личный кабинет</a></li>
-                <li><a href="{% url 'personal:edit' %}">Редактировать профиль</a></li>
+                <!--li><a href="#">Личный кабинет</a></li-->
+                <li><a href="{% url 'personal:edit' %}" class="font-weight-semibold">Редактировать профиль</a></li>
                 <li><a href="{% url 'questions:list' %}">Отвечать на вопросы</a></li>
             {% else %}
                 <li><a href="{% url 'ask_question' %}">Задать вопрос юристу</a></li>
@@ -31,9 +31,9 @@
                 <!--li><a href="#">Как это работает?</a></li-->
                 <li><a href="{% url 'questions:list' %}">Вопросы и ответы</a></li>
                 <!--li><a href="#">Наши юристы</a></li-->
-                <li><a href="{% url 'reviews_page' %}">Отзывы</a></li>
-                <li><a href="{% url 'about' %}">О проекте</a></li>
             {% endif %}
+            <li><a href="{% url 'reviews_page' %}">Отзывы</a></li>
+            <li><a href="{% url 'about' %}">О проекте</a></li>
         </ul>
     </div>
 

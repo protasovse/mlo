@@ -2,6 +2,8 @@
 {% load static %}
 {% load markdown %}
 
+{% block title %}{{ question.title }} — вопрос №{{ question.id }} на «Мойюрист.онлайн»{% endblock %}
+
 {% block content %}
 
     {# Хедер страницы вопроса #}
@@ -157,6 +159,7 @@
                             <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
                             {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
                         {% endif %}
+
 
                     </aside>
                 </div>

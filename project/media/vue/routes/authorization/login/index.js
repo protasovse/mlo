@@ -48,7 +48,7 @@ export default {
             try {
                 this.form_validate([this.requires_fields]);
                 this.get('/api/user', {email: this.email, password: this.password},
-                    (r) => {window.location.href = '/'},
+                    (r) => {window.location.href = '/вопросы'},
                     (r) => {
                         this.unactive = (r.data.code === 'unactive');
                         this.process_error(r);

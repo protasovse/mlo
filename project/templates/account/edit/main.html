@@ -1,96 +1,21 @@
 {% extends 'account/edit/base.html' %}
-{% load cropping %}
+{% load bootstrap4 %}
 
-{% block account_edit_title %}Основная информация{% endblock %}
+{% block account_edit_title %}Статус, подпись, о себе{% endblock %}
 
 {% block account_edit_form %}
-
-    <div class="card mb-3">
-        <div class="card-body">
-
-            <div class="row">
-
-                <div class="col mb-3" style="max-width: 350px;">
-                    <div class="mb-3 mx-auto">
-                        {% if user.info.photo %}
-                            <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
-                        {% else %}
-                            <img src="/static/img/lyr/person_photo.png">
-                        {% endif %}
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото
-                        </button>
-                    </div>
-                </div>
-
-                <div class="col-md-8 mb-3">
-
-                    <div class="mb-3">
-                        <label for="lastName required">Фамилия</label>
-                        <input type="text" class="form-control" id="lastName" value="{{ user.last_name }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="firstName required">Имя</label>
-                        <input type="text" class="form-control" id="firstName" value="{{ user.first_name }}"
-                               required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="patronymic">Отчество</label>
-                        <input type="text" class="form-control" id="patronymic" value="{{ user.patronymic }}"
-                               required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Пол</label>
-                        <select class="custom-select d-block w-100" id="sex" required>
-                            <option value="М">Мужской</option>
-                            <option value="Ж">Женский</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="birthDate">Дата рождения</label>
-                        <input type="date" class="form-control" id="birthDate"
-                               value="{{ user.info.birth_date|date:"Y-m-d" }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="phone">Телефон</label>
-                        <input type="text" class="form-control" id="phone" value="{{ user.phone }}">
-                        <div class="small text-muted">Для уведомлений, чата. Нигде не публикуется.</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="city">Город</label>
-                        <select class="custom-select d-block w-100" id="city" required>
-                            <option>Введите город или выбирите из списка…</option>
-                            <option selected>{{ user.city }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!--hr class="mb-4">
-
-                <div class="mb-3">
-                    <label for="email">Электронный ящик</label>
-                    <input type="email" class="form-control" id="email" value="{{ user.email }}">
-                </div>
-
+    <div class="row">
+        {{ form.media }}
+        {% bootstrap_javascript jquery=True %}
+        <div class="col mb-3">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="password1">Новый пароль</label>
-                        <input type="password" class="form-control" id="password1">
-                        <div class="small text-muted">Введите новый пароль.</div>
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_messages %}
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="password2">Пароль (еще раз)</label>
-                        <input type="password" class="form-control" id="password2">
-                        <div class="small text-muted">Для подтверждения введите пароль ещё раз.</div>
-                    </div>
-                </div-->
+                </div>
+                {% bootstrap_form form layout='horizontal' %}
             </div>
         </div>
     </div>
-
 {% endblock %}

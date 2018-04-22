@@ -96,6 +96,9 @@
 .question-page_gradient {
   position: relative;
   padding-top: line(3);
+  @include media-breakpoint-down(sm){
+    padding-top: line(1);
+  }
   &:before {
     content: '';
     position: absolute;
@@ -278,11 +281,13 @@
         padding-right: 10px;
         a {
           display: inline-block;
+          width: line(2);
+          height: line(2);
+          border-radius: 50%;
           margin-right: -10px;
+          overflow: hidden;
           img {
-            width: line(2);
-            height: line(2);
-            border-radius: 50%;
+            width: 100%;
           }
         }
       }
@@ -349,3 +354,11 @@
   }
 }
 
+.questions-list_nav {
+  .nav-link {
+    &.active {
+      color: $gray-900;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}

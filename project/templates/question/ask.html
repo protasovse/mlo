@@ -1,14 +1,17 @@
 {% extends 'front/base.html' %}
 {% load static %}
 
+{% block title %}Задать вопрос юристу онлайн бесплатно и без регистрации{% endblock %}
+
 {% block content %}
 
     <section class="blue -container pt-0">
         <div class="win-round mt-0 mt-md-5 -col-md-8 -card -mx-auto -p-3 rec" style="width: 900px;">
-            
-            <h2 class="logo mb-3">Задать вопрос юристу</h2>
 
-            <p class="lead mb-4">Задайте вопрос юристам и адвокатам онлайн и решите вашу проблему сегодня.</p>
+            <h2 class="logo mb-3">Задать вопрос юристу</h2>
+            <p class="lead mb-4">Задайте вопрос юристам и адвокатам онлайн и решите вашу проблему сегодня. Доверьте
+                решение своей проблемы квалифицированным юристам!</p>
+
             <router-view></router-view>
 
         </div>
@@ -18,5 +21,5 @@
 {% endblock %}
 
 {% block block_js %}
-<script src='{% static "ask_question.js" %}'></script>
+    <script src='{% static "ask_question.js" %}'></script>
 {% endblock %}

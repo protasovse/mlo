@@ -1,6 +1,9 @@
 {% extends 'front/base.html' %}
 {% load cropping %}
 
+{% block title %}{{ lawyer.info.status|default:lawyer.get_role_display }}, {{ lawyer.get_full_name }}.
+    {% if lawyer.city.name %}г. {{ lawyer.city.name }}{% endif %}{% endblock %}
+
 {% block content %}
     <div class="lawyer-page">
 
@@ -44,9 +47,33 @@
 
                 <div class="row">
                     <nav class="col-12">
-                        <a href="#" class="active"><i class="icon-paper-text"></i><span> Биография</span></a>
-                        <a href="#"><i class="icon-people"></i><span> Отзывы</span></a>
-                        <a href="#"><i class="icon-message_bubble"></i><span> Ответы</span></a>
+                        <a id="show-bio" href="#" class="active"><i class="icon-paper-text"></i><span> Биография</span></a>
+                        <a id="show-review" href="#"><i class="icon-people"></i><span> Отзывы</span></a>
+                        <a id="show-question" href="#"><i class="icon-message_bubble"></i><span> Ответы</span></a>
+                        <script>
+                            $('#show-bio').click(function (e) {
+                                e.preventDefault();
+                                $('#bio').removeClass('d-none');
+                                $('#review').addClass('d-none');
+                                $('#question').addClass('d-none');
+                            });
+                            $('#show-review').click(function (e) {
+                                e.preventDefault();
+                                $('#review').removeClass('d-none');
+                                $('#bio').addClass('d-none');
+                                $('#question').addClass('d-none');
+                            });
+                            $('#show-question').click(function (e) {
+                                e.preventDefault();
+                                $('#question').removeClass('d-none');
+                                $('#bio').addClass('d-none');
+                                $('#review').addClass('d-none');
+                            });
+                            $('[id ^= show-]').click(function (e) {
+                                $('[id ^= show-]').removeClass('active');
+                                $(this).addClass('active');
+                            });
+                        </script>
                     </nav>
                 </div>
 
@@ -95,14 +122,25 @@
 
                 </div>
 
-                <div id="review" class="row">
-
+                <div id="review" class="d-none row">
                     <div class="container">
                         {% for like in likes %}
                             {% include 'review/generic/review_item.html' with like=like %}
                         {% endfor %}
                         <div class="text-center mb-5">
-                            <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-outline-primary">Все отзывы юриста</a>
+                            <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все отзывы
+                                юриста</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="question" class="d-none row questions-section">
+                    <div class="container">
+                        {% for question in questions %}
+                            {% include 'question/generic/question_item_in_list.html' with item=question show_answers=True %}
+                        {% endfor %}
+                        <div class="text-center mb-5">
+                            <a href="{% url 'questions:list' %}?lawyer={{ lawyer.pk }}" class="btn btn-sm btn-outline-primary">Все консультации</a>
                         </div>
                     </div>
                 </div>

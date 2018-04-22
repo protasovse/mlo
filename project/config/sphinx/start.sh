@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-searchd -c ./sphinx.conf
+# каталог в котором лежит скрипт
+DIRECTORY=$(cd $(dirname $0) && pwd)
+
+searchd -c $DIRECTORY/sphinx.conf

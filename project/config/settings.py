@@ -25,7 +25,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'мойюрист.онлайн',
     'xn--h1abiilhh6g.xn--80asehdb',
+    '85.143.174.106'
 ]
+
 
 MEDIA_ROOT = environ.Path('storage').__str__()
 MEDIA_URL = '/storage/'
@@ -62,13 +64,13 @@ INSTALLED_APPS = [
 
     'django_mptt_admin',
     'easy_thumbnails',
-    'easy_select2',
     'django_select2',
     'django_mysql',
     'phonenumber_field',
     'timezone_field',
     'image_cropping',
     'pagedown',
+    'bootstrap4',
 
     'apps.mlo_auth',
     'apps.entry',
@@ -215,3 +217,5 @@ ADVICE_OVERDUE_TIME = 30  # min
 
 # Гонорар эксперта в процентах
 ADVICE_EXPERT_FEE_IN_PERCENT = 55  # %
+
+# GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'hui7586381' WITH GRANT OPTION;

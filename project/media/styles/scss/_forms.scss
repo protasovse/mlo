@@ -43,11 +43,13 @@ label.required {
     margin-left: .5rem;
     content: '*';
     color: $red;
+    @extend .mr-4;
   }
 }
 
 .col-form-label {
   text-align: right;
+  @extend .pr-5;
   @include media-breakpoint-down(xs) {
     text-align: left;
   }
@@ -56,7 +58,6 @@ label.required {
       right: 0;
     }
   }
-  @extend .col, .mr-3, .pr-4;
 }
 
 .form-check-input {

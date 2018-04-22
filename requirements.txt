@@ -16,7 +16,6 @@ git+git://github.com/adamchainz/django-mysql.git
 django-js-asset==1.0.0
 
 # Select2
-django-easy-select2==1.3.4
 django-select2==6.0.0
 
 # Обработка фото, аватор
@@ -59,3 +58,5 @@ django-timezone-field==2.1
 # Морфология
 pymorphy2==0.8
 pymorphy2-dicts-ru
+
+django-bootstrap4==0.0.6

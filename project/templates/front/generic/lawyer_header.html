@@ -10,7 +10,7 @@
             <div class="lawyer-page_header_r-col">
                 <h1>{{ lawyer.get_full_name }}</h1>
                 <div class="lead">{{ lawyer.info.short|default:lawyer.get_role_display }}<br>
-                    <small>{{ lawyer.info.city.name }}</small>
+                    <small>{{ lawyer.city.name }}</small>
                 </div>
                 <a class="btn btn-sm btn-white" href="{% url "ask_question" %}">Задать вопрос <i
                         class="icon-message_bubble ml-2"></i></a>

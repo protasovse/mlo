@@ -112,10 +112,6 @@ venv.bak/
 /project/storage/
 /project/apps/front/template/front/mainpage.html
 /project/media/styles/scss/.sass-cache/
-/project/media/vue/bundles/
+# s/project/media/vue/bundles/
 /project/static/css/style.css.map
 project/apps/svem_auth/fixtures/
-project/static/img/bgr/question_bg.jpg
-project/static/img/dropdown/
-project/static/img/lyr/person_photo.png
-project/static/img/lyr/person_pic.png

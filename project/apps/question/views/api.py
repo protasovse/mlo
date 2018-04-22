@@ -39,7 +39,7 @@ class QuestionView(ApiView):
         city_id = params['city[id]'] if 'city[id]' in params.keys() else None
         params['city_id'] = int(city_id) or None
 
-        params['rubric_id'] = params['rubric[id]']
+        params['rubric_id'] = params.get('rubric[id]', None)
 
         if params['city_id']:
             city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')

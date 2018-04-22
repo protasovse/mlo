@@ -127,40 +127,31 @@
                 </div>
 
                 <div class="row">
-                    <h3 class="answer-list-head">
+                    <h3 class="answer-list-head" title="{{ questions.count }}">
                         {% if not user.is_authenticated or user.role == 1 %}
                             Юридические консультации по {% if rubric.name %}теме «{{ rubric.name }}»
                         {% else %}российскому законодательству{% endif %}
                         {% else %}
-                            Последние вопросы{% if rubric.name %} по теме «{{ rubric.name }}»{% endif %}
+                            Вопросы{% if rubric.name %} по теме «{{ rubric.name }}»{% endif %}
                         {% endif %} <sup>
-                        <small class="text-muted">{{ questions.count }}</small>
+                        <!--small class="text-muted">{{ questions.count }}</small-->
                     </sup>
                     </h3>
 
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ current_url }}">Все</a>
-                        </li>
+                    <div class="nav questions-list_nav">
                         {% if user.is_authenticated and user.role == 2 %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}?unanswered">Без ответа</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}?my_advice">Мои платные заявки</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}?additionals">C дополнительным вопросом</a>
-                            </li>
+                            <a class="nav-link{% if cur_url_param is None %} active{% endif %}" href="{{ current_url }}">Последние</a>
+                            <a class="nav-link{% if cur_url_param == 'unanswered' %} active{% endif %}" href="{{ current_url }}?unanswered">Без ответа</a>
+                            {% if user.is_expert %}
+                                <a class="nav-link{% if cur_url_param == 'my_advice' %} active{% endif %}" href="{{ current_url }}?my_advice">Мои платные заявки</a>
+                            {% endif %}
+                            <a class="nav-link{% if cur_url_param == 'additionals' %} active{% endif %}" href="{{ current_url }}?additionals">C дополнительным вопросом</a>
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ current_url }}?free">Бесплатные</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{{ current_url }}?paid">Платные</a>
-                            </li>
+                            <a class="nav-link{% if cur_url_param is None %} active{% endif %}" href="{{ current_url }}">Все</a>
+                            <a class="nav-link{% if cur_url_param == 'free' %} active{% endif %}" href="{{ current_url }}?free">Бесплатные</a>
+                            <a class="nav-link{% if cur_url_param == 'paid' %} active{% endif %}" href="{{ current_url }}?paid">Платные</a>
                         {% endif %}
-                    </ul>
+                    </div>
                 </div>
 
                 <hr>

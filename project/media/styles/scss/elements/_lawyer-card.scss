@@ -44,13 +44,13 @@
     overflow: hidden;
     p {
       @extend .normal;
-      color: $gray-800;
+      color: $gray-700;
     }
     h6 {
       @extend .subtitle;
     }
     &:after {
-      content: '';
+      // content: '';
       position: absolute;
       z-index: 1;
       bottom: 1px;
