@@ -1,3 +1,5 @@
+from django.contrib.sites.models import Site
+
 from config import flash_messages
 from django.http import Http404
 from django.utils import timezone
@@ -17,7 +19,7 @@ from django.shortcuts import get_object_or_404
 
 from config.flash_messages import QUESTION_CREATE_PAID, QUESTION_CREATE_BLOCKED
 from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE, PAYMENT_FORM_TITLE, PAYMENT_FORM_TARGET, \
-    ADVICE_COST
+    ADVICE_COST, SITE_PROTOCOL
 
 
 class QuestionDetail(TemplateView):
@@ -61,7 +63,10 @@ class QuestionDetail(TemplateView):
 
         context.update({
             'mess': messages.get_messages(self.request),
-            'answers': Answer.published.related_to_question(question)
+            'answers': Answer.published.related_to_question(question),
+            'site': Site.objects.get_current(),
+            'protocol': SITE_PROTOCOL,
+            'question_url': reverse('question:detail', kwargs={'pk': question.pk})
         })
 
         if self.request.user.is_authenticated and self.request.user.role == 2:
