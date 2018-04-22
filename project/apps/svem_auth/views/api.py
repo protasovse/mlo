@@ -7,6 +7,7 @@ from apps.svem_system.views.api import ApiView
 from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_auth.models.users import UserHash
 
+
 class AppUser(ApiView):
     @classmethod
     def post(cls, request):

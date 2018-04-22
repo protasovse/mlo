@@ -8593,6 +8593,10 @@ body.open-slide-menu {
 .rubrics-list-item a {
   color: #545454; }
 
+.questions-list_nav .nav-link.active {
+  color: #212121;
+  font-weight: 600; }
+
 .lawyer-medal, .entry .answer-header_medal {
   color: #878787; }
   .lawyer-medal .item, .entry .answer-header_medal .item {

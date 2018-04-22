@@ -117,6 +117,7 @@ class QuestionsList(TemplateView):
         query = ''
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
         url_params = {}  # GET параметры для url, используется в пагинаторе
+        cur_url_param = None  # Текущий url параметр для определиния активной ссылки в навигации
 
         # Вопросы
         if rubric:
@@ -131,35 +132,33 @@ class QuestionsList(TemplateView):
                 'rubric_slug': rubric.slug
             })
 
-        if 'last' in self.request.GET:
-            filters.update({'is_pay': (True,)})
-            url_params.update({
-                'last': True
-            })
-
         if 'paid' in self.request.GET:
             filters.update({'is_pay': (True,)})
             url_params.update({
                 'paid': True
             })
+            cur_url_param = 'paid'
 
         if 'free' in self.request.GET:
             filters.update({'is_pay': (False,)})
             url_params.update({
                 'free': True
             })
+            cur_url_param = 'free'
 
         if 'unanswered' in self.request.GET:
             filters.update({'reply_count': (0,)})
             url_params.update({
                 'unanswered': True
             })
+            cur_url_param = 'unanswered'
 
         if 'lawyer' in self.request.GET:
             filters.update({'answers_authors_id': (int(self.request.GET['lawyer']),)})
             url_params.update({
                 'lawyer': self.request.GET['lawyer']
             })
+            cur_url_param = 'lawyer'
 
         if self.request.user.is_authenticated and self.request.user.role == 2:
             if 'my_advice' in self.request.GET:
@@ -167,12 +166,14 @@ class QuestionsList(TemplateView):
                 url_params.update({
                     'my_advice': True
                 })
+                cur_url_param = 'my_advice'
 
             if 'additionals' in self.request.GET:
                 filters.update({'additionals_user_id': (self.request.user.pk,)})
                 url_params.update({
                     'additionals': True
                 })
+                cur_url_param = 'additionals'
 
         # filters.update({'answers_authors_id': (1,)})
 
@@ -182,6 +183,7 @@ class QuestionsList(TemplateView):
         context.update({
             'current_url': current_url,
             'url_params': "?" + urlencode(url_params) if url_params else '',
+            'cur_url_param': cur_url_param,
             'total_found': question_set.count,
             'current_page': current_page,
             'next_page': current_page + 1 if current_page * self.page_size < question_set.count else None,

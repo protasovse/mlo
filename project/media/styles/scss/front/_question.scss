@@ -354,3 +354,11 @@
   }
 }
 
+.questions-list_nav {
+  .nav-link {
+    &.active {
+      color: $gray-900;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}

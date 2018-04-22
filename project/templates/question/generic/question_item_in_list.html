@@ -9,7 +9,7 @@
         <h5 class="r-col mb-0 mb-lg-3">
             <a target="_blank" href="{% url 'question:detail' item.pk %}">
                 {% if item.title %}{{ item.title|safe }}{% else %}{{ item.content|truncatechars:64 }}{% endif %}</a>
-            {% if 0 and item.is_pay %}
+            {% if item.is_pay %}
                 <small class="pl-1 badge badge-price badge-success">{{ item.advice.cost }} ₽</small>
                 <small class="pl-1 badge badge-price badge-light">{{ item.advice.get_status_display }}</small>
             {% endif %}
