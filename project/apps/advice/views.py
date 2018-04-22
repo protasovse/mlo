@@ -17,6 +17,9 @@ def advice_to_payment_confirmed(request):
     # data = request.GET
     data = request.POST
 
+    if not request.POST:
+        return HttpResponse('Нет данных')
+
     result_string = "&".join((
         data['notification_type'],
         data['operation_id'],
