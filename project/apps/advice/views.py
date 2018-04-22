@@ -13,6 +13,12 @@ def advice_to_payment_confirmed(request):
     ?operation_id=904035776918098009&notification_type=p2p-incoming&datetime=2014-04-28T16:31:28Z&sha1_hash=8cd2341395aa45f4bfe1f5d5079b878949d3e3cc&sender=41003188981230&codepro=false&currency=643&amount=800.00&withdraw_amount=800.00&label=advice.1500026
     8cd2341395aa45f4bfe1f5d5079b878949d3e3cc
     """
+
+    import sys
+    sys.stdout = open('/tmp/payment.log', 'w')
+    print(request.POST)
+    print(request.GET)
+
     resp = ''
     # data = request.GET
     data = request.POST
