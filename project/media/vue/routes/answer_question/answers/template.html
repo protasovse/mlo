@@ -1,0 +1,312 @@
+<div id="answer_block">
+    <div id="form">
+        <div class="form-group">
+            <label for="reply" class="h6 mb-2">title</label>
+            <textarea class="form-control" v-model="content" :class="{'is-invalid': error_fields.content }" id="reply"
+                      rows="5" placeholder="Мой ответ…"></textarea>
+            <span class="invalid-feedback" v-if="error_fields.content">error_fields.content </span>
+        </div>
+        <div class="form-group">
+            <button type="submit" @click="save" class="btn btn-primary">Отправить</button>
+            <span class="ml-3 normal"><a href="#"><i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
+        </div>
+    </div>
+
+    <div class="row question-page_gradient">
+        <div class="question-page_main-part">
+            <div class="row">
+                <h3 class="answer-list-head">Ответы юристов
+                    <span class="d-none answer__counter" itemprop="answerCount">2</span>
+                </h3>
+            </div>
+
+
+
+
+            <div v-for="answer_data in answers"
+                 role="answer"
+                 data-answer_id="{{answer_data.id}}"
+                 data-thread="{{answer_data.thread}}"
+                 class="answer entry"
+                 :class="{'answer-push': answer_data.parent_id }"
+            >
+
+                <hr class="my-4">
+                <header class="answer-header">
+                    <div class="question-page_l-col">
+                        <a class="answer-header_photo" href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/">
+                            <img src="/static/img/lyr/person_pic.png" alt="Дмитриев Кирилл Валерьевич"/>
+                        </a>
+                    </div>
+
+
+                    <div class="question-page_r-col">
+                        <h6 class="mb-0" itemprop="name">
+                            <a href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/">Дмитриев Кирилл Валерьевич</a>
+                        </h6>
+
+
+
+                        
+                        <div class="normal text-muted">Юрист,</div>
+
+                        <div class="answer-header_medal mt-3">
+                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
+                                class="v">0</span></span>
+                            <span class="item" title="Стаж"><i class="icon-medal"></i><span
+                                    class="v">12,6 лет</span></span>
+                            <span class="item" title="Всего консультаций"><i class="icon-forum"></i><span
+                                    class="v">57345</span></span>
+                            <!--br><span class="item" title="Общаться с юристом в чате"><i class="icon-message_bubble"></i>
+                                <a class="v" href="#">Задать вопрос</a></span-->
+                        </div>
+
+                    </div>
+
+                </header>
+
+
+                <div class="row">
+
+                    <div class="question-page_l-col">
+                        <time class="subtitle d-block mt-1" itemprop="dateCreated"
+                              datetime=""></time>
+                        <span class="d-block">№ 1000001</span>
+
+                    </div>
+
+                    <div class="question-page_r-col content">
+
+
+                        <div class="text" itemprop="text"><p>Уважаемый Денис!</p>
+
+                            <p>Если первая отсрочка была не по учебе в учебном заведении такого же уровня, как СТАНКИН,
+                                то на основании ст. 24 п.2. п/п &quot;а&quot; Вы имеете право на отсрочку в случае
+                                поступления в учебное заведения того же уровня. </p>
+
+                            <p>С уважением,</p>
+
+                            <p>Дмитриев Кирилл Валерьевич.</p>
+
+                            <p>ПУ ГУВД</p>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <footer class="answer-footer row">
+
+                    <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
+
+                        <div class="answer-footer-action normal align-self-start align-self-md-center">
+
+
+                            <a href="#">Дополнительный вопрос</a>
+
+
+                        </div>
+
+                        <div class="align-self-end mt-3 mt-sm-0">
+                            <div class="answer-like">
+
+                                <div class="answer-like-sign dropdown">
+
+
+                                    Ответ полезен?
+
+
+                                </div>
+                                <div class="answer-like-block">
+
+                                    <i class="icon-dislike order-1"></i>
+                                    <i class="icon-like order-3"></i>
+
+                                    <span class=" order-2"
+                                    >0</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="d-none question-page_r-col ml-auto mt-4">
+
+                    </div>
+
+                </footer>
+
+            </div>
+
+
+
+
+
+
+
+            <div role="answer" data-answer_id="1000046" data-thread="1000046"
+                 class="answer entry">
+
+                <hr class="my-4">
+
+
+                <header class="answer-header">
+
+                    <div class="question-page_l-col">
+                        <a class="answer-header_photo" href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/24/">
+                            <img src="" alt="Канюков Сергей Константинович"/>
+                        </a>
+                    </div>
+
+
+                    <div class="question-page_r-col">
+
+
+                        <h6 class="mb-0" itemprop="name">
+                            <a href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/24/">Канюков Сергей Константинович</a>
+                        </h6>
+
+
+                        <div class="normal text-muted"
+                        >Юрист, Санкт-Петербург
+                        </div>
+
+
+                        <div class="answer-header_medal mt-3">
+                        <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
+                                class="v">0</span></span>
+                            <span class="item" title="Стаж"><i class="icon-medal"></i><span
+                                    class="v">12,6 лет</span></span>
+                            <span class="item" title="Всего консультаций"><i class="icon-forum"></i><span
+                                    class="v">57345</span></span>
+                            <!--br><span class="item" title="Общаться с юристом в чате"><i class="icon-message_bubble"></i>
+                                <a class="v" href="#">Задать вопрос</a></span-->
+                        </div>
+
+                    </div>
+
+                </header>
+
+
+                <div class="row">
+
+
+                    <div class="question-page_l-col">
+                        <time class="subtitle d-block mt-1" itemprop="dateCreated"
+                              datetime=""></time>
+                        <span class="d-block">№ 1000046</span>
+
+                    </div>
+
+                    <div class="question-page_r-col content">
+
+
+                        <div class="text" itemprop="text"><p>вам нужно заняться не отчислением, есть опасность призыва в
+                            этот период, а переводом, но так, чтобы не попасть под отчисление за неуспеваемость, далее
+                            читайте ответ Дмитриева К.В. после данного уточнения он вполне подходит</p>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <footer class="answer-footer row">
+
+                    <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
+
+                        <div class="answer-footer-action normal align-self-start align-self-md-center">
+
+
+                            <a href="#">Дополнительный вопрос</a>
+
+
+                        </div>
+
+                        <div class="align-self-end mt-3 mt-sm-0">
+                            <div class="answer-like">
+
+                                <div class="answer-like-sign dropdown">
+
+
+                                    Ответ полезен?
+
+
+                                </div>
+                                <div class="answer-like-block">
+
+                                    <i class="icon-dislike order-1"></i>
+                                    <i class="icon-like order-3"></i>
+
+                                    <span class=" order-2"
+                                    >0</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="d-none question-page_r-col ml-auto mt-4">
+
+                    </div>
+
+                </footer>
+
+            </div>
+
+
+        </div>
+
+
+        <aside class="question-page_aside-part">
+
+
+            <h4 class="mb-4">1Все ответы экспертов на этот вопрос:</h4>
+
+            <div class="lawyer-list">
+
+
+                <div role="answers_selector" data-answer_id="1000001" class="lawyer-list_item lawyer-list_item-action">
+                    <div class="lawyer-list_header">
+                <span class="ph">
+                    <img src="/static/img/lyr/person_pic.png" alt="Дмитриев Кирилл Валерьевич"/>
+                </span>
+                        <div class="nm">Дмитриев Кирилл Валерьевич</div>
+                    </div>
+                    <p class="lawyer-list_body">Уважаемый Денис! Если первая отсрочка была не по учебе в ...</p>
+                </div>
+
+
+                <div role="answers_selector" data-answer_id="1000046" class="lawyer-list_item lawyer-list_item-action">
+                    <div class="lawyer-list_header">
+                <span class="ph">
+                    <img src="" alt="Канюков Сергей Константинович"/>
+                </span>
+                        <div class="nm">Канюков Сергей Константинович</div>
+                    </div>
+                    <p class="lawyer-list_body">вам нужно заняться не отчислением, есть опасность призыва в этот ...</p>
+                </div>
+
+
+            </div>
+
+            <!--script>
+                $('[role=answers_selector]').on('click', function () {
+                    let id = this.getAttribute('data-answer_id');
+                    $('[role="answer"]').hide();
+                    $('[role="answer"][data-thread="'+id+'"]').show();
+                })
+            </script-->
+
+
+        </aside>
+
+    </div>
+
+
+</div>

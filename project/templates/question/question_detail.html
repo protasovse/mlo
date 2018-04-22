@@ -128,45 +128,46 @@
 
         {# Если есть ответы  #}
 
-        <div class="row question-page_gradient">
+        <div id="answer">
+            <router-view>
+                <div class="row question-page_gradient">
+                    <div class="question-page_main-part">
+                        {# Основная часть — ответы #}
+                        {% if question.reply_count %}
+                            {# Ответы #}
+                            <div class="row">
+                                <h3 class="answer-list-head">Ответы юристов
+                                    <span class="d-none answer__counter"
+                                          itemprop="answerCount">{{ question.reply_count }}</span>
+                                </h3>
+                            </div>
 
-            <div class="question-page_main-part">
+                            {% for answer in answers %}
+                                {% include 'entry/generic/answer_item.html' with item=answer %}
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
 
-                {# Основная часть — ответы #}
-                {% if question.reply_count %}
-                    {# Ответы #}
-                    <div class="row">
-                        <h3 class="answer-list-head">Ответы юристов
-                            <span class="d-none answer__counter"
-                                  itemprop="answerCount">{{ question.reply_count }}</span>
-                        </h3>
                     </div>
 
-                    {% for answer in answers %}
-                        {% include 'entry/generic/answer_item.html' with item=answer %}
-                    {% endfor %}
-                {% else %}
-                {% endif %}
+                    {# Боковая колонка 2  #}
+                    <aside class="question-page_aside-part">
 
-            </div>
+                        {% if question.reply_count %}
+                            <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
+                            {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
+                        {% endif %}
 
-            {# Боковая колонка 2  #}
-            <aside class="question-page_aside-part">
-
-                {% if question.reply_count %}
-                    <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
-                    {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
-                {% endif %}
-
-            </aside>
-
+                    </aside>
+                </div>
+            </router-view>
         </div>
-
 
     </div>
 
 {% endblock %}
 
 {% block block_js %}
-    <script src='{% static "question.js" %}'></script>
+    {#  если не авторизован - не грузить этот скрипт #}
+    <script src='{% static "answer_question.js" %}'></script>
 {% endblock %}

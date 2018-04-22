@@ -291,6 +291,14 @@ class Answer(Entry):
         """
         return self.likes.filter(user=self.on_question.author).first()
 
+    def get_public_data(self):
+        return {
+            'id': self.id,
+            'parent_id': self.parent_id,
+            'thread': self.thread,
+            'content': self.content,
+        }
+
     def save(self, *args, **kwargs):
 
         print(self.pk)

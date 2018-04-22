@@ -36,7 +36,8 @@
     "webpack": "^3.11.0"
   },
   "devDependencies": {
-    "babel-preset-react-optimize": "git+https://github.com/BjornMelgaard/babel-react-optimize.git#fix/babel-7"
+    "babel-preset-react-optimize": "git+https://github.com/BjornMelgaard/babel-react-optimize.git#fix/babel-7",
+    "webpack-cli": "^2.0.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -4,7 +4,7 @@ module.exports = {
     "entry": {
         authorization: "./vue/instances/authorization.js",
         ask_question: "./vue/instances/ask_question.js",
-        question: "./vue/instances/question.js",
+        answer_question: "./vue/instances/answer_question.js",
     },
     "output": {
         "path": path.resolve(__dirname, 'vue', 'bundles'),

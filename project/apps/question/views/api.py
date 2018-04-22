@@ -4,7 +4,7 @@ from phonenumbers import PhoneNumberFormat, format_number, parse
 
 from apps.advice.models import Advice
 from apps.svem_system.views.api import ApiView
-from apps.entry.models import Question
+from apps.entry.models import Question, Answer
 from django.contrib.auth import get_user_model
 from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED
@@ -12,7 +12,6 @@ from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
-from django.contrib.auth import logout
 
 from config.settings import ADVICE_COST
 
@@ -86,3 +85,12 @@ class QuestionView(ApiView):
             'id': q.id,
             'status': q.status
         }
+
+
+class AnswersView(ApiView):
+    @classmethod
+    def get(cls, request):
+        question = Question.objects.get(pk=request.GET['id'])
+        if question.status != 'public':
+            return []
+        return [a.get_public_data() for a in Answer.published.related_to_question(question)]

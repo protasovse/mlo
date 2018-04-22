@@ -16,6 +16,7 @@ urlpatterns = [
     path("user", auth_api.AppUser.as_view()),
     path('rubric', rubric_api.Rubrics.as_view()),
     path('question', question_api.QuestionView.as_view()),
+    path('question/answers', question_api.AnswersView.as_view()),
     path('city/search', sxgeo_api.City.as_view()),
     path('city/ip', sxgeo_api.CityIp.as_view()),
     path('city/default', sxgeo_api.CityDefault.as_view())

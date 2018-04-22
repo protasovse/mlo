@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^advice/', include('apps.advice.urls')),
 
     re_path('^задать-вопрос/', AskQuestion.as_view(), name='ask_question'),
-
     url(r'^вопрос/', include('apps.question.urls', namespace='question')),
     url(r'^вопросы/', include('apps.entry.urls.questions', namespace='questions')),
     url(r'^личный-кабинет/вопросы/', include('apps.entry.urls.personal_questions', namespace='personal_questions')),
