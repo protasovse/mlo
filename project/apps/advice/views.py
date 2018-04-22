@@ -16,8 +16,11 @@ def advice_to_payment_confirmed(request):
 
     import sys
     sys.stdout = open('/tmp/payment.log', 'w')
+    print("Тест55")
     print(request.POST)
     print(request.GET)
+    print(request)
+    sys.stdout.close()
 
     resp = ''
     # data = request.GET
