@@ -91,6 +91,22 @@ class Info(models.Model):
         help_text=_('Подпись может выводиться под ответом.')
     )
 
+    review_count = models.IntegerField(
+        verbose_name=_('Количество отзывов'),
+        default=0,
+    )
+
+    answer_count = models.IntegerField(
+        verbose_name=_('Количество консультаций'),
+        default=0,
+    )
+
+    stage = models.IntegerField(
+        verbose_name=_('Стаж, лет'),
+        default=0,
+        help_text=_('Считается на основе опыта работы (Experience).')
+    )
+
     class Meta:
         verbose_name = _('Профиль юриста')
         verbose_name_plural = _('Профили юристов')

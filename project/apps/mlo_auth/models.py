@@ -134,7 +134,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('lawyer_page', kwargs={'id': self.pk})
 
     def save(self, *args, **kwargs):
-        user = super(User, self).save(*args, **kwargs)
 
         if self.pk and self.role == 2:
             from apps.advice.utils import queue_add_user, queue_update, queue_del_user
@@ -145,7 +144,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                 queue_del_user(self.pk)
             queue_update()
 
-        return user
+        return super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.get_full_name
