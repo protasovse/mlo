@@ -3,7 +3,8 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
-from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm
+from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm, \
+    AdviceSchedulerForm
 
 
 class UserEdit(FormView):
@@ -73,3 +74,16 @@ class ExperienceEdit(FormView):
         form.save()
         messages.success(self.request, 'Данные сохранены')
         return super(ExperienceEdit, self).form_valid(form)
+
+
+class AdviceSchedulerEdit(FormView):
+    success_url = reverse_lazy('account:edit_scheduler')
+
+    def get_form(self, form_class=None):
+        post = self.request.POST if self.request.method == 'POST' else None
+        return AdviceSchedulerForm(post, instance=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Данные сохранены')
+        return super(AdviceSchedulerEdit, self).form_valid(form)

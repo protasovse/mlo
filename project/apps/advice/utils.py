@@ -5,19 +5,23 @@ from apps.advice.models import Queue, Scheduler
 
 def queue_update():
     """
-    Здесь нужно проверить условия, может ли пользователь быть в очереди и обновить его активность.
+    Проверяет, могут ли пользователи быть в очереди, и обновляет их активность.
+    Если в планировщике стоит галочка is_available и текущее время попадает в
+    рабочий временной промежуток юриста.
     """
     cursor = connection.cursor()
     cursor.execute("""
         START TRANSACTION;
         UPDATE `advice_queue` SET `is_active` = false;
         UPDATE `advice_queue` SET `is_active` = true
-        WHERE `expert_id` IN (
-            SELECT `expert_id` FROM `advice_scheduler` 
-            WHERE
-                `is_available` AND
-                (CURTIME() >= `begin` AND CURTIME() <= `end`) AND
-                (`weekend` OR WEEKDAY(NOW()) NOT IN (5, 6))
+        WHERE `expert_id` IN (SELECT `id` FROM `mlo_new`.`mlo_auth_user` WHERE `is_expert` = 1) AND
+        
+              `expert_id` IN (
+                    SELECT `expert_id` FROM `advice_scheduler` 
+                    WHERE
+                        `is_available` AND
+                        (CURTIME() >= `begin` AND CURTIME() <= `end`) AND
+                        (`weekend` OR WEEKDAY(NOW()) NOT IN (5, 6))
         );
         COMMIT;
     """)
@@ -25,7 +29,7 @@ def queue_update():
 
 def queue_shift():
     """
-    Меняет очерёдность в очереди
+    Меняет очерёдность в очереди: 1-го активного — в конец.
     """
     cursor = connection.cursor()
     cursor.execute("""
@@ -52,7 +56,7 @@ def queue_get_first():
 
 def queue_add_user(user_id):
     """
-    Добавляет пользователя в очередь
+    Добавляет пользователя в очередь, если его там нет
     """
     cursor = connection.cursor()
     cursor.execute("""

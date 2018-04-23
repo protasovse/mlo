@@ -83,7 +83,8 @@ class Advice(models.Model):
 
     # Назначить эксперта
     def appoint_expert(self):
-        from apps.advice.utils import queue_get_first
+        from apps.advice.utils import queue_get_first, queue_update
+        queue_update()   # обновим очередь
         expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
         self.expert = expert
         self.save(update_fields=['expert'])

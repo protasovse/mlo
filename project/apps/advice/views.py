@@ -2,11 +2,14 @@ import hashlib
 
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+
 from apps.advice.models import Advice
 from apps.entry.models import Question
 from config.settings import MONEY_YANDEX_SECRET
 
 
+@csrf_exempt
 def advice_to_payment_confirmed(request):
     """
     http://мойюрист.онлайн/advice/to_payment_confirmed — url подтверждения

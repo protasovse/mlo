@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 
+from apps.advice.models import Scheduler
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
 from apps.sxgeo.models import Cities
 
@@ -131,6 +132,20 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse('lawyer_page', kwargs={'id': self.pk})
+
+    def save(self, *args, **kwargs):
+        user = super(User, self).save(*args, **kwargs)
+
+        if self.pk and self.role == 2:
+            from apps.advice.utils import queue_add_user, queue_update, queue_del_user
+            if self.is_expert:
+                Scheduler.objects.get_or_create(expert_id=self.pk)
+                queue_add_user(self.pk)
+            else:
+                queue_del_user(self.pk)
+            queue_update()
+
+        return user
 
     def __str__(self):
         return self.get_full_name
