@@ -150,6 +150,7 @@
                             <a class="nav-link{% if cur_url_param is None %} active{% endif %}" href="{{ current_url }}">Все</a>
                             <a class="nav-link{% if cur_url_param == 'free' %} active{% endif %}" href="{{ current_url }}?free">Бесплатные</a>
                             <a class="nav-link{% if cur_url_param == 'paid' %} active{% endif %}" href="{{ current_url }}?paid">Платные</a>
+                            <a class="nav-link{% if cur_url_param == 'my' %} active{% endif %}" href="{{ current_url }}?my">Мои вопросы</a>
                         {% endif %}
                     </div>
                 </div>

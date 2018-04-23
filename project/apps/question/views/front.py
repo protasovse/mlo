@@ -180,6 +180,13 @@ class QuestionsList(TemplateView):
                     'additionals': True
                 })
                 cur_url_param = 'additionals'
+        else:
+            if 'my' in self.request.GET:
+                filters.update({'author_id': (self.request.user.pk,)})
+                url_params.update({
+                    'my': True
+                })
+                cur_url_param = 'my'
 
         # filters.update({'answers_authors_id': (1,)})
 

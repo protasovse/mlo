@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from apps.account.models import Case, Education, Experience, Contact
+from apps.advice.models import Scheduler
 from apps.mlo_auth.models import User
 from django.contrib.auth.forms import AuthenticationForm as AdminAuthenticationForm
 from django.contrib.auth.views import LoginView as AdminLoginView
@@ -37,16 +38,32 @@ class ExperienceInLine(admin.StackedInline):
     classes = ('collapse', 'collapse-closed')
 
 
-class MloUserAdmin(UserAdmin):
+def make_expert(modeladmin, request, queryset):
+    queryset.update(is_expert=True)
+    from apps.advice.utils import queue_add_user, queue_update
+    for exp in queryset.all():
+        Scheduler.objects.get_or_create(expert_id=exp.pk)
+        queue_add_user(exp.pk)
+make_expert.short_description = "Сделать пользователя экспертом"
 
+
+def make_non_expert(modeladmin, request, queryset):
+    queryset.update(is_expert=False)
+    from apps.advice.utils import queue_del_user
+    for exp in queryset.all():
+        queue_del_user(exp.pk)
+make_non_expert.short_description = "Убрать пользователя из экспертов"
+
+
+class MloUserAdmin(UserAdmin):
     add_form = UserCreationForm
 
-    list_display = ('id', 'get_full_name', 'email', 'is_staff', 'is_active', 'role', )
+    list_display = ('id', 'get_full_name', 'email', 'is_staff', 'is_active', 'role', 'is_expert',)
 
     list_filter = ('is_active', 'role', 'is_expert')
 
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'date_joined', 'phone', 'city', )}),
+        (None, {'fields': ('email', 'password', 'date_joined', 'phone', 'city',)}),
         (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff', 'is_expert')}),
 
@@ -58,13 +75,15 @@ class MloUserAdmin(UserAdmin):
             'fields': ('first_name', 'last_name', 'role', 'email', 'password1', 'password2'),
         }),
     )
-    search_fields = ('email', 'first_name', 'last_name', )
+    search_fields = ('email', 'first_name', 'last_name',)
 
-    autocomplete_fields = ('city', )
+    autocomplete_fields = ('city',)
     ordering = ('id',)
     list_per_page = 15
     filter_horizontal = ()
     inlines = (ContactInLine, CaseInLine, EducationInLine, ExperienceInLine)
+
+    actions = [make_expert, make_non_expert]
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)
