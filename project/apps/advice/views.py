@@ -2,6 +2,7 @@ import hashlib
 
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 
@@ -19,9 +20,9 @@ def advice_to_payment_confirmed(request):
     """
 
     import sys
-    sys.stdout = open('/tmp/payment.log', 'w')
+    sys.stdout = open('/tmp/payment.log', 'a')
+    print(timezone.now())
     print(request.POST)
-    print(request.GET)
 
     resp = ''
     # data = request.GET
@@ -73,6 +74,7 @@ def advice_to_payment_confirmed(request):
         resp = 'Хеш неверен! Проверьте секретное слово'
 
     print(resp)
+    print('----------------------------------------------')
     sys.stdout.close()
 
     return HttpResponse(resp)

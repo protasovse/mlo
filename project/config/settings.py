@@ -201,7 +201,7 @@ HOT_LINE_PHONES = {
 
 
 # Платёжная информация об money.yandex аккаунте
-MONEY_YANDEX_SECRET = 'FT4aTj51dQLblW6HQxjxqkfT'
+MONEY_YANDEX_SECRET = 'bhpC6s2sVFnJQF8l/b3K9nV0'
 
 # Номер кошелька для оплаты
 MONEY_YANDEX_PURSE = 410014165217866
