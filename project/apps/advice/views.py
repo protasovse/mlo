@@ -2,6 +2,7 @@ import hashlib
 
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.advice.models import Advice
@@ -32,17 +33,20 @@ def advice_to_payment_confirmed(request):
     if not request.POST:
         return HttpResponse('Нет данных')
 
-    result_string = "&".join((
-        data['notification_type'],
-        data['operation_id'],
-        data['amount'],
-        data['currency'],
-        data['datetime'],
-        data['sender'],
-        data['codepro'],
-        MONEY_YANDEX_SECRET,
-        data['label']
-    ))
+    try:
+        result_string = "&".join((
+            data['notification_type'],
+            data['operation_id'],
+            data['amount'],
+            data['currency'],
+            data['datetime'],
+            data['sender'],
+            data['codepro'],
+            MONEY_YANDEX_SECRET,
+            data['label']
+        ))
+    except MultiValueDictKeyError:
+        return HttpResponse('Неверные данные')
 
     sha = hashlib.sha1(result_string.encode()).hexdigest()
     # print(sha)
