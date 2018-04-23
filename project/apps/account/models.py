@@ -57,11 +57,11 @@ class Info(models.Model):
 
     pic = ImageRatioField('orig', '300x300', verbose_name=_('Миниатюра'))
 
-    status = models.CharField(
+    title = models.CharField(
         max_length=64,
         null=True,
         blank=True,
-        verbose_name=_('Статус'),
+        verbose_name=_('Заголовок'),
         help_text=_('Например: «Семейный юрист», «Юрист по трудовым спорам», «Адвокат по земельным вопросам в Уфе».'
                     ' до 64 символов, можно указать регион. Нельзя указывать контактные данные!')
     )
@@ -100,6 +100,7 @@ class Info(models.Model):
 
 
 class Contact(AccountBase):
+
     C_EMAIL = 'Электронный ящик'
     C_PHONE = 'Телефон'
     C_ADDRESS = 'Адрес'
@@ -173,7 +174,8 @@ class Education(AccountBase):
                                               blank=True)
 
     diplom = models.ImageField(_('Копия диплома'),
-                               upload_to='account/education/%Y/%m/', blank=True)
+                               upload_to='account/education/%Y/%m/', blank=True,
+                               help_text='Приложите копию диплома, что бы подтвердить своё образование')
 
     checked = models.BooleanField(_('Подтверждено'), default=False)
 

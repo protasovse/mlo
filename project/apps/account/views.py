@@ -3,11 +3,10 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
-from apps.account.forms import AccountInfoForm, UserForm
+from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm
 
 
 class UserEdit(FormView):
-    queryset = get_user_model().objects.all()
     success_url = reverse_lazy('account:edit_regdata')
 
     def get_form(self):
@@ -21,7 +20,6 @@ class UserEdit(FormView):
 
 
 class InfoEdit(FormView):
-    queryset = get_user_model().objects.select_related('info').all()
     success_url = reverse_lazy('account:edit')
 
     def get_form(self, form_class=None):
@@ -33,7 +31,45 @@ class InfoEdit(FormView):
         return AccountInfoForm(post, files, instance=self.request.user)
 
     def form_valid(self, form):
-        # form.instance.user = self.request.user
         form.save()
         messages.success(self.request, 'Дополнительная информацию успешно сохранена')
         return super(InfoEdit, self).form_valid(form)
+
+
+class ContactEdit(FormView):
+    success_url = reverse_lazy('account:edit_contact')
+
+    def get_form(self, form_class=None):
+        post = self.request.POST if self.request.method == 'POST' else None
+        return ContactsForm(post, instance=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Данные сохранены')
+        return super(ContactEdit, self).form_valid(form)
+
+
+class EducationEdit(FormView):
+    success_url = reverse_lazy('account:edit_education')
+
+    def get_form(self, form_class=None):
+        post = self.request.POST if self.request.method == 'POST' else None
+        return EducationForm(post, instance=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Данные сохранены')
+        return super(EducationEdit, self).form_valid(form)
+
+
+class ExperienceEdit(FormView):
+    success_url = reverse_lazy('account:edit_experience')
+
+    def get_form(self, form_class=None):
+        post = self.request.POST if self.request.method == 'POST' else None
+        return ExperienceForm(post, instance=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Данные сохранены')
+        return super(ExperienceEdit, self).form_valid(form)
