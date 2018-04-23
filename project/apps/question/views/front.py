@@ -1,3 +1,4 @@
+import urllib.parse
 from django.contrib.sites.models import Site
 
 from config import flash_messages
@@ -66,7 +67,7 @@ class QuestionDetail(TemplateView):
             'answers': Answer.published.related_to_question(question),
             'site': Site.objects.get_current(),
             'protocol': SITE_PROTOCOL,
-            'question_url': reverse('question:detail', kwargs={'pk': question.pk})
+            'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk}))
         })
 
         if self.request.user.is_authenticated and self.request.user.role == 2:
