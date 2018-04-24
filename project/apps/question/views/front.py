@@ -104,9 +104,7 @@ class QuestionsList(TemplateView):
             rubric = get_object_or_404(Rubric, slug=slug)
             rubrics = rubric.get_ancestors(include_self=True)
             rubrics_also_list = rubric.get_children().filter(is_question_rubric=True)
-            rubrics_useful = rubric.get_children().filter(is_guide_rubric=True, is_question_rubric=False)
-            # if rubrics[0].slug != self.kwargs['rubric_slug']:
-            #     raise Http404()
+            # rubrics_useful = rubric.get_children().filter(is_guide_rubric=True, is_question_rubric=False)
             context['rubrics'] = rubrics
             context['rubric'] = rubric
 
@@ -129,8 +127,7 @@ class QuestionsList(TemplateView):
         if rubric:
             if rubric.keywords:
                 query = '({})'.format(')|('.join(rubric.keywords.split("\n")))
-                sort.append('@relevance DESC')
-
+                # sort.append('@relevance DESC')
             else:
                 filters.update({'rubric_id': (rubric.pk,)})
 
