@@ -1,10 +1,28 @@
 {% extends 'account/edit/base.html' %}
 {% load staticfiles %}
+{% load bootstrap4 %}
 
 {% block account_edit_title %}Опыт работы{% endblock %}
 
 {% block account_edit_form %}
 
+    <div class="row">
+        <div class="col mb-3">
+            <div class="container">
+                <div class="row">
+                    {{ form.media }}
+                    {% bootstrap_javascript jquery=True %}
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_formset_errors form %}
+                        {% bootstrap_messages %}
+                    </div>
+                </div>
+                {% bootstrap_formset form layout='horizontal' %}
+            </div>
+        </div>
+    </div>
+
+    {% comment %}
     {% for item in user.experience.all %}
 
         <div class="card mb-3">
@@ -55,5 +73,6 @@
     <div class="mt-4">
         <a href="#">Добавить место работы</a>
     </div>
+{% endcomment %}
 
 {% endblock %}

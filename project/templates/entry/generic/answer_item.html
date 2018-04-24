@@ -26,7 +26,7 @@
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
                     <div class="normal text-muted"
-                    >{{ item.author.info.status|default:item.author.get_role_display }}, {{ item.author.city.name_ru }}</div>
+                    >{{ item.author.get_role_display }}, {{ item.author.city.name_ru }}</div>
                 {% endif %}
 
                 {# Медали #}

@@ -1,39 +1,22 @@
 {% extends 'account/edit/base.html' %}
-{% load staticfiles %}
+{% load bootstrap4 %}
 
 {% block account_edit_title %}Контактная информация{% endblock %}
 
 {% block account_edit_form %}
-
-    {% for item in user.contact.all %}
-
-        <div class="card mb-3">
-
-            <div class="close"><i class="icon-close"></i></div>
-
-            <div class="card-body">
-
+    <div class="row">
+        <div class="col mb-3">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="start">Тип контакта</label>
-                        <select type="text" class="form-control custom-select" id="finish">
-                            <option>{{ item.type }}</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="finish">Значение</label>
-                        <input type="text" class="form-control" id="finish" value="{{ item.value }}">
+                    {{ form.media }}
+                    {% bootstrap_javascript jquery=True %}
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_formset_errors form %}
+                        {% bootstrap_messages %}
                     </div>
                 </div>
-
+                {% bootstrap_formset form layout='horizontal' %}
             </div>
         </div>
-
-    {% endfor %}
-
-    <div class="mt-4">
-        <a href="#">+ Добавить контакты</a>
     </div>
-
 {% endblock %}

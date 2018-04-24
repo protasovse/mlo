@@ -24,6 +24,10 @@
 
                     {% url 'personal:edit_experience' as exp_url %}
                     <a href="{{ exp_url }}" class="nav-link{% if exp_url in curl %} active{% endif %}">Опыт</a>
+
+                    {% if user.is_expert %}{% url 'personal:edit_scheduler' as sch_url %}
+                    <a href="{{ sch_url }}" class="nav-link{% if sch_url in curl %} active{% endif %}">Платные заявки</a>
+                    {% endif %}
                 {% endwith %}
             </nav>
         </div>

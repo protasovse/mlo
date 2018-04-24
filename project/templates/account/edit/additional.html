@@ -6,19 +6,6 @@
 
 {% block account_edit_form %}
     <div class="row">
-        {% comment %}
-                <div class="col mb-3" style="max-width: 350px;">
-                    <div class="mb-3 mx-auto">
-                        {% if user.info.photo %}
-                            <img class="mx-auto w-100" src="{% cropped_thumbnail user.info 'photo' %}" alt="lawyer">
-                        {% else %}
-                            <img src="/static/img/lyr/person_photo.png">
-                        {% endif %}
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-block mt-3">Изменить фото
-                        </button>
-                    </div>
-                </div>
-                {% endcomment %}
         <div class="col mb-3">
             <div class="container">
                 <div class="row">

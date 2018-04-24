@@ -22,8 +22,8 @@
 
             <p class="normal mt-3 text-muted">
                 {% if item.status == 'payment_confirmed' %}
-                    Эксперт назначен и оповещён, но еще не принял заявку. До принятия {{ advice_context.overdue_time }}
-                    мин.
+                    Эксперт назначен и оповещён<!--, но еще не принял заявку.
+                    До принятия {{ advice_context.overdue_time }} мин. -->
                 {% elif item.status == 'inwork' %}
                     Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.
                 {% endif %}
@@ -40,13 +40,12 @@
                     <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
                         <input type="hidden" name="receiver" value="{{ advice_context.money_yandex_purse }}">
                         <input type="hidden" name="quickpay-form" value="shop">
-                        <input type="hidden" name="referer" value="http://мойюрист.онлайн/задать-вопрос/">
                         <input type="hidden" name="formcomment" value="{{ advice_context.payment_form_title }}">
                         <input type="hidden" name="label" value="advice.{{ item.question_id }}">
                         <input type="hidden" name="targets" value="{{ advice_context.payment_form_target }}{{ item.question_id }}">
-                        <input type="hidden" name="successURL" value="http://мойюрист.онлайн/вопрос/456456/">
+                        <input type="hidden" name="successURL" value="{{ protocol }}://{{ site }}{{ question_url }}">
                         <input type="hidden" name="sum" value="{{ advice_context.advice_cost }}" data-type="number">
-                        <input type="hidden" name="paymentType" value="AC"/>
+                        <!--input type="hidden" name="paymentType" value="AC"/-->
                         <input class="btn btn-success btn-block" type="submit" value="Оплатить">
                     </form>
                 {% elif item.status == 'paid' %}

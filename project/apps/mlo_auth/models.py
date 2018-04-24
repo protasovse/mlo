@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 
+from apps.advice.models import Scheduler
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
 from apps.sxgeo.models import Cities
 
@@ -136,6 +137,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse('lawyer_page', kwargs={'id': self.pk})
+
+    def save(self, *args, **kwargs):
+        return super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.get_full_name

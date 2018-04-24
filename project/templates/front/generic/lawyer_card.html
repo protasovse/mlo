@@ -9,7 +9,7 @@
     </div>
     <div class="lawyer-card-body d-flex flex-column justify-content-between">
         <div>
-            <h6>{{ item.user.info.status|default:item.user.get_role_display }}</h6>
+            <h6>{{ item.user.info.title|default:item.user.get_role_display }}</h6>
             <p>{{ item.user.info.short }}</p>
         </div>
         <div class="lawyer-card-body_review d-flex align-items-center justify-content-between">

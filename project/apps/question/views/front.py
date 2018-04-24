@@ -1,3 +1,6 @@
+import urllib.parse
+from django.contrib.sites.models import Site
+
 from config import flash_messages
 from django.http import Http404
 from django.utils import timezone
@@ -17,7 +20,7 @@ from django.shortcuts import get_object_or_404
 
 from config.flash_messages import QUESTION_CREATE_PAID, QUESTION_CREATE_BLOCKED
 from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE, PAYMENT_FORM_TITLE, PAYMENT_FORM_TARGET, \
-    ADVICE_COST
+    ADVICE_COST, SITE_PROTOCOL
 
 
 class QuestionDetail(TemplateView):
@@ -61,7 +64,10 @@ class QuestionDetail(TemplateView):
 
         context.update({
             'mess': messages.get_messages(self.request),
-            'answers': Answer.published.related_to_question(question)
+            'answers': Answer.published.related_to_question(question),
+            'site': Site.objects.get_current(),
+            'protocol': SITE_PROTOCOL,
+            'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk}))
         })
 
         if self.request.user.is_authenticated and self.request.user.role == 2:
@@ -98,9 +104,7 @@ class QuestionsList(TemplateView):
             rubric = get_object_or_404(Rubric, slug=slug)
             rubrics = rubric.get_ancestors(include_self=True)
             rubrics_also_list = rubric.get_children().filter(is_question_rubric=True)
-            rubrics_useful = rubric.get_children().filter(is_guide_rubric=True, is_question_rubric=False)
-            # if rubrics[0].slug != self.kwargs['rubric_slug']:
-            #     raise Http404()
+            # rubrics_useful = rubric.get_children().filter(is_guide_rubric=True, is_question_rubric=False)
             context['rubrics'] = rubrics
             context['rubric'] = rubric
 
@@ -123,8 +127,7 @@ class QuestionsList(TemplateView):
         if rubric:
             if rubric.keywords:
                 query = '({})'.format(')|('.join(rubric.keywords.split("\n")))
-                sort.append('@relevance DESC')
-
+                # sort.append('@relevance DESC')
             else:
                 filters.update({'rubric_id': (rubric.pk,)})
 
@@ -174,6 +177,13 @@ class QuestionsList(TemplateView):
                     'additionals': True
                 })
                 cur_url_param = 'additionals'
+        else:
+            if 'my' in self.request.GET:
+                filters.update({'author_id': (self.request.user.pk,)})
+                url_params.update({
+                    'my': True
+                })
+                cur_url_param = 'my'
 
         # filters.update({'answers_authors_id': (1,)})
 
