@@ -1,7 +1,15 @@
 {% extends 'front/base.html' %}
 {% load static %}
 
-{% block title %}Юридическая консультация онлайн юриста и адвоката. Юридическая помощь круглосуточно {% endblock %}
+{% block title %}Юридическая консультация онлайн юриста и адвоката. Юридическая помощь круглосуточно{% endblock %}
+
+{% block og_meta %}
+<meta property="og:title" content="Юридическая консультация онлайн юриста и адвоката. Юридическая помощь круглосуточно"/>
+<meta property="og:description" content="Мойюрист.онлайн — юридические консультации круглосуточно. Помощь юриста или адвоката в любом правовом вопросе."/>
+<meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content= "http://мойюрист.онлайн/" />
+{% endblock %}
 
 {% block navbar_fixed %}{% endblock %}
 
