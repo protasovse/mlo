@@ -58,9 +58,9 @@
                         <div class="question-page_r-col content">
 
                             {# Имя #}
-                            <h5 class="my-3 mb-lg-1 mt-lg-0"
-                                itemprop="name"
-                                data-user_id="{{ question.author.pk }}">{{ question.author.get_name }}</h5>
+                            <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
+                                class="my-3 mb-lg-1 mt-lg-0" data-user_id="{{ question.author.pk }}"><span
+                                    itemprop="name">{{ question.author.get_name }}</span></h5>
 
                             {# Текст #}
                             <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
@@ -69,8 +69,8 @@
                             {% if question.files.all|length %}
                                 <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
-                                        <p class="file-list-item"><a target="_blank"
-                                                                     href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                        <p class="file-list-item">
+                                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
                                         </p>
                                     {% endfor %}
                                 </div>

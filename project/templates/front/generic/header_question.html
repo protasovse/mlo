@@ -14,7 +14,8 @@
                 <p class="l">Бесплатные или платные юридические консультации, лучших юристов.</p>
             </div>
             <div class="r-col">
-                <form action="{% url 'ask_question' %}">
+                <form method="post" action="{% url 'ask_question' %}">
+                    {% csrf_token %}
                     <textarea class="l" id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
                     <button type="submit">Задать вопрос</button>
                 </form>
