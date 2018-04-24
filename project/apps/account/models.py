@@ -98,6 +98,20 @@ class Info(models.Model):
     def __str__(self):
         return self.user.get_full_name
 
+    def get_public_data(self):
+        return {
+            'photo': '',
+            'ur_status': self.status,
+            'signature': self.signature,
+
+        }
+
+    @classmethod
+    def get_empty_data(cls):
+        return {
+            'ur_status': '',
+        }
+
 
 class Contact(AccountBase):
     C_EMAIL = 'Электронный ящик'

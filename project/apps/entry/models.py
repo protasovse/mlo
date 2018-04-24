@@ -294,14 +294,16 @@ class Answer(Entry):
     def get_public_data(self):
         return {
             'id': self.id,
+            'pub_date_c': self.pub_date.isoformat(),
+            'pub_date': self.pub_date.strftime('%d %B %Y %H:%M'),
             'parent_id': self.parent_id,
+            'author': self.author.get_public_data(),
             'thread': self.thread,
-            'content': self.content,
+            'content': self.html_content,
+            'like_count': self.like_count
         }
 
     def save(self, *args, **kwargs):
-
-        print(self.pk)
 
         if not hasattr(self, 'on_question'):
             self.on_question = self.parent.on_question

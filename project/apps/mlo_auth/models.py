@@ -72,25 +72,30 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
 
-    def get_data(self):
+    def get_public_data(self):
+        from apps.account.models import Info
         return {
             'id': self.id,
             'email': self.email,
+            'full_name': self.get_full_name,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'patronymic': self.patronymic,
             'phone': str(self.phone),
             'city': {
                 'id': self.city_id,
-                'name':self.city.name_ru
+                'name': self.city.name_ru if self.city else None
+            },
+            'info': self.info.get_public_data() if hasattr(self, 'info') else Info.get_empty_data(),
+            'stat': {
+                'rating': self.rating.get_rate if hasattr(self, 'rating') else None,
             }
         }
 
     @property
     def get_full_name(self):
-
         if self.first_name and self.last_name and self.patronymic:
-            full_name = '%s %s %s' % (self.last_name, self.first_name, self.patronymic)
+            full_name = ' '.join([self.last_name, self.first_name, self.patronymic])
         elif self.first_name:
             full_name = self.first_name
         else:

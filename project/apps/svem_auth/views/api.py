@@ -60,7 +60,7 @@ class AppUser(ApiView):
 class CheckLogin(ApiView):
     @classmethod
     def get(cls, request):
-        return request.user.get_data() if request.user.is_authenticated else False
+        return request.user.get_public_data() if request.user.is_authenticated else False
 
 
 class ForgotPassword(ApiView):
