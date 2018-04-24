@@ -1,10 +1,16 @@
 {% extends 'front/base.html' %}
+{% load static %}
 
 {% block title %}
-    {% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}
-    {% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн
-    {% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница
-        {{ current_page }}{% endif %}
+    {% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}{% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн{% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница{{ current_page }}{% endif %}
+{% endblock %}
+
+{% block og_meta %}
+<meta property="og:title" content="{% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}{% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн{% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница{{ current_page }}{% endif %}"/>
+<meta property="og:description" content="{{ rubric.description|default:"" }}"/>
+<meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content= "{{ SITE_URL }}{% if rubric %}{{ rubric.get_absolute_url }}{% else %}{% url 'questions:list' %}{% endif %}" />
 {% endblock %}
 
 {% block content %}

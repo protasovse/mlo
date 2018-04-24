@@ -1,8 +1,17 @@
 {% extends 'front/base.html' %}
 {% load cropping %}
+{% load static %}
 
-{% block title %}Отзывы пользователей, которые получили юридическую консультацию, либо
-    воспользовались улугами сайта Мойюрист.онлайн{% endblock %}
+{% block title %}Отзывы пользователей, которые получили юридическую консультацию, либо воспользовались улугами сайта
+    Мойюрист.онлайн{% endblock %}
+
+{% block og_meta %}
+    <meta property="og:title" content="Отзывы клиентов Мойюрист.онлайн"/>
+    <meta property="og:description" content="Отзывы пользователей, которые получили юридическую консультацию, либо воспользовались улугами сайта Мойюрист.онлайн"/>
+    <meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ SITE_URL }}{% url 'reviews_page' %}"/>
+{% endblock %}
 
 {% block content %}
     {% if lawyer %}
@@ -22,7 +31,7 @@
                     <p class="lead">Всего отзывов — {{ like_positive_count }}</p>
                     <p class="lead mb-5">Уважаемые посетители сайта юридических консультаций Мойюрист.онлайн, позвольте
                         искренне поблагодарить вас за отзывы, положительные или отрицательные. Мы ценим обратную связь,
-                        это делает наш проект лучше и удобнее!</p>
+                        это делает наш проект лучше и удобнее, а консультации наших экспертов качественней!</p>
                 {% endif %}
 
                 {% for like in likes %}

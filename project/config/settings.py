@@ -90,6 +90,8 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = env('SITE_ID')
+SITE_URL = 'http://мойюрист.онлайн'
+SITE_PROTOCOL = 'http'
 AUTH_USER_MODEL = 'mlo_auth.user'
 AUTHENTICATION_BACKENDS = ['apps.mlo_auth.models.Backend']
 
@@ -118,6 +120,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "config.context_processors.site",
             ],
         },
     },
@@ -161,7 +164,6 @@ THUMBNAIL_PROCESSORS = (
                        ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 APPEND_SLASH = True
-SITE_PROTOCOL = 'http'
 
 VK_CLIENT_ID = 3344860
 VK_CLIENT_SECRET = 'idSIuk1OKdxZRxQrDrTC'
