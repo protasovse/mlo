@@ -6580,7 +6580,7 @@ button.bg-white:focus {
 .mx-0 {
   margin-right: 0 !important; }
 
-.mb-0,
+.mb-0, .breadcrumb,
 .my-0 {
   margin-bottom: 0 !important; }
 
@@ -6618,7 +6618,7 @@ button.bg-white:focus {
 .mx-2 {
   margin-right: 0.5rem !important; }
 
-.mb-2, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, .breadcrumb, .entry .answer-header,
+.mb-2, .btn-vk, .btn-od, .btn-ml, .btn-fb, .btn-tw, .btn-gl, .entry .answer-header,
 .my-2 {
   margin-bottom: 0.5rem !important; }
 

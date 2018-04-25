@@ -102,8 +102,7 @@
                 <div class="row">
                     <nav aria-label="breadcrumb" class="col-12 mb-3">
                         <ol class="breadcrumb pt-0" style="margin:0!important;">
-                            <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Все вопросы</a>
-                            </li>
+                            <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Все вопросы</a></li>
                             {% if rubric.get_level > 0 %}
                                 <li class="breadcrumb-item active">
                                     <a href="{{ rubric.get_root.get_absolute_url }}">{{ rubric.get_root }}</a>
@@ -111,11 +110,11 @@
                             {% endif %}
                             {% if rubric %}
                                 <li class="breadcrumb-item active">{{ rubric }}</li>
-                            {% endif %}{% endif %}
+                            {% endif %}
                         </ol>
                     </nav>
                 </div>
-                {% endif %}
+                {% endif %}{% endif %}
 
                 <div class="row">
                     <h3 class="answer-list-head" title="{{ questions.count }}">
@@ -219,7 +218,7 @@
                     {% for r in rubrics_list %}
                         <li class="mb-2">
                             <a class="{% if r == rubric %}text-dark{% else %}text-muted{% endif %}"
-                               href="{{ r.get_absolute_url }}" title="{{ r.title }}">{{ r.link|default:r }}</a>
+                               href="{{ r.get_absolute_url }}" title="{{ r.title }}">{{ r }}</a>
                         </li>
                     {% endfor %}
                 </ul>

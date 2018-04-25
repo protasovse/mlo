@@ -1,5 +1,5 @@
 .breadcrumb {
-  @extend .mt-4, .mb-2;
+  @extend .mt-4, .mb-0;
   font-weight: $font-weight-light;
   @include media-breakpoint-down(sm) {
     display: none;

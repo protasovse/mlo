@@ -22,9 +22,13 @@
         <div class="row">
             <nav aria-label="breadcrumb" class="col-12">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                    <li class="breadcrumb-item active">Вопрос №{{ question.id }}</li>
+                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Вопросы</a></li>
+                    <li class="breadcrumb-item active">
+                        {% if question.rubric %}
+                            <a href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
+                        {% else %}
+                            Общие вопросы
+                        {% endif %}
                 </ol>
             </nav>
         </div>
@@ -51,7 +55,7 @@
                     {% endfor %}
 
                     {# Заголовок #}
-                    <h1 class="question-head" itemprop="name">{{ question.title }}</h1>
+                    <h1 class="question-head h2 mt-4" itemprop="name">{{ question.title }}</h1>
 
                     {# Инфо, текст #}
                     <div class="row">

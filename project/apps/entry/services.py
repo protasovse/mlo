@@ -41,7 +41,7 @@ def answer(question_id, content, author_id, parent_id=None):
         instance.thread = parent_id if parent_id else instance.pk
         instance.save(update_fields=['thread'])
 
-        # update reply counter
+        # update reply counter on entry
         if parent_id:
             _ifu = instance.parent
         else:
@@ -51,29 +51,23 @@ def answer(question_id, content, author_id, parent_id=None):
 
         # Добавляем балл рейтинга
         if author.role == 2:
-            # Если первый ответ
-            if instance.parent is None:
-                score = RatingScore.objects.create(
-                    type=Type.objects.get(key='answer'),
-                    user=instance.author,
-                )
-                RatingScoreComment.objects.create(
-                    rating_score=score,
-                    comment='За ответ %d' % (instance.pk,)
-                )
+            if instance.parent is None:  # Если первый ответ
+                score = RatingScore.objects.create(type=Type.objects.get(key='answer'), user=instance.author)
+                RatingScoreComment.objects.create(rating_score=score, comment='За ответ %d' % (instance.pk,))
             # если дополнительный ответ
             else:
-                score = RatingScore.objects.create(
-                    type=Type.objects.get(key='add_answer'),
-                    user=instance.author,
-                )
-                RatingScoreComment.objects.create(
-                    rating_score=score,
-                    comment='За уточнение %d' % (instance.pk,)
-                )
+                score = RatingScore.objects.create(type=Type.objects.get(key='add_answer'), user=instance.author)
+                RatingScoreComment.objects.create(rating_score=score, comment='За уточнение %d' % (instance.pk,))
             # Добавляем балл к рейтингу
             add_score(instance.author.pk, score.type.value)
             # Уведомление — «Юрист ответил на Ваш вопрос»
+
+        # Обновляем answer_count на account_info (кеш количества ответов юриста)
+        # считаем только ответы первого уровня
+        if author.role == 2:
+            if instance.parent is None:  # Если первый ответ
+                author.info.answer_count = F('answer_count') + 1
+                author.info.save(update_fields=['answer_count'])
 
         # Запись в таблице уточненеий
         # Если дополнительный вопрос «клиента»
