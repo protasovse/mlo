@@ -14,6 +14,7 @@ class LocationIdentify(MiddlewareMixin):
         if location:
             type = 'city'
             name = location['info']['city']['name_ru']
+            name = name if name != True else "Труя"
             id = location['info']['city']['id']
             region_name = location['info']['region']['name_ru']
         else:
@@ -23,7 +24,7 @@ class LocationIdentify(MiddlewareMixin):
             region_name = None
 
         morph = pymorphy2.MorphAnalyzer()
-        c = morph.parse(str(name))[0]
+        c = morph.parse(name)[0]
 
         request.user.location = {
             'loc_id': id,
