@@ -81,7 +81,8 @@ helper.init({
     'server': {
 
         'mode': 'redirect',
-        'url_redirect': 'http://svem.ru/ask/?from_widget',
+        // 'url_redirect': 'http://xn--h1abiilhh6g.xn--80asehdb/%D0%B7%D0%B0%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/?from_widget',
+        'url_redirect': 'http://127.0.0.1:8000/%D0%B7%D0%B0%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/?from_widget',
         'params': {
             'sid': 'YTTYRDSQ8lXzoS6joPDIJvcYgHEADbvsUegBIYiF'
         },
@@ -93,7 +94,7 @@ helper.init({
                 'eventCategory': 'chat',
                 'eventAction': trigger_name,
                 'hitCallback': function () {
-                    yaCounter43222.reachGoal(trigger_name);
+                    yaCounter38190105.reachGoal(trigger_name);
                     callback();
                 }
             });

@@ -23,7 +23,7 @@ class LocationIdentify(MiddlewareMixin):
             region_name = None
 
         morph = pymorphy2.MorphAnalyzer()
-        c = morph.parse(name)[0]
+        c = morph.parse(str(name))[0]
 
         request.user.location = {
             'loc_id': id,

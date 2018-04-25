@@ -1,5 +1,6 @@
 import urllib.parse
 from django.contrib.sites.models import Site
+from django.views.decorators.csrf import csrf_exempt
 
 from config import flash_messages
 from django.http import Http404
