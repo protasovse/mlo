@@ -77,7 +77,7 @@ class QuestionView(ApiView):
             request.session['question_ids'] = question_ids
 
             if q.is_pay:
-                emails.send_paid_question(user, q)
+                emails.send_paid_question(user, q, user.email, password)
             else:
                 emails.send_confirm_question(user, q, q.token, user.email, password)
         else:
