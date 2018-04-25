@@ -42,7 +42,7 @@ def send_forgot_password_email(user):
     send_db_mail('forgot-password', user.email, ctx)
 
 
-def send_confirm_question(user, question, token):
+def send_confirm_question(user, question, token, email, password):
     ctx = {
         'hash': token,
         'username': user.get_name,
@@ -50,7 +50,9 @@ def send_confirm_question(user, question, token):
         'question_title': question.title,
         'question_content': question.content,
         'site': Site.objects.get_current(),
-        'protocol': SITE_PROTOCOL
+        'protocol': SITE_PROTOCOL,
+        'email': email,
+        'password': password,
     }
 
     send_db_mail('confirm-question', user.email, ctx)

@@ -42,6 +42,8 @@ class QuestionView(ApiView):
 
         params['rubric_id'] = params.get('rubric[id]', None)
 
+        password = '********'
+
         if params['city_id']:
             city_validator = CityIdValidator(err_txt.MSG_CITY_DOESNT_EXISTS, 'city')
             city_validator(params['city_id'])
@@ -54,8 +56,9 @@ class QuestionView(ApiView):
             try:
                 user = get_user_model().objects.get(email=params['email'])
             except get_user_model().DoesNotExist:
+                password = binascii.hexlify(os.urandom(8)).decode()
                 user = get_user_model().objects.create_user(
-                    params['email'], binascii.hexlify(os.urandom(6)).decode(),
+                    params['email'], password,
                     first_name=params['name'],
                     phone=params['phone'],
                     city_id=params['city_id'],
@@ -76,7 +79,7 @@ class QuestionView(ApiView):
             if q.is_pay:
                 emails.send_paid_question(user, q)
             else:
-                emails.send_confirm_question(user, q, q.token)
+                emails.send_confirm_question(user, q, q.token, user.email, password)
         else:
             messages.add_message(
                 request, messages.SUCCESS, flash_messages.QUESTION_CREATE_ACTIVE.format(id=q.id), 'success'
