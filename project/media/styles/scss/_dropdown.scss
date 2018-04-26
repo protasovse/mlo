@@ -1,5 +1,22 @@
 .dropdown-menu {
   box-shadow: $dropdown-box-shadow;
+
+  &.select-rubric-menu {
+    max-height: 80vh;
+    height: line(20);
+    overflow-y: scroll;
+    width: 20rem;
+    .dropdown-item {
+      white-space: normal;
+    }
+    @include media-breakpoint-down(md){
+      height: 100vh!important;
+      width: 100vw!important;
+      position: fixed;
+      top: 0!important;
+      left: 0!important;
+    }
+  }
 }
 
 .dropdown-menu-close {
@@ -9,4 +26,14 @@
   right: line(.75);
   color: $gray-500;
   cursor: pointer;
+}
+
+.dropdown-item {
+  &.level0 {
+    margin-top: line(.5);
+  }
+  &.level1 {
+    font-size: 80%;
+    padding-left: line(1.5);
+  }
 }

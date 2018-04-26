@@ -7,6 +7,7 @@
 <html class="no-js" lang="ru">
 <!--<![endif]-->
 <head>
+    {% include 'front/generic/counters.html' %}
     {% block head %}{% endblock %}
     {% block meta_head %}{% endblock %}
     {% block og_meta %}{% endblock %}
@@ -15,8 +16,8 @@
     <meta name="keywords" content="{% block meta_keywords %}{% endblock %}"/>
     <meta http-equiv="content-language" content="ru"/>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <!--link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
@@ -25,8 +26,10 @@
     <script src="https://unpkg.com/vue-select@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-upload-component"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <!--script type="text/javascript" src="http://s1.nice-cream.ru/widget2.2/widget.js"></script-->
-    <!--script src="{% static 'js/allp/init_.js' %}" charset="utf-8"></script-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     {% block block_head_js %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -51,8 +54,7 @@
         $(body).toggleClass("navbar-fixed");
     });
 </script>
-
 {% include 'front/widgets/phone.html' %}
-
+{% include 'front/widgets/consult.html' %}
 </body>
 </html>

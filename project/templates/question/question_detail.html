@@ -2,7 +2,15 @@
 {% load static %}
 {% load markdown %}
 
-{% block title %}{{ question.title }} — вопрос №{{ question.id }} на «Мойюрист.онлайн»{% endblock %}
+{% block title %}{{ question.title }} — вопрос №{{ question.id }} на Мойюрист.онлайн{% endblock %}
+
+{% block og_meta %}
+<meta property="og:title" content="{{ question.title }} — вопрос №{{ question.id }} на Мойюрист.онлайн"/>
+<meta property="og:description" content="Вопрос №{{ question.id }} на Мойюрист.онлайн, ответов: {{ question.reply_count }}.{% if question.rubric %} Тема «{{ question.rubric }}».{% endif %}"/>
+<meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content= "{{ SITE_URL }}{{ question.get_absolute_url }}" />
+{% endblock %}
 
 {% block content %}
 
@@ -14,9 +22,13 @@
         <div class="row">
             <nav aria-label="breadcrumb" class="col-12">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Консультации юриста</a></li>
-                    <li class="breadcrumb-item active">Вопрос №{{ question.id }}</li>
+                    <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Вопросы</a></li>
+                    <li class="breadcrumb-item active">
+                        {% if question.rubric %}
+                            <a href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
+                        {% else %}
+                            Общие вопросы
+                        {% endif %}
                 </ol>
             </nav>
         </div>
@@ -43,7 +55,7 @@
                     {% endfor %}
 
                     {# Заголовок #}
-                    <h1 class="question-head" itemprop="name">{{ question.title }}</h1>
+                    <h1 class="question-head h2 mt-4" itemprop="name">{{ question.title }}</h1>
 
                     {# Инфо, текст #}
                     <div class="row">
@@ -58,9 +70,9 @@
                         <div class="question-page_r-col content">
 
                             {# Имя #}
-                            <h5 class="my-3 mb-lg-1 mt-lg-0"
-                                itemprop="name"
-                                data-user_id="{{ question.author.pk }}">{{ question.author.get_name }}</h5>
+                            <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
+                                class="my-3 mb-lg-1 mt-lg-0" data-user_id="{{ question.author.pk }}"><span
+                                    itemprop="name">{{ question.author.get_name }}</span></h5>
 
                             {# Текст #}
                             <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
@@ -69,8 +81,8 @@
                             {% if question.files.all|length %}
                                 <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
-                                        <p class="file-list-item"><a target="_blank"
-                                                                     href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                        <p class="file-list-item">
+                                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
                                         </p>
                                     {% endfor %}
                                 </div>

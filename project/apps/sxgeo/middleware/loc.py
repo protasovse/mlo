@@ -14,6 +14,7 @@ class LocationIdentify(MiddlewareMixin):
         if location:
             type = 'city'
             name = location['info']['city']['name_ru']
+            name = name if name != True else "Труя"
             id = location['info']['city']['id']
             region_name = location['info']['region']['name_ru']
         else:
