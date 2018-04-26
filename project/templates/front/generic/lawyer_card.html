@@ -19,7 +19,7 @@
                     class="icon-star mr-1"></i>
             </span>
             <a class="text-muted small" href="{% url 'lawyer_reviews' item.user.pk %}">
-                {#{ item.user.info.review_count|number:'отзыв' }#}
+                {{ item.user.info.review_count|number:'отзыв' }}
             </a>
         </div>
     </div>
