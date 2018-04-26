@@ -2778,7 +2778,6 @@ tbody.collapse.show {
 .dropdown-menu {
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1); }
   .dropdown-menu.select-rubric-menu {
-    max-height: 80vh;
     height: 400px;
     overflow-y: scroll;
     width: 20rem; }
@@ -2790,7 +2789,9 @@ tbody.collapse.show {
         width: 100vw !important;
         position: fixed;
         top: 0 !important;
-        left: 0 !important; } }
+        left: 0 !important;
+        border: none;
+        z-index: 2000; } }
 
 .dropdown-menu-close {
   position: absolute;

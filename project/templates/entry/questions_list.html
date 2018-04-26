@@ -162,16 +162,21 @@
                             <a class="nav-link{% if cur_url_param == 'my' %} active{% endif %}"
                                href="{{ current_url }}?my">Мои вопросы</a>
                         {% endif %}
-                        <div>
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">{{ rubric|default:"Все категории" }}</a>
-                            <div class="dropdown-menu select-rubric-menu">
+                        <div style="position:relative">
+                            <a id="rubric-drop-down" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ rubric|default:"Все категории" }}</a>
+                            <div id="rubric-drop-menu" class="dropdown-menu select-rubric-menu">
                                 <a class="dropdown-item" href="{% url "questions:list" %}">Все категории</a>
                                 {% for r in rubrics_list %}
                                     <a class="dropdown-item level{{ r.level }} {% if r == rubric %}text-muted{% else %}text-dark{% endif %}"
                                        href="{{ r.get_absolute_url }}" title="{{ r.title }}">{{ r }}</a>
                                 {% endfor %}
                             </div>
+                            <script>
+                                $('#rubric-drop-down').click(function (e) {
+                                    e.preventDefault();
+                                    $('#rubric-drop-menu').toggle();
+                                })
+                            </script>
                         </div>
 
                     </div>
