@@ -34,9 +34,11 @@
                     <div class="answer-header_medal mt-3">
                         <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
                                 class="v">{{ item.author.rating.month_rate }}</span></span>
-                        <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">12,6 лет</span></span>
+                        <span class="item" title="Стаж"><i class="icon-medal"></i><span class="v">{{ item.author.info.stage }} лет</span></span>
                         <span class="item" title="Всего оказал консультаций"><i class="icon-forum"></i><span
                                 class="v">{{ item.author.info.answer_count }}</span></span>
+                        <span class="item" title="Положительных отзывов"><i class="icon-like"></i><span
+                                class="v">{{ item.author.info.review_count }}</span></span>
                         <!--br><span class="item" title="Общаться с юристом в чате"><i class="icon-message_bubble"></i>
                             <a class="v" href="#">Задать вопрос</a></span-->
                     </div>

@@ -163,9 +163,11 @@
                                href="{{ current_url }}?my">Мои вопросы</a>
                         {% endif %}
                         <div style="position:relative">
-                            <a id="rubric-drop-down" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ rubric|default:"Все категории" }}</a>
+                            <a id="rubric-drop-down" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Выбрать категорию</a>
                             <div id="rubric-drop-menu" class="dropdown-menu select-rubric-menu">
                                 <a class="dropdown-item" href="{% url "questions:list" %}">Все категории</a>
+                                {% if rubric %}<a class="dropdown-item small text-muted" href="{{ rubric.get_absolute_url }}">Выбрана:
+                                    {{ rubric }}</a>{% endif %}
                                 {% for r in rubrics_list %}
                                     <a class="dropdown-item level{{ r.level }} {% if r == rubric %}text-muted{% else %}text-dark{% endif %}"
                                        href="{{ r.get_absolute_url }}" title="{{ r.title }}">{{ r }}</a>

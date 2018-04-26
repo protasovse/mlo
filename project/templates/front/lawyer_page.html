@@ -6,12 +6,13 @@
     {% if lawyer.city.name %}г. {{ lawyer.city.name }}{% endif %}{% endblock %}
 
 {% block og_meta %}
-<meta property="og:title" content="{{ lawyer.info.title|default:lawyer.get_role_display }}, {{ lawyer.get_full_name }}.
+    <meta property="og:title"
+          content="{{ lawyer.info.title|default:lawyer.get_role_display }}, {{ lawyer.get_full_name }}.
     {% if lawyer.city.name %}г. {{ lawyer.city.name }}{% endif %}"/>
-<meta property="og:description" content="{{ lawyer.short }}"/>
-<meta property="og:image" content="{% include 'account/generic/pic.html' with item=lawyer %}"/>
-<meta property="og:type" content="profile"/>
-<meta property="og:url" content= "{{ SITE_URL }}{{ lawyer.get_absolute_url }}" />
+    <meta property="og:description" content="{{ lawyer.short }}"/>
+    <meta property="og:image" content="{% include 'account/generic/pic.html' with item=lawyer %}"/>
+    <meta property="og:type" content="profile"/>
+    <meta property="og:url" content="{{ SITE_URL }}{{ lawyer.get_absolute_url }}"/>
 {% endblock %}
 
 {% block content %}
@@ -30,11 +31,16 @@
                             <div class="medal" data-back="&#xe925;" data-value="{{ lawyer.rating.get_rate }}">рейтинг
                             </div>
                         {% else %}
-                            <div class="medal light" data-back="&#xe924;" data-value="{{ lawyer.rating.get_rate }}">нет
+                            <div class="medal light" data-back="&#xe924;" data-value="">нет
                                 рейтинга
                             </div>
                         {% endif %}
-                        <div class="medal blue" data-back="&#xe91e;" data-value="12">опыт, лет</div>
+                        {% if lawyer.info.stage %}
+                            <div class="medal blue" data-back="&#xe91e;" data-value="{{ lawyer.info.stage }}">опыт, лет
+                            </div>
+                        {% else %}
+                            <div class="medal light" data-back="&#xe91e;" data-value="">нет опыта</div>
+                        {% endif %}
                     </div>
                     <div class="lawyer-page_about_r-col">
                         <p class="lead">
@@ -138,7 +144,8 @@
                             {% include 'review/generic/review_item.html' with like=like %}
                         {% endfor %}
                         <div class="text-center mb-5">
-                            <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все отзывы
+                            <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все
+                                отзывы
                                 юриста</a>
                         </div>
                     </div>
@@ -150,7 +157,8 @@
                             {% include 'question/generic/question_item_in_list.html' with item=question show_answers=True %}
                         {% endfor %}
                         <div class="text-center mb-5">
-                            <a href="{% url 'questions:list' %}?lawyer={{ lawyer.pk }}" class="btn btn-sm btn-outline-primary">Все консультации</a>
+                            <a href="{% url 'questions:list' %}?lawyer={{ lawyer.pk }}"
+                               class="btn btn-sm btn-outline-primary">Все консультации</a>
                         </div>
                     </div>
                 </div>

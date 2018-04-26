@@ -70,8 +70,17 @@ class ExperienceEdit(FormView):
         post = self.request.POST if self.request.method == 'POST' else None
         return ExperienceForm(post, instance=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super(ExperienceEdit, self).get_context_data(**kwargs)
+        context.update({
+            'stage':  self.request.user.info.stage
+        })
+        return context
+
     def form_valid(self, form):
         form.save()
+        from apps.account.utils import recount_stage_on_account_info
+        recount_stage_on_account_info(self.request.user.pk)
         messages.success(self.request, 'Данные сохранены')
         return super(ExperienceEdit, self).form_valid(form)
 
