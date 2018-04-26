@@ -2777,6 +2777,20 @@ tbody.collapse.show {
 
 .dropdown-menu {
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1); }
+  .dropdown-menu.select-rubric-menu {
+    max-height: 80vh;
+    height: 400px;
+    overflow-y: scroll;
+    width: 20rem; }
+    .dropdown-menu.select-rubric-menu .dropdown-item {
+      white-space: normal; }
+    @media (max-width: 991.98px) {
+      .dropdown-menu.select-rubric-menu {
+        height: 100vh !important;
+        width: 100vw !important;
+        position: fixed;
+        top: 0 !important;
+        left: 0 !important; } }
 
 .dropdown-menu-close {
   position: absolute;
@@ -2785,6 +2799,12 @@ tbody.collapse.show {
   right: 15px;
   color: #bababa;
   cursor: pointer; }
+
+.dropdown-item.level0 {
+  margin-top: 10px; }
+.dropdown-item.level1 {
+  font-size: 80%;
+  padding-left: 30px; }
 
 .btn-group,
 .btn-group-vertical {

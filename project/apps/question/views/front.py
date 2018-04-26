@@ -120,6 +120,7 @@ class QuestionsList(TemplateView):
         filters = {}
         sort = []
         query = ''
+        query_string = ''
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
         url_params = {}  # GET параметры для url, используется в пагинаторе
         cur_url_param = None  # Текущий url параметр для определиния активной ссылки в навигации
@@ -135,6 +136,11 @@ class QuestionsList(TemplateView):
             current_url = reverse('questions:list_rubric', kwargs={
                 'rubric_slug': rubric.slug
             })
+
+        if 'q' in self.request.GET:
+            query = self.request.GET['q']
+            sort.append('@relevance DESC')
+            query_string = query
 
         if 'paid' in self.request.GET:
             filters.update({'is_pay': (True,)})
@@ -199,11 +205,12 @@ class QuestionsList(TemplateView):
             'current_page': current_page,
             'next_page': current_page + 1 if current_page * self.page_size < question_set.count else None,
             'questions': question_set,
+            'query_string': query_string,
         })
 
         # Списки рубрик для aside «Темы консультаций, рубрикатор» и «Консультируем так же»
         context.update({
-            'rubrics_list': Rubric.objects.filter(level__in=(0,), is_question_rubric=True),
+            'rubrics_list': Rubric.objects.order_by('tree_id', 'id').filter(level__in=(0, 1,), is_question_rubric=True),
             'rubrics_also_list': rubrics_also_list,
             'rubrics_useful': rubrics_useful,
             # 'rubrics_list': Rubric.rubricator.filter(level__in=(0,)),

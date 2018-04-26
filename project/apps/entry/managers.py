@@ -98,14 +98,15 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, ', '.join(sort))
         client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED)
-        print(filters)
         for key in filters:
             client.SetFilter(key, filters[key])
 
+        if query.isdigit():
+            client.SetIDRange(int(query), int(query))
+            query = ''
+
         result = client.Query(query, 'question, question_delta')
 
-
-        # ids = [r['id'] for r in result['matches']]
         if not result:
             qs = self.get_queryset().none()
             qs.count = 0
