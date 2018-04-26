@@ -1,5 +1,5 @@
 from django.db import models, connection
-from django.db.models.signals import post_save, post_delete, pre_save
+from image_cropping.utils import get_backend
 from django.utils.translation import ugettext_lazy as _
 from django_mysql.models import EnumField
 from image_cropping import ImageCropField, ImageRatioField
@@ -114,10 +114,34 @@ class Info(models.Model):
     def __str__(self):
         return self.user.get_full_name
 
+    def get_small_photo(self, box, size, defualt):
+        try:
+            url = get_backend().get_thumbnail_url(
+                self.orig,
+                {
+                    'size': size,
+                    'box': box,
+                    'crop': True,
+                    'detail': True,
+                }
+            ) if self.orig else '/static/img/lyr/person_pic.png'
+        except FileNotFoundError:
+            url = '/static/img/lyr/person_pic.png'
+        return url
+
+    @property
+    def small_photo(self):
+        return self.get_small_photo(self.pic, (40, 48), '/static/img/lyr/person_pic.png'),
+
+    @property
+    def avatar_photo(self):
+        return self.get_small_photo(self.photo, (80, 96), '/static/img/lyr/person_photo.png'),
+
     def get_public_data(self):
         return {
-            'photo': '',
-            'ur_status': self.status,
+            'photo': self.avatar_photo,
+            'pic': self.small_photo,
+            'ur_status': self.title,
             'signature': self.signature,
 
         }
@@ -126,6 +150,9 @@ class Info(models.Model):
     def get_empty_data(cls):
         return {
             'ur_status': '',
+            'photo': '/static/img/lyr/person_photo.png',
+            'pic': '/static/img/lyr/person_pic.png',
+            'signature': ''
         }
 
 

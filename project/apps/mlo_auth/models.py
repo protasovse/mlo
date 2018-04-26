@@ -90,7 +90,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'info': self.info.get_public_data() if hasattr(self, 'info') else Info.get_empty_data(),
             'stat': {
                 'rating': self.rating.get_rate if hasattr(self, 'rating') else None,
-            }
+            },
+            'url': self.get_absolute_url()
         }
 
     @property

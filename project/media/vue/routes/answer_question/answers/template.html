@@ -15,32 +15,36 @@
     <div class="row question-page_gradient">
         <div class="question-page_main-part">
             <div class="row">
-                <h3 class="answer-list-head">Ответы юристов
+                <h3 class="answer-list-head" id="div-id">Ответы юристов
+                        (<a href="javascript:void(0);" @click="full_tree = !full_tree">{{ tree_link_name }}</a>)
                     <span class="d-none answer__counter" itemprop="answerCount">2</span>
                 </h3>
             </div>
 
 
-            <div v-for="answer_data in answers"
+            <div name="x" v-for="answer_data in answers"
                  role="answer"
+                 :name="answer_data.id"
+                 :ref="answer_data.id"
                  :data-answer_id="answer_data.id"
                  :data-thread="answer_data.thread"
                  class="answer entry"
-                 :class="{'answer-push': answer_data.parent_id }">
+                 :class="{'answer-push': answer_data.parent_id }"
+                 v-if="is_show_comment(answer_data.id)">
 
                 <hr class="my-4"/>
 
                 <header class="answer-header">
                     <div class="question-page_l-col">
-                        <a class="answer-header_photo" href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/">
-                            <img src="/static/img/lyr/person_pic.png" :alt="answer_data.author.full_name" />
+                        <a class="answer-header_photo" :href="answer_data.author.url">
+                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name" />
                         </a>
                     </div>
 
 
                     <div class="question-page_r-col">
                         <h6 class="mb-0" itemprop="name">
-                            <a href="/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/">{{ answer_data.author.full_name }}</a>
+                            <a :href="answer_data.author.url">{{ answer_data.author.full_name }}</a>
                         </h6>
 
 
@@ -87,9 +91,7 @@
 
                         <div class="answer-footer-action normal align-self-start align-self-md-center">
 
-
                             <a href="#">Дополнительный вопрос</a>
-
 
                         </div>
 
@@ -97,9 +99,11 @@
                             <div class="answer-like">
                                 <div class="answer-like-sign dropdown">Ответ полезен?</div>
                                 <div class="answer-like-block">
-                                    <i class="icon-dislike order-1"></i>
-                                    <i class="icon-like order-3"></i>
-                                    <span class=" order-2">{{ answer_data.like_count }}</span>
+                                    <i class="icon-dislike order-1" v-if="answer_data.is_can_like" @click="to_dislike(answer_data.id)"></i>
+                                    <i class="icon-like order-3" v-if="answer_data.is_can_like" @click="to_like(answer_data.id)"></i>
+                                    <span class="order-2"
+                                          :class="{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}">
+                                        {{ answer_data.like_count }}</span>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +117,25 @@
 
 
         <aside class="question-page_aside-part">
-            <h4 class="mb-4">1Все ответы экспертов на этот вопрос:</h4>
+            <h4 class="mb-4">Юристы ответившие на этот вопрос:</h4>
+
+            <div class="lawyer-list">
+                <div v-for="answer_data in answers"
+                     v-if="!answer_data.parent_id"
+                     role="answers_selector"
+                     class="lawyer-list_item lawyer-list_item-action"
+                     :data-answer_id="answer_data.id"
+                     @click="scrollTo(answer_data.id)">
+                    <div class="lawyer-list_header">
+                        <span class="ph">
+                            <img :src="answer_data.author.info.pic" :alt="answer_data.author.full_name">
+                        </span>
+                        <div class="nm">{{ answer_data.author.full_name }}</div>
+                    </div>
+                    <p class="lawyer-list_body"> {{ answer_data.short_content }} </p>
+                </div>
+            </div>
+
         </aside>
 
 

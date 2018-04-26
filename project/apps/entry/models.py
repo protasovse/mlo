@@ -2,7 +2,7 @@ import os
 import binascii
 import misaka
 from django.db import models
-from phonenumbers import PhoneNumberFormat, format_number, parse
+from django.utils.text import Truncator
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -300,8 +300,24 @@ class Answer(Entry):
             'author': self.author.get_public_data(),
             'thread': self.thread,
             'content': self.html_content,
+            'short_content': Truncator(self.content).words(10, truncate=' ...'),
+            'like_count': self.like_count,
+        }
+
+    def get_like_data(self, request_user):
+        """
+        :param request_user :
+        :return:
+        """
+        data = {
+            'id': self.id,
+            'is_can': False,
             'like_count': self.like_count
         }
+        if not request_user.is_authenticated:
+            return data
+
+        return data
 
     def save(self, *args, **kwargs):
 

@@ -1,10 +1,14 @@
 import os
 import binascii
+
+from django.db.models import F
 from phonenumbers import PhoneNumberFormat, format_number, parse
 
 from apps.advice.models import Advice
+from apps.review.models import Likes
+from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_system.views.api import ApiView
-from apps.entry.models import Question, Answer
+from apps.entry.models import Question, Answer, Entry
 from django.contrib.auth import get_user_model
 from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED
@@ -90,7 +94,43 @@ class QuestionView(ApiView):
 class AnswersView(ApiView):
     @classmethod
     def get(cls, request):
+        def _is_can_like(a, user, lks):
+            if not user.is_authenticated:
+                return {'is_can_like': False}
+            if not a['parent_id'] \
+                    and a['id'] not in lks \
+                    and a['author']['id'] != user.id:
+                return {'is_can_like': True}
+            return {'is_can_like': False}
+
         question = Question.objects.get(pk=request.GET['id'])
         if question.status != 'public':
             return []
-        return [a.get_public_data() for a in Answer.published.related_to_question(question)]
+
+        likes = [l.entry_id for l in
+                 Likes.objects.filter(user_id=request.user.id, entry__answer__on_question=request.GET['id'])
+                 ] if request.user.is_authenticated else []
+
+        answers = [a.get_public_data() for a in Answer.published.related_to_question(question)]
+        for a in answers:
+            a.update(_is_can_like(a, request.user, likes))
+        return answers
+
+
+class AnswersLike(ApiView):
+    @classmethod
+    def post(cls, request):
+        if not request.user.is_authenticated:
+            raise ApiPublicException('access denied')
+        answer = Answer.objects.get(pk=request.POST['id'])
+        if answer.parent_id or answer.author_id == request.user.id:
+            raise ApiPublicException('access denied')
+        if Likes.objects.filter(user_id=request.user.id, entry_id=answer.id).count() > 0:
+            raise ApiPublicException('access denied')
+        val = int(request.POST['value'])
+        if val not in [1, -1]:
+            raise ApiPublicException('data error')
+        Likes.objects.create(entry=answer, user=request.user, value=val)
+        Entry.objects.filter(pk=answer.id).update(like_count=F('like_count')+val)
+
+

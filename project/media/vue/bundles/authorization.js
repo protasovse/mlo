@@ -60,18 +60,18 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 130);
+/******/ 	return __webpack_require__(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 130:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _index = _interopRequireDefault(__webpack_require__(131));
+var _index = _interopRequireDefault(__webpack_require__(132));
 
 var _index2 = _interopRequireDefault(__webpack_require__(47));
 
@@ -89,7 +89,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 131:
+/***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -100,15 +100,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _index = _interopRequireDefault(__webpack_require__(132));
+var _index = _interopRequireDefault(__webpack_require__(133));
 
-var _index2 = _interopRequireDefault(__webpack_require__(134));
+var _index2 = _interopRequireDefault(__webpack_require__(135));
 
-var _index3 = _interopRequireDefault(__webpack_require__(138));
+var _index3 = _interopRequireDefault(__webpack_require__(139));
 
-var _index4 = _interopRequireDefault(__webpack_require__(140));
+var _index4 = _interopRequireDefault(__webpack_require__(141));
 
-var _index5 = _interopRequireDefault(__webpack_require__(142));
+var _index5 = _interopRequireDefault(__webpack_require__(143));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -176,7 +176,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 132:
+/***/ 133:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -187,7 +187,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _template = _interopRequireDefault(__webpack_require__(133));
+var _template = _interopRequireDefault(__webpack_require__(134));
 
 var _logged_disallow = _interopRequireDefault(__webpack_require__(51));
 
@@ -231,14 +231,14 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 133:
+/***/ 134:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n\n    <div class=\"l-col\" method=\"post\">\n\n        <div class=\"form-group\">\n            <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                   placeholder=\"Электронный ящик\" name=\"email\" v-model=\"email\" @change=\"save_field_value('email', email)\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n\n        </div>\n        <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary col-12\" :disabled=success>\n            <span v-if=\"loading\">Загрузка...</span>\n            <span v-else-if=\"success\">Письмо отправлено</span>\n            <span v-else>Отправить письмо</span>\n        </button>\n\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{ success_txt }}</p>\n        </div>\n\n\n    </div>\n\n    <div class=\"r-col\">\n        <h4>Введите адрес электронной почты и мы вышлем инструкцию для восстановления пароля.</h4>\n    </div>\n\n    <p class=\"reg\">\n        <router-link :to=\"{name: 'login'}\">Вход</router-link>\n        или\n        <router-link :to=\"{name: 'registration'}\">Регистрация юриста</router-link>\n    </p>\n\n</div>\n\n\n";
 
 /***/ }),
 
-/***/ 134:
+/***/ 135:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -249,13 +249,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _template = _interopRequireDefault(__webpack_require__(135));
+var _template = _interopRequireDefault(__webpack_require__(136));
 
 var _logged_disallow = _interopRequireDefault(__webpack_require__(51));
 
 var _form = _interopRequireDefault(__webpack_require__(27));
 
-var _social = _interopRequireDefault(__webpack_require__(93));
+var _social = _interopRequireDefault(__webpack_require__(94));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -344,14 +344,14 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 135:
+/***/ 136:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n    <div class=\"_l-col col-12\">\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Электронный ящик</label>\n            <div class=\"col-sm-8\">\n                <input type=\"email\" class=\"form-control\" :class=\"{'is-invalid': error_fields.email }\"\n                       placeholder=\"\" name=\"email\" v-model=\"email\"\n                       @change=\"save_field_value('email', email)\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n            </div>\n        </div>\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Пароль</label>\n            <div class=\"col-sm-8\">\n                <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                       placeholder=\"Пароль\" v-model=\"password\" name=\"password\" @keyup.13=\"save\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n            </div>\n        </div>\n\n        <div class=\"form-group row\">\n            <div class=\"col-sm-8 ml-auto\">\n\n                <button type=\"submit\" class=\"btn btn-outline-primary\" @click=\"save\" :disabled=loading>\n                    <span v-if=\"loading\">Загрузка...</span><span v-else>Войти</span>\n                </button>\n\n\n                <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n                    <p class=\"suc\">{{ success_txt }}</p>\n                </div>\n\n                <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n                    <p class=\"err\">{{ error_txt }}</p>\n                </div>\n\n                <div class=\"msg\" v-if=\"unactive\"><!-- .l-col .msg -->\n                    <p class=\"err\">\n                        Не пришло письмо с подтверждением?<br/>\n                        <a @click=\"send_activation\" href=\"javascript:void(0)\">Выслать активационное письмо еще раз</a>\n                    </p>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"col-12\">\n            <hr class=\"my-4\">\n            <p class=\"_reg normal text-muted\">\n                Ещё не зарегистрированны?\n                <router-link :to=\"{name: 'registration'}\">Регистрация юриста</router-link><br>\n                <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n            </p>\n        </div>\n    </div>\n\n    <!--div class=\"hr\"></div>\n\n    <div class=\"r-col\">\n        <h4>войти через соцсети:</h4>\n        <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n        <!--button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n        <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n        <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n        <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n        <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button-->\n\n\n    <!--div class=\"msg\" v-if=\"error_fields.social\">\n            <p class=\"err\" v-if=\"error_fields.social\">{{ error_fields.social }}</p>\n        </div-->\n    <!--/div-->\n\n</div>";
 
 /***/ }),
 
-/***/ 136:
+/***/ 137:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -374,7 +374,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 137:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -396,7 +396,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 138:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -407,13 +407,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _template = _interopRequireDefault(__webpack_require__(139));
+var _template = _interopRequireDefault(__webpack_require__(140));
 
 var _logged_disallow = _interopRequireDefault(__webpack_require__(51));
 
 var _form = _interopRequireDefault(__webpack_require__(27));
 
-var _social = _interopRequireDefault(__webpack_require__(93));
+var _social = _interopRequireDefault(__webpack_require__(94));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -461,14 +461,14 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 139:
+/***/ 140:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n    <div class=\"_l-col col-12\">\n\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Фамилия</label>\n            <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"\" v-model=\"last_name\"\n                       name=\"last_name\" :class=\"{'is-invalid': error_fields.last_name }\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.last_name\">{{ error_fields.last_name }}</span>\n            </div>\n        </div>\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Имя</label>\n            <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"\" v-model=\"first_name\"\n                       name=\"first_name\" :class=\"{'is-invalid': error_fields.first_name }\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.first_name\">{{ error_fields.first_name }}</span>\n            </div>\n        </div>\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Отчество</label>\n            <div class=\"col-sm-8\">\n                <input type=\"text\" class=\"form-control\" placeholder=\"\" v-model=\"patronymic\"\n                       name=\"patronymic\" :class=\"{'is-invalid': error_fields.patronymic }\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.patronymic\">{{ error_fields.patronymic }}</span>\n            </div>\n        </div>\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Электронный ящик</label>\n            <div class=\"col-sm-8\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"\" v-model=\"email\"\n                       name=\"email\" :class=\"{'is-invalid': error_fields.email }\"\n                       @change=\"save_field_value('email', email)\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.email\">{{ error_fields.email }}</span>\n            </div>\n        </div>\n        <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label required\">Пароль</label>\n            <div class=\"col-sm-8\">\n                <input type=\"password\" class=\"form-control\" placeholder=\"Пароль\" v-model=\"password\"\n                       name=\"password\" @keyup.13=\"save\" :class=\"{'is-invalid': error_fields.password }\">\n                <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n            </div>\n        </div>\n\n        <div class=\"form-group row\">\n            <div class=\"col-sm-4 col-sm-8 ml-auto\">\n                <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary mt-4\" :disabled='loading||success'>\n                    <span v-if=\"loading\">Загрузка...</span>\n                    <span v-else-if=\"success\">Успешно</span>\n                    <span v-else>Зарегистрироваться</span>\n                </button>\n\n                <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n                    <p class=\"suc\">{{ success_txt }}</p>\n                </div>\n\n                <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n                    <p class=\"err\">{{ error_txt }}</p>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n    <!--div class=\"hr\"></div-->\n\n    <!--div class=\"r-col\"-->\n    <!--i class=\"icon-logo\"></i-->\n    <!--h4>Что даёт юристу регистрация на Мойюрист.онлайн?</h4>\n    <p>1. Удалённый заработок в удобное время</p>\n    <p>2. Новые клиенты и репутация</p>\n    <p>3. Узнаваемость в Интернете</p>\n    <p>4. Реализация способностей, опыт, общение с коллегами</p>\n    <p>5. Юридическая клиника</p-->\n    <!--h4>войти через соцсети:</h4>\n    <button type=\"submit\" class=\"btn-vk\" @click=\"vk\"><span class=\"icon-vk\"></span></button>\n    <button type=\"submit\" class=\"btn-od\"><span class=\"icon-od\"></span></button>\n    <button type=\"submit\" class=\"btn-ml\"><span class=\"icon-ml\"></span></button>\n    <button type=\"submit\" class=\"btn-fb\" @click=\"fb\"><span class=\"icon-fb\"></span></button>\n    <button type=\"submit\" class=\"btn-tw\"><span class=\"icon-tw\"></span></button>\n    <button type=\"submit\" class=\"btn-gl\"><span class=\"icon-gl\"></span></button-->\n    <!--/div-->\n\n    <div class=\"col-12\">\n        <hr class=\"my-4\">\n        <p class=\"_reg normal text-muted\">Уже зарегистрированны?\n            <router-link :to=\"{name: 'login'}\">Войдите</router-link>\n            <br>\n            <router-link :to=\"{name: 'forgot'}\">Восстановить пароль</router-link>\n        </p>\n    </div>\n</div>\n\n\n\n\n\n";
 
 /***/ }),
 
-/***/ 140:
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -479,7 +479,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _template = _interopRequireDefault(__webpack_require__(141));
+var _template = _interopRequireDefault(__webpack_require__(142));
 
 var _logged_disallow = _interopRequireDefault(__webpack_require__(51));
 
@@ -526,14 +526,14 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 141:
+/***/ 142:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\">\n\n    <div class=\"l-col\" method=\"post\">\n\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.password }\"\n                   placeholder=\"Пароль\" name=\"password\" v-model=\"password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.password\">{{ error_fields.password }}</span>\n        </div>\n\n\n        <div class=\"form-group\">\n            <input type=\"password\" class=\"form-control\" :class=\"{'is-invalid': error_fields.re_password }\"\n                   placeholder=\"Повторите пароль\" name=\"re_password\" v-model=\"re_password\" @keyup.13=\"save\">\n            <span class=\"invalid-feedback\" v-if=\"error_fields.re_password\">{{ error_fields.re_password }}</span>\n        </div>\n\n        <button type=\"submit\" @click=\"save\" class=\"btn btn-outline-primary col-12\" :disabled=success>\n            <span v-if=\"loading\">Загрузка...</span>\n            <span v-else-if=\"success\">Пароль изменен</span>\n            <span v-else>Сменить пароль</span>\n        </button>\n\n    </div>\n\n    <div class=\"r-col\">\n        <h4>Пожалуйста введите новый пароль.</h4>\n        <div class=\"msg\" v-if=\"success\"><!-- .l-col .msg -->\n            <p class=\"suc\">{{ success_txt }}</p>\n        </div>\n        <div class=\"msg\" v-if=\"error\"><!-- .l-col .msg -->\n            <p class=\"err\">{{ error_txt }}</p>\n        </div>\n\n    </div>\n\n     <p class=\"reg\">\n        <router-link :to=\"{name: 'login'}\">Вход</router-link>\n        или\n        <router-link :to=\"{name: 'registration'}\">Регистрация юриста</router-link>\n    </p>\n\n</div>\n\n\n";
 
 /***/ }),
 
-/***/ 142:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -544,7 +544,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _template = _interopRequireDefault(__webpack_require__(143));
+var _template = _interopRequireDefault(__webpack_require__(144));
 
 var _form = _interopRequireDefault(__webpack_require__(27));
 
@@ -559,7 +559,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 143:
+/***/ 144:
 /***/ (function(module, exports) {
 
 module.exports = "<section class=\"blue\">\n    <div class=\"win-round\">\n        <h2 class=\"logo\">\n            <router-view name=\"title\"></router-view>\n        </h2>\n        <router-view></router-view>\n    </div>\n</section>\n\n\n\n\n\n";
@@ -858,7 +858,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 93:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -869,16 +869,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _vk = _interopRequireDefault(__webpack_require__(136));
+var _vk = _interopRequireDefault(__webpack_require__(137));
 
-var _fb = _interopRequireDefault(__webpack_require__(137));
+var _fb = _interopRequireDefault(__webpack_require__(138));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = {
   computed: {
     vk_url: function vk_url() {
-      var buildUrl = __webpack_require__(94);
+      var buildUrl = __webpack_require__(95);
 
       return buildUrl(_vk.default.VK_AUTHORIZE_URL, {
         queryParams: {
@@ -892,7 +892,7 @@ var _default = {
       });
     },
     fb_url: function fb_url() {
-      var buildUrl = __webpack_require__(94);
+      var buildUrl = __webpack_require__(95);
 
       return buildUrl(_fb.default.FB_AUTHORIZE_URL, {
         queryParams: {
@@ -916,7 +916,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 94:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**

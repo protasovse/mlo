@@ -284,6 +284,9 @@ var _index2 = _interopRequireDefault(__webpack_require__(47));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var vueSmoothScroll = __webpack_require__(93);
+
+Vue.use(vueSmoothScroll);
 var app = new Vue({
   name: 'instance_anser_question',
   'el': '#app',
@@ -344,12 +347,12 @@ var _default = {
   name: 'answer_question',
   data: function data() {
     return {
+      full_tree: true,
       content: '',
-      answers: []
+      answers: [],
+      answers_like: []
     };
   },
-  computed: {},
-  watch: {},
   mounted: function mounted() {
     var _this = this;
 
@@ -361,9 +364,69 @@ var _default = {
       _this.answers = r.data.data;
     });
   },
+  computed: {
+    tree_link_name: function tree_link_name() {
+      return this.full_tree ? 'Свернуть' : 'Развернуть';
+    }
+  },
   methods: {
+    is_show_comment: function is_show_comment(id) {
+      if (this.full_tree) {
+        return true;
+      }
+
+      var answer = this.answers.filter(function (i) {
+        return i.id === id;
+      })[0];
+      return !answer.parent_id;
+    },
+    scrollTo: function scrollTo(refName) {
+      var element = this.$refs[refName][0];
+      var curtop = 0;
+      var curtopscroll = 0;
+
+      if (element.offsetParent) {
+        do {
+          curtop += element.offsetTop;
+          curtopscroll += element.offsetParent ? element.offsetParent.scrollTop : 0;
+        } while (element = element.offsetParent);
+      }
+
+      this.$SmoothScroll(curtop - curtopscroll - 40, 500);
+    },
     save: function save() {
       console.log(this.qid);
+    },
+    to_like_val: function to_like_val(id, val) {
+      var a = this.answers.filter(function (i) {
+        return i.id === id;
+      })[0];
+      a['like_count'] += val;
+      a['is_can_like'] = false;
+    },
+    to_like: function to_like(id) {
+      var _this2 = this;
+
+      this.$http.post('/api/question/answers/like', {
+        'id': id,
+        'value': 1
+      }, {
+        emulateJSON: true
+      }).then(function (r) {
+        _this2.to_like_val(id, 1);
+      });
+    },
+    to_dislike: function to_dislike(id) {
+      var _this3 = this;
+
+      this.$http.post('/api/question/answers/like', {
+        'id': id,
+        'value': -1
+      }, {
+        emulateJSON: true
+      }).then(function (r) {
+        _this3.to_like_val(id, -1);
+      });
     }
   }
 };
@@ -374,7 +437,7 @@ exports.default = _default;
 /***/ 357:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"answer_block\">\n    <div id=\"form\">\n        <div class=\"form-group\">\n            <label for=\"reply\" class=\"h6 mb-2\">title</label>\n            <textarea class=\"form-control\" v-model=\"content\" :class=\"{'is-invalid': error_fields.content }\" id=\"reply\"\n                      rows=\"5\" placeholder=\"Мой ответ…\"></textarea>\n            <span class=\"invalid-feedback\" v-if=\"error_fields.content\">error_fields.content </span>\n        </div>\n        <div class=\"form-group\">\n            <button @click=\"save\" class=\"btn btn-primary\">Отправить</button>\n            <span class=\"ml-3 normal\"><a href=\"#\"><i class=\"mr-2 icon-folder\"></i>Прикрепить файлы</a></span>\n        </div>\n    </div>\n\n    <div class=\"row question-page_gradient\">\n        <div class=\"question-page_main-part\">\n            <div class=\"row\">\n                <h3 class=\"answer-list-head\">Ответы юристов\n                    <span class=\"d-none answer__counter\" itemprop=\"answerCount\">2</span>\n                </h3>\n            </div>\n\n\n            <div v-for=\"answer_data in answers\"\n                 role=\"answer\"\n                 :data-answer_id=\"answer_data.id\"\n                 :data-thread=\"answer_data.thread\"\n                 class=\"answer entry\"\n                 :class=\"{'answer-push': answer_data.parent_id }\">\n\n                <hr class=\"my-4\"/>\n\n                <header class=\"answer-header\">\n                    <div class=\"question-page_l-col\">\n                        <a class=\"answer-header_photo\" href=\"/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/\">\n                            <img src=\"/static/img/lyr/person_pic.png\" :alt=\"answer_data.author.full_name\" />\n                        </a>\n                    </div>\n\n\n                    <div class=\"question-page_r-col\">\n                        <h6 class=\"mb-0\" itemprop=\"name\">\n                            <a href=\"/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/\">{{ answer_data.author.full_name }}</a>\n                        </h6>\n\n\n                        <div class=\"normal text-muted\" v-if=\"!answer_data.parent_id\">{{ answer_data.author.info.ur_status }}, {{ answer_data.author.city.name}}</div>\n\n                        <div class=\"answer-header_medal mt-3\" v-if=\"!answer_data.parent_id\">\n                            <span class=\"item\" title=\"Рейтинг эксперта\">\n                                <i class=\"icon-star\"></i>\n                                <span class=\"v\">{{ answer_data.author.stat.rating }}</span>\n                            </span>\n                            <span class=\"item\" title=\"Стаж\" v-if=\"0\">\n                                <i class=\"icon-medal\"></i>\n                                <span class=\"v\">охуеть сколько лет</span>\n                            </span>\n                            <span class=\"item\" title=\"Всего консультаций\" v-if=\"0\">\n                                <i class=\"icon-forum\"></i>\n                                <span class=\"v\">дохуя</span>\n                            </span>\n                        </div>\n\n                    </div>\n\n                </header>\n\n\n                <div class=\"row\">\n\n                    <div class=\"question-page_l-col\">\n                        <time class=\"subtitle d-block mt-1\" itemprop=\"dateCreated\" :datetime=\"answer_data.pub_date_c\">{{ answer_data.pub_date }}</time>\n                        <span class=\"d-block\">№ {{ answer_data.id }}</span>\n                    </div>\n\n                    <div class=\"question-page_r-col content\">\n                        <div class=\"text\" itemprop=\"text\" v-html=\"answer_data.content\">\n                            <div class=\"signature\" v-html=\"answer_data.author.signature\"></div>\n                        </div>\n                    </div>\n                </div>\n\n\n                <footer class=\"answer-footer row\">\n\n                    <div class=\"question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row\">\n\n                        <div class=\"answer-footer-action normal align-self-start align-self-md-center\">\n\n\n                            <a href=\"#\">Дополнительный вопрос</a>\n\n\n                        </div>\n\n                        <div class=\"align-self-end mt-3 mt-sm-0\" v-if=\"!answer_data.parent_id\">\n                            <div class=\"answer-like\">\n                                <div class=\"answer-like-sign dropdown\">Ответ полезен?</div>\n                                <div class=\"answer-like-block\">\n                                    <i class=\"icon-dislike order-1\"></i>\n                                    <i class=\"icon-like order-3\"></i>\n                                    <span class=\" order-2\">{{ answer_data.like_count }}</span>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"d-none question-page_r-col ml-auto mt-4\"></div>\n                </footer>\n\n            </div>\n        </div>\n\n\n        <aside class=\"question-page_aside-part\">\n            <h4 class=\"mb-4\">1Все ответы экспертов на этот вопрос:</h4>\n        </aside>\n\n\n    </div>\n\n\n</div>";
+module.exports = "<div id=\"answer_block\">\n    <div id=\"form\">\n        <div class=\"form-group\">\n            <label for=\"reply\" class=\"h6 mb-2\">title</label>\n            <textarea class=\"form-control\" v-model=\"content\" :class=\"{'is-invalid': error_fields.content }\" id=\"reply\"\n                      rows=\"5\" placeholder=\"Мой ответ…\"></textarea>\n            <span class=\"invalid-feedback\" v-if=\"error_fields.content\">error_fields.content </span>\n        </div>\n        <div class=\"form-group\">\n            <button @click=\"save\" class=\"btn btn-primary\">Отправить</button>\n            <span class=\"ml-3 normal\"><a href=\"#\"><i class=\"mr-2 icon-folder\"></i>Прикрепить файлы</a></span>\n        </div>\n    </div>\n\n    <div class=\"row question-page_gradient\">\n        <div class=\"question-page_main-part\">\n            <div class=\"row\">\n                <h3 class=\"answer-list-head\" id=\"div-id\">Ответы юристов\n                        (<a href=\"javascript:void(0);\" @click=\"full_tree = !full_tree\">{{ tree_link_name }}</a>)\n                    <span class=\"d-none answer__counter\" itemprop=\"answerCount\">2</span>\n                </h3>\n            </div>\n\n\n            <div name=\"x\" v-for=\"answer_data in answers\"\n                 role=\"answer\"\n                 :name=\"answer_data.id\"\n                 :ref=\"answer_data.id\"\n                 :data-answer_id=\"answer_data.id\"\n                 :data-thread=\"answer_data.thread\"\n                 class=\"answer entry\"\n                 :class=\"{'answer-push': answer_data.parent_id }\"\n                 v-if=\"is_show_comment(answer_data.id)\">\n\n                <hr class=\"my-4\"/>\n\n                <header class=\"answer-header\">\n                    <div class=\"question-page_l-col\">\n                        <a class=\"answer-header_photo\" :href=\"answer_data.author.url\">\n                            <img :src=\"answer_data.author.info.photo\" :alt=\"answer_data.author.full_name\" />\n                        </a>\n                    </div>\n\n\n                    <div class=\"question-page_r-col\">\n                        <h6 class=\"mb-0\" itemprop=\"name\">\n                            <a href=\"/%D1%8E%D1%80%D0%B8%D1%81%D1%82/7/\">{{ answer_data.author.full_name }}</a>\n                        </h6>\n\n\n                        <div class=\"normal text-muted\" v-if=\"!answer_data.parent_id\">{{ answer_data.author.info.ur_status }}, {{ answer_data.author.city.name}}</div>\n\n                        <div class=\"answer-header_medal mt-3\" v-if=\"!answer_data.parent_id\">\n                            <span class=\"item\" title=\"Рейтинг эксперта\">\n                                <i class=\"icon-star\"></i>\n                                <span class=\"v\">{{ answer_data.author.stat.rating }}</span>\n                            </span>\n                            <span class=\"item\" title=\"Стаж\" v-if=\"0\">\n                                <i class=\"icon-medal\"></i>\n                                <span class=\"v\">охуеть сколько лет</span>\n                            </span>\n                            <span class=\"item\" title=\"Всего консультаций\" v-if=\"0\">\n                                <i class=\"icon-forum\"></i>\n                                <span class=\"v\">дохуя</span>\n                            </span>\n                        </div>\n\n                    </div>\n\n                </header>\n\n\n                <div class=\"row\">\n\n                    <div class=\"question-page_l-col\">\n                        <time class=\"subtitle d-block mt-1\" itemprop=\"dateCreated\" :datetime=\"answer_data.pub_date_c\">{{ answer_data.pub_date }}</time>\n                        <span class=\"d-block\">№ {{ answer_data.id }}</span>\n                    </div>\n\n                    <div class=\"question-page_r-col content\">\n                        <div class=\"text\" itemprop=\"text\" v-html=\"answer_data.content\">\n                            <div class=\"signature\" v-html=\"answer_data.author.signature\"></div>\n                        </div>\n                    </div>\n                </div>\n\n\n                <footer class=\"answer-footer row\">\n\n                    <div class=\"question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row\">\n\n                        <div class=\"answer-footer-action normal align-self-start align-self-md-center\">\n\n                            <a href=\"#\">Дополнительный вопрос</a>\n\n                        </div>\n\n                        <div class=\"align-self-end mt-3 mt-sm-0\" v-if=\"!answer_data.parent_id\">\n                            <div class=\"answer-like\">\n                                <div class=\"answer-like-sign dropdown\">Ответ полезен?</div>\n                                <div class=\"answer-like-block\">\n                                    <i class=\"icon-dislike order-1\" v-if=\"answer_data.is_can_like\" @click=\"to_dislike(answer_data.id)\"></i>\n                                    <i class=\"icon-like order-3\" v-if=\"answer_data.is_can_like\" @click=\"to_like(answer_data.id)\"></i>\n                                    <span class=\"order-2\"\n                                          :class=\"{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}\"\n                                          >{{ answer_data.like_count }}</span>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"d-none question-page_r-col ml-auto mt-4\"></div>\n                </footer>\n\n            </div>\n        </div>\n\n\n        <aside class=\"question-page_aside-part\">\n            <h4 class=\"mb-4\">Юристы ответившие на этот вопрос:</h4>\n\n            <div class=\"lawyer-list\">\n                <div v-for=\"answer_data in answers\"\n                     v-if=\"!answer_data.parent_id\"\n                     role=\"answers_selector\"\n                     class=\"lawyer-list_item lawyer-list_item-action\"\n                     :data-answer_id=\"answer_data.id\"\n                     @click=\"scrollTo(answer_data.id)\"\n                     >\n                    <div class=\"lawyer-list_header\">\n                        <span class=\"ph\">\n                            <img :src=\"answer_data.author.info.pic\" :alt=\"answer_data.author.full_name\">\n                        </span>\n                        <div class=\"nm\">{{ answer_data.author.full_name }}</div>\n                    </div>\n                    <p class=\"lawyer-list_body\"> {{ answer_data.short_content }} </p>\n                </div>\n            </div>\n\n        </aside>\n\n\n    </div>\n\n\n</div>";
 
 /***/ }),
 
@@ -437,6 +500,213 @@ var _default = {
   }
 };
 exports.default = _default;
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["VueSmoothScroll"] = factory();
+	else
+		root["VueSmoothScroll"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var SmoothScroll = __webpack_require__(1);
+	module.exports = {
+	    install: function (Vue, options) {
+	        options = options || { name: 'smoothscroll' };
+	        Vue.directive(options.name, {
+	            inserted: function (el, binding) {
+	                SmoothScroll(el, binding.value["duration"], binding.value["callback"], binding.value["context"]);
+	            }
+	        });
+	        Object.defineProperty(Vue.prototype, '$SmoothScroll', {
+	            get: function () {
+	                return SmoothScroll;
+	            }
+	        });
+	    }
+	};
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, smoothScroll) {
+	  'use strict';
+
+	  // Support RequireJS and CommonJS/NodeJS module formats.
+	  // Attach smoothScroll to the `window` when executed as a <script>.
+
+	  // RequireJS
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (smoothScroll), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+	  // CommonJS
+	  } else if (typeof exports === 'object' && typeof module === 'object') {
+	    module.exports = smoothScroll();
+
+	  } else {
+	    root.smoothScroll = smoothScroll();
+	  }
+
+	})(this, function(){
+	'use strict';
+
+	// Do not initialize smoothScroll when running server side, handle it in client:
+	if (typeof window !== 'object') return;
+
+	// We do not want this script to be applied in browsers that do not support those
+	// That means no smoothscroll on IE9 and below.
+	if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
+
+	// Get the top position of an element in the document
+	var getTop = function(element, start) {
+	    // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
+	    if(element.nodeName === 'HTML') return -start
+	    return element.getBoundingClientRect().top + start
+	}
+	// ease in out function thanks to:
+	// http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
+	var easeInOutCubic = function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 }
+
+	// calculate the scroll position we should be in
+	// given the start and end point of the scroll
+	// the time elapsed from the beginning of the scroll
+	// and the total duration of the scroll (default 500ms)
+	var position = function(start, end, elapsed, duration) {
+	    if (elapsed > duration) return end;
+	    return start + (end - start) * easeInOutCubic(elapsed / duration); // <-- you can change the easing funtion there
+	    // return start + (end - start) * (elapsed / duration); // <-- this would give a linear scroll
+	}
+
+	// we use requestAnimationFrame to be called by the browser before every repaint
+	// if the first argument is an element then scroll to the top of this element
+	// if the first argument is numeric then scroll to this location
+	// if the callback exist, it is called when the scrolling is finished
+	// if context is set then scroll that element, else scroll window
+	var smoothScroll = function(el, duration, callback, context){
+	    duration = duration || 500;
+	    context = context || window;
+	    var start = context.scrollTop || window.pageYOffset;
+
+	    if (typeof el === 'number') {
+	      var end = parseInt(el);
+	    } else {
+	      var end = getTop(el, start);
+	    }
+
+	    var clock = Date.now();
+	    var requestAnimationFrame = window.requestAnimationFrame ||
+	        window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
+	        function(fn){window.setTimeout(fn, 15);};
+
+	    var step = function(){
+	        var elapsed = Date.now() - clock;
+	        if (context !== window) {
+	          context.scrollTop = position(start, end, elapsed, duration);
+	        }
+	        else {
+	          window.scroll(0, position(start, end, elapsed, duration));
+	        }
+
+	        if (elapsed > duration) {
+	            if (typeof callback === 'function') {
+	                callback(el);
+	            }
+	        } else {
+	            requestAnimationFrame(step);
+	        }
+	    }
+	    step();
+	}
+
+	var linkHandler = function(ev) {
+	    ev.preventDefault();
+
+	    if (location.hash !== this.hash) window.history.pushState(null, null, this.hash)
+	    // using the history api to solve issue #1 - back doesn't work
+	    // most browser don't update :target when the history api is used:
+	    // THIS IS A BUG FROM THE BROWSERS.
+	    // change the scrolling duration in this call
+	    var node = document.getElementById(this.hash.substring(1))
+	    if(!node) return; // Do not scroll to non-existing node
+
+	    smoothScroll(node, 500, function(el) {
+	        location.replace('#' + el.id)
+	        // this will cause the :target to be activated.
+	    });
+	}
+
+	// We look for all the internal links in the documents and attach the smoothscroll function
+	document.addEventListener("DOMContentLoaded", function () {
+	    var internal = document.querySelectorAll('a[href^="#"]:not([href="#"])'), a;
+	    for(var i=internal.length; a=internal[--i];){
+	        a.addEventListener("click", linkHandler, false);
+	    }
+	});
+
+	// return smoothscroll API
+	return smoothScroll;
+
+	});
+
+
+/***/ }
+/******/ ])
+});
+;
 
 /***/ })
 
