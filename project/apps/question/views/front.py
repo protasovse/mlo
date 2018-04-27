@@ -242,7 +242,7 @@ class AskQuestion(TemplateView):
             'ask_name': request.POST.get('name', False),
         }
         data.update({
-            'ask_phone': request.POST['code'] + request.POST['phone'] \
+            'ask_phone': request.POST['code'] + request.POST['phone']
             if 'code' in request.POST and 'phone' in request.POST else False
         })
 
