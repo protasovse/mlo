@@ -651,7 +651,7 @@ pre {
     padding-right: 0;
     padding-left: 0; }
 
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col, .col, .win-round .r-col, .win-round .question-item .answer, .question-item .win-round .answer, .lawyer-page_about nav a,
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col, .col, .win-round .r-col, .win-round .question-item .answer, .question-item .win-round .answer, .lawyer-page_about nav a,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, section.lawyer-section .title, section.lawyer-section .lawyer-page_header_r-col, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, section.questions-section header h3, section.questions-section header h2, .col-md-12, .col-md,
 .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .question-page_header .question-item .answer, .question-item .question-page_header .answer, .col-lg-6, .col-lg-7, .questions-section .question-item .r-col, .questions-section .question-item .answer, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
@@ -717,7 +717,7 @@ pre {
   flex: 0 0 91.6666666667%;
   max-width: 91.6666666667%; }
 
-.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .gutter, section.review-section .reviews, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
+.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
   flex: 0 0 100%;
   max-width: 100%; }
 
@@ -965,7 +965,7 @@ pre {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%; }
 
-  .col-md-5, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col {
+  .col-md-5, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col {
     flex: 0 0 41.6666666667%;
     max-width: 41.6666666667%; }
 
@@ -973,7 +973,7 @@ pre {
     flex: 0 0 50%;
     max-width: 50%; }
 
-  .col-md-7, section.review-section .gutter, section.review-section .reviews {
+  .col-md-7 {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
@@ -1100,7 +1100,7 @@ pre {
     flex: 0 0 25%;
     max-width: 25%; }
 
-  .col-lg-4, section.advantage-section .advantages .advantage-item, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col {
+  .col-lg-4, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%; }
 
@@ -1112,7 +1112,7 @@ pre {
     flex: 0 0 50%;
     max-width: 50%; }
 
-  .col-lg-7, .questions-section .question-item .r-col, .questions-section .question-item .answer {
+  .col-lg-7, section.review-section .spacer, section.review-section .rblock, .questions-section .question-item .r-col, .questions-section .question-item .answer {
     flex: 0 0 58.3333333333%;
     max-width: 58.3333333333%; }
 
@@ -1184,7 +1184,7 @@ pre {
   .offset-lg-0 {
     margin-left: 0; }
 
-  .offset-lg-1, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
+  .offset-lg-1, section.review-section .rblock, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
     margin-left: 8.3333333333%; }
 
   .offset-lg-2 {
@@ -6853,7 +6853,7 @@ section.lawyer-section .lawyer-page_header_r-col,
 .my-auto {
   margin-bottom: auto !important; }
 
-.ml-auto, section.review-section .reviews, section.questions-section header h3, section.questions-section header h2, .question-page_header .l-col, .question-page_l-col, .answer-list-head,
+.ml-auto, section.review-section .rblock, section.questions-section header h3, section.questions-section header h2, .question-page_header .l-col, .question-page_l-col, .answer-list-head,
 .mx-auto,
 section.advantage-section .content,
 section.lawyer-section .title,
@@ -8083,59 +8083,61 @@ section {
         background-image: url("/static/img/advantage/advantage-6.svg"); }
   section.review-section {
     padding-bottom: 0;
-    height: 620px; }
+    min-height: 620px;
+    overflow: hidden; }
     @media (max-width: 767.98px) {
       section.review-section {
         padding-bottom: 80px;
         height: auto; } }
-    section.review-section .gutter {
+    section.review-section .spacer {
       z-index: 0; }
-    section.review-section .reviews {
+    section.review-section .rblock {
       position: absolute;
       z-index: 1;
       right: 0; }
-      @media (max-width: 767.98px) {
-        section.review-section .reviews {
+      @media (max-width: 991.98px) {
+        section.review-section .rblock {
           position: static;
           padding-bottom: 20px; } }
-    section.review-section .review {
+    section.review-section .form {
       background-color: white;
       position: relative;
       max-height: 540px;
       overflow-y: hidden;
       box-shadow: 0 -2.1rem 0 -1.5rem #fcfcfc, 0 -4.2rem 0 -3rem #fafafa; }
       @media (max-width: 767.98px) {
-        section.review-section .review {
+        section.review-section .form {
           min-width: 600px; } }
-      section.review-section .review .review-item {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        border-bottom: solid 4px #f5f5f5;
-        padding: 20px 20px 20px 100px;
-        position: relative;
-        cursor: pointer; }
-        section.review-section .review .review-item p {
-          margin-bottom: 0; }
-        @media (max-width: 991.98px) {
-          section.review-section .review .review-item {
-            padding-left: 60px; } }
-        section.review-section .review .review-item:before {
-          content: '\e901';
-          font-family: icomoon;
-          color: #2e67fb;
-          position: absolute;
-          left: 30px; }
-          @media (max-width: 991.98px) {
-            section.review-section .review .review-item:before {
-              left: 20px; } }
-      section.review-section .review:after {
+      section.review-section .form:after {
         content: '';
         position: absolute;
         bottom: 0;
+        left: 0;
         width: 100%;
         height: 120px;
         box-shadow: inset 0px -9rem 5rem -4rem #f5f5f5; }
+    section.review-section .review-item {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-bottom: solid 4px #f5f5f5;
+      padding: 20px 20px 20px 100px;
+      position: relative;
+      cursor: pointer; }
+      section.review-section .review-item p {
+        margin-bottom: 0; }
+      @media (max-width: 991.98px) {
+        section.review-section .review-item {
+          padding-left: 60px; } }
+      section.review-section .review-item:before {
+        content: '\e901';
+        font-family: icomoon;
+        color: #2e67fb;
+        position: absolute;
+        left: 30px; }
+        @media (max-width: 991.98px) {
+          section.review-section .review-item:before {
+            left: 20px; } }
   section.lawyer-section {
     padding-bottom: 0;
     height: 680px; }

@@ -1,5 +1,6 @@
 import urllib.parse
 from django.contrib.sites.models import Site
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from config import flash_messages
@@ -8,7 +9,7 @@ from django.utils import timezone
 from django.db import transaction
 from django.utils.http import urlencode
 from django.views.generic.base import TemplateView, RedirectView
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
@@ -79,7 +80,9 @@ class QuestionDetail(TemplateView):
 
         # Лучшие юристы блок
         context.update({
-            'lawyers_from_rating': Rating.lawyers.all()[:3]
+            'lawyers_from_rating': Rating.lawyers.all()[:3],
+            'lawyer_will_answer': get_user_model().objects.get(pk=1),
+            'text': self.request.session['ask_question_form']['text']
         })
 
         return context
@@ -226,6 +229,12 @@ class QuestionsList(TemplateView):
 
 class AskQuestion(TemplateView):
     template_name = 'question/ask.html'
+
+    @method_decorator(csrf_exempt)
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        request.session['ask_question_form'] = request.POST
+        return super(AskQuestion, self).render_to_response(context)
 
 
 class ConfirmQuestion(RedirectView):

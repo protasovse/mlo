@@ -16,7 +16,7 @@
             <div class="r-col">
                 <form method="post" action="{% url 'ask_question' %}">
                     {% csrf_token %}
-                    <textarea class="l" id="question" name="text" placeholder="Опишите свою проблему..."></textarea>
+                    <textarea class="l" id="question" name="text" placeholder="Опишите свою проблему...">{{ text }}</textarea>
                     <button type="submit">Задать вопрос</button>
                 </form>
             </div>

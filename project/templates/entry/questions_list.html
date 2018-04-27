@@ -22,7 +22,7 @@
     {# Хедер страницы вопроса #}
     {# Лендинг #}
     {% if not user.is_authenticated %}
-        {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
+        {% include 'question/section/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
     {% endif %}
 
     {# Содержание страницы вопроса #}

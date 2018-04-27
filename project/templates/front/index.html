@@ -71,9 +71,9 @@
                 <div class="title">
                     <h2>За 13 лет 236&nbsp;820 посетителей получили консультации</h2>
                 </div>
-                <div class="gutter"></div>
-                <div class="reviews">
-                    <div class="review">
+                <div class="spacer"></div>
+                <div class="rblock">
+                    <div class="form">
                         {% for item in reviews %}
                             <div class="review-item">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -89,7 +89,6 @@
                     <a class="btn btn-primary" href="{% url 'reviews_page' %}">Посмотреть все отзывы<span
                             class="icon-forum ml-2"></span></a>
                 </div>
-                <div class="gutter"></div>
             </div>
         </div>
     </section>
