@@ -82,7 +82,6 @@ class QuestionDetail(TemplateView):
         context.update({
             'lawyers_from_rating': Rating.lawyers.all()[:3],
             'lawyer_will_answer': get_user_model().objects.get(pk=1),
-            'text': self.request.session['ask_question_form']['text']
         })
 
         return context
@@ -231,9 +230,24 @@ class AskQuestion(TemplateView):
     template_name = 'question/ask.html'
 
     @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AskQuestion, self).dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         context = self.get_context_data()
-        request.session['ask_question_form'] = request.POST
+
+        # Данные с онлайн-консультанта
+        data = {
+            'ask_content': request.POST.get('question', request.POST.get('text', False)),
+            'ask_name': request.POST.get('name', False),
+        }
+        data.update({
+            'ask_phone': request.POST['code'] + request.POST['phone'] \
+            if 'code' in request.POST and 'phone' in request.POST else False
+        })
+
+        request.session.update(data)
+
         return super(AskQuestion, self).render_to_response(context)
 
 
