@@ -89,3 +89,13 @@ class QuestionView(ApiView):
             'id': q.id,
             'status': q.status
         }
+
+
+class QuestionDefault(ApiView):
+    @classmethod
+    def get(self, request):
+        return {
+            'ask_content': request.session.pop('ask_content', ''),
+            'ask_name': request.session.pop('ask_name', ''),
+            'ask_phone': request.session.pop('ask_phone', ''),
+        }

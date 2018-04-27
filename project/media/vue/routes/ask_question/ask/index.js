@@ -57,6 +57,19 @@ export default {
         }
     },
     mounted() {
+        this.$http.get('/api/question/default').then(
+            (r) => {
+                if (r.data.data['ask_content']) {
+                    this.content = r.data.data['ask_content'];
+                }
+                if (r.data.data['ask_name']) {
+                    this.name = r.data.data['ask_name'];
+                }
+                if (r.data.data['ask_phone']) {
+                    this.phone = r.data.data['ask_phone'];
+                }
+            },
+        );
         this.$http.get('/api/default').then(
             (r) => {
                 this.question_url = r.data.data['urls']['show_question'];
