@@ -143,7 +143,7 @@ class Info(models.Model):
             'pic': self.small_photo,
             'ur_status': self.title,
             'signature': self.signature,
-
+            'answer_count': self.answer_count
         }
 
     @classmethod
@@ -152,7 +152,8 @@ class Info(models.Model):
             'ur_status': '',
             'photo': '/static/img/lyr/person_photo.png',
             'pic': '/static/img/lyr/person_pic.png',
-            'signature': ''
+            'signature': '',
+            'answer_count': 0
         }
 
 

@@ -94,13 +94,7 @@
                                 {% include 'advice/advice_question_answer_block.html' %}
                             {% elif user.role == 2 %}
                                 {#% include 'question/question_answer_block.html' %#}
-                                {% if not is_my_answer %}
-                                    <reply-form
-                                            v-bind:question_id="{{ question.id }}"
-                                            v-bind:parent_id="null"
-                                            title="Ответить на вопрос:">
-                                    </reply-form>
-                                {% endif %}
+                                {% if not is_my_answer %}{% endif %}
                             {% endif %}
 
                             <hr class="my-4">

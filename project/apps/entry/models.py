@@ -189,6 +189,12 @@ class Question(Entry, Titled, Classified):
         verbose_name = _("Вопрос")
         verbose_name_plural = _("Вопросы")
 
+    def get_public_data(self):
+        return {
+            'id': self.id,
+            'author': self.author.get_public_data()
+        }
+
     def get_absolute_url(self):
         return reverse('question:detail', kwargs={'pk': self.pk})
 
@@ -294,8 +300,8 @@ class Answer(Entry):
     def get_public_data(self):
         return {
             'id': self.id,
-            'pub_date_c': self.pub_date.isoformat(),
-            'pub_date': self.pub_date.strftime('%d %B %Y %H:%M'),
+            'pub_date_c': self.pub_date.isoformat() if self.pub_date else '',
+            'pub_date': self.pub_date.strftime('%d %B %Y %H:%M') if self.pub_date else '',
             'parent_id': self.parent_id,
             'author': self.author.get_public_data(),
             'thread': self.thread,

@@ -16,11 +16,16 @@ from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
-
-from config.settings import ADVICE_COST
-
+from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED
 
 class QuestionView(ApiView):
+    @classmethod
+    def get(cls, request):
+        return Question.objects.filter(pk=request.GET['id']).select_related(
+            'author', 'author__city', 'author__info', 'author__rating'
+        ).get().get_public_data()
+
+
     @classmethod
     def post(cls, request):
         f = Question.objects.get(pk=request.POST['id'])\
@@ -115,8 +120,24 @@ class AnswersView(ApiView):
                  ] if request.user.is_authenticated else []
 
         answers = [a.get_public_data() for a in Answer.published.related_to_question(question)]
-        for a in answers:
+
+        for i, a in enumerate(answers):
             a.update(_is_can_like(a, request.user, likes))
+            if a['parent_id'] is None:
+                a.update({'is_expand': ANSWERS_TREE_IS_EXPANDED})
+            """
+             to mark last answers in thread
+            """
+            # lawyer's answers are not mark
+            if a['parent_id'] is None:
+                a.update({'is_last_answer': False})
+                continue
+            try:
+                n = answers[i+1]
+                a.update({'is_last_answer': a['parent_id'] != n['parent_id']})
+            except IndexError:
+                a.update({'is_last_answer': True})
+
         return answers
 
 

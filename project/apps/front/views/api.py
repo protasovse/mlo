@@ -8,7 +8,8 @@ class FrontDefault(ApiView):
     def get(cls, request):
         return {
             'settings': {
-                'advice_cost':  settings.ADVICE_COST
+                'advice_cost':  settings.ADVICE_COST,
+                'answers_expand': settings.ANSWERS_TREE_IS_EXPANDED
             },
             'urls': {
                 'show_question': reverse('question:detail', kwargs={'pk': 0})

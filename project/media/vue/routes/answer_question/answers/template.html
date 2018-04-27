@@ -16,7 +16,7 @@
         <div class="question-page_main-part">
             <div class="row">
                 <h3 class="answer-list-head" id="div-id">Ответы юристов
-                        (<a href="javascript:void(0);" @click="full_tree = !full_tree">{{ tree_link_name }}</a>)
+                        <a href="javascript:void(0);" @click="expand_all" v-if="sub_answers_exists">({{ tree_link_name }})</a>
                     <span class="d-none answer__counter" itemprop="answerCount">2</span>
                 </h3>
             </div>
@@ -48,7 +48,7 @@
                         </h6>
 
 
-                        <div class="normal text-muted" v-if="!answer_data.parent_id">{{ answer_data.author.info.ur_status }}, {{ answer_data.author.city.name}}</div>
+                        <div class="normal text-muted" v-if="!answer_data.parent_id">{{ answer_data.author.about_me }}</div>
 
                         <div class="answer-header_medal mt-3" v-if="!answer_data.parent_id">
                             <span class="item" title="Рейтинг эксперта">
@@ -59,9 +59,9 @@
                                 <i class="icon-medal"></i>
                                 <span class="v">охуеть сколько лет</span>
                             </span>
-                            <span class="item" title="Всего консультаций" v-if="0">
+                            <span class="item" title="Всего консультаций" >
                                 <i class="icon-forum"></i>
-                                <span class="v">дохуя</span>
+                                <span class="v">{{ answer_data.author.info.answer_count }}</span>
                             </span>
                         </div>
 
@@ -90,14 +90,13 @@
                     <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
 
                         <div class="answer-footer-action normal align-self-start align-self-md-center">
-
-                            <a href="#">Дополнительный вопрос</a>
-
+                            <a href="#" v-if="get_add_question_link(answer_data.id)">{{ get_add_question_link(answer_data.id)}}</a><br/>
+                            <a href="javascript:void(0);" v-if="is_possible_expand_answer(answer_data.id)" @click="expand_answer(answer_data.id)">{{ get_exand_answer_name(answer_data.id) }}</a>
                         </div>
 
                         <div class="align-self-end mt-3 mt-sm-0" v-if="!answer_data.parent_id">
                             <div class="answer-like">
-                                <div class="answer-like-sign dropdown">Ответ полезен?</div>
+                                <div class="answer-like-sign dropdown">{{ like_title(answer_data.id) }}</div>
                                 <div class="answer-like-block">
                                     <i class="icon-dislike order-1" v-if="answer_data.is_can_like" @click="to_dislike(answer_data.id)"></i>
                                     <i class="icon-like order-3" v-if="answer_data.is_can_like" @click="to_like(answer_data.id)"></i>

@@ -65,17 +65,17 @@ class QuestionDetail(TemplateView):
 
         context.update({
             'mess': messages.get_messages(self.request),
-            'answers': Answer.published.related_to_question(question),
+            'answers': [], #Answer.published.related_to_question(question),
             'site': Site.objects.get_current(),
             'protocol': SITE_PROTOCOL,
             'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk}))
         })
 
-        if self.request.user.is_authenticated and self.request.user.role == 2:
-            context.update({
-                'is_my_answer': not not Answer.objects.filter(on_question=question, author_id=self.request.user,
-                                                              parent=None).count()
-            })
+        #if self.request.user.is_authenticated and self.request.user.role == 2:
+           # context.update({
+           #     'is_my_answer': not not Answer.objects.filter(on_question=question, author_id=self.request.user,
+           #                                                   parent=None).count()
+           # })
 
         # Лучшие юристы блок
         context.update({

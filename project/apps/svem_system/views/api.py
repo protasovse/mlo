@@ -1,4 +1,3 @@
-import os
 import sys
 import config.error_messages as error_txt
 from django.core.exceptions import ValidationError

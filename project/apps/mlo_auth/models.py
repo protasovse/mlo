@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth import get_user_model
-from phonenumber_field.modelfields import PhoneNumberField
 
 from apps.advice.models import Scheduler
 from apps.mlo_auth.managers import UserManager, CLIENT, LAWYER
@@ -16,6 +15,21 @@ ROLES_CHOICES = (
     (LAWYER, _('Юрист')),
     # (EDITOR, _('Редактор')),
 )
+
+
+def get_role(role_id):
+    """
+    role_id = 1 - это пиздец какое говно.
+    Серега, не делай так!
+    :param role_id:
+    :return:
+    """
+    if role_id == CLIENT:
+        return 'client'
+    elif role_id == LAWYER:
+        return 'lawyer'
+    else:
+        return None
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -73,10 +87,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
 
+    @property
+    def about_me(self):
+        p = []
+        if hasattr(self, 'info') and self.info.title:
+            p.append(self.info.title)
+        if self.city:
+            p.append(self.city.name_ru)
+        return ', '.join(p)
+
+
     def get_public_data(self):
         from apps.account.models import Info
         return {
-            'id': self.id,
+            'id': int(self.id),
+            'role': get_role(self.role),
             'email': self.email,
             'full_name': self.get_full_name,
             'first_name': self.first_name,
@@ -88,6 +113,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                 'name': self.city.name_ru if self.city else None
             },
             'info': self.info.get_public_data() if hasattr(self, 'info') else Info.get_empty_data(),
+            'about_me': self.about_me,
             'stat': {
                 'rating': self.rating.get_rate if hasattr(self, 'rating') else None,
             },
