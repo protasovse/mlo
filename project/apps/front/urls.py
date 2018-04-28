@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from apps.front.views.front import Mainpage, LawyerPage, ReviewsPage, TermsOfUse, About
 
 urlpatterns = [
@@ -10,4 +10,8 @@ urlpatterns = [
     path('отзывы/', ReviewsPage.as_view(), name='reviews_page'),
     path('пользовательское-соглашение/', TermsOfUse.as_view(), name='terms_of_use'),
     path('о-проекте/', About.as_view(), name='about'),
+
+
+    # Все остальные гкд проверяем на редирект
+    url(r'^', include('apps.front.urls_redirect_from_svem')),
 ]

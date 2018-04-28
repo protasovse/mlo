@@ -12,6 +12,11 @@
 <meta property="og:url" content= "{{ SITE_URL }}{{ question.get_absolute_url }}" />
 {% endblock %}
 
+{% block head %}
+    <link rel="canonical" href="{{ SITE_URL }}{{ question.get_absolute_url }}">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
 {% block content %}
 
     {# Хедер страницы вопроса #}
@@ -178,7 +183,7 @@
 
     </div>
 
-    {% include 'question/section/not_found_answer.html' %}
+    {#% include 'question/section/not_found_answer.html' %#}
 
 {% endblock %}
 

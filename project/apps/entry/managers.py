@@ -91,7 +91,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
         client = sphinxapi.SphinxClient()
         client.SetServer('127.0.0.1', 9312)
 
-        client.SetLimits(offset, limit, 1000)
+        client.SetLimits(offset, limit, 10000)
 
         if not sort:
             sort.append('pub_date DESC')
