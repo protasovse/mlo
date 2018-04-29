@@ -90,7 +90,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = env('SITE_ID')
-SITE_URL = 'http://мойюрист.онлайн'
+SITE_URL = env('SITE_URL')
 SITE_PROTOCOL = env('PROTOCOL')
 AUTH_USER_MODEL = 'mlo_auth.user'
 AUTHENTICATION_BACKENDS = ['apps.mlo_auth.models.Backend']

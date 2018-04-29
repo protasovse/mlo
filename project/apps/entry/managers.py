@@ -98,6 +98,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, ', '.join(sort))
         client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED)
+
         for key in filters:
             client.SetFilter(key, filters[key])
 

@@ -354,6 +354,20 @@ class SphCounter(models.Model):
 
     max_id = models.IntegerField()
 
+
+class Tag(models.Model):
+    """
+    Техническая модель для редиректа ссылок с тегом со Svem.ru
+    на новые ссылки
+    Экспорт — mlo_new процедура: call mlo_new.export_tags_from_svem();
+    """
+    name = models.CharField(max_length=100)
+    slug = models.CharField(max_length=100)
+    count = models.IntegerField()
+
+    def get_absolute_url(self):
+        return reverse('questions:list_tag', kwargs={'tag': self.slug})
+
 '''
 
 def post_save_answer_receiver(sender, instance, *args, **kwargs):

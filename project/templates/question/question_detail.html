@@ -5,11 +5,12 @@
 {% block title %}{{ question.title }} — вопрос №{{ question.id }} на Мойюрист.онлайн{% endblock %}
 
 {% block og_meta %}
-<meta property="og:title" content="{{ question.title }} — вопрос №{{ question.id }} на Мойюрист.онлайн"/>
-<meta property="og:description" content="Вопрос №{{ question.id }} на Мойюрист.онлайн, ответов: {{ question.reply_count }}.{% if question.rubric %} Тема «{{ question.rubric }}».{% endif %}"/>
-<meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content= "{{ SITE_URL }}{{ question.get_absolute_url }}" />
+    <meta property="og:title" content="{{ question.title }} — вопрос №{{ question.id }} на Мойюрист.онлайн"/>
+    <meta property="og:description"
+          content="Вопрос №{{ question.id }} на Мойюрист.онлайн, ответов: {{ question.reply_count }}.{% if question.rubric %} Тема «{{ question.rubric }}».{% endif %}"/>
+    <meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ SITE_URL }}{{ question.get_absolute_url }}"/>
 {% endblock %}
 
 {% block head %}
@@ -87,7 +88,8 @@
                                 <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
                                         <p class="file-list-item">
-                                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                            <a target="_blank"
+                                               href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
                                         </p>
                                     {% endfor %}
                                 </div>

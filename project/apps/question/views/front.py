@@ -13,7 +13,7 @@ from django.contrib.auth import login, get_user_model
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
-from apps.entry.models import Question, Answer
+from apps.entry.models import Question, Answer, Tag
 from django.contrib import messages
 from django.urls import reverse
 from datetime import timedelta
@@ -137,6 +137,17 @@ class QuestionsList(TemplateView):
 
             current_url = reverse('questions:list_rubric', kwargs={
                 'rubric_slug': rubric.slug
+            })
+
+        if 'tag' in self.kwargs:
+            tag = Tag.objects.get(slug=self.kwargs['tag'])
+            query = self.kwargs['tag']
+            sort.append('@relevance DESC')
+            current_url = reverse('questions:list_tag', kwargs={
+                'tag': kwargs['tag']
+            })
+            context.update({
+                'tag': tag
             })
 
         if 'q' in self.request.GET:

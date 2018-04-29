@@ -61,6 +61,9 @@ class Rubric(MPTTModel):
         default=False,
     )
 
+    # Старый слуг со Svem.ru для редиректа
+    slug2 = models.CharField(max_length=128, null=True, blank=True)
+
     objects = models.Manager()
     rubricator = RubricManager()
 
@@ -130,9 +133,7 @@ class Classified(models.Model):
 
     rubric = TreeForeignKey(
         Rubric,
-        blank=True,
-        null=True,
-        default=None,
+        default=1,
         related_name='rubric',
         verbose_name=_('Рубрика'),
         on_delete=models.CASCADE
