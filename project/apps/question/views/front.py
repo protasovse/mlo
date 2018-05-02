@@ -121,8 +121,10 @@ class QuestionsList(TemplateView):
 
         filters = {}
         sort = []
+        q = False
         query = ''
         query_string = ''
+        tag = False
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
         url_params = {}  # GET параметры для url, используется в пагинаторе
         cur_url_param = None  # Текущий url параметр для определиния активной ссылки в навигации
@@ -140,7 +142,10 @@ class QuestionsList(TemplateView):
             })
 
         if 'tag' in self.kwargs:
-            tag = Tag.objects.get(slug=self.kwargs['tag'])
+            try:
+                tag = Tag.objects.get(slug=self.kwargs['tag'])
+            except Tag.DoesNotExist:
+                raise Http404
             query = self.kwargs['tag']
             sort.append('@relevance DESC')
             current_url = reverse('questions:list_tag', kwargs={
@@ -232,6 +237,43 @@ class QuestionsList(TemplateView):
         # Лучшие юристы блок
         context.update({
             'lawyers_from_rating': Rating.lawyers.all()[:4]
+        })
+
+        h1 = 'Консультация юриста и адвоката онлайн'
+        if rubric:
+            h1 = rubric.h1 if rubric.h1 else rubric.title if rubric.title else rubric
+        if tag:
+            h1 = tag.name
+
+        if not self.request.user.is_authenticated or self.request.user.role == 1:
+            h2_begin = 'Юридические консультации'
+            h2_end = 'по российскому законодательству'
+        else:
+            h2_begin = 'Вопросы'
+            h2_end = 'юристу'
+
+        if rubric:
+            h2 = '{} по теме «{}»'.format(h2_begin, rubric.name)
+        elif tag:
+            h2 = '{} по теме «{}»'.format(h2_begin, tag.name)
+        elif query_string:
+            h2 = 'Результаты поиска'
+        else:
+            h2 = '{} {}'.format(h2_begin, h2_end)
+
+        title = 'Консультации юристов и адвокатов на сайте Мойюрист.онлайн'
+        if rubric:
+            title = rubric.title if rubric.title else rubric.h1 if rubric.h1 else \
+                    'Консультации юристов по теме «{}» на сайте Мойюрист.онлайн'.format(rubric.name)
+        elif tag:
+            title = 'Консультации юристов по теме «{}» на сайте Мойюрист.онлайн'.format(tag.name)
+        elif query_string:
+            title = 'Результаты поиска. Юридические консультации онлайн'
+
+        context.update({
+            'h1': h1,
+            'h2': h2,
+            'title': title,
         })
 
         return context

@@ -34,7 +34,7 @@
                         это делает наш проект лучше и удобнее, а консультации наших экспертов качественней!</p>
                 {% endif %}
 
-                {% for like in likes %}
+                {% for like in object_list %}
                     {% include 'review/generic/review_item.html' with like=like %}
                 {% endfor %}
                 <div class="text-center mb-5">

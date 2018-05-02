@@ -12,6 +12,6 @@ urlpatterns = [
     path('о-проекте/', About.as_view(), name='about'),
 
 
-    # Все остальные гкд проверяем на редирект
+    # Все остальные url проверяем на редирект
     url(r'^', include('apps.front.urls_redirect_from_svem')),
 ]

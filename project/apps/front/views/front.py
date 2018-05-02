@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from apps.entry.models import Question
 from apps.rating.models import Rating
@@ -43,13 +43,16 @@ class LawyerPage(TemplateView):
         return context
 
 
-class ReviewsPage(TemplateView):
+class ReviewsPage(ListView):
     template_name = 'front/reviews_page.html'
+    queryset = Likes.objects.filter(user__role=1).order_by("-date")
 
     def get_context_data(self, **kwargs):
 
         context = super(ReviewsPage, self).get_context_data(**kwargs)
-        likes = Likes.objects.filter(user__role=1).order_by("-date")
+        """
+        print(context)
+        # likes = Likes.objects.filter(user__role=1).order_by("-date")
         lawyer = None
 
         # Отзывы юриста
@@ -66,6 +69,7 @@ class ReviewsPage(TemplateView):
             'like_positive_count': likes.filter(value__gt=0).count(),
             'like_negative_count': likes.filter(value__lt=0).count(),
         })
+        """
 
         return context
 

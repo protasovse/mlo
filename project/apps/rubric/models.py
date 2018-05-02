@@ -97,12 +97,7 @@ class Rubric(MPTTModel):
         return misaka.html(self.content)
 
     def get_absolute_url(self):
-        # if self.is_root_node():
-        return reverse('questions:list_rubric',
-                           kwargs={'rubric_slug': self.slug})
-        # else:
-            # return reverse('questions:list_subrubric',
-            #                kwargs={'subrubric_slug': self.slug, 'rubric_slug': self.get_root().slug, })
+        return reverse('questions:list_rubric', kwargs={'rubric_slug': self.slug})
 
     def _set_slug(self):
         """
