@@ -1,0 +1,77 @@
+{% extends 'front/base.html' %}
+{% load cropping %}
+{% load static %}
+{% load number %}
+
+{% block content %}
+    <div class="container">
+
+        <h1 class="h2 mt-5">Юристы и адвокаты — рейтинг, каталог, поиск</h1>
+        <div class="lead">Эксперты портала бесплатной юридической консультации Мойюрист.онлайн — это компетентные
+            специалисты с большим
+            опытом работы в юридической сфере. Вы можете узнать более подробную информацию о наших экспертах и юристах,
+            адреса, телефоны, контактные данные и специализацию. Если же вы имеете юридическую практику, то можете войти
+            в
+            состав экспертов Мойюрист.онлайн.
+        </div>
+
+        <hr>
+
+        <div class="lawyer-list mt-5 col-9 ml-auto">
+
+            {% for user in lawyers_list %}
+                <div class="lawyer-list_item">
+                    <div class="lawyer-list_header large_photo">
+                        <a class="ph" href="{% url 'lawyer_page' user.pk %}">
+                            <img src="{% include 'account/generic/photo.html' with item=user %}" alt="{{ user }}"/>
+                        </a>
+                        <div class="nm">
+                            <h5 class="mb-0"><a href="{% url 'lawyer_page' user.pk %}">{{ user }}</a></h5>
+
+                            <div class="normal text-muted">
+                                {% if user.city %}<a class="text-muted" href="{% url 'lawyers_list_page' city=user.city.name_ru|lower city_id=user.city.pk %}">
+                                {{ user.get_role_display }} {{ user.city.name_ru }}</a>
+                                {% else %}{{ user.info.title|default:user.get_role_display }}{% endif %}
+                            </div>
+
+                            <div class="lawyer-medal my-2">
+                            <!--span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
+                                    class="v">{{ user.rating.get_rate }}</span></span-->
+                                {% if user.info.stage > 0 %}
+                                <span class="item" title="Стаж"><i class="icon-medal"></i><span
+                                        class="v">стаж {{ user.info.stage|number:'год|года|лет' }}</span></span>
+                                {% endif %}
+
+                                <span class="item" title="Всего оказал консультаций"><i class="icon-forum"></i><span
+                                        class="v">{{ user.info.answer_count|number:'ответ|ответа|ответов' }}</span></span>
+
+                                <span class="item" title="Положительных отзывов"
+                                ><i class="icon-like"></i><span class="v"><a href="{% url 'lawyer_reviews' user.pk %}"
+                                >{{ user.info.review_count|number:'отзыв|отзыва|отзывов' }}</a></span></span>
+
+                                <!--span class="item d-block mt-2" title="Стаж"><i class="icon-message_bubble"></i><span
+                                        class="v">Сообщение</span></span-->
+                            </div>
+                            <!--div class="text-success mb-1">на сайте</div>
+                            <div><a href="#">Задать вопрос</a></div-->
+
+                            {% if user.info.short %}<div class="mt-3">{{ user.info.short|safe }}</div>{% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+
+        </div>
+
+
+        {% if page_obj.has_next %}
+            <div class="text-center mb-5">
+                <a href="{% url 'lawyers_list_page' page_obj.next_page_number %}" class="btn btn-outline-primary">Показать
+                    ещё</a>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

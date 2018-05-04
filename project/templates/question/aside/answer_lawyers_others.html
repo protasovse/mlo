@@ -7,7 +7,7 @@
                 <span class="ph">
                     <img src="{% include 'account/generic/pic.html' with item=item.author %}" alt="{{ item.author }}"/>
                 </span>
-                <div class="nm">{{ item.author }}</div>
+                <div class="nm ml-3 text-primary">{{ item.author }}</div>
             </div>
             <p class="lawyer-list_body">{{ item.content|truncatewords:10|safe }}</p>
         </div>

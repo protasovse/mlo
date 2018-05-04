@@ -2,8 +2,8 @@
 {% load cropping %}
 {% load static %}
 
-{% block title %}Отзывы пользователей, которые получили юридическую консультацию, либо воспользовались улугами сайта
-    Мойюрист.онлайн{% endblock %}
+{% block title %}{% if lawyer %}Отзывы к ответам юриста — {{ lawyer.get_full_name }}{% else %}Отзывы пользователей, которые получили юридическую консультацию, либо
+    воспользовались улугами сайта Мойюрист.онлайн{% endif %}{% if page_obj.number > 1 %}. Страница — {{ page_obj.number }}{% endif %}{% endblock %}
 
 {% block og_meta %}
     <meta property="og:title" content="Отзывы клиентов Мойюрист.онлайн"/>
@@ -34,12 +34,16 @@
                         это делает наш проект лучше и удобнее, а консультации наших экспертов качественней!</p>
                 {% endif %}
 
-                {% for like in object_list %}
+                {% for like in likes %}
                     {% include 'review/generic/review_item.html' with like=like %}
                 {% endfor %}
+
+                {% if page_obj.has_next %}
                 <div class="text-center mb-5">
-                    <a href="#" class="btn btn-outline-primary">Показать ещё</a>
+                    <a href="{% if lawyer %}{% url 'lawyer_reviews' lawyer.pk page_obj.next_page_number %}{% else %}{% url 'reviews_page' page_obj.next_page_number %}{% endif %}"
+                       class="btn btn-outline-primary">Показать ещё</a>
                 </div>
+                {% endif %}
 
             </div>
         </div>

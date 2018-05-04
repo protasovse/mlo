@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
 
 from apps.entry.models import Question
@@ -43,34 +42,53 @@ class LawyerPage(TemplateView):
         return context
 
 
+class LawyersListPage(ListView):
+    template_name = 'front/lawyers_list_page.html'
+    context_object_name = 'lawyers_list'
+    paginate_by = 10
+    paginate_orphans = 4
+
+    def get_queryset(self):
+        qs = get_user_model().objects.\
+            filter(role=2).\
+            order_by('-rating__month_rate', '-info__answer_count')
+
+        if 'city_id' in self.kwargs:
+            qs = qs.filter(city_id=self.kwargs['city_id'])
+
+        print(self.kwargs)
+
+        return qs
+
+
 class ReviewsPage(ListView):
     template_name = 'front/reviews_page.html'
-    queryset = Likes.objects.filter(user__role=1).order_by("-date")
+    context_object_name = 'likes'
+    paginate_by = 15
+    paginate_orphans = 5
+
+    def get_queryset(self):
+        qs = Likes.objects.filter(user__role=1).order_by("-date")
+
+        if 'id' in self.kwargs:
+            return qs.filter(entry__author_id=self.kwargs['id'])
+
+        return qs
 
     def get_context_data(self, **kwargs):
-
         context = super(ReviewsPage, self).get_context_data(**kwargs)
-        """
-        print(context)
-        # likes = Likes.objects.filter(user__role=1).order_by("-date")
-        lawyer = None
-
+        lawyer = False
         # Отзывы юриста
-        if 'id' in kwargs:
-            likes = likes.filter(entry__author_id=kwargs['id'])
+        if 'id' in self.kwargs:
             try:
-                lawyer = get_user_model().objects.get(pk=kwargs['id'], role__gt=1)
+                lawyer = get_user_model().objects.get(pk=self.kwargs['id'], role__gt=1)
             except ObjectDoesNotExist:
                 raise Http404
-
         context.update({
-            'likes': likes[:40],
             'lawyer': lawyer,
-            'like_positive_count': likes.filter(value__gt=0).count(),
-            'like_negative_count': likes.filter(value__lt=0).count(),
+            'like_positive_count': self.get_queryset().filter(value__gt=0).count(),
+            'like_negative_count': self.get_queryset().filter(value__lt=0).count(),
         })
-        """
-
         return context
 
 

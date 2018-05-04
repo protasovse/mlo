@@ -20,5 +20,6 @@ urlpatterns = [
 
     path('experts/<int:id>/', redirect_from_svem.user),
 
-    path('reviews/page(?P<page>\d+)/', redirect_from_svem.user),
+    path('reviews/', redirect_from_svem.review),
+    path('reviews/page<int:page>/', redirect_from_svem.review),
 ]
