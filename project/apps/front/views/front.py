@@ -1,3 +1,4 @@
+import pymorphy2
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
@@ -6,6 +7,7 @@ from django.views.generic import TemplateView, ListView
 from apps.entry.models import Question
 from apps.rating.models import Rating
 from apps.review.models import Review, Likes
+from apps.sxgeo.models import Cities
 
 
 class Mainpage(TemplateView):
@@ -56,9 +58,29 @@ class LawyersListPage(ListView):
         if 'city_id' in self.kwargs:
             qs = qs.filter(city_id=self.kwargs['city_id'])
 
-        print(self.kwargs)
-
         return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(LawyersListPage, self).get_context_data(**kwargs)
+
+        title = 'Юристы и адвокаты. Юридическая помощь и консультации на Мойюрист.онлайн'
+
+        if 'city_id' in self.kwargs:
+            if self.kwargs['city_id']==520555:
+                city_name = 'Нижнего Новгорода'
+            else:
+                city = Cities.objects.get(pk=self.kwargs['city_id'])
+                morph = pymorphy2.MorphAnalyzer()
+                c = morph.parse(city.name_ru)[0]
+                city_name = c.inflect({'gent'}).word.title()
+
+            title = 'Юристы и адвокаты {}. Юридическая помощь и консультации на Мойюрист.онлайн'.format(city_name)
+
+        context.update({
+            'title': title
+        })
+
+        return context
 
 
 class ReviewsPage(ListView):

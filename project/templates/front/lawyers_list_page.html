@@ -3,21 +3,44 @@
 {% load static %}
 {% load number %}
 
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
     <div class="container">
 
-        <h1 class="h2 mt-5">Юристы и адвокаты — рейтинг, каталог, поиск</h1>
-        <div class="lead">Эксперты портала бесплатной юридической консультации Мойюрист.онлайн — это компетентные
-            специалисты с большим
-            опытом работы в юридической сфере. Вы можете узнать более подробную информацию о наших экспертах и юристах,
-            адреса, телефоны, контактные данные и специализацию. Если же вы имеете юридическую практику, то можете войти
-            в
-            состав экспертов Мойюрист.онлайн.
+        <h1 class="h2 mt-5">Юристы и адвокаты</h1>
+        <div class="">
+            <p>Наши юристы — это компетентные специалисты с большим опытом работы в юридической сфере. Вы можете найти
+                юриста в своём регионе и обратиться к нему за консультацией.</p>
+            <p>Если же вы имеете юридическую практику, то можете
+                <a href="/auth/registration/">войти в состав экспертов</a> Мойюрист.онлайн. Отвечая на вопросы
+                посетителей вы оказываете помощь, показываете свою компетенцию и профессионализм, заслуживаете доверие
+                у клиентов.</p>
+        </div>
+
+        <h3>Юристы по городам</h3>
+
+        <div>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='москва' city_id=524901 %}">Москва</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='санкт-петербург' city_id=498817 %}">Санкт-Петербург</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='волгоград' city_id=472757 %}">Волгоград</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='екатеринбург' city_id=1486209 %}">Екатеринбург</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='калининград' city_id=554234 %}">Калининград</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='краснодар' city_id=542420 %}">Краснодар</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='красноярск' city_id=1502026 %}">Красноярск</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='нижний-новгород' city_id=520555 %}">Нижний Новгород</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='новосибирск' city_id=1496747 %}">Новосибирск</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='омск' city_id=1496153 %}">Омск</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='ростов-на-дону' city_id=501175 %}">Ростов-на-Дону</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='самара' city_id=499099 %}">Самара</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='саратов' city_id=498677 %}">Саратов</a>
+            <a class="mr-4" href="{% url 'lawyers_list_page' city='уфа' city_id=479561 %}">Уфа</a>
+            <a href="{% url 'lawyers_list_page' city='челябинск' city_id=1508291 %}">Челябинск</a>
         </div>
 
         <hr>
 
-        <div class="lawyer-list mt-5 col-9 ml-auto">
+        <div class="lawyer-list mt-5 col-12 col-md-8 mr-auto">
 
             {% for user in lawyers_list %}
                 <div class="lawyer-list_item">

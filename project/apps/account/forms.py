@@ -35,7 +35,7 @@ class UserForm(forms.ModelForm):
 
 AccountInfoForm = inlineformset_factory(
     get_user_model(), Info,
-    fields=('orig', 'photo', 'pic', 'birth_date', 'sex', 'title', 'short', 'about', 'signature', ),
+    fields=('orig', 'photo', 'pic', 'birth_date', 'sex', 'short', 'about', 'signature', ),
     can_delete=False,
     widgets={
         'signature': Textarea(attrs={'rows': 3}),
