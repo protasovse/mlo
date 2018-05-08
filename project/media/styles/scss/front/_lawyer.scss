@@ -9,7 +9,7 @@ $photo-small-size: 40px;
   color: $gray-600;
   .item {
     @extend .mr-4, .d-inline-flex, .align-items-center;
-    cursor: pointer;
+    // cursor: pointer;
     i {
       @extend .mr-2, .normal;
       color: $gray-200;
@@ -17,11 +17,11 @@ $photo-small-size: 40px;
     a {
       color: $gray-600;
     }
-    &:hover {
+    /*&:hover {
       i {
         color: $light-blue;
       }
-    }
+    }*/
   }
 }
 

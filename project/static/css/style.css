@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("../../../static/font/opensans/opensanstyle.css");
+@import url("../../../static/font/opensans/opensans.css");
 @import url("../../../static/font/style.css");
 :root {
   --blue: #2e67fb;
@@ -8623,13 +8623,15 @@ body.open-slide-menu {
 .lawyer-medal, .entry .answer-header_medal {
   color: #878787; }
   .lawyer-medal .item, .entry .answer-header_medal .item {
-    cursor: pointer; }
+    /*&:hover {
+      i {
+        color: $light-blue;
+      }
+    }*/ }
     .lawyer-medal .item i, .entry .answer-header_medal .item i {
       color: #e6e6e6; }
     .lawyer-medal .item a, .entry .answer-header_medal .item a {
       color: #878787; }
-    .lawyer-medal .item:hover i, .entry .answer-header_medal .item:hover i {
-      color: #4c7efd; }
 
 .lawyer-page dt {
   color: #878787;
