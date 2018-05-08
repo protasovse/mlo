@@ -91,7 +91,7 @@
 
         {% if page_obj.has_next %}
             <div class="text-center mb-5">
-                <a href="{% url 'lawyers_list_page' page_obj.next_page_number %}" class="btn btn-outline-primary">Показать
+                <a href="{% if city_id %}{% url 'lawyers_list_page' city=city city_id=city_id page=page_obj.next_page_number %}{% else %}{% url 'lawyers_list_page' page_obj.next_page_number %}{% endif %}" class="btn btn-outline-primary">Показать
                     ещё</a>
             </div>
         {% endif %}

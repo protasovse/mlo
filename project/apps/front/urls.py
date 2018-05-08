@@ -9,6 +9,7 @@ urlpatterns = [
     path('юристы/', LawyersListPage.as_view(), name='lawyers_list_page'),
     path('юристы/<int:page>/', LawyersListPage.as_view(), name='lawyers_list_page'),
     path('юристы/город/<city>-<int:city_id>/', LawyersListPage.as_view(), name='lawyers_list_page'),
+    path('юристы/город/<city>-<int:city_id>/<int:page>/', LawyersListPage.as_view(), name='lawyers_list_page'),
 
     path('юрист/<int:id>/отзывы/', ReviewsPage.as_view(), name='lawyer_reviews'),
     path('юрист/<int:id>/отзывы/<int:page>/', ReviewsPage.as_view(), name='lawyer_reviews'),

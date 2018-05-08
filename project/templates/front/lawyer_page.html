@@ -43,9 +43,9 @@
                         {% endif %}
                     </div>
                     <div class="lawyer-page_about_r-col">
-                        <p class="lead">
-                            {{ lawyer.info.about|safe|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
-                        </p>
+                        <div class="lead">
+                            {{ lawyer.info.html_about|safe|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
+                        </div>
                         <dl>
                             <dt>Зарегистрирован</dt>
                             <dd>{{ lawyer.date_joined }}</dd>

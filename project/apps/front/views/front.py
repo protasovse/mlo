@@ -31,7 +31,7 @@ class LawyerPage(TemplateView):
         context = super(LawyerPage, self).get_context_data(**kwargs)
 
         try:
-            lawyer = get_user_model().objects.get(pk=kwargs['id'], role__gt=1)
+            lawyer = get_user_model().objects.get(pk=kwargs['id'], role__gt=1, is_active=True)
         except ObjectDoesNotExist:
             raise Http404
 
@@ -52,7 +52,7 @@ class LawyersListPage(ListView):
 
     def get_queryset(self):
         qs = get_user_model().objects.\
-            filter(role=2).\
+            filter(role=2, is_active=True).\
             order_by('-rating__month_rate', '-info__answer_count')
 
         if 'city_id' in self.kwargs:
@@ -66,7 +66,7 @@ class LawyersListPage(ListView):
         title = 'Юристы и адвокаты. Юридическая помощь и консультации на Мойюрист.онлайн'
 
         if 'city_id' in self.kwargs:
-            if self.kwargs['city_id']==520555:
+            if self.kwargs['city_id'] == 520555:
                 city_name = 'Нижнего Новгорода'
             else:
                 city = Cities.objects.get(pk=self.kwargs['city_id'])
@@ -75,9 +75,13 @@ class LawyersListPage(ListView):
                 city_name = c.inflect({'gent'}).word.title()
 
             title = 'Юристы и адвокаты {}. Юридическая помощь и консультации на Мойюрист.онлайн'.format(city_name)
+            context.update({
+                'city_id': self.kwargs['city_id'],
+                'city': c.inflect({'gent'}).word,
+            })
 
         context.update({
-            'title': title
+            'title': title,
         })
 
         return context
