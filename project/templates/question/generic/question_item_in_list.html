@@ -9,7 +9,8 @@
 
         <h5 class="r-col mb-0 mb-lg-3">
             <a target="_blank" href="{% url 'question:detail' item.pk %}">
-                {% if item.title %}{{ item.title|capfirst|safe }}{% else %}{{ item.content|capfirst|truncatechars:64 }}{% endif %}</a>
+                {% if item.title %}{{ item.title|capfirst|safe }}{% else %}
+                    {{ item.content|capfirst|truncatechars:64 }}{% endif %}</a>
             {% if item.is_pay %}
                 <small class="pl-1 badge badge-price badge-success">{{ item.advice.cost }} ₽</small>
                 <small class="pl-1 badge badge-price badge-light">{{ item.advice.get_status_display }}</small>
@@ -33,11 +34,9 @@
                     <div class="answer-header">
                         <div class="usr">
                             {% for a in answers %}
-                                {% if a.author.info.orig %}
-                                    <a href="{% url 'lawyer_page' a.author_id %}"><img
-                                            src="{% include 'account/generic/pic.html' with item=a.author %}"
-                                            alt="{{ a.author }}"/></a>
-                                {% endif %}
+                                <a href="{% url 'lawyer_page' a.author_id %}"><img
+                                        src="{% include 'account/generic/pic.html' with item=a.author %}"
+                                        alt="{{ a.author }}"/></a>
                             {% endfor %}
                         </div>
                         <div>
