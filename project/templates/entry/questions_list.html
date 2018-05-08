@@ -158,7 +158,7 @@
                         {% endif %}
                         {% if user.is_authenticated and user.role == 1 %}
                             <a class="nav-link{% if cur_url_param == 'my' %} active{% endif %}"
-                               href="{{ current_url }}?my">Мои вопросы</a>
+                               href="{% url 'questions:list' %}?my">Мои вопросы</a>
                         {% endif %}
                         <div style="position:relative">
                             <a id="rubric-drop-down" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Выбрать
