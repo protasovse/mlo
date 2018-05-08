@@ -117,7 +117,7 @@ class Info(models.Model):
         """
         Возвращает "about" форматированное в HTML.
         """
-        return misaka.html(self.about)
+        return misaka.html(self.about) if self.about else False
 
     def __str__(self):
         return self.user.get_full_name

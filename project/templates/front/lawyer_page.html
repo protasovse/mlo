@@ -44,7 +44,7 @@
                     </div>
                     <div class="lawyer-page_about_r-col">
                         <div class="lead">
-                            {{ lawyer.info.html_about|safe|default:"Юрист зарегистрированный на Мойюрист.онлайн" }}
+                            {{ lawyer.info.html_about|default:"<p>Юрист зарегистрированный на Мойюрист.онлайн</p>"|safe }}
                         </div>
                         <dl>
                             <dt>Зарегистрирован</dt>
