@@ -80,7 +80,8 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(Dir)
 class DirAdmin(admin.ModelAdmin):
-    pass
+    fields = ('name', 'description', 'slug')
+    list_display = ('name', 'slug')
 
 
 @admin.register(Article)
