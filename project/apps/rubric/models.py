@@ -119,17 +119,9 @@ class Rubric(MPTTModel):
 
 class Classified(models.Model):
 
-    rubrics = TreeManyToManyField(
-        Rubric,
-        blank=True,
-        related_name='rubrics',
-        verbose_name=_('Рубрики')
-    )
-
     rubric = TreeForeignKey(
         Rubric,
         default=1,
-        related_name='rubric',
         verbose_name=_('Рубрика'),
         on_delete=models.CASCADE
     )

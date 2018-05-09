@@ -368,35 +368,11 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return reverse('questions:list_tag', kwargs={'tag': self.slug})
 
-'''
 
-def post_save_answer_receiver(sender, instance, *args, **kwargs):
+class Article(Entry, Titled, Classified):
     """
-    Добавление или удаление ответа
+    Статьи
     """
-
-    # Если удаляем ответ, то должны из общего количества должны отнять 1,
-    # так как сигнал у нас, перед удалением.
-    if 'created' in kwargs:
-        i = 0
-    else:
-        i = 1
-
-    question = instance.on_question
-
-    # Подсчёт количества ответов на вопрос и «ответов» на ответ
-    if instance.is_parent:
-        question.reply_count = \
-            sender.objects.filter(parent=None, on_question=instance.on_question_id).count() - i
-        print(sender.objects.filter(parent=None, on_question=instance.on_question_id).count())
-        question.save(update_fields=('reply_count',))
-    else:
-        parent = instance.parent
-        parent.reply_count = \
-            sender.objects.filter(parent=parent.pk).count() - i
-        parent.save(update_fields=('reply_count',))
-
-post_save.connect(post_save_answer_receiver, sender=Answer)
-pre_delete.connect(post_save_answer_receiver, sender=Answer)
-
-'''
+    status = EnumField(
+        _('Статус'), db_index=True,
+        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
