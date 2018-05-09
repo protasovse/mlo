@@ -10,6 +10,9 @@
         <div class="col mb-3">
             <div class="container">
                 <div class="row">
+                    <h5 class="col-9 ml-auto">Ваш стаж: {{ stage }} —
+                        <small>вычисляется на основании введённых здесь данных</small>
+                    </h5>
                     {{ form.media }}
                     {% bootstrap_javascript jquery=True %}
                     <div class="col-md-9 ml-auto">

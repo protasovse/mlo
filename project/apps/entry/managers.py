@@ -1,5 +1,6 @@
 import sphinxapi
 from django.db import models
+from django.db.models import Q
 
 DELETED = 'deleted'
 BLOCKED = 'blocked'
@@ -7,11 +8,11 @@ DRAFT = 'draft'
 PUBLISHED = 'public'
 
 
-def entries_published(queryset):
+def entries_published(queryset, self):
     """
     Возвращает только опубликованные записи.
     """
-    return queryset.filter(status=PUBLISHED)
+    return queryset.filter(status__in=[PUBLISHED, BLOCKED])
 
 
 class EntryPublishedManager(models.Manager):
@@ -22,8 +23,7 @@ class EntryPublishedManager(models.Manager):
         return entries_published(
             super(EntryPublishedManager, self).get_queryset().select_related(
                 'author', 'author__info', 'author__rating', 'author__city'
-            ).prefetch_related()
-        )
+            ).prefetch_related(), self)
 
     def like(self, entry_id, user_id):
         """
@@ -90,17 +90,24 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         client = sphinxapi.SphinxClient()
         client.SetServer('127.0.0.1', 9312)
+        client.SetLimits(offset, limit, 10000)
 
-        client.SetLimits(offset, limit, 1000)
-
+        # По умолчанию сортировка по дате
         if not sort:
             sort.append('pub_date DESC')
 
         client.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, ', '.join(sort))
         client.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED)
+
         for key in filters:
             client.SetFilter(key, filters[key])
 
+        # Показываем вопросы со статусом 'blocked', если выбран список моих вопросов,
+        # в остальных случаях только 'public'
+        show_statuses = (2, 3) if 'author_id' in filters else (2, )  # (2, ) — 'public', (2, 3) — 'public', 'blocked'
+        client.SetFilter('status', show_statuses)
+
+        # Если запрос — число, то воспринимаем, как поиск по id
         if query.isdigit():
             client.SetIDRange(int(query), int(query))
             query = ''

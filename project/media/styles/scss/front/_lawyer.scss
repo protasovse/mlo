@@ -9,16 +9,19 @@ $photo-small-size: 40px;
   color: $gray-600;
   .item {
     @extend .mr-4, .d-inline-flex, .align-items-center;
-    cursor: pointer;
+    // cursor: pointer;
     i {
       @extend .mr-2, .normal;
       color: $gray-200;
     }
-    &:hover {
+    a {
+      color: $gray-600;
+    }
+    /*&:hover {
       i {
         color: $light-blue;
       }
-    }
+    }*/
   }
 }
 
@@ -261,10 +264,10 @@ $photo-small-size: 40px;
         width: 100%;
       }
     }
-    .nm {
+    /* .nm {
       margin-left: 10px;
       color: $blue;
-    }
+    } */
 
     &.large_photo {
       align-items: flex-start;

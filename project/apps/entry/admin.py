@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.models import Advice
-from apps.entry.models import Question, Answer, Files, Offer, Entry
+from apps.entry.models import Question, Answer, Files, Offer, Entry, Article, Dir
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -65,17 +65,41 @@ class QuestionAdmin(admin.ModelAdmin):
         (_('Content'), {
             'fields': ('title', 'content',)}),
         (_('Клиссификация'), {
-            'fields': ('status', 'author', 'rubric', 'rubrics', 'is_pay', 'reply_count', )}),
+            'fields': ('status', 'author', 'rubric', 'is_pay', 'reply_count', )}),
         (_('Дополнительные поля'), {
             'fields': ('city', 'phone', 'first_name')}),
     )
-    autocomplete_fields = ['rubric', 'rubrics', 'author', 'city']
+    autocomplete_fields = ['rubric', 'author', 'city']
     radio_fields = {'status': admin.HORIZONTAL}
     list_display = ('entry_ptr_id', 'title', 'author', 'pub_date', 'like_count', 'reply_count', 'status', 'is_pay')
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
     list_filter = ('pub_date', 'status', 'is_pay')
     inlines = (AnswersForQuestionInLine, FilesInLine, AdviceInLine)
     list_per_page = 10
+
+
+@admin.register(Dir)
+class DirAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    """
+    Админка для модели Article.
+    """
+    fieldsets = (
+        (_('Content'), {
+            'fields': ('title', 'content',)}),
+        (_('Клиссификация'), {
+            'fields': ('status', 'author', 'rubric', 'reply_count', )}),
+    )
+    autocomplete_fields = ['rubric', 'author']
+    radio_fields = {'status': admin.HORIZONTAL}
+    list_display = ('entry_ptr_id', 'title', 'author', 'pub_date', 'like_count', 'reply_count', 'status',)
+    search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
+    list_filter = ('pub_date', 'status',)
+    list_per_page = 20
 
 
 @admin.register(Answer)
@@ -103,7 +127,8 @@ class AnswerAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         return qs.filter(parent=None)
 
-
+'''
 @admin.register(Entry)
 class EntryAdmin(admin.ModelAdmin):
     raw_id_fields = ['author', ]
+'''

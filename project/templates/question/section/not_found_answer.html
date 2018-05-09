@@ -1,0 +1,44 @@
+<section class="gray review-section" style="min-height:520px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="title">
+                <h2>Не нашли ответ на свой вопрос?</h2>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="rblock">
+                <div class="form p-5" style="padding-bottom: 100px!important;">
+                    <div class="row">
+                        <h5 class="col-12 text-center mb-4">Консультации бесплатные или платные<!--,
+                            <nobr>а так же онлайн в чате с юристами</nobr>--></h5>
+                        <div class="col-12 col-md-7">
+                            <form method="post" action="{% url 'ask_question' %}">
+                                {% csrf_token %}
+                                <textarea class="form-control mb-2" rows="7" id="question" name="text"
+                                          placeholder="Опишите свою проблему..."></textarea>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Задать вопрос юристу
+                                </button>
+                            </form>
+                        </div>
+                        <div class="d-none d-md-block col-md-5 py-3 text-center">
+                            <p class="subtitle">На вопросы отвечает</p>
+                            <p><a class="ph" href="{% url 'lawyer_page' lawyer_will_answer.pk %}">
+                                <img width="75"
+                                     src="{% include 'account/generic/photo.html' with item=lawyer_will_answer %}"
+                                     alt="{{ lawyer_will_answer }}"/>
+                            </a></p>
+                            <h6><a href="#">{{ lawyer_will_answer }}</a></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desc">
+                <p class="lead">Проконсультируйтесь с нашими юристами</p>
+            </div>
+
+        </div>
+    </div>
+</section>

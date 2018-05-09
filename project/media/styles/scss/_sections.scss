@@ -120,29 +120,30 @@ section {
 
   &.review-section {
     padding-bottom: 0;
-    height: line(31);
+    min-height: line(31);
+    overflow: hidden;
     @include media-breakpoint-down(sm) {
       padding-bottom: line(4);
       height: auto;
     }
     .title, .desc {
-      @extend .col-12, .col-md-5;
+      @extend .col-12, .col-lg-4;
     }
-    .gutter {
-      @extend .col-12, .col-md-7;
+    .spacer {
+      @extend .col-12, .col-lg-7;
       z-index: 0;
     }
-    .reviews {
-      @extend .col-12, .col-md-7, .ml-auto;
+    .rblock {
+      @extend .col-12, .col-lg-7, .offset-lg-1, .ml-auto;
       position: absolute;
       z-index: 1;
       right: 0;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         position: static;
         padding-bottom: line(1);
       }
     }
-    .review {
+    .form {
       background-color: white;
       position: relative;
       max-height: line(27);
@@ -151,38 +152,39 @@ section {
       @include media-breakpoint-down(sm) {
         min-width: 600px;
       }
-      .review-item {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        border-bottom: solid 4px $gray-100;
-        p {
-          margin-bottom: 0;
-        }
-        padding: line(1) line(1) line(1) line(5);
-        @include media-breakpoint-down(md) {
-          padding-left: line(3);
-        }
-        position: relative;
-        cursor: pointer;
-        &:before {
-          content: '\e901';
-          font-family: icomoon;
-          color: $blue;
-          position: absolute;
-          left: line(1.5);
-          @include media-breakpoint-down(md) {
-            left: line(1);
-          }
-        }
-      }
       &:after {
         content: '';
         position: absolute;
         bottom: 0;
+        left: 0;
         width: 100%;
         height: line(6);
         box-shadow: inset 0px -9rem 5rem -4rem $gray-100;
+      }
+    }
+    .review-item {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-bottom: solid 4px $gray-100;
+      p {
+        margin-bottom: 0;
+      }
+      padding: line(1) line(1) line(1) line(5);
+      @include media-breakpoint-down(md) {
+        padding-left: line(3);
+      }
+      position: relative;
+      cursor: pointer;
+      &:before {
+        content: '\e901';
+        font-family: icomoon;
+        color: $blue;
+        position: absolute;
+        left: line(1.5);
+        @include media-breakpoint-down(md) {
+          left: line(1);
+        }
       }
     }
   }

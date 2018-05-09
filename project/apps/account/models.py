@@ -1,3 +1,4 @@
+import misaka
 from django.db import models, connection
 from image_cropping.utils import get_backend
 from django.utils.translation import ugettext_lazy as _
@@ -110,6 +111,13 @@ class Info(models.Model):
     class Meta:
         verbose_name = _('Профиль юриста')
         verbose_name_plural = _('Профили юристов')
+
+    @property
+    def html_about(self):
+        """
+        Возвращает "about" форматированное в HTML.
+        """
+        return misaka.html(self.about) if self.about else False
 
     def __str__(self):
         return self.user.get_full_name

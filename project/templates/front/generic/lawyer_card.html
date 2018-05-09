@@ -1,4 +1,5 @@
 {% load cropping %}
+{% load number %}
 
 <div class="lawyer-card">
     <div class="lanyard"></div>
@@ -18,7 +19,7 @@
                     class="icon-star mr-1"></i>
             </span>
             <a class="text-muted small" href="{% url 'lawyer_reviews' item.user.pk %}">
-                отзывы
+                {{ item.user.info.review_count|number:'отзыв|отзыва|отзывов' }}
             </a>
         </div>
     </div>

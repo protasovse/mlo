@@ -386,35 +386,49 @@ class SphCounter(models.Model):
 
     max_id = models.IntegerField()
 
-'''
 
-def post_save_answer_receiver(sender, instance, *args, **kwargs):
+class Tag(models.Model):
     """
-    Добавление или удаление ответа
+    Техническая модель для редиректа ссылок с тегом со Svem.ru
+    на новые ссылки
+    Экспорт — mlo_new процедура: call mlo_new.export_tags_from_svem();
     """
+    name = models.CharField(max_length=100)
+    slug = models.CharField(max_length=100)
+    count = models.IntegerField()
 
-    # Если удаляем ответ, то должны из общего количества должны отнять 1,
-    # так как сигнал у нас, перед удалением.
-    if 'created' in kwargs:
-        i = 0
-    else:
-        i = 1
+    def get_absolute_url(self):
+        return reverse('questions:list_tag', kwargs={'tag': self.slug})
 
-    question = instance.on_question
 
-    # Подсчёт количества ответов на вопрос и «ответов» на ответ
-    if instance.is_parent:
-        question.reply_count = \
-            sender.objects.filter(parent=None, on_question=instance.on_question_id).count() - i
-        print(sender.objects.filter(parent=None, on_question=instance.on_question_id).count())
-        question.save(update_fields=('reply_count',))
-    else:
-        parent = instance.parent
-        parent.reply_count = \
-            sender.objects.filter(parent=parent.pk).count() - i
-        parent.save(update_fields=('reply_count',))
+class Dir(models.Model):
+    """
+    Разделы статей
+    """
+    name = models.CharField(_('Name'), max_length=128,
+                            help_text=_('Название раздела'), blank=True)
 
-post_save.connect(post_save_answer_receiver, sender=Answer)
-pre_delete.connect(post_save_answer_receiver, sender=Answer)
+    description = models.TextField(_('Description'), help_text=_('Описание'),
+                                   null=True, blank=True)
 
-'''
+    slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'))
+
+    class Meta:
+        verbose_name = _("Раздел статей")
+        verbose_name_plural = _("Разделы")
+
+
+class Article(Entry, Titled, Classified):
+    """
+    Статьи
+    """
+    dir = models.ForeignKey(Dir, on_delete=models.PROTECT, default=None)
+
+    status = EnumField(
+        _('Статус'), db_index=True,
+        choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
+
+    class Meta:
+        verbose_name = _("Статья")
+        verbose_name_plural = _("Статьи")
+

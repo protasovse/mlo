@@ -1,5 +1,6 @@
 import urllib.parse
 from django.contrib.sites.models import Site
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from config import flash_messages
@@ -8,11 +9,11 @@ from django.utils import timezone
 from django.db import transaction
 from django.utils.http import urlencode
 from django.views.generic.base import TemplateView, RedirectView
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric
-from apps.entry.models import Question, Answer
+from apps.entry.models import Question, Answer, Tag
 from django.contrib import messages
 from django.urls import reverse
 from datetime import timedelta
@@ -79,7 +80,8 @@ class QuestionDetail(TemplateView):
 
         # Лучшие юристы блок
         context.update({
-            'lawyers_from_rating': Rating.lawyers.all()[:3]
+            'lawyers_from_rating': Rating.lawyers.all()[:3],
+            'lawyer_will_answer': get_user_model().objects.get(pk=1),
         })
 
         return context
@@ -119,8 +121,10 @@ class QuestionsList(TemplateView):
 
         filters = {}
         sort = []
+        q = False
         query = ''
         query_string = ''
+        tag = False
         current_url = reverse('questions:list')  # текущий url без параметров и страниц
         url_params = {}  # GET параметры для url, используется в пагинаторе
         cur_url_param = None  # Текущий url параметр для определиния активной ссылки в навигации
@@ -135,6 +139,20 @@ class QuestionsList(TemplateView):
 
             current_url = reverse('questions:list_rubric', kwargs={
                 'rubric_slug': rubric.slug
+            })
+
+        if 'tag' in self.kwargs:
+            try:
+                tag = Tag.objects.get(slug=self.kwargs['tag'])
+            except Tag.DoesNotExist:
+                raise Http404
+            query = self.kwargs['tag']
+            sort.append('@relevance DESC')
+            current_url = reverse('questions:list_tag', kwargs={
+                'tag': kwargs['tag']
+            })
+            context.update({
+                'tag': tag
             })
 
         if 'q' in self.request.GET:
@@ -221,11 +239,69 @@ class QuestionsList(TemplateView):
             'lawyers_from_rating': Rating.lawyers.all()[:4]
         })
 
+        h1 = 'Консультация юриста и адвоката онлайн'
+        if rubric:
+            h1 = rubric.h1 if rubric.h1 else rubric.title if rubric.title else rubric
+        if tag:
+            h1 = tag.name
+
+        if not self.request.user.is_authenticated or self.request.user.role == 1:
+            h2_begin = 'Юридические консультации'
+            h2_end = 'по российскому законодательству'
+        else:
+            h2_begin = 'Вопросы'
+            h2_end = 'юристу'
+
+        if rubric:
+            h2 = '{} по теме «{}»'.format(h2_begin, rubric.name)
+        elif tag:
+            h2 = '{} по теме «{}»'.format(h2_begin, tag.name)
+        elif query_string:
+            h2 = 'Результаты поиска'
+        else:
+            h2 = '{} {}'.format(h2_begin, h2_end)
+
+        title = 'Консультации юристов и адвокатов на сайте Мойюрист.онлайн'
+        if rubric:
+            title = rubric.title if rubric.title else rubric.h1 if rubric.h1 else \
+                    'Консультации юристов по теме «{}» на сайте Мойюрист.онлайн'.format(rubric.name)
+        elif tag:
+            title = 'Консультации юристов по теме «{}» на сайте Мойюрист.онлайн'.format(tag.name)
+        elif query_string:
+            title = 'Результаты поиска. Юридические консультации онлайн'
+
+        context.update({
+            'h1': h1,
+            'h2': h2,
+            'title': title,
+        })
+
         return context
 
 
 class AskQuestion(TemplateView):
     template_name = 'question/ask.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AskQuestion, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data()
+
+        # Данные с онлайн-консультанта
+        data = {
+            'ask_content': request.POST.get('question', request.POST.get('text', False)),
+            'ask_name': request.POST.get('name', False),
+        }
+        data.update({
+            'ask_phone': request.POST['code'] + request.POST['phone']
+            if 'code' in request.POST and 'phone' in request.POST else False
+        })
+
+        request.session.update(data)
+
+        return super(AskQuestion, self).render_to_response(context)
 
 
 class ConfirmQuestion(RedirectView):

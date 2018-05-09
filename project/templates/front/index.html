@@ -17,8 +17,8 @@
 
     <section class="header-section">
         <main class="text-center row">
-            <h1 class="h4 mt-5 col-12">Юридическая консультация <nobr>онлайн с&nbsp;2005 года</nobr></h1>
-            <h2 class="h1 mb-5 col-12">Ваш персональный <nobr>онлайн юрист</nobr></h2>
+            <h1 class="h4 mt-5 col-12">С&nbsp;2005 года</h1>
+            <h2 class="h1 mb-5 col-12">Юридическая консультация онлайн</h2>
             <!--p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p-->
             <p class="col-md-7 mx-auto lead mb-5">
                 <b>Просто задайте вопрос <nobr>и получите грамотный</nobr> <nobr>совет юриста</nobr> <nobr>в любой жизненной ситуации.</nobr></b>
@@ -33,7 +33,7 @@
     <section class="advantage-section">
         <div class="row">
             <div class="row content">
-                <h3>Наши преимущества<sup>*</sup></h3>
+                <h3>Наши преимущества<!--sup>*</sup--></h3>
                 <div class="advantages">
                     <div class="advantage-item i1">
                         <h5>Экономия денег</h5>
@@ -60,7 +60,7 @@
                         <p>Данные передаются по защищённому протоколу и недоступны другим.</p>
                     </div>
                 </div>
-                <small class="text-muted">* Относится только к платным консультациям</small>
+                <!--small class="text-muted">* Относится только к платным консультациям</small-->
             </div>
         </div>
     </section>
@@ -71,9 +71,9 @@
                 <div class="title">
                     <h2>За 13 лет 236&nbsp;820 посетителей получили консультации</h2>
                 </div>
-                <div class="gutter"></div>
-                <div class="reviews">
-                    <div class="review">
+                <div class="spacer"></div>
+                <div class="rblock">
+                    <div class="form">
                         {% for item in reviews %}
                             <div class="review-item">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -89,7 +89,6 @@
                     <a class="btn btn-primary" href="{% url 'reviews_page' %}">Посмотреть все отзывы<span
                             class="icon-forum ml-2"></span></a>
                 </div>
-                <div class="gutter"></div>
             </div>
         </div>
     </section>
@@ -100,8 +99,8 @@
             <div class="row">
                 <div class="title">
                     <h3>Юристы и адвокаты</h3>
-                    <button type="button" class="btn btn-sm btn-white">Все эксперты <i class="icon-people ml-2"></i>
-                    </button>
+                    <a href="{% url 'lawyers_list_page' %}" class="btn btn-sm btn-white">Все эксперты
+                        <i class="icon-people ml-2"></i></a>
                 </div>
             </div>
         </div>

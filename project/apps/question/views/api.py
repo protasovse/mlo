@@ -1,9 +1,7 @@
 import os
 import binascii
-
 from django.db.models import F
 from phonenumbers import PhoneNumberFormat, format_number, parse
-
 from apps.advice.models import Advice
 from apps.review.models import Likes
 from apps.svem_system.exceptions import ApiPublicException
@@ -17,6 +15,7 @@ import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
 from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED
+
 
 class QuestionView(ApiView):
     @classmethod
@@ -158,3 +157,11 @@ class AnswersLike(ApiView):
         Entry.objects.filter(pk=answer.id).update(like_count=F('like_count')+val)
 
 
+class QuestionDefault(ApiView):
+    @classmethod
+    def get(self, request):
+        return {
+            'ask_content': request.session.pop('ask_content', ''),
+            'ask_name': request.session.pop('ask_name', ''),
+            'ask_phone': request.session.pop('ask_phone', ''),
+        }

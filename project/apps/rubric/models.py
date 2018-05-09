@@ -61,6 +61,9 @@ class Rubric(MPTTModel):
         default=False,
     )
 
+    # Старый слуг со Svem.ru для редиректа
+    slug2 = models.CharField(max_length=128, null=True, blank=True)
+
     objects = models.Manager()
     rubricator = RubricManager()
 
@@ -94,12 +97,7 @@ class Rubric(MPTTModel):
         return misaka.html(self.content)
 
     def get_absolute_url(self):
-        # if self.is_root_node():
-        return reverse('questions:list_rubric',
-                           kwargs={'rubric_slug': self.slug})
-        # else:
-            # return reverse('questions:list_subrubric',
-            #                kwargs={'subrubric_slug': self.slug, 'rubric_slug': self.get_root().slug, })
+        return reverse('questions:list_rubric', kwargs={'rubric_slug': self.slug})
 
     def _set_slug(self):
         """
@@ -121,19 +119,9 @@ class Rubric(MPTTModel):
 
 class Classified(models.Model):
 
-    rubrics = TreeManyToManyField(
-        Rubric,
-        blank=True,
-        related_name='rubrics',
-        verbose_name=_('Рубрики')
-    )
-
     rubric = TreeForeignKey(
         Rubric,
-        blank=True,
-        null=True,
-        default=None,
-        related_name='rubric',
+        default=1,
         verbose_name=_('Рубрика'),
         on_delete=models.CASCADE
     )

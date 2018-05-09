@@ -9641,6 +9641,19 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
+    this.$http.get('/api/question/default').then(function (r) {
+      if (r.data.data['ask_content']) {
+        _this.content = r.data.data['ask_content'];
+      }
+
+      if (r.data.data['ask_name']) {
+        _this.name = r.data.data['ask_name'];
+      }
+
+      if (r.data.data['ask_phone']) {
+        _this.phone = r.data.data['ask_phone'];
+      }
+    });
     this.$http.get('/api/default').then(function (r) {
       _this.question_url = r.data.data['urls']['show_question'];
       _this.advice_cost = r.data.data['settings']['advice_cost'];

@@ -1,35 +1,39 @@
 {% extends 'front/base.html' %}
 {% load static %}
 
-{% block title %}
-    {% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}{% else %}Консультации юристов
-        по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн{% else %}Консультации юристов и адвокатов на
-        сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница {{ current_page }}{% endif %}
-{% endblock %}
+{% block title %}{{ title }}{% if current_page > 1 %} — Страница {{ current_page }}{% endif %}{% endblock %}
 
 {% block og_meta %}
-    <meta property="og:title" content="{% if rubric %}{% if rubric.title or rubric.h1 %}{{ rubric.title|default:rubric.h1 }}{% else %}Консультации юристов по теме «{{ rubric.name }}»{% endif %} на сайте Мойюрист.онлайн{% else %}Консультации юристов и адвокатов на сайте Мойюрист.онлайн{% endif %}{% if current_page > 1 %} — Страница{{ current_page }}{% endif %}"/>
+    <meta property="og:title" content="{{ title }}{% if current_page > 1 %} — Страница {{ current_page }}{% endif %}"/>
     <meta property="og:description" content="{{ rubric.description|default:"" }}"/>
-    <meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+    <meta property="og:image" content="{{ SITE_URL }}{% static 'img/logo_sq.png' %}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="
-            {{ SITE_URL }}{% if rubric %}{{ rubric.get_absolute_url }}{% else %}{% url 'questions:list' %}{% endif %}"/>
+    <meta property="og:url" content="{{ SITE_URL }}{% if rubric %}{{ rubric.get_absolute_url }}{% else %}{% url 'questions:list' %}{% endif %}"/>
+{% endblock %}
+
+{% block head %}
+    {% if tag %}
+    <link rel="canonical" href="{{ SITE_URL }}{% if current_page > 1 %}{% url 'questions:list_tag' tag.slug current_page %}{% else %}{% url 'questions:list_tag' tag.slug %}{% endif %}">
+    {% elif rubric %}
+    <link rel="canonical" href="{{ SITE_URL }}{% if current_page > 1 %}{% url 'questions:list_rubric' rubric.slug current_page %}{% else %}{% url 'questions:list_rubric' rubric.slug %}{% endif %}">
+    {% else %}
+    <link rel="canonical" href="{{ SITE_URL }}{% if current_page > 1 %}{% url 'questions:list' current_page %}{% else %}{% url 'questions:list'%}{% endif %}">
+    {% endif %}
+    <meta name="robots" content="index,follow">
 {% endblock %}
 
 {% block content %}
-
-
     {# Хедер страницы вопроса #}
     {# Лендинг #}
     {% if not user.is_authenticated %}
-        {% include 'front/generic/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
+        {% include 'question/section/header_question.html' with bg_class='bg-2' title=rubric.call_to_action %}
     {% endif %}
 
     {# Содержание страницы вопроса #}
     <div class="question-page_container">
 
-        {# Для клиентов и первая страница #}
-        {% if current_page == 1 and not query_string %}
+        {# Для клиентов и первая страница, для результатов поиска и тэгов не показываем блок #}
+        {% if current_page == 1 and not query_string and not tag %}
             {% if not user.is_authenticated or user.role == 1 %}
                 {# Основная часть — заголовок темы, тексты #}
                 <div class="row">
@@ -40,9 +44,8 @@
 
                             {# Заголовок #}
                             <div class="row">
-                                <h1 class="h2 col mt-5 mb-4">{% if rubric %}
-                                    {{ rubric.h1|default:rubric.title|default:rubric }}
-                                {% else %}Консультация юриста и адвоката онлайн{% endif %}</h1></div>
+                                <h1 class="h2 col mt-5 mb-4">{{ h1|capfirst }}</h1>
+                            </div>
 
                             <div class="row">
 
@@ -121,17 +124,12 @@
                 {% endif %}{% endif %}
 
                 <div class="row">
-                    <h3 class="answer-list-head" title="{{ questions.count }}">
-                        {% if query_string %}Результаты поиска
-                            {% else %}{% if not user.is_authenticated or user.role == 1 %}
-                            Юридические консультации по {% if rubric.name %}теме «{{ rubric.name }}»
-                        {% else %}российскому законодательству{% endif %}
-                        {% else %}Вопросы{% if rubric.name %} по теме «{{ rubric.name }}»{% endif %}{% endif %}{% endif %}</h3>
+                    <h2 class="h3 answer-list-head" title="{{ questions.count }}">{{ h2 }}</h2>
 
                     <form class="col-12" action="{% url "questions:list" %}" method="get">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="q" placeholder="Текст или номер вопроса"
-                            value="{{ query_string }}">
+                                   value="{{ query_string }}">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary btn-sm" type="submit">Найти</button>
                             </div>
@@ -160,18 +158,27 @@
                         {% endif %}
                         {% if user.is_authenticated and user.role == 1 %}
                             <a class="nav-link{% if cur_url_param == 'my' %} active{% endif %}"
-                               href="{{ current_url }}?my">Мои вопросы</a>
+                               href="{% url 'questions:list' %}?my">Мои вопросы</a>
                         {% endif %}
-                        <div>
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">{{ rubric|default:"Все категории" }}</a>
-                            <div class="dropdown-menu select-rubric-menu">
+                        <div style="position:relative">
+                            <a id="rubric-drop-down" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Выбрать
+                                категорию</a>
+                            <div id="rubric-drop-menu" class="dropdown-menu select-rubric-menu">
                                 <a class="dropdown-item" href="{% url "questions:list" %}">Все категории</a>
+                                {% if rubric %}
+                                    <a class="dropdown-item small text-muted" href="{{ rubric.get_absolute_url }}">Выбрана:
+                                        {{ rubric }}</a>{% endif %}
                                 {% for r in rubrics_list %}
                                     <a class="dropdown-item level{{ r.level }} {% if r == rubric %}text-muted{% else %}text-dark{% endif %}"
                                        href="{{ r.get_absolute_url }}" title="{{ r.title }}">{{ r }}</a>
                                 {% endfor %}
                             </div>
+                            <script>
+                                $('#rubric-drop-down').click(function (e) {
+                                    e.preventDefault();
+                                    $('#rubric-drop-menu').toggle();
+                                })
+                            </script>
                         </div>
 
                     </div>
