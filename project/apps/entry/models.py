@@ -1,7 +1,5 @@
-import hashlib
 import os
 import binascii
-import random
 
 import misaka
 from django.db import models
@@ -9,6 +7,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+from apps import get_file_path
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
     QuestionsPublishedManager
 from apps.rubric.models import Classified
@@ -89,21 +88,6 @@ class Entry(models.Model):
         # ordering = ("-id",)
         # abstract = True
         pass
-
-
-def get_file_path(instance, filename):
-    ext = filename.split('.')[-1]
-    h = hashlib.md5()
-    filename_string = "%s-%s" % (random.random(), filename)
-    h.update(filename_string.encode('utf-8'))
-    filename = "%s.%s" % (h.hexdigest(), ext)
-    return os.path.join(
-        instance.directory_string_var,
-        filename[0:3],
-        filename[3:6],
-        filename[6:9],
-        filename
-    )
 
 
 class Files(models.Model):
