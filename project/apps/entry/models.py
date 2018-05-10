@@ -1,5 +1,6 @@
 import os
 import binascii
+
 import misaka
 from django.db import models
 from django.utils.text import Truncator
@@ -7,11 +8,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+from apps import get_file_path
 from apps.entry.managers import EntryPublishedManager, DELETED, DRAFT, PUBLISHED, BLOCKED, AnswersManager, \
     QuestionsPublishedManager
 from apps.rubric.models import Classified
 from apps.svem_system.exceptions import BackendPublicException
-from config.settings import AUTH_USER_MODEL, ADVICE_COST
+from config.settings import AUTH_USER_MODEL
 from django_mysql.models import EnumField
 from apps.sxgeo.models import Cities
 
@@ -93,12 +95,29 @@ class Files(models.Model):
     """
     Модель файлов, прикрепленных к записи.
     """
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='entries/%Y/%m/%d', verbose_name=_('Файл'))
+    entry = models.ForeignKey(
+        Entry,
+        on_delete=models.CASCADE,
+        related_name='files',
+    )
+
+    file = models.FileField(
+        upload_to=get_file_path,
+        verbose_name=_('Файл'),
+    )
+
+    name = models.CharField(
+        max_length=255,
+        default=None,
+        editable=False,
+    )
+
+    directory_string_var = 'entries'
 
     def get_basename(self):
-        if self.file.name:
-            import os
+        if self.name:
+            return self.name
+        elif self.file.name:
             return os.path.basename(self.file.name)
 
     def get_public_data(self, is_show=True):
@@ -111,6 +130,11 @@ class Files(models.Model):
     class Meta:
         verbose_name = _('Файл')
         verbose_name_plural = _('Файлы')
+
+    def save(self, **kwargs):
+        if self.name is None:
+            self.name = self.file.name
+        return super(Files, self).save()
 
     def __str__(self):
         return str(self.get_basename())
@@ -413,12 +437,12 @@ class Dir(models.Model):
     Разделы статей
     """
     name = models.CharField(_('Name'), max_length=128,
-                            help_text=_('Название раздела'), blank=True)
+                            help_text=_('Название раздела'))
 
     description = models.TextField(_('Description'), help_text=_('Описание'),
                                    null=True, blank=True)
 
-    slug = models.CharField(max_length=128, unique=True, blank=True, verbose_name=_('Слаг'))
+    slug = models.CharField(max_length=128, unique=True, verbose_name=_('Слаг'))
 
     class Meta:
         verbose_name = _("Раздел статей")

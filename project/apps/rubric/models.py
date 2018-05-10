@@ -80,7 +80,8 @@ class Rubric(MPTTModel):
         r = 'R' if self.is_question_rubric else ''
         g = ' G' if self.is_guide_rubric else ''
         d = ' descr' if self.description else ''
-        return "{} ({}{}{})".format(self.name, r, g, d)
+        c = ' cont' if self.content else ''
+        return "{} ({}{}{}{})".format(self.name, r, g, d, c)
 
     @property
     def html_description(self):
