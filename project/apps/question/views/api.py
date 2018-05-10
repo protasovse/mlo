@@ -6,7 +6,7 @@ from apps.advice.models import Advice
 from apps.review.models import Likes
 from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_system.views.api import ApiView
-from apps.entry.models import Question, Answer, Entry
+from apps.entry.models import Question, Answer, Entry, Files
 from django.contrib.auth import get_user_model
 from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED
@@ -120,10 +120,51 @@ class AnswersView(ApiView):
 
         answers = [a.get_public_data() for a in Answer.published.related_to_question(question)]
 
+        # для кажого ответа 2-ого уровня найдем ответ 1-ого уровня и возьмем его автора (юриста)
+        answers_authors = {}
+        for a in answers:
+            if a['parent_id'] is None:
+                author_id = a['author']['id']
+            answers_authors[a['id']] = author_id
+
+        def is_show(entry_id):
+            """
+            определим фунцию которая будет возвращать флаг - показывать ли файл
+            :param entry_id:
+            :return bool:
+            """
+            # не показываем файлы незалогиненому пользователю
+            if not request.user.is_authenticated:
+                return False
+            # если текущий юзер автор вопроса - то все вложения ему видны
+            if request.user.id == question.author.id:
+                return True
+            # если текущий юзер - юрист, ответивший на вопрос, то ему видны все вложения в его ветке
+            if answers_authors[entry_id] == request.user.id:
+                return True
+            # во всех остальных случаях - не видны
+            return False
+
+        files = {}
+        # найдем все файлы для ответов на вопрос question
+        for f in Files.objects.filter(entry_id__in=[a['id'] for a in answers]):
+            p_data = f.get_public_data(is_show(f.entry_id))
+            try:
+                files[f.entry_id].append(p_data)
+            except KeyError:
+                files[f.entry_id] = [p_data]
+
+        # to prepare array of answers for front
         for i, a in enumerate(answers):
             a.update(_is_can_like(a, request.user, likes))
             if a['parent_id'] is None:
                 a.update({'is_expand': ANSWERS_TREE_IS_EXPANDED})
+            # add files to answers
+            if a['id'] in files.keys():
+                a.update({'files': files[a['id']]})
+            else:
+                a.update({'files': False})
+
             """
              to mark last answers in thread
             """

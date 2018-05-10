@@ -101,6 +101,13 @@ class Files(models.Model):
             import os
             return os.path.basename(self.file.name)
 
+    def get_public_data(self, is_show=True):
+        return {
+            'entry_id': self.entry_id,
+            'filename': self.get_basename(),
+            'path': self.file if is_show else False
+        }
+
     class Meta:
         verbose_name = _('Файл')
         verbose_name_plural = _('Файлы')
