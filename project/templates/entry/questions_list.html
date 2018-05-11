@@ -51,9 +51,10 @@
 
                                 <div class="col question-page_article">
                                     {% if rubric %}
-                                        {% if rubric.html_description or rubric.html_content %}
-                                            {{ rubric.html_description|safe }}
+                                        {% if rubric.html_content %}
                                             {{ rubric.html_content|safe }}
+                                        {% elif rubric.html_description %}
+                                            {{ rubric.html_description|safe }}
                                         {% else %}
                                             <p class="_lead">Юристы и адвокаты сайта «Мойюрист.онлайн» со стажем от
                                                 <strong class="font-weight-bold">5&nbsp;лет</strong> проконсультируют

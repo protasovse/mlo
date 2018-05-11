@@ -6,10 +6,6 @@ from apps.entry.models import Question, Tag
 from apps.rubric.models import Rubric
 
 
-class Redirect(RedirectView):
-    pass
-
-
 def question(request, **kwargs):
     q = get_object_or_404(Question, pk=kwargs['question_id'])
     return redirect(q, permanent=True)
@@ -17,11 +13,15 @@ def question(request, **kwargs):
 
 def tag(request, **kwargs):
     q = get_object_or_404(Tag, pk=kwargs['tag_id'])
-    # return redirect(q, permanent=True)
-    if 'page' in kwargs:
-        return redirect('questions:list_tag', permanent=True, tag=q.slug, page=kwargs['page'])
-    else:
-        return redirect('questions:list_tag', permanent=True, tag=q.slug)
+
+    try:
+        r = Rubric.objects.get(slug=q.slug)
+    except Rubric.DoesNotExist:
+        if 'page' in kwargs:
+            return redirect('questions:list_tag', permanent=True, tag=q.slug, page=kwargs['page'])
+        else:
+            return redirect('questions:list_tag', permanent=True, tag=q.slug)
+    return redirect('questions:list_rubric', permanent=True, rubric_slug=r.slug)
 
 
 def rubric(request, **kwargs):
