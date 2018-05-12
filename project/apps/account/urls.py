@@ -11,5 +11,6 @@ urlpatterns = [
     path('образование/', EducationEdit.as_view(template_name='account/edit/education.html'), name='edit_education'),
     path('опыт-работы/', ExperienceEdit.as_view(template_name='account/edit/experience.html'), name='edit_experience'),
     path('контакты/', ContactEdit.as_view(template_name='account/edit/contact.html'), name='edit_contact'),
-    path('платные-заявки/', AdviceSchedulerEdit.as_view(template_name='account/edit/contact.html'), name='edit_scheduler'),
+    path('платные-заявки/', AdviceSchedulerEdit.as_view(template_name='account/edit/scheduler.html'),
+         name='edit_scheduler'),
 ]

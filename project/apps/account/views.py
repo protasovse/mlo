@@ -5,6 +5,8 @@ from django.views.generic import FormView
 
 from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm, \
     AdviceSchedulerForm
+from apps.advice.models import Queue
+from config.settings import ADVICE_OVERDUE_TIME, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT
 
 
 class UserEdit(FormView):
@@ -54,8 +56,12 @@ class EducationEdit(FormView):
     success_url = reverse_lazy('account:edit_education')
 
     def get_form(self, form_class=None):
-        post = self.request.POST if self.request.method == 'POST' else None
-        return EducationForm(post, instance=self.request.user)
+        post = None
+        files = None
+        if self.request.method == 'POST':
+            post = self.request.POST
+            files = self.request.FILES
+        return EducationForm(post, files, instance=self.request.user)
 
     def form_valid(self, form):
         form.save()
@@ -96,3 +102,16 @@ class AdviceSchedulerEdit(FormView):
         form.save()
         messages.success(self.request, 'Данные сохранены')
         return super(AdviceSchedulerEdit, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdviceSchedulerEdit, self).get_context_data(**kwargs)
+
+        context.update({
+            'overdue_time': ADVICE_OVERDUE_TIME,
+            'queue': Queue.objects.get(expert=self.request.user),
+            'cost': ADVICE_COST,
+            'fee_in_percent': ADVICE_EXPERT_FEE_IN_PERCENT,
+            'fee': ADVICE_COST*ADVICE_EXPERT_FEE_IN_PERCENT/100
+        })
+
+        return context

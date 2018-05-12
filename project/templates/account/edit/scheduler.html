@@ -1,0 +1,30 @@
+{% extends 'account/edit/base.html' %}
+{% load bootstrap4 %}
+
+{% block account_edit_title %}Планировщик «Персональный юрист»{% endblock %}
+
+{% block account_edit_form %}
+    <div class="row">
+        <div class="col mb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="normal">
+                        <p>Настройте режим приёма заявок «Персональный юрист». Установите временной промежуток дня,
+                        когда вам будут приходить заявки. После поступления новой заявки, вам необходимо принять её в
+                            течении <strong>{{ overdue_time }} минут</strong>. Если вы не принимаете заявку в этот срок,
+                            то она перейдёт следующему по очереди эксперту.</p>
+                        <p>На данный момент вы <strong>{{ queue.order }}-й</strong> в очереди. Стоимость заявки —
+                            {{ cost }} руб., ваш гонорар — {{ fee_in_percent }}% или <strong>{{ fee }} руб.</strong></p>
+                    </div>
+                    {{ form.media }}
+                    {% bootstrap_javascript jquery=True %}
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_formset_errors form %}
+                        {% bootstrap_messages %}
+                    </div>
+                </div>
+                {% bootstrap_formset form layout='horizontal' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
