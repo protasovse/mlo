@@ -87,6 +87,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
 
+    def is_lawyer(self):
+        return self.role == LAWYER
+
+    def is_client(self):
+        return self.role == CLIENT
+
     @property
     def about_me(self):
         p = []
@@ -95,7 +101,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.city:
             p.append(self.city.name_ru)
         return ', '.join(p)
-
 
     def get_public_data(self):
         from apps.account.models import Info
@@ -116,6 +121,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'about_me': self.about_me,
             'stat': {
                 'rating': self.rating.get_rate if hasattr(self, 'rating') else None,
+
             },
             'url': self.get_absolute_url()
         }

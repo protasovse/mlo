@@ -4,6 +4,7 @@ import form_store from '../stores/form_store/index.js'
 
 let vueSmoothScroll = require('vue-smoothscroll');
 Vue.use(vueSmoothScroll);
+Vue.component('file-upload', VueUploadComponent);
 
 let app = new Vue({
     name: 'instance_anser_question',

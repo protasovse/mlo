@@ -17,7 +17,10 @@ export default {
             role: false,
             question: [],
             count_answ: {},
-            sub_answers_exists: false
+            sub_answers_exists: false,
+            is_can_answer: false,
+            files: [],
+
         }
     },
     mounted() {
@@ -30,8 +33,13 @@ export default {
             this.is_authorized = r.data.success;
             if (this.is_authorized) {
                 this.role = r.data.data.role;
-                this.user_id = r.data.data.id
+                this.user_id = r.data.data.id;
+
+                if (this.role === 'lawyer') {
+                    this.is_can_answer = true
+                }
             }
+
         });
         this.$http.get('/api/question',{params: {'id': this.qid}}).then(
             (r) => {this.question = r.data.data},
@@ -39,12 +47,20 @@ export default {
         this.$http.get('/api/question/answers',{params: {'id': this.qid}}).then(
             (r) => {
                 this.answers = r.data.data;
+
+
                 // to count subanswers
                 this.answers.forEach(x => {
                     if (x.parent_id) {
                         this.sub_answers_exists = true;
                         this.count_answ[x.parent_id] = (this.count_answ[x.parent_id] || 0) + 1;
                     }
+
+                    if (this.is_can_answer && x.author.id === this.user_id) {
+                        this.is_can_answer = false
+                    }
+
+
                 });
             },
         );
@@ -54,6 +70,25 @@ export default {
         tree_link_name() {
            return this.full_tree ? 'Свернуть': 'Развернуть'
         },
+        post_action() {
+            return '/api/question/answers'
+        },
+        is_form_send_done() {
+            return this.success && (!this.loading) && (!(this.$refs.upload && this.$refs.upload.active))
+        },
+
+    },
+    watch: {
+        is_form_send_done: function() {
+            if (this.is_form_send_done) {
+                this.is_can_answer = false;
+                this.$SmoothScroll(document.body.scrollHeight);
+
+                this.$http.get('/api/question/answers/{}/files', {params: {'id': this.qid}}).then(
+                    (r) => {},
+                );
+            }
+        }
     },
     methods: {
         like_title(id) {
@@ -126,7 +161,20 @@ export default {
             this.$SmoothScroll(curtop - curtopscroll - 40, 500);
         },
         save() {
-            console.log(this.qid);
+            let data = {
+                'id': this.qid,
+                'content': this.content
+            };
+            this.put('/api/question/answers', data, (r) => {
+                    this.answer_id = r.data.id;
+                    this.answers.push(r.data);
+
+                    for (let i = 0; i < this.$refs.upload.files.length; i++) {
+                        this.$refs.upload.files[i].data = {id:this.answer_id};
+                    }
+                    this.$refs.upload.active = true;
+                    this.set_form_success();
+            });
         },
         to_like_val(id, val) {
             let a = this.answers.filter(i=>i.id === id)[0];

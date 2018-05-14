@@ -151,7 +151,9 @@ class Info(models.Model):
             'pic': self.small_photo,
             'ur_status': self.title,
             'signature': self.signature,
-            'answer_count': self.answer_count
+            'answer_count': self.answer_count,
+            'review_count': self.review_count,
+            'stage': self.stage,
         }
 
     @classmethod
@@ -161,7 +163,9 @@ class Info(models.Model):
             'photo': '/static/img/lyr/person_photo.png',
             'pic': '/static/img/lyr/person_pic.png',
             'signature': '',
-            'answer_count': 0
+            'answer_count': 0,
+            'review_count': 0,
+            'stage': 0,
         }
 
 

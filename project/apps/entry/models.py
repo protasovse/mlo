@@ -85,6 +85,12 @@ class Entry(models.Model):
         """
         return misaka.html(self.content.replace("\n", "\n\n"))
 
+    def upload_document(self, file):
+        """"""
+        if not self.pk:
+            raise BackendPublicException('model not load')
+        return Files.objects.create(entry=self, file=file)
+
     class Meta:
         # ordering = ("-id",)
         # abstract = True
@@ -124,7 +130,7 @@ class Files(models.Model):
         return {
             'entry_id': self.entry_id,
             'filename': self.get_basename(),
-            'path': self.file if is_show else False
+            'path': "storage/{}".format(self.file) if is_show else False
         }
 
     class Meta:
@@ -229,11 +235,7 @@ class Question(Entry, Titled, Classified):
     def get_absolute_url(self):
         return reverse('question:detail', kwargs={'pk': self.pk})
 
-    def upload_document(self, file):
-        """"""
-        if not self.pk:
-            raise BackendPublicException('model not load')
-        return Files.objects.create(entry=self, file=file)
+
 
     # Получаем список ответов на вопрос. Оптимизировано.
     def get_answers(self):
@@ -251,6 +253,7 @@ class Question(Entry, Titled, Classified):
         user.city_id = self.city_id
         user.phone = self.phone
         user.save()
+
 
     def pay(self):
         self.confirm()

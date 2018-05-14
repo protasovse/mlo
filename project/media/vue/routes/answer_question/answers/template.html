@@ -1,5 +1,5 @@
 <div id="answer_block">
-    <div id="form">
+    <div id="form" v-if="is_can_answer">
         <div class="form-group">
             <label for="reply" class="h6 mb-2">title</label>
             <textarea class="form-control" v-model="content" :class="{'is-invalid': error_fields.content }" id="reply"
@@ -7,8 +7,33 @@
             <span class="invalid-feedback" v-if="error_fields.content">error_fields.content </span>
         </div>
         <div class="form-group">
-            <button @click="save" class="btn btn-primary">Отправить</button>
-            <span class="ml-3 normal"><a href="#"><i class="mr-2 icon-folder"></i>Прикрепить файлы</a></span>
+
+            <button type="submit"
+                        @click="save"
+                        class="btn btn-primary"
+                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                    <span v-else-if="success">Успешно</span>
+                    <span v-else>Отправить</span>
+                </button>
+
+
+            <file-upload
+                    :post-action="post_action"
+                    class="btn btn-sm btn-outline-primary"
+                    extensions="gif,jpg,jpeg,png,webp,pdf,xls"
+                    accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
+                    :multiple="true"
+
+                    :size="1024 * 1024 * 100"
+                    v-model="files"
+                    ref="upload"><span class="icon-folder mr-2"></span> Прикрепить файлы
+            </file-upload>
+
+            <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
+                <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
+                <a href="#" @click.prevent="$refs.upload.remove(file)" class="close"><i class="icon-cancel"></i></a>
+            </div>
         </div>
     </div>
 
@@ -20,7 +45,6 @@
                     <span class="d-none answer__counter" itemprop="answerCount">2</span>
                 </h3>
             </div>
-
 
             <div name="x" v-for="answer_data in answers"
                  role="answer"
@@ -55,14 +79,20 @@
                                 <i class="icon-star"></i>
                                 <span class="v">{{ answer_data.author.stat.rating }}</span>
                             </span>
-                            <span class="item" title="Стаж" v-if="0">
+                            <span class="item" title="Стаж" >
                                 <i class="icon-medal"></i>
-                                <span class="v">охуеть сколько лет</span>
+                                <span class="v">{{ answer_data.author.info.stage }}</span>
                             </span>
                             <span class="item" title="Всего консультаций" >
                                 <i class="icon-forum"></i>
                                 <span class="v">{{ answer_data.author.info.answer_count }}</span>
                             </span>
+
+                            <span class="item" title="Положительных отзывов">
+                                <i class="icon-like"></i>
+                                <span class="v">{{ answer_data.author.info.review_count }}</span>
+                            </span>
+
                         </div>
 
                     </div>
@@ -78,10 +108,21 @@
                     </div>
 
                     <div class="question-page_r-col content">
-                        <div class="text" itemprop="text" v-html="answer_data.content">
-                            <div class="signature" v-html="answer_data.author.signature"></div>
+                        <div class="text" itemprop="text" v-html="answer_data.content"></div>
+                        <p class="text-muted normal" v-if="answer_data.author.info.signature">
+                            --<br>
+                            {{ answer_data.author.info.signature }}
+                        </p>
+
+                         <div class="alert alert-secondary" v-if="answer_data.files">
+                            <p class="file-list-item" v-for="f in answer_data.files">
+                                <a target="_blank" :href="f.path" v-if="f.path">{{ f.filename }}</a>
+                                <span v-else="f.path">{{ f.filename }}</span>
+                            </p>
                         </div>
                     </div>
+
+
                 </div>
 
 
@@ -136,6 +177,9 @@
             </div>
 
         </aside>
+
+
+
 
 
     </div>

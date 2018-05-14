@@ -287,6 +287,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var vueSmoothScroll = __webpack_require__(93);
 
 Vue.use(vueSmoothScroll);
+Vue.component('file-upload', VueUploadComponent);
 var app = new Vue({
   name: 'instance_anser_question',
   'el': '#app',
@@ -356,7 +357,9 @@ var _default = {
       role: false,
       question: [],
       count_answ: {},
-      sub_answers_exists: false
+      sub_answers_exists: false,
+      is_can_answer: false,
+      files: []
     };
   },
   mounted: function mounted() {
@@ -371,6 +374,10 @@ var _default = {
       if (_this.is_authorized) {
         _this.role = r.data.data.role;
         _this.user_id = r.data.data.id;
+
+        if (_this.role === 'lawyer') {
+          _this.is_can_answer = true;
+        }
       }
     });
     this.$http.get('/api/question', {
@@ -392,12 +399,30 @@ var _default = {
           _this.sub_answers_exists = true;
           _this.count_answ[x.parent_id] = (_this.count_answ[x.parent_id] || 0) + 1;
         }
+
+        if (_this.is_can_answer && x.author.id === _this.user_id) {
+          _this.is_can_answer = false;
+        }
       });
     });
   },
   computed: {
     tree_link_name: function tree_link_name() {
       return this.full_tree ? 'Свернуть' : 'Развернуть';
+    },
+    post_action: function post_action() {
+      return '/api/question/answers';
+    },
+    is_form_send_done: function is_form_send_done() {
+      return this.success && !this.loading && !(this.$refs.upload && this.$refs.upload.active);
+    }
+  },
+  watch: {
+    is_form_send_done: function is_form_send_done() {
+      if (this.is_form_send_done) {
+        this.is_can_answer = false;
+        this.$SmoothScroll(document.body.scrollHeight);
+      }
     }
   },
   methods: {
@@ -498,7 +523,28 @@ var _default = {
       this.$SmoothScroll(curtop - curtopscroll - 40, 500);
     },
     save: function save() {
-      console.log(this.qid);
+      var _this3 = this;
+
+      var data = {
+        'id': this.qid,
+        'content': this.content
+      };
+      this.put('/api/question/answers', data, function (r) {
+        _this3.answer_id = r.data.id;
+
+        _this3.answers.push(r.data);
+
+        for (var i = 0; i < _this3.$refs.upload.files.length; i++) {
+          _this3.$refs.upload.files[i].data = {
+            id: _this3.answer_id
+          };
+          console.log(_this3.$refs.upload.files[i]);
+        }
+
+        _this3.$refs.upload.active = true;
+
+        _this3.set_form_success();
+      });
     },
     to_like_val: function to_like_val(id, val) {
       var a = this.answers.filter(function (i) {
@@ -508,7 +554,7 @@ var _default = {
       a['is_can_like'] = false;
     },
     to_like: function to_like(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$http.post('/api/question/answers/like', {
         'id': id,
@@ -516,11 +562,11 @@ var _default = {
       }, {
         emulateJSON: true
       }).then(function (r) {
-        _this3.to_like_val(id, 1);
+        _this4.to_like_val(id, 1);
       });
     },
     to_dislike: function to_dislike(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$http.post('/api/question/answers/like', {
         'id': id,
@@ -528,7 +574,7 @@ var _default = {
       }, {
         emulateJSON: true
       }).then(function (r) {
-        _this4.to_like_val(id, -1);
+        _this5.to_like_val(id, -1);
       });
     }
   }
@@ -540,7 +586,7 @@ exports.default = _default;
 /***/ 357:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"answer_block\">\n    <div id=\"form\">\n        <div class=\"form-group\">\n            <label for=\"reply\" class=\"h6 mb-2\">title</label>\n            <textarea class=\"form-control\" v-model=\"content\" :class=\"{'is-invalid': error_fields.content }\" id=\"reply\"\n                      rows=\"5\" placeholder=\"Мой ответ…\"></textarea>\n            <span class=\"invalid-feedback\" v-if=\"error_fields.content\">error_fields.content </span>\n        </div>\n        <div class=\"form-group\">\n            <button @click=\"save\" class=\"btn btn-primary\">Отправить</button>\n            <span class=\"ml-3 normal\"><a href=\"#\"><i class=\"mr-2 icon-folder\"></i>Прикрепить файлы</a></span>\n        </div>\n    </div>\n\n    <div class=\"row question-page_gradient\">\n        <div class=\"question-page_main-part\">\n            <div class=\"row\">\n                <h3 class=\"answer-list-head\" id=\"div-id\">Ответы юристов\n                        <a href=\"javascript:void(0);\" @click=\"expand_all\" v-if=\"sub_answers_exists\">({{ tree_link_name }})</a>\n                    <span class=\"d-none answer__counter\" itemprop=\"answerCount\">2</span>\n                </h3>\n            </div>\n\n\n            <div name=\"x\" v-for=\"answer_data in answers\"\n                 role=\"answer\"\n                 :name=\"answer_data.id\"\n                 :ref=\"answer_data.id\"\n                 :data-answer_id=\"answer_data.id\"\n                 :data-thread=\"answer_data.thread\"\n                 class=\"answer entry\"\n                 :class=\"{'answer-push': answer_data.parent_id }\"\n                 v-if=\"is_show_comment(answer_data.id)\">\n\n                <hr class=\"my-4\"/>\n\n                <header class=\"answer-header\">\n                    <div class=\"question-page_l-col\">\n                        <a class=\"answer-header_photo\" :href=\"answer_data.author.url\">\n                            <img :src=\"answer_data.author.info.photo\" :alt=\"answer_data.author.full_name\" />\n                        </a>\n                    </div>\n\n\n                    <div class=\"question-page_r-col\">\n                        <h6 class=\"mb-0\" itemprop=\"name\">\n                            <a :href=\"answer_data.author.url\">{{ answer_data.author.full_name }}</a>\n                        </h6>\n\n\n                        <div class=\"normal text-muted\" v-if=\"!answer_data.parent_id\">{{ answer_data.author.info.ur_status }}, {{ answer_data.author.city.name}}</div>\n\n                        <div class=\"answer-header_medal mt-3\" v-if=\"!answer_data.parent_id\">\n                            <span class=\"item\" title=\"Рейтинг эксперта\">\n                                <i class=\"icon-star\"></i>\n                                <span class=\"v\">{{ answer_data.author.stat.rating }}</span>\n                            </span>\n                            <span class=\"item\" title=\"Стаж\" v-if=\"0\">\n                                <i class=\"icon-medal\"></i>\n                                <span class=\"v\">охуеть сколько лет</span>\n                            </span>\n                            <span class=\"item\" title=\"Всего консультаций\" >\n                                <i class=\"icon-forum\"></i>\n                                <span class=\"v\">{{ answer_data.author.info.answer_count }}</span>\n                            </span>\n                        </div>\n\n                    </div>\n\n                </header>\n\n\n                <div class=\"row\">\n\n                    <div class=\"question-page_l-col\">\n                        <time class=\"subtitle d-block mt-1\" itemprop=\"dateCreated\" :datetime=\"answer_data.pub_date_c\">{{ answer_data.pub_date }}</time>\n                        <span class=\"d-block\">№ {{ answer_data.id }}</span>\n                    </div>\n\n                    <div class=\"question-page_r-col content\">\n                        <div class=\"text\" itemprop=\"text\" v-html=\"answer_data.content\">\n                            <div class=\"signature\" v-html=\"answer_data.author.signature\"></div>\n                        </div>\n                    </div>\n                </div>\n\n\n                <footer class=\"answer-footer row\">\n\n                    <div class=\"question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row\">\n\n                        <div class=\"answer-footer-action normal align-self-start align-self-md-center\">\n                            <a href=\"#\" v-if=\"get_add_question_link(answer_data.id)\">{{ get_add_question_link(answer_data.id)}}</a><br/>\n                            <a href=\"javascript:void(0);\" v-if=\"is_possible_expand_answer(answer_data.id)\" @click=\"expand_answer(answer_data.id)\">{{ get_exand_answer_name(answer_data.id) }}</a>\n                        </div>\n\n                        <div class=\"align-self-end mt-3 mt-sm-0\" v-if=\"!answer_data.parent_id\">\n                            <div class=\"answer-like\">\n                                <div class=\"answer-like-sign dropdown\">{{ like_title(answer_data.id) }}</div>\n                                <div class=\"answer-like-block\">\n                                    <i class=\"icon-dislike order-1\" v-if=\"answer_data.is_can_like\" @click=\"to_dislike(answer_data.id)\"></i>\n                                    <i class=\"icon-like order-3\" v-if=\"answer_data.is_can_like\" @click=\"to_like(answer_data.id)\"></i>\n                                    <span class=\"order-2\"\n                                          :class=\"{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}\">\n                                        {{ answer_data.like_count }}</span>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"d-none question-page_r-col ml-auto mt-4\"></div>\n                </footer>\n\n            </div>\n        </div>\n\n\n        <aside class=\"question-page_aside-part\">\n            <h4 class=\"mb-4\">Юристы ответившие на этот вопрос:</h4>\n\n            <div class=\"lawyer-list\">\n                <div v-for=\"answer_data in answers\"\n                     v-if=\"!answer_data.parent_id\"\n                     role=\"answers_selector\"\n                     class=\"lawyer-list_item lawyer-list_item-action\"\n                     :data-answer_id=\"answer_data.id\"\n                     @click=\"scrollTo(answer_data.id)\">\n                    <div class=\"lawyer-list_header\">\n                        <span class=\"ph\">\n                            <img :src=\"answer_data.author.info.pic\" :alt=\"answer_data.author.full_name\">\n                        </span>\n                        <div class=\"nm\">{{ answer_data.author.full_name }}</div>\n                    </div>\n                    <p class=\"lawyer-list_body\"> {{ answer_data.short_content }} </p>\n                </div>\n            </div>\n\n        </aside>\n\n\n    </div>\n\n\n</div>";
+module.exports = "<div id=\"answer_block\">\n    <div id=\"form\" v-if=\"is_can_answer\">\n        <div class=\"form-group\">\n            <label for=\"reply\" class=\"h6 mb-2\">title</label>\n            <textarea class=\"form-control\" v-model=\"content\" :class=\"{'is-invalid': error_fields.content }\" id=\"reply\"\n                      rows=\"5\" placeholder=\"Мой ответ…\"></textarea>\n            <span class=\"invalid-feedback\" v-if=\"error_fields.content\">error_fields.content </span>\n        </div>\n        <div class=\"form-group\">\n\n            <button type=\"submit\"\n                        @click=\"save\"\n                        class=\"btn btn-primary\"\n                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>\n                    <span v-if=\"loading||($refs.upload&&$refs.upload.active)\">Загрузка...</span>\n                    <span v-else-if=\"success\">Успешно</span>\n                    <span v-else>Отправить</span>\n                </button>\n\n\n            <file-upload\n                    :post-action=\"post_action\"\n                    class=\"btn btn-sm btn-outline-primary\"\n                    extensions=\"gif,jpg,jpeg,png,webp,pdf,xls\"\n                    accept=\"image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel\"\n                    :multiple=\"true\"\n\n                    :size=\"1024 * 1024 * 100\"\n                    v-model=\"files\"\n                    ref=\"upload\"><span class=\"icon-folder mr-2\"></span> Прикрепить файлы\n            </file-upload>\n\n            <div v-for=\"(file, index) in files\" class=\"file-loader\" :data-filename=\"file.name\">\n                <i class=\"bar\" :id=\"file.id\"><i :style=\"{width: file.progress + '%'}\"></i></i>\n                <a href=\"#\" @click.prevent=\"$refs.upload.remove(file)\" class=\"close\"><i class=\"icon-cancel\"></i></a>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"row question-page_gradient\">\n        <div class=\"question-page_main-part\">\n            <div class=\"row\">\n                <h3 class=\"answer-list-head\" id=\"div-id\">Ответы юристов\n                        <a href=\"javascript:void(0);\" @click=\"expand_all\" v-if=\"sub_answers_exists\">({{ tree_link_name }})</a>\n                    <span class=\"d-none answer__counter\" itemprop=\"answerCount\">2</span>\n                </h3>\n            </div>\n\n            <div name=\"x\" v-for=\"answer_data in answers\"\n                 role=\"answer\"\n                 :name=\"answer_data.id\"\n                 :ref=\"answer_data.id\"\n                 :data-answer_id=\"answer_data.id\"\n                 :data-thread=\"answer_data.thread\"\n                 class=\"answer entry\"\n                 :class=\"{'answer-push': answer_data.parent_id }\"\n                 v-if=\"is_show_comment(answer_data.id)\">\n\n                <hr class=\"my-4\"/>\n\n                <header class=\"answer-header\">\n                    <div class=\"question-page_l-col\">\n                        <a class=\"answer-header_photo\" :href=\"answer_data.author.url\">\n                            <img :src=\"answer_data.author.info.photo\" :alt=\"answer_data.author.full_name\" />\n                        </a>\n                    </div>\n\n\n                    <div class=\"question-page_r-col\">\n                        <h6 class=\"mb-0\" itemprop=\"name\">\n                            <a :href=\"answer_data.author.url\">{{ answer_data.author.full_name }}</a>\n                        </h6>\n\n\n                        <div class=\"normal text-muted\" v-if=\"!answer_data.parent_id\">{{ answer_data.author.about_me }}</div>\n\n                        <div class=\"answer-header_medal mt-3\" v-if=\"!answer_data.parent_id\">\n                            <span class=\"item\" title=\"Рейтинг эксперта\">\n                                <i class=\"icon-star\"></i>\n                                <span class=\"v\">{{ answer_data.author.stat.rating }}</span>\n                            </span>\n                            <span class=\"item\" title=\"Стаж\" >\n                                <i class=\"icon-medal\"></i>\n                                <span class=\"v\">{{ answer_data.author.info.stage }}</span>\n                            </span>\n                            <span class=\"item\" title=\"Всего консультаций\" >\n                                <i class=\"icon-forum\"></i>\n                                <span class=\"v\">{{ answer_data.author.info.answer_count }}</span>\n                            </span>\n\n                            <span class=\"item\" title=\"Положительных отзывов\">\n                                <i class=\"icon-like\"></i>\n                                <span class=\"v\">{{ answer_data.author.info.review_count }}</span>\n                            </span>\n\n                        </div>\n\n                    </div>\n\n                </header>\n\n\n                <div class=\"row\">\n\n                    <div class=\"question-page_l-col\">\n                        <time class=\"subtitle d-block mt-1\" itemprop=\"dateCreated\" :datetime=\"answer_data.pub_date_c\">{{ answer_data.pub_date }}</time>\n                        <span class=\"d-block\">№ {{ answer_data.id }}</span>\n                    </div>\n\n                    <div class=\"question-page_r-col content\">\n                        <div class=\"text\" itemprop=\"text\" v-html=\"answer_data.content\"></div>\n                        <p class=\"text-muted normal\" v-if=\"answer_data.author.info.signature\">\n                            --<br>\n                            {{ answer_data.author.info.signature }}\n                        </p>\n\n                         <div class=\"alert alert-secondary\" v-if=\"answer_data.files\">\n                            <p class=\"file-list-item\" v-for=\"f in answer_data.files\">\n                                <a target=\"_blank\" :href=\"f.path\" v-if=\"f.path\">{{ f.filename }}</a>\n                                <span v-else=\"f.path\">{{ f.filename }}</span>\n                            </p>\n                        </div>\n                    </div>\n\n\n                </div>\n\n\n                <footer class=\"answer-footer row\">\n\n                    <div class=\"question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row\">\n\n                        <div class=\"answer-footer-action normal align-self-start align-self-md-center\">\n                            <a href=\"#\" v-if=\"get_add_question_link(answer_data.id)\">{{ get_add_question_link(answer_data.id)}}</a><br/>\n                            <a href=\"javascript:void(0);\" v-if=\"is_possible_expand_answer(answer_data.id)\" @click=\"expand_answer(answer_data.id)\">{{ get_exand_answer_name(answer_data.id) }}</a>\n                        </div>\n\n                        <div class=\"align-self-end mt-3 mt-sm-0\" v-if=\"!answer_data.parent_id\">\n                            <div class=\"answer-like\">\n                                <div class=\"answer-like-sign dropdown\">{{ like_title(answer_data.id) }}</div>\n                                <div class=\"answer-like-block\">\n                                    <i class=\"icon-dislike order-1\" v-if=\"answer_data.is_can_like\" @click=\"to_dislike(answer_data.id)\"></i>\n                                    <i class=\"icon-like order-3\" v-if=\"answer_data.is_can_like\" @click=\"to_like(answer_data.id)\"></i>\n                                    <span class=\"order-2\"\n                                          :class=\"{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}\">\n                                        {{ answer_data.like_count }}</span>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"d-none question-page_r-col ml-auto mt-4\"></div>\n                </footer>\n\n            </div>\n        </div>\n\n\n        <aside class=\"question-page_aside-part\">\n            <h4 class=\"mb-4\">Юристы ответившие на этот вопрос:</h4>\n\n            <div class=\"lawyer-list\">\n                <div v-for=\"answer_data in answers\"\n                     v-if=\"!answer_data.parent_id\"\n                     role=\"answers_selector\"\n                     class=\"lawyer-list_item lawyer-list_item-action\"\n                     :data-answer_id=\"answer_data.id\"\n                     @click=\"scrollTo(answer_data.id)\">\n                    <div class=\"lawyer-list_header\">\n                        <span class=\"ph\">\n                            <img :src=\"answer_data.author.info.pic\" :alt=\"answer_data.author.full_name\">\n                        </span>\n                        <div class=\"nm\">{{ answer_data.author.full_name }}</div>\n                    </div>\n                    <p class=\"lawyer-list_body\"> {{ answer_data.short_content }} </p>\n                </div>\n            </div>\n\n        </aside>\n\n\n\n\n\n    </div>\n\n\n</div>";
 
 /***/ }),
 

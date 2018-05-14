@@ -4,7 +4,7 @@ from django.db.models import F
 from phonenumbers import PhoneNumberFormat, format_number, parse
 from apps.advice.models import Advice
 from apps.review.models import Likes
-from apps.svem_system.exceptions import ApiPublicException
+from apps.svem_system.exceptions import ApiPublicException, BackendPublicException
 from apps.svem_system.views.api import ApiView
 from apps.entry.models import Question, Answer, Entry, Files
 from django.contrib.auth import get_user_model
@@ -15,15 +15,17 @@ import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
 from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED
+from apps.entry.services import answer as to_answer
 
 
 class QuestionView(ApiView):
     @classmethod
     def get(cls, request):
-        return Question.objects.filter(pk=request.GET['id']).select_related(
+        q = Question.objects.filter(pk=request.GET['id']).select_related(
             'author', 'author__city', 'author__info', 'author__rating'
         ).get().get_public_data()
-
+        q.update({'is_can_answer': False})
+        return q
 
     @classmethod
     def post(cls, request):
@@ -99,6 +101,20 @@ class QuestionView(ApiView):
 
 
 class AnswersView(ApiView):
+
+    @classmethod
+    def put(cls, request):
+        params = cls.get_put(request)
+        question = Question.objects.get(pk=params['id'])
+        answer = to_answer(question, params['content'], request.user)
+        return answer.get_public_data()
+
+    @classmethod
+    def post(cls, request):
+        f = Answer.objects.get(pk=request.POST['id'])\
+            .upload_document(request.FILES['file'])
+        return 'file {} uploaded'.format(f.file)
+
     @classmethod
     def get(cls, request):
         def _is_can_like(a, user, lks):
@@ -177,6 +193,7 @@ class AnswersView(ApiView):
                 a.update({'is_last_answer': a['parent_id'] != n['parent_id']})
             except IndexError:
                 a.update({'is_last_answer': True})
+
 
         return answers
 
