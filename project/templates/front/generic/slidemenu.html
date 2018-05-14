@@ -3,7 +3,7 @@
     <div class="mt-4">
         <ul>
             {% if user.is_authenticated and user.role == 2 %}
-                <li><a href="{% url 'personal:edit' %}" class="font-weight-semibold">Личный кабинет</a></li>
+                <li><a href="{% url 'personal:edit' %}" class="font-weight-semibold">Личный кабине</a></li>
                 <li><a href="{% url 'questions:list' %}">Отвечать на вопросы</a></li>
             {% else %}
                 <li><a href="{% url 'ask_question' %}">Задать вопрос юристу</a></li>

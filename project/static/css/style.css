@@ -4938,16 +4938,17 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   animation: progress-bar-stripes 1s linear infinite; }
 
 .file-loader {
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: 25px;
   position: relative;
-  height: 30px;
-  overflow: hidden; }
+  height: 40px; }
   .file-loader:before {
     content: attr(data-filename);
     white-space: nowrap;
     position: absolute;
+    top: 0;
     display: block;
+    line-height: 1.5rem;
+    height: 1.5rem;
     margin-right: 2rem;
     z-index: 0; }
   .file-loader:after {
@@ -4970,9 +4971,7 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
     z-index: 2; }
   .file-loader .bar {
     margin-right: 30px;
-    height: 4px;
-    position: relative;
-    top: 20px; }
+    height: 4px; }
     .file-loader .bar :first-child {
       content: ''; }
 
@@ -6612,7 +6611,7 @@ button.bg-white:focus {
 .m-1 {
   margin: 0.25rem !important; }
 
-.mt-1, .file-loader .bar,
+.mt-1,
 .my-1 {
   margin-top: 0.25rem !important; }
 
