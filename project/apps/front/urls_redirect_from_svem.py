@@ -1,7 +1,6 @@
 from django.urls import re_path, path
 
 from apps.front.views import redirect_from_svem
-from apps.front.views.redirect_from_svem import Redirect
 
 urlpatterns = [
     # /Trudovoe-pravo/ — рубрика или /Trudovoe-pravo/0-vse/

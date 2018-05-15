@@ -1,0 +1,8 @@
+User-agent: Yandex
+Host: мойюрист.онлайн
+
+Disallow: /юрист/1/
+
+User-agent: *
+
+Disallow: /юрист/1/

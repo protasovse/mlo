@@ -19,7 +19,11 @@
     {% else %}
     <link rel="canonical" href="{{ SITE_URL }}{% if current_page > 1 %}{% url 'questions:list' current_page %}{% else %}{% url 'questions:list'%}{% endif %}">
     {% endif %}
-    <meta name="robots" content="index,follow">
+    {% if cur_url_param is None %}
+    <meta name="robots" content="index, follow">
+    {% else %}
+    <meta name="robots" content="noindex, nofollow"/>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -51,9 +55,10 @@
 
                                 <div class="col question-page_article">
                                     {% if rubric %}
-                                        {% if rubric.html_description or rubric.html_content %}
-                                            {{ rubric.html_description|safe }}
+                                        {% if rubric.html_content %}
                                             {{ rubric.html_content|safe }}
+                                        {% elif rubric.html_description %}
+                                            {{ rubric.html_description|safe }}
                                         {% else %}
                                             <p class="_lead">Юристы и адвокаты сайта «Мойюрист.онлайн» со стажем от
                                                 <strong class="font-weight-bold">5&nbsp;лет</strong> проконсультируют

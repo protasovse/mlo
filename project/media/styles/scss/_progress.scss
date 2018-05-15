@@ -1,16 +1,17 @@
 .file-loader {
   @extend .normal;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: line(1.25);
   position: relative;
-  height: line(1.5);
-  overflow: hidden;
+  height: line(2);
 
   &:before {
     content: attr(data-filename);
     white-space: nowrap;
     position: absolute;
+    top: 0;
     display: block;
+    line-height: 1.5rem;
+    height: 1.5rem;
     margin-right: 2rem;
     z-index: 0;
   }
@@ -38,11 +39,9 @@
   }
 
   .bar {
-    @extend .progress, .mt-1;
+    @extend .progress;
     margin-right: line(1.5);
     height: 4px;
-    position: relative;
-    top: line(1);
     & :first-child {
       content: '';
       @extend .progress-bar, .bg-secondary;

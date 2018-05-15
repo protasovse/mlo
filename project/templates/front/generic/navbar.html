@@ -26,14 +26,16 @@
         {% if user.role == 2 %}
             <a href="{% url 'questions:list' %}" class="action_item d-none d-sm-inline-flex">Отвечать</a>
         {% else %}
-            <a href="{% url 'ask_question' %}" class="action_item d-none d-sm-inline-flex">Спросить юриста</a>
+            <a href="{% url 'ask_question' %}" class="action_item d-none d-sm-inline-flex">Задать вопрос</a>
         {% endif %}
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
-        <a href="#" class="action_item slide-menu-toggle sq">
-            {% if user.is_authenticated and user.role > 0 %}
+        {% if user.is_authenticated and user.role > 0 %}
+            <a href="{% url 'personal:edit' %}" class="action_item sq">
                 <img src="{% include 'account/generic/pic.html' with item=user %}">
-            {% endif %}
-        </a>
+            </a>
+        {% endif %}
+
+        <a href="#" class="action_item slide-menu-toggle sq"></a>
     </div>
 
     {% block navbar_addbar %}{% endblock %}
