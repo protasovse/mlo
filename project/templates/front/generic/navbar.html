@@ -26,7 +26,7 @@
         {% if user.role == 2 %}
             <a href="{% url 'questions:list' %}" class="action_item d-none d-sm-inline-flex">Отвечать</a>
         {% else %}
-            <a href="{% url 'ask_question' %}" class="action_item d-none d-sm-inline-flex">Спросить юриста</a>
+            <a href="{% url 'ask_question' %}" class="action_item d-none d-sm-inline-flex">Задать вопрос</a>
         {% endif %}
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
         {% if user.is_authenticated and user.role > 0 %}
