@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from apps.front.views import api as front_api
 from apps.svem_auth.views import api as auth_api
 from apps.rubric import view_api as rubric_api
@@ -19,6 +19,8 @@ urlpatterns = [
     path('question', question_api.QuestionView.as_view()),
     path('question/answers/like', question_api.AnswersLike.as_view()),
     path('question/answers', question_api.AnswersView.as_view()),
+    # правильный урл
+    path(r'questions/<int:qid>/answers/<int:aid>/files', question_api.AnswersFilesView.as_view()),
     path('city/search', sxgeo_api.City.as_view()),
     path('city/ip', sxgeo_api.CityIp.as_view()),
     path('city/default', sxgeo_api.CityDefault.as_view())

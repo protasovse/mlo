@@ -235,8 +235,6 @@ class Question(Entry, Titled, Classified):
     def get_absolute_url(self):
         return reverse('question:detail', kwargs={'pk': self.pk})
 
-
-
     # Получаем список ответов на вопрос. Оптимизировано.
     def get_answers(self):
         return Answer.published.by_question(self.pk)
@@ -253,7 +251,6 @@ class Question(Entry, Titled, Classified):
         user.city_id = self.city_id
         user.phone = self.phone
         user.save()
-
 
     def pay(self):
         self.confirm()

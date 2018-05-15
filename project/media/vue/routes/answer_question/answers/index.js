@@ -84,8 +84,10 @@ export default {
                 this.is_can_answer = false;
                 this.$SmoothScroll(document.body.scrollHeight);
 
-                this.$http.get('/api/question/answers/{}/files', {params: {'id': this.qid}}).then(
-                    (r) => {},
+                this.$http.get(`/api/questions/${this.qid}/answers/${this.answer_id}/files`).then(
+                    (r) => {
+                        this.answers[this.answer_id]['files'] = r.data.data
+                    },
                 );
             }
         }
@@ -165,6 +167,7 @@ export default {
                 'id': this.qid,
                 'content': this.content
             };
+            this.answer_id = false;
             this.put('/api/question/answers', data, (r) => {
                     this.answer_id = r.data.id;
                     this.answers.push(r.data);

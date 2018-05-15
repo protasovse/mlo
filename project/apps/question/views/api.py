@@ -100,8 +100,59 @@ class QuestionView(ApiView):
         }
 
 
-class AnswersView(ApiView):
+class AnswersFilesView(ApiView):
+    @classmethod
+    def is_show(cls, entry_id, request, question, answers_authors):
+        """
+        определим фунцию которая будет возвращать флаг - показывать ли файл
+        Хуевенькая передача параметров.
+        :param entry_id:
+        :param request:
+        :param question:
+        :param answers_authors:
+        :return:
+        """
+        # не показываем файлы незалогиненому пользователю
+        if not request.user.is_authenticated:
+            return False
+        # если текущий юзер автор вопроса - то все вложения ему видны
+        if request.user.id == question.author.id:
+            return True
+        # если текущий юзер - юрист, ответивший на вопрос, то ему видны все вложения в его ветке
+        if answers_authors[entry_id] == request.user.id:
+            return True
+        # во всех остальных случаях - не видны
+        return False
 
+    @classmethod
+    def get_files(cls, request, answers, question):
+        # для кажого ответа 2-ого уровня найдем ответ 1-ого уровня и возьмем его автора (юриста)
+        answers_authors = {}
+        author_id = None
+        for a in answers:
+            if a['parent_id'] is None:
+                author_id = a['author']['id']
+            answers_authors[a['id']] = author_id
+
+        files = {}
+        # найдем все файлы для ответов на вопрос question
+        for f in Files.objects.filter(entry_id__in=[a['id'] for a in answers]):
+            p_data = f.get_public_data(cls.is_show(f.entry_id, request, question, answers_authors))
+            try:
+                files[f.entry_id].append(p_data)
+            except KeyError:
+                files[f.entry_id] = [p_data]
+        return files
+
+    @classmethod
+    def get(cls, request, qid, aid):
+        question = Question.published.get(pk=qid)
+        answers = Answer.published.related_to_question(question).filter(pk=aid)
+        files = cls.get_files(request, [a.get_public_data() for a in answers], question)
+        return files[aid] if files else []
+
+
+class AnswersView(ApiView):
     @classmethod
     def put(cls, request):
         params = cls.get_put(request)
@@ -136,39 +187,7 @@ class AnswersView(ApiView):
 
         answers = [a.get_public_data() for a in Answer.published.related_to_question(question)]
 
-        # для кажого ответа 2-ого уровня найдем ответ 1-ого уровня и возьмем его автора (юриста)
-        answers_authors = {}
-        for a in answers:
-            if a['parent_id'] is None:
-                author_id = a['author']['id']
-            answers_authors[a['id']] = author_id
-
-        def is_show(entry_id):
-            """
-            определим фунцию которая будет возвращать флаг - показывать ли файл
-            :param entry_id:
-            :return bool:
-            """
-            # не показываем файлы незалогиненому пользователю
-            if not request.user.is_authenticated:
-                return False
-            # если текущий юзер автор вопроса - то все вложения ему видны
-            if request.user.id == question.author.id:
-                return True
-            # если текущий юзер - юрист, ответивший на вопрос, то ему видны все вложения в его ветке
-            if answers_authors[entry_id] == request.user.id:
-                return True
-            # во всех остальных случаях - не видны
-            return False
-
-        files = {}
-        # найдем все файлы для ответов на вопрос question
-        for f in Files.objects.filter(entry_id__in=[a['id'] for a in answers]):
-            p_data = f.get_public_data(is_show(f.entry_id))
-            try:
-                files[f.entry_id].append(p_data)
-            except KeyError:
-                files[f.entry_id] = [p_data]
+        files = AnswersFilesView.get_files(request, answers, question)
 
         # to prepare array of answers for front
         for i, a in enumerate(answers):
@@ -193,9 +212,9 @@ class AnswersView(ApiView):
                 a.update({'is_last_answer': a['parent_id'] != n['parent_id']})
             except IndexError:
                 a.update({'is_last_answer': True})
-
-
         return answers
+
+
 
 
 class AnswersLike(ApiView):
@@ -217,7 +236,7 @@ class AnswersLike(ApiView):
 
 class QuestionDefault(ApiView):
     @classmethod
-    def get(self, request):
+    def get(cls, request):
         return {
             'ask_content': request.session.pop('ask_content', ''),
             'ask_name': request.session.pop('ask_name', ''),
