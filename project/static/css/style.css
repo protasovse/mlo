@@ -8487,7 +8487,7 @@ body.open-slide-menu {
   padding-top: 60px; }
   @media (max-width: 767.98px) {
     .question-page_gradient {
-      padding-top: 20px; } }
+      padding-top: 40px; } }
   .question-page_gradient:before {
     content: '';
     position: absolute;

@@ -97,7 +97,7 @@
   position: relative;
   padding-top: line(3);
   @include media-breakpoint-down(sm){
-    padding-top: line(1);
+    padding-top: line(2);
   }
   &:before {
     content: '';
