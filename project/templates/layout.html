@@ -52,6 +52,6 @@
     });
 </script>
 {#% include 'front/widgets/phone.html' %#}
-{#% include 'front/widgets/consult.html' %#}
+{% if user.role != 2 %}{% include 'front/widgets/consult.html' %}{% endif %}
 </body>
 </html>

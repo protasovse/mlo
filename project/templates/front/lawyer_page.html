@@ -1,6 +1,7 @@
 {% extends 'front/base.html' %}
 {% load cropping %}
 {% load static %}
+{% load number %}
 
 {% block title %}{{ lawyer.info.title|default:lawyer.get_role_display }}, {{ lawyer.get_full_name }}.
     {% if lawyer.city.name %}г. {{ lawyer.city.name }}{% endif %}{% endblock %}
@@ -145,20 +146,19 @@
                         {% endfor %}
                         <div class="text-center mb-5">
                             <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все
-                                отзывы
-                                юриста</a>
+                                отзывы юриста</a>
                         </div>
                     </div>
                 </div>
 
                 <div id="question" class="d-none row questions-section">
                     <div class="container">
+                        <h3 class="mb-4">Юрист оказал {{ questions_count|number:'консультацию|консультации|консультаций'  }}</h3>
                         {% for question in questions %}
-                            {% include 'question/generic/question_item_in_list.html' with item=question show_answers=True %}
+                            {% include 'question/generic/question_item_in_list.html' with item=question show_answers=False %}
                         {% endfor %}
                         <div class="text-center mb-5">
-                            <a href="{% url 'questions:list' %}?lawyer={{ lawyer.pk }}"
-                               class="btn btn-sm btn-outline-primary">Все консультации</a>
+                            <a href="{% url 'questions:list' %}?lawyer={{ lawyer.pk }}">Все консультации юриста&nbsp;&rarr;</a>
                         </div>
                     </div>
                 </div>

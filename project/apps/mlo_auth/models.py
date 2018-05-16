@@ -52,11 +52,9 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Указывает, является ли пользователь экспертом, имеющим право '
                                                 'отвечать на платные вопросы.'))
 
-    date_joined = models.DateTimeField(_('Дата регистрации'),
-                                       default=timezone.now)
+    date_joined = models.DateTimeField(_('Дата регистрации'), auto_now_add=True)
 
-    last_login = models.DateTimeField(_('Последний визит'),
-                                      default=timezone.now)
+    last_login = models.DateTimeField(_('Последний визит'), auto_now=True)
 
     role = models.PositiveSmallIntegerField(_('Тип учётной записи'),
                                             choices=ROLES_CHOICES, default=1, db_index=True,

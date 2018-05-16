@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     'image_cropping',
     'pagedown',
     'bootstrap4',
+    'dbmail',
+    'debug_toolbar',
 
     'apps.mlo_auth',
     'apps.entry',
@@ -85,8 +87,7 @@ INSTALLED_APPS = [
     'apps.advice.apps.AdviceConfig',
     'apps.rating.apps.RatingConfig',
     'apps.billing.apps.BillingConfig',
-    'dbmail',
-    'debug_toolbar',
+    'apps.article',
 ]
 
 SITE_ID = env('SITE_ID')

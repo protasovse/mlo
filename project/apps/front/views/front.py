@@ -35,10 +35,13 @@ class LawyerPage(TemplateView):
         except ObjectDoesNotExist:
             raise Http404
 
+        questions = Question.published.search('', 0, 10, {'answers_authors_id': (lawyer.pk,)})
+
         context.update({
             'likes': Likes.objects.filter(entry__author=lawyer, user__role=1).order_by("-date")[:10],
             'lawyer': lawyer,
-            'questions': Question.published.search('', 0, 10, {'answers_authors_id': (lawyer.pk,)})
+            'questions': questions,
+            'questions_count': questions.count,
         })
 
         return context

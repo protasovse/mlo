@@ -24,7 +24,7 @@
         </div>
 
         <div class="r-col large">
-            <p>{{ item.content|safe|urlize|truncatechars:192 }}</p>
+            <p>{{ item.content|truncatechars:192|safe }}</p>
         </div>
 
         {# Ответы #}
@@ -32,17 +32,15 @@
             <div class="answer offset-md-3">
                 {% with item.get_answers as answers %}
                     <div class="answer-header">
+
                         <div class="usr">
                             {% for a in answers %}
-                                <a href="{% url 'lawyer_page' a.author_id %}"><img
-                                        src="{% include 'account/generic/pic.html' with item=a.author %}"
-                                        alt="{{ a.author }}"/></a>
+                                <a href="{% url 'lawyer_page' a.author_id %}"><img src="{% include 'account/generic/pic.html' with item=a.author %}" alt="{{ a.author }}"/></a>
                             {% endfor %}
                         </div>
                         <div>
                             {% if item.reply_count > 1 %}
-                                <a target="_blank" href="{% url 'question:detail' item.pk %}"
-                                   rel="nofollow">{{ item.reply_count|number:'ответ|ответа|ответов' }}</a>
+                                <a target="_blank" href="{% url 'question:detail' item.pk %}" rel="nofollow">{{ item.reply_count|number:'ответ|ответа|ответов' }}</a>
                             {% else %}
                                 <a href="{% url 'lawyer_page' answers.0.author_id %}">{{ answers.0.author }}</a><br>
                                 <span class="text-muted">{{ answers.0.author.city.name_ru }}</span>
@@ -50,7 +48,7 @@
                         </div>
 
                     </div>
-                    <p>{{ answers.last.content|safe|truncatechars:160 }}</p>
+                    <p>{{ answers.last.content|truncatechars:160|safe }}</p>
                 {% endwith %}
             </div>
         {% else %}
