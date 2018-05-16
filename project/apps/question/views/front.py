@@ -44,6 +44,10 @@ class QuestionDetail(TemplateView):
             'question': question
         })
 
+        query_for_similar_questions = question.title
+        similar_questions = Question.published.search(query_for_similar_questions, 0, 5)
+        print(similar_questions)
+
         if hasattr(question, 'advice'):
             advice = Advice.objects.filter(question=question).first()
             advice_context = {
@@ -51,7 +55,8 @@ class QuestionDetail(TemplateView):
                 'money_yandex_purse': MONEY_YANDEX_PURSE,
                 'payment_form_title': PAYMENT_FORM_TITLE,
                 'payment_form_target': PAYMENT_FORM_TARGET,
-                'advice_cost': ADVICE_COST
+                'advice_cost': ADVICE_COST,
+                'similar_questions': similar_questions,
             }
 
             if advice.status == ADVICE_PAYMENT_CONFIRMED:
@@ -88,7 +93,7 @@ class QuestionDetail(TemplateView):
 
 
 class QuestionsList(TemplateView):
-    template_name = 'entry/questions_list.html'
+    template_name = 'question/questions_list.html'
     page_size = 10
 
     def get_context_data(self, **kwargs):
@@ -159,6 +164,9 @@ class QuestionsList(TemplateView):
             query = self.request.GET['q']
             sort.append('@relevance DESC')
             query_string = query
+            url_params.update({
+                'q': query,
+            })
 
         if 'paid' in self.request.GET:
             filters.update({'is_pay': (True,)})

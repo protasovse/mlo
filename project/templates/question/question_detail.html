@@ -148,7 +148,6 @@
         </div>
 
         {# Если есть ответы  #}
-
         <div class="row question-page_gradient">
 
             <div class="question-page_main-part">
@@ -166,8 +165,18 @@
                     {% for answer in answers %}
                         {% include 'entry/generic/answer_item.html' with item=answer %}
                     {% endfor %}
+
+                    <hr class="mt-4 mb-5">
                 {% else %}
+                    {# Если нет ответов #}
                 {% endif %}
+
+                <div class="row">
+                    <h3 class="answer-list-head">Похожие вопросы</h3>
+
+                    {{ similar_questions }}
+
+                </div>
 
             </div>
 
