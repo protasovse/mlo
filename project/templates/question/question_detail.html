@@ -165,18 +165,9 @@
                     {% for answer in answers %}
                         {% include 'entry/generic/answer_item.html' with item=answer %}
                     {% endfor %}
-
-                    <hr class="mt-4 mb-5">
                 {% else %}
                     {# Если нет ответов #}
                 {% endif %}
-
-                <div class="row">
-                    <h3 class="answer-list-head">Похожие вопросы</h3>
-
-                    {{ similar_questions }}
-
-                </div>
 
             </div>
 
@@ -191,6 +182,20 @@
             </aside>
 
         </div>
+
+        {% if similar_questions %}
+            <div class="row question-page_gradient">
+                <div class="question-page_main-part">
+                    <div class="row">
+                        <h4 class="answer-list-head">Похожие вопросы</h4>
+                    </div>
+                    <hr>
+                    {% for item in similar_questions %}
+                        {% include 'question/generic/question_item_in_list.html' with item=item show_answers=False %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
 
     </div>
 

@@ -1,4 +1,6 @@
 import urllib.parse
+
+import re
 from django.contrib.sites.models import Site
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -28,9 +30,9 @@ from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE, PAYMENT_FOR
 class QuestionDetail(TemplateView):
     template_name = 'question/question_detail.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, pk, **kwargs):
         context = super().get_context_data(**kwargs)
-        question = get_object_or_404(Question, pk=kwargs['pk'])
+        question = get_object_or_404(Question, pk=pk)
 
         if question.status == 'blocked':
             ids = self.request.session.get('question_ids', [])
@@ -44,9 +46,11 @@ class QuestionDetail(TemplateView):
             'question': question
         })
 
-        query_for_similar_questions = question.title
-        similar_questions = Question.published.search(query_for_similar_questions, 0, 5)
-        print(similar_questions)
+        # Выборка похожих вопроов
+        query_for_similar_questions = '|'.join(re.split(r'[\s]+', question.title))
+        # Выбираем, исключая сам вопрос
+        similar_questions = Question.published.search(query_for_similar_questions, 0, 5,
+                                                      sort=['@relevance DESC', ], exclude_id=question.pk)
 
         if hasattr(question, 'advice'):
             advice = Advice.objects.filter(question=question).first()
@@ -56,7 +60,6 @@ class QuestionDetail(TemplateView):
                 'payment_form_title': PAYMENT_FORM_TITLE,
                 'payment_form_target': PAYMENT_FORM_TARGET,
                 'advice_cost': ADVICE_COST,
-                'similar_questions': similar_questions,
             }
 
             if advice.status == ADVICE_PAYMENT_CONFIRMED:
@@ -72,9 +75,8 @@ class QuestionDetail(TemplateView):
         context.update({
             'mess': messages.get_messages(self.request),
             'answers': Answer.published.related_to_question(question),
-            'site': Site.objects.get_current(),
-            'protocol': SITE_PROTOCOL,
-            'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk}))
+            'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk})),
+            'similar_questions': similar_questions,
         })
 
         if self.request.user.is_authenticated and self.request.user.role == 2:

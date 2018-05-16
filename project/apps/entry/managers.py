@@ -79,12 +79,14 @@ class QuestionsPublishedManager(EntryPublishedManager):
         qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
         return qs
 
-    def search(self, query='', offset=0, limit=10, filters={}, sort=[]):
+    def search(self, query='', offset=0, limit=10, filters={}, sort=[], exclude_id=False):
         """
         :param query:
         :param offset:
         :param limit:
         :param filters: Словарь фильтров
+        :param sort:
+        :param exclude_id: Исключить элемент с id=... из поиска
         :return:
         """
 
@@ -102,6 +104,9 @@ class QuestionsPublishedManager(EntryPublishedManager):
         for key in filters:
             client.SetFilter(key, filters[key])
 
+        if exclude_id:
+            client.SetFilter('@id', (exclude_id,), exclude=True)
+
         # Показываем вопросы со статусом 'blocked', если выбран список моих вопросов,
         # в остальных случаях только 'public'
         show_statuses = (2, 3) if 'author_id' in filters else (2, )  # (2, ) — 'public', (2, 3) — 'public', 'blocked'
@@ -109,10 +114,13 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         # Если запрос — число, то воспринимаем, как поиск по id
         if query.isdigit():
-            client.SetIDRange(int(query), int(query))
+            # client.SetIDRange(int(query), int(query))
+            client.SetFilter('@id', (int(query), ))
             query = ''
 
         result = client.Query(query, 'question, question_delta')
+
+        print(query)
 
         if not result:
             qs = self.get_queryset().none()
