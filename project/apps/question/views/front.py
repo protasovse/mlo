@@ -2,6 +2,7 @@ import urllib.parse
 
 import re
 from django.contrib.sites.models import Site
+from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
@@ -45,6 +46,9 @@ class QuestionDetail(TemplateView):
         context.update({
             'question': question
         })
+
+        question.views_count = F('views_count') + 1
+        question.save(update_fields=['views_count'])
 
         # Выборка похожих вопроов
         query_for_similar_questions = '|'.join(re.split(r'[\s]+', question.title))

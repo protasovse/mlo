@@ -95,6 +95,7 @@
                                 </div>
                             {% endif %}
 
+                            {% comment %}
                             {# Блок ответить на вопрос #}
                             {% if question.is_pay %}
                                 {# Если консультация платная #}
@@ -109,15 +110,16 @@
                                     </reply-form>
                                 {% endif %}
                             {% endif %}
+                            {% endcomment %}
 
                             <hr class="my-4">
 
                             {# Яндекс share кнопки #}
-                            {#% include 'front/generic/yandex-share.html' %#}
+                            {% include 'front/generic/yandex-share.html' %}
 
                             {# Рубрики #}
                             {% if question.rubric %}
-                                <p class="rubrics-list mt-5">
+                                <p class="rubrics-list mt-4">
                                     <span class="rubrics-list-item"><a
                                             href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></span>
                                 </p>
@@ -148,12 +150,12 @@
         </div>
 
         {# Если есть ответы  #}
+        {% if question.reply_count %}
         <div class="row question-page_gradient">
 
             <div class="question-page_main-part">
 
                 {# Основная часть — ответы #}
-                {% if question.reply_count %}
                     {# Ответы #}
                     <div class="row">
                         <h3 class="answer-list-head">Ответы юристов
@@ -165,9 +167,6 @@
                     {% for answer in answers %}
                         {% include 'entry/generic/answer_item.html' with item=answer %}
                     {% endfor %}
-                {% else %}
-                    {# Если нет ответов #}
-                {% endif %}
 
             </div>
 
@@ -182,12 +181,15 @@
             </aside>
 
         </div>
+        {% else %}
+            {# Если нет ответов #}
+        {% endif %}
 
         {% if similar_questions %}
             <div class="row question-page_gradient">
                 <div class="question-page_main-part">
                     <div class="row">
-                        <h4 class="answer-list-head">Похожие вопросы</h4>
+                        <h3 class="answer-list-head">Похожие вопросы</h3>
                     </div>
                     <hr>
                     {% for item in similar_questions %}

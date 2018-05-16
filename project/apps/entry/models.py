@@ -65,6 +65,8 @@ class Entry(models.Model):
         _('Ответов'), db_index=True,
         default=0)
 
+    views_count = models.PositiveIntegerField(_('Колличество просмотров'), default=0)
+
     objects = models.Manager()
     published = EntryPublishedManager()
 

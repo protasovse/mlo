@@ -12,7 +12,7 @@ helper.init({
         'side': 'down', // down / left / right
         'method': 'window', // inline / window
 
-        'margin-right': '150px',
+        'margin-right': '50px',
         'z-index': 10000,
 
         'message_sound': 'http://s1.nice-cream.ru/widget2.2/server/message.mp3'
