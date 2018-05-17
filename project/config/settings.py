@@ -89,7 +89,6 @@ INSTALLED_APPS = [
     'apps.rating.apps.RatingConfig',
     'apps.billing.apps.BillingConfig',
     'apps.article',
-    'apps.sitemap',
 ]
 
 SITE_ID = env('SITE_ID')
