@@ -1,10 +1,16 @@
 <div id="answer_block">
+
     <div id="form" v-if="is_can_answer">
         <div class="form-group">
-            <label for="reply" class="h6 mb-2">title</label>
-            <textarea class="form-control" v-model="content" :class="{'is-invalid': error_fields.content }" id="reply"
-                      rows="5" placeholder="Мой ответ…"></textarea>
-            <span class="invalid-feedback" v-if="error_fields.content">error_fields.content </span>
+            <label for="reply" class="h6 mb-2">Ответ</label>
+            <textarea class="form-control"
+                      v-model="content"
+                      :class="{'is-invalid': error_fields.content }"
+                      id="reply"
+                      rows="5"
+                      :disabled="file_form_loading"
+                      placeholder="Мой ответ…"></textarea>
+            <span class="invalid-feedback" v-if="error_fields.content">Введите текст ответа</span>
         </div>
         <div class="form-group">
 
@@ -44,7 +50,10 @@
                         <a href="javascript:void(0);" @click="expand_all" v-if="sub_answers_exists">({{ tree_link_name }})</a>
                     <span class="d-none answer__counter" itemprop="answerCount">2</span>
                 </h3>
+
             </div>
+
+            <img v-if="file_form_loading" src="/static/img/preloaders/spinner200.svg">
 
             <div name="x" v-for="answer_data in answers"
                  role="answer"
@@ -58,9 +67,9 @@
 
                 <hr class="my-4"/>
 
-                <header class="answer-header">
-                    <div class="question-page_l-col">
-                        <a class="answer-header_photo" :href="answer_data.author.url">
+                <header class="answer-header" >
+                    <div class="question-page_l-col" >
+                        <a class="answer-header_photo" :href="answer_data.author.url" v-if="answer_data.author.role=='lawyer'">
                             <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name" />
                         </a>
                     </div>
@@ -68,7 +77,8 @@
 
                     <div class="question-page_r-col">
                         <h6 class="mb-0" itemprop="name">
-                            <a :href="answer_data.author.url">{{ answer_data.author.full_name }}</a>
+                            <a :href="answer_data.author.url" v-if="answer_data.author.role=='lawyer'">{{ answer_data.author.full_name }}</a>
+                            <span v-else>{{ answer_data.author.full_name }}</span>
                         </h6>
 
 
@@ -94,10 +104,10 @@
                             </span>
 
                         </div>
-
                     </div>
 
                 </header>
+
 
 
                 <div class="row">
@@ -105,6 +115,7 @@
                     <div class="question-page_l-col">
                         <time class="subtitle d-block mt-1" itemprop="dateCreated" :datetime="answer_data.pub_date_c">{{ answer_data.pub_date }}</time>
                         <span class="d-block">№ {{ answer_data.id }}</span>
+                        <span class="d-block" v-if="answer_data.author.role=='client'">{{ answer_data.author.about_me }}</span>
                     </div>
 
                     <div class="question-page_r-col content">
@@ -131,7 +142,9 @@
                     <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
 
                         <div class="answer-footer-action normal align-self-start align-self-md-center">
-                            <a href="#" v-if="get_add_question_link(answer_data.id)">{{ get_add_question_link(answer_data.id)}}</a><br/>
+                            <a href="javascript:void(0);"
+                               v-if="get_add_question_link(answer_data.id)"
+                               @click="show_form_answer(answer_data.id)">{{ get_add_question_link(answer_data.id)}}</a><br/>
                             <a href="javascript:void(0);" v-if="is_possible_expand_answer(answer_data.id)" @click="expand_answer(answer_data.id)">{{ get_exand_answer_name(answer_data.id) }}</a>
                         </div>
 
@@ -147,10 +160,57 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+
+
+
                     <div class="d-none question-page_r-col ml-auto mt-4"></div>
                 </footer>
+
+
+                <div id="form" v-if="is_show_form_answer(answer_data.id)">
+                            <div class="form-group">
+                                <label for="reply" class="h6 mb-2">Ответ</label>
+                                <textarea class="form-control"
+                                          v-model="content"
+                                          :class="{'is-invalid': error_fields.content }"
+                                          id="reply"
+                                          rows="5"
+                                          :disabled="file_form_loading"
+                                          placeholder="Мой ответ…"></textarea>
+                                <span class="invalid-feedback" v-if="error_fields.content">Введите текст ответа</span>
+                            </div>
+                            <div class="form-group">
+
+                                <button type="submit"
+                                            @click="save"
+                                            class="btn btn-primary"
+                                            :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+                                        <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                                        <span v-else-if="success">Успешно</span>
+                                        <span v-else>Отправить</span>
+                                    </button>
+
+
+                                <file-upload
+                                        :post-action="post_action"
+                                        class="btn btn-sm btn-outline-primary"
+                                        extensions="gif,jpg,jpeg,png,webp,pdf,xls"
+                                        accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
+                                        :multiple="true"
+
+                                        :size="1024 * 1024 * 100"
+                                        v-model="files"
+                                        ref="upload"><span class="icon-folder mr-2"></span> Прикрепить файлы
+                                </file-upload>
+
+                                <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
+                                    <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
+                                    <a href="#" @click.prevent="remove(file)" class="close"><i class="icon-cancel"></i></a>
+                                </div>
+                            </div>
+                    </div>
 
             </div>
         </div>

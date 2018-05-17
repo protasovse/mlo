@@ -1,8 +1,9 @@
 import template from './template.html';
 import form_mixin from '../../../mixins/form';
+import upload_mixin from '../../../mixins/upload';
 
 export default {
-    mixins: [form_mixin],
+    mixins: [form_mixin, upload_mixin],
     template: template,
     props: ['qid'],
     name: 'answer_question',
@@ -20,10 +21,12 @@ export default {
             sub_answers_exists: false,
             is_can_answer: false,
             files: [],
-
+            parent_id: 0,
+            thread: 0
         }
     },
     mounted() {
+        this.start_loading();
         this.$http.get('/api/default').then(
             (r) => {
                 this.full_tree = r.data.data['settings']['answers_expand'];
@@ -44,26 +47,7 @@ export default {
         this.$http.get('/api/question',{params: {'id': this.qid}}).then(
             (r) => {this.question = r.data.data},
         );
-        this.$http.get('/api/question/answers',{params: {'id': this.qid}}).then(
-            (r) => {
-                this.answers = r.data.data;
-
-
-                // to count subanswers
-                this.answers.forEach(x => {
-                    if (x.parent_id) {
-                        this.sub_answers_exists = true;
-                        this.count_answ[x.parent_id] = (this.count_answ[x.parent_id] || 0) + 1;
-                    }
-
-                    if (this.is_can_answer && x.author.id === this.user_id) {
-                        this.is_can_answer = false
-                    }
-
-
-                });
-            },
-        );
+        this.request_and_load_answers()
 
     },
     computed: {
@@ -74,7 +58,7 @@ export default {
             return '/api/question/answers'
         },
         is_form_send_done() {
-            return this.success && (!this.loading) && (!(this.$refs.upload && this.$refs.upload.active))
+            return this.success && (!this.loading) && (!(this.get_upload() && this.get_upload().active))
         },
 
     },
@@ -82,17 +66,51 @@ export default {
         is_form_send_done: function() {
             if (this.is_form_send_done) {
                 this.is_can_answer = false;
-                this.$SmoothScroll(document.body.scrollHeight);
-
-                this.$http.get(`/api/questions/${this.qid}/answers/${this.answer_id}/files`).then(
-                    (r) => {
-                        this.answers[this.answer_id]['files'] = r.data.data
-                    },
-                );
+                //this.$SmoothScroll(document.body.scrollHeight);
+                this.request_and_load_answers(this.answer_id);
+                //this.$http.get(`/api/questions/${this.qid}/answers/${this.answer_id}/files`).then(
+                //    (r) => {
+                //        if (r.data.data.length > 0) {
+                //            let a = this.answers.filter(i => i.id === this.answer_id)[0];
+                //            Vue.set(a, 'files', r.data.data);
+                //       }
+                //    },
+                //);
             }
         }
     },
     methods: {
+        get_upload() {
+            return this.$refs.upload[0]
+        },
+        request_and_load_answers(scroll_to_id=false) {
+            this.$http.get('/api/question/answers',{params: {'id': this.qid}}).then(
+                (r) => {
+                    this.count_answ = {};
+                    this.answers = r.data.data;
+                    // to count subanswers
+                    this.answers.forEach(x => {
+                        if (x.parent_id) {
+                            this.sub_answers_exists = true;
+                            this.count_answ[x.parent_id] = (this.count_answ[x.parent_id] || 0) + 1;
+                        }
+
+                        if (this.is_can_answer && x.author.id === this.user_id) {
+                            this.is_can_answer = false
+                        }
+                    });
+                    this.stop_loading();
+                    if (scroll_to_id) {
+                        Vue.nextTick(() => {
+                            this.scrollTo(scroll_to_id);
+                        });
+                    }
+                },
+            );
+        },
+        get_requires_fields() {
+            return ['content']
+        },
         like_title(id) {
             let answer = this.answers.filter(i=>i.id === id)[0];
             if (answer.author.id === this.user_id) {
@@ -151,7 +169,10 @@ export default {
             return this.answers.filter(i=>i.id === answer.parent_id)[0].is_expand
         },
         scrollTo(refName) {
+
             let element = this.$refs[refName][0];
+            console.log(element);
+
             let curtop = 0;
             let curtopscroll = 0;
             if (element.offsetParent) {
@@ -162,21 +183,31 @@ export default {
             }
             this.$SmoothScroll(curtop - curtopscroll - 40, 500);
         },
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        },
         save() {
+            this.form_validate([this.requires_fields]);
+
             let data = {
                 'id': this.qid,
+                'parent_id': this.thread,
                 'content': this.content
             };
             this.answer_id = false;
             this.put('/api/question/answers', data, (r) => {
                     this.answer_id = r.data.id;
-                    this.answers.push(r.data);
 
-                    for (let i = 0; i < this.$refs.upload.files.length; i++) {
-                        this.$refs.upload.files[i].data = {id:this.answer_id};
+                    for (let i = 0; i < this.get_upload().files.length; i++) {
+                        this.get_upload().files[i].data = {id:this.answer_id};
                     }
-                    this.$refs.upload.active = true;
+                    this.get_upload().active = true;
+
+                    if (this.is_form_send_done) {
+                        this.request_and_load_answers(this.answer_id);
+                    }
                     this.set_form_success();
+
             });
         },
         to_like_val(id, val) {
@@ -194,6 +225,29 @@ export default {
                 (r) => {this.to_like_val(id, -1)}
             )
         },
+        show_form_answer(id)
+        {
+            if (this.is_show_form_answer(id)) {
+                return;
+            }
+            let a = this.answers.filter(i=>i.id === id)[0];
+            this.thread = a.thread;
+            this.content = '';
+            this.parent_id = a.parent_id;
+            this.files = [];
+            this.$store.commit('init_state');
+            //this.files.forEach(file => this.remove(file));
+            this.answers.forEach(x => Vue.set(x, 'show_form', x.id === id));
+        },
+        is_show_form_answer(id)
+        {
+            let a = this.answers.filter(i=>i.id === id)[0];
+            return a['show_form'] === true;
+        },
+        remove(file) {
+            this.get_upload().remove(file)
+        }
+
     },
 
 }

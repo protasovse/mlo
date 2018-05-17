@@ -65,7 +65,7 @@ def answer(question, content, user, parent_id=None):
     # Запись в таблице уточненеий
     # Если дополнительный вопрос «клиента»
     if parent_id and user.is_client():
-        Additionals.objects.create(question_id=question.pk, user_id=instance.parent.author_id)
+        Additionals.objects.get_or_create(question_id=question.pk, user_id=instance.parent.author_id)
         # Уведомление — «Клиент задал дополнительный вопрос на ответ юриста»
     elif parent_id and user.is_lawyer() and user == instance.parent.author:  # если отвечает тот юрист, чья ветка
         Additionals.objects.filter(question_id=question.pk, user_id=instance.parent.author_id).delete()
@@ -80,5 +80,4 @@ def answer(question, content, user, parent_id=None):
         elif user == question.author:  # Если пишет автор вопроса
             advice.to_addquestion()
 
-    print(instance)
     return instance

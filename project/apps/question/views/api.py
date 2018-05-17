@@ -157,7 +157,7 @@ class AnswersView(ApiView):
     def put(cls, request):
         params = cls.get_put(request)
         question = Question.objects.get(pk=params['id'])
-        answer = to_answer(question, params['content'], request.user)
+        answer = to_answer(question, params['content'], request.user, params['parent_id'])
         return answer.get_public_data()
 
     @classmethod

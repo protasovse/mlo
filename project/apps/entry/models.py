@@ -130,7 +130,7 @@ class Files(models.Model):
         return {
             'entry_id': self.entry_id,
             'filename': self.get_basename(),
-            'path': "storage/{}".format(self.file) if is_show else False
+            'path': "/storage/{}".format(self.file) if is_show else False
         }
 
     class Meta:
@@ -405,7 +405,7 @@ class Additionals(models.Model):
     user_id = models.IntegerField()
 
     class Meta:
-        unique_together = ['question_id', 'user_id',]
+        unique_together = ['question_id', 'user_id']
 
 
 # Счётчик для SphinxSearch
