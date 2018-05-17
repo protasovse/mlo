@@ -10,7 +10,7 @@
     <meta property="og:description" content="Отзывы пользователей, которые получили юридическую консультацию, либо воспользовались улугами сайта Мойюрист.онлайн"/>
     <meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="{{ SITE_URL }}{% url 'reviews_page' %}"/>
+    <meta property="og:url" content="{{ SITE_URL }}{% url 'front:reviews_page' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -40,7 +40,7 @@
 
                 {% if page_obj.has_next %}
                 <div class="text-center mb-5">
-                    <a href="{% if lawyer %}{% url 'lawyer_reviews' lawyer.pk page_obj.next_page_number %}{% else %}{% url 'reviews_page' page_obj.next_page_number %}{% endif %}"
+                    <a href="{% if lawyer %}{% url 'front:lawyer_reviews' lawyer.pk page_obj.next_page_number %}{% else %}{% url 'front:reviews_page' page_obj.next_page_number %}{% endif %}"
                        class="btn btn-outline-primary">Показать ещё</a>
                 </div>
                 {% endif %}

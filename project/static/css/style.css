@@ -5738,7 +5738,7 @@ button.bg-white:focus {
 .bg-transparent {
   background-color: transparent !important; }
 
-.border, .question-page_header .r-col form textarea, .question-page_header .question-item .answer form textarea, .question-item .question-page_header .answer form textarea, .entry .answer-like .answer-like-block {
+.border, .question-page_header .r-col form textarea, .question-page_header .question-item .answer form textarea, .question-item .question-page_header .answer form textarea {
   border: 1px solid #e6e6e6 !important; }
 
 .border-top {
@@ -8559,7 +8559,6 @@ body.open-slide-menu {
   .entry .answer-like .answer-like-block {
     display: inline-flex;
     justify-content: center;
-    border-radius: 40px;
     padding: 10px 20px;
     color: #bababa; }
     .entry .answer-like .answer-like-block span {
@@ -8862,6 +8861,24 @@ body.open-slide-menu {
     right: 0;
     bottom: 0;
     height: 100%; }
+
+.lawyer-list_page_header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #fff;
+  position: relative;
+  background-image: url("/static/img/bgr/bg-volgograd.jpg");
+  background-position: center;
+  background-size: cover;
+  /* &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  } */ }
 
 .edu_check_diplom {
   display: block;

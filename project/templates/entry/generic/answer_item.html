@@ -10,7 +10,7 @@
         <header class="answer-header{% if item.id != item.thread %} answer-header_photo-small{% endif %}">
 
             <div class="question-page_l-col">
-                <a class="answer-header_photo" href="{% url 'lawyer_page' item.author_id %}">
+                <a class="answer-header_photo" href="{% url 'front:lawyer_page' item.author_id %}">
                     <img src="{% include 'account/generic/pic.html' with item=item.author %}" alt="{{ item.author }}"/>
                 </a>
             </div>
@@ -20,14 +20,14 @@
 
                 {# Имя автора ответа #}
                 <h6 class="mb-0" itemprop="name">
-                    <a href="{% url 'lawyer_page' item.author_id %}">{{ item.author }}</a>
+                    <a href="{% url 'front:lawyer_page' item.author_id %}">{{ item.author }}</a>
                 </h6>
 
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
                     <div class="normal text-muted">
                         {% if item.author.city %}<a class="text-muted"
-                                                    href="{% url 'lawyers_list_page' city=item.author.city.name_ru|lower city_id=item.author.city.pk %}">
+                                                    href="{% url 'front:lawyers_list_page' city=item.author.city.name_ru|lower city_id=item.author.city.pk %}">
                             {{ item.author.get_role_display }} {{ item.author.city.name_ru }}</a>{% else %}
                             {{ item.author.get_role_display }}{% endif %}
                     </div>
@@ -75,7 +75,7 @@
             <div class="text" itemprop="text">
                 {{ item.html_content|safe|urlize }}
                 {% if item.author.info.signature %}
-                    <p class="text-muted normal">--<br>{{ item.author.info.signature }}</p>
+                    <p class="text-muted normal"><i>{{ item.author.info.signature }}</i></p>
                 {% endif %}
 
             </div>

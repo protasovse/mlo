@@ -129,7 +129,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.save()
 
     def get_absolute_url(self):
-        return reverse('lawyer_page', kwargs={'id': self.pk})
+        return reverse('front:lawyer_page', kwargs={'id': self.pk})
 
     def save(self, *args, **kwargs):
         return super(User, self).save(*args, **kwargs)

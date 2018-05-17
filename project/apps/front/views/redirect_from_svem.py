@@ -55,11 +55,11 @@ def questions(request, **kwargs):
 
 
 def user(request, **kwargs):
-    return redirect('lawyer_page', permanent=True, id=kwargs['id'])
+    return redirect('front:lawyer_page', permanent=True, id=kwargs['id'])
 
 
 def review(request, **kwargs):
     if 'page' in kwargs:
-        return redirect('reviews_page', permanent=True, page=kwargs['page'])
+        return redirect('front:reviews_page', permanent=True, page=kwargs['page'])
     else:
-        return redirect('reviews_page', permanent=True)
+        return redirect('front:reviews_page', permanent=True)

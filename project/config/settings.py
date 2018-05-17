@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'django_mptt_admin',
     'easy_thumbnails',
@@ -88,6 +89,7 @@ INSTALLED_APPS = [
     'apps.rating.apps.RatingConfig',
     'apps.billing.apps.BillingConfig',
     'apps.article',
+    'apps.sitemap',
 ]
 
 SITE_ID = env('SITE_ID')

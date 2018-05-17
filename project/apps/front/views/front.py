@@ -67,10 +67,13 @@ class LawyersListPage(ListView):
         context = super(LawyersListPage, self).get_context_data(**kwargs)
 
         title = 'Юристы и адвокаты. Юридическая помощь и консультации на Мойюрист.онлайн'
+        h1 = 'Юристы и адвокаты'
 
         if 'city_id' in self.kwargs:
             if self.kwargs['city_id'] == 520555:
                 city_name = 'Нижнего Новгорода'
+            elif self.kwargs['city_id'] == 501175:
+                city_name = 'Ростова-на-Дону'
             else:
                 city = Cities.objects.get(pk=self.kwargs['city_id'])
                 morph = pymorphy2.MorphAnalyzer()
@@ -78,13 +81,15 @@ class LawyersListPage(ListView):
                 city_name = c.inflect({'gent'}).word.title()
 
             title = 'Юристы и адвокаты {}. Юридическая помощь и консультации на Мойюрист.онлайн'.format(city_name)
+            h1 = 'Юристы и адвокаты {}'.format(city_name)
             context.update({
                 'city_id': self.kwargs['city_id'],
-                'city': c.inflect({'gent'}).word,
+                'city': city_name
             })
 
         context.update({
             'title': title,
+            'h1': h1,
         })
 
         return context

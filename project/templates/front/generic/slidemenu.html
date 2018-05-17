@@ -3,7 +3,7 @@
     <div class="mt-4">
         <ul>
             {% if user.is_authenticated and user.role == 2 %}
-                <li><a href="{% url 'personal:edit' %}" class="font-weight-semibold">Личный кабинет</a></li>
+                <li><a href="{% url 'personal:edit_profile' %}" class="font-weight-semibold">Личный кабинет</a></li>
                 <li><a href="{% url 'questions:list' %}">Отвечать на вопросы</a></li>
             {% else %}
                 <li><a href="{% url 'ask_question' %}">Задать вопрос юристу</a></li>
@@ -14,9 +14,9 @@
                 <li><a href="{% url 'questions:list' %}">Вопросы и ответы</a></li>
                 <!--li><a href="#">Наши юристы</a></li-->
             {% endif %}
-            <li><a href="{% url 'lawyers_list_page' %}">Наши юристы</a></li>
-            <li><a href="{% url 'reviews_page' %}">Отзывы</a></li>
-            <li><a href="{% url 'about' %}">О проекте</a></li>
+            <li><a href="{% url 'front:lawyers_list_page' %}">Наши юристы</a></li>
+            <li><a href="{% url 'front:reviews_page' %}">Отзывы</a></li>
+            <li><a href="{% url 'front:about' %}">О проекте</a></li>
         </ul>
     </div>
 

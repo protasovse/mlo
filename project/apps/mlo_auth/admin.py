@@ -63,7 +63,7 @@ class MloUserAdmin(UserAdmin):
     list_filter = ('is_active', 'role', 'is_expert')
 
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'date_joined', 'phone', 'city',)}),
+        (None, {'fields': ('email', 'password', 'phone', 'city',)}),
         (_('Personal info'), {'fields': ('first_name', 'patronymic', 'last_name', 'role',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_superuser', 'is_staff', 'is_expert')}),
 

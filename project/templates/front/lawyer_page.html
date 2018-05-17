@@ -145,7 +145,7 @@
                             {% include 'review/generic/review_item.html' with like=like %}
                         {% endfor %}
                         <div class="text-center mb-5">
-                            <a href="{% url 'lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все
+                            <a href="{% url 'front:lawyer_reviews' lawyer.pk %}" class="btn btn-sm btn-outline-primary">Все
                                 отзывы юриста</a>
                         </div>
                     </div>

@@ -14,9 +14,9 @@
 
             {% with item.expert as expert %}
                 <div class="consult-lawyer ">
-                    <a class="pht" href="{% url 'lawyer_page' expert.pk %}"><img
+                    <a class="pht" href="{% url 'front:lawyer_page' expert.pk %}"><img
                             src="{% cropped_thumbnail expert.info 'photo' %}"/></a>
-                    <h6><a href="{% url 'lawyer_page' expert.pk %}">{{ expert }}</a></h6>
+                    <h6><a href="{% url 'front:lawyer_page' expert.pk %}">{{ expert }}</a></h6>
                 </div>
             {% endwith %}
 

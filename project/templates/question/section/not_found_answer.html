@@ -24,7 +24,7 @@
                         </div>
                         <div class="d-none d-md-block col-md-5 py-3 text-center">
                             <p class="subtitle">На вопросы отвечает</p>
-                            <p><a class="ph" href="{% url 'lawyer_page' lawyer_will_answer.pk %}">
+                            <p><a class="ph" href="{% url 'front:lawyer_page' lawyer_will_answer.pk %}">
                                 <img width="75"
                                      src="{% include 'account/generic/photo.html' with item=lawyer_will_answer %}"
                                      alt="{{ lawyer_will_answer }}"/>

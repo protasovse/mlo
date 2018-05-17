@@ -317,6 +317,28 @@ $photo-small-size: 40px;
   }
 }
 
+.lawyer-list_page_header {
+  padding-top: line(2);
+  padding-bottom: line(2);
+  color: $white;
+  position: relative;
+  background: {
+    image: url("#{$img_dir}/bgr/bg-volgograd.jpg");
+    position: center;
+    size: cover;
+  }
+
+  /* &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+  } */
+}
+
 .edu_check_diplom {
   @extend .normal;
   display: block;
@@ -331,7 +353,7 @@ $photo-small-size: 40px;
     color: $green;
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
   }
   &:after {
     content: attr(data-label);
