@@ -66,11 +66,9 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Указывает, является ли пользователь экспертом, имеющим право '
                                                 'отвечать на платные вопросы.'))
 
-    date_joined = models.DateTimeField(_('Дата регистрации'),
-                                       default=timezone.now)
+    date_joined = models.DateTimeField(_('Дата регистрации'), auto_now_add=True)
 
-    last_login = models.DateTimeField(_('Последний визит'),
-                                      default=timezone.now)
+    last_login = models.DateTimeField(_('Последний визит'), auto_now=True)
 
     role = models.PositiveSmallIntegerField(_('Тип учётной записи'),
                                             choices=ROLES_CHOICES, default=1, db_index=True,
@@ -169,7 +167,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.save()
 
     def get_absolute_url(self):
-        return reverse('lawyer_page', kwargs={'id': self.pk})
+        return reverse('front:lawyer_page', kwargs={'id': self.pk})
 
     def save(self, *args, **kwargs):
         return super(User, self).save(*args, **kwargs)

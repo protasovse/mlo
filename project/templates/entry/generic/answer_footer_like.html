@@ -24,7 +24,5 @@
         <span class="{% if item.like_count < 0 %}dislike{% elif item.like_count > 0 %}like{% endif %} order-2"
         >{{ item.like_count }}</span>
     </div>
-{% else %}
-    <span class="answer-like-sign">Дополнительный вопрос</span>
 {% endif %}
 </div>

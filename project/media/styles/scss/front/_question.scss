@@ -97,7 +97,7 @@
   position: relative;
   padding-top: line(3);
   @include media-breakpoint-down(sm){
-    padding-top: line(1);
+    padding-top: line(2);
   }
   &:before {
     content: '';
@@ -222,10 +222,10 @@
       color: $gray-500;
     }
     .answer-like-block {
-      @extend .border;
+      // @extend .border;
       display: inline-flex;
       justify-content: center;
-      border-radius: line(2);
+      // border-radius: line(2);
       padding: line(.5) line(1);
       color: $gray-500;
       span {

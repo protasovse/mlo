@@ -5,7 +5,7 @@
     <div class="lanyard"></div>
     <img src="{% include 'account/generic/photo.html' with item=item.user %}" alt="{{ item.user }}"/>
     <div class="lawyer-card-title">
-        <h6><a href="{% url 'lawyer_page' item.user.pk %}">{{ item.user }}</a></h6>
+        <h6><a href="{% url 'front:lawyer_page' item.user.pk %}">{{ item.user }}</a></h6>
         <p class="rating">{{ item.get_rate }}</p>
     </div>
     <div class="lawyer-card-body d-flex flex-column justify-content-between">
@@ -18,7 +18,7 @@
                 <i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i class="icon-star mr-1"></i><i
                     class="icon-star mr-1"></i>
             </span>
-            <a class="text-muted small" href="{% url 'lawyer_reviews' item.user.pk %}">
+            <a class="text-muted small" href="{% url 'front:lawyer_reviews' item.user.pk %}">
                 {{ item.user.info.review_count|number:'отзыв|отзыва|отзывов' }}
             </a>
         </div>

@@ -35,9 +35,9 @@
             <p>{% if like.review %}{{ like.review|safe }}{% else %}
                 {{ like.user.get_name }}, остался{% if like.value < 0 %} не{% endif %} доволен ответом юриста.
             {% endif %}</p>
-            <p class="text-muted">За ответ юриста
-                <a class="text-muted " href="{% url "lawyer_page" like.entry.author.pk %}">{{ like.entry.author }}</a>
-            </p>
+            <!--p class="text-muted">За ответ юриста
+                <a class="text-muted " href="{% url "front:lawyer_page" like.entry.author.pk %}">{{ like.entry.author }}</a>
+            </p-->
         </div>
 
     </div>

@@ -5,6 +5,7 @@ from django.http import Http404
 from django.views.generic import TemplateView, ListView
 
 from apps.entry.models import Question
+from apps.front.models import CityMeta
 from apps.rating.models import Rating
 from apps.review.models import Review, Likes
 from apps.sxgeo.models import Cities
@@ -35,10 +36,13 @@ class LawyerPage(TemplateView):
         except ObjectDoesNotExist:
             raise Http404
 
+        questions = Question.published.search('', 0, 10, {'answers_authors_id': (lawyer.pk,)})
+
         context.update({
             'likes': Likes.objects.filter(entry__author=lawyer, user__role=1).order_by("-date")[:10],
             'lawyer': lawyer,
-            'questions': Question.published.search('', 0, 10, {'answers_authors_id': (lawyer.pk,)})
+            'questions': questions,
+            'questions_count': questions.count,
         })
 
         return context
@@ -64,24 +68,33 @@ class LawyersListPage(ListView):
         context = super(LawyersListPage, self).get_context_data(**kwargs)
 
         title = 'Юристы и адвокаты. Юридическая помощь и консультации на Мойюрист.онлайн'
+        h1 = 'Юристы и адвокаты'
 
         if 'city_id' in self.kwargs:
             if self.kwargs['city_id'] == 520555:
                 city_name = 'Нижнего Новгорода'
+            elif self.kwargs['city_id'] == 501175:
+                city_name = 'Ростова-на-Дону'
             else:
                 city = Cities.objects.get(pk=self.kwargs['city_id'])
                 morph = pymorphy2.MorphAnalyzer()
                 c = morph.parse(city.name_ru)[0]
                 city_name = c.inflect({'gent'}).word.title()
 
+            # city_meta = CityMeta.objects.get(city_id=self.kwargs['city_id'])
+            # cover = city_meta.lawyers_page_cover
+
             title = 'Юристы и адвокаты {}. Юридическая помощь и консультации на Мойюрист.онлайн'.format(city_name)
+            h1 = 'Юристы и адвокаты {}'.format(city_name)
+
             context.update({
                 'city_id': self.kwargs['city_id'],
-                'city': c.inflect({'gent'}).word,
+                'city': city_name
             })
 
         context.update({
             'title': title,
+            'h1': h1,
         })
 
         return context

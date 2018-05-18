@@ -8,11 +8,11 @@
             <h1 class="h2 my-4">Редактировать профиль</h1>
             <nav class="col-12 nav nav-pills mb-5">
                 {% with request.get_full_path as curl %}
-                    {% url 'personal:edit_regdata' as regdata_url %}
+                    {% url 'personal:edit_user_data' as regdata_url %}
                     <a href="{{ regdata_url }}"
                        class="nav-link{% if regdata_url in curl %} active{% endif %}">Основное</a>
 
-                    {% url 'personal:edit' as  pe_url %}
+                    {% url 'personal:edit_profile' as  pe_url %}
                     <a href="{{ pe_url }}" class="nav-link{% if pe_url in curl %} active{% endif %}">Дополнительное</a>
 
                     {% url 'personal:edit_contact' as contact_url %}

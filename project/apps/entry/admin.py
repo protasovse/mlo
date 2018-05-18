@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.models import Advice
-from apps.entry.models import Question, Answer, Files, Offer, Entry, Article, Dir
+from apps.entry.models import Question, Answer, Files, Offer
 
 
 class AnswersForQuestionInLine(admin.StackedInline):
@@ -78,31 +78,6 @@ class QuestionAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-@admin.register(Dir)
-class DirAdmin(admin.ModelAdmin):
-    fields = ('name', 'description', 'slug')
-    list_display = ('name', 'slug')
-
-
-@admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
-    """
-    Админка для модели Article.
-    """
-    fieldsets = (
-        (_('Content'), {
-            'fields': ('title', 'content',)}),
-        (_('Клиссификация'), {
-            'fields': ('status', 'author', 'rubric', 'reply_count', )}),
-    )
-    autocomplete_fields = ['rubric', 'author']
-    radio_fields = {'status': admin.HORIZONTAL}
-    list_display = ('entry_ptr_id', 'title', 'author', 'pub_date', 'like_count', 'reply_count', 'status',)
-    search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
-    list_filter = ('pub_date', 'status',)
-    list_per_page = 20
-
-
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('content', 'on_question_id', 'author', 'pub_date', 'like_count', 'reply_count', 'status')
@@ -127,9 +102,3 @@ class AnswerAdmin(admin.ModelAdmin):
         """
         qs = super().get_queryset(request)
         return qs.filter(parent=None)
-
-'''
-@admin.register(Entry)
-class EntryAdmin(admin.ModelAdmin):
-    raw_id_fields = ['author', ]
-'''

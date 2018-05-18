@@ -30,7 +30,7 @@
         {% endif %}
         <!--a href="#" class="fix-navbar sq -active"><span class="icon-lightning"></span></a-->
         {% if user.is_authenticated and user.role > 0 %}
-            <a href="{% url 'personal:edit' %}" class="action_item sq">
+            <a href="{% url 'personal:edit_profile' %}" class="action_item sq">
                 <img src="{% include 'account/generic/pic.html' with item=user %}">
             </a>
         {% endif %}
