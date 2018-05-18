@@ -15,6 +15,9 @@ def answer(question, content, user, parent_id=None):
     :param parent_id:
     :return: созданный ответ
     """
+    if int(parent_id) == 0:
+        parent_id = None
+
     if not user.is_authenticated:
         raise BackendPublicException("You can't answer")
 
