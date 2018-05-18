@@ -22,7 +22,8 @@ export default {
             is_can_answer: false,
             files: [],
             parent_id: 0,
-            thread: 0
+            thread: 0,
+            upload_form: '',
         }
     },
     mounted() {
@@ -57,31 +58,38 @@ export default {
         post_action() {
             return '/api/question/answers'
         },
-        is_form_send_done() {
-            return this.success && (!this.loading) && (!(this.get_upload() && this.get_upload().active))
+        is_form_send_done_first() {
+            return this.upload_form === 'upload_first' && this.is_form_send_done('upload_first')
         },
-
+        is_form_send_done_second() {
+            return this.upload_form === 'upload_second' && this.is_form_send_done('upload_second')
+        }
     },
     watch: {
-        is_form_send_done: function() {
-            if (this.is_form_send_done) {
+        is_form_send_done_first: function() {
+            if (this.is_form_send_done_first) {
                 this.is_can_answer = false;
-                //this.$SmoothScroll(document.body.scrollHeight);
                 this.request_and_load_answers(this.answer_id);
-                //this.$http.get(`/api/questions/${this.qid}/answers/${this.answer_id}/files`).then(
-                //    (r) => {
-                //        if (r.data.data.length > 0) {
-                //            let a = this.answers.filter(i => i.id === this.answer_id)[0];
-                //            Vue.set(a, 'files', r.data.data);
-                //       }
-                //    },
-                //);
+            }
+        },
+        is_form_send_done_second: function() {
+            if (this.is_form_send_done_second) {
+                this.is_can_answer = false;
+                this.request_and_load_answers(this.answer_id);
             }
         }
     },
     methods: {
-        get_upload() {
-            return this.$refs.upload[0]
+        is_form_send_done(upload_name) {
+            return this.success && (!this.loading) && (!(this.get_upload(upload_name) && this.get_upload(upload_name).active))
+        },
+        get_upload(name) {
+            let ref = this.$refs[name];
+            // охуительный костыль. всем костылям костыль
+            if (name === 'upload_second') {
+                ref = ref[0];
+            }
+            return ref;
         },
         request_and_load_answers(scroll_to_id=false) {
             this.$http.get('/api/question/answers',{params: {'id': this.qid}}).then(
@@ -171,7 +179,6 @@ export default {
         scrollTo(refName) {
 
             let element = this.$refs[refName][0];
-            console.log(element);
 
             let curtop = 0;
             let curtopscroll = 0;
@@ -186,7 +193,8 @@ export default {
         sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         },
-        save() {
+        save(upload_name) {
+            this.upload_form = upload_name;
             this.form_validate([this.requires_fields]);
 
             let data = {
@@ -198,12 +206,14 @@ export default {
             this.put('/api/question/answers', data, (r) => {
                     this.answer_id = r.data.id;
 
-                    for (let i = 0; i < this.get_upload().files.length; i++) {
-                        this.get_upload().files[i].data = {id:this.answer_id};
+                    for (let i = 0; i < this.get_upload(upload_name).files.length; i++) {
+                        this.get_upload(upload_name).files[i].data = {id:this.answer_id};
                     }
-                    this.get_upload().active = true;
 
-                    if (this.is_form_send_done) {
+                    this.get_upload(upload_name).active = true;
+
+                    if (this.is_form_send_done(upload_name)) {
+                        console.log('123');
                         this.request_and_load_answers(this.answer_id);
                     }
                     this.set_form_success();
@@ -236,7 +246,6 @@ export default {
             this.parent_id = a.parent_id;
             this.files = [];
             this.$store.commit('init_state');
-            //this.files.forEach(file => this.remove(file));
             this.answers.forEach(x => Vue.set(x, 'show_form', x.id === id));
         },
         is_show_form_answer(id)
@@ -244,9 +253,7 @@ export default {
             let a = this.answers.filter(i=>i.id === id)[0];
             return a['show_form'] === true;
         },
-        remove(file) {
-            this.get_upload().remove(file)
-        }
+
 
     },
 

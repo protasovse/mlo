@@ -15,10 +15,10 @@
         <div class="form-group">
 
             <button type="submit"
-                        @click="save"
+                        @click="save('upload_first')"
                         class="btn btn-primary"
-                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
-                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                        :disabled='loading||success||($refs.upload_first&&$refs.upload_first.active)'>
+                    <span v-if="loading||($refs.upload_first&&$refs.upload_first.active)">Загрузка...</span>
                     <span v-else-if="success">Успешно</span>
                     <span v-else>Отправить</span>
                 </button>
@@ -33,12 +33,12 @@
 
                     :size="1024 * 1024 * 100"
                     v-model="files"
-                    ref="upload"><span class="icon-folder mr-2"></span> Прикрепить файлы
+                    ref="upload_first"><span class="icon-folder mr-2"></span> Прикрепить файлы
             </file-upload>
 
             <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
                 <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                <a href="#" @click.prevent="$refs.upload.remove(file)" class="close"><i class="icon-cancel"></i></a>
+                <a href="#" @click.prevent="$refs.upload_first.remove(file)" class="close"><i class="icon-cancel"></i></a>
             </div>
         </div>
     </div>
@@ -184,10 +184,10 @@
                             <div class="form-group">
 
                                 <button type="submit"
-                                            @click="save"
+                                            @click="save('upload_second')"
                                             class="btn btn-primary"
-                                            :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
-                                        <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                                            :disabled='loading||success||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)'>
+                                        <span v-if="loading||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)">Загрузка...</span>
                                         <span v-else-if="success">Успешно</span>
                                         <span v-else>Отправить</span>
                                     </button>
@@ -202,12 +202,12 @@
 
                                         :size="1024 * 1024 * 100"
                                         v-model="files"
-                                        ref="upload"><span class="icon-folder mr-2"></span> Прикрепить файлы
+                                        ref="upload_second"><span class="icon-folder mr-2"></span> Прикрепить файлы
                                 </file-upload>
 
                                 <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
                                     <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                                    <a href="#" @click.prevent="remove(file)" class="close"><i class="icon-cancel"></i></a>
+                                    <a href="#" @click.prevent="$refs.upload_second[0].remove(file)" class="close"><i class="icon-cancel"></i></a>
                                 </div>
                             </div>
                     </div>
