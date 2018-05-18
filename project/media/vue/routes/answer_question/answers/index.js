@@ -1,9 +1,8 @@
 import template from './template.html';
 import form_mixin from '../../../mixins/form';
-import upload_mixin from '../../../mixins/upload';
 
 export default {
-    mixins: [form_mixin, upload_mixin],
+    mixins: [form_mixin],
     template: template,
     props: ['qid'],
     name: 'answer_question',
@@ -24,10 +23,11 @@ export default {
             parent_id: 0,
             thread: 0,
             upload_form: '',
+            load_answers: false,
         }
     },
     mounted() {
-        this.start_loading();
+        this.load_answers = true;
         this.$http.get('/api/default').then(
             (r) => {
                 this.full_tree = r.data.data['settings']['answers_expand'];
@@ -63,7 +63,13 @@ export default {
         },
         is_form_send_done_second() {
             return this.upload_form === 'upload_second' && this.is_form_send_done('upload_second')
-        }
+        },
+        file_first_form_loading: function () {
+            return this.loading || (this.get_upload('upload_first') && this.get_upload('upload_first').active)
+        },
+        file_second_form_loading: function () {
+            return this.loading || (this.get_upload('upload_second') && this.get_upload('upload_second').active)
+        },
     },
     watch: {
         is_form_send_done_first: function() {
@@ -87,7 +93,9 @@ export default {
             let ref = this.$refs[name];
             // охуительный костыль. всем костылям костыль
             if (name === 'upload_second') {
-                ref = ref[0];
+                if (ref) {
+                    ref = ref[0];
+                }
             }
             return ref;
         },
@@ -107,7 +115,7 @@ export default {
                             this.is_can_answer = false
                         }
                     });
-                    this.stop_loading();
+                    this.load_answers = false;
                     if (scroll_to_id) {
                         Vue.nextTick(() => {
                             this.scrollTo(scroll_to_id);
@@ -237,6 +245,7 @@ export default {
         },
         show_form_answer(id)
         {
+
             if (this.is_show_form_answer(id)) {
                 return;
             }
