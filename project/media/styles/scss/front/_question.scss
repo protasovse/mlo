@@ -95,10 +95,6 @@
 
 .question-page_gradient {
   position: relative;
-  padding-top: line(3);
-  @include media-breakpoint-down(sm){
-    padding-top: line(2);
-  }
   &:before {
     content: '';
     position: absolute;
@@ -113,19 +109,8 @@
   }
 }
 
-// Левая и правая колонки для вопроса, ответа
-.question-page_l-col {
-  @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
-  color: $gray-500;
-  line-height: line(1);
-}
-
-.question-page_r-col {
-  @extend .col-12, .col-lg-9;
-}
-
 .question-page_main-part {
-  @extend .col-12, .col-md-9, .col-lg-9, .mb-5;
+  @extend .col-12, .col-md-9, .col-lg-9;
   padding-right: line(2.25);
   @include media-breakpoint-down(lg) {
     padding-right: line(1);
@@ -143,13 +128,20 @@
   }
 }
 
+// Левая и правая колонки для вопроса, ответа
+.question-page_l-col {
+  @extend .col-12, .col-lg-3, .ml-auto, .text-lg-right, .normal;
+  color: $gray-500;
+  line-height: line(1);
+}
+
+.question-page_r-col {
+  @extend .col-12, .col-lg-9;
+}
+
 .entry {
 
   position: relative;
-
-  .question-head {
-    @extend .h2, .mb-4;
-  }
 
   .content {
     .text {
@@ -222,10 +214,10 @@
       color: $gray-500;
     }
     .answer-like-block {
-      // @extend .border;
+      @extend .border;
       display: inline-flex;
       justify-content: center;
-      // border-radius: line(2);
+      border-radius: line(2);
       padding: line(.5) line(1);
       color: $gray-500;
       span {
@@ -248,7 +240,6 @@
 }
 
 .answer-list-head {
-  @extend .col-12, .ml-auto;
   margin-bottom: line(1);
   .answer__counter {
     &:before {
@@ -342,15 +333,6 @@
   }
   a {
     color: $gray-800;
-  }
-}
-
-.question-page_article {
-  h2 {
-    @extend .h3;
-  }
-  h3 {
-    @extend .h4;
   }
 }
 

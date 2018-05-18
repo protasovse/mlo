@@ -26,15 +26,10 @@
     {# Хлебные крошки #}
     <div class="question-page_container">
         <div class="row">
-            <nav aria-label="breadcrumb" class="col-12">
+            <nav class="col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Вопросы</a></li>
-                    <li class="breadcrumb-item active">
-                        {% if question.rubric %}
-                            <a href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
-                        {% else %}
-                            Общие вопросы
-                        {% endif %}
+                    <li class="breadcrumb-item active"><a href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
                 </ol>
             </nav>
         </div>
@@ -44,7 +39,7 @@
     <div class="question-page_container">
 
         {# Вопрос и правая колонка напротив вопроса  #}
-        <div class="row">
+        <div class="row pb-4">
 
             {# Центральная часть — вопрос #}
             <div class="question-page_main-part">
@@ -61,7 +56,7 @@
                     {% endfor %}
 
                     {# Заголовок #}
-                    <h1 class="question-head h2 mt-4" itemprop="name">{{ question.title }}</h1>
+                    <h1 class="h2 mb-5" itemprop="name">{{ question.title }}</h1>
 
                     {# Инфо, текст #}
                     <div class="row">
@@ -73,7 +68,7 @@
                             <span class="d-block">{{ question.author.city.name }}</span>
                         </div>
 
-                        <div class="question-page_r-col content">
+                        <div class="question-page_r-col mb-4">
 
                             {# Имя #}
                             <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
@@ -81,15 +76,14 @@
                                     itemprop="name">{{ question.author.get_name }}</span></h5>
 
                             {# Текст #}
-                            <div class="text-lead" itemprop="text">{{ question.html_content|safe }}</div>
+                            <div class="lead" itemprop="text">{{ question.html_content|safe }}</div>
 
                             {# Файлы #}
                             {% if question.files.all|length %}
                                 <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
                                         <p class="file-list-item">
-                                            <a target="_blank"
-                                               href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
                                         </p>
                                     {% endfor %}
                                 </div>
@@ -106,17 +100,17 @@
                             {% endif %}
                             {% endcomment %}
 
-                            <hr class="my-4">
+                            <!--hr class="my-4"-->
 
                             {# Яндекс share кнопки #}
                             {#% include 'front/generic/yandex-share.html' %#}
 
                             {# Рубрики #}
                             {% if question.rubric %}
-                                <p class="rubrics-list mt-4">
+                                <div class="rubrics-list mt-4">
                                     <span class="rubrics-list-item"><a
                                             href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></span>
-                                </p>
+                                </div>
                             {% endif %}
 
                         </div>
@@ -128,15 +122,17 @@
             </div>
 
             {# Боковая колонка 1  #}
-            <aside class="question-page_aside-part">
+            <aside class="question-page_aside-part pt-3">
 
                 {% if question.is_pay %}
                     {# Если консультация платная #}
                     {% include 'advice/aside/advice_status.html' with advice_context=advice_context %}
 
                 {% elif lawyers_from_rating.count %}
+                    {% comment %}
                     <h4 class="mb-4">Наши эксперты</h4>
                     {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
+                    {% endcomment %}
                 {% endif %}
 
             </aside>
@@ -146,16 +142,14 @@
         {# Если есть ответы  #}
         <div id="answer">
             <router-view>
-                <div class="row question-page_gradient">
+                <div class="row question-page_gradient py-5">
                     <div class="question-page_main-part">
                         {# Основная часть — ответы #}
                         {% if question.reply_count %}
                             {# Ответы #}
                             <div class="row">
-                                <h3 class="answer-list-head">Ответы юристов
-                                    <span class="d-none answer__counter"
-                                          itemprop="answerCount">{{ question.reply_count }}</span>
-                                </h3>
+                                <h3 class="answer-list-head col offset-lg-1">Ответы юристов <span class="answer__counter"
+                                itemprop="answerCount">{{ question.reply_count }}</span></h3>
                             </div>
 
                             {% for answer in answers %}
@@ -168,23 +162,20 @@
 
                     {# Боковая колонка 2  #}
                     <aside class="question-page_aside-part">
-
                         {% if question.reply_count %}
                             <h4 class="mb-4">Все ответы экспертов на этот вопрос:</h4>
                             {% include 'question/aside/answer_lawyers_others.html' with items=answers %}
                         {% endif %}
-
-
                     </aside>
                 </div>
             </router-view>
         </div>
 
         {% if similar_questions %}
-            <div class="row question-page_gradient">
+            <div class="row question-page_gradient py-5">
                 <div class="question-page_main-part">
                     <div class="row">
-                        <h3 class="answer-list-head">Похожие вопросы</h3>
+                        <h3 class="answer-list-head col offset-lg-1">Похожие вопросы</h3>
                     </div>
                     <hr>
                     {% for item in similar_questions %}

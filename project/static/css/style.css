@@ -356,7 +356,7 @@ template {
   display: none !important; }
 
 h1, h2, h3, h4, h5, h6,
-.h1, .h2, .entry .question-head, .h3, .question-page_article h2, .h4, .question-page_article h3, .h5, .h6 {
+.h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
   font-weight: 100;
@@ -366,13 +366,13 @@ h1, h2, h3, h4, h5, h6,
 h1, .h1 {
   font-size: 3.375rem; }
 
-h2, .h2, .entry .question-head {
+h2, .h2 {
   font-size: 2.5rem; }
 
-h3, .h3, .question-page_article h2 {
+h3, .h3 {
   font-size: 1.625rem; }
 
-h4, .h4, .question-page_article h3 {
+h4, .h4 {
   font-size: 1.25rem; }
 
 h5, .h5 {
@@ -460,38 +460,38 @@ h6, .h6 {
 h5, .h5 {
   line-height: 1.3888889em; }
 
-h4, .h4, .question-page_article h3 {
+h4, .h4 {
   line-height: 1.5em; }
 
-h3, .h3, .question-page_article h2 {
+h3, .h3 {
   line-height: 1.3461539em; }
   @media (max-width: 767.98px) {
-    h3, .h3, .question-page_article h2 {
+    h3, .h3 {
       font-size: 1.25rem;
       line-height: 1.5em; } }
 
-h2, .h2, .entry .question-head {
+h2, .h2 {
   line-height: 1.25em; }
   @media (max-width: 991.98px) {
-    h2, .h2, .entry .question-head {
+    h2, .h2 {
       font-size: 1.625rem;
       line-height: 1.3461539em; } }
-  h2.logo, .h2.logo, .entry .logo.question-head {
+  h2.logo, .h2.logo {
     margin-bottom: 40px; }
     @media (max-width: 767.98px) {
-      h2.logo, .h2.logo, .entry .logo.question-head {
+      h2.logo, .h2.logo {
         text-align: center;
         margin-bottom: 20px; } }
-    h2.logo:before, .h2.logo:before, .entry .logo.question-head:before {
+    h2.logo:before, .h2.logo:before {
       font-family: icomoon;
       content: '\e92b';
       font-size: 3.125rem; }
       @media (min-width: 576px) {
-        h2.logo:before, .h2.logo:before, .entry .logo.question-head:before {
+        h2.logo:before, .h2.logo:before {
           padding-right: 1.25rem;
           vertical-align: bottom; } }
       @media (max-width: 767.98px) {
-        h2.logo:before, .h2.logo:before, .entry .logo.question-head:before {
+        h2.logo:before, .h2.logo:before {
           padding-bottom: 20px;
           padding-right: 0;
           height: 3.125rem;
@@ -651,7 +651,7 @@ pre {
     padding-right: 0;
     padding-left: 0; }
 
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col, .col, .win-round .r-col, .win-round .question-item .answer, .question-item .win-round .answer, .lawyer-page_about nav a,
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_main-part, .question-page_aside-part, .question-page_l-col, .question-page_r-col, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col, .col, .win-round .r-col, .win-round .question-item .answer, .question-item .win-round .answer, .lawyer-page_about nav a,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, section.lawyer-section .title, section.lawyer-section .lawyer-page_header_r-col, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, section.questions-section header h3, section.questions-section header h2, .col-md-12, .col-md,
 .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .question-page_header .question-item .answer, .question-item .question-page_header .answer, .col-lg-6, .col-lg-7, .questions-section .question-item .r-col, .questions-section .question-item .answer, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
@@ -717,7 +717,7 @@ pre {
   flex: 0 0 91.6666666667%;
   max-width: 91.6666666667%; }
 
-.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_l-col, .question-page_r-col, .question-page_main-part, .question-page_aside-part, .answer-list-head, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
+.col-12, section.advantage-section .content, section.advantage-section .advantages .advantage-item, section.review-section .title, section.review-section .lawyer-page_header_r-col, section.review-section .desc, section.review-section .spacer, section.review-section .rblock, footer.main-footer > div .ttl, footer.main-footer > div .mdd, footer.main-footer > div .cpr, .win-round .l-col, .win-round .hr, .question-page_header .l-col, .question-page_header .r-col, .question-page_main-part, .question-page_aside-part, .question-page_l-col, .question-page_r-col, .question-item .l-col, .question-item .r-col, .question-item .answer, .lawyer-page dt, .lawyer-page dd, .lawyer-page_l-col, .lawyer-page_header_l-col, .lawyer-page_about_l-col, .lawyer-page_r-col, .lawyer-page_header_r-col, .lawyer-page_about_r-col {
   flex: 0 0 100%;
   max-width: 100%; }
 
@@ -1096,7 +1096,7 @@ pre {
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%; }
 
-  .col-lg-3, .question-page_l-col, .question-page_aside-part {
+  .col-lg-3, .question-page_aside-part, .question-page_l-col {
     flex: 0 0 25%;
     max-width: 25%; }
 
@@ -1120,7 +1120,7 @@ pre {
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%; }
 
-  .col-lg-9, .question-page_r-col, .question-page_main-part {
+  .col-lg-9, .question-page_main-part, .question-page_r-col {
     flex: 0 0 75%;
     max-width: 75%; }
 
@@ -5738,7 +5738,7 @@ button.bg-white:focus {
 .bg-transparent {
   background-color: transparent !important; }
 
-.border, .question-page_header .r-col form textarea, .question-page_header .question-item .answer form textarea, .question-item .question-page_header .answer form textarea {
+.border, .question-page_header .r-col form textarea, .question-page_header .question-item .answer form textarea, .question-item .question-page_header .answer form textarea, .entry .answer-like .answer-like-block {
   border: 1px solid #e6e6e6 !important; }
 
 .border-top {
@@ -6678,7 +6678,7 @@ footer.main-footer > div .mdd {
 footer.main-footer > div .mdd a {
   margin-right: 1.5rem !important; }
 
-.mb-4, .win-round h3, .entry .question-head, .lawyer-list,
+.mb-4, .win-round h3, .lawyer-list,
 .my-4,
 footer.main-footer > div .mdd {
   margin-bottom: 1.5rem !important; }
@@ -6699,7 +6699,7 @@ footer.main-footer > div .mdd a {
 .mx-5 {
   margin-right: 3rem !important; }
 
-.mb-5, .question_feed-item, .question-page_main-part, .lawyer-page_header_r-col,
+.mb-5, .question_feed-item, .lawyer-page_header_r-col,
 .my-5 {
   margin-bottom: 3rem !important; }
 
@@ -6852,7 +6852,7 @@ section.lawyer-section .lawyer-page_header_r-col,
 .my-auto {
   margin-bottom: auto !important; }
 
-.ml-auto, section.review-section .rblock, section.questions-section header h3, section.questions-section header h2, .question-page_header .l-col, .question-page_l-col, .answer-list-head,
+.ml-auto, section.review-section .rblock, section.questions-section header h3, section.questions-section header h2, .question-page_header .l-col, .question-page_l-col,
 .mx-auto,
 section.advantage-section .content,
 section.lawyer-section .title,
@@ -8483,11 +8483,7 @@ body.open-slide-menu {
     max-width: none; } }
 
 .question-page_gradient {
-  position: relative;
-  padding-top: 60px; }
-  @media (max-width: 767.98px) {
-    .question-page_gradient {
-      padding-top: 40px; } }
+  position: relative; }
   .question-page_gradient:before {
     content: '';
     position: absolute;
@@ -8499,10 +8495,6 @@ body.open-slide-menu {
     margin-left: -1000px;
     margin-right: -1000px;
     background: linear-gradient(180deg, #f5f5f5, #fff); }
-
-.question-page_l-col {
-  color: #bababa;
-  line-height: 20px; }
 
 .question-page_main-part {
   padding-right: 45px; }
@@ -8518,6 +8510,10 @@ body.open-slide-menu {
   @media (max-width: 1199.98px) {
     .question-page_aside-part {
       padding-left: 20px; } }
+
+.question-page_l-col {
+  color: #bababa;
+  line-height: 20px; }
 
 .entry {
   position: relative; }
@@ -8559,6 +8555,7 @@ body.open-slide-menu {
   .entry .answer-like .answer-like-block {
     display: inline-flex;
     justify-content: center;
+    border-radius: 40px;
     padding: 10px 20px;
     color: #bababa; }
     .entry .answer-like .answer-like-block span {
