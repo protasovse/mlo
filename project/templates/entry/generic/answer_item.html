@@ -34,6 +34,7 @@
                 {% endif %}
 
                 {# Медали #}
+                {% comment %}
                 {% if item.id == item.thread %}
                     <div class="answer-header_medal mt-3">
                         <span class="item" title="Рейтинг эксперта"><i class="icon-star"></i><span
@@ -48,6 +49,7 @@
                             <a class="v" href="#">Задать вопрос</a></span-->
                     </div>
                 {% endif %}
+                {% endcomment %}
             </div>
 
         </header>
@@ -81,6 +83,7 @@
             </div>
 
             {# Файлы #}
+            {% comment %}
             {% if item.files.all|length %}
                 <div class="alert alert-secondary">
                     {% for file in item.files.all %}
@@ -90,12 +93,14 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            {% endcomment %}
 
         </div>
 
     </div>
 
     {# Футтер: лайки/дизлайки #}
+    {% comment %}
     <footer class="answer-footer row">
 
         <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
@@ -128,5 +133,6 @@
         </div>
 
     </footer>
+    {% endcomment %}
 
 </div>
