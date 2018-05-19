@@ -1,6 +1,7 @@
 from django.db import transaction
 from django.db.models import F
 from apps.entry.models import Answer, Additionals
+from apps.question.emails import send_question_new_answer
 from apps.rating.models import RatingScore, Type, RatingScoreComment
 from apps.rating.utils import add_score
 from apps.svem_system.exceptions import BackendPublicException
@@ -56,6 +57,7 @@ def answer(question, content, user, parent_id=None):
             RatingScoreComment.objects.create(rating_score=score, comment='За уточнение %d' % (instance.pk,))
         # Добавляем балл к рейтингу
         add_score(instance.author.pk, score.type.value)
+        send_question_new_answer(question, instance)
         # Уведомление — «Юрист ответил на Ваш вопрос»
 
     # Обновляем answer_count на account_info (кеш количества ответов юриста)

@@ -50,7 +50,7 @@ class QuestionDetail(TemplateView):
         question.views_count = F('views_count') + 1
         question.save(update_fields=['views_count'])
 
-        # Выборка похожих вопроов
+        # Выборка похожих вопросов
         query_for_similar_questions = '|'.join(re.split(r'[\s]+', question.title))
         # Выбираем, исключая сам вопрос
         similar_questions = Question.published.search(query_for_similar_questions, 0, 5,
