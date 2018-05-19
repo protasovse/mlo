@@ -29,7 +29,8 @@
             <nav class="col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'questions:list' %}">Вопросы</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
+                    <li class="breadcrumb-item active"><a
+                            href="{{ question.rubric.get_absolute_url }}">{{ question.rubric }}</a></li>
                 </ol>
             </nav>
         </div>
@@ -83,7 +84,8 @@
                                 <div class="alert alert-secondary">
                                     {% for file in question.files.all %}
                                         <p class="file-list-item">
-                                            <a target="_blank" href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
+                                            <a target="_blank"
+                                               href="/storage/{{ file.file }}">{{ file.get_basename }}</a>
                                         </p>
                                     {% endfor %}
                                 </div>
@@ -145,21 +147,17 @@
                 <div class="row question-page_gradient py-5">
                     <div class="question-page_main-part">
                         {# Основная часть — ответы #}
-                        {% if question.reply_count %}
-                            {# Ответы #}
-                            <div class="row">
-                                <h3 class="answer-list-head col offset-lg-1">Ответы юристов <span class="answer__counter"
-                                itemprop="answerCount">{{ question.reply_count }}</span></h3>
-                            </div>
-
-                            {% for answer in answers %}
-                                {% include 'entry/generic/answer_item.html' with item=answer %}
-                            {% endfor %}
-                        {% else %}
-                        {% endif %}
+                        {# Ответы #}
+                        <div class="row">
+                            <h3 class="answer-list-head col offset-lg-1">Ответы юристов <span class="answer__counter"
+                                                                                              itemprop="answerCount">{{ question.reply_count }}</span>
+                            </h3>
+                        </div>
+                        {% for answer in answers %}
+                            {% include 'entry/generic/answer_item.html' with item=answer %}
+                        {% endfor %}
 
                     </div>
-
                     {# Боковая колонка 2  #}
                     <aside class="question-page_aside-part">
                         {% if question.reply_count %}
