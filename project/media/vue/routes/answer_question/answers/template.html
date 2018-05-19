@@ -79,7 +79,7 @@
                     <div class="question-page_l-col">
                         <a class="answer-header_photo" :href="answer_data.author.url"
                            v-if="answer_data.author.role=='lawyer'">
-                            <img :src="answer_data.author.info.pic" :alt="answer_data.author.full_name"/>
+                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name"/>
                         </a>
                     </div>
 
@@ -203,7 +203,6 @@
                                     <span v-else-if="success">Успешно</span>
                                     <span v-else>Отправить</span>
                                 </button>
-                                
 
                                 <file-upload
                                         :post-action="post_action"
@@ -217,7 +216,7 @@
                                         ref="upload_second"><span class="icon-folder mr-2"></span> Прикрепить файлы
                                 </file-upload>
 
-                                <a href="#" class="text-muted ml-auto small">Отмена</a>
+                                <a href="javascript:void(0);" class="text-muted ml-auto small" @click="hide_form_answer(answer_data.id)">Отмена</a>
 
                             </div>
                         </div>
@@ -242,7 +241,7 @@
                      @click="scrollTo(answer_data.id)">
                     <div class="lawyer-list_header">
                         <span class="ph">
-                            <img :src="answer_data.author.info.pic" :alt="answer_data.author.full_name">
+                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name">
                         </span>
                         <div class="nm ml-3 text-primary">{{ answer_data.author.full_name }}</div>
                     </div>

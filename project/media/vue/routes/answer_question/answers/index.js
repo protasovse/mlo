@@ -257,6 +257,11 @@ export default {
             this.$store.commit('init_state');
             this.answers.forEach(x => Vue.set(x, 'show_form', x.id === id));
         },
+        hide_form_answer(id)
+        {
+            let a = this.answers.filter(i=>i.id === id)[0];
+            a.show_form = false;
+        },
         is_show_form_answer(id)
         {
             let a = this.answers.filter(i=>i.id === id)[0];
