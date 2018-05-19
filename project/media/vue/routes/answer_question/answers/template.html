@@ -13,22 +13,22 @@
                                       :class="{'is-invalid': error_fields.content }"
                                       id="reply"
                                       rows="5"
-                                      :disabled="file_form_loading"
+                                      :disabled="file_first_form_loading"
                                       placeholder=""></textarea>
                             <span class="invalid-feedback" v-if="error_fields.content">Введите текст ответа</span>
                         </div>
                         <div class="form-group">
                             <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
                                 <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                                <a href="#" @click.prevent="$refs.upload.remove(file)" class="close"><i
+                                <a href="#" @click.prevent="$refs.upload_first.remove(file)" class="close"><i
                                         class="icon-cancel"></i></a>
                             </div>
 
                             <button type="submit"
-                                    @click="save"
+                                    @click="save('upload_first')"
                                     class="btn btn-primary btn-sm"
-                                    :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
-                                <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                                    :disabled='loading||success||($refs.upload_first&&$refs.upload_first.active)'>
+                                <span v-if="loading||($refs.upload_first&&$refs.upload_first.active)">Загрузка...</span>
                                 <span v-else-if="success">Успешно</span>
                                 <span v-else>Отправить</span>
                             </button>
@@ -41,7 +41,7 @@
                                     :multiple="true"
                                     :size="1024 * 1024 * 100"
                                     v-model="files"
-                                    ref="upload"><span class="icon-folder mr-2"></span> Прикрепить файлы
+                                    ref="upload_first"><span class="icon-folder mr-2"></span> Прикрепить файлы
                             </file-upload>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
 
             </div>
 
-            <img v-if="file_form_loading" src="/static/img/preloaders/spinner200.svg">
+            <img v-if="load_answers" src="/static/img/preloaders/spinner200.svg">
 
             <div name="x" v-for="answer_data in answers"
                  role="answer"
@@ -183,26 +183,27 @@
                                           :class="{'is-invalid': error_fields.content }"
                                           id="reply"
                                           rows="5"
-                                          :disabled="file_form_loading"
+                                          :disabled="file_second_form_loading"
                                           placeholder=""></textarea>
                                 <span class="invalid-feedback" v-if="error_fields.content">Введите текст сообщения</span>
                             </div>
 
                             <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
-                                <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                                <a href="#" @click.prevent="remove(file)" class="close"><i class="icon-cancel"></i></a>
+                                    <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
+                                    <a href="#" @click.prevent="$refs.upload_second[0].remove(file)" class="close"><i class="icon-cancel"></i></a>
                             </div>
 
                             <div class="form-group d-flex align-items-center">
 
                                 <button type="submit"
-                                        @click="save"
+                                        @click="save('upload_second')"
                                         class="btn btn-primary btn-sm"
-                                        :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
-                                    <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+                                        :disabled='loading||success||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)'>
+                                    <span v-if="loading||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)">Загрузка...</span>
                                     <span v-else-if="success">Успешно</span>
                                     <span v-else>Отправить</span>
                                 </button>
+                                
 
                                 <file-upload
                                         :post-action="post_action"

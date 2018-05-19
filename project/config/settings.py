@@ -1,6 +1,11 @@
 import os
 import environ
+import locale
 from easy_thumbnails.conf import Settings as thumbnail_settings
+
+
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
+
 
 root = environ.Path(__file__) - 3
 env = environ.Env(DEBUG=(bool, False), )  # set default values and casting
