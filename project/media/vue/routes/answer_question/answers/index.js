@@ -26,7 +26,8 @@ export default {
             load_answers: false,
         }
     },
-    mounted() {
+
+    beforeMount() {
         this.load_answers = true;
         this.$http.get('/api/default').then(
             (r) => {
@@ -45,10 +46,13 @@ export default {
             }
 
         });
-        this.$http.get('/api/question',{params: {'id': this.qid}}).then(
-            (r) => {this.question = r.data.data},
+        this.$http.get(`/api/questions/${this.qid}`).then(
+            (r) => {
+                this.question = r.data.data;
+                this.request_and_load_answers()
+            },
         );
-        this.request_and_load_answers()
+
 
     },
     computed: {
@@ -56,7 +60,7 @@ export default {
            return this.full_tree ? 'Свернуть': 'Развернуть'
         },
         post_action() {
-            return '/api/question/answers'
+            return `/api/questions/${this.qid}/answers`
         },
         is_form_send_done_first() {
             return this.upload_form === 'upload_first' && this.is_form_send_done('upload_first')
@@ -106,7 +110,7 @@ export default {
             return ref;
         },
         request_and_load_answers(scroll_to_id=false) {
-            this.$http.get(`/api/question/${this.qid}/answers`).then(
+            this.$http.get(`/api/questions/${this.qid}/answers`).then(
                 (r) => {
                     this.count_answ = {};
                     this.answers = r.data.data;
@@ -215,7 +219,7 @@ export default {
                 'content': this.content
             };
             this.answer_id = false;
-            this.put(`/api/question/${this.qid}/answers`, data, (r) => {
+            this.put(`/api/questions/${this.qid}/answers`, data, (r) => {
                     this.answer_id = r.data.id;
 
                     for (let i = 0; i < this.get_upload(upload_name).files.length; i++) {
@@ -239,14 +243,12 @@ export default {
             a['my_like'] = val;
         },
         to_like(id) {
-            this.$http.post('/api/question/answers/like', {'id':id, 'value': 1}, {emulateJSON:true}).then(
-                (r) => {this.to_like_val(id, 1)}
-            )
+            this.to_like_val(id, 1);
+            this.$http.post(`/api/questions/${this.qid}/answers/${id}/like`)
         },
         to_dislike(id) {
-            this.$http.post('/api/question/answers/like', {'id':id, 'value': -1}, {emulateJSON:true}).then(
-                (r) => {this.to_like_val(id, -1)}
-            )
+            this.to_like_val(id, -1);
+            this.$http.post(`/api/questions/${this.qid}/answers/${id}/dislike`)
         },
         show_form_answer(id)
         {

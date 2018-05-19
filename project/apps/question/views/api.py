@@ -20,17 +20,16 @@ from apps.entry.services import answer as to_answer
 
 class QuestionView(ApiView):
     @classmethod
-    def get(cls, request):
-        q = Question.objects.filter(pk=request.GET['id']).select_related(
+    def get(cls, request, qid):
+        q = Question.objects.filter(pk=qid).select_related(
             'author', 'author__city', 'author__info', 'author__rating'
         ).get().get_public_data()
         q.update({'is_can_answer': False})
         return q
 
     @classmethod
-    def post(cls, request):
-        f = Question.objects.get(pk=request.POST['id'])\
-            .upload_document(request.FILES['file'])
+    def post(cls, request, qid):
+        f = Question.objects.get(pk=qid).upload_document(request.FILES['file'])
         return 'file {} uploaded'.format(f.file)
 
     @classmethod
@@ -162,7 +161,7 @@ class AnswersView(ApiView):
 
     @classmethod
     def post(cls, request, qid):
-        f = Answer.objects.get(pk=qid).upload_document(request.FILES['file'])
+        f = Answer.objects.get(pk=request.POST['id']).upload_document(request.FILES['file'])
         return 'file {} uploaded'.format(f.file)
 
     @classmethod
@@ -217,21 +216,33 @@ class AnswersView(ApiView):
         return answers
 
 
-class AnswersLike(ApiView):
+class BaseAnswersLike(ApiView):
     @classmethod
-    def post(cls, request):
+    def like(cls, request, aid, val):
         if not request.user.is_authenticated:
             raise ApiPublicException('access denied')
-        answer = Answer.objects.get(pk=request.POST['id'])
+        answer = Answer.objects.get(pk=aid)
         if answer.parent_id or answer.author_id == request.user.id:
             raise ApiPublicException('access denied')
         if Likes.objects.filter(user_id=request.user.id, entry_id=answer.id).count() > 0:
             raise ApiPublicException('access denied')
-        val = int(request.POST['value'])
         if val not in [1, -1]:
             raise ApiPublicException('data error')
         Likes.objects.create(entry=answer, user=request.user, value=val)
-        Entry.objects.filter(pk=answer.id).update(like_count=F('like_count')+val)
+        Entry.objects.filter(pk=answer.id).update(like_count=F('like_count') + val)
+
+
+class AnswersLike(BaseAnswersLike):
+    @classmethod
+    def post(cls, request, qid, aid):
+        cls.like(request, aid, 1)
+
+
+class AnswersDislike(BaseAnswersLike):
+    @classmethod
+    def post(cls, request, qid, aid):
+        cls.like(request, aid, -1)
+
 
 
 class QuestionDefault(ApiView):
