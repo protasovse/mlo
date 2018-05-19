@@ -162,10 +162,17 @@
                             <div class="answer-like">
                                 <div class="answer-like-sign dropdown">{{ like_title(answer_data.id) }}</div>
                                 <div class="answer-like-block">
+
                                     <i class="icon-dislike order-1" v-if="answer_data.is_can_like"
                                        @click="to_dislike(answer_data.id)"></i>
+
+                                    <i class="icon-dislike order-1 text-danger" v-if="my_dislike(answer_data)"></i>
+
+
                                     <i class="icon-like order-3" v-if="answer_data.is_can_like"
                                        @click="to_like(answer_data.id)"></i>
+
+                                    <i class="icon-like order-3 text-success" v-if="my_like(answer_data)"></i>
                                     <span class="order-2"
                                           :class="{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}">
                                         {{ answer_data.like_count }}</span>

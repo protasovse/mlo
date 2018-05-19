@@ -18,8 +18,7 @@ urlpatterns = [
     path('question/default', question_api.QuestionDefault.as_view()),
     path('question', question_api.QuestionView.as_view()),
     path('question/answers/like', question_api.AnswersLike.as_view()),
-    path('question/answers', question_api.AnswersView.as_view()),
-    # правильный урл
+    path('question/<int:qid>/answers', question_api.AnswersView.as_view()),
     path(r'questions/<int:qid>/answers/<int:aid>/files', question_api.AnswersFilesView.as_view()),
     path('city/search', sxgeo_api.City.as_view()),
     path('city/ip', sxgeo_api.CityIp.as_view()),

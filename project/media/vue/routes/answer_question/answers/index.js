@@ -86,6 +86,12 @@ export default {
         }
     },
     methods: {
+        my_dislike(answer_data) {
+           return answer_data.my_like === -1;
+        },
+        my_like(answer_data) {
+           return answer_data.my_like === 1;
+        },
         is_form_send_done(upload_name) {
             return this.success && (!this.loading) && (!(this.get_upload(upload_name) && this.get_upload(upload_name).active))
         },
@@ -100,7 +106,7 @@ export default {
             return ref;
         },
         request_and_load_answers(scroll_to_id=false) {
-            this.$http.get('/api/question/answers',{params: {'id': this.qid}}).then(
+            this.$http.get(`/api/question/${this.qid}/answers`).then(
                 (r) => {
                     this.count_answ = {};
                     this.answers = r.data.data;
@@ -110,7 +116,6 @@ export default {
                             this.sub_answers_exists = true;
                             this.count_answ[x.parent_id] = (this.count_answ[x.parent_id] || 0) + 1;
                         }
-
                         if (this.is_can_answer && x.author.id === this.user_id) {
                             this.is_can_answer = false
                         }
@@ -206,12 +211,11 @@ export default {
             this.form_validate([this.requires_fields]);
 
             let data = {
-                'id': this.qid,
                 'parent_id': this.thread,
                 'content': this.content
             };
             this.answer_id = false;
-            this.put('/api/question/answers', data, (r) => {
+            this.put(`/api/question/${this.qid}/answers`, data, (r) => {
                     this.answer_id = r.data.id;
 
                     for (let i = 0; i < this.get_upload(upload_name).files.length; i++) {
@@ -232,6 +236,7 @@ export default {
             let a = this.answers.filter(i=>i.id === id)[0];
             a['like_count'] += val;
             a['is_can_like'] = false;
+            a['my_like'] = val;
         },
         to_like(id) {
             this.$http.post('/api/question/answers/like', {'id':id, 'value': 1}, {emulateJSON:true}).then(
