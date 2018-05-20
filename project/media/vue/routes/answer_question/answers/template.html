@@ -155,7 +155,7 @@
                                v-if="get_add_question_link(answer_data.id)"
                                @click="show_form_answer(answer_data.id)">
                                 {{ get_add_question_link(answer_data.id)}}</a><br/>
-                            <a href="javascript:void(0);" v-if="is_possible_expand_answer(answer_data.id)"
+                            <a href="javascript:void(0);" class="small text-muted" v-if="is_possible_expand_answer(answer_data.id)"
                                @click="expand_answer(answer_data.id)">{{ get_exand_answer_name(answer_data.id) }}</a>
                         </div>
                         <div class="align-self-end mt-3 mt-sm-0" v-if="!answer_data.parent_id">
