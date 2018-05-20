@@ -3,6 +3,8 @@ import binascii
 from django.db.models import F
 from phonenumbers import PhoneNumberFormat, format_number, parse
 from apps.advice.models import Advice
+from apps.rating.models import Type, RatingScore, RatingScoreComment
+from apps.rating.utils import add_score
 from apps.review.models import Likes
 from apps.svem_system.exceptions import ApiPublicException, BackendPublicException
 from apps.svem_system.views.api import ApiView
@@ -209,7 +211,7 @@ class AnswersView(ApiView):
                 a.update({'is_last_answer': False})
                 continue
             try:
-                n = answers[i+1]
+                n = answers[i + 1]
                 a.update({'is_last_answer': a['parent_id'] != n['parent_id']})
             except IndexError:
                 a.update({'is_last_answer': True})
@@ -231,6 +233,20 @@ class BaseAnswersLike(ApiView):
         Likes.objects.create(entry=answer, user=request.user, value=val)
         Entry.objects.filter(pk=answer.id).update(like_count=F('like_count') + val)
 
+        # добавляем балл рейтинга
+        prefix = 'usefull' if val == 1 else 'useless'
+        comment_prefix = 'Полезный' if val == 1 else 'Бесполезный'
+        if request.user.role == 2:  # like ставит юрист
+            type_key = '{}_answer_lawyer'.format(prefix)
+        elif answer.on_question.author == request.user:  # like ставит клиент — автор вопроса
+            type_key = '{}_answer_author_questions'.format(prefix)
+        else:  # like ставит клиент за чужой вопрос
+            type_key = '{}_answer_client'.format(prefix)
+        rating_type = Type.objects.get(key=type_key)
+        score = RatingScore.objects.create(user=answer.author, type=rating_type)
+        RatingScoreComment.objects.create(rating_score=score, comment='{} ответ {}'.format(comment_prefix, answer.pk))
+        add_score(answer.author_id, score.type.value)
+
 
 class AnswersLike(BaseAnswersLike):
     @classmethod
@@ -242,7 +258,6 @@ class AnswersDislike(BaseAnswersLike):
     @classmethod
     def post(cls, request, qid, aid):
         cls.like(request, aid, -1)
-
 
 
 class QuestionDefault(ApiView):

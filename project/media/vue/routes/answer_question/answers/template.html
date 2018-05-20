@@ -166,16 +166,16 @@
                                     <i class="icon-dislike order-1" v-if="answer_data.is_can_like"
                                        @click="to_dislike(answer_data.id)"></i>
 
-                                    <i class="icon-dislike answer-like order-1 noactive"
+                                    <i class="icon-dislike order-1 noactive"
                                        :class="{'text-danger':my_dislike(answer_data)}"
                                        v-else></i>
 
 
-                                    <i class="icon-like  order-3" v-if="answer_data.is_can_like"
+                                    <i class="icon-like order-3" v-if="answer_data.is_can_like"
                                        @click="to_like(answer_data.id)"></i>
 
 
-                                    <i class="icon-like answer-like order-3 noactive"
+                                    <i class="icon-like order-3 noactive"
                                        :class="{'text-success':my_like(answer_data)}"
                                        v-else></i>
 

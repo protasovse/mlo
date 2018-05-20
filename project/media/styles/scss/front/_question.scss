@@ -153,13 +153,6 @@
     }
   }
 
-  &.answer-push {
-    padding-left: line(4);
-    @include media-breakpoint-down(md) {
-      padding-left: 0;
-    }
-  }
-
   .answer-header {
     @extend .row, .align-items-center, .mb-2;
     @include media-breakpoint-down(md) {
@@ -193,13 +186,14 @@
     @extend .lawyer-medal;
   }
 
-  .answer-header_photo-small {
-    .answer-header_photo, &.answer-header_photo {
+  &.answer-push {
+    padding-left: line(4);
+    @include media-breakpoint-down(md) {
+      padding-left: 0;
+    }
+    .answer-header_photo {
       width: line(2);
       height: line(2);
-    }
-    .answer-header-stat {
-      display: none;
     }
   }
 
@@ -227,12 +221,21 @@
       i {
         font-size: line(1);
         cursor: pointer;
+        &.noactive {
+          cursor: auto;
+        }
       }
       .icon-dislike:hover, .icon-dislike.active, .dislike {
         color: $red;
+        &.noactive {
+          color: inherit;
+        }
       }
       .icon-like:hover, .icon-dislike.active, .like {
         color: $green;
+        &.noactive {
+          color: inherit;
+        }
       }
     }
   }

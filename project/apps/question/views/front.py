@@ -250,7 +250,7 @@ class QuestionsList(TemplateView):
 
         # Лучшие юристы блок
         context.update({
-            'lawyers_from_rating': Rating.lawyers.all()[:4]
+            'lawyers_from_rating': Rating.lawyers.filter(month_rate__gt=0)[:5]
         })
 
         h1 = 'Консультация юриста и адвоката онлайн'

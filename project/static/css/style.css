@@ -8521,11 +8521,6 @@ body.open-slide-menu {
     font-size: 1.125rem; }
   .entry .content .text-lead {
     font-weight: 300; }
-  .entry.answer-push {
-    padding-left: 80px; }
-    @media (max-width: 991.98px) {
-      .entry.answer-push {
-        padding-left: 0; } }
   @media (max-width: 991.98px) {
     .entry .answer-header .question-page_l-col {
       position: absolute;
@@ -8545,11 +8540,14 @@ body.open-slide-menu {
         height: 40px; } }
     .entry .answer-header_photo img {
       width: 100%; }
-  .entry .answer-header_photo-small .answer-header_photo, .entry .answer-header_photo-small.answer-header_photo {
-    width: 40px;
-    height: 40px; }
-  .entry .answer-header_photo-small .answer-header-stat {
-    display: none; }
+  .entry.answer-push {
+    padding-left: 80px; }
+    @media (max-width: 991.98px) {
+      .entry.answer-push {
+        padding-left: 0; } }
+    .entry.answer-push .answer-header_photo {
+      width: 40px;
+      height: 40px; }
   .entry .answer-like .answer-like-sign {
     color: #bababa; }
   .entry .answer-like .answer-like-block {
@@ -8564,10 +8562,16 @@ body.open-slide-menu {
     .entry .answer-like .answer-like-block i {
       font-size: 20px;
       cursor: pointer; }
+      .entry .answer-like .answer-like-block i.noactive {
+        cursor: auto; }
     .entry .answer-like .answer-like-block .icon-dislike:hover, .entry .answer-like .answer-like-block .icon-dislike.active, .entry .answer-like .answer-like-block .dislike {
       color: #fc6947; }
+      .entry .answer-like .answer-like-block .icon-dislike:hover.noactive, .entry .answer-like .answer-like-block .icon-dislike.active.noactive, .entry .answer-like .answer-like-block .dislike.noactive {
+        color: inherit; }
     .entry .answer-like .answer-like-block .icon-like:hover, .entry .answer-like .answer-like-block .icon-dislike.active, .entry .answer-like .answer-like-block .like {
       color: #16c246; }
+      .entry .answer-like .answer-like-block .icon-like:hover.noactive, .entry .answer-like .answer-like-block .icon-dislike.active.noactive, .entry .answer-like .answer-like-block .like.noactive {
+        color: inherit; }
 
 .answer-list-head {
   margin-bottom: 20px; }
