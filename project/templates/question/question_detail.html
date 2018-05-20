@@ -115,13 +115,14 @@
                                 </div>
                             {% endif %}
 
-                            {% if question.reply_count == 0 %}
+                            {% if question.reply_count == 0 and not user.is_authenticated %}
                                 <div class="small text-muted mt-4">
                                 <hr>
-                                На этот вопрос юрист ещё не ответил. Если вы знаете ответ, то можете
-                                    <a class="text-dark" href="/auth/registration/">зарегистрироваться</a> в качестве
-                                    эксперта сайта и ответить на него.
+                                На этот вопрос юрист ещё не ответил.
+                                    Если вы знаете ответ, то можете <a class="text-dark" href="/auth/registration/"
+                                    >зарегистрироваться</a> в качестве эксперта сайта и ответить на него.
                                 </div>
+
                             {% endif %}
 
                         </div>
