@@ -34,7 +34,7 @@
                             </button>
 
                             <file-upload
-                                    :post-action="post_action"
+                                    :custom-action="post_action"
                                     class="btn btn-link btn-sm m-0"
                                     extensions="gif,jpg,jpeg,png,webp,pdf,xls"
                                     accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
@@ -162,10 +162,24 @@
                             <div class="answer-like">
                                 <div class="answer-like-sign dropdown">{{ like_title(answer_data.id) }}</div>
                                 <div class="answer-like-block">
+
                                     <i class="icon-dislike order-1" v-if="answer_data.is_can_like"
                                        @click="to_dislike(answer_data.id)"></i>
-                                    <i class="icon-like order-3" v-if="answer_data.is_can_like"
+
+                                    <i class="icon-dislike answer-like order-1 noactive"
+                                       :class="{'text-danger':my_dislike(answer_data)}"
+                                       v-else></i>
+
+
+                                    <i class="icon-like  order-3" v-if="answer_data.is_can_like"
                                        @click="to_like(answer_data.id)"></i>
+
+
+                                    <i class="icon-like answer-like order-3 noactive"
+                                       :class="{'text-success':my_like(answer_data)}"
+                                       v-else></i>
+
+
                                     <span class="order-2"
                                           :class="{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}">
                                         {{ answer_data.like_count }}</span>
