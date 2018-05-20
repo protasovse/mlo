@@ -79,7 +79,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
         qs = super(QuestionsPublishedManager, self).filter(rubrics__exact=rubric_id)
         return qs
 
-    def search(self, query='', offset=0, limit=10, filters={}, sort=[], exclude_id=False):
+    def search(self, query='', offset=0, limit=10, filters={}, filters_exclude={}, sort=[], exclude_id=False):
         """
         :param query:
         :param offset:
@@ -103,6 +103,9 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         for key in filters:
             client.SetFilter(key, filters[key])
+
+        for key in filters_exclude:
+            client.SetFilter(key, filters_exclude[key], exclude=True)
 
         if exclude_id:
             client.SetFilter('@id', (exclude_id,), exclude=True)

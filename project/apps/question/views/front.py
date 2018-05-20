@@ -53,8 +53,13 @@ class QuestionDetail(TemplateView):
         # Выборка похожих вопросов
         query_for_similar_questions = '|'.join(re.split(r'[\s]+', question.title))
         # Выбираем, исключая сам вопрос
-        similar_questions = Question.published.search(query_for_similar_questions, 0, 5,
-                                                      sort=['@relevance DESC', ], exclude_id=question.pk)
+        similar_questions = Question.published.search(
+            query=query_for_similar_questions,
+            offset=0,
+            limit=5,
+            sort=['@relevance DESC', ],
+            exclude_id=question.pk,
+        )
 
         if hasattr(question, 'advice'):
             advice = Advice.objects.filter(question=question).first()
@@ -131,6 +136,7 @@ class QuestionsList(TemplateView):
             start = 0
 
         filters = {}
+        filters_exclude = {}
         sort = []
         q = False
         query = ''
@@ -224,10 +230,21 @@ class QuestionsList(TemplateView):
                 })
                 cur_url_param = 'my'
 
+        # Для неавторизованный пользователей, покажем только вопросы с ответами
+        if not self.request.user.is_authenticated:
+            filters_exclude.update({'reply_count': (0,)})
+
         # filters.update({'answers_authors_id': (1,)})
 
         # QuerySet для списка вопросов
-        question_set = Question.published.search(query, start, self.page_size, filters, sort)
+        question_set = Question.published.search(
+            query=query,
+            offset=start,
+            limit=self.page_size,
+            filters=filters,
+            filters_exclude=filters_exclude,
+            sort=sort,
+        )
 
         context.update({
             'current_url': current_url,
