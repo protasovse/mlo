@@ -74,6 +74,9 @@ export default {
         file_second_form_loading: function () {
             return this.loading || (this.get_upload('upload_second') && this.get_upload('upload_second').active)
         },
+        answers_total() {
+            return this.answers.length;
+        }
     },
     watch: {
         is_form_send_done_first: function() {

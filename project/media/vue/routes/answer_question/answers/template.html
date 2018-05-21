@@ -50,7 +50,14 @@
         </div>
     </div>
 
-    <div class="row question-page_gradient py-5">
+
+    <div class="row question-page_gradient py-5" v-if="load_answers">
+        <div class="question-page_main-part">
+            <img src="/static/img/preloaders/spinner200.svg">
+        </div>
+    </div>
+
+    <div class="row question-page_gradient py-5" v-if="answers_total">
         <div class="question-page_main-part">
             <div class="row">
                 <h3 class="answer-list-head col offset-lg-1" id="div-id">Ответы юристов
@@ -61,7 +68,7 @@
 
             </div>
 
-            <img v-if="load_answers" src="/static/img/preloaders/spinner200.svg">
+
 
             <div name="x" v-for="answer_data in answers"
                  role="answer"
