@@ -8,10 +8,8 @@
         <p class="subtitle">Цена консультации</p>
         <p class="cost rub">{{ item.cost }}</p>
 
-        {% if item.expert %}
-
+        {% if item.status == 'inwork' or item.status == 'answered' or item.status == 'addquestion' or item.status == 'closed' %}
             <p class="subtitle">Консультацию ведёт эксперт</p>
-
             {% with item.expert as expert %}
                 <div class="consult-lawyer ">
                     <a class="pht" href="{% url 'front:lawyer_page' expert.pk %}"><img
@@ -19,40 +17,38 @@
                     <h6><a href="{% url 'front:lawyer_page' expert.pk %}">{{ expert }}</a></h6>
                 </div>
             {% endwith %}
-
-            <p class="normal mt-3 text-muted">
-                {% if item.status == 'payment_confirmed' %}
-                    Эксперт назначен и оповещён<!--, но еще не принял заявку.
-                    До принятия {{ advice_context.overdue_time }} мин. -->
-                {% elif item.status == 'inwork' %}
-                    Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.
-                {% endif %}
-
-            </p>
-
         {% else %}
-
             <p class="subtitle">Эксперт ещё не назначен</p>
+        {% endif %}
 
-            <div class="normal">
-                {% if item.status == 'new' %}{{ money_yandex_purse }}
-                    <p>Эксперт будет назначен после оплаты и подвержения оплаты.</p>
+        <div class="normal">
+            {% if item.status == 'new' %}
+                <p>Эксперт будет назначен после оплаты.</p>
+                {% if item.question.author == user %}
                     <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
                         <input type="hidden" name="receiver" value="{{ advice_context.money_yandex_purse }}">
                         <input type="hidden" name="quickpay-form" value="shop">
                         <input type="hidden" name="formcomment" value="{{ advice_context.payment_form_title }}">
                         <input type="hidden" name="label" value="advice.{{ item.question_id }}">
-                        <input type="hidden" name="targets" value="{{ advice_context.payment_form_target }}{{ item.question_id }}">
-                        <input type="hidden" name="successURL" value="{{ protocol }}://{{ site }}{{ question_url }}">
+                        <input type="hidden" name="targets"
+                               value="{{ advice_context.payment_form_target }}{{ item.question_id }}">
+                        <input type="hidden" name="successURL" value="{{ SITE_URL }}{{ question_url }}">
                         <input type="hidden" name="sum" value="{{ advice_context.advice_cost }}" data-type="number">
                         <!--input type="hidden" name="paymentType" value="AC"/-->
                         <input class="btn btn-success btn-block" type="submit" value="Оплатить">
                     </form>
-                {% elif item.status == 'paid' %}
-                    <p>Заявка оплачена, ждём поступления оплаты!</p>
                 {% endif %}
-            </div>
+            {% elif item.status == 'paid' %}
+                <p>Оплачено, ждём подтверждение оплаты.</p>
+            {% elif item.status == 'payment_confirmed' %}
+                <p class="mt-3">Идёт подбор эксперта по данному вопросу (обычно в течении 30 мин.)</p>
 
-        {% endif %}
+                    <!--, Эксперт назначен и оповещён.<!--, но еще не принял заявку.
+                До принятия {{ advice_context.overdue_time }} мин. --></p>
+            {% elif item.status == 'inwork' %}
+                <p class="mt-3">Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.</p>
+            {% endif %}
+        </div>
+
     </div>
 {% endwith %}

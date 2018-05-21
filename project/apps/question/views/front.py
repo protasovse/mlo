@@ -98,7 +98,6 @@ class QuestionDetail(TemplateView):
         # Лучшие юристы блок
         context.update({
             'lawyers_from_rating': Rating.lawyers.all()[:3],
-            'lawyer_will_answer': get_user_model().objects.get(pk=1),
         })
 
         return context
@@ -298,6 +297,9 @@ class QuestionsList(TemplateView):
             h2 = 'Результаты поиска'
         else:
             h2 = '{} {}'.format(h2_begin, h2_end)
+
+        if current_page > 1:
+            h2 = h2 + '. Страница {}'.format(current_page)
 
         title = 'Консультации юристов и адвокатов на сайте Мойюрист.онлайн'
         if rubric:
