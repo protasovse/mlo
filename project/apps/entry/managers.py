@@ -123,7 +123,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
 
         result = client.Query(query, 'question, question_delta')
 
-        # print(result)
+        print(result)
 
         if not result:
             qs = self.get_queryset().none()

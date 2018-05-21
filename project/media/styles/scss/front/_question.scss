@@ -222,19 +222,20 @@
         font-size: line(1);
         cursor: pointer;
         &.noactive {
+          color: $gray-200;
           cursor: auto;
         }
       }
-      .icon-dislike:hover, .icon-dislike.active, .dislike {
+      .icon-dislike:hover {
         color: $red;
         &.noactive {
-          color: inherit;
+          color: $gray-200;
         }
       }
-      .icon-like:hover, .icon-dislike.active, .like {
+      .icon-like:hover {
         color: $green;
         &.noactive {
-          color: inherit;
+          color: $gray-200;
         }
       }
     }

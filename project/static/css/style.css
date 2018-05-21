@@ -8563,15 +8563,16 @@ body.open-slide-menu {
       font-size: 20px;
       cursor: pointer; }
       .entry .answer-like .answer-like-block i.noactive {
+        color: #e6e6e6;
         cursor: auto; }
-    .entry .answer-like .answer-like-block .icon-dislike:hover, .entry .answer-like .answer-like-block .icon-dislike.active, .entry .answer-like .answer-like-block .dislike {
+    .entry .answer-like .answer-like-block .icon-dislike:hover {
       color: #fc6947; }
-      .entry .answer-like .answer-like-block .icon-dislike:hover.noactive, .entry .answer-like .answer-like-block .icon-dislike.active.noactive, .entry .answer-like .answer-like-block .dislike.noactive {
-        color: inherit; }
-    .entry .answer-like .answer-like-block .icon-like:hover, .entry .answer-like .answer-like-block .icon-dislike.active, .entry .answer-like .answer-like-block .like {
+      .entry .answer-like .answer-like-block .icon-dislike:hover.noactive {
+        color: #e6e6e6; }
+    .entry .answer-like .answer-like-block .icon-like:hover {
       color: #16c246; }
-      .entry .answer-like .answer-like-block .icon-like:hover.noactive, .entry .answer-like .answer-like-block .icon-dislike.active.noactive, .entry .answer-like .answer-like-block .like.noactive {
-        color: inherit; }
+      .entry .answer-like .answer-like-block .icon-like:hover.noactive {
+        color: #e6e6e6; }
 
 .answer-list-head {
   margin-bottom: 20px; }

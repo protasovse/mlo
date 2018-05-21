@@ -37,6 +37,7 @@ class QuestionDetail(TemplateView):
 
         if question.status == 'blocked':
             ids = self.request.session.get('question_ids', [])
+
             if question.id not in ids and question.author != self.request.user:
                 raise Http404("Question does not exist")
 
@@ -201,15 +202,15 @@ class QuestionsList(TemplateView):
             })
             cur_url_param = 'unanswered'
 
-        if 'lawyer' in self.request.GET:
+        if 'lawyer' in self.request.GET:  # Вопросы с ответами юриста
             filters.update({'answers_authors_id': (int(self.request.GET['lawyer']),)})
             url_params.update({
                 'lawyer': self.request.GET['lawyer']
             })
             cur_url_param = 'lawyer'
 
-        if self.request.user.is_authenticated and self.request.user.role == 2:
-            if 'my_advice' in self.request.GET:
+        if self.request.user.is_authenticated and self.request.user.is_lawyer():
+            if 'my_advice' in self.request.GET:  # Вопросы с платными заявками юриста-эксперта
                 filters.update({'advice_expert_id': (self.request.user.pk,)})
                 url_params.update({
                     'my_advice': True
@@ -222,7 +223,7 @@ class QuestionsList(TemplateView):
                     'additionals': True
                 })
                 cur_url_param = 'additionals'
-        else:
+        else:  # Вопросы клиента
             if 'my' in self.request.GET:
                 filters.update({'author_id': (self.request.user.pk,)})
                 url_params.update({
@@ -230,9 +231,15 @@ class QuestionsList(TemplateView):
                 })
                 cur_url_param = 'my'
 
-        # Для неавторизованный пользователей, покажем только вопросы с ответами
-        if not self.request.user.is_authenticated:
+        if not self.request.user.is_authenticated or self.request.user.is_client() or 'my' not in self.request.GET:
+            # Для неавторизованный пользователей, и клиентов только вопросы с ответами
             filters_exclude.update({'reply_count': (0,)})
+            print(self.request.user.is_client())
+
+        if self.request.user.is_authenticated and self.request.user.is_lawyer() and 'my_advice' not in self.request.GET:
+            # Для юристов, не показываем платные вопросы
+            # Платные вопросы показываем только те,  которых юрист ведёт
+            filters.update({'is_pay': (False,)})
 
         # filters.update({'answers_authors_id': (1,)})
 
