@@ -231,7 +231,7 @@ class QuestionsList(TemplateView):
                 })
                 cur_url_param = 'my'
 
-        if not self.request.user.is_authenticated or self.request.user.is_client() or 'my' not in self.request.GET:
+        if (not self.request.user.is_authenticated or self.request.user.is_client()) and 'my' not in self.request.GET:
             # Для неавторизованный пользователей, и клиентов только вопросы с ответами
             filters_exclude.update({'reply_count': (0,)})
             print(self.request.user.is_client())
