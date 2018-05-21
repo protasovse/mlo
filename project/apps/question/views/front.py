@@ -233,7 +233,6 @@ class QuestionsList(TemplateView):
         if (not self.request.user.is_authenticated or self.request.user.is_client()) and 'my' not in self.request.GET:
             # Для неавторизованный пользователей, и клиентов только вопросы с ответами
             filters_exclude.update({'reply_count': (0,)})
-            print(self.request.user.is_client())
 
         if self.request.user.is_authenticated and self.request.user.is_lawyer() and 'my_advice' not in self.request.GET:
             # Для юристов, не показываем платные вопросы

@@ -116,14 +116,18 @@
                                 </div>
                             {% endif %}
 
-                            {% if question.reply_count == 0 and not user.is_authenticated %}
-                                <div class="small text-muted mt-4">
-                                <hr>
-                                На этот вопрос юрист ещё не ответил.
-                                    Если вы знаете ответ, то можете <a class="text-dark" href="/auth/registration/"
-                                    >зарегистрироваться</a> в качестве эксперта сайта и ответить на него.
-                                </div>
-
+                            {% if question.reply_count == 0 %}
+                            {% if not user.is_authenticated %}
+                                <div class="small text-muted mt-4"><hr>На этот вопрос юрист ещё не ответил. Если вы знаете
+                                ответ, то можете <a class="text-dark" href="/auth/registration/" >зарегистрироваться</a>
+                                в качестве эксперта и ответить на него.</div>
+                                {% elif user == question.author %}
+                                <div class="small text-muted mt-4"><hr>На ваш вопрос юрист ещё не ответил. К сожалению,
+                                на бесплатный вопрос мы не даём гарантии ответа. Если вам нужна развернутая
+                                гаратированная консультация, <a class="text-dark" href="{% url 'ask_question' %}"
+                                >задайте вопрос</a> платно.
+                                {% endif %}
+                            </div>
                             {% endif %}
 
                         </div>
