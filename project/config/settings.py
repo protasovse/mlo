@@ -39,23 +39,6 @@ MEDIA_URL = '/storage/'
 
 DATA_DIR = PROJECT_DIR + '/media'+'/data/'
 
-if 0 and DEBUG:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'loggers': {
-            'django.db.backends': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-            }
-        },
-    }
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -166,9 +149,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-THUMBNAIL_PROCESSORS = (
-                           'image_cropping.thumbnail_processors.crop_corners',
-                       ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+THUMBNAIL_PROCESSORS = ('image_cropping.thumbnail_processors.crop_corners',) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 APPEND_SLASH = True
 
@@ -228,3 +209,6 @@ ADVICE_OVERDUE_TIME = 30  # min
 ADVICE_EXPERT_FEE_IN_PERCENT = 55  # %
 
 ANSWERS_TREE_IS_EXPANDED = True
+
+ALL_PARTNER = False  # Партнёрска программа
+# URL для обработки заявок с виджета: /widget_send

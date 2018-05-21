@@ -15,29 +15,29 @@ helper.init({
         'margin-right': '50px',
         'z-index': 10000,
 
-        'message_sound': 'http://s1.nice-cream.ru/widget2.2/server/message.mp3'
+        'message_sound': '/static/js/allp/message.mp3'
     },
 
     'consultants': [
         {
             'name': 'Олег Юрьевич',
             'profession': 'юрист',
-            'userpic': 'http://svem.ru/images/OlegYurevich.jpg'
+            'userpic': '/static/js/allp/OlegYurevich.jpg'
         },
         {
             'name': 'Иван Анатольевич',
             'profession': 'адвокат',
-            'userpic': 'http://svem.ru/images/IvanAnatolevich.jpg'
+            'userpic': '/static/js/allp/IvanAnatolevich.jpg'
         },
         {
             'name': 'Петр Павлович',
             'profession': 'адвокат',
-            'userpic': 'http://svem.ru/images/PetrPavlovich.jpg'
+            'userpic': '/static/js/allp/PetrPavlovich.jpg'
         }
     ],
 
     'template': {
-        'url': 'http://s1.nice-cream.ru/widget2.2/server/design.php',
+        'url': '/static/js/allp/design.html',
 
         'vars': {
             'writing-label': 'Юрист печатает вам сообщение...',
@@ -80,6 +80,8 @@ helper.init({
 
     'server': {
 
+        'mode': 'ajax',
+        'url_redirect': '/api/widget_send',
         // 'mode': 'redirect',
         // 'url_redirect': 'http://xn--h1abiilhh6g.xn--80asehdb/%D0%B7%D0%B0%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/?from_widget',
         // 'url_redirect': 'http://127.0.0.1:8000/%D0%B7%D0%B0%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/?from_widget',

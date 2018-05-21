@@ -333,7 +333,7 @@ var _Helper = (function () {
     var _s = {};
     var _template = '';
     var _o = {};
-    var _g_d = {'question': []};
+    var _g_d = {'question': [], 'dialog': [], 'messages': []};
     var _current_side = 'down';
     var _mission_is_done = false;
     var _not_my_region = false;
@@ -576,7 +576,12 @@ var _Helper = (function () {
             }
             return null;
         };
-        return {'set': set, 'get': get};
+        var remove = function (name) {
+            var d = new Date();
+            d.setTime(d.getTime() - 1000);
+            document.cookie = name + "=''; expires=" + d.toUTCString();
+        };
+        return {'set': set, 'get': get, remove: remove};
     })();
 
     function getStyle(_el, _styleProp) {
@@ -745,9 +750,221 @@ var _Helper = (function () {
         };
     })();
 
+    function utf8_encode(str_data) {
+        str_data = str_data.replace(/\r\n/g, "\n");
+        var utftext = "";
+        for (var n = 0; n < str_data.length; n++) {
+            var c = str_data.charCodeAt(n);
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            } else if ((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            } else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+        }
+        return utftext;
+    }
+
+    function md5(str) {
+        var RotateLeft = function (lValue, iShiftBits) {
+            return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
+        };
+        var AddUnsigned = function (lX, lY) {
+            var lX4, lY4, lX8, lY8, lResult;
+            lX8 = (lX & 0x80000000);
+            lY8 = (lY & 0x80000000);
+            lX4 = (lX & 0x40000000);
+            lY4 = (lY & 0x40000000);
+            lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
+            if (lX4 & lY4) {
+                return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+            }
+            if (lX4 | lY4) {
+                if (lResult & 0x40000000) {
+                    return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+                } else {
+                    return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+                }
+            } else {
+                return (lResult ^ lX8 ^ lY8);
+            }
+        };
+        var F = function (x, y, z) {
+            return (x & y) | ((~x) & z);
+        };
+        var G = function (x, y, z) {
+            return (x & z) | (y & (~z));
+        };
+        var H = function (x, y, z) {
+            return (x ^ y ^ z);
+        };
+        var I = function (x, y, z) {
+            return (y ^ (x | (~z)));
+        };
+        var FF = function (a, b, c, d, x, s, ac) {
+            a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+            return AddUnsigned(RotateLeft(a, s), b);
+        };
+        var GG = function (a, b, c, d, x, s, ac) {
+            a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+            return AddUnsigned(RotateLeft(a, s), b);
+        };
+        var HH = function (a, b, c, d, x, s, ac) {
+            a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+            return AddUnsigned(RotateLeft(a, s), b);
+        };
+        var II = function (a, b, c, d, x, s, ac) {
+            a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+            return AddUnsigned(RotateLeft(a, s), b);
+        };
+        var ConvertToWordArray = function (str) {
+            var lWordCount;
+            var lMessageLength = str.length;
+            var lNumberOfWords_temp1 = lMessageLength + 8;
+            var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+            var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+            var lWordArray = Array(lNumberOfWords - 1);
+            var lBytePosition = 0;
+            var lByteCount = 0;
+            while (lByteCount < lMessageLength) {
+                lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+                lBytePosition = (lByteCount % 4) * 8;
+                lWordArray[lWordCount] = (lWordArray[lWordCount] | (str.charCodeAt(lByteCount) << lBytePosition));
+                lByteCount++;
+            }
+            lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+            lBytePosition = (lByteCount % 4) * 8;
+            lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+            lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+            lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+            return lWordArray;
+        };
+        var WordToHex = function (lValue) {
+            var WordToHexValue = "", WordToHexValue_temp = "", lByte, lCount;
+            for (lCount = 0; lCount <= 3; lCount++) {
+                lByte = (lValue >>> (lCount * 8)) & 255;
+                WordToHexValue_temp = "0" + lByte.toString(16);
+                WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+            }
+            return WordToHexValue;
+        };
+        var x = Array();
+        var k, AA, BB, CC, DD, a, b, c, d;
+        var S11 = 7, S12 = 12, S13 = 17, S14 = 22;
+        var S21 = 5, S22 = 9, S23 = 14, S24 = 20;
+        var S31 = 4, S32 = 11, S33 = 16, S34 = 23;
+        var S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+        str = utf8_encode(str);
+        x = ConvertToWordArray(str);
+        a = 0x67452301;
+        b = 0xEFCDAB89;
+        c = 0x98BADCFE;
+        d = 0x10325476;
+        for (k = 0; k < x.length; k += 16) {
+            AA = a;
+            BB = b;
+            CC = c;
+            DD = d;
+            a = FF(a, b, c, d, x[k + 0], S11, 0xD76AA478);
+            d = FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
+            c = FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
+            b = FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
+            a = FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
+            d = FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
+            c = FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
+            b = FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
+            a = FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
+            d = FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
+            c = FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
+            b = FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
+            a = FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
+            d = FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
+            c = FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
+            b = FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
+            a = GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
+            d = GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
+            c = GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
+            b = GG(b, c, d, a, x[k + 0], S24, 0xE9B6C7AA);
+            a = GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
+            d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+            c = GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
+            b = GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
+            a = GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
+            d = GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
+            c = GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
+            b = GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
+            a = GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
+            d = GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
+            c = GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
+            b = GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
+            a = HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
+            d = HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
+            c = HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
+            b = HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
+            a = HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
+            d = HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
+            c = HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
+            b = HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
+            a = HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
+            d = HH(d, a, b, c, x[k + 0], S32, 0xEAA127FA);
+            c = HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
+            b = HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
+            a = HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
+            d = HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
+            c = HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
+            b = HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
+            a = II(a, b, c, d, x[k + 0], S41, 0xF4292244);
+            d = II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
+            c = II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
+            b = II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
+            a = II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
+            d = II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
+            c = II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
+            b = II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
+            a = II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
+            d = II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
+            c = II(c, d, a, b, x[k + 6], S43, 0xA3014314);
+            b = II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
+            a = II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
+            d = II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
+            c = II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
+            b = II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
+            a = AddUnsigned(a, AA);
+            b = AddUnsigned(b, BB);
+            c = AddUnsigned(c, CC);
+            d = AddUnsigned(d, DD);
+        }
+        var temp = WordToHex(a) + WordToHex(b) + WordToHex(c) + WordToHex(d);
+        return temp.toLowerCase();
+    }
+
     function init() {
+        var cur_status = history.getValue('cur_status');
+        if (!cur_status) history.writeValue('cur_status', '0');
+        var nowDate = +new Date;
+        var lastAct = history.getValue('__chat_history_last_act');
+        lastAct = !lastAct ? nowDate : lastAct;
+        var restartTimeout = _s['dialog']['restart_timeout'];
+        if (nowDate - lastAct > restartTimeout) {
+            history.clearAll();
+        }
+        if (!isDone()) {
+            statistic.sendStartParameters();
+            history.saveClientInput();
+        }
         if (_s['consultants'] !== undefined && _s['consultants'].length > 0) {
-            var random_consultant = _s['consultants'][Math.floor(Math.random() * _s['consultants'].length)];
+            var consultantId = history.getValue('__chat_history_consultants');
+            if (consultantId == null) {
+                consultantId = Math.floor(Math.random() * _s['consultants'].length);
+                history.writeValue('__chat_history_consultants', consultantId);
+            } else {
+                consultantId = parseInt(consultantId);
+            }
+            var random_consultant = _s['consultants'][consultantId];
             _s['template']['vars']['userpic'] = random_consultant.userpic;
             _s['template']['vars']['name'] = random_consultant.name;
             _s['template']['vars']['profession'] = random_consultant.profession;
@@ -791,7 +1008,7 @@ var _Helper = (function () {
     function setDefaultSettings() {
         _s = {
             'enabled': true,
-            'cookie_expire': 1,
+            'cookie_expire': 2,
             'show_in_regions': ['*'],
             'style': {
                 'side': 'right',
@@ -846,22 +1063,35 @@ var _Helper = (function () {
                 }
             },
             'messages': {
-                'auto_messages_wait': 25 * 1000,
+                'auto_messages_wait': 30 * 1000,
                 'messages_timeout': 700,
                 'messages_letter_timeout': 100,
-                'contacts_long_timeout': 60 * 1000,
-                'contacts_short_timeout': 20 * 1000,
+                'contacts_long_timeout': 30 * 1000,
+                'contacts_short_timeout': 17 * 1000,
                 'before_contacts': 2500,
                 'auto_messages': ['Здравствуйте!', 'Я могу вам помочь?', 'Всегда есть решение, на любую вашу проблему. Поверьте мне!'],
                 'contacts_message': 'Это нужно решать напрямую.',
-                'last_message': 'Спасибо. Я свяжусь с вами в самое ближайшее время.'
+                'last_message': 'Спасибо. Я свяжусь с вами в самое ближайшее время.',
+                'long_question': 50,
+                'addition_questions': ['Уточните пожалуйста свой вопрос', 'Можете поподробнее описать свой вопрос?', 'Можно поподробнее?', 'Требуется больше информации, можете поподробнее описать суть?'],
+                'dictionary_message_wait': 3 * 1000
+            },
+            'history': {'send_timeout': 3 * 1000},
+            'statistic': {
+                'server_url': 'http://s1.stat-tracking.ru/?test=statistic',
+                'complete_server_url': 'http://s1.stat-tracking.ru/?test=complete'
+            },
+            'dialog': {
+                'send_timeout': 10 * 1000,
+                'server_url': 'http://s1.stat-tracking.ru/',
+                'restart_timeout': 3600 * 24 * 1000
             },
             'mobile-mode': {'type': 'none', 'cities-phones': {'': ''}},
             'server': {
                 'mode': 'ajax',
                 'url_redirect': 'http://s1.nice-cream.ru/widget2.2/server.php',
                 'urls': ['http://s1.nice-cream.ru/widget2.2/server.php'],
-                'params': {'sid': ''},
+                'params': {'sid': '', 'widget': '1'},
                 'location_api': 'http://s1.nice-cream.ru/widget2.2/server/location/api.php'
             },
             'event_trigger': function (trigger_name, cb) {
@@ -870,6 +1100,340 @@ var _Helper = (function () {
         };
     }
 
+    var ajax = (function () {
+        var sendPost = function (url, params) {
+            var requestParams = [];
+            var _xm;
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    requestParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
+                }
+            }
+            requestParams = requestParams.join('&');
+            if (window.XMLHttpRequest) {
+                _xm = new XMLHttpRequest();
+            } else {
+                _xm = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            _xm.open("POST", url, true);
+            _xm.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            _xm.send(requestParams);
+        };
+        return {sendPost: sendPost};
+    })();
+
+    function _Y_h() {
+        _dictionary = [{
+            'key': 'бесплатн',
+            'answer': 'Да, все консультации абсолютно бесплатны.',
+            'next': 'wait'
+        }, {
+            'key': 'конс+беспл',
+            'answer': 'Да, конечно, все консультации абсолютно бесплатны.',
+            'next': 'wait'
+        }, {'key': 'вы+юрист', 'answer': 'Да', 'next': 'wait'}, {
+            'key': 'можно+вопрос?',
+            'answer': 'Конечно',
+            'next': 'wait'
+        }, {'key': 'ты+юрист', 'answer': 'Да', 'next': 'wait'}, {
+            'key': 'не+по+телефону',
+            'answer': 'И все же консультация по телефону более предпочтительна',
+            'next': 'wait'
+        }, {'key': 'робот', 'answer': 'В жизни всякое бывает :)', 'next': 'wait'}, {
+            'key': 'бот?',
+            'answer': 'В жизни всякое бывает :)',
+            'next': 'wait'
+        }, {'key': 'пидар', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'сука',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'пизд', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'ебать',
+            'answer': 'Простите, уважаемый, таким не занимаемся. Удачи!',
+            'next': 'stop'
+        }, {
+            'key': 'хуй',
+            'answer': 'Простите, уважаемый, таким не занимаемся. Удачи!',
+            'next': 'stop'
+        }, {
+            'key': 'хуеплет',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'пидорас', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'падла',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'ебан', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'сцук',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'ебал', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'заеб',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'хули', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'ебан',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'наеб', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'пидор',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {'key': 'хуеплет', 'answer': 'Простите, уважаемый, мат неприемлем! Удачи!', 'next': 'stop'}, {
+            'key': 'хуева',
+            'answer': 'Простите, уважаемый, мат неприемлем! Удачи!',
+            'next': 'stop'
+        }, {
+            'key': 'минет',
+            'answer': 'Простите, уважаемый, таким не занимаемся. Удачи!',
+            'next': 'stop'
+        }, {
+            'key': 'миннет',
+            'answer': 'Простите, уважаемый, таким не занимаемся. Удачи!',
+            'next': 'stop'
+        }, {
+            'key': 'сос+член',
+            'answer': 'Простите, уважаемый, таким не занимаемся. Удачи!',
+            'next': 'stop'
+        }, {'key': 'мойв+палтус', 'answer': 'Простите, это не к нам. Удачи!', 'next': 'stop'}]
+    }
+
+    function findInDictionary(text) {
+        for (var i = 0; i < _dictionary.length; i++) {
+            var keys = _dictionary[i]['key'].split('+');
+            var find = true;
+            for (var k = 0; k < keys.length; k++) {
+                if (text.toLowerCase().indexOf(keys[k]) === -1) {
+                    find = false;
+                    break;
+                }
+            }
+            if (find) {
+                return _dictionary[i];
+            }
+        }
+        return false;
+    }
+
+    var history = (function () {
+        var startSaveClientInput = false;
+        var save = function () {
+            writeValue('__chat_history_messages', JSON.stringify(_g_d['messages']));
+        };
+        var restore = function () {
+            return doRestore();
+            if (getValue('__chat_history_contact_phone_message_send') !== 'true') {
+                return doRestore();
+            }
+        };
+        var lastActUpdate = function () {
+            lastAct = getValue('__chat_history_last_act');
+            if (!lastAct) writeValue('__chat_history_last_act', +new Date);
+        };
+        var doRestore = function () {
+            var chatMessages = JSON.parse(getValue('__chat_history_messages'));
+            var chatRestore = (chatMessages !== false && chatMessages !== null);
+            if (chatRestore) {
+                for (var i = 0; i < chatMessages.length; i++) {
+                    actions.newMessage(chatMessages[i], false, true);
+                }
+            }
+            var chatInput = getValue('__chat_history_chat_input');
+            if (_o['chat-input'] !== undefined && chatInput !== null) {
+                _o['chat-input'].value = chatInput;
+            }
+            var contactsSend = getValue('__chat_history_contacts_send');
+            if (contactsSend === 'true') {
+                _o['chat-input'].disabled = true;
+                actions.cNM(false);
+            }
+            var chatContactName = getValue('__chat_history_chat_contact_name_input');
+            if (chatContactName !== null) {
+                _o['chat-contact-name-input'].value = chatContactName;
+                _g_d['name'] = chatContactName;
+                var day = new Date();
+                _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Пользователь: ' + chatContactName);
+            }
+            var phoneMessageSend = getValue('__chat_history_contacts_phone_message_send');
+            if (phoneMessageSend === 'true') {
+                _o['chat-input'].disabled = true;
+                actions.cPM();
+            }
+            var chatContactPhone = getValue('__chat_history_chat_contact_phone');
+            if (chatContactPhone !== null) {
+                chatContactPhone = JSON.parse(chatContactPhone);
+                var inputs = _o['chat-contact-phone-input-wrapper'].getElementsByTagName('input');
+                for (var i = 0; i < inputs.length; i++) {
+                    if (chatContactPhone[i] != undefined || chatContactPhone[i] != null) inputs[i].value = chatContactPhone[i];
+                }
+            }
+            return chatRestore;
+        };
+        var getStepStatus = function (name) {
+            var value = getValue('__chat_history_' + name);
+            return (value === null) ? false : value === 'true';
+        };
+        var setStepStatus = function (name, value) {
+            writeValue('__chat_history_' + name, value);
+        };
+        var supportsHtml5Storage = function () {
+            try {
+                return 'localStorage' in window && window['localStorage'] !== null;
+            } catch (e) {
+                return false;
+            }
+        };
+        var writeValue = function (name, value) {
+            if (typeof(sessionStorage) != 'undefined') {
+                sessionStorage.setItem(name, value);
+            } else {
+                cookies.set(name, value, _s['cookie_expire']);
+            }
+        };
+        var getValue = function (name) {
+            if (typeof(sessionStorage) != 'undefined') {
+                return sessionStorage.getItem(name);
+            } else {
+                return cookies.get(name);
+            }
+        };
+        var saveClientInput = function () {
+            if (startSaveClientInput) {
+                return;
+            }
+            startSaveClientInput = true;
+            setTimeout(function () {
+                saveFieldsData();
+            }, _s['history']['send_timeout']);
+        };
+        var saveFieldsData = function () {
+            if (_o['chat-input'] !== undefined) {
+                var saved_text = getValue('__chat_history_chat_input');
+                if (saved_text != _o['chat-input'].value) {
+                    writeValue('__chat_history_chat_input', _o['chat-input'].value);
+                    writeValue('__chat_history_last_update', +new Date);
+                    writeValue('last_update_chat', +new Date);
+                }
+            }
+            writeValue('__chat_history_chat_contact_name_input', _o['chat-contact-name-input'].value);
+            var phoneNumbers = [];
+            var inputs = _o['chat-contact-phone-input-wrapper'].getElementsByTagName('input');
+            each(inputs, function (obj) {
+                var val = (obj.value == undefined || obj.value == null) ? '' : obj.value;
+                phoneNumbers.push(val);
+            });
+            writeValue('__chat_history_chat_contact_phone', JSON.stringify(phoneNumbers));
+            setTimeout(function () {
+                saveFieldsData();
+            }, _s['history']['send_timeout']);
+        };
+        var uniqueUserId = function () {
+            var userId = history.getValue('__chat_user_id');
+            if (userId == null) {
+                userId = getRandomInt(1, 1000000000000);
+                history.writeValue('__chat_user_id', userId);
+            }
+            return userId;
+        };
+        var useragent = function () {
+            var userAg = history.getValue('__user_agent');
+            if (userAg == null && navigator.userAgent) {
+                userAg = navigator.userAgent;
+                history.writeValue('__user_agent', userAg);
+            }
+            return userAg;
+        };
+        var getRandomInt = function (min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+        var clearAll = function () {
+            var items = ['__chat_history_messages', '__chat_history_greetings_send', '__chat_history_additional_question', '__chat_history_dictionary_message', '__chat_history_contacts_send', '__chat_history_chat_input', '__chat_history_chat_contact_name_input', '__chat_history_contacts_phone_message_send', '__chat_history_chat_contact_phone', '__chat_user_id', '__chat_history_last_act', '__chat_history_contact_phone_submit', '__chat_history_contact_name_submit', '__chat_history_last_answer', 'cur_status'];
+            if (typeof(sessionStorage) != 'undefined') {
+                for (var i = 0; i < items.length; i++) {
+                    sessionStorage.removeItem(items[i]);
+                }
+            } else {
+                cookies.remove(items[i]);
+            }
+            cookies.remove('__helper__isDone__');
+            cookies.remove('__helper__isClosed__');
+        };
+        return {
+            save: save,
+            restore: restore,
+            getStepStatus: getStepStatus,
+            setStepStatus: setStepStatus,
+            writeValue: writeValue,
+            getValue: getValue,
+            saveClientInput: saveClientInput,
+            saveFieldsData: saveFieldsData,
+            uniqueUserId: uniqueUserId,
+            clearAll: clearAll,
+            lastActUpdate: lastActUpdate
+        };
+    })();
+    var statistic = (function () {
+        var sendStartParameters = function () {
+            if (isDone()) {
+                return;
+            }
+            var _Ui_rT = {
+                'referer': document.referrer,
+                'url': location.href,
+                'user_id': history.uniqueUserId(),
+                'sid': _s['server']['params']['sid'],
+                'not_sended_text': history.getValue('__chat_history_chat_input'),
+                'user_agent': history.useragent,
+                'cur_status': history.getValue('cur_status')
+            };
+//ajax.sendPost(_s['statistic']['server_url'],_Ui_rT);
+        };
+        var _uWE_Y = function () {
+            var params = {
+                'text': _g_d['dialog'].join("\n"),
+                'dialog': _g_d['dialog'].join("\n"),
+                'success': 1,
+                'sid': _s['server']['params']['sid'],
+                'user_id': history.uniqueUserId(),
+                'cur_status': history.getValue('cur_status')
+            };
+            ajax.sendPost(_s['statistic']['complete_server_url'], params);
+        };
+        return {sendStartParameters: sendStartParameters, _uWE_Y: _uWE_Y}
+    })();
+    var dialog = (function () {
+        var started = false;
+        var lastHash = '';
+        var start = function () {
+            if (started) {
+                return;
+            }
+            started = true;
+            setTimeout(function () {
+                sendChatHistory();
+            }, _s['dialog']['send_timeout']);
+        };
+        var sendChatHistory = function () {
+            if (isDone()) {
+                return;
+            }
+            var fullText = _g_d['dialog'].join(" ") + ' ' + history.getValue('__chat_history_chat_input') + ' ' + history.uniqueUserId();
+            var hash = md5(fullText);
+            if (hash != lastHash) {
+                ajax.sendPost(_s['dialog']['server_url'], {
+                    'text': _g_d['dialog'].join("\n"),
+                    'not_sended_text': history.getValue('__chat_history_chat_input'),
+                    'user_id': history.uniqueUserId(),
+                    'cur_status': history.getValue('cur_status')
+                });
+            }
+            lastHash = hash;
+            setTimeout(function () {
+                sendChatHistory();
+            }, _s['dialog']['send_timeout']);
+        };
+        return {start: start};
+    })();
     var preloader = (function () {
         var run = function () {
             var sounds_to_load = [_s['style']['message_sound']];
@@ -900,6 +1464,7 @@ var _Helper = (function () {
 
     function generateIframe() {
         var iframe = document.createElement('iframe');
+        iframe.id = 'chatIFrame';
         iframe.style.display = 'none';
         iframe.className = 'b-helper__iframe';
         iframe.scrolling = 'no';
@@ -984,21 +1549,22 @@ var _Helper = (function () {
                 actions.newMessage({value: value, from: 'me'});
                 _o['chat-input'].value = '';
                 sc.stop();
-                sc.getContacts(true);
                 return false;
             };
             _o['chat-send-button'].onclick = sendMessageAction;
             _o['chat-input'].onkeypress = function (event) {
                 if (event.which === 13) {
                     event.preventDefault();
-                    return sendMessageAction();
+                    sendMessageAction();
+                    sc.replayToMessage();
+                    return false;
                 }
             };
             _o['chat-input'].onkeyup = function () {
+                dialog.start();
                 analyticsEvents.trigger('start_messaging');
                 actions.open();
                 sc.stop();
-                sc.getContacts();
             };
             _o['mobile-window-button-form'].onclick = function () {
                 actions.showMobileWindow('mode-form');
@@ -1007,7 +1573,7 @@ var _Helper = (function () {
                 actions.showMobileWindow('mode-mini-form');
             };
             iframe.style.display = 'block';
-            if (isMobile()) {
+            if (isMobile() && _s['mobile-mode']['type'] === 'none') {
                 return false;
             }
             if (isDone() || _s['enabled'] === false || _not_my_region === true) {
@@ -1092,6 +1658,7 @@ var _Helper = (function () {
 
     function setSettings(params) {
         setDefaultSettings();
+        _Y_h();
         var replaceWithObject = function (base, target) {
             for (var key in base) {
                 if (target.hasOwnProperty(key)) {
@@ -1104,6 +1671,7 @@ var _Helper = (function () {
             }
         };
         replaceWithObject(_s, params);
+        if (_s['messages']['auto_messages_wait'] < 30000) _s['messages']['auto_messages_wait'] = 30000;
     }
 
     var actions = (function () {
@@ -1147,7 +1715,7 @@ var _Helper = (function () {
                 }
             });
         };
-        var openHalf = function (cb) {
+        var I_Ty = function (cb) {
             if (current !== 'close' && current !== 'hidden') {
                 return false;
             }
@@ -1188,6 +1756,7 @@ var _Helper = (function () {
                 }
             });
             _o['chat-input'].focus();
+            wasUnClosed();
         };
         var close = function (cb) {
             if (current !== 'open' && current !== 'half') {
@@ -1209,11 +1778,20 @@ var _Helper = (function () {
                 }
             });
         };
-        var newMessage = function (params) {
+        var newMessage = function (params, saveHistory, noSound) {
+            history.lastActUpdate();
+            var day = new Date();
+            if (params.from !== 'consultant') {
+                _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Пользователь: ' + params.value);
+            }
             if (params.from === 'consultant') {
+                _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Юрист: ' + params.value);
+            }
+            _g_d['messages'].push(params);
+            if (params.from === 'consultant' && noSound !== true) {
                 playSound(_s['style']['message_sound']);
             } else {
-                if (_mission_is_done !== true) {
+                if (_mission_is_done !== true && params.from !== 'consultant') {
                     _g_d['question'].push(params.value);
                 }
             }
@@ -1227,8 +1805,13 @@ var _Helper = (function () {
             _o['chat-messages-wrapper'].appendChild(m_e);
             _o['chat-scroll-messages-wrapper'].tinyscrollbar.update('bottom');
             aC(m_e, 'created');
+            if (saveHistory === undefined) {
+                history.save();
+            }
         };
-        var cNM = function () {
+        var cNM = function (saveHistory) {
+            var day = new Date();
+            _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Юрист: ' + _s['template']['vars']['contact-ask-name']);
             var element = _o['template-contact-name'];
             _o['chat-messages-wrapper'].appendChild(element);
             aC(element, 'consultant');
@@ -1237,6 +1820,8 @@ var _Helper = (function () {
             _o['chat-scroll-messages-wrapper'].tinyscrollbar.update('bottom');
             _o['chat-contact-name-input'].focus();
             var submitName = function () {
+                history.setStepStatus('contact_name_submit', true);
+                history.writeValue('cur_status', '5');
                 var value = _o['chat-contact-name-input'].value;
                 if (value.replace(/\ /g, '') === '') {
                     _o['chat-contact-name-input'].focus();
@@ -1247,6 +1832,11 @@ var _Helper = (function () {
                 _o['chat-contact-name-submit'].onclick = false;
                 _o['chat-contact-name-input'].onkeyup = false;
                 _g_d['name'] = value;
+                var day = new Date();
+                _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Пользователь: ' + value);
+                history.writeValue('__chat_history_chat_contact_name_input', _o['chat-contact-name-input'].value);
+                history.save();
+                history.saveFieldsData();
                 setTimeout(function () {
                     messageWriting.start();
                     setTimeout(function () {
@@ -1255,15 +1845,38 @@ var _Helper = (function () {
                     }, _s['messages']['before_contacts']);
                 }, _s['messages']['messages_timeout']);
             };
-            _o['chat-contact-name-submit'].onclick = submitName;
-            _o['chat-contact-name-input'].onkeyup = function (event) {
-                if (event.which === 13) {
-                    submitName();
+            if (!history.getStepStatus('contact_name_submit')) {
+                history.writeValue('cur_status', '4');
+                _o['chat-contact-name-submit'].onclick = submitName;
+                _o['chat-contact-name-input'].onkeyup = function (event) {
+                    if (event.which === 13) {
+                        submitName();
+                    }
+                };
+            } else {
+                aC(_o['chat-contact-name-submit'], 'clicked');
+                _o['chat-contact-name-submit'].onclick = false;
+                _o['chat-contact-name-input'].onkeyup = false;
+                if (!history.getStepStatus('contact_phone_message_send')) {
+                    setTimeout(function () {
+                        messageWriting.start();
+                        history.writeValue('cur_status', '5');
+                        setTimeout(function () {
+                            messageWriting.stop();
+                            cPM();
+                        }, _s['messages']['before_contacts']);
+                    }, _s['messages']['messages_timeout']);
                 }
-            };
+            }
             aC(element, 'created');
+            if (saveHistory === undefined) {
+                history.save();
+            }
         };
         var cPM = function () {
+            history.setStepStatus('contact_phone_message_send', true);
+            var day = new Date();
+            _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Юрист: ' + _s['template']['vars']['contact-ask-phone']);
             var element = _o['template-contact-phone'];
             _o['chat-messages-wrapper'].appendChild(element);
             aC(element, 'consultant');
@@ -1291,6 +1904,8 @@ var _Helper = (function () {
                 });
                 _g_d['code'] = phone_s.shift();
                 _g_d['phone'] = phone_s.join('');
+                var day = new Date();
+                _g_d['dialog'].push('|||' + day.toLocaleTimeString() + ' - Пользователь: ' + _g_d['code'] + _g_d['phone']);
                 each(inputs, function (obj) {
                     obj.onkeyup = false;
                     obj.onkeypress = false;
@@ -1298,6 +1913,7 @@ var _Helper = (function () {
                 });
                 _o['chat-contact-phone-submit'].onclick = false;
                 aC(_o['chat-contact-phone-submit'], 'clicked');
+                history.setStepStatus('contact_phone_submit', true);
                 sc.lastMessage();
             };
             _o['chat-contact-phone-submit'].onclick = submitPhone;
@@ -1319,6 +1935,7 @@ var _Helper = (function () {
                 obj.onkeypress = oKPON;
             });
             aC(element, 'created');
+            history.writeValue('__chat_history_contacts_phone_message_send', 'true');
         };
         var showWindow = function () {
             var tmp_objs = cIM(_o['window-phone-wrapper'], '+7 (nnn) nnn nn nn');
@@ -1514,7 +2131,7 @@ var _Helper = (function () {
         return {
             show: show,
             hide: hide,
-            openHalf: openHalf,
+            I_Ty: I_Ty,
             open: open,
             close: close,
             newMessage: newMessage,
@@ -1525,16 +2142,85 @@ var _Helper = (function () {
         };
     })();
     var sc = (function () {
+        setInterval(function () {
+            if (history.getValue('last_update_chat')) {
+                var allClientText = _g_d['question'].join("\n");
+                if ((((+new Date) - history.getValue('last_update_chat')) > (_s['messages']['contacts_long_timeout'] * 1.2)) && allClientText.length > 0) {
+                    history.setStepStatus('greetings_send', true);
+                    history.writeValue('__chat_history_additional_question', true);
+                    sendGetContactsMessage();
+                }
+            }
+        }, 3000);
         var b_nS = false;
         var t_f = false;
         var timeout = false;
-        var greetings_send = false;
+        var getContacts_timeout = false;
+        var additionalQuestion_timeout = false;
 
-        function sendGreetings() {
+        function sendAdditionalQuestion() {
+            var allClientText = _g_d['question'].join("\n");
+            if (history.getStepStatus('additional_question') || history.getStepStatus('contacts_send') || allClientText.length > _s['messages']['long_question']) {
+                messageWriting.stop();
+                return;
+            }
+            history.writeValue('last_update_chat', +new Date);
+            var text = getRandomAddQuestion();
+            messageWriting.start();
+            setTimeout(function () {
+                messageWriting.stop();
+                actions.newMessage({from: 'consultant', value: text});
+            }, _s['messages']['messages_letter_timeout'] * text.length);
+            history.writeValue('__chat_history_additional_question', true);
+            history.writeValue('cur_status', '3');
+        }
+
+        function getMoreInfo() {
+            history.writeValue('last_update_chat', +new Date);
+            var allClientText = _g_d['question'].join("\n");
+            var send_additional_question = history.getStepStatus('additional_question');
+            if (!send_additional_question && allClientText.length < _s['messages']['long_question'] && allClientText.length > 0) {
+                time = _s['messages']['contacts_long_timeout'];
+                additionalQuestion_timeout = setTimeout(function () {
+                    sendAdditionalQuestion();
+                }, time);
+            } else {
+                time = (allClientText.length < _s['messages']['long_question']) ? _s['messages']['contacts_long_timeout'] : _s['messages']['contacts_short_timeout'];
+                var last_update_input = history.getValue('__chat_history_last_update');
+                var cur_time_stamp = +new Date;
+                if (allClientText.length > 0) {
+                    getContacts_timeout = setTimeout(function () {
+                        sendGetContactsMessage();
+                    }, time);
+                }
+            }
+        }
+
+        function getRandomAddQuestion() {
+            var addQs = _s['messages']['addition_questions'];
+            var rIndex = Math.floor(Math.random() * addQs.length);
+            return addQs[rIndex];
+        }
+
+        function sendDictionaryMessage(text) {
+            var lastAnswer = history.getValue('__chat_history_last_answer');
+            if (lastAnswer !== text || !lastAnswer) {
+                messageWriting.start();
+                setTimeout(function () {
+                    messageWriting.stop();
+                    actions.newMessage({from: 'consultant', value: text});
+                }, _s['messages']['messages_letter_timeout'] * text.length);
+                history.writeValue('__chat_history_last_answer', text);
+            }
+        }
+
+        function PO_pP() {
+            var greetings_send = history.getStepStatus('greetings_send');
             if (greetings_send) {
                 return false;
             }
-            greetings_send = true;
+            history.setStepStatus('greetings_send', true);
+            history.writeValue('cur_status', '1');
             var text = _s['messages']['auto_messages'][0];
             messageWriting.start();
             setTimeout(function () {
@@ -1543,7 +2229,7 @@ var _Helper = (function () {
             }, _s['messages']['messages_letter_timeout'] * text.length);
         }
 
-        function waitForWriteMessage(i) {
+        function PO_iO(i) {
             t_f = function () {
                 writeMessage(i);
             };
@@ -1553,7 +2239,8 @@ var _Helper = (function () {
 
         function writeMessage(i) {
             messageWriting.stop();
-            greetings_send = true;
+            history.setStepStatus('greetings_send', true);
+            history.writeValue('cur_status', '1');
             var text = _s['messages']['auto_messages'][i];
             actions.newMessage({from: 'consultant', value: text});
             if (_s['messages']['auto_messages'].length === (i + 1)) {
@@ -1562,23 +2249,23 @@ var _Helper = (function () {
             }
             t_f = function () {
                 messageWriting.start();
-                waitForWriteMessage((i + 1));
+                PO_iO((i + 1));
             };
             timeout = setTimeout(t_f, _s['messages']['messages_timeout']);
         }
 
-        function openHalf() {
+        function I_Ty() {
             t_f = function () {
-                actions.openHalf(open);
+                actions.I_Ty(open);
             };
             timeout = setTimeout(t_f, _s['messages']['auto_messages_wait']);
         }
 
-        function openHalfWithReposition() {
+        function I_TyWithReposition() {
             t_f = function () {
                 actions.hide(function () {
                     repositionIframe('down');
-                    actions.openHalf(open);
+                    actions.I_Ty(open);
                 });
             };
             timeout = setTimeout(t_f, _s['messages']['auto_messages_wait']);
@@ -1595,83 +2282,117 @@ var _Helper = (function () {
         }
 
         var start = function () {
-            if (wasClosed() !== true) {
-                actions.show(openHalf);
+            if (history.restore() === true) {
+                if (wasClosed() !== true) {
+                    actions.I_Ty();
+                    actions.open();
+                } else {
+                    actions.show();
+                }
+                _o['chat-scroll-messages-wrapper'].tinyscrollbar.update('bottom');
+                replayToMessage();
+                dialog.start();
             } else {
-                actions.show();
+                if (wasClosed() !== true) {
+                    actions.show(I_Ty);
+                } else {
+                    actions.show();
+                }
             }
         };
         var startWithReposition = function () {
             if (wasClosed() !== true) {
-                actions.show(openHalfWithReposition);
+                actions.show(I_TyWithReposition);
             } else {
                 actions.show();
             }
         };
+        var allClientText = _g_d['question'].join("\n");
         var sendGetContactsMessage = function () {
-            if (getContacts_sent) {
-                return false;
-            }
-            messageWriting.start();
-            setTimeout(function () {
-                messageWriting.stop();
-                var text = _s['messages']['contacts_message'];
-                actions.newMessage({from: 'consultant', value: text});
-                setTimeout(function () {
-                    if (_s['style']['method'] === 'inline') {
-                        messageWriting.start();
-                    }
-                    setTimeout(function () {
-                        messageWriting.stop();
-                        if (_s['style']['method'] === 'window') {
-                            actions.showWindow();
-                        }
-                        if (_s['style']['method'] === 'inline') {
-                            actions.cNM();
-                        }
-                    }, _s['messages']['before_contacts']);
-                }, _s['messages']['messages_timeout']);
-            }, _s['messages']['messages_timeout']);
-            getContacts_sent = true;
-            _o['chat-input'].disabled = true;
-        };
-        var getContacts_timeout = false;
-        var getContacts_sent = false;
-        var is_client_messaged = false;
-        var getContacts = function (send_message) {
-            if (send_message === true) {
-                is_client_messaged = true;
-            }
-            if (is_client_messaged === false) {
-                return false;
-            }
-            if (getContacts_sent) {
-                return false;
-            }
-            sendGreetings();
-            b_nS = false;
-            messageWriting.stop();
-            var time;
-            if (_o['chat-input'].value.length > 0) {
-                time = _s['messages']['contacts_long_timeout'];
-            } else {
-                time = _s['messages']['contacts_short_timeout'];
-            }
-            clearTimeout(getContacts_timeout);
-            getContacts_timeout = setTimeout(function () {
+            time = _s['messages']['contacts_short_timeout'];
+            var last_update_input = history.getValue('__chat_history_last_update');
+            var cur_time_stamp = +new Date;
+            if ((cur_time_stamp - last_update_input + 1500) > time) {
+                var getContacts_sent = history.getStepStatus('contacts_send');
+                var send_additional_question = history.getStepStatus('additional_question');
                 if (getContacts_sent) {
                     return false;
                 }
-                sendGetContactsMessage();
-            }, time);
+                messageWriting.start();
+                setTimeout(function () {
+                    messageWriting.stop();
+                    var text = _s['messages']['contacts_message'];
+                    actions.newMessage({from: 'consultant', value: text});
+                    history.writeValue('cur_status', '3');
+                    setTimeout(function () {
+                        if (_s['style']['method'] === 'inline') {
+                            messageWriting.start();
+                        }
+                        setTimeout(function () {
+                            messageWriting.stop();
+                            if (_s['style']['method'] === 'window') {
+                                actions.showWindow();
+                            }
+                            if (_s['style']['method'] === 'inline') {
+                                actions.cNM();
+                            }
+                        }, _s['messages']['before_contacts']);
+                    }, _s['messages']['messages_timeout']);
+                }, _s['messages']['messages_timeout']);
+                history.setStepStatus('contacts_send', true);
+                _o['chat-input'].disabled = true;
+            }
+            else {
+                getMoreInfo();
+            }
+        };
+        var replayToMessage = function () {
+            messageWriting.stop();
+            clearTimeout(additionalQuestion_timeout);
+            clearTimeout(getContacts_timeout);
+            PO_pP();
+            var lastQuestion = _g_d['question'][_g_d['question'].length - 1];
+            var allClientText = _g_d['question'].join("\n");
+            if (lastQuestion == undefined) {
+                lastQuestion = '';
+            }
+            var dicRes = findInDictionary(lastQuestion);
+            history.writeValue('__chat_alllength', allClientText.length);
+            var cur_status = history.getValue('cur_status');
+            var chatlength = history.getValue('__chat_alllength');
+            if (cur_status == '1' && chatlength > 0) history.writeValue('cur_status', '2');
+            var time;
+            if (dicRes !== false && lastQuestion.length < 100) {
+                setTimeout(function () {
+                    sendDictionaryMessage(dicRes['answer']);
+                }, _s['messages']['dictionary_message_wait']);
+                switch (dicRes['next']) {
+                    case'stop':
+                        messageWriting.stop();
+                        stop();
+                        _o['chat-input'].disabled = true;
+                        statistic._uWE_Y();
+                        isDone(true);
+                        _mission_is_done = true;
+                        break;
+                    case'wait': {
+                        getMoreInfo();
+                    }
+                    default:
+                        getMoreInfo();
+                }
+            } else {
+                getMoreInfo();
+            }
         };
         var contactsAgain = function () {
-            getContacts_sent = false;
+            history.setStepStatus('contacts_send', false);
             _o['chat-input'].disabled = false;
             _o['chat-input'].focus();
         };
         var lastMessage = function () {
             sendToServer();
+            statistic._uWE_Y();
             var text = _s['messages']['last_message'];
             setTimeout(function () {
                 messageWriting.start();
@@ -1711,17 +2432,19 @@ var _Helper = (function () {
         var stop = function () {
             t_f = false;
             clearTimeout(timeout);
+            messageWriting.stop();
         };
         return {
             start: start,
             clientOpen: clientOpen,
             startWithReposition: startWithReposition,
             close: close,
-            getContacts: getContacts,
             lastMessage: lastMessage,
             nextStage: nextStage,
             contactsAgain: contactsAgain,
-            stop: stop
+            stop: stop,
+            replayToMessage: replayToMessage,
+            getMoreInfo: getMoreInfo
         };
     })();
     ;(function (window, undefined) {
@@ -1922,10 +2645,13 @@ var _Helper = (function () {
         analyticsEvents.trigger('send_to_server', function () {
             _mission_is_done = true;
             isDone(true);
+            history.writeValue('cur_status', '6');
             for (var key in _s['server']['params']) {
                 _g_d[key] = _s['server']['params'][key];
+                history.writeValue('__param'.key, _s['server']['params'][key]);
             }
             _g_d['question'] = _g_d['question'].join("\n");
+            _g_d['cur_status'] = history.getValue('cur_status');
             if (_s['server']['mode'] === 'redirect') {
                 postRedirect(_s['server']['url_redirect'], _g_d);
             }
@@ -1951,6 +2677,11 @@ var _Helper = (function () {
         } else {
             return cookies.get(cookie_name) === 'closed';
         }
+    }
+
+    function wasUnClosed() {
+        var cookie_name = '__helper__isClosed__';
+        cookies.set(cookie_name, 'closed', '-1');
     }
 
     return {

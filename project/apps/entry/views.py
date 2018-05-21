@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.views import View
 from django.views.generic import ListView, TemplateView
 from apps.entry.models import Question
 from apps.rubric.models import Rubric
@@ -21,4 +22,3 @@ class QuestionsFeedList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-

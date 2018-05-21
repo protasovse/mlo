@@ -1,3 +1,4 @@
+import requests
 from django.db import transaction
 from django.db.models import F
 from apps.entry.models import Answer, Additionals
@@ -86,3 +87,25 @@ def answer(question, content, user, parent_id=None):
             advice.to_addquestion()
 
     return instance
+
+
+def send_to_all_partner(name, phone, code, question, ip=''):
+    """
+    :param name — имя,
+    :param phone — номер телефона без кода,
+    :param code — код,
+    :param question — текст вопроса,
+    :param ip
+    :return:
+    """
+
+    params = {
+        'sid': 'YTTYRDSQ8lXzoS6joPDIJvcYgHEADbvsUegBIYiF',
+        'name': name,
+        'phone': phone,
+        'code': code,
+        'question': question,
+        'ip': ip
+    }
+
+    return requests.post("http://all-partner.ru/receive/", params)

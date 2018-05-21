@@ -1,5 +1,6 @@
 import os
 import binascii
+
 from django.db.models import F
 from phonenumbers import PhoneNumberFormat, format_number, parse
 from apps.advice.models import Advice
@@ -16,8 +17,8 @@ from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
-from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED
-from apps.entry.services import answer as to_answer
+from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED, ALL_PARTNER
+from apps.entry.services import answer as to_answer, send_to_all_partner
 
 
 class QuestionView(ApiView):
@@ -90,6 +91,14 @@ class QuestionView(ApiView):
                 emails.send_paid_question(user, q, user.email, password)
             else:
                 emails.send_confirm_question(user, q, q.token, user.email, password)
+                if ALL_PARTNER:  # Если влючена парнёрская программа — отправим заявку
+                    send_to_all_partner(
+                        name=params['name'],
+                        phone=params['phone'][5:],
+                        code=params['phone'][2:5],
+                        question=params['content'],
+                        ip=cls.get_client_ip(request)
+                    )
         else:
             messages.add_message(
                 request, messages.SUCCESS, flash_messages.QUESTION_CREATE_ACTIVE.format(id=q.id), 'success'
@@ -268,3 +277,16 @@ class QuestionDefault(ApiView):
             'ask_name': request.session.pop('ask_name', ''),
             'ask_phone': request.session.pop('ask_phone', ''),
         }
+
+
+class WidgetSend(ApiView):
+    @classmethod
+    def post(cls, request):
+
+        r = send_to_all_partner(
+            name=request.POST.get('name'),
+            phone=request.POST.get('phone'),
+            code=request.POST.get('code'),
+            question=request.POST.get('question'),
+            ip=cls.get_client_ip(request),
+        )

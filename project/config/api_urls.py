@@ -24,6 +24,7 @@ urlpatterns = [
     path('questions/<int:qid>/answers/<int:aid>/files', question_api.AnswersFilesView.as_view()),
     path('city/search', sxgeo_api.City.as_view()),
     path('city/ip', sxgeo_api.CityIp.as_view()),
-    path('city/default', sxgeo_api.CityDefault.as_view())
+    path('city/default', sxgeo_api.CityDefault.as_view()),
+    path('widget_send', question_api.WidgetSend.as_view()),
 ]
 

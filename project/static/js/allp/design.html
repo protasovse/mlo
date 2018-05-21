@@ -1,0 +1,448 @@
+
+<style>*{font-family:Arial}
+
+#bundle-close-button{position:absolute;right:-20.5px;top:-20.5px;width:23px;height:23px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-header__close-button.png');opacity:.35;transition:opacity .5s;cursor:pointer}
+
+
+#bundle-close-button:hover{opacity:1}
+#bundle-close-button.hidden{opacity:0;height:0}
+.b-wrapper{position:absolute;right:0;bottom:0;width:328px;height:0}
+.b-wrapper.close{height:51px}
+.b-wrapper.close.rotated{width:51px;height:328px}
+.b-wrapper.open{height:443px}
+.b-wrapper.open .b-body__input-wrapper{height:68px !important}
+.b-wrapper.open .b-body__writing-wrapper{bottom:94px;display:none}
+.b-wrapper.open .b-body__writing-wrapper.write{display:block}
+.b-wrapper.open .b-body__writing-wrapper .b-body__writing-data.icon{width:100%}
+.b-wrapper.open .b-body__writing-wrapper .b-body__writing-data.text{display:none}
+.b-wrapper.open.half{height:212px}
+.b-wrapper.open.half .b-body__input-wrapper{height:29px !important}
+.b-wrapper.open.half .b-body__writing-wrapper{bottom:70px !important;display:block !important}
+.b-wrapper.open.half .b-body__writing-wrapper .b-body__writing-data.icon{width:34px !important}
+.b-wrapper.open.half .b-body__writing-wrapper .b-body__writing-data.text{display:block !important}
+
+
+.b-wrapper .b-chat-wrapper{position:absolute;bottom:0;width:305px;height:0}
+.b-wrapper .b-chat-wrapper.rotated{transform:rotate(-90deg);-moz-transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-o-transform:rotate(-90deg);-ms-transform:rotate(-90deg)}
+.b-wrapper .b-chat-wrapper.rotated .b-header__userpic{transform:rotate(90deg);-moz-transform:rotate(90deg);-webkit-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg)}
+.b-wrapper .b-chat-wrapper.rotated.left .b-header-frame{border-top-left-radius:0;border-top-right-radius:0;border-bottom-left-radius:5px;border-bottom-right-radius:5px}
+.b-wrapper .b-chat-wrapper.close{height:51px}
+.b-wrapper .b-chat-wrapper.close.rotated{width:305px;height:305px}
+.b-wrapper .b-chat-wrapper.open{height:420px}
+.b-wrapper .b-chat-wrapper.open.half{height:189px}
+.b-wrapper .b-chat-wrapper .b-header-frame{position:absolute;top:0;left:0;right:0;height:51px;background:#0f69b5;background:linear-gradient(to bottom, #1c8cbb, #0f69b5);border-top-left-radius:5px;border-top-right-radius:5px}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper{position:absolute;left:0;right:0;top:0;bottom:0;margin:7px 14px 5px 14px;cursor:pointer}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper .b-header__userpic{float:left;margin-right:15px;width:39px;height:39px;border-radius:4px}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper .b-header__data{color:#fff}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper .b-header__data.name{display:inline-block;font-size:15px;margin-top:2px;padding-right:20px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-header__data__name.png');background-repeat:no-repeat;background-position:right 3px}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper .b-header__data.name.on{background-position:right -37px}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__wrapper .b-header__data.profession{font-size:13px;opacity:.6;margin-top:2px}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__close-button{position:absolute;right:-20.5px;top:-20.5px;width:23px;height:23px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-header__close-button.png');opacity:.35;transition:opacity .5s;cursor:pointer}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__close-button:hover{opacity:1}
+.b-wrapper .b-chat-wrapper .b-header-frame .b-header__close-button.hidden{opacity:0;height:0}
+.b-wrapper .b-chat-wrapper .b-body-frame{position:absolute;width:100%;top:51px;bottom:0;background:#0f69b5}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper{position:absolute;left:0;right:0;top:0;bottom:0;overflow:hidden;border-radius:5px;margin:0 11px 10px 11px;background:#e8f1f6}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper{position:absolute;z-index:2;top:11px;left:8px;right:8px;bottom:120px;overflow:hidden}
+
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper:before{position:absolute;z-index:3;top:0;display:block;width:254px;height:41px;content:'';background:linear-gradient(to bottom, #e8f1f6, rgba(232,241,246,0))}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact{width:234px;padding:10px 10px 15px 10px;margin-top:30px;margin-bottom:30px;border-radius:3px;position:relative;word-break:break-word;font-size:15px;opacity:0;transition:opacity .5s}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message.created,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact.created{opacity:1}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message:first-child,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact:first-child{margin-top:0}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message:after,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact:after{display:block;width:9px;height:20px;position:absolute;bottom:-20px;line-height:20px;color:#8ca0b2;font-size:12px;content:attr(data-message-time);word-break:normal;background-repeat:no-repeat}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message.me,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact.me{background:#d65050;color:#fff}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message.me:after,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact.me:after{background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-body__message__me.png');left:6px;padding-left:17px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message.consultant,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact.consultant{background:#d4dfe8;color:#000}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-body__message.consultant:after,.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact.consultant:after{background-position:right top;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-body__message__consultant.png');right:6px;padding-right:38px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact{width:226px;padding:10px 14px 18px 14px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__label{margin-top:4px;margin-bottom:10px;font-size:17px;text-align:center}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form{position:relative;overflow:hidden}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__input-wrapper{width:173px;height:23px;border-radius:3px;padding:5px;background:#fff;float:left}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__input-wrapper.mask input{text-align:center;background:none;border:none;outline:none;font-size:15px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__input-wrapper.mask span{color:#a0a0a0}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__input-wrapper.mask .pull{float:left;width:5px;height:1px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__input-wrapper .b-contact__input{width:160px;margin-top:2px;margin-left:6px;background:none;border:none;outline:none;font-size:15px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__submit-button{position:absolute;right:0;width:32px;height:33px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-contact__submit-button.png');cursor:pointer}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__submit-button:hover{background-position:32px 0}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .b-contact .b-contact__form .b-contact__submit-button.clicked{opacity:.5;cursor:default}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .viewport{width:254px;height:227px;overflow:hidden;position:relative}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .overview{list-style:none;position:absolute;left:0;top:0;padding:0;margin:0}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .scrollbar{background:transparent;position:relative;float:right;width:5px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .track{background:#d2e0e9;height:100%;width:5px;position:relative;padding:0;border-radius:3px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .thumb{background:#85a2b4;height:20px;width:5px;overflow:hidden;position:absolute;top:0;left:0;border-radius:3px;cursor:pointer}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .thumb:hover{background:#668ba2}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .thumb .end{background:transparent;overflow:hidden;height:5px;width:5px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__messages-box-wrapper .disable{display:none}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__writing-wrapper{position:absolute;left:8px;right:8px;height:57px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__writing-wrapper .b-body__writing-data.icon{float:left;height:100%;margin-right:9px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-body__writing-data__icon.gif');background-repeat:no-repeat;background-position:center center}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__writing-wrapper .b-body__writing-data.text{width:100%;font-size:13px;line-height:57px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__input-wrapper{position:absolute;left:8px;right:8px;bottom:37px;height:29px;border:solid 2px #d2dbe0;border-radius:3px;overflow:hidden;transition:height .5s}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__input-wrapper .b-body__send-button{position:absolute;top:0;bottom:0;right:5px;margin:auto 0;z-index:3;width:21px;height:19px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-body__send-button.png');opacity:.4;transition:opacity .4s;cursor:pointer}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__input-wrapper .b-body__send-button:hover{opacity:1}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__input-wrapper .b-body__input{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;resize:none;font-size:15px;padding:6px 26px 6px 7px;overflow:hidden;border:none;outline:none;background:#fff}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__security-wrapper{position:absolute;left:9px;right:9px;bottom:0;height:37px}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__security-wrapper .b-body__security-data{height:100%}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__security-wrapper .b-body__security-data.icon{float:left;width:25px;margin-right:9px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-body__security-data__icon.png');background-repeat:no-repeat;background-position:right center}
+.b-wrapper .b-chat-wrapper .b-body-frame .b-body__wrapper .b-body__security-wrapper .b-body__security-data.text{width:100%;font-size:10px;color:#8ca0b2;padding-top:7px}
+.b-form{position:relative;width:100%;height:253px;background-color:#f3f3f3}
+.b-form .b-form__question{overflow:hidden;padding-top:30px;padding-left:20px}
+.b-form .b-form__question .b-form__label{float:left;width:152px;font-size:22px;height:42px;line-height:42px}
+.b-form .b-form__question .b-form__label .b-form__label-star{width:22px;float:left;color:#d65050;font-size:38px;position:relative;top:-5px}
+.b-form .b-form__question .b-form__input-wrapper{float:left;width:330px;height:42px;line-height:42px;border:solid 2px #d2dbe0;border-radius:3px;overflow:hidden;background:#fff}
+.b-form .b-form__question .b-form__input-wrapper .b-form__input{width:100%;height:100%;padding:10px;font-size:18px;box-sizing:border-box;border:none;outline:none;background:none}
+.b-form .b-form__question .b-form__input-wrapper.textarea{height:80px}
+.b-form .b-form__question .b-form__input-wrapper.textarea .b-form__input{line-height:normal;resize:none}
+.b-form .b-form__question .b-form__input-wrapper.mask input{text-align:center;background:none;border:none;outline:none;font-size:18px}
+.b-form .b-form__question .b-form__input-wrapper.mask span{font-size:18px;color:#a0a0a0;margin-right:2px}
+.b-form .b-form__question .b-form__input-wrapper.mask .pull{float:left;width:10px;height:1px}
+.b-form .b-form__thank-you-wrapper{position:absolute;top:0;left:0;width:100%;height:0;overflow:hidden;opacity:0;transition:opacity .5s;background-color:#f3f3f3}
+.b-form .b-form__thank-you-wrapper.show{height:100%;opacity:1}
+.b-form .b-form__thank-you-wrapper .b-form__thank-you-title{text-align:center;font-size:42px;margin-top:50px}
+.b-form .b-form__thank-you-wrapper .b-form__thank-you-text{text-align:center;margin-top:20px}
+.b-window{position:fixed;z-index:10;top:0;bottom:0;left:0;right:0;margin:auto;width:528px;height:531px;opacity:0;transition:opacity .8s}
+.b-window.show{opacity:1}
+.b-window .b-header{width:100%;height:118px;background-color:#0f69b5;border-top-left-radius:5px;border-top-right-radius:5px}
+.b-window .b-header .b-header__line{text-align:center;text-transform:uppercase;color:#fff}
+.b-window .b-header .b-header__line._1{padding-top:10px;font-size:30px}
+.b-window .b-header .b-header__line._2{padding-top:7px;font-size:17px}
+.b-window .b-header .b-header__line._3{padding-top:7px;font-size:23px;color:#afd9ff}
+.b-window .b-header .b-header__close-button{position:absolute;right:-20.5px;top:-20.5px;width:23px;height:23px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-header__close-button.png');opacity:.35;transition:opacity .5s;cursor:pointer}
+.b-window .b-header .b-header__close-button:hover{opacity:1}
+.b-window .b-header .b-header__close-button.hidden{opacity:0;height:0}
+.b-window .b-security{width:100%;height:78px;background-color:#e4e7ea}
+.b-window .b-security .b-security__data{float:left}
+.b-window .b-security .b-security__data.icon{float:left;margin-top:15px;margin-left:20px;margin-right:20px;width:28px;height:33px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-security__data__icon.png')}
+.b-window .b-security .b-security__data.text{margin-top:15px;width:266px;height:44px;font-size:10px}
+.b-window .b-security .b-security__data.images{float:right;margin-top:8px;margin-right:20px;width:169px;height:55px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-security__data__images.png')}
+.b-window .b-submit{width:100%;height:81px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;background-color:#d1d5da}
+.b-window .b-submit .b-submit__hint-data{float:left;margin-top:20px}
+.b-window .b-submit .b-submit__hint-data.icon{margin-left:20px;margin-right:20px;width:27px;height:39px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-submit__hint-data__icon.png')}
+.b-window .b-submit .b-submit__hint-data.text{color:#66778e;font-size:14px}
+.b-window .b-submit .b-submit__hint-data.text .text-important{color:#b50000;border-bottom:dashed 1px #b50000}
+.b-window .b-submit .b-submit__button{float:right;margin-right:20px;margin-top:18px;width:144px;height:42px;line-height:42px;text-align:center;font-size:18px;color:#fff;background:#d65050;border-radius:5px;cursor:pointer}
+.b-mobile-window{position:fixed;z-index:10;top:0;bottom:0;left:0;right:0;margin:auto;width:701px;max-height:780px;height:99%;min-height:620px;border:solid 5px #2e5892;border-radius:10px;background:#f3f3f3;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-mobile-window.png');background-repeat:no-repeat;background-position:20px bottom;opacity:0;transition:opacity .8s}
+.b-mobile-window.show{opacity:1}
+.b-mobile-window .b-mobile-window__header{width:100%;display:table}
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper{display:table-row}
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element{display:table-cell;text-align:center;vertical-align:middle}
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element.row_1{height:112px;color:#c93032;text-transform:uppercase;font-size:28px;padding:0 100px;box-sizing:border-box;font-weight:bold}
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element.row_2{height:60px;color:#fff;text-transform:uppercase;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-mobile-window__element__row_2.jpg');background-size:100% 100%;font-size:20px}
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element.row_3{height:54px;color:#335f9c;background:#fff;font-weight:bold;font-size:18px}
+
+
+.b-mobile-window .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element.row_4{display:none;height:71px;color:#c93032;text-transform:uppercase;font-size:28px;padding:0 100px;box-sizing:border-box;font-weight:bold}
+.b-mobile-window .b-mobile-window__phones-wrapper{display:none;margin-top:30px;padding:0 20px;box-sizing:border-box;overflow:hidden}
+.b-mobile-window .b-mobile-window__phones-wrapper .b-mobile-window__phone{float:left;width:325px;height:109px;padding:15px 0 0 80px;box-sizing:border-box;border-radius:5px;background:#fff;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-mobile-window__phone.png');background-repeat:no-repeat;background-position:20px 45px}
+.b-mobile-window .b-mobile-window__phones-wrapper .b-mobile-window__phone.right{margin-left:10px}
+.b-mobile-window .b-mobile-window__phones-wrapper .b-mobile-window__phone .b-mobile-window__phone-city{font-size:22px;margin-bottom:10px}
+.b-mobile-window .b-mobile-window__phones-wrapper .b-mobile-window__phone .b-mobile-window__phone-number{font-weight:bold;font-size:28px;text-decoration:none;border-bottom:dashed 1px #000;padding-bottom:3px;color:#000}
+.b-mobile-window .b-mobile-window__buttons-wrapper{display:none;margin-top:60px;padding:0 20px;box-sizing:border-box;overflow:hidden}
+.b-mobile-window .b-mobile-window__buttons-wrapper .b-mobile-window__button{float:left;width:325px;height:69px;border-radius:5px;line-height:69px;text-align:center;color:#fff;font-weight:bold;font-size:18px;cursor:pointer;background:#c93032;transition:background .3s}
+.b-mobile-window .b-mobile-window__buttons-wrapper .b-mobile-window__button:hover{background:#d24143}
+.b-mobile-window .b-mobile-window__buttons-wrapper .b-mobile-window__button.right{margin-left:10px}
+.b-mobile-window .b-form{display:none;height:auto;background:none;padding:0 85px;box-sizing:border-box}
+.b-mobile-window .b-form .b-form__question{padding-top:20px}
+.b-mobile-window .b-form .b-form__question .b-form__label{height:49px;line-height:49px;font-size:18px}
+.b-mobile-window .b-form .b-form__question .b-form__label .b-form__label-star{width:12px;font-size:22px}
+.b-mobile-window .b-form .b-form__input-wrapper{height:49px;line-height:49px}
+.b-mobile-window .b-form .b-form__input-wrapper.textarea{height:110px}
+.b-mobile-window .b-mobile-window__send-button{display:none;margin-top:20px;margin-left:259px;width:330px;height:69px;border-radius:5px;line-height:69px;text-align:center;color:#fff;font-size:22px;cursor:pointer;background:#c93032;transition:background .3s}
+.b-mobile-window .b-mobile-window__send-button:hover{background:#d24143}
+.b-mobile-window .b-mobile-window__footer{position:absolute;bottom:20px;padding:0 20px;box-sizing:border-box;overflow:hidden}
+.b-mobile-window .b-mobile-window__footer .b-mobile-window__footer-part{float:left;font-weight:bold}
+.b-mobile-window .b-mobile-window__footer .b-mobile-window__footer-part.left{padding-left:40px;box-sizing:border-box;width:50%;font-size:10px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-security__data__icon.png');background-repeat:no-repeat;background-position:0 0}
+.b-mobile-window .b-mobile-window__footer .b-mobile-window__footer-part.right{margin-left:5%;width:45%;text-align:right;font-size:16px}
+@media (max-height:680px){.b-mobile-window .b-mobile-window__buttons-wrapper{margin-top:15px}
+}
+@media (max-height:640px){.b-mobile-window .b-mobile-window__phones-wrapper{margin-top:15px}
+}
+@media (max-height:772px){.b-mobile-window .b-form .b-form__question{padding-top:15px}
+}
+@media (max-height:753px){.b-mobile-window .b-form .b-form__question{padding-top:10px}
+.b-mobile-window .b-form .b-form__question .b-form__label{height:40px;line-height:40px}
+.b-mobile-window .b-form .b-form__input-wrapper{height:40px;line-height:40px}
+}
+@media (max-height:707px){.b-mobile-window .b-form .b-form__question .b-form__label{height:35px;line-height:35px}
+.b-mobile-window .b-form .b-form__input-wrapper{height:35px;line-height:35px}
+.b-mobile-window .b-mobile-window__send-button{margin-top:10px}
+}
+
+
+@media (max-height:680px){.b-mobile-window .b-mobile-window__send-button{height:50px;line-height:50px}
+}
+@media (max-height:660px){.b-mobile-window .b-form .b-form__input-wrapper.textarea{height:75px}
+}
+.b-mobile-window.mode-init .b-mobile-window__header .b-mobile-window__element-wrapper .b-mobile-window__element.row_4{display:table-cell}
+.b-mobile-window.mode-init .b-mobile-window__phones-wrapper{display:block}
+.b-mobile-window.mode-init .b-mobile-window__buttons-wrapper{display:block}
+.b-mobile-window.mode-init .b-mobile-window__main-button.back{display:none}
+.b-mobile-window.mode-form .b-form{display:block}
+.b-mobile-window.mode-form .b-mobile-window__send-button{display:block}
+.b-mobile-window.mode-mini-form .b-form{display:block}
+.b-mobile-window.mode-mini-form .b-form .b-form__question.question_text{display:none}
+.b-mobile-window.mode-mini-form .b-form .b-form__question.city{display:none}
+.b-mobile-window.mode-mini-form .b-form .b-form__question{padding-top:40px}
+.b-mobile-window.mode-mini-form .b-mobile-window__send-button{margin-top:40px;display:block;height:69px !important;line-height:69px !important}
+.b-mobile-window .b-mobile-window__main-button{position:absolute;top:-45px;width:40px;height:40px;cursor:pointer;transform:scale(.8);transition:transform .3s}
+
+
+.b-mobile-window .b-mobile-window__main-button:hover{transform:scale(1)}
+.b-mobile-window .b-mobile-window__main-button.close{right:-45px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-mobile-window__main-button__close.png')}
+.b-mobile-window .b-mobile-window__main-button.back{left:-45px;background-image:url('http://s1.nice-cream.ru/widget2.2/server/img/b-mobile-window__main-button__back.png')}
+@media (max-height:900px){.b-mobile-window .b-mobile-window__main-button{top:0}
+.b-mobile-window .b-mobile-window__main-button.close{right:-60px}
+.b-mobile-window .b-mobile-window__main-button.back{left:-60px}
+}
+.b-dark-background{position:absolute;z-index:9;top:0;left:0;right:0;bottom:0;background:#000;display:none;transition:opacity .5s;opacity:0}
+.b-dark-background.show{opacity:.6}
+.no-select{user-select:none;-o-user-select:none;-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none}
+#template-contact-name,#template-contact-phone,#template-window,#template,#template-mobile-window{display:none}
+
+</style>
+
+<div id="main-wrapper" class="b-wrapper">
+	<div id="chat-wrapper" class="b-chat-wrapper">
+		<div id="chat-header" class="b-header-frame no-select">
+			<div class="b-header__wrapper">
+				<div class="b-header__userpic" style="background-image: url('{{userpic}}');"></div>
+
+				<div id="chat-indicator" class="b-header__data name off">{{name}}</div>
+				<div class="b-header__data profession">{{profession}}</div>
+			</div>
+			<div id="chat-close-button" class="b-header__close-button"></div>
+		</div>
+		<div class="b-body-frame">
+			<div class="b-body__wrapper">
+				<div id="chat-scroll-messages-wrapper" class="b-body__messages-box-wrapper">
+						<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+						<div class="viewport">
+							<div id="chat-messages-wrapper" class="overview"></div>
+						</div>
+				</div>
+
+				<div id="chat-writing-wrapper" class="b-body__writing-wrapper no-select">
+					<div class="b-body__writing-data icon"></div>
+					<div class="b-body__writing-data text">{{writing-label}}</div>
+				</div>
+
+				<div class="b-body__input-wrapper">
+					<div id="chat-send-button" class="b-body__send-button"></div>
+					<textarea id="chat-input" class="b-body__input" placeholder="{{input-placeholder}}"></textarea>
+				</div>
+
+				<div class="b-body__security-wrapper no-select">
+					<div class="b-body__security-data icon"></div>
+					<div class="b-body__security-data text">
+						{{guarantee}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="template-contact-name" class="b-contact">
+	<div class="b-contact__label">
+		{{contact-ask-name}}
+	</div>
+	<div class="b-contact__form">
+		<div class="b-contact__input-wrapper">
+			<input id="chat-contact-name-input" class="b-contact__input" type="text" placeholder="{{contact-name-placeholder}}">
+		</div>
+		<div id="chat-contact-name-submit" class="b-contact__submit-button"></div>
+	</div>
+</div>
+
+<div id="template-contact-phone" class="b-contact">
+	<div class="b-contact__label">
+		{{contact-ask-phone}}
+	</div>
+	<div class="b-contact__form">
+		<div id="chat-contact-phone-input-wrapper" class="b-contact__input-wrapper mask">
+			<div class="pull"></div>
+		</div>
+		<div id="chat-contact-phone-submit" class="b-contact__submit-button"></div>
+	</div>
+</div>
+
+<div id="template-background" class="b-dark-background"></div>
+<div id="template-window" class="b-window">
+	<div class="b-header">
+		<div class="b-header__line _1">
+			{{window-title-1}}
+		</div>
+		<div class="b-header__line _2">
+			{{window-title-2}}
+		</div>
+		<div class="b-header__line _3">
+			{{window-title-3}}
+		</div>
+		<div id="window-close-button" class="b-header__close-button"></div>
+	</div>
+	<div class="b-form">
+		<div class="b-form__question">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-1}}
+			</div>
+
+			<div class="b-form__input-wrapper">
+				<input id="window-name" class="b-form__input" type="text" placeholder="{{window-input-placeholder-1}}">
+			</div>
+		</div>
+
+		<div class="b-form__question">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-2}}
+			</div>
+
+			<div class="b-form__input-wrapper">
+				<input id="window-city" class="b-form__input" type="text" placeholder="{{window-input-placeholder-2}}" value="{{auto_city}}">
+			</div>
+		</div>
+
+		<div class="b-form__question">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-3}}
+			</div>
+
+			<div id="window-phone-wrapper" class="b-form__input-wrapper mask">
+				<div class="pull"></div>
+			</div>
+		</div>
+
+		<div id="window-thank-you" class="b-form__thank-you-wrapper">
+			<div class="b-form__thank-you-title">{{thank-you-title}}</div>
+			<div class="b-form__thank-you-text">{{thank-you-text}}</div>
+		</div>
+	</div>
+	<div class="b-security">
+		<div class="b-security__data icon"></div>
+		<div class="b-security__data text">
+			{{window-guarantee}}
+		</div>
+		<div class="b-security__data images"></div>
+	</div>
+
+	<div class="b-submit">
+		<div class="b-submit__hint">
+			<div class="b-submit__hint-data icon"></div>
+			<div class="b-submit__hint-data text">
+				{{window-time-label}}<br/>
+				<span class="text-important">{{window-time-value}}</span>
+			</div>
+		</div>
+
+		<div id="window-submit" class="b-submit__button">{{window-submit-label}}</div>
+	</div>
+</div>
+
+<div id="template-mobile-window" class="b-mobile-window">
+	<div id="mobile-window-back-button" class="b-mobile-window__main-button back"></div>
+	<div id="mobile-window-close-button" class="b-mobile-window__main-button close"></div>
+	<div class="b-mobile-window__header">
+		<div class="b-mobile-window__element-wrapper">
+			<div class="b-mobile-window__element row_1">
+				{{mobile-window-title-1}}
+			</div>
+		</div>
+		<div class="b-mobile-window__element-wrapper">
+			<div class="b-mobile-window__element row_2">
+				{{mobile-window-title-2}}
+			</div>
+		</div>
+		<div class="b-mobile-window__element-wrapper">
+			<div class="b-mobile-window__element row_3">
+				{{mobile-window-title-3}}
+			</div>
+		</div>
+		<div class="b-mobile-window__element-wrapper">
+			<div class="b-mobile-window__element row_4">
+				{{mobile-window-phones}}
+			</div>
+		</div>
+	</div>
+	<div class="b-mobile-window__phones-wrapper">
+		<div class="b-mobile-window__phone">
+			<div class="b-mobile-window__phone-city">
+				{{mobile-window-phone-1-city}}
+			</div>
+			<a href="{{mobile-window-phone-1-phone-href}}" class="b-mobile-window__phone-number">
+				{{mobile-window-phone-1-phone}}
+			</a>
+		</div>
+		<div class="b-mobile-window__phone right">
+			<div class="b-mobile-window__phone-city">
+				{{mobile-window-phone-2-city}}
+			</div>
+			<a href="{{mobile-window-phone-2-phone-href}}" class="b-mobile-window__phone-number">
+				{{mobile-window-phone-2-phone}}
+			</a>
+		</div>
+	</div>
+	<div class="b-mobile-window__buttons-wrapper">
+		<div id="mobile-window-button-form" class="b-mobile-window__button">
+			{{mobile-window-button-form}}
+		</div>
+		<div id="mobile-window-button-mini-form" class="b-mobile-window__button right">
+			{{mobile-window-button-mini-form}}
+		</div>
+	</div>
+	<div class="b-form">
+		<div class="b-form__question">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-1}}
+			</div>
+
+			<div class="b-form__input-wrapper">
+				<input id="mobile-window-name" class="b-form__input" type="text" placeholder="{{window-input-placeholder-1}}">
+			</div>
+		</div>
+		<div class="b-form__question city">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-2}}
+			</div>
+
+			<div class="b-form__input-wrapper">
+				<input id="mobile-window-city" class="b-form__input" type="text" placeholder="{{window-input-placeholder-2}}" value="{{auto_city}}">
+			</div>
+		</div>
+		<div class="b-form__question">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{window-input-label-3}}
+			</div>
+			<div id="mobile-window-phone-wrapper" class="b-form__input-wrapper mask">
+				<div class="pull"></div>
+			</div>
+		</div>
+		<div class="b-form__question question_text">
+			<div class="b-form__label">
+				<div class="b-form__label-star">*</div>
+				{{mobile-window-input-label-4}}
+			</div>
+			<div class="b-form__input-wrapper textarea">
+				<textarea id="mobile-window-question" class="b-form__input" type="text" placeholder="{{mobile-window-input-placeholder-4}}"></textarea>
+			</div>
+		</div>
+		<div id="mobile-window-thank-you" class="b-form__thank-you-wrapper">
+			<div class="b-form__thank-you-title">{{thank-you-title}}</div>
+			<div class="b-form__thank-you-text">{{thank-you-text}}</div>
+		</div>
+	</div>
+	<div id="mobile-window-button-send" class="b-mobile-window__send-button">
+		{{window-submit-label}}
+	</div>
+	<div class="b-mobile-window__footer">
+		<div class="b-mobile-window__footer-part left">
+			{{window-guarantee}}
+		</div>
+		<div class="b-mobile-window__footer-part right">
+			{{window-time-label}}<br/>
+			{{window-time-value}}
+		</div>
+	</div>
+</div>
