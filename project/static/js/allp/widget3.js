@@ -1092,7 +1092,7 @@ var _Helper = (function () {
                 'url_redirect': 'http://s1.nice-cream.ru/widget2.2/server.php',
                 'urls': ['http://s1.nice-cream.ru/widget2.2/server.php'],
                 'params': {'sid': '', 'widget': '1'},
-                'location_api': 'http://s1.nice-cream.ru/widget2.2/server/location/api.php'
+                'location_api': '/static/js/allp/location_api.php'
             },
             'event_trigger': function (trigger_name, cb) {
                 cb();
