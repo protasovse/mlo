@@ -180,9 +180,7 @@ class AnswersView(ApiView):
         def _is_can_like(a, user, lks):
             if not user.is_authenticated:
                 return {'is_can_like': False}
-            if not a['parent_id'] \
-                    and a['id'] not in lks.keys() \
-                    and a['author']['id'] != user.id:
+            if a['id'] not in lks.keys() and a['author']['id'] != user.id:
                 return {'is_can_like': True}
             res = {'is_can_like': False}
             if a['id'] in lks.keys():
@@ -232,9 +230,10 @@ class BaseAnswersLike(ApiView):
     def like(cls, request, aid, val):
         if not request.user.is_authenticated:
             raise ApiPublicException('access denied')
-        answer = Answer.objects.get(pk=aid)
-        if answer.parent_id or answer.author_id == request.user.id:
-            raise ApiPublicException('access denied')
+        answer = Answer.objects.select_related().get(pk=aid)
+
+        if not answer.author.is_lawyer() or answer.author_id == request.user.id:
+            raise ApiPublicException('access denied lawyer {}'.format(answer.author.role))
         if Likes.objects.filter(user_id=request.user.id, entry_id=answer.id).count() > 0:
             raise ApiPublicException('access denied')
         if val not in [1, -1]:
@@ -245,7 +244,7 @@ class BaseAnswersLike(ApiView):
         # добавляем балл рейтинга
         prefix = 'usefull' if val == 1 else 'useless'
         comment_prefix = 'Полезный' if val == 1 else 'Бесполезный'
-        if request.user.role == 2:  # like ставит юрист
+        if request.user.is_lawyer():  # like ставит юрист
             type_key = '{}_answer_lawyer'.format(prefix)
         elif answer.on_question.author == request.user:  # like ставит клиент — автор вопроса
             type_key = '{}_answer_author_questions'.format(prefix)
