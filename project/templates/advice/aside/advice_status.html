@@ -41,12 +41,38 @@
             {% elif item.status == 'paid' %}
                 <p>Оплачено, ждём подтверждение оплаты.</p>
             {% elif item.status == 'payment_confirmed' %}
-                <p class="mt-3">Идёт подбор эксперта по данному вопросу (обычно в течении 30 мин.)</p>
-
-                    <!--, Эксперт назначен и оповещён.<!--, но еще не принял заявку.
-                До принятия {{ advice_context.overdue_time }} мин. --></p>
+                {% if item.expert == user %}
+                    <p>Вам необходимо принять заявку в течение {{ advice_context.overdue_time }} мин.</p>
+                    <div class="d-flex align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-success btn-sm dropdown-toggle" href="#">Принять </a>
+                            <div class="d-block dropdown-menu">
+                                <div class="dropdown-header">Отвечу через:</div>
+                                <a class="dropdown-item" href="#">1 час</a>
+                                <a class="dropdown-item" href="#">2 часа</a>
+                                <a class="dropdown-item" href="#">3 часов</a>
+                                <a class="dropdown-item" href="#">4 часов</a>
+                                <a class="dropdown-item" href="#">6 часов</a>
+                                <a class="dropdown-item" href="#">12 часов</a>
+                                <a class="dropdown-item" href="#">24 часов</a>
+                            </div>
+                        </div>
+                        <a class="text-muted ml-3" href="#">Отказаться</a>
+                    </div>
+                {% else %}
+                    <p class="mt-3">Идёт подбор эксперта по данному вопросу (обычно в течении 30 мин.)</p>
+                {% endif %}
             {% elif item.status == 'inwork' %}
-                <p class="mt-3">Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.</p>
+                {% if item.expert == user %}
+                    <p class="mt-3">Вы должны ответить до {{ item.answered_date|date:'d b Y G:i' }} мск.</p>
+                {% else %}
+                    <p class="mt-3">Эксперт принял вопрос и ответит до {{ item.answered_date|date:'d b Y G:i' }} мск.</p>
+                {% endif %}
+            {% elif item.status == 'answered' %}
+                {% if item.question.author == user %}
+                    <p class="mt-3">Эксперт ответил на вопрос, если у вас нет дополнительных вопросов нажмите на:</p>
+                    <p><a class="btn btn-success btn-sm" href="#">Вопрос решён</a></p>
+                {% endif %}
             {% endif %}
         </div>
 

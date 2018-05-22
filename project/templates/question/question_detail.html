@@ -121,13 +121,12 @@
                                 <div class="small text-muted mt-4"><hr>На этот вопрос юрист ещё не ответил. Если вы знаете
                                 ответ, то можете <a class="text-dark" href="/auth/registration/" >зарегистрироваться</a>
                                 в качестве эксперта и ответить на него.</div>
-                                {% elif user == question.author %}
+                                {% elif user == question.author and not question.is_pay %}
                                 <div class="small text-muted mt-4"><hr>На ваш вопрос юрист ещё не ответил. К сожалению,
                                 на бесплатный вопрос мы не даём гарантии ответа. Если вам нужна развернутая
-                                гаратированная консультация, <a class="text-dark" href="{% url 'ask_question' %}"
-                                >задайте вопрос</a> платно.
+                                гаратированная консультация, <a class="text-dark" href="{% url 'ask_question' %}">задайте
+                                вопрос</a> платно.</div>
                                 {% endif %}
-                            </div>
                             {% endif %}
 
                         </div>
