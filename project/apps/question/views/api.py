@@ -7,9 +7,9 @@ from apps.advice.models import Advice
 from apps.rating.models import Type, RatingScore, RatingScoreComment
 from apps.rating.utils import add_score
 from apps.review.models import Likes
-from apps.svem_system.exceptions import ApiPublicException, BackendPublicException
+from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_system.views.api import ApiView
-from apps.entry.models import Question, Answer, Entry, Files
+from apps.entry.models import Question, Answer, Entry, Files, DEFAULT_RUBRIC
 from django.contrib.auth import get_user_model
 from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED
@@ -31,7 +31,9 @@ class QuestionView(ApiView):
         return q
 
     @classmethod
-    def post(cls, request, qid):
+    def post(cls, request, qid=0):
+        if not qid:
+            qid = request.POST['id']
         f = Question.objects.get(pk=qid).upload_document(request.FILES['file'])
         return 'file {} uploaded'.format(f.file)
 
@@ -51,7 +53,7 @@ class QuestionView(ApiView):
         city_id = params['city[id]'] if 'city[id]' in params.keys() else None
         params['city_id'] = int(city_id) or None
 
-        params['rubric_id'] = params.get('rubric[id]', None)
+        params['rubric_id'] = params.get('rubric[id]', DEFAULT_RUBRIC)
 
         password = '********'
 
