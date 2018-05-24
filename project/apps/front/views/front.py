@@ -81,15 +81,20 @@ class LawyersListPage(ListView):
                 c = morph.parse(city.name_ru)[0]
                 city_name = c.inflect({'gent'}).word.title()
 
-            # city_meta = CityMeta.objects.get(city_id=self.kwargs['city_id'])
-            # cover = city_meta.lawyers_page_cover
+            try:
+                city_meta = CityMeta.objects.get(city_id=self.kwargs['city_id'])
+                context.update({
+                    'city_meta': city_meta,
+                })
+            except CityMeta.DoesNotExist:
+                pass
 
             title = 'Юристы и адвокаты {}. Юридическая помощь и консультации на Мойюрист.онлайн'.format(city_name)
             h1 = 'Юристы и адвокаты {}'.format(city_name)
 
             context.update({
                 'city_id': self.kwargs['city_id'],
-                'city': city_name
+                'city': city_name,
             })
 
         context.update({

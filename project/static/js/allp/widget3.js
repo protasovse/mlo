@@ -1015,15 +1015,15 @@ var _Helper = (function () {
                 'method': 'inline',
                 'margin-right': '30px',
                 'z-index': 10000,
-                'message_sound': 'http://s1.nice-cream.ru/widget2.2/server/message.mp3'
+                'message_sound': '/static/js/allp/message.mp3'
             },
             'consultants': [{
                 'name': 'Владимир Прохожин',
                 'profession': 'Юрист-консультант',
-                'userpic': 'http://s1.nice-cream.ru/widget2.2/server/img/b-header__userpic.jpg'
+                'userpic': '/static/js/allp/b-header__userpic.jpg'
             }],
             'template': {
-                'url': 'http://s1.nice-cream.ru/widget2.2/server/design.php',
+                'url': '/static/js/allp/design.php',
                 'vars': {
                     'userpic': '',
                     'name': '',
@@ -1078,21 +1078,21 @@ var _Helper = (function () {
             },
             'history': {'send_timeout': 3 * 1000},
             'statistic': {
-                'server_url': 'http://s1.stat-tracking.ru/?test=statistic',
-                'complete_server_url': 'http://s1.stat-tracking.ru/?test=complete'
+                'server_url': '',
+                'complete_server_url': ''
             },
             'dialog': {
                 'send_timeout': 10 * 1000,
-                'server_url': 'http://s1.stat-tracking.ru/',
+                'server_url': '',
                 'restart_timeout': 3600 * 24 * 1000
             },
             'mobile-mode': {'type': 'none', 'cities-phones': {'': ''}},
             'server': {
                 'mode': 'ajax',
-                'url_redirect': 'http://s1.nice-cream.ru/widget2.2/server.php',
-                'urls': ['http://s1.nice-cream.ru/widget2.2/server.php'],
+                'url_redirect': '/api/widget_send',
+                'urls': ['/api/widget_send'],
                 'params': {'sid': '', 'widget': '1'},
-                'location_api': '/static/js/allp/location_api.php'
+                'location_api': '/static/js/allp/location_api.html'
             },
             'event_trigger': function (trigger_name, cb) {
                 cb();
