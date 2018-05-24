@@ -9582,7 +9582,7 @@ var _default = {
     return {
       advice_cost: 0,
       completed: [],
-      question_id: '',
+      question_id: 0,
       question_url: '',
       rubric: 'не выбрано',
       options: [],
@@ -9613,7 +9613,7 @@ var _default = {
       return this.success && !this.loading && !(this.$refs.upload && this.$refs.upload.active);
     },
     post_action: function post_action() {
-      return '/api/question';
+      return "/api/questions";
     },
     is_require_email: function is_require_email() {
       return !this.completed.includes('email');
@@ -9641,7 +9641,7 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
-    this.$http.get('/api/question/default').then(function (r) {
+    this.$http.get('/api/questions/default').then(function (r) {
       if (r.data.data['ask_content']) {
         _this.content = r.data.data['ask_content'];
       }
@@ -9792,7 +9792,7 @@ var _default = {
           phone: this.phone,
           city: this.city
         };
-        this.put('/api/question', data, function (r) {
+        this.put('/api/questions', data, function (r) {
           _this4.question_id = r.data.id;
           _this4.question_url = _this4.question_url.replace('/0/', '/' + _this4.question_id + '/');
           _this4.require_confirm = r.data.status === 'blocked';

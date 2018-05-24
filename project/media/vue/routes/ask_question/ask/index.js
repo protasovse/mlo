@@ -8,7 +8,7 @@ export default {
         return {
             advice_cost: 0,
             completed: [],
-            question_id: '',
+            question_id: 0,
             question_url: '',
             rubric: 'не выбрано',
             options: [],
@@ -37,7 +37,7 @@ export default {
         is_form_send_done() {
             return this.success && (!this.loading) && (!(this.$refs.upload && this.$refs.upload.active))
         },
-        post_action() {return '/api/question'},
+        post_action() {return `/api/questions`},
         is_require_email() {return !this.completed.includes('email')},
         is_require_name() {return !this.completed.includes('name')},
         is_require_phone() {return !this.completed.includes('phone')},
@@ -57,7 +57,7 @@ export default {
         }
     },
     mounted() {
-        this.$http.get('/api/question/default').then(
+        this.$http.get('/api/questions/default').then(
             (r) => {
                 if (r.data.data['ask_content']) {
                     this.content = r.data.data['ask_content'];
@@ -190,7 +190,7 @@ export default {
                     phone: this.phone,
                     city: this.city,
                 };
-                this.put('/api/question', data, (r) => {
+                this.put('/api/questions', data, (r) => {
                     this.question_id = r.data.id;
                     this.question_url = this.question_url.replace('/0/', '/'+this.question_id+'/');
                     this.require_confirm = (r.data.status === 'blocked');

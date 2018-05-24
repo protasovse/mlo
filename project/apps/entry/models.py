@@ -20,6 +20,7 @@ from apps.sxgeo.models import Cities
 
 CONSULT_COST = 800
 
+DEFAULT_RUBRIC = 1
 
 OFFER_NEW = '0'
 OFFER_VIEWED = '1'
