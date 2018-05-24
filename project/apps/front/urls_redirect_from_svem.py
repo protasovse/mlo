@@ -1,4 +1,6 @@
+from django.conf.urls import url
 from django.urls import re_path, path
+from django.views.generic import RedirectView
 
 from apps.front.views import redirect_from_svem
 
@@ -21,4 +23,10 @@ urlpatterns = [
 
     path('reviews/', redirect_from_svem.review),
     path('reviews/page<int:page>/', redirect_from_svem.review),
+
+    path('ask/', RedirectView.as_view(url='/задать-вопрос/', permanent=True)),
+    path('experts/', RedirectView.as_view(url='/юристы/', permanent=True)),
+    path('questions/', RedirectView.as_view(url='/вопросы/', permanent=True)),
+
+    url(r'^', RedirectView.as_view(url='/', permanent=False))
 ]
