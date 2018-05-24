@@ -2,6 +2,7 @@ import os
 import binascii
 
 from django.db.models import F
+from django.views.decorators.csrf import csrf_exempt
 from phonenumbers import PhoneNumberFormat, format_number, parse
 from apps.advice.models import Advice
 from apps.rating.models import Type, RatingScore, RatingScoreComment
@@ -281,7 +282,9 @@ class QuestionDefault(ApiView):
 
 
 class WidgetSend(ApiView):
+
     @classmethod
+    @csrf_exempt
     def post(cls, request):
 
         r = send_to_all_partner(
