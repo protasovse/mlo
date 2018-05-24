@@ -405,7 +405,7 @@ var _Helper = (function () {
             if (next === 'next') {
                 url_i++;
                 if (_s['server']['urls'].length === url_i) {
-                    alert('Server error');
+                    // alert('Server error');
                     return false;
                 }
             }
