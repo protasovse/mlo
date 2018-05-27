@@ -210,5 +210,5 @@ ADVICE_EXPERT_FEE_IN_PERCENT = 55  # %
 
 ANSWERS_TREE_IS_EXPANDED = True
 
-ALL_PARTNER = False  # Партнёрска программа
+ALL_PARTNER = True  # Партнёрска программа
 # URL для обработки заявок с виджета: /widget_send
