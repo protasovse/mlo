@@ -27,7 +27,6 @@ def send_advice_appoint_expert_email(advice):
     send_db_mail('advice-appoint-expert', advice.expert.email, ctx)
     # send_db_sms('advice-sms-appoint-expert', advice.expert.phone, ctx)
 
-    """
     long_url = '{protocol}://{site}{url}'.format(
         protocol=SITE_PROTOCOL,
         site=Site.objects.get_current(),
@@ -41,7 +40,7 @@ def send_advice_appoint_expert_email(advice):
     short_url = r.json()['id']
 
     params = OrderedDict([
-        ('phone', '+79265380040'),
+        ('phone', advice.expert.phone),
         ('text', 'Вам платная заявка: {short_url}. Принять в течении {min} мин.'.format(
             short_url=short_url,
             min=ADVICE_OVERDUE_TIME
@@ -54,7 +53,6 @@ def send_advice_appoint_expert_email(advice):
         auth=(IQSMS_API_LOGIN, IQSMS_API_PASSWORD),
         params=urlencode(params)
     )
-    """
 
 
 def send_advice_to_in_work_to_client_message(advice, num_hours):
