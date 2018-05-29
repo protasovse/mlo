@@ -17,6 +17,6 @@ def execute_command():
 
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.config.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mlo.project.config.settings")
     django.setup()
     execute_command()

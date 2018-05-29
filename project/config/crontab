@@ -3,4 +3,4 @@
 # 3:15 выполняет переиндексацию базы данных
 15 3 * * *  /home/web/mlo/mlo/project/config/sphinx/make_index_question.sh
 # Проверка заявок на прострочку и назначение нового эксперта
-* * * * * /home/web/mlo/env/bin/python3 /home/web/mlo/mlo/project/advice/advice_check_of_overdue.py
+* * * * * /home/web/mlo/env/bin/python /home/web/mlo/mlo/project/apps/advice/advice_check_of_overdue.py
