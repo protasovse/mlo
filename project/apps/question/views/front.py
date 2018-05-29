@@ -1,7 +1,6 @@
 import urllib.parse
 
 import re
-from django.contrib.sites.models import Site
 from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -12,7 +11,7 @@ from django.utils import timezone
 from django.db import transaction
 from django.utils.http import urlencode
 from django.views.generic.base import TemplateView, RedirectView
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 from apps.advice.models import Advice, ADVICE_PAYMENT_CONFIRMED
 from apps.rating.models import Rating
 from apps.rubric.models import Rubric

@@ -9,7 +9,7 @@ class AdviceAdmin(admin.ModelAdmin):
     """
     Админка для модели Consult.
     """
-    list_display = ('question_id', 'pk', 'cost', 'expert', 'status', 'payment_date',)
+    list_display = ('question_id', 'pk', 'cost', 'expert', 'status', 'payment_date', 'overdue_date',)
     fieldsets = (
         (_('Content'), {
             'fields': ('question', 'cost', 'expert', 'status', 'payment_date', 'answered_date')}),

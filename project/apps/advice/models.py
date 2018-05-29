@@ -11,7 +11,7 @@ from apps.advice.manager import AdviceManager
 from apps.entry.managers import DELETED
 from . import emails
 from apps.entry.models import Question
-from config.settings import AUTH_USER_MODEL, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT
+from config.settings import AUTH_USER_MODEL, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT, ADVICE_OVERDUE_TIME
 
 ADVICE_NEW = 'new'
 ADVICE_PAID = 'paid'
@@ -67,6 +67,12 @@ class Advice(models.Model):
         verbose_name=_('Дата поступления оплаты'),
     )
 
+    overdue_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text=_('Время, когда заявка будет считаться просроченной и назначен новый эксперт'),
+    )
+
     answered_date = models.DateTimeField(
         null=True,
         blank=True,
@@ -87,7 +93,8 @@ class Advice(models.Model):
         queue_update()   # обновим очередь
         expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
         self.expert = expert
-        self.save(update_fields=['expert'])
+        self.overdue_date = timezone.now() + timedelta(minutes=ADVICE_OVERDUE_TIME)  # время просрочки
+        self.save(update_fields=['expert', 'overdue_date'])
         # Уведомляем эксперта о назначении заявки
         emails.send_advice_appoint_expert_email(self)
         return expert
