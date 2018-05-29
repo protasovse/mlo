@@ -70,6 +70,7 @@ class Advice(models.Model):
     overdue_date = models.DateTimeField(
         null=True,
         blank=True,
+        db_index=True,
         help_text=_('Время, когда заявка будет считаться просроченной и назначен новый эксперт'),
     )
 
