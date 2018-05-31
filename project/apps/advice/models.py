@@ -210,7 +210,7 @@ class Queue(models.Model):
     """
     Очередь экспертов для оказания консультации
     """
-    expert = models.ForeignKey(
+    expert = models.OneToOneField(
         AUTH_USER_MODEL,
         primary_key=True,
         on_delete=models.NOT_PROVIDED,
