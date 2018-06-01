@@ -51,7 +51,6 @@
         $(body).toggleClass("navbar-fixed");
     });
 </script>
-{#% include 'front/widgets/phone.html' %#}
-{% if user.role != 2 %}{% include 'front/widgets/consult.html' %}{% endif %}
+{% include 'front/widgets/phone.html' %}
 </body>
 </html>
