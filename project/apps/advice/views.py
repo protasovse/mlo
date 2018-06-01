@@ -78,9 +78,3 @@ def advice_to_payment_confirmed(request):
     sys.stdout.close()
 
     return HttpResponse(resp)
-
-
-def advice_check_of_overdue(request):
-
-    for a in Advice.objects.filter(overdue_date__lt=timezone.now()):
-        a.appoint_expert()

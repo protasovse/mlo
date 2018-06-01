@@ -6,6 +6,7 @@ from django_mysql.models import EnumField
 from image_cropping import ImageCropField, ImageRatioField
 
 from apps.entry.models import Answer
+from apps.rubric.models import Rubric
 from apps.sxgeo.models import Cities
 from config.settings import AUTH_USER_MODEL
 
@@ -287,3 +288,31 @@ class Experience(AccountBase):
 
     def __str__(self):
         return self.name
+
+
+class Subscription(models.Model):
+    """
+    Подписки на оповещения по почте
+    """
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name=_('Пользователь')
+    )
+
+    # Рубрики, вопросы по которым будут приходить на почту
+    question_rubrics = models.ManyToManyField(
+        Rubric,
+        blank=True,
+        null=True,
+        verbose_name=_('Рубрики'),
+        help_text=_('Выберите рубрики из списка, уведомления о вопросах по ним будут приходить вам на электронную '
+                    'почту. Снимите отметки со всех рубрик, что бы не получать уведомления.')
+    )
+
+    def get_admin_title(self):
+        return self.user
+
+    class Meta:
+        verbose_name = _('Подписка')
+        verbose_name_plural = _('Подписки')

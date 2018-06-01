@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
-from django.db import connection
+from django.db import connection, models
+from django.forms import CheckboxSelectMultiple
 from image_cropping import ImageCroppingMixin
 
-from apps.account.models import Info, Case, Education, Experience, Contact
+from apps.account.models import Info, Case, Education, Experience, Contact, Subscription
+from apps.rubric.models import Rubric
 from apps.sxgeo.models import Cities
 
 
@@ -76,4 +78,22 @@ class EducationAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', )
     autocomplete_fields = ['user']
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    raw_id_fields = ('user', )
+    autocomplete_fields = ['user', ]
+    list_filter = (CityListFilter,)
+    list_display = ['get_admin_title',]
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+
+
+    def get_field_queryset(self, db, db_field, request):
+        if db_field.name == 'question_rubrics':
+            return Rubric.objects.filter(level=0)
+
+        super().get_field_queryset(db, db_field, request)
 
