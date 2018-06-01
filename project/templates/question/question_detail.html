@@ -208,5 +208,9 @@
 {% block block_js %}
     {#  если не авторизован - не грузить этот скрипт #}
     <script src='{% static "answer_question.js" %}'></script>
-    {% if user.role != 2 %}{% include 'front/widgets/consult.html' %}{% endif %}
+    {% if user.role != 2 %}
+        {% include 'front/widgets/consult.html' %}
+        {% include 'front/widgets/phone.html' %}
+    {% endif %}
+
 {% endblock %}
