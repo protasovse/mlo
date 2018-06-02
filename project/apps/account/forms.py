@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.forms import inlineformset_factory, Textarea, DateInput, RadioSelect, TimeInput
 from django_select2.forms import ModelSelect2Widget
 from image_cropping import ImageCropWidget
 from phonenumber_field.formfields import PhoneNumberField
 
-from apps.account.models import Info, Contact, Education, Experience
+from apps.account.models import Info, Contact, Education, Experience, Subscription
 from apps.advice.models import Scheduler
+from apps.rubric.models import Rubric
 from apps.sxgeo.models import Cities, Country
 
 
@@ -33,48 +33,60 @@ class UserForm(forms.ModelForm):
         }
 
 
-AccountInfoForm = inlineformset_factory(
+AccountInfoForm = forms.inlineformset_factory(
     get_user_model(), Info,
     fields=('orig', 'photo', 'pic', 'birth_date', 'sex', 'short', 'about', 'signature', ),
     can_delete=False,
     widgets={
-        'signature': Textarea(attrs={'rows': 3}),
-        'short': Textarea(attrs={'rows': 4}),
-        'status': Textarea(attrs={'rows': 2}),
-        'birth_date': DateInput(),
-        'sex': RadioSelect(),
+        'signature': forms.Textarea(attrs={'rows': 3}),
+        'short': forms.Textarea(attrs={'rows': 4}),
+        'status': forms.Textarea(attrs={'rows': 2}),
+        'birth_date': forms.DateInput(),
+        'sex': forms.RadioSelect(),
     }
 )
 
 
-ContactsForm = inlineformset_factory(
+ContactsForm = forms.inlineformset_factory(
     get_user_model(), Contact,
     can_delete=True,
     fields=('type', 'value', )
 )
 
 
-EducationForm = inlineformset_factory(
+EducationForm = forms.inlineformset_factory(
     get_user_model(), Education,
     can_delete=True,
     fields=('name', 'faculty', 'specialty', 'finish', 'diplom', ),
     extra=1
 )
 
-ExperienceForm = inlineformset_factory(
+ExperienceForm = forms.inlineformset_factory(
     get_user_model(), Experience,
     can_delete=True,
     fields=('name', 'position', 'description', 'site', 'start', 'finish', ),
     extra=1
 )
 
-AdviceSchedulerForm = inlineformset_factory(
+AdviceSchedulerForm = forms.inlineformset_factory(
     get_user_model(), Scheduler,
     can_delete=False,
     fields=('is_available', 'begin', 'end', 'weekend', ),
     widgets=({
-        'begin': TimeInput(),
-        'end': TimeInput(),
+        'begin': forms.TimeInput(),
+        'end': forms.TimeInput(),
     })
 )
+
+
+class SubscriptionForm(forms.ModelForm):
+    question_rubrics = forms.ModelMultipleChoiceField(
+        label='Рубрика',
+        queryset=Rubric.objects.filter(level=0),
+        widget=forms.SelectMultiple(attrs={'size': 10}),
+    )
+
+    class Meta:
+        model = Subscription
+        fields = ('question_rubrics', )
 

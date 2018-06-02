@@ -90,7 +90,6 @@ class SubscriptionAdmin(admin.ModelAdmin):
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
-
     def get_field_queryset(self, db, db_field, request):
         if db_field.name == 'question_rubrics':
             return Rubric.objects.filter(level=0)

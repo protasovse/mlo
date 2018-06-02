@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-from apps.account.views import InfoEdit, UserEdit, ContactEdit, EducationEdit, ExperienceEdit, AdviceSchedulerEdit
+from apps.account.views import InfoEdit, UserEdit, ContactEdit, EducationEdit, ExperienceEdit, AdviceSchedulerEdit, \
+    SubscriptionEdit
 
 app_name = 'account'
 
@@ -44,5 +45,11 @@ urlpatterns = [
         'платные-заявки/',
         AdviceSchedulerEdit.as_view(template_name='account/edit/scheduler.html'),
         name='edit_scheduler'
+    ),
+
+    path(
+        'уведомления/',
+        SubscriptionEdit.as_view(template_name='account/edit/subscription.html'),
+        name='edit_subscription'
     ),
 ]

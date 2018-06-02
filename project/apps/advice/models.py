@@ -8,7 +8,7 @@ from timezone_field import TimeZoneField
 from django.utils.translation import ugettext_lazy as _
 
 from apps.advice.manager import AdviceManager
-from apps.entry.managers import DELETED
+from apps.entry.managers import DELETED, PUBLISHED
 from . import emails
 from apps.entry.models import Question
 from config.settings import AUTH_USER_MODEL, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT, ADVICE_OVERDUE_TIME
@@ -123,6 +123,8 @@ class Advice(models.Model):
                 self.status = ADVICE_PAYMENT_CONFIRMED
                 self.payment_date = timezone.now()
                 self.save(update_fields=['status', 'payment_date'])
+                self.question.status = PUBLISHED
+                self.question.save(update_fields=['status'])
                 self.appoint_expert()  # Назначаем эксперта
                 return True
             return False
