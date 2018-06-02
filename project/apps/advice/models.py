@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from django.db import models
+from django.db import models, transaction
 from django.utils import timezone
 from django_mysql.models import EnumField
 from timezone_field import TimeZoneField
@@ -118,13 +118,14 @@ class Advice(models.Model):
     # оплата подтверждается с помощью http уведомления: https://money.yandex.ru/myservices/online.xml
     # док: https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
     def to_payment_confirmed(self):
-        if self.status in (ADVICE_NEW, ADVICE_PAID):
-            self.status = ADVICE_PAYMENT_CONFIRMED
-            self.payment_date = timezone.now()
-            self.save(update_fields=['status', 'payment_date'])
-            self.appoint_expert()  # Назначаем эксперта
-            return True
-        return False
+        with transaction.atomic():
+            if self.status in (ADVICE_NEW, ADVICE_PAID):
+                self.status = ADVICE_PAYMENT_CONFIRMED
+                self.payment_date = timezone.now()
+                self.save(update_fields=['status', 'payment_date'])
+                self.appoint_expert()  # Назначаем эксперта
+                return True
+            return False
 
     # Переводим заявку в статус «В работе»
     # (num_hours — через сколько часов эксперт обещает дать ответ)

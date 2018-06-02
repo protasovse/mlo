@@ -9,19 +9,17 @@ def queue_update():
     """
     cursor = connection.cursor()
     cursor.execute("""
-        START TRANSACTION;
         UPDATE `advice_queue` SET `is_active` = false;
         UPDATE `advice_queue` SET `is_active` = true
-        WHERE `expert_id` IN (SELECT `id` FROM `mlo_auth_user` WHERE `is_expert` = 1) AND
-        
-              `expert_id` IN (
-                    SELECT `expert_id` FROM `advice_scheduler` 
-                    WHERE
-                        `is_available` AND
-                        (CURTIME() >= `begin` AND CURTIME() <= `end`) AND
-                        (`weekend` OR WEEKDAY(NOW()) NOT IN (5, 6))
-        );
-        COMMIT;
+            WHERE `expert_id` IN (SELECT `id` FROM `mlo_auth_user` WHERE `is_expert` = 1) AND
+            
+                  `expert_id` IN (
+                        SELECT `expert_id` FROM `advice_scheduler` 
+                        WHERE
+                            `is_available` AND
+                            (CURTIME() >= `begin` AND CURTIME() <= `end`) AND
+                            (`weekend` OR WEEKDAY(NOW()) NOT IN (5, 6))
+            );
     """)
 
 
@@ -31,11 +29,9 @@ def queue_shift():
     """
     cursor = connection.cursor()
     cursor.execute("""
-        START TRANSACTION;
         SELECT @i := (SELECT COUNT(`order`) FROM `advice_queue`);
         UPDATE `advice_queue` SET `order` = @i + (@i := `order`) - @i
         WHERE `is_active` ORDER BY `order`;
-        COMMIT;
         """)
 
     return True  # first
