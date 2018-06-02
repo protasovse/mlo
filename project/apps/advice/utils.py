@@ -12,7 +12,7 @@ def queue_update():
         START TRANSACTION;
         UPDATE `advice_queue` SET `is_active` = false;
         UPDATE `advice_queue` SET `is_active` = true
-        WHERE `expert_id` IN (SELECT `id` FROM `mlo_new`.`mlo_auth_user` WHERE `is_expert` = 1) AND
+        WHERE `expert_id` IN (SELECT `id` FROM `mlo_auth_user` WHERE `is_expert` = 1) AND
         
               `expert_id` IN (
                     SELECT `expert_id` FROM `advice_scheduler` 
