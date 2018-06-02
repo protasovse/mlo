@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm, \
-    AdviceSchedulerForm
+    AdviceSchedulerForm, SubscriptionForm
 from apps.advice.models import Queue
 from config.settings import ADVICE_OVERDUE_TIME, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT
 
@@ -115,3 +115,16 @@ class AdviceSchedulerEdit(FormView):
         })
 
         return context
+
+
+class SubscriptionEdit(FormView):
+    success_url = reverse_lazy('account:edit_subscription')
+
+    def get_form(self, form_class=None):
+        post = self.request.POST if self.request.method == 'POST' else None
+        return SubscriptionForm(post, instance=self.request.user)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Информация обновлена.')
+        return super(SubscriptionEdit, self).form_valid(form)

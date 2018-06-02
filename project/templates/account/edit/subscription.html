@@ -1,0 +1,26 @@
+{% extends 'account/edit/base.html' %}
+{% load bootstrap4 %}
+
+{% block account_edit_title %}Уведомления{% endblock %}
+
+{% block account_edit_form %}
+    <div class="row">
+        <div class="col mb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="normal">
+                        <p>Выберите рубрики из списка. И уведомления о вопросах по ним будут приходить вам на
+                            электронную почту. Снимите отметки со всех рубрик, что бы не получать уведомления.</p>
+                    </div>
+                    {{ form.media }}
+                    {% bootstrap_javascript jquery=True %}
+                    <div class="col-md-9 ml-auto">
+                        {% bootstrap_form_errors form %}
+                        {% bootstrap_messages %}
+                    </div>
+                </div>
+                {% bootstrap_form form layout='horizontal' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
