@@ -26,7 +26,7 @@ export default {
             phone:'',
             require_confirm: false,
             default_city: [
-                {'id':0, 'name': '-- Город не выбран --'},
+                {'id':0,  'name': '-- Город не выбран --'},
                 {'id':-1, 'name': "-- Введите название города --"}
             ]
 

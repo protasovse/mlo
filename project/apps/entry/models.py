@@ -232,7 +232,19 @@ class Question(Entry, Titled, Classified):
     def get_public_data(self):
         return {
             'id': self.id,
-            'author': self.author.get_public_data()
+            'status': self.status,
+            'title': self.title,
+            'pub_date_c': self.pub_date.isoformat() if self.pub_date else '',
+            'pub_date': self.pub_date.strftime('%d %B %Y %H:%M') if self.pub_date else '',
+            'content': self.html_content,
+            'author': self.author.get_public_data(),
+            'rubric': {
+                'name': self.rubric.name,
+                'url': self.rubric.get_absolute_url()
+            } if self.rubric else False,
+            'reply_count': self.reply_count,
+            'is_pay': self.is_pay,
+            'url': self.get_absolute_url()
         }
 
     def get_absolute_url(self):

@@ -177,6 +177,18 @@ class Advice(models.Model):
             self.question.save(update_fields=['status'])
             return True
 
+    def get_public_data(self):
+        return {
+            'status': self.status,
+            'status_display': self.get_status_display(),
+            'cost': self.cost,
+            'expert': (
+                self.expert.get_public_data()
+                if self.status in [ADVICE_INWORK, ADVICE_ANSWERED, ADVICE_ADDQUESTION, ADVICE_CLOSED]
+                else False
+            )
+        }
+
 
 class StatusLog(models.Model):
     """

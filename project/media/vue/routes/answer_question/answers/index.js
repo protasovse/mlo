@@ -8,6 +8,7 @@ export default {
     name: 'answer_question',
     data() {
         return {
+            default_settings: [],
             full_tree: true,
             content: '',
             answers: [],
@@ -15,7 +16,8 @@ export default {
             is_authorized: false,
             user_id: false,
             role: false,
-            question: [],
+            question: {},
+            advice: false,
             count_answ: {},
             sub_answers_exists: false,
             is_can_answer: false,
@@ -24,13 +26,15 @@ export default {
             thread: 0,
             upload_form: '',
             load_answers: false,
+            load_question: false
         }
     },
 
-    beforeMount() {
+    mounted() {
         this.load_answers = true;
         this.$http.get('/api/default').then(
             (r) => {
+                this.default_settings = r.data.data;
                 this.full_tree = r.data.data['settings']['answers_expand'];
             },
         );
@@ -49,13 +53,39 @@ export default {
         this.$http.get(`/api/questions/${this.qid}`).then(
             (r) => {
                 this.question = r.data.data;
-                this.request_and_load_answers()
+                this.load_question = true;
+                this.request_and_load_answers();
+                if (this.question.is_pay) {
+                    this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
+                      this.advice = r.data.data
+                    })
+                }
             },
         );
 
 
     },
     computed: {
+        is_show_button_payment()
+        {
+            return (this.is_iam_autor && this.advice && this.advice.status === 'new')
+        },
+        you_must_confirm_email()
+        {
+            return (!this.question.is_pay && this.question.status === 'blocked')
+        },
+        you_must_pay() {
+            return (this.question.is_pay && this.question.status === 'blocked')
+        },
+        is_iam_expert() {
+            return (this.advice && this.advice.expert && this.advice.expert.id === this.user_id)
+        },
+        is_iam_autor() {
+            return this.question.author.id === this.user_id
+        },
+        article_id() {
+            return `question-${this.qid}`
+        },
         tree_link_name() {
            return this.full_tree ? 'Свернуть': 'Развернуть'
         },

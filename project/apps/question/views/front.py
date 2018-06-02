@@ -22,7 +22,6 @@ from datetime import timedelta
 from apps.svem_system.exceptions import ControlledException
 from django.shortcuts import get_object_or_404
 
-from config.flash_messages import QUESTION_CREATE_PAID, QUESTION_CREATE_BLOCKED
 from config.settings import ADVICE_OVERDUE_TIME, MONEY_YANDEX_PURSE, PAYMENT_FORM_TITLE, PAYMENT_FORM_TARGET, \
     ADVICE_COST, SITE_PROTOCOL
 
@@ -32,16 +31,18 @@ class QuestionDetail(TemplateView):
 
     def get_context_data(self, pk, **kwargs):
         context = super().get_context_data(**kwargs)
-        question = get_object_or_404(Question, pk=pk)
+        try:
+            question = Question.objects.select_related().get(pk=pk)
+        except Question.DoesNotExist:
+            raise Http404("Question doesn't exists")
 
-        if question.status == 'blocked':
-            ids = self.request.session.get('question_ids', [])
-
-            if question.id not in ids and question.author != self.request.user:
-                raise Http404("Question does not exist")
-
-            messages.add_message(self.request, messages.WARNING,
-                                 QUESTION_CREATE_PAID if question.is_pay else QUESTION_CREATE_BLOCKED)
+        if question.status == 'blocked' and (
+            not (
+                question.id in self.request.session.get('question_ids', [])
+                and question.author == self.request.user
+            )
+        ):
+            raise Http404("Question does not exist")
 
         context.update({
             'question': question
@@ -76,7 +77,6 @@ class QuestionDetail(TemplateView):
                 advice_context.update({
                     'overdue_time': overdue_time.seconds // 60
                 })
-
             context.update({
                 'advice_context': advice_context
             })
@@ -87,12 +87,6 @@ class QuestionDetail(TemplateView):
             'question_url': urllib.parse.unquote(reverse('question:detail', kwargs={'pk': question.pk})),
             'similar_questions': similar_questions,
         })
-
-        #if self.request.user.is_authenticated and self.request.user.role == 2:
-           # context.update({
-           #     'is_my_answer': not not Answer.objects.filter(on_question=question, author_id=self.request.user,
-           #                                                   parent=None).count()
-           # })
 
         # Лучшие юристы блок
         context.update({

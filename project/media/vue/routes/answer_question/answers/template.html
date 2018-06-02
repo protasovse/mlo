@@ -1,277 +1,422 @@
-<div id="answer_block">
+<div class="question-page_container">
+    <div class="row pb-4">
 
-    <div class="row">
         <div class="question-page_main-part">
-            <div class="row">
-                <div class="question-page_r-col ml-auto">
-                    <div id="form" v-if="is_can_answer" class="mb-4">
-                        <hr class="mt-0 mb-3">
-                        <div class="form-group">
-                            <label for="reply" class="h6 mb-3">Ответить на вопрос:</label>
-                            <textarea class="form-control"
-                                      v-model="content"
-                                      :class="{'is-invalid': error_fields.content }"
-                                      id="reply"
-                                      rows="5"
-                                      :disabled="file_first_form_loading"
-                                      placeholder=""></textarea>
-                            <span class="invalid-feedback" v-if="error_fields.content">Введите текст ответа</span>
-                        </div>
-                        <div class="form-group">
-                            <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
-                                <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                                <a href="#" @click.prevent="$refs.upload_first.remove(file)" class="close"><i
-                                        class="icon-cancel"></i></a>
-                            </div>
 
-                            <button type="submit"
-                                    @click="save('upload_first')"
-                                    class="btn btn-primary btn-sm"
-                                    :disabled='loading||success||($refs.upload_first&&$refs.upload_first.active)'>
-                                <span v-if="loading||($refs.upload_first&&$refs.upload_first.active)">Загрузка...</span>
-                                <span v-else-if="success">Успешно</span>
-                                <span v-else>Отправить</span>
-                            </button>
+            <article :id="article_id" v-if="load_question" class="entry" itemscope itemtype="http://schema.org/Question">
 
-                            <file-upload
-                                    :post-action="post_action"
-                                    class="btn btn-link btn-sm m-0"
-                                    extensions="gif,jpg,jpeg,png,webp,pdf,xls"
-                                    accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
-                                    :multiple="true"
-                                    :size="1024 * 1024 * 100"
-                                    v-model="files"
-                                    ref="upload_first"><span class="icon-folder mr-2"></span> Прикрепить файлы
-                            </file-upload>
-                        </div>
-                    </div>
+
+                <div class="alert alert-warning" role="alert" v-if="you_must_pay">
+                    <h4>Спасибо, мы получили ваш вопрос</h4>
+                    <p>Пожалуйста, оплатите услугу, что бы вопрос был принят в работу.</p>
                 </div>
-            </div>
-        </div>
-    </div>
 
-
-    <div class="row question-page_gradient py-5" v-if="load_answers">
-        <div class="question-page_main-part">
-            <img src="/static/img/preloaders/spinner200.svg">
-        </div>
-    </div>
-
-    <div class="row question-page_gradient py-5" v-if="answers_total">
-        <div class="question-page_main-part">
-            <div class="row">
-                <h3 class="answer-list-head col offset-lg-1" id="div-id">Ответы юристов
-                    <a href="javascript:void(0);" @click="expand_all"
-                       v-if="sub_answers_exists">({{ tree_link_name }})</a>
-                    <span class="d-none answer__counter" itemprop="answerCount">2</span>
-                </h3>
-
-            </div>
+                <div class="alert alert-warning" role="alert" v-if="you_must_confirm_email">
+                    <h4>Спасибо, мы получили ваш вопрос</h4>
+                    <p>Но он пока не виден юристам. Для публикации вопроса, подтвердите ваш электронный ящик,
+                    кликнув по ссылки в отправленном письме. Проверьте папку со спамом, если письмо не приходит.</p>
+                </div>
 
 
 
-            <div name="x" v-for="answer_data in answers"
-                 role="answer"
-                 :name="answer_data.id"
-                 :ref="answer_data.id"
-                 :data-answer_id="answer_data.id"
-                 :data-thread="answer_data.thread"
-                 class="answer entry"
-                 :class="{'answer-push': answer_data.parent_id }"
-                 v-if="is_show_comment(answer_data.id)">
-
-                <hr class="my-4"/>
-
-                <header class="answer-header">
-                    <div class="question-page_l-col">
-                        <a class="answer-header_photo" :href="answer_data.author.url"
-                           v-if="answer_data.author.role=='lawyer'">
-                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name"/>
-                        </a>
-                    </div>
-
-
-                    <div class="question-page_r-col">
-                        <h6 class="mb-0" itemprop="name">
-                            <a :href="answer_data.author.url"
-                               v-if="answer_data.author.role=='lawyer'">{{ answer_data.author.full_name }}</a>
-                            <span v-else>{{ answer_data.author.full_name }}</span>
-                        </h6>
-
-
-                        <div class="normal text-muted"
-                             v-if="!answer_data.parent_id">{{ answer_data.author.about_me }}</div>
-
-                        <div class="answer-header_medal mt-3" v-if="!answer_data.parent_id">
-                            <span class="item" title="Рейтинг эксперта">
-                                <i class="icon-star"></i>
-                                <span class="v">{{ answer_data.author.stat.rating }}</span>
-                            </span>
-                            <span class="item" title="Стаж">
-                                <i class="icon-medal"></i>
-                                <span class="v">{{ answer_data.author.info.stage }}</span>
-                            </span>
-                            <span class="item" title="Всего консультаций">
-                                <i class="icon-forum"></i>
-                                <span class="v">{{ answer_data.author.info.answer_count }}</span>
-                            </span>
-
-                            <span class="item" title="Положительных отзывов">
-                                <i class="icon-like"></i>
-                                <span class="v">{{ answer_data.author.info.review_count }}</span>
-                            </span>
-
-                        </div>
-                    </div>
-
-                </header>
+                <h1 class="h2 mb-5" itemprop="name">{{ question.title }}</h1>
 
                 <div class="row">
-
                     <div class="question-page_l-col">
-                        <time class="subtitle d-block mt-1" itemprop="dateCreated"
-                              :datetime="answer_data.pub_date_c">{{ answer_data.pub_date }}</time>
-                        <span class="d-block">№ {{ answer_data.id }}</span>
-                        <span class="d-block"
-                              v-if="answer_data.author.role=='client'">{{ answer_data.author.about_me }}</span>
+                        <time class="subtitle d-block mt-1" :datetime="question.pub_date_c"
+                              itemprop="dateCreated">{{ question.pub_date }}</time>
+                        <span class="d-block">№ {{ question.id }}</span>
+                        <span class="d-block">{{ question.author.city.name }}</span>
                     </div>
 
-                    <div class="question-page_r-col content">
-                        <div class="text" itemprop="text" v-html="answer_data.content"></div>
-                        <p class="text-muted normal" v-if="answer_data.author.info.signature">
-                            {{ answer_data.author.info.signature }}
-                        </p>
+                    <div class="question-page_r-col mb-4">
+                        <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
+                            class="my-3 mb-lg-1 mt-lg-0" :data-user_id="question.author.id">
+                            <span itemprop="name">{{ question.author.full_name }}</span>
+                        </h5>
 
-                        <div class="alert alert-secondary" v-if="answer_data.files">
-                            <p class="file-list-item" v-for="f in answer_data.files">
+                        <div class="lead" itemprop="text" v-html="question.content"></div>
+
+                        <div class="alert alert-secondary" v-if="question.files">
+                            <p class="file-list-item" v-for="f in question.files">
                                 <a target="_blank" :href="f.path" v-if="f.path">{{ f.filename }}</a>
                                 <span v-else="f.path">{{ f.filename }}</span>
                             </p>
                         </div>
+
+                        <div class="rubrics-list mt-4" v-if="question.rubric">
+                            <span class="rubrics-list-item">
+                                <a :href="question.rubric.url">{{ question.rubric.name }}</a>
+                            </span>
+                        </div>
+
+
+                        <div class="small text-muted mt-4" v-if="!is_authorized && !question.reply_count ">
+                            <hr>На этот вопрос юрист ещё не ответил. Если вы знаете
+                                ответ, то можете <a class="text-dark" href="/auth/registration/" >зарегистрироваться</a>
+                                в качестве эксперта и ответить на него.
+
+                        </div>
+
+                        <div class="small text-muted mt-4" v-if="is_iam_autor && !question.reply_count"><hr>
+                            На ваш вопрос юрист ещё не ответил. К сожалению,
+                            на бесплатный вопрос мы не даём гарантии ответа. Если вам нужна развернутая
+                            гаратированная консультация, <a class="text-dark" :href="default_settings.urls.ask_question">задайте
+                            вопрос</a> платно.
+                        </div>
+
                     </div>
 
 
                 </div>
 
+            </article>
 
-                <footer class="answer-footer row">
+        </div>
 
-                    <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
-                        <div class="answer-footer-action normal align-self-start align-self-md-center">
-                            <a href="javascript:void(0);"
-                               v-if="get_add_question_link(answer_data.id)"
-                               @click="show_form_answer(answer_data.id)">
-                                {{ get_add_question_link(answer_data.id)}}</a><br/>
-                            <a href="javascript:void(0);" class="small text-muted" v-if="is_possible_expand_answer(answer_data.id)"
-                               @click="expand_answer(answer_data.id)">{{ get_exand_answer_name(answer_data.id) }}</a>
+        <aside class="question-page_aside-part pt-3">
+            <div id="advice_status" v-if="question.is_pay && advice">
+                <div class="lawyer-list">
+                    <h5 class="consult-state" :class="advice.status">{{ advice.status_display }}</h5>
+                    <p class="subtitle">Цена консультации</p>
+                    <p class="cost rub">{{ advice.cost }}</p>
+
+                    <div v-if="advice.expert">
+                        <p class="subtitle" >Консультацию ведёт эксперт</p>
+                        <div class="consult-lawyer ">
+
                         </div>
-                        <div class="align-self-end mt-3 mt-sm-0" v-if="answer_data.author.role == 'lawyer'">
-                            <div class="answer-like">
-                                <div class="answer-like-sign dropdown">{{ like_title(answer_data.id) }}</div>
-                                <div class="answer-like-block">
-
-                                    <i class="icon-dislike order-1" v-if="answer_data.is_can_like"
-                                       @click="to_dislike(answer_data.id)"></i>
-
-                                    <i class="icon-dislike order-1 noactive"
-                                       :class="{'text-danger':my_dislike(answer_data)}"
-                                       v-else></i>
+                    </div>
+                    <div v-else>
+                        <p class="subtitle">Эксперт ещё не назначен</p>
+                    </div>
 
 
-                                    <i class="icon-like order-3" v-if="answer_data.is_can_like"
-                                       @click="to_like(answer_data.id)"></i>
+                    <div class="normal" v-if="is_show_button_payment">
+                        <p>Эксперт будет назначен после оплаты.</p>
+                        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                            <input type="hidden" name="receiver" :value="default_settings.advice.money_yandex_purse">
+                            <input type="hidden" name="quickpay-form" value="shop">
+                            <input type="hidden" name="formcomment" :value="default_settings.advice.payment_form_title">
+                            <input type="hidden" name="label" :value="'advice.' + question.id">
+                            <input type="hidden" name="targets"
+                                   :value="default_settings.advice.payment_form_target + question.id">
+                            <input type="hidden" name="successURL"
+                                   :value="default_settings.settings.site_protocol+'://'+default_settings.settings.site_url+question.url">
+                            <input type="hidden" name="sum" :value="advice.cost" data-type="number">
+                            <!--input type="hidden" name="paymentType" value="AC"/-->
+                            <input class="btn btn-success btn-block" type="submit" value="Оплатить">
+                        </form>
+                    </div>
 
 
-                                    <i class="icon-like order-3 noactive"
-                                       :class="{'text-success':my_like(answer_data)}"
-                                       v-else></i>
+                    <div class="normal" v-if="is_iam_autor && advice.status == 'paid'">
+                        <p>Оплачено, ждём подтверждение оплаты.</p>
+                    </div>
+
+                    <div class="normal" v-if="advice.status == 'payment_confirmed'">
+                        <div v-if="is_iam_expert">
+
+                        </div>
+                        <div v-else>
+                            <p class="mt-3">Идёт подбор эксперта по данному вопросу (обычно в течении 30 мин.)</p>
+                        </div>
+                    </div>
 
 
-                                    <span class="order-2"
-                                          :class="{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}">
-                                        {{ answer_data.like_count }}</span>
+
+
+                </div>
+            </div>
+        </aside>
+
+
+    </div>
+
+    <div id="answer">
+        <div id="answer_block">
+
+            <div class="row">
+                <div class="question-page_main-part">
+                    <div class="row">
+                        <div class="question-page_r-col ml-auto">
+                            <div id="form" v-if="is_can_answer" class="mb-4">
+                                <hr class="mt-0 mb-3">
+                                <div class="form-group">
+                                    <label for="reply" class="h6 mb-3">Ответить на вопрос:</label>
+                                    <textarea class="form-control"
+                                              v-model="content"
+                                              :class="{'is-invalid': error_fields.content }"
+                                              id="reply"
+                                              rows="5"
+                                              :disabled="file_first_form_loading"
+                                              placeholder=""></textarea>
+                                    <span class="invalid-feedback"
+                                          v-if="error_fields.content">Введите текст ответа</span>
+                                </div>
+                                <div class="form-group">
+                                    <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
+                                        <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
+                                        <a href="#" @click.prevent="$refs.upload_first.remove(file)" class="close"><i
+                                                class="icon-cancel"></i></a>
+                                    </div>
+
+                                    <button type="submit"
+                                            @click="save('upload_first')"
+                                            class="btn btn-primary btn-sm"
+                                            :disabled='loading||success||($refs.upload_first&&$refs.upload_first.active)'>
+                                        <span v-if="loading||($refs.upload_first&&$refs.upload_first.active)">Загрузка...</span>
+                                        <span v-else-if="success">Успешно</span>
+                                        <span v-else>Отправить</span>
+                                    </button>
+
+                                    <file-upload
+                                            :post-action="post_action"
+                                            class="btn btn-link btn-sm m-0"
+                                            extensions="gif,jpg,jpeg,png,webp,pdf,xls"
+                                            accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
+                                            :multiple="true"
+                                            :size="1024 * 1024 * 100"
+                                            v-model="files"
+                                            ref="upload_first"><span class="icon-folder mr-2"></span> Прикрепить файлы
+                                    </file-upload>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="question-page_r-col ml-auto pt-3">
-                        <div id="form" v-if="is_show_form_answer(answer_data.id)">
-                            <div class="form-group">
-                                <!--label for="reply" class="h6 mb-2">Ответ</label-->
-                                <textarea class="form-control normal"
-                                          v-model="content"
-                                          :class="{'is-invalid': error_fields.content }"
-                                          id="reply"
-                                          rows="5"
-                                          :disabled="file_second_form_loading"
-                                          placeholder=""></textarea>
-                                <span class="invalid-feedback" v-if="error_fields.content">Введите текст сообщения</span>
-                            </div>
-
-                            <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
-                                    <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
-                                    <a href="#" @click.prevent="$refs.upload_second[0].remove(file)" class="close"><i class="icon-cancel"></i></a>
-                            </div>
-
-                            <div class="form-group d-flex align-items-center">
-
-                                <button type="submit"
-                                        @click="save('upload_second')"
-                                        class="btn btn-primary btn-sm"
-                                        :disabled='loading||success||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)'>
-                                    <span v-if="loading||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)">Загрузка...</span>
-                                    <span v-else-if="success">Успешно</span>
-                                    <span v-else>Отправить</span>
-                                </button>
-
-                                <file-upload
-                                        :post-action="post_action"
-                                        class="btn btn-link btn-sm m-0"
-                                        extensions="gif,jpg,jpeg,png,webp,pdf,xls"
-                                        accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
-                                        :multiple="true"
-
-                                        :size="1024 * 1024 * 100"
-                                        v-model="files"
-                                        ref="upload_second"><span class="icon-folder mr-2"></span> Прикрепить файлы
-                                </file-upload>
-
-                                <a href="javascript:void(0);" class="text-muted ml-auto small" @click="hide_form_answer(answer_data.id)">Отмена</a>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </footer>
-
-
-            </div>
-        </div>
-
-
-        <aside class="question-page_aside-part">
-            <h4 class="mb-4">Юристы ответившие на этот вопрос:</h4>
-
-            <div class="lawyer-list">
-                <div v-for="answer_data in answers"
-                     v-if="!answer_data.parent_id"
-                     role="answers_selector"
-                     class="lawyer-list_item lawyer-list_item-action"
-                     :data-answer_id="answer_data.id"
-                     @click="scrollTo(answer_data.id)">
-                    <div class="lawyer-list_header">
-                        <span class="ph">
-                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name">
-                        </span>
-                        <div class="nm ml-3 text-primary">{{ answer_data.author.full_name }}</div>
-                    </div>
-                    <p class="lawyer-list_body"> {{ answer_data.short_content }} </p>
                 </div>
             </div>
 
-        </aside>
 
+            <div class="row question-page_gradient py-5" v-if="load_answers">
+                <div class="question-page_main-part">
+                    <img src="/static/img/preloaders/spinner200.svg">
+                </div>
+            </div>
+
+            <div class="row question-page_gradient py-5" v-if="answers_total">
+                <div class="question-page_main-part">
+                    <div class="row">
+                        <h3 class="answer-list-head col offset-lg-1" id="div-id">Ответы юристов
+                            <a href="javascript:void(0);" @click="expand_all"
+                               v-if="sub_answers_exists">({{ tree_link_name }})</a>
+                            <span class="d-none answer__counter" itemprop="answerCount">2</span>
+                        </h3>
+
+                    </div>
+
+
+                    <div name="x" v-for="answer_data in answers"
+                         role="answer"
+                         :name="answer_data.id"
+                         :ref="answer_data.id"
+                         :data-answer_id="answer_data.id"
+                         :data-thread="answer_data.thread"
+                         class="answer entry"
+                         :class="{'answer-push': answer_data.parent_id }"
+                         v-if="is_show_comment(answer_data.id)">
+
+                        <hr class="my-4"/>
+
+                        <header class="answer-header">
+                            <div class="question-page_l-col">
+                                <a class="answer-header_photo" :href="answer_data.author.url"
+                                   v-if="answer_data.author.role=='lawyer'">
+                                    <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name"/>
+                                </a>
+                            </div>
+
+
+                            <div class="question-page_r-col">
+                                <h6 class="mb-0" itemprop="name">
+                                    <a :href="answer_data.author.url"
+                                       v-if="answer_data.author.role=='lawyer'">{{ answer_data.author.full_name }}</a>
+                                    <span v-else>{{ answer_data.author.full_name }}</span>
+                                </h6>
+
+
+                                <div class="normal text-muted"
+                                     v-if="!answer_data.parent_id">{{ answer_data.author.about_me }}</div>
+
+                                <div class="answer-header_medal mt-3" v-if="!answer_data.parent_id">
+                            <span class="item" title="Рейтинг эксперта">
+                                <i class="icon-star"></i>
+                                <span class="v">{{ answer_data.author.stat.rating }}</span>
+                            </span>
+                                    <span class="item" title="Стаж">
+                                <i class="icon-medal"></i>
+                                <span class="v">{{ answer_data.author.info.stage }}</span>
+                            </span>
+                                    <span class="item" title="Всего консультаций">
+                                <i class="icon-forum"></i>
+                                <span class="v">{{ answer_data.author.info.answer_count }}</span>
+                            </span>
+
+                                    <span class="item" title="Положительных отзывов">
+                                <i class="icon-like"></i>
+                                <span class="v">{{ answer_data.author.info.review_count }}</span>
+                            </span>
+
+                                </div>
+                            </div>
+
+                        </header>
+
+                        <div class="row">
+
+                            <div class="question-page_l-col">
+                                <time class="subtitle d-block mt-1" itemprop="dateCreated"
+                                      :datetime="answer_data.pub_date_c">{{ answer_data.pub_date }}</time>
+                                <span class="d-block">№ {{ answer_data.id }}</span>
+                                <span class="d-block"
+                                      v-if="answer_data.author.role=='client'">{{ answer_data.author.about_me }}</span>
+                            </div>
+
+                            <div class="question-page_r-col content">
+                                <div class="text" itemprop="text" v-html="answer_data.content"></div>
+                                <p class="text-muted normal" v-if="answer_data.author.info.signature">
+                                    {{ answer_data.author.info.signature }}
+                                </p>
+
+                                <div class="alert alert-secondary" v-if="answer_data.files">
+                                    <p class="file-list-item" v-for="f in answer_data.files">
+                                        <a target="_blank" :href="f.path" v-if="f.path">{{ f.filename }}</a>
+                                        <span v-else="f.path">{{ f.filename }}</span>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <footer class="answer-footer row">
+
+                            <div class="question-page_r-col ml-auto d-flex align-items-center justify-content-between flex-column flex-sm-row">
+                                <div class="answer-footer-action normal align-self-start align-self-md-center">
+                                    <a href="javascript:void(0);"
+                                       v-if="get_add_question_link(answer_data.id)"
+                                       @click="show_form_answer(answer_data.id)">
+                                        {{ get_add_question_link(answer_data.id)}}</a><br/>
+                                    <a href="javascript:void(0);" class="small text-muted"
+                                       v-if="is_possible_expand_answer(answer_data.id)"
+                                       @click="expand_answer(answer_data.id)">
+                                        {{ get_exand_answer_name(answer_data.id) }}</a>
+                                </div>
+                                <div class="align-self-end mt-3 mt-sm-0" v-if="answer_data.author.role == 'lawyer'">
+                                    <div class="answer-like">
+                                        <div class="answer-like-sign dropdown">{{ like_title(answer_data.id) }}</div>
+                                        <div class="answer-like-block">
+
+                                            <i class="icon-dislike order-1" v-if="answer_data.is_can_like"
+                                               @click="to_dislike(answer_data.id)"></i>
+
+                                            <i class="icon-dislike order-1 noactive"
+                                               :class="{'text-danger':my_dislike(answer_data)}"
+                                               v-else></i>
+
+
+                                            <i class="icon-like order-3" v-if="answer_data.is_can_like"
+                                               @click="to_like(answer_data.id)"></i>
+
+
+                                            <i class="icon-like order-3 noactive"
+                                               :class="{'text-success':my_like(answer_data)}"
+                                               v-else></i>
+
+
+                                            <span class="order-2"
+                                                  :class="{'text-success': answer_data.like_count>0, 'text-danger': answer_data.like_count<0}">
+                                        {{ answer_data.like_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="question-page_r-col ml-auto pt-3">
+                                <div id="form" v-if="is_show_form_answer(answer_data.id)">
+                                    <div class="form-group">
+                                        <!--label for="reply" class="h6 mb-2">Ответ</label-->
+                                        <textarea class="form-control normal"
+                                                  v-model="content"
+                                                  :class="{'is-invalid': error_fields.content }"
+                                                  id="reply"
+                                                  rows="5"
+                                                  :disabled="file_second_form_loading"
+                                                  placeholder=""></textarea>
+                                        <span class="invalid-feedback"
+                                              v-if="error_fields.content">Введите текст сообщения</span>
+                                    </div>
+
+                                    <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
+                                        <i class="bar" :id="file.id"><i :style="{width: file.progress + '%'}"></i></i>
+                                        <a href="#" @click.prevent="$refs.upload_second[0].remove(file)"
+                                           class="close"><i
+                                                class="icon-cancel"></i></a>
+                                    </div>
+
+                                    <div class="form-group d-flex align-items-center">
+
+                                        <button type="submit"
+                                                @click="save('upload_second')"
+                                                class="btn btn-primary btn-sm"
+                                                :disabled='loading||success||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)'>
+                                            <span v-if="loading||($refs.upload_second&&$refs.upload_second[0]&&$refs.upload_second[0].active)">Загрузка...</span>
+                                            <span v-else-if="success">Успешно</span>
+                                            <span v-else>Отправить</span>
+                                        </button>
+
+                                        <file-upload
+                                                :post-action="post_action"
+                                                class="btn btn-link btn-sm m-0"
+                                                extensions="gif,jpg,jpeg,png,webp,pdf,xls"
+                                                accept="image/png,image/gif,image/jpeg,image/webp,application/pdf,application/vnd.ms-excel"
+                                                :multiple="true"
+
+                                                :size="1024 * 1024 * 100"
+                                                v-model="files"
+                                                ref="upload_second"><span class="icon-folder mr-2"></span> Прикрепить
+                                            файлы
+                                        </file-upload>
+
+                                        <a href="javascript:void(0);" class="text-muted ml-auto small"
+                                           @click="hide_form_answer(answer_data.id)">Отмена</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </footer>
+
+
+                    </div>
+                </div>
+
+
+                <aside class="question-page_aside-part">
+                    <h4 class="mb-4">Юристы ответившие на этот вопрос:</h4>
+
+                    <div class="lawyer-list">
+                        <div v-for="answer_data in answers"
+                             v-if="!answer_data.parent_id"
+                             role="answers_selector"
+                             class="lawyer-list_item lawyer-list_item-action"
+                             :data-answer_id="answer_data.id"
+                             @click="scrollTo(answer_data.id)">
+                            <div class="lawyer-list_header">
+                        <span class="ph">
+                            <img :src="answer_data.author.info.photo" :alt="answer_data.author.full_name">
+                        </span>
+                                <div class="nm ml-3 text-primary">{{ answer_data.author.full_name }}</div>
+                            </div>
+                            <p class="lawyer-list_body"> {{ answer_data.short_content }} </p>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
     </div>
-
 </div>

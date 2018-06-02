@@ -27,9 +27,13 @@ class QuestionView(ApiView):
     def get(cls, request, qid):
         q = Question.objects.filter(pk=qid).select_related(
             'author', 'author__city', 'author__info', 'author__rating'
-        ).get().get_public_data()
-        q.update({'is_can_answer': False})
-        return q
+        ).get()
+        q_data = q.get_public_data()
+        q_data.update({'is_can_answer': False})
+
+        files = QuestionFilesView.get_files(request, q)
+        q_data.update({'files': files[q.id] if files else False})
+        return q_data
 
     @classmethod
     def post(cls, request, qid=0):
@@ -163,6 +167,40 @@ class AnswersFilesView(ApiView):
         answers = Answer.published.related_to_question(question).filter(pk=aid)
         files = cls.get_files(request, [a.get_public_data() for a in answers], question)
         return files[aid] if files else []
+
+
+class QuestionFilesView(ApiView):
+    @classmethod
+    def is_show(cls, request, question):
+        """
+        определим фунцию которая будет возвращать флаг - показывать ли файл
+        :param request:
+        :param question:
+        :return:
+        """
+        # не показываем файлы незалогиненому пользователю
+        if not request.user.is_authenticated:
+            return False
+        # если текущий юзер автор вопроса - то все вложения ему видны
+        if request.user.id == question.author.id:
+            return True
+        # если текущий юзер - юрист, то ему видны все вложения в любом вопросе
+        if request.user.is_lawyer:
+            return True
+        # во всех остальных случаях - не видны
+        return False
+
+    @classmethod
+    def get_files(cls, request, question):
+        files = {}
+        # найдем все файлы для ответов на вопрос question
+        for f in Files.objects.filter(entry_id=question.id):
+            p_data = f.get_public_data(cls.is_show(request, question))
+            try:
+                files[f.entry_id].append(p_data)
+            except KeyError:
+                files[f.entry_id] = [p_data]
+        return files
 
 
 class AnswersView(ApiView):

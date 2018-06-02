@@ -3,6 +3,7 @@ from apps.front.views import api as front_api
 from apps.svem_auth.views import api as auth_api
 from apps.rubric import view_api as rubric_api
 from apps.question.views import api as question_api
+from apps.advice.views import api as advice_api
 from apps.sxgeo.views import api as sxgeo_api
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     path('questions/default', question_api.QuestionDefault.as_view()),
     path('questions', question_api.QuestionView.as_view()),
     path('questions/<int:qid>', question_api.QuestionView.as_view()),
+    path('questions/<int:qid>/advice', advice_api.AdviceView.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/like', question_api.AnswersLike.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/dislike', question_api.AnswersDislike.as_view()),
     path('questions/<int:qid>/answers', question_api.AnswersView.as_view()),
