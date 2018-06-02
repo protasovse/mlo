@@ -1,7 +1,5 @@
 from django.db import connection
 
-from apps.advice.models import Queue, Scheduler
-
 
 def queue_update():
     """
@@ -48,10 +46,13 @@ def queue_get_first():
     Возвращает первого в очереди пользователя и смещает очередь
     """
     queue_update()
+    from apps.advice.models import Queue
     first = Queue.objects.filter(is_active=True).first()
     if first:
         queue_shift()
         return first.expert
+    else:
+        return False
 
 
 def queue_add_user(user_id):

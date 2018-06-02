@@ -294,3 +294,10 @@
         {% endcomment %}
 
 {% endblock %}
+
+{% block block_js %}
+    {% if user.role != 2 %}
+        {% include 'front/widgets/consult.html' %}
+        {% include 'front/widgets/phone.html' %}
+    {% endif %}
+{% endblock %}

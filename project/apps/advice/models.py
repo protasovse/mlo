@@ -90,15 +90,18 @@ class Advice(models.Model):
 
     # Назначить эксперта
     def appoint_expert(self):
-        from apps.advice.utils import queue_get_first, queue_update
+        from apps.advice.utils import queue_update, queue_get_first
         queue_update()   # обновим очередь
         expert = queue_get_first()  # получаем текущего пользователя и смещаем очередь
-        self.expert = expert
-        self.overdue_date = timezone.now() + timedelta(minutes=ADVICE_OVERDUE_TIME)  # время просрочки
-        self.save(update_fields=['expert', 'overdue_date'])
-        # Уведомляем эксперта о назначении заявки
-        emails.send_advice_appoint_expert_email(self)
-        return expert
+        if expert:
+            self.expert = expert
+            self.overdue_date = timezone.now() + timedelta(minutes=ADVICE_OVERDUE_TIME)  # время просрочки
+            self.save(update_fields=['expert', 'overdue_date'])
+            # Уведомляем эксперта о назначении заявки
+            emails.send_advice_appoint_expert_email(self)
+            return True
+        else:
+            return False
 
     # Пользователь оплатил и перешёл на страницу вопроса
     def to_paid(self):

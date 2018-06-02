@@ -1,8 +1,9 @@
 User-agent: Yandex
-Host: мойюрист.онлайн
+Host: xn--h1abiilhh6g.xn--80asehdb
 
 Disallow: /юрист/1/
 
 User-agent: *
+Host: xn--h1abiilhh6g.xn--80asehdb
 
 Disallow: /юрист/1/
