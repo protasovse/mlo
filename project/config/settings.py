@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'dbmail',
     'debug_toolbar',
+    'django_extensions',
 
     'apps.mlo_auth',
     'apps.entry',
