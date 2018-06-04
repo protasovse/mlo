@@ -62,3 +62,4 @@ pymorphy2-dicts-ru
 django-bootstrap4==0.0.6
 
 raven==6.9.0
+django_extensions=2.0.7
