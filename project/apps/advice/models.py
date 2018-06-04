@@ -132,14 +132,15 @@ class Advice(models.Model):
     # Переводим заявку в статус «В работе»
     # (num_hours — через сколько часов эксперт обещает дать ответ)
     def to_in_work(self, num_hours):
-        if self.status == ADVICE_PAYMENT_CONFIRMED:
-            self.status = ADVICE_INWORK
-            self.answered_date = timezone.now() + timedelta(hours=num_hours)
-            self.save(update_fields=['status', 'answered_date'])
-            # Уведомляем клиента о новом назначении эксперта
-            emails.send_advice_to_in_work_to_client_message(self, num_hours)
-            return True
-        return False
+        with transaction.atomic():
+            if self.status == ADVICE_PAYMENT_CONFIRMED:
+                self.status = ADVICE_INWORK
+                self.answered_date = timezone.now() + timedelta(hours=int(num_hours))
+                self.save(update_fields=['status', 'answered_date'])
+                # Уведомляем клиента о новом назначении эксперта
+                emails.send_advice_to_in_work_to_client_message(self, num_hours)
+                return True
+            return False
 
     # Переводим заявку в статус «Ответ эксперта»
     def to_answered(self):
