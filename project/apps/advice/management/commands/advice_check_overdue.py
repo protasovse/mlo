@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = 'Проверяем просроченные заявки, если они есть, то переназначаем экспертов'
 
     def handle(self, *args, **options):
-
+        print(timezone)
         adv = Advice.objects.filter(question__status=PUBLISHED).\
             filter(status=ADVICE_PAYMENT_CONFIRMED).\
             filter(Q(overdue_date__lt=timezone.now()) | Q(overdue_date=None))

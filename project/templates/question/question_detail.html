@@ -86,18 +86,7 @@
 
         {# Боковая колонка 1  #}
         <aside class="question-page_aside-part pt-3">
-            <div id="advice_status">
-            {% if question.is_pay %}
-                {# Если консультация платная #}
-                {% include 'advice/aside/advice_status.html' with advice_context=advice_context %}
-
-            {% elif lawyers_from_rating.count %}
-                {% comment %}
-                <h4 class="mb-4">Наши эксперты</h4>
-                {% include 'rating/aside/best_lawyers.html' with items=lawyers_from_rating %}
-                {% endcomment %}
-            {% endif %}
-            </div>
+            <div id="advice_status"></div>
         </aside>
 
 

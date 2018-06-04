@@ -26,7 +26,10 @@ export default {
             thread: 0,
             upload_form: '',
             load_answers: false,
-            load_question: false
+            load_question: false,
+            is_show_advice_timeout: false,
+            reject: false,
+            expert_loading: false
         }
     },
 
@@ -55,17 +58,22 @@ export default {
                 this.question = r.data.data;
                 this.load_question = true;
                 this.request_and_load_answers();
-                if (this.question.is_pay) {
-                    this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
-                      this.advice = r.data.data
-                    })
-                }
+                this.load_advice()
             },
         );
 
 
     },
     computed: {
+        is_expert_appointed()
+        {
+            return (this.advice && this.advice.expert && (
+                this.advice.status === 'inwork' ||
+                this.advice.status === 'answered' ||
+                this.advice.status === 'addquestion' ||
+                this.advice.status === 'closed'
+            ))
+        },
         is_show_button_payment()
         {
             return (this.is_iam_autor && this.advice && this.advice.status === 'new')
@@ -123,6 +131,41 @@ export default {
         }
     },
     methods: {
+        load_advice()
+        {
+            if (this.question.is_pay) {
+                this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
+                    this.advice = r.data.data
+                })
+            }
+        },
+        reject_advice()
+        {
+            this.expert_loading = true;
+            this.$http.post(`/api/questions/${this.qid}/advice/${this.advice.id}/reject`).then(
+                (r) => {
+                    this.reject = true;
+                    this.expert_loading = false;
+                },
+                (err) => {
+                    this.set_field_error('advice', err.data.error);
+                    this.expert_loading = false;
+                }
+            );
+        },
+        approve_advice(hours) {
+            this.expert_loading = true;
+            this.is_show_advice_timeout = false;
+            this.$http.post(`/api/questions/${this.qid}/advice/${this.advice.id}/approve`, {'hours': hours}, {emulateJSON:true}).then(
+                (okr) => {
+                    this.expert_loading = false;
+                },
+                (err) => {
+                    this.set_field_error('advice', err.data.error);
+                    this.expert_loading = false;
+                }
+            )
+        },
         my_dislike(answer_data) {
            return answer_data.my_like === -1;
         },

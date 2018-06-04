@@ -185,14 +185,11 @@ class Advice(models.Model):
 
     def get_public_data(self):
         return {
+            'id': self.id,
             'status': self.status,
             'status_display': self.get_status_display(),
             'cost': self.cost,
-            'expert': (
-                self.expert.get_public_data()
-                if self.status in [ADVICE_INWORK, ADVICE_ANSWERED, ADVICE_ADDQUESTION, ADVICE_CLOSED]
-                else False
-            )
+            'expert': self.expert.get_public_data()
         }
 
 

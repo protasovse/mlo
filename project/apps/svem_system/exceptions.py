@@ -12,6 +12,7 @@ class ControlledException(Exception):
         self.request_status = int(kwargs.get('request_status', 500))
 
 
+
 class BackendPublicException(ControlledException):
     pass
 
@@ -21,4 +22,8 @@ class ApiPublicException(BackendPublicException):
 
 
 class ApiException(ControlledException):
+    pass
+
+
+class ApiPrivateException(ApiException):
     pass

@@ -81,7 +81,7 @@
                     <p class="subtitle">Цена консультации</p>
                     <p class="cost rub">{{ advice.cost }}</p>
 
-                    <div v-if="advice.expert">
+                    <div v-if="is_expert_appointed">
                         <p class="subtitle" >Консультацию ведёт эксперт</p>
                         <div class="consult-lawyer ">
 
@@ -114,14 +114,51 @@
                         <p>Оплачено, ждём подтверждение оплаты.</p>
                     </div>
 
-                    <div class="normal" v-if="advice.status == 'payment_confirmed'">
-                        <div v-if="is_iam_expert">
-
+                    <div class="normal" v-if="!expert_loading && advice.status == 'payment_confirmed'">
+                        <div v-if="is_iam_expert && !reject">
+                            <p>Вам необходимо принять заявку в течение {{ default_settings.advice.overdue_time }} мин.</p>
+                            <div class="d-flex align-items-center" v-if="!error_fields.advice">
+                                <div class="btn-group">
+                                    <a class="btn btn-success btn-sm dropdown-toggle"
+                                       href="javascript:void(0);"
+                                      @click="is_show_advice_timeout = true">Принять </a>
+                                    <div class="dropdown-menu"
+                                         :class="{'d-block': is_show_advice_timeout}"
+                                        @mouseleave="is_show_advice_timeout = false">
+                                        <div class="dropdown-header">Отвечу через:</div>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(1)">1 час</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(2)">2 часа</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(3)">3 часа</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(4)">4 часа</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(6)">6 часов</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(12)">12 часов</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" @click="approve_advice(24)">24 часа</a>
+                                    </div>
+                                </div>
+                                <a class="text-muted ml-3" href="javascript:void(0);" @click="reject_advice">Отказаться</a>
+                            </div>
                         </div>
                         <div v-else>
                             <p class="mt-3">Идёт подбор эксперта по данному вопросу (обычно в течении 30 мин.)</p>
                         </div>
+
+                        <div class="text-danger" v-if="reject">
+                            Вы отказались
+                        </div>
+
+                        <div class="text-danger mt-3" v-if="error_fields.advice">
+                            <h6>{{ error_fields.advice }}</h6>
+                            <p class="small">При выполнении действия произошла ошибка. Разработчики уже узнали об этом и трудятся над
+                            исправлением.</p>
+                        </div>
+
                     </div>
+
+                    <div class="normal" v-if="expert_loading && advice.status == 'payment_confirmed'">
+                        <img src="/static/img/preloaders/spinner200.svg">
+                    </div>
+
+
 
 
 
