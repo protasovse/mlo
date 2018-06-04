@@ -12,8 +12,6 @@ class LocationIdentify(MiddlewareMixin):
         ip = self.get_client_ip(request)
         location = geo_data.get_location(ip, detailed=True)
 
-        print(location)
-
         if location:
             type = 'city'
             name = location['info']['city']['name_ru']
@@ -34,7 +32,7 @@ class LocationIdentify(MiddlewareMixin):
             'loc_name': name,
             'loc_name_loct': c.inflect({'loc2'}).word.title(),
             'loc_type': type,
-            'consultant_show': 'region_id' in location
+            'consultant_show': location and 'region_id' in location
                                and location['region_id'] in ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
         }
 
