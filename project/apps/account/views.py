@@ -5,6 +5,7 @@ from django.views.generic import FormView
 
 from apps.account.forms import AccountInfoForm, UserForm, ContactsForm, EducationForm, ExperienceForm, \
     AdviceSchedulerForm, SubscriptionForm
+from apps.account.models import Subscription
 from apps.advice.models import Queue
 from config.settings import ADVICE_OVERDUE_TIME, ADVICE_COST, ADVICE_EXPERT_FEE_IN_PERCENT
 
@@ -122,7 +123,8 @@ class SubscriptionEdit(FormView):
 
     def get_form(self, form_class=None):
         post = self.request.POST if self.request.method == 'POST' else None
-        return SubscriptionForm(post, instance=self.request.user)
+        sub, created = Subscription.objects.get_or_create(user=self.request.user)
+        return SubscriptionForm(post, instance=sub)
 
     def form_valid(self, form):
         form.save()

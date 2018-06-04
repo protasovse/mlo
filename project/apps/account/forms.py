@@ -83,7 +83,7 @@ class SubscriptionForm(forms.ModelForm):
     question_rubrics = forms.ModelMultipleChoiceField(
         label='Рубрика',
         queryset=Rubric.objects.filter(level=0),
-        widget=forms.SelectMultiple(attrs={'size': 10}),
+        widget=forms.CheckboxSelectMultiple(),
     )
 
     class Meta:
