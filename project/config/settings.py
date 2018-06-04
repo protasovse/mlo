@@ -1,6 +1,8 @@
 import os
 import environ
 import locale
+
+import raven
 from easy_thumbnails.conf import Settings as thumbnail_settings
 
 
@@ -51,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
 
+    'raven.contrib.django.raven_compat',
+
     'django_mptt_admin',
     'easy_thumbnails',
     'django_select2',
@@ -94,7 +98,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'apps.sxgeo.middleware.loc.LocationIdentify',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -212,3 +217,10 @@ ANSWERS_TREE_IS_EXPANDED = True
 
 ALL_PARTNER = True  # Партнёрска программа
 # URL для обработки заявок с виджета: /widget_send
+
+RAVEN_CONFIG = {
+    'dsn': 'https://c9489b1580874e9f984dc2ef4202292f:e5b9db86650f4afeae5434b68554b3fe@sentry.io/1218590',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}

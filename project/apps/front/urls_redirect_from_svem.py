@@ -28,5 +28,5 @@ urlpatterns = [
     path('experts/', RedirectView.as_view(url='/юристы/', permanent=True)),
     path('questions/', RedirectView.as_view(url='/вопросы/', permanent=True)),
 
-    url(r'^', RedirectView.as_view(url='/', permanent=False))
+    # url(r'^', RedirectView.as_view(url='/', permanent=False))
 ]
