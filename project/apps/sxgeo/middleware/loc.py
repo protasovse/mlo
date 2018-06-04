@@ -3,6 +3,7 @@ from django.utils.deprecation import MiddlewareMixin
 from pysyge import GeoLocator
 
 from config import settings
+from config.settings import ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
 
 
 class LocationIdentify(MiddlewareMixin):
@@ -10,6 +11,8 @@ class LocationIdentify(MiddlewareMixin):
         geo_data = GeoLocator(settings.DATA_DIR + 'SxGeoCity.dat')
         ip = self.get_client_ip(request)
         location = geo_data.get_location(ip, detailed=True)
+
+        print(location)
 
         if location:
             type = 'city'
@@ -30,7 +33,9 @@ class LocationIdentify(MiddlewareMixin):
             'loc_id': id,
             'loc_name': name,
             'loc_name_loct': c.inflect({'loc2'}).word.title(),
-            'loc_type': type
+            'loc_type': type,
+            'consultant_show': 'region_id' in location
+                               and location['region_id'] in ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
         }
 
         request.user.hot_line_phone = settings.HOT_LINE_PHONES[region_name] \

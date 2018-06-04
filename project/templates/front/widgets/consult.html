@@ -1,4 +1,6 @@
 {% load static %}
 <!--script type="text/javascript" src="http://s1.nice-cream.ru/widget2.2/widget.js"></script-->
+{% if user.location.consultant_show %}{# настройка consultant_show в apps.sxgeo.middleware.loc #}
 <script type="text/javascript" src="{% static 'js/allp/widget3.js' %}"></script>
 <script src="{% static 'js/allp/init.js' %}" charset="utf-8"></script>
+{% endif %}
