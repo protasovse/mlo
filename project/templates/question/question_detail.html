@@ -92,17 +92,6 @@
                             {% endif %}
 
                             {# Блок ответить на вопрос #}
-                            {% if question.is_pay %}
-                                {# Если консультация платная #}
-                                {% include 'advice/advice_question_answer_block.html' %}
-                            {% endif %}
-                            {% comment %}
-                            {% elif user.role == 2 %}
-                                {#% include 'question/question_answer_block.html' %#}
-                                {% if not is_my_answer %}{% endif %}
-                            {% endif %}
-                            {% endcomment %}
-
                             <!--hr class="my-4"-->
 
                             {# Яндекс share кнопки #}

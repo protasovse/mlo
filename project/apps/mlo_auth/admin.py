@@ -40,7 +40,7 @@ class ExperienceInLine(admin.StackedInline):
 
 def make_expert(modeladmin, request, queryset):
     queryset.update(is_expert=True)
-    from apps.advice.utils import queue_add_user, queue_update
+    from apps.advice.utils import queue_add_user
     for exp in queryset.all():
         Scheduler.objects.get_or_create(expert_id=exp.pk)
         queue_add_user(exp.pk)
