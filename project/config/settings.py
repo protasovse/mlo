@@ -218,9 +218,10 @@ ANSWERS_TREE_IS_EXPANDED = True
 ALL_PARTNER = True  # Партнёрска программа
 # URL для обработки заявок с виджета: /widget_send
 
-RAVEN_CONFIG = {
-    'dsn': 'https://c9489b1580874e9f984dc2ef4202292f:e5b9db86650f4afeae5434b68554b3fe@sentry.io/1218590',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
-}
+if not DEBUG:
+    RAVEN_CONFIG = {
+        'dsn': 'https://c9489b1580874e9f984dc2ef4202292f:e5b9db86650f4afeae5434b68554b3fe@sentry.io/1218590',
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+    }
