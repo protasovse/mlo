@@ -24,7 +24,7 @@ class UserEdit(FormView):
 
 
 class InfoEdit(FormView):
-    success_url = reverse_lazy('account:edit')
+    success_url = reverse_lazy('account:edit_profile')
 
     def get_form(self, form_class=None):
         post = None

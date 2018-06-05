@@ -9,7 +9,7 @@ from config.settings import ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
 class LocationIdentify(MiddlewareMixin):
     def process_request(self, request):
         geo_data = GeoLocator(settings.DATA_DIR + 'SxGeoCity.dat')
-        ip = self.get_client_ip(request)
+        ip = '62.105.129.45'  # self.get_client_ip(request)
         location = geo_data.get_location(ip, detailed=True)
 
         if location:
@@ -30,7 +30,7 @@ class LocationIdentify(MiddlewareMixin):
         request.user.location = {
             'loc_id': id,
             'loc_name': name,
-            'loc_name_loct': c.inflect({'loc2'}).word.title(),
+            'loc_name_loct': c.inflect({'loc2'}).word.title() if c.inflect({'loc2'}) else name,
             'loc_type': type,
             'consultant_show': location and 'region_id' in location
                                and location['region_id'] in ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
