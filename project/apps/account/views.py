@@ -11,7 +11,7 @@ from config.settings import ADVICE_OVERDUE_TIME, ADVICE_COST, ADVICE_EXPERT_FEE_
 
 
 class UserEdit(FormView):
-    success_url = reverse_lazy('account:edit_regdata')
+    success_url = reverse_lazy('account:edit_user_data')
 
     def get_form(self):
         post = self.request.POST if self.request.method == 'POST' else None
