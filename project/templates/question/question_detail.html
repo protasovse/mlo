@@ -21,7 +21,7 @@
 {% block content %}
 
     {# Хедер страницы вопроса #}
-    {% include 'question/section/header_question.html' with bg_class='bg-1' %}
+    {#% include 'question/section/header_question.html' with bg_class='bg-1' %#}
 
 
     {# Хлебные крошки #}
@@ -77,6 +77,7 @@
                                 <span itemprop="name">{{ question.author.get_name }}</span>
                             </h5>
                             <div class="lead" itemprop="text">{{ question.html_content|safe }}</div>
+
                         </div>
                     </div>
 

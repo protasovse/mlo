@@ -15,6 +15,8 @@ urlpatterns = [
     re_path(r'^[A-Z]+[\w-]+/(?P<tag_id>\d+)-[\w-]+/page(?P<page>\d+)/$', redirect_from_svem.tag),
     # /Trudovoe-pravo/253-trudovoe-pravo/294226-pochemu-iz-moej-zarplaty-vychli-otpusknye/
     re_path(r'^[A-Z]+[\w-]+/\d+-[\w-]+/(?P<question_id>\d+)-[\w-]+/$', redirect_from_svem.question),
+    re_path(r'^question/(?P<question_id>\d+)-[\w-]+/$', redirect_from_svem.question),
+    re_path(r'^question/(?P<question_id>\d+)/$', redirect_from_svem.question),
     # /otvety/
     path('otvety/', redirect_from_svem.questions),
     path('otvety/page<int:page>/', redirect_from_svem.questions),
@@ -28,5 +30,5 @@ urlpatterns = [
     path('experts/', RedirectView.as_view(url='/юристы/', permanent=True)),
     path('questions/', RedirectView.as_view(url='/вопросы/', permanent=True)),
 
-    url(r'^', RedirectView.as_view(url='/', permanent=False))
+    # url(r'^', RedirectView.as_view(url='/', permanent=False))
 ]
