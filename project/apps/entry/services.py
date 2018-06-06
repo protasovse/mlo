@@ -1,6 +1,8 @@
 import requests
 from django.db import transaction
 from django.db.models import F
+
+from apps.advice.models import ADVICE_INWORK, ADVICE_ANSWERED, ADVICE_ADDQUESTION
 from apps.entry.models import Answer, Additionals
 from apps.question.emails import send_question_new_answer
 from apps.rating.models import RatingScore, Type, RatingScoreComment
@@ -30,6 +32,9 @@ def answer(question, content, user, parent_id=None):
         raise BackendPublicException("You can't answer. There are your answers in the question")
 
     advice = question.advice if hasattr(question, 'advice') else None
+
+    if advice and advice.status not in [ADVICE_INWORK, ADVICE_ANSWERED, ADVICE_ADDQUESTION]:
+        raise BackendPublicException("You can't answer.")
 
     # create an answer
     instance = Answer.objects.create(
