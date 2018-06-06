@@ -22,6 +22,7 @@ urlpatterns = [
     path('questions/<int:qid>/advice', advice_api.AdviceView.as_view()),
     path('questions/<int:qid>/advice/<int:adid>/reject', advice_api.AdviceReject.as_view()),
     path('questions/<int:qid>/advice/<int:adid>/approve', advice_api.AdviceApprove.as_view()),
+    path('questions/<int:qid>/advice/<int:adid>/confirm', advice_api.AdviceConfirm.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/like', question_api.AnswersLike.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/dislike', question_api.AnswersDislike.as_view()),
     path('questions/<int:qid>/answers', question_api.AnswersView.as_view()),

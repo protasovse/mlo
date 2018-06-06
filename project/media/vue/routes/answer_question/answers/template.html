@@ -60,9 +60,11 @@
 
                         <div class="small text-muted mt-4" v-if="is_iam_autor && !question.reply_count"><hr>
                             На ваш вопрос юрист ещё не ответил. К сожалению,
-                            на бесплатный вопрос мы не даём гарантии ответа. Если вам нужна развернутая
-                            гаратированная консультация, <a class="text-dark" :href="default_settings.urls.ask_question">задайте
-                            вопрос</a> платно.
+                            на бесплатный вопрос мы не даём гарантии ответа.
+                            <span v-if="default_settings.urls">
+                                Если вам нужна развернутая гаратированная консультация,
+                                <a  class="text-dark" :href="default_settings.urls.ask_question">задайте вопрос</a> платно.
+                            </span>
                         </div>
 
                     </div>
@@ -82,9 +84,16 @@
                     <p class="cost rub">{{ advice.cost }}</p>
 
                     <div v-if="is_expert_appointed">
-                        <p class="subtitle" >Консультацию ведёт эксперт</p>
-                        <div class="consult-lawyer ">
 
+                        <p class="subtitle" v-if="advice.status != 'closed'">Консультацию ведёт эксперт</p>
+                        <p class="subtitle" v-if="advice.status == 'closed'">Консультацию провел эксперт</p>
+
+
+                        <div class="consult-lawyer ">
+                            <a class="pht" :href="advice.expert.url">
+                                <img :src="advice.expert.info.photo" :alt="advice.expert.full_name"/>
+                            </a>
+                            <h6><a :href="advice.expert.url">{{ advice.expert.full_name }}</a></h6>
                         </div>
                     </div>
                     <div v-else>
@@ -146,24 +155,34 @@
                             Вы отказались
                         </div>
 
-                        <div class="text-danger mt-3" v-if="error_fields.advice">
-                            <h6>{{ error_fields.advice }}</h6>
-                            <p class="small">При выполнении действия произошла ошибка. Разработчики уже узнали об этом и трудятся над
+
+
+
+                    </div>
+
+                    <div class="normal" v-if="!expert_loading && advice.status == 'inwork'">
+                        <p class="mt-3" v-if="is_iam_expert">Вы должны ответить до {{ advice.answered_date }} мск.</p>
+                        <p class="mt-3" v-if="is_iam_autor">Эксперт принял вопрос и ответит до {{ advice.answered_date }} мск.</p>
+                    </div>
+
+                    <div class="normal" v-if="!expert_loading && advice.status == 'answered' && is_iam_autor && !error_fields.advice">
+                        <p class="mt-3">Эксперт ответил на вопрос, если у вас нет дополнительных вопросов нажмите на:</p>
+                        <p>
+                            <a class="btn btn-success btn-sm"
+                              href="javascript:void(0);"
+                              @click="confirm_advice">Вопрос решён</a>
+                        </p>
+                    </div>
+
+                    <div class="text-danger mt-3" v-if="error_fields.advice">
+                        <h6>{{ error_fields.advice }}</h6>
+                        <p class="small">При выполнении действия произошла ошибка. Разработчики уже узнали об этом и трудятся над
                             исправлением.</p>
-                        </div>
-
                     </div>
-
-                    <div class="normal" v-if="expert_loading && advice.status == 'payment_confirmed'">
-                        <img src="/static/img/preloaders/spinner200.svg">
-                    </div>
-
-
-
-
-
-
                 </div>
+            </div>
+            <div class="normal" v-if="expert_loading">
+                <img src="/static/img/preloaders/spinner200.svg">
             </div>
         </aside>
 

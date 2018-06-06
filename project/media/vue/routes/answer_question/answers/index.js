@@ -153,6 +153,22 @@ export default {
                 }
             );
         },
+        confirm_advice()
+        {
+            this.expert_loading = true;
+            this.$http.post(`/api/questions/${this.qid}/advice/${this.advice.id}/confirm`).then(
+                (r) => {
+                    this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
+                        this.advice = r.data.data;
+                        this.expert_loading = false;
+                    })
+                },
+                (err) => {
+                    this.set_field_error('advice', err.data.error);
+                    this.expert_loading = false;
+                }
+            );
+        },
         approve_advice(hours) {
             this.expert_loading = true;
             this.is_show_advice_timeout = false;
@@ -244,6 +260,9 @@ export default {
         },
         get_add_question_link(id) {
             if (!this.is_authorized) {
+                return false
+            }
+            if (this.advice && this.advice.status === 'closed') {
                 return false
             }
             let answer = this.answers.filter(i=>i.id === id)[0];

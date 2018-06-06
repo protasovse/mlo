@@ -32,3 +32,15 @@ class AdviceApprove(ApiView):
         result = advice.to_in_work(request.POST.get('hours'))
         if not result:
             raise ApiPrivateException('anything wrong')
+
+
+class AdviceConfirm(ApiView):
+    @classmethod
+    def post(cls, request, qid, adid):
+        advice = Advice.objects.filter(question_id=qid).filter(pk=adid).select_related().get()
+        # решить advice может только тот, кто автор вопроса
+        if advice.question.author_id != request.user.id:
+            raise ApiPublicException('access denied')
+        result = advice.to_closed()
+        if not result:
+            raise ApiPrivateException('anything wrong')
