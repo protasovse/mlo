@@ -188,8 +188,8 @@ GOOGLE_HORT_API_URL = 'https://www.googleapis.com/urlshortener/v1/url'
 GOOGLE_HORT_API_KEY = 'AIzaSyD7GJizTAQaQ3C0v_ysFTJz2HWZMopHb5E'
 
 HOT_LINE_PHONES = {
-    'Московская область': '8 (495) 568-24-78',
-    'Москва': '8 (495) 568-24-78',
+    'Московская область': '8 (495) 984-46-07',
+    'Москва': '8 (495) 984-46-07',
     'Санкт-Петербург': '8 (812) 458-04-71',
     'Ленинградская область': '8 (812) 458-04-71',
     'остальные': None
