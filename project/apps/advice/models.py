@@ -141,6 +141,14 @@ class Advice(models.Model):
                 return True
             return False
 
+    # Отказаться от заявки
+    def to_refuse(self):
+        with transaction.atomic():
+            if self.status == ADVICE_PAYMENT_CONFIRMED:
+                self.appoint_expert()
+                return True
+            return False
+
     # Переводим заявку в статус «Ответ эксперта»
     def to_answered(self):
         if self.status in (ADVICE_ADDQUESTION, ADVICE_INWORK):
