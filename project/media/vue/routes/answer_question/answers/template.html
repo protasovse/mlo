@@ -195,7 +195,7 @@
             <div class="row">
                 <div class="question-page_main-part">
                     <div class="row">
-                        <div class="question-page_r-col ml-auto">
+                        <div class="question-page_r-col ml-auto" v-if="!load_form">
                             <div id="form" v-if="is_can_answer" class="mb-4">
                                 <hr class="mt-0 mb-3">
                                 <div class="form-group">
@@ -208,7 +208,7 @@
                                               :disabled="file_first_form_loading"
                                               placeholder=""></textarea>
                                     <span class="invalid-feedback"
-                                          v-if="error_fields.content">Введите текст ответа</span>
+                                          v-if="error_fields.content">{{ error_fields.content }}</span>
                                 </div>
                                 <div class="form-group">
                                     <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">
@@ -401,7 +401,7 @@
                                                   :disabled="file_second_form_loading"
                                                   placeholder=""></textarea>
                                         <span class="invalid-feedback"
-                                              v-if="error_fields.content">Введите текст сообщения</span>
+                                              v-if="error_fields.content">{{ error_fields.content }}</span>
                                     </div>
 
                                     <div v-for="(file, index) in files" class="file-loader" :data-filename="file.name">

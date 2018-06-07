@@ -29,7 +29,8 @@ export default {
             load_question: false,
             is_show_advice_timeout: false,
             reject: false,
-            expert_loading: false
+            expert_loading: false,
+            load_form: false
         }
     },
 
@@ -134,9 +135,19 @@ export default {
         load_advice()
         {
             if (this.question.is_pay) {
-                this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
-                    this.advice = r.data.data
-                })
+                this.load_form = true;
+                this.$http.get(`/api/questions/${this.qid}/advice`).then(
+                    (r) => {
+                        this.advice = r.data.data;
+                        if (!(this.advice.status === 'inwork' &&  this.advice.expert && this.advice.expert.id === this.user_id)) {
+                            this.is_can_answer = false;
+                        }
+                        this.load_form = false;
+                    },
+                    (err) => {
+                        this.load_form = false;
+                    }
+                )
             }
         },
         reject_advice()
@@ -173,8 +184,12 @@ export default {
             this.expert_loading = true;
             this.is_show_advice_timeout = false;
             this.$http.post(`/api/questions/${this.qid}/advice/${this.advice.id}/approve`, {'hours': hours}, {emulateJSON:true}).then(
-                (okr) => {
-                    this.expert_loading = false;
+                (r) => {
+                    this.$http.get(`/api/questions/${this.qid}/advice`).then((r) => {
+                        this.advice = r.data.data;
+                        this.expert_loading = false;
+                        this.is_can_answer = true;
+                    })
                 },
                 (err) => {
                     this.set_field_error('advice', err.data.error);
@@ -314,7 +329,8 @@ export default {
                 'content': this.content
             };
             this.answer_id = false;
-            this.put(`/api/questions/${this.qid}/answers`, data, (r) => {
+            this.put(`/api/questions/${this.qid}/answers`, data,
+                (r) => {
                     this.answer_id = r.data.id;
 
                     for (let i = 0; i < this.get_upload(upload_name).files.length; i++) {
@@ -324,12 +340,14 @@ export default {
                     this.get_upload(upload_name).active = true;
 
                     if (this.is_form_send_done(upload_name)) {
-                        console.log('123');
                         this.request_and_load_answers(this.answer_id);
                     }
                     this.set_form_success();
-
-            });
+                },
+                (err) => {
+                    this.set_field_error('content', err.data.error);
+                }
+            );
         },
         to_like_val(id, val) {
             let a = this.answers.filter(i=>i.id === id)[0];

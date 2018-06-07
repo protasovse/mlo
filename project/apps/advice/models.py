@@ -189,8 +189,8 @@ class Advice(models.Model):
             'status': self.status,
             'status_display': self.get_status_display(),
             'cost': self.cost,
-            'expert': self.expert.get_public_data(),
-            'answered_date': self.answered_date.strftime('%d %B %Y %H:%M')
+            'expert': self.expert.get_public_data() if self.expert else False,
+            'answered_date': self.answered_date.strftime('%d %B %Y %H:%M') if self.answered_date else False
         }
 
 
