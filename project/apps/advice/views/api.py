@@ -17,7 +17,7 @@ class AdviceReject(ApiView):
         # отклонить advice может только тот, кому она назначена
         if advice.expert_id != request.user.id:
             raise ApiPublicException('access denied')
-        result = advice.appoint_expert()
+        result = advice.to_refuse()
         if not result:
             raise ApiPrivateException('anything wrong')
 
