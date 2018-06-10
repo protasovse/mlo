@@ -1,7 +1,7 @@
 import pymorphy2
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
+from django.http import Http404, HttpResponseServerError
 from django.views.generic import TemplateView, ListView
 
 from apps.entry.models import Question

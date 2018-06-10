@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
 from apps.account.views import InfoEdit, UserEdit, ContactEdit, EducationEdit, ExperienceEdit, AdviceSchedulerEdit, \
@@ -13,7 +14,7 @@ urlpatterns = [
 
     path(
         'редактировать-профиль/',
-        InfoEdit.as_view(template_name='account/edit/additional.html'),
+        login_required(login_url='/auth/login/')(InfoEdit.as_view(template_name='account/edit/additional.html')),
         name='edit_profile'
     ),
 

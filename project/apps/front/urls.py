@@ -1,9 +1,8 @@
 from django.conf.urls import url
-from django.urls import path, include, re_path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from apps.front.views.front import Mainpage, LawyerPage, ReviewsPage, TermsOfUse, About, LawyersListPage
-from apps.question.views.front import AskQuestion
 
 app_name = 'front'
 

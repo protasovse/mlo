@@ -1,9 +1,7 @@
-User-agent: Yandex
 Host: xn--h1abiilhh6g.xn--80asehdb
 
-Disallow: /юрист/1/
+User-agent: Yandex
+Disallow: /%D1%8E%D1%80%D0%B8%D1%81%D1%82/1/
 
 User-agent: *
-Host: xn--h1abiilhh6g.xn--80asehdb
-
-Disallow: /юрист/1/
+Disallow: /%D1%8E%D1%80%D0%B8%D1%81%D1%82/1/
