@@ -4,6 +4,8 @@ import binascii
 from django.db.models import F
 from django.views.decorators.csrf import csrf_exempt
 from phonenumbers import PhoneNumberFormat, format_number, parse
+
+from apps.account.models import Subscription
 from apps.advice.models import Advice
 from apps.rating.models import Type, RatingScore, RatingScoreComment
 from apps.rating.utils import add_score
@@ -98,6 +100,12 @@ class QuestionView(ApiView):
                 emails.send_paid_question(user, q, user.email, password)
             else:
                 emails.send_confirm_question(user, q, q.token, user.email, password)
+
+                # mail to lawyers
+                for r in Subscription.objects.filter(rubrics__in=[q.rubric]):
+                    print(r.user)
+                    emails.send_new_question_to_expert(r.user, q)
+
                 if ALL_PARTNER:  # Если влючена парнёрская программа — отправим заявку
                     send_to_all_partner(
                         name=params['name'],

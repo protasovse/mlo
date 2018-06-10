@@ -70,3 +70,13 @@ def send_paid_question(user, question, email, password):
         'password': password,
     }
     send_db_mail('paid-question', user.email, ctx)
+
+
+def send_new_question_to_expert(user, question):
+    ctx = {
+        'site': Site.objects.get_current(),
+        'protocol': SITE_PROTOCOL,
+        'question': question,
+        'username': user.get_name
+    }
+    send_db_mail('new_question_to_expert', user.email, ctx)

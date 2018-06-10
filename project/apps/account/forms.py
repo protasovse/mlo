@@ -80,7 +80,7 @@ AdviceSchedulerForm = forms.inlineformset_factory(
 
 
 class SubscriptionForm(forms.ModelForm):
-    question_rubrics = forms.ModelMultipleChoiceField(
+    rubrics = forms.ModelMultipleChoiceField(
         label='Рубрика',
         queryset=Rubric.objects.filter(level=0),
         widget=forms.CheckboxSelectMultiple(),
@@ -88,5 +88,5 @@ class SubscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Subscription
-        fields = ('question_rubrics', )
+        fields = ('rubrics', )
 

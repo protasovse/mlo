@@ -29,6 +29,10 @@
                     <a href="{{ sch_url }}" class="nav-link{% if sch_url in curl %} active{% endif %}"
                     >«Персональный юрист»</a>
                     {% endif %}
+
+                    {% url 'personal:edit_subscription' as sub_url %}
+                    <a href="{{ sub_url }}" class="nav-link{% if sub_url in curl %} active{% endif %}">Уведомления</a>
+
                 {% endwith %}
             </nav>
         </div>

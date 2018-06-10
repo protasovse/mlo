@@ -301,7 +301,7 @@ class Subscription(models.Model):
     )
 
     # Рубрики, вопросы по которым будут приходить на почту
-    question_rubrics = models.ManyToManyField(
+    rubrics = models.ManyToManyField(
         Rubric,
         blank=True,
         null=True,
