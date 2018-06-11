@@ -259,7 +259,7 @@ class Question(Entry, Titled, Classified):
         self.save()
         # find user from hash
         user = self.author
-        # if user doesnt active
+        # if user does`nt active
         user.activate(False)
         # save to user personal info from question
         user.first_name = self.first_name

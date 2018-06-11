@@ -101,11 +101,6 @@ class QuestionView(ApiView):
             else:
                 emails.send_confirm_question(user, q, q.token, user.email, password)
 
-                # mail to lawyers
-                for r in Subscription.objects.filter(rubrics__in=[q.rubric]):
-                    print(r.user)
-                    emails.send_new_question_to_expert(r.user, q)
-
                 if ALL_PARTNER:  # Если влючена парнёрская программа — отправим заявку
                     send_to_all_partner(
                         name=params['name'],

@@ -5,6 +5,8 @@ from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
+from apps.account.models import Subscription
+from apps.svem_auth.models.emails import send_new_question_to_expert
 from config import flash_messages
 from django.http import Http404
 from django.utils import timezone
@@ -354,6 +356,10 @@ class ConfirmQuestion(RedirectView):
                     raise ControlledException()
                 # to public the question
                 q.confirm()
+                # mail to lawyers
+                for r in Subscription.objects.filter(rubrics__in=[q.rubric]):
+                    send_new_question_to_expert(r.user, q)
+
             # to do login user
             if not self.request.user.is_authenticated:
                 login(self.request, q.author)
