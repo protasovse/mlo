@@ -316,7 +316,7 @@ var _default = {
           email: this.email,
           password: this.password
         }, function (r) {
-          window.location.href = '/вопросы';
+          window.location.href = _this2.$route.query.next ? _this2.$route.query.next : '/вопросы';
         }, function (r) {
           _this2.unactive = r.data.code === 'unactive';
 

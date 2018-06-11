@@ -47,8 +47,8 @@ export default {
         save() {
             try {
                 this.form_validate([this.requires_fields]);
-                this.get('/api/user', {email: this.email, password: this.password},
-                    (r) => {window.location.href = '/вопросы'},
+                this.get('/api/user',{email: this.email, password: this.password},
+                    (r) => {window.location.href = this.$route.query.next ? this.$route.query.next : '/вопросы'},
                     (r) => {
                         this.unactive = (r.data.code === 'unactive');
                         this.process_error(r);

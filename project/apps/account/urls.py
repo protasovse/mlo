@@ -20,37 +20,37 @@ urlpatterns = [
 
     path(
         'регистрационные-данные/',
-        UserEdit.as_view(template_name='account/edit/main.html'),
+        login_required(login_url='/auth/login/')(UserEdit.as_view(template_name='account/edit/main.html')),
         name='edit_user_data'
     ),
 
     path(
         'образование/',
-        EducationEdit.as_view(template_name='account/edit/education.html'),
+        login_required(login_url='/auth/login/')(EducationEdit.as_view(template_name='account/edit/education.html')),
         name='edit_education'
     ),
 
     path(
         'опыт-работы/',
-        ExperienceEdit.as_view(template_name='account/edit/experience.html'),
+        login_required(login_url='/auth/login/')(ExperienceEdit.as_view(template_name='account/edit/experience.html')),
         name='edit_experience'
     ),
 
     path(
         'контакты/',
-        ContactEdit.as_view(template_name='account/edit/contact.html'),
+        login_required(login_url='/auth/login/')(ContactEdit.as_view(template_name='account/edit/contact.html')),
         name='edit_contact'
     ),
 
     path(
         'платные-заявки/',
-        AdviceSchedulerEdit.as_view(template_name='account/edit/scheduler.html'),
+        login_required(login_url='/auth/login/')(AdviceSchedulerEdit.as_view(template_name='account/edit/scheduler.html')),
         name='edit_scheduler'
     ),
 
     path(
         'уведомления/',
-        SubscriptionEdit.as_view(template_name='account/edit/subscription.html'),
+        login_required(login_url='/auth/login/')(SubscriptionEdit.as_view(template_name='account/edit/subscription.html')),
         name='edit_subscription'
     ),
 ]
