@@ -25,7 +25,7 @@
             </p>
             <!--p class="lead text-center mb-4">{{ request.user.email }}</p-->
             <div class="col-12">
-                <a href="{% url 'ask_question' %}" class="btn btn-primary btn-lg px-5">Начать консультацию</a>
+                <a href="{% url 'ask_question' %}" class="btn btn-primary">Начать консультацию</a>
             </div>
         </main>
     </section>
@@ -145,6 +145,5 @@
 {% block block_js %}
     {% if user.role != 2 %}
         {% include 'front/widgets/consult.html' %}
-        {% include 'front/widgets/phone.html' %}
     {% endif %}
 {% endblock %}
