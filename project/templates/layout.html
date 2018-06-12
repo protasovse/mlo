@@ -33,6 +33,10 @@
 <body>
 <div id="app" class="page {% block navbar_fixed %}{% endblock %}">{% block body %}{% endblock %}</div>
 {% block block_js %}{% endblock %}
+{% if user.role != 2 %}
+    {% include 'front/widgets/phone.html' %}
+{% endif %}
+
 <script>
     // $('.page').addClass("navbar-fixed");
     $(window).on('scroll', function () {
