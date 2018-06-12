@@ -117,37 +117,37 @@ class Advice(models.Model):
     # оплата подтверждается с помощью http уведомления: https://money.yandex.ru/myservices/online.xml
     # док: https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
     def to_payment_confirmed(self):
-        with transaction.atomic():
-            if self.status in (ADVICE_NEW, ADVICE_PAID):
+        if self.status in (ADVICE_NEW, ADVICE_PAID):
+            with transaction.atomic():
                 self.status = ADVICE_PAYMENT_CONFIRMED
                 self.payment_date = timezone.now()
                 self.save(update_fields=['status', 'payment_date'])
                 self.question.status = PUBLISHED
                 self.question.save(update_fields=['status'])
                 self.appoint_expert()  # Назначаем эксперта
-                return True
-            return False
+            return True
+        return False
 
     # Переводим заявку в статус «В работе»
     # (num_hours — через сколько часов эксперт обещает дать ответ)
     def to_in_work(self, num_hours):
-        with transaction.atomic():
-            if self.status == ADVICE_PAYMENT_CONFIRMED:
+        if self.status == ADVICE_PAYMENT_CONFIRMED:
+            with transaction.atomic():
                 self.status = ADVICE_INWORK
                 self.answered_date = timezone.now() + timedelta(hours=int(num_hours))
                 self.save(update_fields=['status', 'answered_date'])
-                # Уведомляем клиента о новом назначении эксперта
-                emails.send_advice_to_in_work_to_client_message(self, num_hours)
-                return True
-            return False
+            # Уведомляем клиента о новом назначении эксперта
+            emails.send_advice_to_in_work_to_client_message(self, num_hours)
+            return True
+        return False
 
     # Отказаться от заявки
     def to_refuse(self):
-        with transaction.atomic():
-            if self.status == ADVICE_PAYMENT_CONFIRMED:
+        if self.status == ADVICE_PAYMENT_CONFIRMED:
+            with transaction.atomic():
                 self.appoint_expert()
                 return True
-            return False
+        return False
 
     # Переводим заявку в статус «Ответ эксперта»
     def to_answered(self):
@@ -172,11 +172,12 @@ class Advice(models.Model):
     # Переводим заявку в статус «Завершено»
     def to_closed(self):
         if self.status == ADVICE_ANSWERED:
-            self.status = ADVICE_CLOSED
-            self.save(update_fields=['status'])
-            from apps.billing.models import transfer_to_user
-            transfer_to_user(self.expert, self.cost * ADVICE_EXPERT_FEE_IN_PERCENT / 100,
-                             'Гонорар за платный вопрос №{id}'.format(id=self.question_id))
+            with transaction.atomic():
+                self.status = ADVICE_CLOSED
+                self.save(update_fields=['status'])
+                from apps.billing.models import transfer_to_user
+                transfer_to_user(self.expert, self.cost * ADVICE_EXPERT_FEE_IN_PERCENT / 100,
+                                 'Гонорар за платный вопрос №{id}'.format(id=self.question_id))
             # Уведомляем эксперта о завершении консультации и переводе денег на счёт
             emails.send_advice_closed(self)
             return True
@@ -185,10 +186,11 @@ class Advice(models.Model):
     # Переводим заявку в статус «Отменено»
     def to_canceled(self):
         if self.status != ADVICE_CLOSED:
-            self.status = ADVICE_CANCELED
-            self.save(update_fields=['status'])
-            self.question.status = DELETED
-            self.question.save(update_fields=['status'])
+            with transaction.atomic():
+                self.status = ADVICE_CANCELED
+                self.save(update_fields=['status'])
+                self.question.status = DELETED
+                self.question.save(update_fields=['status'])
             return True
 
     def get_public_data(self):

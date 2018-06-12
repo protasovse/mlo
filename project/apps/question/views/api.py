@@ -13,14 +13,14 @@ from apps.review.models import Likes
 from apps.svem_system.exceptions import ApiPublicException
 from apps.svem_system.views.api import ApiView
 from apps.entry.models import Question, Answer, Entry, Files, DEFAULT_RUBRIC
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from apps.svem_auth.models import emails
 from apps.entry.managers import BLOCKED
 from apps.svem_auth.models.validators import CityIdValidator
 import config.error_messages as err_txt
 from django.contrib import messages
 from config import flash_messages
-from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED, ALL_PARTNER
+from config.settings import ADVICE_COST, ANSWERS_TREE_IS_EXPANDED, ALL_PARTNER, DEBUG
 from apps.entry.services import answer as to_answer, send_to_all_partner
 
 
@@ -83,32 +83,29 @@ class QuestionView(ApiView):
                     phone=params['phone'],
                     city_id=params['city_id'],
                 )
+                login(request, user)
 
         if int(params['is_paid_question']) == 1:
             q = Question.objects.create_paid_question(user, params)
             Advice.objects.create(question=q, cost=ADVICE_COST)
+            emails.send_paid_question(user, q, user.email, password)
         else:
             q = Question.objects.create_free_question(user, is_authenticated, params)
+            emails.send_confirm_question(user, q, q.token, user.email, password)
+            if not DEBUG and ALL_PARTNER:  # Если влючена парнёрская программа — отправим заявку
+                send_to_all_partner(
+                    name=params['name'],
+                    phone=params['phone'][5:],
+                    code=params['phone'][2:5],
+                    question=params['content'],
+                    ip=cls.get_client_ip(request)
+                )
 
         if q.status == BLOCKED:
             # add question_id to session
             question_ids = request.session.get('question_ids', [])
             question_ids.append(q.id)
             request.session['question_ids'] = question_ids
-
-            if q.is_pay:
-                emails.send_paid_question(user, q, user.email, password)
-            else:
-                emails.send_confirm_question(user, q, q.token, user.email, password)
-
-                if ALL_PARTNER:  # Если влючена парнёрская программа — отправим заявку
-                    send_to_all_partner(
-                        name=params['name'],
-                        phone=params['phone'][5:],
-                        code=params['phone'][2:5],
-                        question=params['content'],
-                        ip=cls.get_client_ip(request)
-                    )
         else:
             messages.add_message(
                 request, messages.SUCCESS, flash_messages.QUESTION_CREATE_ACTIVE.format(id=q.id), 'success'
