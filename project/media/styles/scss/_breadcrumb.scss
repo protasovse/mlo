@@ -1,8 +1,8 @@
 .breadcrumb {
   @extend .mt-4, .mb-0;
   font-weight: $font-weight-light;
-  @include media-breakpoint-down(sm) {
-    display: none;
+  /*@include media-breakpoint-down(sm) {
+    // display: none;
     .breadcrumb-item {
       display: none;
       margin-bottom: .5rem;
@@ -34,5 +34,5 @@
         }
       }
     }
-  }
+  }*/
 }

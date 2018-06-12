@@ -28,7 +28,7 @@
             <p class="text">Вы авторизованы как {{ user.get_full_name }}</p>
         {% else %}
             <p>
-                <a href="/auth/login/" class="btn btn-outline-primary btn-sm">Вход<i class="icon-person ml-2"></i></a>
+                <a href="/auth/login/?next={{ request.get_full_path }}" class="btn btn-outline-primary btn-sm">Вход<i class="icon-person ml-2"></i></a>
             </p>
             <p class="text">или <a class="text-dark" href="/auth/registration/">Зарегистрируйтесь</a> на
                 сайте юридической помощи «Мойюрист.онлайн»</p>

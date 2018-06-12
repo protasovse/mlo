@@ -38,61 +38,62 @@
     </div>
 
     <router-view>
-    {# Содержание страницы вопроса #}
-    <div class="question-page_container">
-        {# Вопрос и правая колонка напротив вопроса  #}
-        <div class="row pb-4">
+        {# Содержание страницы вопроса #}
+        <div class="question-page_container">
+            {# Вопрос и правая колонка напротив вопроса  #}
+            <div class="row pb-4">
 
-            {# Центральная часть — вопрос #}
-            <div class="question-page_main-part">
+                {# Центральная часть — вопрос #}
+                <div class="question-page_main-part">
 
-                {# Вопрос #}
-                <article id="question-{{ question.id }}" class="entry" itemscope itemtype="http://schema.org/Question">
+                    {# Вопрос #}
+                    <article id="question-{{ question.id }}" class="entry" itemscope
+                             itemtype="http://schema.org/Question">
 
-                    {% for message in mess %}
-                        <div class="alert alert-{{ message.tags }}" role="alert">
-                            {% autoescape off %}
-                                {{ message }}
-                            {% endautoescape %}
+                        {% for message in mess %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {% autoescape off %}
+                                    {{ message }}
+                                {% endautoescape %}
+                            </div>
+                        {% endfor %}
+
+                        <h1 class="h2 mb-5" itemprop="name">{{ question.title }}</h1>
+
+                        <div class="row">
+                            <div class="question-page_l-col">
+                                <time class="subtitle d-block mt-1" datetime="{{ question.pub_date|date:"c" }}"
+                                      itemprop="dateCreated">{{ question.pub_date|date:"j M Y G:i" }}</time>
+                                <span class="d-block">№ {{ question.id }}</span>
+                                <span class="d-block">{{ question.author.city.name }}</span>
+                            </div>
+
+                            <div class="question-page_r-col mb-4">
+                                <h5 itemprop="author"
+                                    itemscope itemtype="http://schema.org/Person"
+                                    class="my-3 mb-lg-1 mt-lg-0"
+                                    data-user_id="{{ question.author.pk }}">
+                                    <span itemprop="name">{{ question.author.get_name }}</span>
+                                </h5>
+                                <div class="lead" itemprop="text">{{ question.html_content|safe }}</div>
+
+                            </div>
                         </div>
-                    {% endfor %}
 
-                    <h1 class="h2 mb-5" itemprop="name">{{ question.title }}</h1>
+                    </article>
 
-                    <div class="row">
-                        <div class="question-page_l-col">
-                            <time class="subtitle d-block mt-1" datetime="{{ question.pub_date|date:"c" }}"
-                                  itemprop="dateCreated">{{ question.pub_date|date:"j M Y G:i" }}</time>
-                            <span class="d-block">№ {{ question.id }}</span>
-                            <span class="d-block">{{ question.author.city.name }}</span>
-                        </div>
+                </div>
 
-                        <div class="question-page_r-col mb-4">
-                            <h5 itemprop="author"
-                                itemscope itemtype="http://schema.org/Person"
-                                class="my-3 mb-lg-1 mt-lg-0"
-                                data-user_id="{{ question.author.pk }}">
-                                <span itemprop="name">{{ question.author.get_name }}</span>
-                            </h5>
-                            <div class="lead" itemprop="text">{{ question.html_content|safe }}</div>
+                {# Боковая колонка 1  #}
+                <aside class="question-page_aside-part pt-3">
+                    <div id="advice_status"></div>
+                </aside>
 
-                        </div>
-                    </div>
-
-                </article>
 
             </div>
 
-        {# Боковая колонка 1  #}
-        <aside class="question-page_aside-part pt-3">
-            <div id="advice_status"></div>
-        </aside>
-
-
-        </div>
-
-        {# Если есть ответы  #}
-        <div id="answer">
+            {# Если есть ответы  #}
+            <div id="answer">
 
                 <div class="row question-page_gradient py-5">
                     <div class="question-page_main-part">
@@ -112,12 +113,30 @@
                     <aside class="question-page_aside-part">&nbsp;</aside>
                 </div>
 
-        </div>
+            </div>
 
-    </div>
+        </div>
     </router-view>
 
     <div class="question-page_container">
+        {% if not user.is_lawyer %}
+        <div class="row pb-4">
+            <div class="question-page_main-part">
+                <div class="question-page_r-col- ml-auto">
+                    <div class="alert alert-secondary">
+                        <h3>Ищете ответ на свой вопрос? Спросить юриста проще!</h3>
+                        <form method="post" action="{% url 'ask_question' %}">
+                            <div class="form-group">
+                                <textarea class="form-control" name="text" rows="5" placeholder="Опишите вашу ситуацию…"></textarea>
+                                <button class="btn btn-primary btn-sm mt-3" type="submit">Получить консультацию</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         {% if similar_questions %}
             <div class="row question-page_gradient py-5">
                 <div class="question-page_main-part">
@@ -138,7 +157,7 @@
 
 {% block block_js %}
     <script src='{% static "answer_question.js" %}'></script>
-    {% if user.role != 2 %}
+    {% if not user.is_lawyer %}
         {% include 'front/widgets/consult.html' %}
     {% endif %}
 

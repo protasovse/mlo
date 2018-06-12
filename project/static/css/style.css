@@ -4574,31 +4574,41 @@ section.gray .input-group > .input-group-prepend:first-child > button:not(:first
   color: #bababa; }
 
 .breadcrumb {
-  font-weight: 300; }
-  @media (max-width: 767.98px) {
-    .breadcrumb {
-      display: none; }
-      .breadcrumb .breadcrumb-item {
-        display: none;
-        margin-bottom: .5rem; }
-        .breadcrumb .breadcrumb-item.active {
-          display: inherit;
-          position: relative;
-          cursor: pointer; }
-          .breadcrumb .breadcrumb-item.active:after {
-            content: '\e923';
-            font-family: icomoon;
-            position: absolute;
-            right: 0;
-            top: 0; }
-      .breadcrumb .breadcrumb-item::before {
-        content: none; }
-      .breadcrumb.open .breadcrumb-item, .breadcrumb:hover .breadcrumb-item {
-        display: inherit; }
-        .breadcrumb.open .breadcrumb-item.active:after, .breadcrumb:hover .breadcrumb-item.active:after {
-          content: '\e922';
-          top: auto;
-          bottom: 0; } }
+  font-weight: 300;
+  /*@include media-breakpoint-down(sm) {
+    // display: none;
+    .breadcrumb-item {
+      display: none;
+      margin-bottom: .5rem;
+      &.active {
+        display: inherit;
+        position: relative;
+        cursor: pointer;
+        &:after {
+          content: '\e923';
+          font-family: icomoon;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+    .breadcrumb-item::before {
+      content: none;
+    }
+    &.open, &:hover {
+      .breadcrumb-item {
+        display: inherit;
+        &.active {
+          &:after {
+            content: '\e922';
+            top: auto;
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }*/ }
 
 .pagination {
   display: flex;
