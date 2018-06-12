@@ -1,9 +1,8 @@
 var helper;
 var trigger_name = 'lead_from_widget';
-
 helper = new _Helper;
 helper.init({
-    'enabled': true, // true / false
+    'enabled': (window.innerWidth > 600),
 
     'cookie_expire': 1, // in days
     'show_in_regions': ['*'],
