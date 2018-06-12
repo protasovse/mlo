@@ -38,10 +38,8 @@
     </div>
 
     <router-view>
-
     {# Содержание страницы вопроса #}
     <div class="question-page_container">
-
         {# Вопрос и правая колонка напротив вопроса  #}
         <div class="row pb-4">
 
@@ -116,6 +114,10 @@
 
         </div>
 
+    </div>
+    </router-view>
+
+    <div class="question-page_container">
         {% if similar_questions %}
             <div class="row question-page_gradient py-5">
                 <div class="question-page_main-part">
@@ -129,10 +131,7 @@
                 </div>
             </div>
         {% endif %}
-
     </div>
-    </router-view>
-
     {#% include 'question/section/not_found_answer.html' %#}
 
 {% endblock %}

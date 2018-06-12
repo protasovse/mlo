@@ -16,7 +16,7 @@ class ArticleAdmin(admin.ModelAdmin):
     """
     fieldsets = (
         (_('Content'), {
-            'fields': ('title', 'content',)}),
+            'fields': ('title', 'content', 'dir')}),
         (_('Клиссификация'), {
             'fields': ('status', 'author', 'rubric', 'reply_count', )}),
     )
@@ -24,5 +24,5 @@ class ArticleAdmin(admin.ModelAdmin):
     radio_fields = {'status': admin.HORIZONTAL}
     list_display = ('entry_ptr_id', 'title', 'author', 'pub_date', 'like_count', 'reply_count', 'status',)
     search_fields = ['id', 'title', 'content', 'author__last_name', 'author__email']
-    list_filter = ('pub_date', 'status',)
+    list_filter = ('pub_date', 'status', 'dir')
     list_per_page = 20

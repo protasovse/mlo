@@ -19,6 +19,9 @@ class Dir(models.Model):
 
     slug = models.CharField(max_length=128, unique=True, verbose_name=_('Слаг'))
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = _("Раздел статей")
         verbose_name_plural = _("Разделы")
