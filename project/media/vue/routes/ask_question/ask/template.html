@@ -33,7 +33,6 @@
         </div>
     </div>
 
-
     <div class="form-group row mt-4">
         <label for="ask_file" class="col-sm-4 col-form-label">Прикрепить файлы</label>
         <div class="col-sm-8">
@@ -73,7 +72,6 @@
                 <span class="invalid-feedback" v-if="error_fields.email">{{ error_fields.email }}</span>
                 <small class="text-muted">На этот адрес вы получите ответ от юристов.</small>
             </div>
-
         </div>
 
         <div class="form-group row" v-if="is_require_name">
@@ -124,7 +122,16 @@
 
     </div>
 
-    <h3>Тип консультации</h3>
+    <button type="submit"
+            @click="save_free"
+            class="btn btn-primary btn-sm d-block ml-auto mt-4"
+            :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
+        <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
+        <span v-else-if="success">Вопрос задан</span>
+        <span v-else>Задать вопрос</span>
+    </button>
+
+    <!--h3>Тип консультации</h3>
 
     <div class="card-deck">
         <div class="card"
@@ -183,9 +190,9 @@
                         :disabled='loading||success||($refs.upload&&$refs.upload.active)'>
                     <span v-if="loading||($refs.upload&&$refs.upload.active)">Загрузка...</span>
                     <span v-else-if="success">Вопрос задан</span>
-                    <span v-else>Задать вопрос<!--span class="icon-nav-arrow-right ml-2"></span--></span>
+                    <span v-else>Задать вопрос</span>
                 </button>
             </div>
         </div>
-    </div>
+    </div-->
 </div>
