@@ -1,7 +1,8 @@
 {% load cropping %}
 
 <div role="answer" data-answer_id="{{ item.pk }}" data-thread="{{ item.thread }}"
-     class="answer entry{% if item.id != item.thread %} answer-push{% endif %}">
+     class="answer entry{% if item.id != item.thread %} answer-push{% endif %}"
+     itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer">
 
     <hr class="my-4">
 
@@ -26,8 +27,7 @@
                 {# Статус, только для юристов #}
                 {% if item.author.role > 1 %}
                     <div class="normal text-muted">
-                        {% if item.author.city %}<a class="text-muted"
-                                                    href="{% url 'front:lawyers_list_page' city=item.author.city.name_ru|lower city_id=item.author.city.pk %}">
+                        {% if item.author.city %}<a class="text-muted" href="{% url 'front:lawyers_list_page' city=item.author.city.name_ru|lower city_id=item.author.city.pk %}">
                             {{ item.author.get_role_display }} {{ item.author.city.name_ru }}</a>{% else %}
                             {{ item.author.get_role_display }}{% endif %}
                     </div>

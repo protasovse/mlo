@@ -1,9 +1,9 @@
-<div class="question-page_container">
+<div class="question-page_container" itemscope itemtype="http://schema.org/Question">
     <div class="row pb-4">
 
         <div class="question-page_main-part">
 
-            <article :id="article_id" v-if="load_question" class="entry" itemscope itemtype="http://schema.org/Question">
+            <article :id="article_id" v-if="load_question" class="entry">
 
 
                 <div class="alert alert-warning" role="alert" v-if="you_must_pay">
@@ -262,7 +262,8 @@
                     </div>
 
 
-                    <div name="x" v-for="answer_data in answers"
+                    <div name="x" v-for="answer_data in answers" itemprop="suggestedAnswer" itemscope
+                         itemtype="http://schema.org/Answer"
                          role="answer"
                          :name="answer_data.id"
                          :ref="answer_data.id"

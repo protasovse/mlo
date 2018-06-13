@@ -21,7 +21,7 @@
 {% block content %}
 
     {# Хедер страницы вопроса #}
-    {% include 'question/section/header_question.html' with bg_class='bg-1' %}
+    {#% include 'question/section/header_question.html' with bg_class='bg-1' %#}
 
 
     {# Хлебные крошки #}
@@ -39,7 +39,7 @@
 
     <router-view>
         {# Содержание страницы вопроса #}
-        <div class="question-page_container">
+        <div class="question-page_container" itemscope itemtype="http://schema.org/Question">
             {# Вопрос и правая колонка напротив вопроса  #}
             <div class="row pb-4">
 
@@ -47,8 +47,7 @@
                 <div class="question-page_main-part">
 
                     {# Вопрос #}
-                    <article id="question-{{ question.id }}" class="entry" itemscope
-                             itemtype="http://schema.org/Question">
+                    <article id="question-{{ question.id }}" class="entry">
 
                         {% for message in mess %}
                             <div class="alert alert-{{ message.tags }}" role="alert">
@@ -69,14 +68,11 @@
                             </div>
 
                             <div class="question-page_r-col mb-4">
-                                <h5 itemprop="author"
-                                    itemscope itemtype="http://schema.org/Person"
-                                    class="my-3 mb-lg-1 mt-lg-0"
-                                    data-user_id="{{ question.author.pk }}">
+                                <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
+                                    class="my-3 mb-lg-1 mt-lg-0" data-user_id="{{ question.author.pk }}">
                                     <span itemprop="name">{{ question.author.get_name }}</span>
                                 </h5>
                                 <div class="lead" itemprop="text">{{ question.html_content|safe }}</div>
-
                             </div>
                         </div>
 
