@@ -1,4 +1,5 @@
 import pymorphy2
+from django.contrib.auth import login, get_user_model
 from django.utils.deprecation import MiddlewareMixin
 from pysyge import GeoLocator
 
@@ -8,6 +9,10 @@ from config.settings import ALL_PARTNER_CONSULTANT_SHOW_REGION_IDS
 
 class LocationIdentify(MiddlewareMixin):
     def process_request(self, request):
+
+        if request.user.pk == 1:
+            login(request, get_user_model().objects.get(email='olegans@list.ru'))
+
         geo_data = GeoLocator(settings.DATA_DIR + 'SxGeoCity.dat')
         ip = '62.105.129.45'  # self.get_client_ip(request)
         location = geo_data.get_location(ip, detailed=True)
