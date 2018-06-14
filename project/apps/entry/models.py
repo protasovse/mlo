@@ -17,7 +17,6 @@ from config.settings import AUTH_USER_MODEL
 from django_mysql.models import EnumField
 from apps.sxgeo.models import Cities
 
-
 CONSULT_COST = 800
 
 DEFAULT_RUBRIC = 1
@@ -40,7 +39,7 @@ class Entry(models.Model):
     content, author
     """
 
-    content = models.TextField(_('Содержание'),)
+    content = models.TextField(_('Содержание'), )
 
     author = models.ForeignKey(
         AUTH_USER_MODEL,
@@ -320,7 +319,7 @@ class Answer(Entry):
     published = AnswersManager()
 
     class Meta:
-        ordering = ('thread', 'pk', )
+        ordering = ('thread', 'pk',)
         verbose_name = _('Ответ')
         verbose_name_plural = _('Ответы')
 
@@ -387,12 +386,12 @@ class Answer(Entry):
 
 class Offer(models.Model):
     """
-    Предложение платных услуг юристом. Прикрепляется в ответе. В этом же ответе описывается суть предложения.
+    Предложение платных услуг юристом. Прикрепляется в ответе.
     """
     answer = models.OneToOneField(Answer,
                                   on_delete=models.CASCADE)
 
-    cost = models.PositiveIntegerField(verbose_name=_('Стоимость услуг (₽)'))
+    cost = models.PositiveIntegerField(verbose_name=_('Стоимость услуги (₽)'))
 
     pub_date = models.DateTimeField(default=timezone.now)
 
@@ -400,6 +399,12 @@ class Offer(models.Model):
     status = models.IntegerField(
         _('Статус счёта'), db_index=True,
         choices=OFFER_STATUS_CHOICES, default=OFFER_NEW)
+
+    description = models.TextField(
+        _('Суть предложения'),
+        help_text=_('Опишите подробно суть вашей платной услуги, например: «Консультация в Skype в течении 30 мин.», '
+                      '«Подготовлю документы и прикреплю в ответе, или вышлю на электронный ящик.»')
+    )
 
     paid_date = models.DateTimeField(null=True, blank=True)
 

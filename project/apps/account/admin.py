@@ -45,7 +45,7 @@ class InfoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ['user', ]
     list_per_page = 10
     fieldsets = (
-        (None, {'fields': ('user', 'birth_date', 'sex',)}),
+        (None, {'fields': ('user', 'birth_date', 'sex', 'ym_purpose')}),
         ('Текст', {'fields': ('title', 'short', 'signature', 'about',)}),
         ('Фото', {'fields': ('orig', ('photo', 'pic'),)})
     )

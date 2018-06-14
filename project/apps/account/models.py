@@ -93,6 +93,14 @@ class Info(models.Model):
         help_text=_('Подпись может выводиться под ответом.')
     )
 
+    ym_purpose = models.CharField(
+        max_length=15,
+        blank=True,
+        null=True,
+        verbose_name=_('Номер счета'),
+        help_text=_('Номер счёта Яндекс.Денег.')
+    )
+
     review_count = models.IntegerField(
         verbose_name=_('Количество отзывов'),
         default=0,

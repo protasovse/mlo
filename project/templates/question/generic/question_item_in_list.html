@@ -24,7 +24,13 @@
         </div>
 
         <div class="r-col large">
-            <p>{{ item.content|truncatechars:192|safe }}</p>
+            {% if item.content|length > 192 %}
+                <p class="short-text" data-id="{{ item.pk }}">{{ item.content|truncatechars:192|safe }}
+                    <br><a class="normal show-full-text" data-id="{{ item.pk }}" href="#">Показать полностью…</a></p>
+                <div class="full-text" data-id="{{ item.pk }}" style="display:none;">{{ item.html_content|safe }}</div>
+            {% else %}
+                <p>{{ item.content|safe }}</p>
+            {% endif %}
         </div>
 
         {# Ответы #}

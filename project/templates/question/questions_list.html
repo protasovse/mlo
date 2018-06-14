@@ -299,4 +299,14 @@
     {% if user.role != 2 %}
         {% include 'front/widgets/consult.html' %}
     {% endif %}
+
+    <script>
+        $('.show-full-text').one('click', function (e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            $('.full-text[data-id="'+id+'"]').show();
+            $('.short-text[data-id="'+id+'"]').hide();
+        })
+    </script>
+
 {% endblock %}
