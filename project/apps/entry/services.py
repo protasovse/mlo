@@ -31,7 +31,7 @@ def answer(question, content, user, parent_id=None):
     if parent_id is None and question.get_answers().filter(author_id=user.id, parent=None).count():
         raise BackendPublicException("You can't answer. There are your answers in the question")
 
-    advice = question.advice if hasattr(question, 'advice') else None
+    advice = question.advice if hasattr(question, 'advice') and question.is_pay else None
 
     if advice and advice.status not in [ADVICE_INWORK, ADVICE_ANSWERED, ADVICE_ADDQUESTION]:
         raise BackendPublicException("You can't answer.")
