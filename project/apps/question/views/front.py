@@ -357,7 +357,7 @@ class ConfirmQuestion(RedirectView):
                 # to public the question
                 q.confirm()
                 # mail to lawyers
-                for r in Subscription.objects.filter(rubrics__in=[q.rubric]):
+                for r in Subscription.objects.filter(rubrics__in=[q.rubric.get_root()]):
                     send_new_question_to_expert(r.user, q)
 
             # to do login user
