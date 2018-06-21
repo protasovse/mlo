@@ -30,5 +30,9 @@ urlpatterns = [
     path('experts/', RedirectView.as_view(url='/юристы/', permanent=True)),
     path('questions/', RedirectView.as_view(url='/вопросы/', permanent=True)),
 
+    path('contacts/', RedirectView.as_view(url='/контакты/', permanent=True)),
+
+    re_path(r'blog/likbez/(?P<id>\d+)-[\.\w-]+', redirect_from_svem.blog),
+
     # url(r'^', RedirectView.as_view(url='/', permanent=False))
 ]

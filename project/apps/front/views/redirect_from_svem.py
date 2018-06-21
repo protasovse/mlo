@@ -63,3 +63,12 @@ def review(request, **kwargs):
         return redirect('front:reviews_page', permanent=True, page=kwargs['page'])
     else:
         return redirect('front:reviews_page', permanent=True)
+
+
+def blog(request, **kwargs):
+    return redirect(
+        'article:article',
+        permanent=True,
+        slug='юридический-ликбез',
+        id=str(int(kwargs['id'])+600000),
+    )

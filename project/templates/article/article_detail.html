@@ -1,0 +1,91 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% load markdown %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block og_meta %}
+    <meta property="og:title" content="{{ article.title }}"/>
+    <meta property="og:description"
+          content="Вопрос №{{ question.id }} на Мойюрист.онлайн, ответов: {{ question.reply_count }}.{% if question.rubric %} Тема «{{ question.rubric }}».{% endif %}"/>
+    <meta property="og:image" content="{% static 'img/logo_sq.png' %}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ SITE_URL }}{{ article.get_absolute_url }}"/>
+{% endblock %}
+
+{% block head %}
+    <link rel="canonical" href="{{ SITE_URL }}{{ article.get_absolute_url }}">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
+{% block content %}
+
+    {# Хедер страницы вопроса #}
+    {#% include 'question/section/header_question.html' with bg_class='bg-1' %#}
+
+
+    {# Хлебные крошки #}
+    <div class="question-page_container">
+        <div class="row">
+            <nav class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{#% url 'article:list' %#}">Журнал</a></li>
+                    <li class="breadcrumb-item active"><a
+                            href="#">{{ article.dir.name }}</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    {# Содержание страницы вопроса #}
+    <div class="question-page_container" itemscope itemtype="http://schema.org/Question">
+        {# Вопрос и правая колонка напротив вопроса  #}
+        <div class="row pb-4">
+
+            {# Центральная часть — вопрос #}
+            <div class="question-page_main-part">
+
+                {# Вопрос #}
+                <article id="question-{{ article.id }}" class="entry">
+
+                    <h1 class="h2 mb-5" itemprop="name">{{ article.title }}</h1>
+
+                    <div class="row">
+                        <div class="question-page_l-col">
+                            <time class="subtitle d-block mt-1" datetime="{{ article.pub_date|date:"c" }}"
+                                  itemprop="dateCreated">{{ article.pub_date|date:"j M Y G:i" }}</time>
+                            <span class="d-block">№ {{ article.id }}</span>
+                            <span class="d-block">{{ article.author.city.name }}</span>
+                        </div>
+
+                        <div class="question-page_r-col mb-4">
+                            <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
+                                class="my-3 mb-lg-1 mt-lg-0" data-user_id="{{ article.author.pk }}">
+                                <span itemprop="name">{{ article.author.get_name }}</span>
+                            </h5>
+                            <div class="lead" itemprop="text">{{ article.html_content|safe }}</div>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+            {# Боковая колонка 1  #}
+            <aside class="question-page_aside-part pt-3">
+                <div id="advice_status"></div>
+            </aside>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block block_js %}
+    {% if not user.is_lawyer %}
+        {#% include 'front/widgets/consult.html' %#}
+    {% endif %}
+
+{% endblock %}

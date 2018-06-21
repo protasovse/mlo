@@ -23,6 +23,7 @@ urlpatterns = [
     path('вопрос/', include('apps.question.urls', namespace='question')),
     path('вопросы/', include('apps.entry.urls.questions', namespace='questions')),
     path('личный-кабинет/', include('apps.account.urls', namespace='personal')),
+    path('журнал/', include('apps.article.urls', namespace='article')),
 
     path('admin/login/', LoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
