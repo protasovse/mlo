@@ -26,6 +26,7 @@ urlpatterns = [
     path('пользовательское-соглашение/', TermsOfUse.as_view(), name='terms_of_use'),
     path('о-проекте/', About.as_view(), name='about'),
     path('новый-svem/', TemplateView.as_view(template_name='front/new_svem.html'), name='new_svem'),
+    path('контакты/', TemplateView.as_view(template_name='front/contacts.html'), name='contacts'),
 
     # Все остальные url проверяем на редирект
     url(r'^', include('apps.front.urls_redirect_from_svem')),
