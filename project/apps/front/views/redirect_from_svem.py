@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import RedirectView
 
@@ -66,9 +66,17 @@ def review(request, **kwargs):
 
 
 def blog(request, **kwargs):
+
+    if kwargs['slug'] == 'likbez':
+        slug = 'юридический-ликбез'
+    elif kwargs['slug'] == 'publication':
+        slug = 'публикации'
+    else:
+        raise Http404("Article dir doesn't exists")
+
     return redirect(
         'article:article',
         permanent=True,
-        slug='юридический-ликбез',
+        slug=slug,
         id=str(int(kwargs['id'])+600000),
     )

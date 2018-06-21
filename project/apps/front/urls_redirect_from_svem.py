@@ -32,7 +32,7 @@ urlpatterns = [
 
     path('contacts/', RedirectView.as_view(url='/контакты/', permanent=True)),
 
-    re_path(r'blog/likbez/(?P<id>\d+)-[\.\w-]+', redirect_from_svem.blog),
+    re_path(r'blog/(?P<slug>[\-\w]+)/(?P<id>\d+)[\.\w-]+', redirect_from_svem.blog),
 
     # url(r'^', RedirectView.as_view(url='/', permanent=False))
 ]

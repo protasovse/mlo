@@ -61,7 +61,7 @@
                         <div class="question-page_r-col mb-4">
                             <h5 itemprop="author" itemscope itemtype="http://schema.org/Person"
                                 class="my-3 mb-lg-1 mt-lg-0" data-user_id="{{ article.author.pk }}">
-                                <span itemprop="name">{{ article.author.get_name }}</span>
+                                <a href="{% url 'front:lawyer_page' id=article.author.pk %}" itemprop="name">{{ article.author.get_full_name }}</a>
                             </h5>
                             <div class="lead" itemprop="text">{{ article.html_content|safe }}</div>
                         </div>
@@ -77,6 +77,22 @@
             </aside>
 
 
+        </div>
+
+        <div class="question-page_container">
+            {% if similar_articles %}
+                <div class="row question-page_gradient py-5">
+                    <div class="question-page_main-part">
+                        <div class="row">
+                            <h3 class="answer-list-head col">Похожие вопросы</h3>
+                        </div>
+                        <hr>
+                        {% for item in similar_articles %}
+                            <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
     </div>

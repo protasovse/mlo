@@ -14,8 +14,11 @@ class ArticleDetail(TemplateView):
         except Article.DoesNotExist:
             raise Http404("Article doesn't exists")
 
+        similar_articles = Article.published.filter(pk__lt=article.pk, dir=article.dir).order_by('-pk')[:10]
+
         context.update({
-            'article': article
+            'article': article,
+            'similar_articles': similar_articles,
         })
 
         return context

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_mysql.models import EnumField
 
@@ -37,7 +38,9 @@ class Article(Entry, Titled, Classified):
         _("Статус"), db_index=True,
         choices=[DELETED, PUBLISHED, BLOCKED, DRAFT], default=PUBLISHED)
 
+    def get_absolute_url(self):
+        return reverse('article:article', kwargs={'id': self.pk, 'slug': self.dir.slug})
+
     class Meta:
         verbose_name = _("Статья")
         verbose_name_plural = _("Статьи")
-
