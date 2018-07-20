@@ -38,12 +38,12 @@ class QuestionDetail(TemplateView):
         except Question.DoesNotExist:
             raise Http404("Question doesn't exists")
 
-        if question.status == 'blocked' and (
+        if (question.status == 'blocked' and (
             not (
                 question.id in self.request.session.get('question_ids', [])
                 and question.author == self.request.user
             )
-        ):
+        )) or question.status == 'deleted':
             raise Http404("Question does not exist")
 
         context.update({
