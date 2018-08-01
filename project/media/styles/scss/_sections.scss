@@ -46,6 +46,15 @@ section {
     }
   }
 
+  &.auth-section {
+    color: white;
+    &:before{
+      background-image: url('https://2.downloader.disk.yandex.ru/disk/b6b82e57d1ddda66bdc78ebc8f44fb73b87df92fa9c3fd21e752e9d4e08f31c7/5b618baa/dgEEztxLP8E1CR9sIvG7HeSwJxu2d4CRp_CjsaP2nkxflCglLtfnAEXWVnWrO_4-sk3tp5mSErcpon96nRJ2dg%3D%3D?uid=16074847&filename=7fwefew.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&fsize=496981&hid=7bbc759e55e8862ac6f3390af0233bbe&media_type=image&tknv=v2&etag=6660761cf579df5343182c2f477da0e2');
+      background-position: center;
+      background-size: cover;
+    }
+  }
+
   &.gray {
     color: $gray-600;
     & > .container {
