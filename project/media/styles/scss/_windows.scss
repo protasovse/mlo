@@ -88,4 +88,10 @@
       }
     }
   }
+
+  .close {
+    position: absolute;
+    top: line(1);
+    right: line(1);
+  }
 }

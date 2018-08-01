@@ -562,7 +562,7 @@ exports.default = _default;
 /***/ 144:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"auth-section align-items-center\" style=\"min-height: 100vh;\">\n    <div class=\"win-round\">\n        <h2 class=\"logo\">\n            <router-view name=\"title\"></router-view>\n        </h2>\n        <router-view></router-view>\n    </div>\n</section>\n\n\n\n\n\n";
+module.exports = "<section class=\"auth-section align-items-center\" style=\"min-height: 100vh;\">\n    <div class=\"win-round\">\n        <div class=\"close\" onclick=\"document.location.href='/';\"><span aria-hidden=\"true\">&times;</span></div>\n        <h2 class=\"logo\">\n            <router-view name=\"title\"></router-view>\n        </h2>\n        <router-view></router-view>\n    </div>\n</section>\n\n\n\n\n\n";
 
 /***/ }),
 

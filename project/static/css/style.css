@@ -8248,6 +8248,10 @@ footer.main-footer {
     .win-round.rec .r-col, .win-round.rec .question-item .answer, .question-item .win-round.rec .answer {
       order: 1;
       margin-bottom: 10px; } }
+  .win-round .close {
+    position: absolute;
+    top: 20px;
+    right: 20px; }
 
 body {
   transition: margin 0.2s; }
