@@ -15,16 +15,16 @@
 
 {% block content %}
 
-    <section class="header-section">
-        <main class="text-center row">
-            <h1 class="h4 mt-5 col-12">С&nbsp;2005 года</h1>
-            <h2 class="h1 mb-5 col-12">Юридическая консультация онлайн</h2>
+    <section class="header-section align-items-center justify-content-center container-fluid">
+        <main class="container text-center">
+            <h1 class="h4 mt-5">С&nbsp;2005 года</h1>
+            <h2 class="h1 mb-5">Юридическая консультация онлайн</h2>
             <!--p style="font-size: 80px; font-weight: 100; line-height: 20px">~</p-->
-            <p class="col-md-7 mx-auto lead mb-5">
-                <b>Просто задайте вопрос <nobr>и получите грамотный</nobr> <nobr>совет юриста</nobr> <nobr>в любой жизненной ситуации.</nobr></b>
+            <p class="lead mb-5 col-lg-8 mx-lg-auto">
+                <b>Просто задайте вопрос и получите грамотный совет юриста в любой жизненной ситуации.</b>
             </p>
             <!--p class="lead text-center mb-4">{{ request.user.email }}</p-->
-            <div class="col-12">
+            <div>
                 <a href="{% url 'ask_question' %}" class="btn btn-primary">Начать консультацию</a>
             </div>
         </main>

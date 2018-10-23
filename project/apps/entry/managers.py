@@ -2,6 +2,8 @@ import sphinxapi
 from django.db import models
 from django.db.models import Q
 
+from config.settings import SPHINX_HOST
+
 DELETED = 'deleted'
 BLOCKED = 'blocked'
 DRAFT = 'draft'
@@ -91,7 +93,7 @@ class QuestionsPublishedManager(EntryPublishedManager):
         """
 
         client = sphinxapi.SphinxClient()
-        client.SetServer('127.0.0.1', 9312)
+        client.SetServer(SPHINX_HOST, 9312)
         client.SetLimits(offset, limit, 10000)
 
         # По умолчанию сортировка по дате

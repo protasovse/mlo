@@ -90,6 +90,7 @@ SITE_URL = env('SITE_URL')
 SITE_PROTOCOL = env('PROTOCOL')
 AUTH_USER_MODEL = 'mlo_auth.user'
 AUTHENTICATION_BACKENDS = ['apps.mlo_auth.models.Backend']
+SPHINX_HOST = '85.143.174.106'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

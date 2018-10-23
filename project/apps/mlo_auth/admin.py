@@ -44,6 +44,8 @@ def make_expert(modeladmin, request, queryset):
     for exp in queryset.all():
         Scheduler.objects.get_or_create(expert_id=exp.pk)
         queue_add_user(exp.pk)
+
+
 make_expert.short_description = "Сделать пользователя экспертом"
 
 
@@ -52,13 +54,15 @@ def make_non_expert(modeladmin, request, queryset):
     from apps.advice.utils import queue_del_user
     for exp in queryset.all():
         queue_del_user(exp.pk)
+
+
 make_non_expert.short_description = "Убрать пользователя из экспертов"
 
 
 class MloUserAdmin(UserAdmin):
     add_form = UserCreationForm
 
-    list_display = ('id', 'get_full_name', 'email', 'is_staff', 'is_active', 'role', 'is_expert',)
+    list_display = ('id', 'get_full_name', 'email', 'is_active', 'role', 'is_expert', 'date_joined')
 
     list_filter = ('is_active', 'role', 'is_expert')
 
@@ -91,7 +95,6 @@ class MloUserAdmin(UserAdmin):
             queryset = get_user_model().objects.filter(pk=search_term)
 
         return queryset, False
-
 
 
 class AuthenticationForm(AdminAuthenticationForm):
