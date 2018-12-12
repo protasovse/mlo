@@ -334,7 +334,12 @@
                             </div>
 
                             <div class="question-page_r-col content">
-                                <div class="text" itemprop="text" v-html="answer_data.content"></div>
+                                <div @click="answer_make_editable(answer_data.id)"
+                                     @blur="save_answer_content(answer_data.id, $event)"
+                                     :contenteditable="answer_data.is_editable"
+                                     class="text"
+                                     itemprop="text"
+                                     v-html="answer_data.content"></div>
                                 <p class="text-muted normal" v-if="answer_data.author.info.signature">
                                     {{ answer_data.author.info.signature }}
                                 </p>

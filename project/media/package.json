@@ -4,14 +4,15 @@
   "description": "Frondend for Django project Мойюрист.онлайн",
   "main": "index.js",
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.42",
-    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0-beta.42",
+    "@webpack-cli/init": "^0.1.2",
     "axios": "^0.18.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.0-beta.2",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.0.0",
@@ -37,7 +38,7 @@
   },
   "devDependencies": {
     "babel-preset-react-optimize": "git+https://github.com/BjornMelgaard/babel-react-optimize.git#fix/babel-7",
-    "webpack-cli": "^2.0.14"
+    "webpack-cli": "^2.1.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

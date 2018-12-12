@@ -230,6 +230,7 @@ export default {
                         if (this.is_can_answer && x.author.id === this.user_id) {
                             this.is_can_answer = false
                         }
+                        x['is_editable'] = x.author.id === this.user_id
                     });
                     this.load_answers = false;
                     if (scroll_to_id) {
@@ -387,7 +388,14 @@ export default {
             let a = this.answers.filter(i=>i.id === id)[0];
             return a['show_form'] === true;
         },
-
+        answer_make_editable(aid){
+        },
+        save_answer_content(aid, event){
+            let data = {
+                'content': event.target.innerText,
+            }
+            this.$http.patch(`/api/questions/${this.qid}/answer/${aid}`, data, {emulateJSON:true})
+        },
 
     },
 

@@ -266,6 +266,23 @@ class AnswersView(ApiView):
         return answers
 
 
+class AnswerView(ApiView):
+    @classmethod
+    def get(cls, request, qid, aid=None):
+        answer = Answer.objects.get(pk=aid)
+        return answer.get_public_data()
+
+    @classmethod
+    def patch(cls, request, qid, aid=None):
+        if request.user.is_authenticated:
+            params = cls.get_put(request)
+            answer = Answer.objects.get(pk=aid)
+            if request.user.pk == answer.author_id:
+                answer.content = params['content']
+                answer.save(update_fields=['content'])
+            return answer.get_public_data()
+
+
 class BaseAnswersLike(ApiView):
     @classmethod
     def like(cls, request, aid, val):

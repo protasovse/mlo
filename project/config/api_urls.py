@@ -26,6 +26,7 @@ urlpatterns = [
     path('questions/<int:qid>/answers/<int:aid>/like', question_api.AnswersLike.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/dislike', question_api.AnswersDislike.as_view()),
     path('questions/<int:qid>/answers', question_api.AnswersView.as_view()),
+    path('questions/<int:qid>/answer/<int:aid>', question_api.AnswerView.as_view()),
     path('questions/<int:qid>/answers/<int:aid>/files', question_api.AnswersFilesView.as_view()),
     path('city/search', sxgeo_api.City.as_view()),
     path('city/ip', sxgeo_api.CityIp.as_view()),

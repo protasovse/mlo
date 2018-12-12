@@ -151,6 +151,9 @@
       @extend .lead;
       font-weight: $font-weight-light;
     }
+    &:hover > *[contenteditable="true"] {
+      cursor: context-menu;
+    }
   }
 
   .answer-header {
