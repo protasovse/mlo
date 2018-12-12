@@ -112,6 +112,5 @@ venv.bak/
 /project/storage/
 /project/apps/front/template/front/mainpage.html
 /project/media/styles/scss/.sass-cache/
-# s/project/media/vue/bundles/
 /project/static/css/style.css.map
 project/apps/svem_auth/fixtures/
