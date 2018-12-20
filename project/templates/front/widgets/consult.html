@@ -1,6 +1,32 @@
 {% load static %}
 <!--script type="text/javascript" src="http://s1.nice-cream.ru/widget2.2/widget.js"></script-->
 {#% if user.location.consultant_show %#}{# настройка consultant_show в apps.sxgeo.middleware.loc #}
+{% comment %}
 <script type="text/javascript" src="{% static 'js/allp/widget3.js' %}"></script>
 <script src="{% static 'js/allp/init.js' %}" charset="utf-8"></script>
+{% endcomment %}
+<script src='//s1.nice-cream.ru/phone-widget2/build.php'></script>
+<script>
+    var config = {
+    sid: 'YTTYRDSQ8lXzoS6joPDIJvcYgHEADbvsUegBIYiF',
+	openstat: '0',
+	gclid: '0',
+	utm: '',
+	phone: '74959844607',
+	name_text: 'Татьяна Викторовна',
+	avatar : '/static/img/n89.jpg',
+         mobile : {
+         timeToShow : 25000
+        },
+        desktop : {
+            mobileVersion : true,
+            active: 1,
+            timeToShow : 9999000
+    },
+        tablet : {
+        timeToShow : 9999000
+            }
+    };
+    widget.init(config);
+</script>
 {#% endif %#}

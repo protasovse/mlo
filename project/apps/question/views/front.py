@@ -34,7 +34,7 @@ class QuestionDetail(TemplateView):
     def get_context_data(self, pk, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            question = Question.objects.select_related().get(pk=pk)
+            question = Question.objects.get(pk=pk)
         except Question.DoesNotExist:
             raise Http404("Question doesn't exists")
 
